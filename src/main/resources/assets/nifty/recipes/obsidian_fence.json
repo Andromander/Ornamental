@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "nifty:obsidian_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:obsidian_slab",
+      "data": 0
+    },
+    "B": {
+      "item": "minecraft:obsidian"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nifty",
+  "name": "Nifty",
+  "description": "A little bit of this and that.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Androsa"],
+  "credits": "Androsa, or AlphaLeaf, your choice.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

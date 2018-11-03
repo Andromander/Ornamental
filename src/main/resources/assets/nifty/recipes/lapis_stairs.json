@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:lapis_stairs",
+    "count": 8
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:lapis_block"
+    }
+  }
+}

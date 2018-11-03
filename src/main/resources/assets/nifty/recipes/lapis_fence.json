@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "nifty:lapis_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "B": {
+      "item": "minecraft:lapis_block"
+    }
+  }
+}

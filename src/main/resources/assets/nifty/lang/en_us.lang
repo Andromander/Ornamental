@@ -1,0 +1,22 @@
+#PARSE_ESCAPES
+
+tile.nifty.iron_stairs.name=Iron Stairs
+tile.nifty.gold_stairs.name=Gold Stairs
+tile.nifty.diamond_stairs.name=Diamond Stairs
+tile.nifty.emerald_stairs.name=Emerald Stairs
+tile.nifty.lapis_stairs.name=Lapis Lazuli Stairs
+tile.nifty.obsidian_stairs.name=Obsidian Stairs
+
+tile.nifty.iron_slab.name=Iron Slab
+tile.nifty.gold_slab.name=Gold Slab
+tile.nifty.diamond_slab.name=Diamond Slab
+tile.nifty.emerald_slab.name=Emerald Slab
+tile.nifty.lapis_slab.name=Lapis Lazuli Slab
+tile.nifty.obsidian_slab.name=Obsidian Slab
+
+tile.nifty.iron_fence.name=Iron Fence
+tile.nifty.gold_fence.name=Gold Fence
+tile.nifty.diamond_fence.name=Diamond Fence
+tile.nifty.emerald_fence.name=Emerald Fence
+tile.nifty.lapis_fence.name=Lapis Lazuli Fence
+tile.nifty.obsidian_fence.name=Obsidian Fence

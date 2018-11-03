@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "nifty:gold_slab",
+    "count": 6,
+    "data": 0
+  },
+  "pattern": [
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_block"
+    }
+  }
+}

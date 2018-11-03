@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "minecraft:blocks/diamond_block"
+    }
+  },
+  "variants": { "normal": [{}] }
+}
