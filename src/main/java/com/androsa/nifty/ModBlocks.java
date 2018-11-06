@@ -62,12 +62,12 @@ public class ModBlocks {
         Block lapis =    new Block(Material.IRON, MapColor.LAPIS);
         Block obsidian = new Block(Material.ROCK, MapColor.BLACK);
 
-        blocks.registerBlock("iron_stairs",     new NiftyStairs(iron.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 1));
-        blocks.registerBlock("gold_stairs",     new NiftyStairs(gold.getDefaultState(), SoundType.METAL, 3.0F, 10.0F, 2));
-        blocks.registerBlock("diamond_stairs",  new NiftyStairs(diamond.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("emerald_stairs",  new NiftyStairs(emerald.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("lapis_stairs",    new NiftyStairs(lapis.getDefaultState(), SoundType.STONE, 3.0F, 5.0F, 1));
-        blocks.registerBlock("obsidian_stairs", new NiftyStairs(obsidian.getDefaultState(), SoundType.STONE, 50.0F, 2000.0F, 3));
+        blocks.registerBlock("iron_stairs",     new NiftyStairs(iron.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 1, true));
+        blocks.registerBlock("gold_stairs",     new NiftyStairs(gold.getDefaultState(), SoundType.METAL, 3.0F, 10.0F, 2, true));
+        blocks.registerBlock("diamond_stairs",  new NiftyStairs(diamond.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2, true));
+        blocks.registerBlock("emerald_stairs",  new NiftyStairs(emerald.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2, true));
+        blocks.registerBlock("lapis_stairs",    new NiftyStairs(lapis.getDefaultState(), SoundType.STONE, 3.0F, 5.0F, 1, false));
+        blocks.registerBlock("obsidian_stairs", new NiftyStairs(obsidian.getDefaultState(), SoundType.STONE, 50.0F, 2000.0F, 3, false));
         blocks.registerBlock("iron_slab",     new NiftySlab(false, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F, 10.0F, 1));
         blocks.registerBlock("gold_slab",     new NiftySlab(false, Material.IRON, MapColor.GOLD, SoundType.METAL, 5.0F, 10.0F, 2));
         blocks.registerBlock("diamond_slab",  new NiftySlab(false, Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));

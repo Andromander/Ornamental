@@ -10,12 +10,16 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NiftyStairs extends BlockStairs implements BlockModelHelper {
 
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, int harvest) {
+    private boolean isBeaconBase;
+
+    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, int harvest, boolean beacon) {
         super(state);
 
         this.setSoundType(sound);
@@ -25,6 +29,11 @@ public class NiftyStairs extends BlockStairs implements BlockModelHelper {
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
         this.useNeighborBrightness = true;
+        this.isBeaconBase = beacon;
+    }
+
+    public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+        return this.isBeaconBase;
     }
 
     @Override
