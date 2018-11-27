@@ -22,9 +22,24 @@ import java.util.Locale;
 
 public class NiftySlab extends BlockSlab implements BlockModelHelper {
 
-    private static final PropertyEnum<NiftySlabEnum> VARIANT = PropertyEnum.create("variant", NiftySlabEnum.class);
+    public static final PropertyEnum<NiftySlabEnum> VARIANT = PropertyEnum.create("variant", NiftySlabEnum.class);
 
     private final boolean isDouble;
+
+    public NiftySlab(boolean isDouble, Material material, MapColor color, SoundType sound, float hardness, float resistance) {
+        super(material, color);
+
+        this.setSoundType(sound);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+
+        IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, NiftySlabEnum.NORMAL);
+        if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
+        this.setDefaultState(state);
+
+        this.isDouble = isDouble;
+    }
 
     public NiftySlab(boolean isDouble, Material material, MapColor color, SoundType sound, float hardness, float resistance, int harvest) {
         super(material, color);
@@ -35,13 +50,11 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         this.setHarvestLevel("pickaxe", harvest);
 
-        this.isDouble = isDouble;
-
         IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, NiftySlabEnum.NORMAL);
-
         if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
-
         this.setDefaultState(state);
+
+        this.isDouble = isDouble;
     }
 
     @Override

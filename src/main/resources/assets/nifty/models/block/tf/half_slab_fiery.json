@@ -1,0 +1,84 @@
+{
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.625, 0.625, 0.625 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale":[ 0.25, 0.25, 0.25 ]
+    },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 45, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [ 0.375, 0.375, 0.375 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 45, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    }
+  },
+  "textures": {
+    "particle": "twilightforest:blocks/fiery_block",
+    "all": "twilightforest:blocks/fiery_block_inner",
+    "over": "twilightforest:blocks/fiery_pattern"
+  },
+  "ambientocculsion": false,
+  "elements": [{
+    "from": [ 16, 8, 16 ],
+    "to": [ 0, 0.01, 0 ],
+    "shade": false,
+    "faces": {
+      "down":  { "texture": "#over", "cullface": "up"    },
+      "up":    { "texture": "#over" },
+      "north": { "texture": "#over", "cullface": "south" },
+      "south": { "texture": "#over", "cullface": "north" },
+      "west":  { "texture": "#over", "cullface": "east"  },
+      "east":  { "texture": "#over", "cullface": "west"  }
+    }
+  }, {
+    "from": [ 1, 1, 1 ],
+    "to": [ 15, 7, 15 ],
+    "shade": false,
+    "faces": {
+      "down":  { "texture": "#all" },
+      "up":    { "texture": "#all" },
+      "north": { "texture": "#all" },
+      "south": { "texture": "#all" },
+      "west":  { "texture": "#all" },
+      "east":  { "texture": "#all" }
+    }
+  }],
+  "ctm_version_": 1,
+  "ctm_overrides": {
+    "0": {
+      "type": "ctm",
+      "layer": "CUTOUT",
+      "textures": [ "twilightforest:blocks/fiery_block_inner_ctm" ],
+      "extra": {
+        "light": 15,
+        "connect_inside": true
+      }
+    },
+    "1": {
+      "type": "pattern",
+      "extra": {
+        "light": 15,
+        "size": 2
+      }
+    }
+  }
+}

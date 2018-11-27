@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "nifty:fiery_stairs",
+    "count": 8
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "twilightforest:block_storage",
+      "data": 1
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "twilightforest"
+  }]
+}

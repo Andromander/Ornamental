@@ -3,6 +3,7 @@ package com.androsa.nifty;
 import com.androsa.nifty.blocks.NiftyFence;
 import com.androsa.nifty.blocks.NiftySlab;
 import com.androsa.nifty.blocks.NiftyStairs;
+import com.androsa.nifty.compat.NiftyCompat;
 import com.androsa.nifty.util.BlockModelHelper;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.*;
@@ -29,27 +30,50 @@ public class ModBlocks {
     public static final BlockStairs emerald_stairs = null;
     public static final BlockStairs lapis_stairs = null;
     public static final BlockStairs obsidian_stairs = null;
-
     public static final BlockSlab iron_slab = null;
     public static final BlockSlab gold_slab = null;
     public static final BlockSlab diamond_slab = null;
     public static final BlockSlab emerald_slab = null;
     public static final BlockSlab lapis_slab = null;
     public static final BlockSlab obsidian_slab = null;
-
     public static final BlockSlab double_iron_slab = null;
     public static final BlockSlab double_gold_slab = null;
     public static final BlockSlab double_diamond_slab = null;
     public static final BlockSlab double_emerald_slab = null;
     public static final BlockSlab double_lapis_slab = null;
     public static final BlockSlab double_obsidian_slab = null;
-
     public static final BlockFence iron_fence = null;
     public static final BlockFence gold_fence = null;
     public static final BlockFence diamond_fence = null;
     public static final BlockFence emerald_fence = null;
     public static final BlockFence lapis_fence = null;
     public static final BlockFence obsidian_fence = null;
+
+    /**
+     * MOD COMPAT BELOW HERE.
+     * Note that all blocks are registered, but WILL NOT show unless mod is loaded
+     * */
+    /*TWILIGHT FOREST*/
+    public static final BlockStairs ironwood_stairs = null;
+    public static final BlockStairs fiery_stairs = null;
+    public static final BlockStairs steeleaf_stairs = null;
+    public static final BlockStairs arctic_fur_stairs = null;
+    public static final BlockStairs carminite_stairs = null;
+    public static final BlockSlab ironwood_slab = null;
+    public static final BlockSlab fiery_slab = null;
+    public static final BlockSlab steeleaf_slab = null;
+    public static final BlockSlab arctic_fur_slab = null;
+    public static final BlockSlab carminite_slab = null;
+    public static final BlockSlab double_ironwood_slab = null;
+    public static final BlockSlab double_fiery_slab = null;
+    public static final BlockSlab double_steeleaf_slab = null;
+    public static final BlockSlab double_arctic_fur_slab = null;
+    public static final BlockSlab double_carminite_slab = null;
+    public static final BlockFence ironwood_fence = null;
+    public static final BlockFence fiery_fence = null;
+    public static final BlockFence steeleaf_fence = null;
+    public static final BlockFence arctic_fur_fence = null;
+    public static final BlockFence carminite_fence = null;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> e) {
@@ -86,6 +110,8 @@ public class ModBlocks {
         blocks.registerBlock("emerald_fence",  new NiftyFence(Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
         blocks.registerBlock("lapis_fence",    new NiftyFence(Material.IRON, MapColor.LAPIS, SoundType.STONE, 5.0F, 10.0F, 1));
         blocks.registerBlock("obsidian_fence", new NiftyFence(Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
+
+        NiftyCompat.initCompatBlocks(blocks);
     }
 
     public static List<BlockModelHelper> getBlockModels() {
@@ -114,9 +140,11 @@ public class ModBlocks {
         items.registerBlock(emerald_fence);
         items.registerBlock(lapis_fence);
         items.registerBlock(obsidian_fence);
+
+        NiftyCompat.initCompatItems(items);
     }
 
-    private static class BlockRegistryHelper {
+    public static class BlockRegistryHelper {
         private final IForgeRegistry<Block> registry;
 
         private static List<BlockModelHelper> blockModels = new ArrayList<>();
@@ -125,7 +153,7 @@ public class ModBlocks {
             this.registry = registry;
         }
 
-        private void registerBlock(String name, Block block) {
+        public void registerBlock(String name, Block block) {
             block.setRegistryName(NiftyMod.MODID, name);
             block.setTranslationKey(NiftyMod.MODID + "." + name);
 
@@ -136,19 +164,19 @@ public class ModBlocks {
         }
     }
 
-    private static class ItemRegistryHelper {
+    public static class ItemRegistryHelper {
         private final IForgeRegistry<Item> registry;
 
         ItemRegistryHelper(IForgeRegistry<Item> registry) {
             this.registry = registry;
         }
 
-        private void registerBlock(Block block) {
+        public void registerBlock(Block block) {
             ItemBlock metaItemBlock = new ItemBlock(block);
             register(metaItemBlock);
         }
 
-        private void register(ItemBlock item) {
+        public void register(ItemBlock item) {
             item.setRegistryName(item.getBlock().getRegistryName());
             item.setTranslationKey(item.getBlock().getTranslationKey());
             registry.register(item);

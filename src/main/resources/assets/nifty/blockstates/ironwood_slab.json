@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:tf/half_slab_2_layer",
+    "textures": {
+      "particle": "twilightforest:blocks/ironwood_pattern",
+      "all": "twilightforest:blocks/ironwood_pattern",
+      "over": "twilightforest:blocks/ironwood_block"
+    },
+    "uvlock": true
+  },
+  "variants": { "half": { "bottom": {}, "top": { "x": 180 } } }
+}

@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:tf/cube_all_2_layer",
+    "textures": {
+      "particle": "#all",
+      "all": "twilightforest:blocks/carminite_block",
+      "over": "twilightforest:blocks/carminite_block_overlay"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

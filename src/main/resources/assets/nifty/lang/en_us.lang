@@ -20,3 +20,22 @@ tile.nifty.diamond_fence.name=Diamond Fence
 tile.nifty.emerald_fence.name=Emerald Fence
 tile.nifty.lapis_fence.name=Lapis Lazuli Fence
 tile.nifty.obsidian_fence.name=Obsidian Fence
+
+
+tile.nifty.ironwood_stairs.name=Ironwood Stairs
+tile.nifty.fiery_stairs.name=Fiery Stairs
+tile.nifty.steeleaf_stairs.name=Steeleaf Stairs
+tile.nifty.arctic_fur_stairs.name=Arctic Fur Stairs
+tile.nifty.carminite_stairs.name=Carminite Stairs
+
+tile.nifty.ironwood_slab.name=Ironwood Slab
+tile.nifty.fiery_slab.name=Fiery Slab
+tile.nifty.steeleaf_slab.name=Steeleaf Slab
+tile.nifty.arctic_fur_slab.name=Arctic Fur Slab
+tile.nifty.carminite_slab.name=Carminite Slab
+
+tile.nifty.ironwood_fence.name=Ironwood Fence
+tile.nifty.fiery_fence.name=Fiery Fence
+tile.nifty.steeleaf_fence.name=Steeleaf Fence
+tile.nifty.arctic_fur_fence.name=Arctic Fur Fence
+tile.nifty.carminite_fence.name=Carminite Fence

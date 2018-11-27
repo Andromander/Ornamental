@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "twilightforest:blocks/arctic_fur_block"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

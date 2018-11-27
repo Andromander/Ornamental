@@ -1,0 +1,10 @@
+{
+  "homepage": "https://minecraft.curseforge.com/projects/nifty",
+  "1.12.2": {
+    "1.2": "• Whoops, that was not Vanilla, that looks more like Twilight Forest compatibility.\n     • Ironwood Fences, Stairs, and Slabs. For those who want more than wood, but less than iron.\n     • Fiery Fences, Stairs, and Slabs. It's perfect for heating your home during Winter!\n     • Steeleaf Fences, Slabs, and Stairs. It's the natural alternative for fine steel!\n     • Arctic Fur Fences, Slabs, and Stairs. The soft and cushiony blocks are perfect for those who are a little faithful to the leap.\n    • Carminite Fences, Slabs, and Stairs. Whatever it is, how well does it bode as something durable?\n    • As a note, these blocks will persist without Twilight Forest installed. This is perfectly normal behaviour.\n • Silly me, that wasn't the right thing to put into the Mod Info. The players are aware that this version is for 1.12.2, but what about the mod itself?\n • Maybe I should let players know what to expect in updates to this mod?"
+  },
+  "promos": {
+    "1.12.2-latest": "1.2",
+    "1.12.2-recommended": "1.2"
+  }
+}

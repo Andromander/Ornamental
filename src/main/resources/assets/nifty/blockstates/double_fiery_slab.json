@@ -1,0 +1,7 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:tf/cube_all_fiery"
+  },
+  "variants": { "normal": [{}] }
+}

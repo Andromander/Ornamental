@@ -1,7 +1,6 @@
 package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.util.BlockModelHelper;
-import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -12,6 +11,15 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class NiftyFence extends BlockFence implements BlockModelHelper {
+
+    public NiftyFence(Material material, MapColor color, SoundType sound, float hardness, float resistance) {
+        super(material, color);
+
+        this.setSoundType(sound);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setCreativeTab(CreativeTabs.DECORATIONS);
+    }
 
     public NiftyFence(Material material, MapColor color, SoundType sound, float hardness, float resistance, int harvest) {
         super(material, color);

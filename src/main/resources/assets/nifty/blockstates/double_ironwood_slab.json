@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:tf/cube_all_2_layer",
+    "textures": {
+      "particle": "twilightforest:blocks/ironwood_pattern",
+      "all": "twilightforest:blocks/ironwood_pattern",
+      "over": "twilightforest:blocks/ironwood_block"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

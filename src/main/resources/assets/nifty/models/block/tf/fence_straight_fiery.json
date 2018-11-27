@@ -1,0 +1,140 @@
+{
+  "textures": {
+    "particle": "twilightforest:blocks/fiery_block",
+    "all": "twilightforest:blocks/fiery_block_inner",
+    "over": "nifty:blocks/fiery_pattern_safe"
+  },
+  "ambientocclusion": false,
+  "elements": [{
+    "from": [ 10, 16, 10 ],
+    "to"  : [ 6,  0.01,  6 ],
+    "shade": false,
+    "faces": {
+      "down":  { "texture": "#over", "cullface": "up"   },
+      "up":    { "texture": "#over", "cullface": "down" },
+      "north": { "texture": "#over" },
+      "south": { "texture": "#over" },
+      "west":  { "texture": "#over" },
+      "east":  { "texture": "#over" }
+    }
+  }, {
+    "from": [ 7,  1, 7 ],
+    "to"  : [ 9, 15, 9 ],
+    "shade": false,
+    "faces": {
+      "down":  { "texture": "#all", "cullface": "down" },
+      "up":    { "texture": "#all", "cullface": "up"   },
+      "north": { "texture": "#all" },
+      "south": { "texture": "#all" },
+      "west":  { "texture": "#all" },
+      "east":  { "texture": "#all" }
+    }
+  }, {
+    "from": [ 9, 15, 6 ],
+    "to"  : [ 7, 12, 0 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#over" },
+      "up"   : { "texture": "#over" },
+      "north": { "texture": "#over", "cullface": "south" },
+      "west" : { "texture": "#over" },
+      "east" : { "texture": "#over" }
+    }
+  }, {
+    "from": [ 7, 13, 0 ],
+    "to"  : [ 9, 14, 7 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#all", "tintindex": 0                      },
+      "up"   : { "texture": "#all", "tintindex": 0                      },
+      "north": { "texture": "#all", "cullface": "north", "tintindex": 0 },
+      "west" : { "texture": "#all", "tintindex": 0                      },
+      "east" : { "texture": "#all", "tintindex": 0                      }
+    }
+  }, {
+    "from": [ 9, 9, 6 ],
+    "to"  : [ 7, 6, 0 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#over" },
+      "up"   : { "texture": "#over" },
+      "north": { "texture": "#over", "cullface": "south" },
+      "west" : { "texture": "#over" },
+      "east" : { "texture": "#over" }
+    }
+  }, {
+    "from": [ 7, 7, 0 ],
+    "to"  : [ 9, 8, 7 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#all", "tintindex": 0                      },
+      "up"   : { "texture": "#all", "tintindex": 0                      },
+      "north": { "texture": "#all", "cullface": "north", "tintindex": 0 },
+      "west" : { "texture": "#all", "tintindex": 0                      },
+      "east" : { "texture": "#all", "tintindex": 0                      }
+    }
+  }, {
+    "from": [ 9, 15, 16 ],
+    "to"  : [ 7, 12, 10 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#over" },
+      "up"   : { "texture": "#over" },
+      "south": { "texture": "#over", "cullface": "north" },
+      "west" : { "texture": "#over" },
+      "east" : { "texture": "#over" }
+    }
+  }, {
+    "from": [ 7, 13, 9  ],
+    "to"  : [ 9, 14, 16 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#all" },
+      "up"   : { "texture": "#all" },
+      "south": { "texture": "#all", "cullface": "south" },
+      "west" : { "texture": "#all" },
+      "east" : { "texture": "#all" }
+    }
+  }, {
+    "from": [ 9, 9, 16 ],
+    "to"  : [ 7, 6, 10 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#over" },
+      "up"   : { "texture": "#over" },
+      "south": { "texture": "#over", "cullface": "north" },
+      "west" : { "texture": "#over" },
+      "east" : { "texture": "#over" }
+    }
+  }, {
+    "from": [ 7, 7, 9  ],
+    "to"  : [ 9, 8, 16 ],
+    "shade": false,
+    "faces": {
+      "down" : { "texture": "#all" },
+      "up"   : { "texture": "#all" },
+      "south": { "texture": "#all", "cullface": "south" },
+      "west" : { "texture": "#all" },
+      "east" : { "texture": "#all" }
+    }
+  }],
+  "ctm_version_": 1,
+  "ctm_overrides": {
+    "0": {
+      "type": "ctm",
+      "layer": "CUTOUT",
+      "textures": [ "twilightforest:blocks/fiery_block_inner_ctm" ],
+      "extra": {
+        "light": 15,
+        "connect_inside": true
+      }
+    },
+    "1": {
+      "type": "pattern",
+      "extra": {
+        "light": 15,
+        "size": 2
+      }
+    }
+  }
+}

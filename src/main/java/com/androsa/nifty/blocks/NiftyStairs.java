@@ -19,14 +19,26 @@ public class NiftyStairs extends BlockStairs implements BlockModelHelper {
 
     private boolean isBeaconBase;
 
+    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, boolean beacon) {
+        super(state);
+
+        this.setSoundType(sound);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+
+        this.useNeighborBrightness = true;
+        this.isBeaconBase = beacon;
+    }
+
     public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, int harvest, boolean beacon) {
         super(state);
 
         this.setSoundType(sound);
         this.setHardness(hardness);
         this.setResistance(resistance);
-        this.setHarvestLevel("pickaxe", harvest);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+            this.setHarvestLevel("pickaxe", harvest);
 
         this.useNeighborBrightness = true;
         this.isBeaconBase = beacon;
