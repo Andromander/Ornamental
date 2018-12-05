@@ -6,6 +6,9 @@ tile.nifty.diamond_stairs.name=Diamond Stairs
 tile.nifty.emerald_stairs.name=Emerald Stairs
 tile.nifty.lapis_stairs.name=Lapis Lazuli Stairs
 tile.nifty.obsidian_stairs.name=Obsidian Stairs
+tile.nifty.coal_stairs.name=Coal Stairs
+tile.nifty.redstone_stairs.name=Redstone Stairs
+tile.nifty.missingno_stairs.name=§kMissingno Stairs
 
 tile.nifty.iron_slab.name=Iron Slab
 tile.nifty.gold_slab.name=Gold Slab
@@ -13,6 +16,9 @@ tile.nifty.diamond_slab.name=Diamond Slab
 tile.nifty.emerald_slab.name=Emerald Slab
 tile.nifty.lapis_slab.name=Lapis Lazuli Slab
 tile.nifty.obsidian_slab.name=Obsidian Slab
+tile.nifty.coal_slab.name=Coal Slab
+tile.nifty.redstone_slab.name=Redstone Slab
+tile.nifty.missingno_slab.name=§kMissingno Slab
 
 tile.nifty.iron_fence.name=Iron Fence
 tile.nifty.gold_fence.name=Gold Fence
@@ -20,6 +26,9 @@ tile.nifty.diamond_fence.name=Diamond Fence
 tile.nifty.emerald_fence.name=Emerald Fence
 tile.nifty.lapis_fence.name=Lapis Lazuli Fence
 tile.nifty.obsidian_fence.name=Obsidian Fence
+tile.nifty.coal_fence.name=Coal Fence
+tile.nifty.redstone_fence.name=Redstone Fence
+tile.nifty.missingno_fence.name=§kMissingno Fence
 
 
 tile.nifty.ironwood_stairs.name=Ironwood Stairs

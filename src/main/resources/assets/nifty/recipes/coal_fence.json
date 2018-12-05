@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "nifty:coal_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    "B": {
+      "item": "minecraft:coal_block"
+    }
+  }
+}

@@ -22,15 +22,13 @@ compileJava {
 
 repositories {
     maven {
-        name 'tterag\'s Maven'
+        name 'tterrag\'s Maven'
         url 'http://maven.tterrag.com/'
     }
-    /*
     maven {
-        name 'Curseforge Maven'
-        url 'http://minecraft.curseforge.com/api/maven'
+        name "CurseForge"
+        url "https://minecraft.curseforge.com/api/maven/"
     }
-    */
 }
 
 minecraft {
@@ -50,7 +48,7 @@ minecraft {
 dependencies {
     deobfCompile "team.chisel.ctm:CTM:MC${mc_version}-${ctm_version}"
 
-    //deobfCompile "the-twilight-forest:twilightforest-${mc_version}:${tf_version}:universal"
+    deobfCompile "the-twilight-forest:twilightforest-${mc_version}:${tf_version}:universal"
 }
 
 processResources {
