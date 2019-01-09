@@ -13,9 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSlab;
+import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -39,54 +37,15 @@ public enum NiftyCompat {
             Block arctic = new Block(Material.CLOTH, MapColor.CLOTH);
             Block carminite = new Block(Material.CLAY, MapColor.CLAY);
 
-            blocks.registerBlock("ironwood_stairs",   new NiftyTFStairs(ironwood.getDefaultState(), SoundType.WOOD, 5.0F, 10.0F));
-            blocks.registerBlock("fiery_stairs",      new NiftyTFStairs(fiery.getDefaultState(), SoundType.METAL, 5.0F, 10.0F) {
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
-                    return 15728880;
-                }
-                @Override
-                @Deprecated
-                public boolean getUseNeighborBrightness(IBlockState state) {
-                    return true;
-                }
-                @Override
-                public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-                    if ((!entityIn.isImmuneToFire())
-                            && entityIn instanceof EntityLivingBase
-                            && (!EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase)entityIn))) {
-                        entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
-                    }
-                    super.onEntityWalk(worldIn, pos, entityIn);
-                }
-                @Override
-                public boolean isFireSource(World world, BlockPos pos, EnumFacing face) {
-                    return true;
-                }
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-                        IBlockState state = blockAccess.getBlockState(pos.offset(side));
-                        return state.getBlock() != this;
-                }
-                @SideOnly(Side.CLIENT)
-                @Override
-                public void registerModel() {
-                    ModelUtil.registerToState(this, 0, getDefaultState().withProperty(FACING, EnumFacing.EAST));
-                    ModelResourceLocation mrl = new ModelResourceLocation(this.getRegistryName(), "inventory");
-                    ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, mrl);
-                }
-            });
-            blocks.registerBlock("steeleaf_stairs",   new NiftyTFStairs(steeleaf.getDefaultState(), SoundType.PLANT, 5.0F, 10.0F) {
+            blocks.registerBlock("ironwood_stairs",   new NiftyTFStairs(ironwood.getDefaultState(), SoundType.WOOD, 5.0F));
+            blocks.registerBlock("fiery_stairs",      new NiftyTFFieryStairs(fiery.getDefaultState()));
+            blocks.registerBlock("steeleaf_stairs",   new NiftyTFStairs(steeleaf.getDefaultState(), SoundType.PLANT, 5.0F) {
                 @Override
                 public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
                     entityIn.fall(fallDistance, 0.75F);
                 }
             });
-            blocks.registerBlock("arctic_fur_stairs", new NiftyTFStairs(arctic.getDefaultState(), SoundType.CLOTH, 0.8F, 10.0F) {
+            blocks.registerBlock("arctic_fur_stairs", new NiftyTFStairs(arctic.getDefaultState(), SoundType.CLOTH, 0.8F) {
                 @Override
                 @Deprecated
                 public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
@@ -97,48 +56,9 @@ public enum NiftyCompat {
                     entityIn.fall(fallDistance, 0.1F);
                 }
             });
-            blocks.registerBlock("carminite_stairs",  new NiftyTFStairs(carminite.getDefaultState(), SoundType.SLIME, 0.0F, 10.0F));
+            blocks.registerBlock("carminite_stairs",  new NiftyTFStairs(carminite.getDefaultState(), SoundType.SLIME, 0.0F));
             blocks.registerBlock("ironwood_slab",   new NiftyTFSlab(false, Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
-            blocks.registerBlock("fiery_slab",      new NiftyTFSlab(false, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F){
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
-                    return 15728880;
-                }
-                @Override
-                @Deprecated
-                public boolean getUseNeighborBrightness(IBlockState state) {
-                    return true;
-                }
-                @Override
-                public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-                    if ((!entityIn.isImmuneToFire())
-                            && entityIn instanceof EntityLivingBase
-                            && (!EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase)entityIn))) {
-                        entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
-                    }
-                    super.onEntityWalk(worldIn, pos, entityIn);
-                }
-                @Override
-                public boolean isFireSource(World world, BlockPos pos, EnumFacing face) {
-                    return true;
-                }
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-                    IBlockState state = blockAccess.getBlockState(pos.offset(side));
-                    return state.getBlock() != this;
-                }
-                @SideOnly(Side.CLIENT)
-                @Override
-                public void registerModel() {
-                    ModelResourceLocation mrl = new ModelResourceLocation(this.getRegistryName(), "inventory_fiery");
-                    ModelUtil.registerToState(this, 0, getDefaultState());
-                    ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, mrl);
-                }
-            });
+            blocks.registerBlock("fiery_slab",      new NiftyTFFierySlab(false));
             blocks.registerBlock("steeleaf_slab",   new NiftyTFSlab(false, Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
                 @Override
                 public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
@@ -158,39 +78,7 @@ public enum NiftyCompat {
             });
             blocks.registerBlock("carminite_slab",  new NiftyTFSlab(false, Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
             blocks.registerBlock("double_ironwood_slab",   new NiftyTFSlab(true, Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
-            blocks.registerBlock("double_fiery_slab",      new NiftyTFSlab(true, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F){
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
-                    return 15728880;
-                }
-                @Override
-                @Deprecated
-                public boolean getUseNeighborBrightness(IBlockState state) {
-                    return true;
-                }
-                @Override
-                public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-                    if ((!entityIn.isImmuneToFire())
-                            && entityIn instanceof EntityLivingBase
-                            && (!EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase)entityIn))) {
-                        entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
-                    }
-                    super.onEntityWalk(worldIn, pos, entityIn);
-                }
-                @Override
-                public boolean isFireSource(World world, BlockPos pos, EnumFacing face) {
-                    return true;
-                }
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-                    IBlockState state = blockAccess.getBlockState(pos.offset(side));
-                    return state.getBlock() != this;
-                }
-            });
+            blocks.registerBlock("double_fiery_slab",      new NiftyTFFierySlab(true));
             blocks.registerBlock("double_steeleaf_slab",   new NiftyTFSlab(true, Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
                 @Override
                 public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
@@ -199,7 +87,7 @@ public enum NiftyCompat {
             });
             blocks.registerBlock("double_arctic_fur_slab", new NiftyTFSlab(true, Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
                 @Override
-
+                @Deprecated
                 public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
                     return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
                 }
@@ -210,41 +98,7 @@ public enum NiftyCompat {
             });
             blocks.registerBlock("double_carminite_slab",  new NiftyTFSlab(true, Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
             blocks.registerBlock("ironwood_fence",   new NiftyTFFence(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
-            blocks.registerBlock("fiery_fence",      new NiftyTFFence(Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F){
-                @Override
-                @SideOnly(Side.CLIENT)
-                public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
-                    return 15728880;
-                }
-                @Override
-                public boolean getUseNeighborBrightness(IBlockState state) {
-                    return true;
-                }
-                @Override
-                public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-                    if ((!entityIn.isImmuneToFire())
-                            && entityIn instanceof EntityLivingBase
-                            && (!EnchantmentHelper.hasFrostWalkerEnchantment((EntityLivingBase)entityIn))) {
-                        entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 1.0F);
-                    }
-                    super.onEntityWalk(worldIn, pos, entityIn);
-                }
-                @Override
-                public boolean isFireSource(World world, BlockPos pos, EnumFacing face) {
-                    return true;
-                }
-                @Override
-                @Deprecated
-                @SideOnly(Side.CLIENT)
-                public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-                    IBlockState state = blockAccess.getBlockState(pos.offset(side));
-                    return state.getBlock() != this;
-                }
-                @Override
-                public void registerModel() {
-                    ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation((Item.getItemFromBlock(this)).getRegistryName(), "inventory"));
-                }
-            });
+            blocks.registerBlock("fiery_fence",      new NiftyTFFieryFence());
             blocks.registerBlock("steeleaf_fence",   new NiftyTFFence(Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
                 @Override
                 public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
@@ -262,26 +116,102 @@ public enum NiftyCompat {
                     entityIn.fall(fallDistance, 0.1F);
                 }
             });
-            blocks.registerBlock("carminite_fence",  new NiftyTFFence(Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
+            blocks.registerBlock("carminite_fence",     new NiftyTFFence(Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
+            blocks.registerBlock("ironwood_trapdoor",   new NiftyTFTrapDoor(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("fiery_trapdoor",      new NiftyTFFieryTrapDoor());
+            blocks.registerBlock("steeleaf_trapdoor",   new NiftyTFTrapDoor(Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
+                @Override
+                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+                    entityIn.fall(fallDistance, 0.75F);
+                }
+            });
+            blocks.registerBlock("arctic_fur_trapdoor", new NiftyTFTrapDoor(Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
+                @Override
+                @Deprecated
+                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
+                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
+                }
+                @Override
+                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+                    entityIn.fall(fallDistance, 0.1F);
+                }
+            });
+            blocks.registerBlock("carminite_trapdoor",  new NiftyTFTrapDoor(Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
+            blocks.registerBlock("ironwood_fence_gate",   new NiftyTFFenceGate(ironwood::getDefaultState, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("fiery_fence_gate",      new NiftyTFFieryFenceGate(fiery::getDefaultState));
+            blocks.registerBlock("steeleaf_fence_gate",   new NiftyTFFenceGate(steeleaf::getDefaultState, SoundType.PLANT, 5.0F) {
+                @Override
+                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+                    entityIn.fall(fallDistance, 0.75F);
+                }
+            });
+            blocks.registerBlock("arctic_fur_fence_gate", new NiftyTFFenceGate(arctic::getDefaultState, SoundType.CLOTH, 0.8F) {
+                @Override
+                @Deprecated
+                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
+                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
+                }
+                @Override
+                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+                    entityIn.fall(fallDistance, 0.1F);
+                }
+            });
+            blocks.registerBlock("carminite_fence_gate",  new NiftyTFFenceGate(carminite::getDefaultState, SoundType.SLIME, 0.0F));
+
         }
 
         @Override
         protected void registerItems(ModBlocks.ItemRegistryHelper items) {
-            items.registerBlock(ModBlocks.ironwood_stairs);
+            items.register(new ItemBlock(ModBlocks.ironwood_stairs) {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 0;
+                }
+            });
             items.registerBlock(ModBlocks.fiery_stairs);
             items.registerBlock(ModBlocks.steeleaf_stairs);
             items.registerBlock(ModBlocks.arctic_fur_stairs);
             items.registerBlock(ModBlocks.carminite_stairs);
-            items.register(new ItemSlab(ModBlocks.ironwood_slab, ModBlocks.ironwood_slab, ModBlocks.double_ironwood_slab));
+            items.register(new ItemSlab(ModBlocks.ironwood_slab, ModBlocks.ironwood_slab, ModBlocks.double_ironwood_slab) {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 0;
+                }
+            });
             items.register(new ItemSlab(ModBlocks.fiery_slab, ModBlocks.fiery_slab, ModBlocks.double_fiery_slab));
             items.register(new ItemSlab(ModBlocks.steeleaf_slab, ModBlocks.steeleaf_slab, ModBlocks.double_steeleaf_slab));
             items.register(new ItemSlab(ModBlocks.arctic_fur_slab, ModBlocks.arctic_fur_slab, ModBlocks.double_arctic_fur_slab));
             items.register(new ItemSlab(ModBlocks.carminite_slab, ModBlocks.carminite_slab, ModBlocks.double_carminite_slab));
-            items.registerBlock(ModBlocks.ironwood_fence);
+            items.register(new ItemBlock(ModBlocks.ironwood_fence) {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 0;
+                }
+            });
             items.registerBlock(ModBlocks.fiery_fence);
             items.registerBlock(ModBlocks.steeleaf_fence);
             items.registerBlock(ModBlocks.arctic_fur_fence);
             items.registerBlock(ModBlocks.carminite_fence);
+            items.register(new ItemBlock(ModBlocks.ironwood_trapdoor) {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 0;
+                }
+            });
+            items.registerBlock(ModBlocks.fiery_trapdoor);
+            items.registerBlock(ModBlocks.steeleaf_trapdoor);
+            items.registerBlock(ModBlocks.arctic_fur_trapdoor);
+            items.registerBlock(ModBlocks.carminite_trapdoor);
+            items.register(new ItemBlock(ModBlocks.ironwood_fence_gate) {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 0;
+                }
+            });
+            items.registerBlock(ModBlocks.fiery_fence_gate);
+            items.registerBlock(ModBlocks.steeleaf_fence_gate);
+            items.registerBlock(ModBlocks.arctic_fur_fence_gate);
+            items.registerBlock(ModBlocks.carminite_fence_gate);
         }
     };
 

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:lapis_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "B": {
+      "item": "minecraft:lapis_block"
+    }
+  }
+}

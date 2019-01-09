@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nifty:arctic_fur_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "twilightforest:arctic_fur"
+    },
+    "B": {
+      "item": "twilightforest:block_storage",
+      "data": 3
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "twilightforest"
+  }]
+}

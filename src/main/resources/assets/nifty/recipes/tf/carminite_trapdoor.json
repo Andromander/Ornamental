@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:carminite_trapdoor"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "twilightforest:carminite"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "twilightforest"
+  }]
+}

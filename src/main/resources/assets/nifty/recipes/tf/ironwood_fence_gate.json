@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nifty:ironwood_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "twilightforest:ironwood_ingot"
+    },
+    "B": {
+      "item": "twilightforest:block_storage",
+      "data": 0
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "twilightforest"
+  }]
+}

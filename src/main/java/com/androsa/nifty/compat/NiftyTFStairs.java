@@ -16,8 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NiftyTFStairs extends NiftyStairs implements BlockModelHelper {
 
-    public NiftyTFStairs(IBlockState state, SoundType sound, float hardness, float resistance) {
-        super(state, sound, hardness, resistance, true);
+    public NiftyTFStairs(IBlockState state, SoundType sound, float hardness) {
+        super(state, sound, hardness, 10.0F, true);
     }
 
     @Override

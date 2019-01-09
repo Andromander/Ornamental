@@ -1,0 +1,44 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "nifty:blocks/ironwood_pattern_safe",
+      "over": "twilightforest:blocks/ironwood_block"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing":      {
+      "east":      { },
+      "west":      { },
+      "south":     { },
+      "north":     { }
+    }, "in_wall":  {
+      "true":      { },
+      "false":     { }
+    }, "open":     {
+      "false":     { },
+      "true":      { }
+    },
+
+    "facing=east,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 270 },
+    "facing=east,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_2_layer", "y": 270   },
+    "facing=east,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 270 },
+    "facing=east,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_2_layer", "y": 270   },
+
+    "facing=west,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 90 },
+    "facing=west,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_2_layer", "y": 90   },
+    "facing=west,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 90 },
+    "facing=west,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_2_layer", "y": 90   },
+
+    "facing=south,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_2_layer" },
+    "facing=south,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_2_layer"   },
+    "facing=south,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_2_layer" },
+    "facing=south,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_2_layer"   },
+
+    "facing=north,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 180 },
+    "facing=north,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_2_layer", "y": 180   },
+    "facing=north,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_2_layer", "y": 180 },
+    "facing=north,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_2_layer", "y": 180   }
+  }
+}

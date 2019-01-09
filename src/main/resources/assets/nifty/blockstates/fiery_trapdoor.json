@@ -1,0 +1,44 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "texture": "twilightforest:blocks/fiery_block"
+    }
+  },
+  "variants": {
+    "facing":   {
+      "east":   { },
+      "west":   { },
+      "south":  { },
+      "north":  { }
+    }, "half":  {
+      "bottom": { },
+      "top":    { }
+    }, "open":  {
+      "false":  { },
+      "true":   { }
+    },
+
+    "inventory": [{ "model": "trapdoor_bottom" }],
+
+    "facing=east,half=bottom,open=false": { "model": "nifty:tf/trapdoor_bottom_fiery", "y": 90      },
+    "facing=east,half=bottom,open=true":  { "model": "nifty:tf/trapdoor_bottom_open_fiery", "y": 90 },
+    "facing=east,half=top,open=false":    { "model": "nifty:tf/trapdoor_top_fiery", "y": 90         },
+    "facing=east,half=top,open=true":     { "model": "nifty:tf/trapdoor_top_open_fiery", "y": 90    },
+
+    "facing=west,half=bottom,open=false": { "model": "nifty:tf/trapdoor_bottom_fiery", "y": 270      },
+    "facing=west,half=bottom,open=true":  { "model": "nifty:tf/trapdoor_bottom_open_fiery", "y": 270 },
+    "facing=west,half=top,open=false":    { "model": "nifty:tf/trapdoor_top_fiery", "y": 270         },
+    "facing=west,half=top,open=true":     { "model": "nifty:tf/trapdoor_top_open_fiery", "y": 270    },
+
+    "facing=south,half=bottom,open=false": { "model": "nifty:tf/trapdoor_bottom_fiery", "y": 180      },
+    "facing=south,half=bottom,open=true":  { "model": "nifty:tf/trapdoor_bottom_open_fiery", "y": 180 },
+    "facing=south,half=top,open=false":    { "model": "nifty:tf/trapdoor_top_fiery", "y": 180         },
+    "facing=south,half=top,open=true":     { "model": "nifty:tf/trapdoor_top_open_fiery", "y": 180    },
+
+    "facing=north,half=bottom,open=false": { "model": "nifty:tf/trapdoor_bottom_fiery"      },
+    "facing=north,half=bottom,open=true":  { "model": "nifty:tf/trapdoor_bottom_open_fiery" },
+    "facing=north,half=top,open=false":    { "model": "nifty:tf/trapdoor_top_fiery"         },
+    "facing=north,half=top,open=true":     { "model": "nifty:tf/trapdoor_top_open_fiery"    }
+  }
+}

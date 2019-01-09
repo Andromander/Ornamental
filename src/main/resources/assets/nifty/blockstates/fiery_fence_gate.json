@@ -1,0 +1,42 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true
+  },
+  "variants": {
+    "facing":      {
+      "east":      { },
+      "west":      { },
+      "south":     { },
+      "north":     { }
+    }, "in_wall":  {
+      "true":      { },
+      "false":     { }
+    }, "open":     {
+      "false":     { },
+      "true":      { }
+    },
+
+    "inventory": [{ "model": "fence_gate_closed", "textures": { "texture": "twilightforest:blocks/fiery_block" }}],
+
+    "facing=east,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_fiery", "y": 270 },
+    "facing=east,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_fiery", "y": 270   },
+    "facing=east,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_fiery", "y": 270 },
+    "facing=east,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_fiery", "y": 270   },
+
+    "facing=west,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_fiery", "y": 90 },
+    "facing=west,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_fiery", "y": 90   },
+    "facing=west,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_fiery", "y": 90 },
+    "facing=west,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_fiery", "y": 90   },
+
+    "facing=south,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_fiery" },
+    "facing=south,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_fiery"   },
+    "facing=south,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_fiery" },
+    "facing=south,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_fiery"   },
+
+    "facing=north,in_wall=true,open=false":  { "model": "nifty:tf/fence_gate_closed_fiery", "y": 180 },
+    "facing=north,in_wall=true,open=true":   { "model": "nifty:tf/fence_gate_open_fiery", "y": 180   },
+    "facing=north,in_wall=false,open=false": { "model": "nifty:tf/fence_gate_closed_fiery", "y": 180 },
+    "facing=north,in_wall=false,open=true":  { "model": "nifty:tf/fence_gate_open_fiery", "y": 180   }
+  }
+}

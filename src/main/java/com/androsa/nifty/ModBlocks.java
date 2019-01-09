@@ -59,10 +59,27 @@ public class ModBlocks {
     public static final BlockFence coal_fence = null;
     public static final BlockFence redstone_fence = null;
     public static final BlockFence missingno_fence = null;
+    public static final BlockTrapDoor gold_trapdoor = null;
+    public static final BlockTrapDoor diamond_trapdoor = null;
+    public static final BlockTrapDoor emerald_trapdoor = null;
+    public static final BlockTrapDoor lapis_trapdoor = null;
+    public static final BlockTrapDoor obsidian_trapdoor = null;
+    public static final BlockTrapDoor coal_trapdoor = null;
+    public static final BlockTrapDoor redstone_trapdoor = null;
+    public static final BlockTrapDoor missingno_trapdoor = null;
+    public static final BlockFenceGate iron_fence_gate = null;
+    public static final BlockFenceGate gold_fence_gate = null;
+    public static final BlockFenceGate diamond_fence_gate = null;
+    public static final BlockFenceGate emerald_fence_gate = null;
+    public static final BlockFenceGate lapis_fence_gate = null;
+    public static final BlockFenceGate obsidian_fence_gate = null;
+    public static final BlockFenceGate coal_fence_gate = null;
+    public static final BlockFenceGate redstone_fence_gate = null;
+    public static final BlockFenceGate missingno_fence_gate = null;
 
     /**
      * MOD COMPAT BELOW HERE.
-     * Note that all blocks are registered, but WILL NOT show unless mod is loaded
+     * Note that all blocks are registered, but WILL NOT show unless and until mod is loaded
      * */
     /*TWILIGHT FOREST*/
     public static final BlockStairs ironwood_stairs = null;
@@ -85,6 +102,16 @@ public class ModBlocks {
     public static final BlockFence steeleaf_fence = null;
     public static final BlockFence arctic_fur_fence = null;
     public static final BlockFence carminite_fence = null;
+    public static final BlockTrapDoor ironwood_trapdoor = null;
+    public static final BlockTrapDoor fiery_trapdoor = null;
+    public static final BlockTrapDoor steeleaf_trapdoor = null;
+    public static final BlockTrapDoor arctic_fur_trapdoor = null;
+    public static final BlockTrapDoor carminite_trapdoor = null;
+    public static final BlockFenceGate ironwood_fence_gate = null;
+    public static final BlockFenceGate fiery_fence_gate = null;
+    public static final BlockFenceGate steeleaf_fence_gate = null;
+    public static final BlockFenceGate arctic_fur_fence_gate = null;
+    public static final BlockFenceGate carminite_fence_gate = null;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> e) {
@@ -136,6 +163,23 @@ public class ModBlocks {
         blocks.registerBlock("coal_fence",      new NiftyFence(Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 0));
         blocks.registerBlock("redstone_fence",  new NiftyRedstoneFence());
         blocks.registerBlock("missingno_fence", new NiftyFence(Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("gold_trapdoor",      new NiftyTrapDoor(Material.IRON, MapColor.GOLD, SoundType.METAL, 3.0F, 10.0F, 2));
+        blocks.registerBlock("diamond_trapdoor",   new NiftyTrapDoor(Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("emerald_trapdoor",   new NiftyTrapDoor(Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("lapis_trapdoor",     new NiftyTrapDoor(Material.IRON, MapColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, 1));
+        blocks.registerBlock("obsidian_trapdoor",  new NiftyTrapDoor(Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
+        blocks.registerBlock("coal_trapdoor",      new NiftyTrapDoor(Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 1));
+        blocks.registerBlock("redstone_trapdoor",  new NiftyRedstoneTrapDoor());
+        blocks.registerBlock("missingno_trapdoor", new NiftyTrapDoor(Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("iron_fence_gate",      new NiftyFenceGate(iron::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 1));
+        blocks.registerBlock("gold_fence_gate",      new NiftyFenceGate(gold::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("diamond_fence_gate",   new NiftyFenceGate(diamond::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("emerald_fence_gate",   new NiftyFenceGate(emerald::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
+        blocks.registerBlock("lapis_fence_gate",     new NiftyFenceGate(lapis::getDefaultState, SoundType.STONE, 5.0F, 10.0F, 1));
+        blocks.registerBlock("obsidian_fence_gate",  new NiftyFenceGate(obsidian::getDefaultState, SoundType.STONE, 50.0F, 2000.0F, 3));
+        blocks.registerBlock("coal_fence_gate",      new NiftyFenceGate(coal::getDefaultState, SoundType.STONE, 5.0F, 10.0F, 0));
+        blocks.registerBlock("redstone_fence_gate",  new NiftyRedstoneFenceGate(redstone::getDefaultState));
+        blocks.registerBlock("missingno_fence_gate", new NiftyFenceGate(missingno::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
 
         NiftyCompat.initCompatBlocks(blocks);
     }
@@ -190,6 +234,33 @@ public class ModBlocks {
         });
         items.registerBlock(redstone_fence);
         items.registerBlock(missingno_fence);
+        items.registerBlock(gold_trapdoor);
+        items.registerBlock(diamond_trapdoor);
+        items.registerBlock(emerald_trapdoor);
+        items.registerBlock(lapis_trapdoor);
+        items.registerBlock(obsidian_trapdoor);
+        items.register(new ItemBlock(coal_trapdoor) {
+            @Override
+            public int getItemBurnTime(ItemStack itemStack) {
+                return 5250;
+            }
+        });
+        items.registerBlock(redstone_trapdoor);
+        items.registerBlock(missingno_trapdoor);
+        items.registerBlock(iron_fence_gate);
+        items.registerBlock(gold_fence_gate);
+        items.registerBlock(diamond_fence_gate);
+        items.registerBlock(emerald_fence_gate);
+        items.registerBlock(lapis_fence_gate);
+        items.registerBlock(obsidian_fence_gate);
+        items.register(new ItemBlock(coal_fence_gate) {
+            @Override
+            public int getItemBurnTime(ItemStack itemStack) {
+                return 4000;
+            }
+        });
+        items.registerBlock(redstone_fence_gate);
+        items.registerBlock(missingno_fence_gate);
 
         NiftyCompat.initCompatItems(items);
     }

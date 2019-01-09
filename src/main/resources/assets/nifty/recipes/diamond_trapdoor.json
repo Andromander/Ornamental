@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "nifty:diamond_trapdoor"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

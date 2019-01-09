@@ -30,6 +30,25 @@ tile.nifty.coal_fence.name=Coal Fence
 tile.nifty.redstone_fence.name=Redstone Fence
 tile.nifty.missingno_fence.name=§kMissingno Fence
 
+tile.nifty.gold_trapdoor.name=Gold Trapdoor
+tile.nifty.diamond_trapdoor.name=Diamond Trapdoor
+tile.nifty.emerald_trapdoor.name=Emerald Trapdoor
+tile.nifty.lapis_trapdoor.name=Lapis Lazuli Trapdoor
+tile.nifty.obsidian_trapdoor.name=Obsidian Trapdoor
+tile.nifty.coal_trapdoor.name=Coal Trapdoor
+tile.nifty.redstone_trapdoor.name=Redstone Trapdoor
+tile.nifty.missingno_trapdoor.name=§kMissingno Trapdoor
+
+tile.nifty.iron_fence_gate.name=Iron Fence Gate
+tile.nifty.gold_fence_gate.name=Gold Fence Gate
+tile.nifty.diamond_fence_gate.name=Diamond Fence Gate
+tile.nifty.emerald_fence_gate.name=Emerald Fence Gate
+tile.nifty.lapis_fence_gate.name=Lapis Lazuli Fence Gate
+tile.nifty.obsidian_fence_gate.name=Obsidian Fence Gate
+tile.nifty.coal_fence_gate.name=Coal Fence Gate
+tile.nifty.redstone_fence_gate.name=Redstone Fence Gate
+tile.nifty.missingno_fence_gate.name=§kMissingno Fence Gate
+
 
 tile.nifty.ironwood_stairs.name=Ironwood Stairs
 tile.nifty.fiery_stairs.name=Fiery Stairs
@@ -48,3 +67,15 @@ tile.nifty.fiery_fence.name=Fiery Fence
 tile.nifty.steeleaf_fence.name=Steeleaf Fence
 tile.nifty.arctic_fur_fence.name=Arctic Fur Fence
 tile.nifty.carminite_fence.name=Carminite Fence
+
+tile.nifty.ironwood_trapdoor.name=Ironwood Trapdoor
+tile.nifty.fiery_trapdoor.name=Fiery Trapdoor
+tile.nifty.steeleaf_trapdoor.name=Steeleaf Trapdoor
+tile.nifty.arctic_fur_trapdoor.name=Arctic Fur Trapdoor
+tile.nifty.carminite_trapdoor.name=Carminite Trapdoor
+
+tile.nifty.ironwood_fence_gate.name=Ironwood Fence Gate
+tile.nifty.fiery_fence_gate.name=Fiery Fence Gate
+tile.nifty.steeleaf_fence_gate.name=Steeleaf Fence Gate
+tile.nifty.arctic_fur_fence_gate.name=Arctic Fur Fence Gate
+tile.nifty.carminite_fence_gate.name=Carminite Fence Gate

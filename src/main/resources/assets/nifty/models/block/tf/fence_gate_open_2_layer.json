@@ -1,0 +1,182 @@
+{
+  "textures": {
+    "particle" : "#all"
+  },
+  "elements": [
+    {
+      "__comment": "Left-hand post",
+      "from": [ 0, 5, 7 ],
+      "to": [ 2, 16, 9 ],
+      "faces": {
+        "down":  { "uv": [ 0, 7, 2,  9 ], "texture": "#all" },
+        "up":    { "uv": [ 0, 7, 2,  9 ], "texture": "#all" },
+        "north": { "uv": [ 0, 0, 2, 11 ], "texture": "#all" },
+        "south": { "uv": [ 0, 0, 2, 11 ], "texture": "#all" },
+        "west":  { "uv": [ 7, 0, 9, 11 ], "texture": "#all", "cullface": "west" },
+        "east":  { "uv": [ 7, 0, 9, 11 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Left-hand post",
+      "from": [ -0.01, 4.99, 6.99 ],
+      "to": [ 2.01, 16.01, 9.01 ],
+      "faces": {
+        "down":  { "uv": [ 0, 7, 2,  9 ], "texture": "#over" },
+        "up":    { "uv": [ 0, 7, 2,  9 ], "texture": "#over" },
+        "north": { "uv": [ 0, 0, 2, 11 ], "texture": "#over" },
+        "south": { "uv": [ 0, 0, 2, 11 ], "texture": "#over" },
+        "west":  { "uv": [ 7, 0, 9, 11 ], "texture": "#over", "cullface": "west" },
+        "east":  { "uv": [ 7, 0, 9, 11 ], "texture": "#over" }
+      }
+    }, {
+      "__comment": "Right-hand post",
+      "from": [ 14, 5, 7 ],
+      "to": [ 16, 16, 9 ],
+      "faces": {
+        "down":  { "uv": [ 14, 7, 16,  9 ], "texture": "#all" },
+        "up":    { "uv": [ 14, 7, 16,  9 ], "texture": "#all" },
+        "north": { "uv": [ 14, 0, 16, 11 ], "texture": "#all" },
+        "south": { "uv": [ 14, 0, 16, 11 ], "texture": "#all" },
+        "west":  { "uv": [  7, 0,  9, 11 ], "texture": "#all" },
+        "east":  { "uv": [  7, 0,  9, 11 ], "texture": "#all", "cullface": "east" }
+      }
+    }, {
+      "__comment": "Right-hand post",
+      "from": [ 13.99, 4.99, 6.99 ],
+      "to": [ 16.01, 16.01, 9.01 ],
+      "faces": {
+        "down":  { "uv": [ 14, 7, 16,  9 ], "texture": "#over" },
+        "up":    { "uv": [ 14, 7, 16,  9 ], "texture": "#over" },
+        "north": { "uv": [ 14, 0, 16, 11 ], "texture": "#over" },
+        "south": { "uv": [ 14, 0, 16, 11 ], "texture": "#over" },
+        "west":  { "uv": [  7, 0,  9, 11 ], "texture": "#over" },
+        "east":  { "uv": [  7, 0,  9, 11 ], "texture": "#over", "cullface": "east" }
+      }
+    }, {
+      "__comment": "Inner vertical post of left-hand gate door",
+      "from": [ 0, 6, 13 ],
+      "to": [ 2, 15, 15 ],
+      "faces": {
+        "down":  { "uv": [  0, 13,  2, 15 ], "texture": "#all" },
+        "up":    { "uv": [  0, 13,  2, 15 ], "texture": "#all" },
+        "north": { "uv": [  0,  1,  2, 10 ], "texture": "#all" },
+        "south": { "uv": [  0,  1,  2, 10 ], "texture": "#all" },
+        "west":  { "uv": [ 13,  1, 15, 10 ], "texture": "#all" },
+        "east":  { "uv": [ 13,  1, 15, 10 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Inner vertical post of left-hand gate door",
+      "from": [ 0, 6, 13 ],
+      "to": [ 2, 15, 15 ],
+      "faces": {
+        "down":  { "uv": [  0, 13,  2, 15 ], "texture": "#over" },
+        "up":    { "uv": [  0, 13,  2, 15 ], "texture": "#over" },
+        "north": { "uv": [  0,  1,  2, 10 ], "texture": "#over" },
+        "south": { "uv": [  0,  1,  2, 10 ], "texture": "#over" },
+        "west":  { "uv": [ 13,  1, 15, 10 ], "texture": "#over" },
+        "east":  { "uv": [ 13,  1, 15, 10 ], "texture": "#over" }
+      }
+    }, {
+      "__comment": "Inner vertical post of right-hand gate door",
+      "from": [ 14, 6, 13 ],
+      "to": [ 16, 15, 15 ],
+      "faces": {
+        "down":  { "uv": [ 14, 13, 16, 15 ], "texture": "#all" },
+        "up":    { "uv": [ 14, 13, 16, 15 ], "texture": "#all" },
+        "north": { "uv": [ 14,  1, 16, 10 ], "texture": "#all" },
+        "south": { "uv": [ 14,  1, 16, 10 ], "texture": "#all" },
+        "west":  { "uv": [ 13,  1, 15, 10 ], "texture": "#all" },
+        "east":  { "uv": [ 13,  1, 15, 10 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Inner vertical post of right-hand gate door",
+      "from": [ 14, 6, 13 ],
+      "to": [ 16, 15, 15 ],
+      "faces": {
+        "down":  { "uv": [ 14, 13, 16, 15 ], "texture": "#over" },
+        "up":    { "uv": [ 14, 13, 16, 15 ], "texture": "#over" },
+        "north": { "uv": [ 14,  1, 16, 10 ], "texture": "#over" },
+        "south": { "uv": [ 14,  1, 16, 10 ], "texture": "#over" },
+        "west":  { "uv": [ 13,  1, 15, 10 ], "texture": "#over" },
+        "east":  { "uv": [ 13,  1, 15, 10 ], "texture": "#over" }
+      }
+    }, {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [ 0, 6, 9 ],
+      "to": [ 2, 9, 13 ],
+      "faces": {
+        "down":  { "uv": [  0, 9,  2, 13 ], "texture": "#all" },
+        "up":    { "uv": [  0, 9,  2, 13 ], "texture": "#all" },
+        "west":  { "uv": [ 13, 7, 15, 10 ], "texture": "#all" },
+        "east":  { "uv": [ 13, 7, 15, 10 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [ 0, 6, 9 ],
+      "to": [ 2, 9, 13 ],
+      "faces": {
+        "down":  { "uv": [  0, 9,  2, 13 ], "texture": "#over" },
+        "up":    { "uv": [  0, 9,  2, 13 ], "texture": "#over" },
+        "west":  { "uv": [ 13, 7, 15, 10 ], "texture": "#over" },
+        "east":  { "uv": [ 13, 7, 15, 10 ], "texture": "#over" }
+      }
+    }, {
+      "__comment": "Upper horizontal bar of left-hand gate door",
+      "from": [ 0, 12, 9 ],
+      "to": [ 2, 15, 13 ],
+      "faces": {
+        "down":  { "uv": [  0, 9,  2, 13 ], "texture": "#all" },
+        "up":    { "uv": [  0, 9,  2, 13 ], "texture": "#all" },
+        "west":  { "uv": [ 13, 1, 15,  4 ], "texture": "#all" },
+        "east":  { "uv": [ 13, 1, 15,  4 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Upper horizontal bar of left-hand gate door",
+      "from": [ 0, 12, 9 ],
+      "to": [ 2, 15, 13 ],
+      "faces": {
+        "down":  { "uv": [  0, 9,  2, 13 ], "texture": "#over" },
+        "up":    { "uv": [  0, 9,  2, 13 ], "texture": "#over" },
+        "west":  { "uv": [ 13, 1, 15,  4 ], "texture": "#over" },
+        "east":  { "uv": [ 13, 1, 15,  4 ], "texture": "#over" }
+      }
+    }, {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [ 14, 6, 9 ],
+      "to": [ 16, 9, 13 ],
+      "faces": {
+        "down":  { "uv": [ 14, 9, 16, 13 ], "texture": "#all" },
+        "up":    { "uv": [ 14, 9, 16, 13 ], "texture": "#all" },
+        "west":  { "uv": [ 13, 7, 15, 10 ], "texture": "#all" },
+        "east":  { "uv": [ 13, 7, 15, 10 ], "texture": "#all" }
+      }
+    }, {
+      "__comment": "Lower horizontal bar of left-hand gate door",
+      "from": [ 14, 6, 9 ],
+      "to": [ 16, 9, 13 ],
+      "faces": {
+        "down":  { "uv": [ 14, 9, 16, 13 ], "texture": "#over" },
+        "up":    { "uv": [ 14, 9, 16, 13 ], "texture": "#over" },
+        "west":  { "uv": [ 13, 7, 15, 10 ], "texture": "#over" },
+        "east":  { "uv": [ 13, 7, 15, 10 ], "texture": "#over" }
+      }
+    }, {   "__comment": "Upper horizontal bar of left-hand gate door",
+      "from": [ 14, 12, 9 ],
+      "to": [ 16, 15, 13 ],
+      "faces": {
+        "down":  { "uv": [ 14, 9, 16, 13 ], "texture": "#all" },
+        "up":    { "uv": [ 14, 9, 16, 13 ], "texture": "#all" },
+        "west":  { "uv": [ 13, 1, 15,  4 ], "texture": "#all" },
+        "east":  { "uv": [ 13, 1, 15,  4 ], "texture": "#all" }
+      }
+    }, {   "__comment": "Upper horizontal bar of left-hand gate door",
+      "from": [ 14, 12, 9 ],
+      "to": [ 16, 15, 13 ],
+      "faces": {
+        "down":  { "uv": [ 14, 9, 16, 13 ], "texture": "#over" },
+        "up":    { "uv": [ 14, 9, 16, 13 ], "texture": "#over" },
+        "west":  { "uv": [ 13, 1, 15,  4 ], "texture": "#over" },
+        "east":  { "uv": [ 13, 1, 15,  4 ], "texture": "#over" }
+      }
+    }
+  ]
+}

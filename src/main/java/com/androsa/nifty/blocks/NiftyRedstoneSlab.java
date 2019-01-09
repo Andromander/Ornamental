@@ -28,7 +28,7 @@ public class NiftyRedstoneSlab extends NiftySlab implements BlockModelHelper {
     private final boolean isDouble;
 
     public NiftyRedstoneSlab(boolean isDouble) {
-        super(isDouble, Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, 0 /*CHANGE*/);
+        super(isDouble, Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, 0);
 
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 

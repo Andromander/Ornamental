@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class NiftyRedstoneStairs extends NiftyStairs implements BlockModelHelper {
 
     public NiftyRedstoneStairs(IBlockState state) {
-        super(state, SoundType.METAL, 5.0F, 10.0F, 0 /*CHANGE*/, false);
+        super(state, SoundType.METAL, 5.0F, 10.0F, 0, false);
 
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 

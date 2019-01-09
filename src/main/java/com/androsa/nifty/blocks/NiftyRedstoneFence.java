@@ -17,7 +17,7 @@ import net.minecraftforge.client.model.ModelLoader;
 public class NiftyRedstoneFence extends NiftyFence implements BlockModelHelper {
 
     public NiftyRedstoneFence() {
-        super(Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, 0 /*CHANGE*/);
+        super(Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, 0);
 
         this.setCreativeTab(CreativeTabs.DECORATIONS);
     }

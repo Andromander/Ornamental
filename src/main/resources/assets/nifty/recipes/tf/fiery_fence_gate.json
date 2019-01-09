@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nifty:fiery_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "twilightforest:fiery_ingot"
+    },
+    "B": {
+      "item": "twilightforest:block_storage",
+      "data": 1
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "twilightforest"
+  }]
+}
