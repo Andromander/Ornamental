@@ -1,77 +1,41 @@
 package com.androsa.nifty.blocks;
 
-import com.androsa.nifty.util.BlockModelHelper;
-import com.androsa.nifty.util.ModelUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IWorldReader;
+import net.minecraftforge.common.ToolType;
 
-public class NiftyStairs extends BlockStairs implements BlockModelHelper {
+import javax.annotation.Nullable;
+
+public class NiftyStairs extends BlockStairs {
 
     private boolean isBeaconBase;
+    private ToolType toolType;
+    private int toolLevel;
 
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, boolean beacon) {
-        super(state);
+    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, ToolType tool, int level, boolean base) {
+        super(state, Block.Properties.from(state.getBlock()).hardnessAndResistance(hardness, resistance).sound(sound));
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-
-        this.useNeighborBrightness = true;
-        this.isBeaconBase = beacon;
+        this.toolType = tool;
+        this.toolLevel = level;
+        this.isBeaconBase = base;
     }
 
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, int harvest, boolean beacon) {
-        super(state);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-            this.setHarvestLevel("pickaxe", harvest);
-
-        this.useNeighborBrightness = true;
-        this.isBeaconBase = beacon;
+    @Override
+    public ToolType getHarvestTool(IBlockState state) {
+        return toolType;
     }
 
-    public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+    @Override
+    public int getHarvestLevel(IBlockState state) {
+        return toolLevel;
+    }
+
+    @Override
+    public boolean isBeaconBase(IBlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
         return this.isBeaconBase;
-    }
-
-    @Override
-    public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, HALF, SHAPE);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return super.getMetaFromState(state);
-    }
-
-    @Override
-    @Deprecated
-    public IBlockState getStateFromMeta(int meta) {
-        return super.getStateFromMeta(meta & 0b0111);
-    }
-
-    @Override
-    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-        list.add(new ItemStack(this, 1, 0));
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerModel() {
-        ModelUtil.registerToState(this, 0, getDefaultState().withProperty(FACING, EnumFacing.EAST));
     }
 }

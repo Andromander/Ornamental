@@ -1,90 +1,84 @@
 package com.androsa.nifty.blocks;
 
-import com.androsa.nifty.util.BlockModelHelper;
-import com.androsa.nifty.util.ModelUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
+import net.minecraft.init.Fluids;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.ToolType;
 
-public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
+import javax.annotation.Nullable;
 
-    private final MapColor mapColor;
+public class NiftyTrapDoor extends BlockTrapDoor {
 
-    public NiftyTrapDoor(Material material, MapColor color, SoundType sound, float hardness, float resistance) {
-        super(material);
+    private ToolType toolType;
+    private int toolLevel;
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
+    public NiftyTrapDoor(Material material, MaterialColor color, SoundType sound, float hardness, float resistance, ToolType tool, int level) {
+        super(Block.Properties.create(material, color).hardnessAndResistance(hardness, resistance).sound(sound));
 
-        this.mapColor = color;
-    }
-
-    public NiftyTrapDoor(Material material, MapColor color, SoundType sound, float hardness, float resistance, int harvest) {
-        super(material);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setHarvestLevel("pickaxe", harvest);
-
-        this.mapColor = color;
-    }
-
-    // Yeah, screw you too BlockTrapDoor
-    @Override
-    @Deprecated
-    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return mapColor;
+        this.toolType = tool;
+        this.toolLevel = level;
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (material == Material.IRON || material == Material.ROCK) {
-            //Basically, Iron and Rock Nifty Trapdoors won't open. Wood, Cloth, Leaves, and Slime can
+    public ToolType getHarvestTool(IBlockState state) {
+        return toolType;
+    }
+
+    @Override
+    public int getHarvestLevel(IBlockState state) {
+        return toolLevel;
+    }
+
+    //This will have purpose later
+    @Override
+    public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (this.material == Material.IRON || this.material == Material.ROCK) {
             return false;
         } else {
-            state = state.cycleProperty(OPEN);
+            state = state.cycle(OPEN);
             worldIn.setBlockState(pos, state, 2);
-            this.playSound(playerIn, worldIn, pos, state.getValue(OPEN));
+            if (state.get(WATERLOGGED)) {
+                worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            }
+
+            this.playSound(player, worldIn, pos, state.get(OPEN));
             return true;
         }
     }
 
-    //Entities fall through "weak" materials
+    //This will have purpose later
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         IBlockState state = worldIn.getBlockState(pos);
 
-        if (!state.getValue(OPEN)) {
+        if (!state.get(OPEN)) {
             if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH) {
-                state = state.cycleProperty(OPEN);
+                state = state.cycle(OPEN);
                 worldIn.setBlockState(pos, state, 2);
-                this.playSound(null, worldIn, pos, state.getValue(OPEN));
+                this.playSound(null, worldIn, pos, state.get(OPEN));
             }
         }
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void registerModel() {
-        ModelUtil.registerToState(this, 0, getDefaultState().withProperty(FACING, EnumFacing.NORTH));
+    protected void playSound(@Nullable EntityPlayer player, World worldIn, BlockPos pos, boolean state) {
+        if (state) {
+            int i = this.material == Material.IRON ? 1037 : 1007;
+            worldIn.playEvent(player, i, pos, 0);
+        } else {
+            int j = this.material == Material.IRON ? 1036 : 1013;
+            worldIn.playEvent(player, j, pos, 0);
+        }
+
     }
 }

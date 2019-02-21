@@ -1,20 +1,19 @@
 package com.androsa.nifty.blocks;
 
-import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IBlockReader;
+
+import static net.minecraftforge.common.ToolType.PICKAXE;
 
 public class NiftyRedstoneTrapDoor extends NiftyTrapDoor {
 
     public NiftyRedstoneTrapDoor() {
-        super(Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, 0);
+        super(Material.IRON, MaterialColor.TNT, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 0);
     }
 
     @Override
@@ -25,13 +24,7 @@ public class NiftyRedstoneTrapDoor extends NiftyTrapDoor {
 
     @Override
     @Deprecated
-    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public int getWeakPower(IBlockState blockState, IBlockReader blockReader, BlockPos pos, EnumFacing side) {
         return 5;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerModel() {
-        ModelUtil.registerToState(this, 0, getDefaultState().withProperty(FACING, EnumFacing.NORTH));
     }
 }

@@ -1,306 +1,167 @@
 package com.androsa.nifty;
 
 import com.androsa.nifty.blocks.*;
-import com.androsa.nifty.compat.NiftyCompat;
-import com.androsa.nifty.util.BlockModelHelper;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.*;
-import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
-import java.util.ArrayList;
-import java.util.List;
+import static net.minecraftforge.common.ToolType.*;
 
-@GameRegistry.ObjectHolder(NiftyMod.MODID)
-@Mod.EventBusSubscriber(modid = NiftyMod.MODID)
+@ObjectHolder(NiftyMod.MODID)
 public class ModBlocks {
-    public static final BlockStairs iron_stairs = null;
-    public static final BlockStairs gold_stairs = null;
-    public static final BlockStairs diamond_stairs = null;
-    public static final BlockStairs emerald_stairs = null;
-    public static final BlockStairs lapis_stairs = null;
-    public static final BlockStairs obsidian_stairs = null;
-    public static final BlockStairs coal_stairs = null;
-    public static final BlockStairs redstone_stairs = null;
-    public static final BlockStairs missingno_stairs = null;
-    public static final BlockSlab iron_slab = null;
-    public static final BlockSlab gold_slab = null;
-    public static final BlockSlab diamond_slab = null;
-    public static final BlockSlab emerald_slab = null;
-    public static final BlockSlab lapis_slab = null;
-    public static final BlockSlab obsidian_slab = null;
-    public static final BlockSlab coal_slab = null;
-    public static final BlockSlab redstone_slab = null;
-    public static final BlockSlab missingno_slab = null;
-    public static final BlockSlab double_iron_slab = null;
-    public static final BlockSlab double_gold_slab = null;
-    public static final BlockSlab double_diamond_slab = null;
-    public static final BlockSlab double_emerald_slab = null;
-    public static final BlockSlab double_lapis_slab = null;
-    public static final BlockSlab double_obsidian_slab = null;
-    public static final BlockSlab double_coal_slab = null;
-    public static final BlockSlab double_redstone_slab = null;
-    public static final BlockSlab double_missingno_slab = null;
-    public static final BlockFence iron_fence = null;
-    public static final BlockFence gold_fence = null;
-    public static final BlockFence diamond_fence = null;
-    public static final BlockFence emerald_fence = null;
-    public static final BlockFence lapis_fence = null;
-    public static final BlockFence obsidian_fence = null;
-    public static final BlockFence coal_fence = null;
-    public static final BlockFence redstone_fence = null;
-    public static final BlockFence missingno_fence = null;
-    public static final BlockTrapDoor gold_trapdoor = null;
-    public static final BlockTrapDoor diamond_trapdoor = null;
-    public static final BlockTrapDoor emerald_trapdoor = null;
-    public static final BlockTrapDoor lapis_trapdoor = null;
-    public static final BlockTrapDoor obsidian_trapdoor = null;
-    public static final BlockTrapDoor coal_trapdoor = null;
-    public static final BlockTrapDoor redstone_trapdoor = null;
-    public static final BlockTrapDoor missingno_trapdoor = null;
-    public static final BlockFenceGate iron_fence_gate = null;
-    public static final BlockFenceGate gold_fence_gate = null;
-    public static final BlockFenceGate diamond_fence_gate = null;
-    public static final BlockFenceGate emerald_fence_gate = null;
-    public static final BlockFenceGate lapis_fence_gate = null;
-    public static final BlockFenceGate obsidian_fence_gate = null;
-    public static final BlockFenceGate coal_fence_gate = null;
-    public static final BlockFenceGate redstone_fence_gate = null;
-    public static final BlockFenceGate missingno_fence_gate = null;
 
-    /**
-     * MOD COMPAT BELOW HERE.
-     * Note that all blocks are registered, but WILL NOT show unless and until mod is loaded
-     * */
-    /*TWILIGHT FOREST*/
-    public static final BlockStairs ironwood_stairs = null;
-    public static final BlockStairs fiery_stairs = null;
-    public static final BlockStairs steeleaf_stairs = null;
-    public static final BlockStairs arctic_fur_stairs = null;
-    public static final BlockStairs carminite_stairs = null;
-    public static final BlockSlab ironwood_slab = null;
-    public static final BlockSlab fiery_slab = null;
-    public static final BlockSlab steeleaf_slab = null;
-    public static final BlockSlab arctic_fur_slab = null;
-    public static final BlockSlab carminite_slab = null;
-    public static final BlockSlab double_ironwood_slab = null;
-    public static final BlockSlab double_fiery_slab = null;
-    public static final BlockSlab double_steeleaf_slab = null;
-    public static final BlockSlab double_arctic_fur_slab = null;
-    public static final BlockSlab double_carminite_slab = null;
-    public static final BlockFence ironwood_fence = null;
-    public static final BlockFence fiery_fence = null;
-    public static final BlockFence steeleaf_fence = null;
-    public static final BlockFence arctic_fur_fence = null;
-    public static final BlockFence carminite_fence = null;
-    public static final BlockTrapDoor ironwood_trapdoor = null;
-    public static final BlockTrapDoor fiery_trapdoor = null;
-    public static final BlockTrapDoor steeleaf_trapdoor = null;
-    public static final BlockTrapDoor arctic_fur_trapdoor = null;
-    public static final BlockTrapDoor carminite_trapdoor = null;
-    public static final BlockFenceGate ironwood_fence_gate = null;
-    public static final BlockFenceGate fiery_fence_gate = null;
-    public static final BlockFenceGate steeleaf_fence_gate = null;
-    public static final BlockFenceGate arctic_fur_fence_gate = null;
-    public static final BlockFenceGate carminite_fence_gate = null;
+    /** Blockstates */
+    private static Block iron =      new Block(Block.Properties.create(Material.IRON, MaterialColor.IRON));
+    private static Block gold =      new Block(Block.Properties.create(Material.IRON, MaterialColor.GOLD));
+    private static Block diamond =   new Block(Block.Properties.create(Material.IRON, MaterialColor.DIAMOND));
+    private static Block emerald =   new Block(Block.Properties.create(Material.IRON, MaterialColor.EMERALD));
+    private static Block lapis =     new Block(Block.Properties.create(Material.IRON, MaterialColor.LAPIS));
+    private static Block obsidian =  new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK));
+    private static Block coal =      new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK));
+    private static Block redstone =  new Block(Block.Properties.create(Material.IRON, MaterialColor.TNT));
+    private static Block missingno = new Block(Block.Properties.create(Material.IRON, MaterialColor.MAGENTA));
 
-    @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> e) {
-        BlockRegistryHelper blocks = new BlockRegistryHelper(e.getRegistry());
+    public static final Block iron_stairs =      new NiftyStairs(iron.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1, false).setRegistryName("iron_stairs");
+    public static final Block gold_stairs =      new NiftyStairs(gold.getDefaultState(), SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2, true).setRegistryName("gold_stairs");
+    public static final Block diamond_stairs =   new NiftyStairs(diamond.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, true).setRegistryName("diamond_stairs");
+    public static final Block emerald_stairs =   new NiftyStairs(emerald.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, true).setRegistryName("emerald_stairs");
+    public static final Block lapis_stairs =     new NiftyStairs(lapis.getDefaultState(), SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1, false).setRegistryName("lapis_stairs");
+    public static final Block obsidian_stairs =  new NiftyStairs(obsidian.getDefaultState(), SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3, false).setRegistryName("obsidian_stairs");
+    public static final Block coal_stairs =      new NiftyStairs(coal.getDefaultState(), SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0, false).setRegistryName("coal_stairs");
+    public static final Block redstone_stairs =  new NiftyRedstoneStairs(redstone.getDefaultState()).setRegistryName("redstone_stairs");
+    public static final Block missingno_stairs = new NiftyStairs(missingno.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, false).setRegistryName("missingno_stairs");
+    public static final Block iron_slab      = new NiftySlab(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_slab");
+    public static final Block gold_slab      = new NiftySlab(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_slab");
+    public static final Block diamond_slab   = new NiftySlab(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_slab");
+    public static final Block emerald_slab   = new NiftySlab(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_slab");
+    public static final Block lapis_slab     = new NiftySlab(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_slab");
+    public static final Block obsidian_slab  = new NiftySlab(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_slab");
+    public static final Block coal_slab      = new NiftySlab(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_slab");
+    public static final Block redstone_slab  = new NiftyRedstoneSlab().setRegistryName("redstone_slab");
+    public static final Block missingno_slab = new NiftySlab(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_slab");
+    public static final Block iron_fence      = new NiftyFence(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_fence");
+    public static final Block gold_fence      = new NiftyFence(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_fence");
+    public static final Block diamond_fence   = new NiftyFence(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_fence");
+    public static final Block emerald_fence   = new NiftyFence(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_fence");
+    public static final Block lapis_fence     = new NiftyFence(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_fence");
+    public static final Block obsidian_fence  = new NiftyFence(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_fence");
+    public static final Block coal_fence      = new NiftyFence(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_fence");
+    public static final Block redstone_fence  = new NiftyRedstoneFence().setRegistryName("redstone_fence");
+    public static final Block missingno_fence = new NiftyFence(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_fence");
+    public static final Block gold_trapdoor      = new NiftyTrapDoor(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 1).setRegistryName("gold_trapdoor");
+    public static final Block diamond_trapdoor   = new NiftyTrapDoor(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_trapdoor");
+    public static final Block emerald_trapdoor   = new NiftyTrapDoor(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_trapdoor");
+    public static final Block lapis_trapdoor     = new NiftyTrapDoor(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_trapdoor");
+    public static final Block obsidian_trapdoor  = new NiftyTrapDoor(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_trapdoor");
+    public static final Block coal_trapdoor      = new NiftyTrapDoor(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_trapdoor");
+    public static final Block redstone_trapdoor  = new NiftyRedstoneTrapDoor().setRegistryName("redstone_trapdoor");
+    public static final Block missingno_trapdoor = new NiftyTrapDoor(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_trapdoor");
+    public static final Block iron_fence_gate      = new NiftyFenceGate(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_fence_gate");
+    public static final Block gold_fence_gate      = new NiftyFenceGate(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_fence_gate");
+    public static final Block diamond_fence_gate   = new NiftyFenceGate(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_fence_gate");
+    public static final Block emerald_fence_gate   = new NiftyFenceGate(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_fence_gate");
+    public static final Block lapis_fence_gate     = new NiftyFenceGate(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_fence_gate");
+    public static final Block obsidian_fence_gate  = new NiftyFenceGate(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_fence_gate");
+    public static final Block coal_fence_gate      = new NiftyFenceGate(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_fence_gate");
+    public static final Block redstone_fence_gate  = new NiftyRedstoneFenceGate().setRegistryName("redstone_fence_gate");
+    public static final Block missingno_fence_gate = new NiftyFenceGate(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_fence_gate");
 
-        Block iron =      new Block(Material.IRON, MapColor.IRON);
-        Block gold =      new Block(Material.IRON, MapColor.GOLD);
-        Block diamond =   new Block(Material.IRON, MapColor.DIAMOND);
-        Block emerald =   new Block(Material.IRON, MapColor.EMERALD);
-        Block lapis =     new Block(Material.IRON, MapColor.LAPIS);
-        Block obsidian =  new Block(Material.ROCK, MapColor.BLACK);
-        Block coal =      new Block(Material.ROCK, MapColor.BLACK);
-        Block redstone =  new Block(Material.IRON, MapColor.TNT);
-        Block missingno = new Block(Material.IRON, MapColor.MAGENTA);
+    public void onRegisterBlocks(final RegistryEvent.Register<Block> e) {
+        final Block blocks[] = new Block[] {
+                //Stairs
+                iron_stairs, gold_stairs, diamond_stairs, emerald_stairs, lapis_stairs, obsidian_stairs, coal_stairs, redstone_stairs, missingno_stairs,
+                //Slabs
+                iron_slab, gold_slab, diamond_slab, emerald_slab, lapis_slab, obsidian_slab, coal_slab, redstone_slab, missingno_slab,
+                //Fences
+                iron_fence, gold_fence, diamond_fence, emerald_fence, lapis_fence, obsidian_fence, coal_fence, redstone_fence, missingno_fence,
+                //Trapdoors
+                gold_trapdoor, diamond_trapdoor, emerald_trapdoor, lapis_trapdoor, obsidian_trapdoor, coal_trapdoor, redstone_trapdoor, missingno_trapdoor,
+                //Fence Gates
+                iron_fence_gate, gold_fence_gate, diamond_fence_gate, emerald_fence_gate, lapis_fence_gate, obsidian_fence_gate, coal_fence_gate, redstone_fence_gate, missingno_fence_gate
+        };
 
-        blocks.registerBlock("iron_stairs",      new NiftyStairs(iron.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 1, true));
-        blocks.registerBlock("gold_stairs",      new NiftyStairs(gold.getDefaultState(), SoundType.METAL, 3.0F, 10.0F, 2, true));
-        blocks.registerBlock("diamond_stairs",   new NiftyStairs(diamond.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2, true));
-        blocks.registerBlock("emerald_stairs",   new NiftyStairs(emerald.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2, true));
-        blocks.registerBlock("lapis_stairs",     new NiftyStairs(lapis.getDefaultState(), SoundType.STONE, 3.0F, 5.0F, 1, false));
-        blocks.registerBlock("obsidian_stairs",  new NiftyStairs(obsidian.getDefaultState(), SoundType.STONE, 50.0F, 2000.0F, 3, false));
-        blocks.registerBlock("coal_stairs",      new NiftyStairs(coal.getDefaultState(), SoundType.STONE, 5.0F, 10.0F, 0, false));
-        blocks.registerBlock("redstone_stairs",  new NiftyRedstoneStairs(redstone.getDefaultState()));
-        blocks.registerBlock("missingno_stairs", new NiftyStairs(missingno.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, 2, false));
-        blocks.registerBlock("iron_slab",      new NiftySlab(false, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F, 10.0F, 1));
-        blocks.registerBlock("gold_slab",      new NiftySlab(false, Material.IRON, MapColor.GOLD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("diamond_slab",   new NiftySlab(false, Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("emerald_slab",   new NiftySlab(false, Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("lapis_slab",     new NiftySlab(false, Material.IRON, MapColor.LAPIS, SoundType.STONE, 5.0F, 10.0F, 1));
-        blocks.registerBlock("obsidian_slab",  new NiftySlab(false, Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
-        blocks.registerBlock("coal_slab",      new NiftySlab(false, Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 0));
-        blocks.registerBlock("redstone_slab",  new NiftyRedstoneSlab(false));
-        blocks.registerBlock("missingno_slab", new NiftySlab(false, Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("double_iron_slab",      new NiftySlab(true, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F, 10.0F, 1));
-        blocks.registerBlock("double_gold_slab",      new NiftySlab(true, Material.IRON, MapColor.GOLD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("double_diamond_slab",   new NiftySlab(true, Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("double_emerald_slab",   new NiftySlab(true, Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("double_lapis_slab",     new NiftySlab(true, Material.IRON, MapColor.LAPIS, SoundType.STONE, 5.0F, 10.0F, 1));
-        blocks.registerBlock("double_obsidian_slab",  new NiftySlab(true, Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
-        blocks.registerBlock("double_coal_slab",      new NiftySlab(true, Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 0));
-        blocks.registerBlock("double_redstone_slab",  new NiftyRedstoneSlab(true));
-        blocks.registerBlock("double_missingno_slab", new NiftySlab(true, Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("iron_fence",      new NiftyFence(Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F, 10.0F, 1));
-        blocks.registerBlock("gold_fence",      new NiftyFence(Material.IRON, MapColor.GOLD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("diamond_fence",   new NiftyFence(Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("emerald_fence",   new NiftyFence(Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("lapis_fence",     new NiftyFence(Material.IRON, MapColor.LAPIS, SoundType.STONE, 5.0F, 10.0F, 1));
-        blocks.registerBlock("obsidian_fence",  new NiftyFence(Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
-        blocks.registerBlock("coal_fence",      new NiftyFence(Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 0));
-        blocks.registerBlock("redstone_fence",  new NiftyRedstoneFence());
-        blocks.registerBlock("missingno_fence", new NiftyFence(Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("gold_trapdoor",      new NiftyTrapDoor(Material.IRON, MapColor.GOLD, SoundType.METAL, 3.0F, 10.0F, 2));
-        blocks.registerBlock("diamond_trapdoor",   new NiftyTrapDoor(Material.IRON, MapColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("emerald_trapdoor",   new NiftyTrapDoor(Material.IRON, MapColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("lapis_trapdoor",     new NiftyTrapDoor(Material.IRON, MapColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, 1));
-        blocks.registerBlock("obsidian_trapdoor",  new NiftyTrapDoor(Material.ROCK, MapColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, 3));
-        blocks.registerBlock("coal_trapdoor",      new NiftyTrapDoor(Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, 1));
-        blocks.registerBlock("redstone_trapdoor",  new NiftyRedstoneTrapDoor());
-        blocks.registerBlock("missingno_trapdoor", new NiftyTrapDoor(Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("iron_fence_gate",      new NiftyFenceGate(iron::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 1));
-        blocks.registerBlock("gold_fence_gate",      new NiftyFenceGate(gold::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("diamond_fence_gate",   new NiftyFenceGate(diamond::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("emerald_fence_gate",   new NiftyFenceGate(emerald::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
-        blocks.registerBlock("lapis_fence_gate",     new NiftyFenceGate(lapis::getDefaultState, SoundType.STONE, 5.0F, 10.0F, 1));
-        blocks.registerBlock("obsidian_fence_gate",  new NiftyFenceGate(obsidian::getDefaultState, SoundType.STONE, 50.0F, 2000.0F, 3));
-        blocks.registerBlock("coal_fence_gate",      new NiftyFenceGate(coal::getDefaultState, SoundType.STONE, 5.0F, 10.0F, 0));
-        blocks.registerBlock("redstone_fence_gate",  new NiftyRedstoneFenceGate(redstone::getDefaultState));
-        blocks.registerBlock("missingno_fence_gate", new NiftyFenceGate(missingno::getDefaultState, SoundType.METAL, 5.0F, 10.0F, 2));
-
-        NiftyCompat.initCompatBlocks(blocks);
+        e.getRegistry().registerAll(blocks);
     }
 
-    public static List<BlockModelHelper> getBlockModels() {
-        return ImmutableList.copyOf(BlockRegistryHelper.blockModels);
-    }
+    public void onRegisterItems(final RegistryEvent.Register<Item> e) {
+        final IForgeRegistry<Item> registry = e.getRegistry();
 
-    @SubscribeEvent
-    public static void onRegisterItems(RegistryEvent.Register<Item> e) {
-        ItemRegistryHelper items = new ItemRegistryHelper(e.getRegistry());
-
-        items.registerBlock(iron_stairs);
-        items.registerBlock(gold_stairs);
-        items.registerBlock(diamond_stairs);
-        items.registerBlock(emerald_stairs);
-        items.registerBlock(lapis_stairs);
-        items.registerBlock(obsidian_stairs);
-        items.register(new ItemBlock(coal_stairs) {
+        registry.register(new ItemBlock(iron_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_stairs"));
+        registry.register(new ItemBlock(gold_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gold_stairs"));
+        registry.register(new ItemBlock(diamond_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("diamond_stairs"));
+        registry.register(new ItemBlock(emerald_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("emerald_stairs"));
+        registry.register(new ItemBlock(lapis_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("lapis_stairs"));
+        registry.register(new ItemBlock(obsidian_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("obsidian_stairs"));
+        registry.register(new ItemBlock(coal_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)) {
             @Override
-            public int getItemBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack stack) {
                 return 12000;
             }
-        });
-        items.registerBlock(redstone_stairs);
-        items.registerBlock(missingno_stairs);
-        items.register(new ItemSlab(iron_slab, iron_slab, double_iron_slab));
-        items.register(new ItemSlab(gold_slab, gold_slab, double_gold_slab));
-        items.register(new ItemSlab(diamond_slab, diamond_slab, double_diamond_slab));
-        items.register(new ItemSlab(emerald_slab, emerald_slab, double_emerald_slab));
-        items.register(new ItemSlab(lapis_slab, lapis_slab, double_lapis_slab));
-        items.register(new ItemSlab(obsidian_slab, obsidian_slab, double_obsidian_slab));
-        items.register(new ItemSlab(coal_slab,coal_slab,double_coal_slab) {
+        }.setRegistryName("coal_stairs"));
+        registry.register(new ItemBlock(redstone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_stairs"));
+        registry.register(new ItemBlock(missingno_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_stairs"));
+        registry.register(new ItemBlock(iron_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_slab"));
+        registry.register(new ItemBlock(gold_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gold_slab"));
+        registry.register(new ItemBlock(diamond_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("diamond_slab"));
+        registry.register(new ItemBlock(emerald_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("emerald_slab"));
+        registry.register(new ItemBlock(lapis_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("lapis_slab"));
+        registry.register(new ItemBlock(obsidian_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("obsidian_slab"));
+        registry.register(new ItemBlock(coal_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)) {
             @Override
-            public int getItemBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack stack) {
                 return 8000;
             }
-        });
-        items.register(new ItemSlab(redstone_slab,redstone_slab,double_redstone_slab));
-        items.register(new ItemSlab(missingno_slab,missingno_slab,double_missingno_slab));
-        items.registerBlock(iron_fence);
-        items.registerBlock(gold_fence);
-        items.registerBlock(diamond_fence);
-        items.registerBlock(emerald_fence);
-        items.registerBlock(lapis_fence);
-        items.registerBlock(obsidian_fence);
-        items.register(new ItemBlock(coal_fence) {
+        }.setRegistryName("coal_slab"));
+        registry.register(new ItemBlock(redstone_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_slab"));
+        registry.register(new ItemBlock(missingno_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_slab"));
+        registry.register(new ItemBlock(iron_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("iron_fence"));
+        registry.register(new ItemBlock(gold_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("gold_fence"));
+        registry.register(new ItemBlock(diamond_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("diamond_fence"));
+        registry.register(new ItemBlock(emerald_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("emerald_fence"));
+        registry.register(new ItemBlock(lapis_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("lapis_fence"));
+        registry.register(new ItemBlock(obsidian_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("obsidian_fence"));
+        registry.register(new ItemBlock(coal_fence, new Item.Properties().group(ItemGroup.DECORATIONS)) {
             @Override
-            public int getItemBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack stack) {
                 return 5250;
             }
-        });
-        items.registerBlock(redstone_fence);
-        items.registerBlock(missingno_fence);
-        items.registerBlock(gold_trapdoor);
-        items.registerBlock(diamond_trapdoor);
-        items.registerBlock(emerald_trapdoor);
-        items.registerBlock(lapis_trapdoor);
-        items.registerBlock(obsidian_trapdoor);
-        items.register(new ItemBlock(coal_trapdoor) {
+        }.setRegistryName("coal_fence"));
+        registry.register(new ItemBlock(redstone_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("redstone_fence"));
+        registry.register(new ItemBlock(missingno_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("missingno_fence"));
+        registry.register(new ItemBlock(gold_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_trapdoor"));
+        registry.register(new ItemBlock(diamond_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("diamond_trapdoor"));
+        registry.register(new ItemBlock(emerald_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("emerald_trapdoor"));
+        registry.register(new ItemBlock(lapis_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("lapis_trapdoor"));
+        registry.register(new ItemBlock(obsidian_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("obsidian_trapdoor"));
+        registry.register(new ItemBlock(coal_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)) {
             @Override
-            public int getItemBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack stack) {
                 return 5250;
             }
-        });
-        items.registerBlock(redstone_trapdoor);
-        items.registerBlock(missingno_trapdoor);
-        items.registerBlock(iron_fence_gate);
-        items.registerBlock(gold_fence_gate);
-        items.registerBlock(diamond_fence_gate);
-        items.registerBlock(emerald_fence_gate);
-        items.registerBlock(lapis_fence_gate);
-        items.registerBlock(obsidian_fence_gate);
-        items.register(new ItemBlock(coal_fence_gate) {
+        }.setRegistryName("coal_trapdoor"));
+        registry.register(new ItemBlock(redstone_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_trapdoor"));
+        registry.register(new ItemBlock(missingno_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_trapdoor"));
+        registry.register(new ItemBlock(iron_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("iron_fence_gate"));
+        registry.register(new ItemBlock(gold_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_fence_gate"));
+        registry.register(new ItemBlock(diamond_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("diamond_fence_gate"));
+        registry.register(new ItemBlock(emerald_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("emerald_fence_gate"));
+        registry.register(new ItemBlock(lapis_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("lapis_fence_gate"));
+        registry.register(new ItemBlock(obsidian_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("obsidian_fence_gate"));
+        registry.register(new ItemBlock(coal_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)) {
             @Override
-            public int getItemBurnTime(ItemStack itemStack) {
+            public int getBurnTime(ItemStack stack) {
                 return 4000;
             }
-        });
-        items.registerBlock(redstone_fence_gate);
-        items.registerBlock(missingno_fence_gate);
+        }.setRegistryName("coal_fence_gate"));
+        registry.register(new ItemBlock(redstone_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_fence_gate"));
+        registry.register(new ItemBlock(missingno_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_fence_gate"));
 
-        NiftyCompat.initCompatItems(items);
-    }
-
-    public static class BlockRegistryHelper {
-        private final IForgeRegistry<Block> registry;
-
-        private static List<BlockModelHelper> blockModels = new ArrayList<>();
-
-        BlockRegistryHelper(IForgeRegistry<Block> registry) {
-            this.registry = registry;
-        }
-
-        public void registerBlock(String name, Block block) {
-            block.setRegistryName(NiftyMod.MODID, name);
-            block.setTranslationKey(NiftyMod.MODID + "." + name);
-
-            if (block instanceof BlockModelHelper) {
-                blockModels.add((BlockModelHelper) block);
-            }
-            registry.register(block);
-        }
-    }
-
-    public static class ItemRegistryHelper {
-        private final IForgeRegistry<Item> registry;
-
-        ItemRegistryHelper(IForgeRegistry<Item> registry) {
-            this.registry = registry;
-        }
-
-        public void registerBlock(Block block) {
-            ItemBlock metaItemBlock = new ItemBlock(block);
-            register(metaItemBlock);
-        }
-
-        public void register(ItemBlock item) {
-            item.setRegistryName(item.getBlock().getRegistryName());
-            item.setTranslationKey(item.getBlock().getTranslationKey());
-            registry.register(item);
-        }
     }
 }

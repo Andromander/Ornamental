@@ -1,13 +1,7 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "half_slab",
-    "textures": {
-      "top": "minecraft:blocks/emerald_block",
-      "side": "minecraft:blocks/emerald_block",
-      "bottom": "minecraft:blocks/emerald_block"
-    },
-    "uvlock": true
-  },
-  "variants": { "half": { "bottom": {}, "top": { "x": 180 } } }
+  "variants": {
+    "type=bottom": { "model": "nifty:block/emerald/emerald_slab" },
+    "type=top":    { "model": "nifty:block/emerald/emerald_slab_top" },
+    "type=double": { "model": "block/emerald_block" }
+  }
 }
