@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "nifty:clay_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "B": {
+      "item": "minecraft:clay"
+    }
+  }
+}

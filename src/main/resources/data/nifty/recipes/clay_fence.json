@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:clay_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "B": {
+      "item": "minecraft:clay"
+    }
+  }
+}

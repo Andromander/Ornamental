@@ -39,7 +39,6 @@ public class NiftyTrapDoor extends BlockTrapDoor {
         return toolLevel;
     }
 
-    //This will have purpose later
     @Override
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (this.material == Material.IRON || this.material == Material.ROCK) {
@@ -56,7 +55,6 @@ public class NiftyTrapDoor extends BlockTrapDoor {
         }
     }
 
-    //This will have purpose later
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
         IBlockState state = worldIn.getBlockState(pos);

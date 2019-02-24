@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "nifty:block/clay/clay_slab" },
+    "type=top":    { "model": "nifty:block/clay/clay_slab_top" },
+    "type=double": { "model": "block/clay" }
+  }
+}
