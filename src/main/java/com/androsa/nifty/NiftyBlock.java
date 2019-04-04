@@ -14,6 +14,7 @@ public enum NiftyBlock {
     COAL(Material.ROCK, MapColor.BLACK, SoundType.STONE, 5.0F, 10.0F, "pickaxe", 0),
     REDSTONE(Material.IRON, MapColor.TNT, SoundType.METAL, 5.0F, 10.0F, "pickaxe", 0),
     MISSINGNO(Material.IRON, MapColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, "pickaxe", 2),
+    CLAY(Material.GROUND, MapColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, "shovel", 0),
 
     IRONWOOD(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F, 10.0F, null, 0),
     FIERY(Material.IRON, MapColor.BLACK_STAINED_HARDENED_CLAY, SoundType.METAL, 5.0F, 10.0F, null, 0),

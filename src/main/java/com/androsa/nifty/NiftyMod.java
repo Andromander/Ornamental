@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 public class NiftyMod {
     public static final String MODID = "nifty";
     public static final String NAME = "Nifty";
-    public static final String VERSION = "1.4";
+    public static final String VERSION = "1.5";
 
     public static Logger logger;
 

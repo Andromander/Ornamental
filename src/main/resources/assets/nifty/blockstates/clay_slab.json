@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "top": "minecraft:blocks/clay",
+      "side": "minecraft:blocks/clay",
+      "bottom": "minecraft:blocks/clay"
+    },
+    "uvlock": true
+  },
+  "variants": { "half": { "bottom": {}, "top": { "x": 180 } } }
+}
