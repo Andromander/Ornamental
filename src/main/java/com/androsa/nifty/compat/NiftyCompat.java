@@ -2,162 +2,56 @@ package com.androsa.nifty.compat;
 
 import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyMod;
-import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static com.androsa.nifty.NiftyBlock.*;
 
 @ParametersAreNonnullByDefault
 public enum NiftyCompat {
     TWILIGHT_FOREST("Twilight Forest") {
         @Override
         protected void registerBlocks(ModBlocks.BlockRegistryHelper blocks) {
-            //TODO: Change when TF updates
             Block ironwood = new Block(Material.WOOD, MapColor.WOOD);
             Block fiery = new Block(Material.IRON, MapColor.IRON);
             Block steeleaf = new Block(Material.LEAVES, MapColor.FOLIAGE);
             Block arctic = new Block(Material.CLOTH, MapColor.CLOTH);
             Block carminite = new Block(Material.CLAY, MapColor.CLAY);
 
-            blocks.registerBlock("ironwood_stairs",   new NiftyTFStairs(ironwood.getDefaultState(), SoundType.WOOD, 5.0F));
+            blocks.registerBlock("ironwood_stairs",   new NiftyTFStairs(ironwood.getDefaultState(), IRONWOOD));
             blocks.registerBlock("fiery_stairs",      new NiftyTFFieryStairs(fiery.getDefaultState()));
-            blocks.registerBlock("steeleaf_stairs",   new NiftyTFStairs(steeleaf.getDefaultState(), SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("arctic_fur_stairs", new NiftyTFStairs(arctic.getDefaultState(), SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("carminite_stairs",  new NiftyTFStairs(carminite.getDefaultState(), SoundType.SLIME, 0.0F));
-            blocks.registerBlock("ironwood_slab",   new NiftyTFSlab(false, Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("steeleaf_stairs",   new NiftyTFStairs(steeleaf.getDefaultState(), STEELEAF));
+            blocks.registerBlock("arctic_fur_stairs", new NiftyTFStairs(arctic.getDefaultState(), ARCTIC));
+            blocks.registerBlock("carminite_stairs",  new NiftyTFStairs(carminite.getDefaultState(), CARMINITE));
+            blocks.registerBlock("ironwood_slab",   new NiftyTFSlab(false, IRONWOOD));
             blocks.registerBlock("fiery_slab",      new NiftyTFFierySlab(false));
-            blocks.registerBlock("steeleaf_slab",   new NiftyTFSlab(false, Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("arctic_fur_slab", new NiftyTFSlab(false, Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("carminite_slab",  new NiftyTFSlab(false, Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
-            blocks.registerBlock("double_ironwood_slab",   new NiftyTFSlab(true, Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("steeleaf_slab",   new NiftyTFSlab(false, STEELEAF));
+            blocks.registerBlock("arctic_fur_slab", new NiftyTFSlab(false, ARCTIC));
+            blocks.registerBlock("carminite_slab",  new NiftyTFSlab(false, CARMINITE));
+            blocks.registerBlock("double_ironwood_slab",   new NiftyTFSlab(true, IRONWOOD));
             blocks.registerBlock("double_fiery_slab",      new NiftyTFFierySlab(true));
-            blocks.registerBlock("double_steeleaf_slab",   new NiftyTFSlab(true, Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("double_arctic_fur_slab", new NiftyTFSlab(true, Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("double_carminite_slab",  new NiftyTFSlab(true, Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
-            blocks.registerBlock("ironwood_fence",   new NiftyTFFence(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("double_steeleaf_slab",   new NiftyTFSlab(true, STEELEAF));
+            blocks.registerBlock("double_arctic_fur_slab", new NiftyTFSlab(true, ARCTIC));
+            blocks.registerBlock("double_carminite_slab",  new NiftyTFSlab(true, CARMINITE));
+            blocks.registerBlock("ironwood_fence",   new NiftyTFFence(IRONWOOD));
             blocks.registerBlock("fiery_fence",      new NiftyTFFieryFence());
-            blocks.registerBlock("steeleaf_fence",   new NiftyTFFence(Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("arctic_fur_fence", new NiftyTFFence(Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("carminite_fence",     new NiftyTFFence(Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
-            blocks.registerBlock("ironwood_trapdoor",   new NiftyTFTrapDoor(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("steeleaf_fence",   new NiftyTFFence(STEELEAF));
+            blocks.registerBlock("arctic_fur_fence", new NiftyTFFence(ARCTIC));
+            blocks.registerBlock("carminite_fence",  new NiftyTFFence(CARMINITE));
+            blocks.registerBlock("ironwood_trapdoor",   new NiftyTFTrapDoor(IRONWOOD));
             blocks.registerBlock("fiery_trapdoor",      new NiftyTFFieryTrapDoor());
-            blocks.registerBlock("steeleaf_trapdoor",   new NiftyTFTrapDoor(Material.LEAVES, MapColor.FOLIAGE, SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("arctic_fur_trapdoor", new NiftyTFTrapDoor(Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("carminite_trapdoor",  new NiftyTFTrapDoor(Material.CLAY, MapColor.CLAY, SoundType.SLIME, 0.0F));
-            blocks.registerBlock("ironwood_fence_gate",   new NiftyTFFenceGate(ironwood::getDefaultState, SoundType.WOOD, 5.0F));
+            blocks.registerBlock("steeleaf_trapdoor",   new NiftyTFTrapDoor(STEELEAF));
+            blocks.registerBlock("arctic_fur_trapdoor", new NiftyTFTrapDoor(ARCTIC));
+            blocks.registerBlock("carminite_trapdoor",  new NiftyTFTrapDoor(CARMINITE));
+            blocks.registerBlock("ironwood_fence_gate",   new NiftyTFFenceGate(ironwood::getDefaultState, IRONWOOD));
             blocks.registerBlock("fiery_fence_gate",      new NiftyTFFieryFenceGate(fiery::getDefaultState));
-            blocks.registerBlock("steeleaf_fence_gate",   new NiftyTFFenceGate(steeleaf::getDefaultState, SoundType.PLANT, 5.0F) {
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.75F);
-                }
-            });
-            blocks.registerBlock("arctic_fur_fence_gate", new NiftyTFFenceGate(arctic::getDefaultState, SoundType.CLOTH, 0.8F) {
-                @Override
-                @Deprecated
-                public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {
-                    return player.getHeldItemMainhand().getItem() instanceof ItemShears ? 0.2F : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
-                }
-                @Override
-                public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-                    entityIn.fall(fallDistance, 0.1F);
-                }
-            });
-            blocks.registerBlock("carminite_fence_gate",  new NiftyTFFenceGate(carminite::getDefaultState, SoundType.SLIME, 0.0F));
-
+            blocks.registerBlock("steeleaf_fence_gate",   new NiftyTFFenceGate(steeleaf::getDefaultState, STEELEAF));
+            blocks.registerBlock("arctic_fur_fence_gate", new NiftyTFFenceGate(arctic::getDefaultState, ARCTIC));
+            blocks.registerBlock("carminite_fence_gate",  new NiftyTFFenceGate(carminite::getDefaultState, CARMINITE));
         }
 
         @Override
