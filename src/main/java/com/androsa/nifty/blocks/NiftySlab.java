@@ -1,11 +1,9 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.BlockModelHelper;
 import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,29 +24,14 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
 
     private final boolean isDouble;
 
-    public NiftySlab(boolean isDouble, Material material, MapColor color, SoundType sound, float hardness, float resistance) {
-        super(material, color);
+    public NiftySlab(boolean isDouble, NiftyBlock block) {
+        super(block.material, block.color);
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setSoundType(block.sound);
+        this.setHardness(block.hardness);
+        this.setResistance(block.resistance);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-
-        IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, NiftySlabEnum.NORMAL);
-        if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
-        this.setDefaultState(state);
-
-        this.isDouble = isDouble;
-    }
-
-    public NiftySlab(boolean isDouble, Material material, MapColor color, SoundType sound, float hardness, float resistance, int harvest) {
-        super(material, color);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-        this.setHarvestLevel("pickaxe", harvest);
+        this.setHarvestLevel(block.tool, block.level);
 
         IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, NiftySlabEnum.NORMAL);
         if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);

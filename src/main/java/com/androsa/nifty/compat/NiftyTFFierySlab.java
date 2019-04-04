@@ -1,10 +1,7 @@
 package com.androsa.nifty.compat;
 
-import com.androsa.nifty.util.BlockModelHelper;
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.ModelUtil;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -21,10 +18,10 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class NiftyTFFierySlab extends NiftyTFSlab implements BlockModelHelper {
+public class NiftyTFFierySlab extends NiftyTFSlab {
 
     public NiftyTFFierySlab(boolean isDouble) {
-        super(isDouble, Material.IRON, MapColor.IRON, SoundType.METAL, 5.0F);
+        super(isDouble, NiftyBlock.FIERY);
     }
 
     @Override

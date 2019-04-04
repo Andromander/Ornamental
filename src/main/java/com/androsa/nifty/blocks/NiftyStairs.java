@@ -1,9 +1,9 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.BlockModelHelper;
 import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,26 +19,14 @@ public class NiftyStairs extends BlockStairs implements BlockModelHelper {
 
     private boolean isBeaconBase;
 
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, boolean beacon) {
+    public NiftyStairs(IBlockState state, NiftyBlock block, boolean beacon) {
         super(state);
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setSoundType(block.sound);
+        this.setHardness(block.hardness);
+        this.setResistance(block.resistance);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-
-        this.useNeighborBrightness = true;
-        this.isBeaconBase = beacon;
-    }
-
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, int harvest, boolean beacon) {
-        super(state);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-            this.setHarvestLevel("pickaxe", harvest);
+        this.setHarvestLevel(block.tool, block.level);
 
         this.useNeighborBrightness = true;
         this.isBeaconBase = beacon;

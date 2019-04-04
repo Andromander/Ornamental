@@ -1,18 +1,15 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.BlockModelHelper;
 import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.BlockTrapDoor;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -25,27 +22,16 @@ public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
 
     private final MapColor mapColor;
 
-    public NiftyTrapDoor(Material material, MapColor color, SoundType sound, float hardness, float resistance) {
-        super(material);
+    public NiftyTrapDoor(NiftyBlock block) {
+        super(block.material);
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setSoundType(block.sound);
+        this.setHardness(block.hardness);
+        this.setResistance(block.resistance);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
+        this.setHarvestLevel(block.tool, block.level);
 
-        this.mapColor = color;
-    }
-
-    public NiftyTrapDoor(Material material, MapColor color, SoundType sound, float hardness, float resistance, int harvest) {
-        super(material);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setHarvestLevel("pickaxe", harvest);
-
-        this.mapColor = color;
+        this.mapColor = block.color;
     }
 
     // Yeah, screw you too BlockTrapDoor

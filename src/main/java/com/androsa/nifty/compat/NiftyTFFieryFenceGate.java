@@ -1,8 +1,7 @@
 package com.androsa.nifty.compat;
 
-import com.androsa.nifty.util.BlockModelHelper;
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.ModelUtil;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -21,10 +20,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
-public class NiftyTFFieryFenceGate extends NiftyTFFenceGate implements BlockModelHelper {
+public class NiftyTFFieryFenceGate extends NiftyTFFenceGate {
 
     public NiftyTFFieryFenceGate(Supplier<IBlockState> state) {
-        super(state, SoundType.METAL, 5.0F);
+        super(state, NiftyBlock.FIERY);
     }
 
     @Override

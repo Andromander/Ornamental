@@ -1,10 +1,10 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.BlockModelHelper;
 import com.androsa.nifty.util.ModelUtil;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,33 +20,20 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class NiftyFenceGate extends BlockFenceGate implements BlockModelHelper {
 
     private final Supplier<IBlockState> blockstate;
 
-    public NiftyFenceGate(Supplier<IBlockState> state, SoundType sound, float hardness, float resistance) {
+    public NiftyFenceGate(Supplier<IBlockState> state, NiftyBlock block) {
         super(BlockPlanks.EnumType.OAK);
 
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
+        this.setSoundType(block.sound);
+        this.setHardness(block.hardness);
+        this.setResistance(block.resistance);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(OPEN, false).withProperty(POWERED, false).withProperty(IN_WALL, false));
-
-        blockstate = state;
-    }
-
-    public NiftyFenceGate(Supplier<IBlockState> state, SoundType sound, float hardness, float resistance, int harvest) {
-        super(BlockPlanks.EnumType.OAK);
-
-        this.setSoundType(sound);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setCreativeTab(CreativeTabs.DECORATIONS);
-        this.setHarvestLevel("pickaxe", harvest);
+        this.setHarvestLevel(block.tool, block.level);
         this.setDefaultState(this.blockState.getBaseState().withProperty(OPEN, false).withProperty(POWERED, false).withProperty(IN_WALL, false));
 
         blockstate = state;

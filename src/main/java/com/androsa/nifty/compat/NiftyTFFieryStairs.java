@@ -1,8 +1,7 @@
 package com.androsa.nifty.compat;
 
-import com.androsa.nifty.util.BlockModelHelper;
+import com.androsa.nifty.NiftyBlock;
 import com.androsa.nifty.util.ModelUtil;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -18,10 +17,10 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class NiftyTFFieryStairs extends NiftyTFStairs implements BlockModelHelper {
+public class NiftyTFFieryStairs extends NiftyTFStairs {
 
     public NiftyTFFieryStairs(IBlockState state) {
-        super(state, SoundType.METAL, 5.0F);
+        super(state, NiftyBlock.FIERY);
 
         useNeighborBrightness = false;
     }
