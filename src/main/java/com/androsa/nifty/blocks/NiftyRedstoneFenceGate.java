@@ -1,19 +1,15 @@
 package com.androsa.nifty.blocks;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
+import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
-import static net.minecraftforge.common.ToolType.PICKAXE;
-
 public class NiftyRedstoneFenceGate extends NiftyFenceGate {
 
     public NiftyRedstoneFenceGate() {
-        super(Material.IRON, MaterialColor.TNT, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 0);
+        super(NiftyBlock.REDSTONE);
     }
 
     @Override

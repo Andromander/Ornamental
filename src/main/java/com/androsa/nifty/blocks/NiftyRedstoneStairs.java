@@ -1,16 +1,15 @@
 package com.androsa.nifty.blocks;
 
-import net.minecraft.block.SoundType;
+import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraftforge.common.ToolType;
 
 public class NiftyRedstoneStairs extends NiftyStairs {
 
     public NiftyRedstoneStairs(IBlockState state) {
-        super(state, SoundType.METAL, 5.0F, 10.0F, ToolType.PICKAXE, 0, false);
+        super(state, NiftyBlock.REDSTONE, false);
     }
 
     @Override

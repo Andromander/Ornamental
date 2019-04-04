@@ -1,14 +1,12 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.ToolType;
-
-import javax.annotation.Nullable;
 
 public class NiftyStairs extends BlockStairs {
 
@@ -16,11 +14,11 @@ public class NiftyStairs extends BlockStairs {
     private ToolType toolType;
     private int toolLevel;
 
-    public NiftyStairs(IBlockState state, SoundType sound, float hardness, float resistance, ToolType tool, int level, boolean base) {
-        super(state, Block.Properties.from(state.getBlock()).hardnessAndResistance(hardness, resistance).sound(sound));
+    public NiftyStairs(IBlockState state, NiftyBlock block, boolean base) {
+        super(state, Block.Properties.from(state.getBlock()).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
 
-        this.toolType = tool;
-        this.toolLevel = level;
+        this.toolType = block.tool;
+        this.toolLevel = block.level;
         this.isBeaconBase = base;
     }
 

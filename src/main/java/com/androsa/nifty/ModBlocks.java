@@ -9,12 +9,15 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
-import static net.minecraftforge.common.ToolType.*;
+import static com.androsa.nifty.NiftyBlock.*;
 
 @ObjectHolder(NiftyMod.MODID)
+@Mod.EventBusSubscriber(modid = NiftyMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
 
     /** Blockstates */
@@ -29,61 +32,62 @@ public class ModBlocks {
     private static Block missingno = new Block(Block.Properties.create(Material.IRON, MaterialColor.MAGENTA));
     private static Block clay =      new Block(Block.Properties.create(Material.CLAY, MaterialColor.CLAY));
 
-    public static final Block iron_stairs      = new NiftyStairs(iron.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1, false).setRegistryName("iron_stairs");
-    public static final Block gold_stairs      = new NiftyStairs(gold.getDefaultState(), SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2, true).setRegistryName("gold_stairs");
-    public static final Block diamond_stairs   = new NiftyStairs(diamond.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, true).setRegistryName("diamond_stairs");
-    public static final Block emerald_stairs   = new NiftyStairs(emerald.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, true).setRegistryName("emerald_stairs");
-    public static final Block lapis_stairs     = new NiftyStairs(lapis.getDefaultState(), SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1, false).setRegistryName("lapis_stairs");
-    public static final Block obsidian_stairs  = new NiftyStairs(obsidian.getDefaultState(), SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3, false).setRegistryName("obsidian_stairs");
-    public static final Block coal_stairs      = new NiftyStairs(coal.getDefaultState(), SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0, false).setRegistryName("coal_stairs");
+    public static final Block iron_stairs      = new NiftyStairs(iron.getDefaultState(), IRON, false).setRegistryName("iron_stairs");
+    public static final Block gold_stairs      = new NiftyStairs(gold.getDefaultState(), GOLD, true).setRegistryName("gold_stairs");
+    public static final Block diamond_stairs   = new NiftyStairs(diamond.getDefaultState(), DIAMOND, true).setRegistryName("diamond_stairs");
+    public static final Block emerald_stairs   = new NiftyStairs(emerald.getDefaultState(), EMERALD, true).setRegistryName("emerald_stairs");
+    public static final Block lapis_stairs     = new NiftyStairs(lapis.getDefaultState(), LAPIS, false).setRegistryName("lapis_stairs");
+    public static final Block obsidian_stairs  = new NiftyStairs(obsidian.getDefaultState(), OBSIDIAN, false).setRegistryName("obsidian_stairs");
+    public static final Block coal_stairs      = new NiftyStairs(coal.getDefaultState(), COAL, false).setRegistryName("coal_stairs");
     public static final Block redstone_stairs  = new NiftyRedstoneStairs(redstone.getDefaultState()).setRegistryName("redstone_stairs");
-    public static final Block missingno_stairs = new NiftyStairs(missingno.getDefaultState(), SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2, false).setRegistryName("missingno_stairs");
-    public static final Block clay_stairs      = new NiftyStairs(clay.getDefaultState(), SoundType.GROUND, 0.6F, 0.6F, SHOVEL, -1, false).setRegistryName("clay_stairs");
+    public static final Block missingno_stairs = new NiftyStairs(missingno.getDefaultState(), MISSINGNO, false).setRegistryName("missingno_stairs");
+    public static final Block clay_stairs      = new NiftyStairs(clay.getDefaultState(), CLAY, false).setRegistryName("clay_stairs");
 
-    public static final Block iron_slab      = new NiftySlab(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_slab");
-    public static final Block gold_slab      = new NiftySlab(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_slab");
-    public static final Block diamond_slab   = new NiftySlab(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_slab");
-    public static final Block emerald_slab   = new NiftySlab(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_slab");
-    public static final Block lapis_slab     = new NiftySlab(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_slab");
-    public static final Block obsidian_slab  = new NiftySlab(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_slab");
-    public static final Block coal_slab      = new NiftySlab(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_slab");
+    public static final Block iron_slab      = new NiftySlab(IRON).setRegistryName("iron_slab");
+    public static final Block gold_slab      = new NiftySlab(GOLD).setRegistryName("gold_slab");
+    public static final Block diamond_slab   = new NiftySlab(DIAMOND).setRegistryName("diamond_slab");
+    public static final Block emerald_slab   = new NiftySlab(EMERALD).setRegistryName("emerald_slab");
+    public static final Block lapis_slab     = new NiftySlab(LAPIS).setRegistryName("lapis_slab");
+    public static final Block obsidian_slab  = new NiftySlab(OBSIDIAN).setRegistryName("obsidian_slab");
+    public static final Block coal_slab      = new NiftySlab(COAL).setRegistryName("coal_slab");
     public static final Block redstone_slab  = new NiftyRedstoneSlab().setRegistryName("redstone_slab");
-    public static final Block missingno_slab = new NiftySlab(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_slab");
-    public static final Block clay_slab      = new NiftySlab(Material.CLAY, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, -1).setRegistryName("clay_slab");
+    public static final Block missingno_slab = new NiftySlab(MISSINGNO).setRegistryName("missingno_slab");
+    public static final Block clay_slab      = new NiftySlab(CLAY).setRegistryName("clay_slab");
 
-    public static final Block iron_fence      = new NiftyFence(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_fence");
-    public static final Block gold_fence      = new NiftyFence(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_fence");
-    public static final Block diamond_fence   = new NiftyFence(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_fence");
-    public static final Block emerald_fence   = new NiftyFence(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_fence");
-    public static final Block lapis_fence     = new NiftyFence(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_fence");
-    public static final Block obsidian_fence  = new NiftyFence(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_fence");
-    public static final Block coal_fence      = new NiftyFence(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_fence");
+    public static final Block iron_fence      = new NiftyFence(IRON).setRegistryName("iron_fence");
+    public static final Block gold_fence      = new NiftyFence(GOLD).setRegistryName("gold_fence");
+    public static final Block diamond_fence   = new NiftyFence(DIAMOND).setRegistryName("diamond_fence");
+    public static final Block emerald_fence   = new NiftyFence(EMERALD).setRegistryName("emerald_fence");
+    public static final Block lapis_fence     = new NiftyFence(LAPIS).setRegistryName("lapis_fence");
+    public static final Block obsidian_fence  = new NiftyFence(OBSIDIAN).setRegistryName("obsidian_fence");
+    public static final Block coal_fence      = new NiftyFence(COAL).setRegistryName("coal_fence");
     public static final Block redstone_fence  = new NiftyRedstoneFence().setRegistryName("redstone_fence");
-    public static final Block missingno_fence = new NiftyFence(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_fence");
-    public static final Block clay_fence      = new NiftyFence(Material.CLAY, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, -1).setRegistryName("clay_fence");
+    public static final Block missingno_fence = new NiftyFence(MISSINGNO).setRegistryName("missingno_fence");
+    public static final Block clay_fence      = new NiftyFence(CLAY).setRegistryName("clay_fence");
 
-    public static final Block gold_trapdoor      = new NiftyTrapDoor(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 1).setRegistryName("gold_trapdoor");
-    public static final Block diamond_trapdoor   = new NiftyTrapDoor(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_trapdoor");
-    public static final Block emerald_trapdoor   = new NiftyTrapDoor(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_trapdoor");
-    public static final Block lapis_trapdoor     = new NiftyTrapDoor(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_trapdoor");
-    public static final Block obsidian_trapdoor  = new NiftyTrapDoor(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_trapdoor");
-    public static final Block coal_trapdoor      = new NiftyTrapDoor(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_trapdoor");
+    public static final Block gold_trapdoor      = new NiftyTrapDoor(GOLD).setRegistryName("gold_trapdoor");
+    public static final Block diamond_trapdoor   = new NiftyTrapDoor(DIAMOND).setRegistryName("diamond_trapdoor");
+    public static final Block emerald_trapdoor   = new NiftyTrapDoor(EMERALD).setRegistryName("emerald_trapdoor");
+    public static final Block lapis_trapdoor     = new NiftyTrapDoor(LAPIS).setRegistryName("lapis_trapdoor");
+    public static final Block obsidian_trapdoor  = new NiftyTrapDoor(OBSIDIAN).setRegistryName("obsidian_trapdoor");
+    public static final Block coal_trapdoor      = new NiftyTrapDoor(COAL).setRegistryName("coal_trapdoor");
     public static final Block redstone_trapdoor  = new NiftyRedstoneTrapDoor().setRegistryName("redstone_trapdoor");
-    public static final Block missingno_trapdoor = new NiftyTrapDoor(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_trapdoor");
-    public static final Block clay_trapdoor      = new NiftyTrapDoor(Material.CLAY, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, -1).setRegistryName("clay_trapdoor");
+    public static final Block missingno_trapdoor = new NiftyTrapDoor(MISSINGNO).setRegistryName("missingno_trapdoor");
+    public static final Block clay_trapdoor      = new NiftyTrapDoor(CLAY).setRegistryName("clay_trapdoor");
 
-    public static final Block iron_fence_gate      = new NiftyFenceGate(Material.IRON, MaterialColor.IRON, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 1).setRegistryName("iron_fence_gate");
-    public static final Block gold_fence_gate      = new NiftyFenceGate(Material.IRON, MaterialColor.GOLD, SoundType.METAL, 3.0F, 10.0F, PICKAXE, 2).setRegistryName("gold_fence_gate");
-    public static final Block diamond_fence_gate   = new NiftyFenceGate(Material.IRON, MaterialColor.DIAMOND, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("diamond_fence_gate");
-    public static final Block emerald_fence_gate   = new NiftyFenceGate(Material.IRON, MaterialColor.EMERALD, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("emerald_fence_gate");
-    public static final Block lapis_fence_gate     = new NiftyFenceGate(Material.IRON, MaterialColor.LAPIS, SoundType.STONE, 3.0F, 5.0F, PICKAXE, 1).setRegistryName("lapis_fence_gate");
-    public static final Block obsidian_fence_gate  = new NiftyFenceGate(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 50.0F, 2000.0F, PICKAXE, 3).setRegistryName("obsidian_fence_gate");
-    public static final Block coal_fence_gate      = new NiftyFenceGate(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0).setRegistryName("coal_fence_gate");
+    public static final Block iron_fence_gate      = new NiftyFenceGate(IRON).setRegistryName("iron_fence_gate");
+    public static final Block gold_fence_gate      = new NiftyFenceGate(GOLD).setRegistryName("gold_fence_gate");
+    public static final Block diamond_fence_gate   = new NiftyFenceGate(DIAMOND).setRegistryName("diamond_fence_gate");
+    public static final Block emerald_fence_gate   = new NiftyFenceGate(EMERALD).setRegistryName("emerald_fence_gate");
+    public static final Block lapis_fence_gate     = new NiftyFenceGate(LAPIS).setRegistryName("lapis_fence_gate");
+    public static final Block obsidian_fence_gate  = new NiftyFenceGate(OBSIDIAN).setRegistryName("obsidian_fence_gate");
+    public static final Block coal_fence_gate      = new NiftyFenceGate(COAL).setRegistryName("coal_fence_gate");
     public static final Block redstone_fence_gate  = new NiftyRedstoneFenceGate().setRegistryName("redstone_fence_gate");
-    public static final Block missingno_fence_gate = new NiftyFenceGate(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2).setRegistryName("missingno_fence_gate");
-    public static final Block clay_fence_gate      = new NiftyFenceGate(Material.CLAY, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, -1).setRegistryName("clay_fence_gate");
+    public static final Block missingno_fence_gate = new NiftyFenceGate(MISSINGNO).setRegistryName("missingno_fence_gate");
+    public static final Block clay_fence_gate      = new NiftyFenceGate(CLAY).setRegistryName("clay_fence_gate");
 
-    public void onRegisterBlocks(final RegistryEvent.Register<Block> e) {
+    @SubscribeEvent
+    public static void onRegisterBlocks(RegistryEvent.Register<Block> e) {
         final Block blocks[] = new Block[] {
                 //Stairs
                 iron_stairs, gold_stairs, diamond_stairs, emerald_stairs, lapis_stairs, obsidian_stairs, coal_stairs, redstone_stairs, missingno_stairs, clay_stairs,
@@ -100,7 +104,8 @@ public class ModBlocks {
         e.getRegistry().registerAll(blocks);
     }
 
-    public void onRegisterItems(final RegistryEvent.Register<Item> e) {
+    @SubscribeEvent
+    public static void onRegisterItems(RegistryEvent.Register<Item> e) {
         final IForgeRegistry<Item> registry = e.getRegistry();
 
         registry.register(new ItemBlock(iron_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_stairs"));

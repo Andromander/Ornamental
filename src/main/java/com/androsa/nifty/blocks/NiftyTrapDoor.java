@@ -1,10 +1,9 @@
 package com.androsa.nifty.blocks;
 
+import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTrapDoor;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,11 +21,11 @@ public class NiftyTrapDoor extends BlockTrapDoor {
     private ToolType toolType;
     private int toolLevel;
 
-    public NiftyTrapDoor(Material material, MaterialColor color, SoundType sound, float hardness, float resistance, ToolType tool, int level) {
-        super(Block.Properties.create(material, color).hardnessAndResistance(hardness, resistance).sound(sound));
+    public NiftyTrapDoor(NiftyBlock block) {
+        super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
 
-        this.toolType = tool;
-        this.toolLevel = level;
+        this.toolType = block.tool;
+        this.toolLevel = block.level;
     }
 
     @Override
