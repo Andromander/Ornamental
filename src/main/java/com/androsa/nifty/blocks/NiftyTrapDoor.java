@@ -44,7 +44,7 @@ public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (material == Material.IRON || material == Material.ROCK) {
-            //Basically, Iron and Rock Nifty Trapdoors won't open. Wood, Cloth, Leaves, and Slime can
+            //Basically, Iron and Rock Nifty Trapdoors won't open. Wood, Cloth, Leaves, Slime, and Ground can
             return false;
         } else {
             state = state.cycleProperty(OPEN);
@@ -60,7 +60,7 @@ public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
         IBlockState state = worldIn.getBlockState(pos);
 
         if (!state.getValue(OPEN)) {
-            if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH) {
+            if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH || material == Material.GROUND || material == Material.GRASS) {
                 state = state.cycleProperty(OPEN);
                 worldIn.setBlockState(pos, state, 2);
                 this.playSound(null, worldIn, pos, state.getValue(OPEN));

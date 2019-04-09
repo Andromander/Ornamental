@@ -32,6 +32,7 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
         this.setResistance(block.resistance);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         this.setHarvestLevel(block.tool, block.level);
+        this.useNeighborBrightness = true;
 
         IBlockState state = this.blockState.getBaseState().withProperty(VARIANT, NiftySlabEnum.NORMAL);
         if (!this.isDouble()) state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
