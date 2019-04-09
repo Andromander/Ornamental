@@ -10,8 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "minecraft:grass",
-      "data": 2
+      "item": "minecraft:grass"
     }
   }
 }
