@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:grass_slab",
+    "count": 6,
+    "data": 0
+  },
+  "pattern": [
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:grass",
+      "data": 2
+    }
+  }
+}

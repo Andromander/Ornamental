@@ -1,0 +1,63 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:stairs_bottom_straight_grass",
+    "textures": {
+      "bottom": "minecraft:blocks/dirt",
+      "top": "minecraft:blocks/grass_top",
+      "side": "minecraft:blocks/grass_side",
+      "overlay": "minecraft:blocks/grass_side_overlay",
+      "particle": "#side"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "east":  {          },
+      "west":  { "y": 180 },
+      "south": { "y": 90  },
+      "north": { "y": 270 }
+    }, "half":{
+      "bottom": { },
+      "top":    { }
+    }, "shape": {
+      "straight":{ },
+      "outer_right":{ },
+      "outer_left": { },
+      "inner_right":{ },
+      "inner_left": { }
+    },
+
+    "facing=east,half=bottom,shape=inner_left":  { "model": "nifty:stairs_bottom_inner_grass", "y": 270           },
+    "facing=east,half=bottom,shape=outer_left":  { "model": "nifty:stairs_bottom_outer_grass", "y": 270           },
+    "facing=east,half=top,shape=inner_left":     { "model": "nifty:stairs_top_inner_grass",    "x": 180, "y": 0   },
+    "facing=east,half=top,shape=inner_right":    { "model": "nifty:stairs_top_inner_grass",    "x": 180, "y": 90  },
+    "facing=east,half=top,shape=outer_left":     { "model": "nifty:stairs_top_outer_grass",    "x": 180, "y": 0   },
+    "facing=east,half=top,shape=outer_right":    { "model": "nifty:stairs_top_outer_grass",    "x": 180, "y": 90  },
+    "facing=east,half=top,shape=straight":       { "model": "nifty:stairs_top_straight_grass", "x": 180           },
+
+    "facing=north,half=bottom,shape=inner_left": { "model": "nifty:stairs_bottom_inner_grass", "y": 180           },
+    "facing=north,half=bottom,shape=outer_left": { "model": "nifty:stairs_bottom_outer_grass", "y": 180           },
+    "facing=north,half=top,shape=inner_left":    { "model": "nifty:stairs_top_inner_grass",    "x": 180, "y": 270 },
+    "facing=north,half=top,shape=inner_right":   { "model": "nifty:stairs_top_inner_grass",    "x": 180, "y": 0   },
+    "facing=north,half=top,shape=outer_left":    { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 270    },
+    "facing=north,half=top,shape=outer_right":   { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 0      },
+    "facing=north,half=top,shape=straight":      { "model": "nifty:stairs_top_straight_grass", "x": 180, "y": 270 },
+
+    "facing=south,half=bottom,shape=inner_left": { "model": "nifty:stairs_bottom_inner_grass", "y": 0             },
+    "facing=south,half=bottom,shape=outer_left": { "model": "nifty:stairs_bottom_outer_grass", "y": 0             },
+    "facing=south,half=top,shape=inner_left":    { "model": "nifty:stairs_top_inner_grass", "x": 180, "y": 90     },
+    "facing=south,half=top,shape=inner_right":   { "model": "nifty:stairs_top_inner_grass", "x": 180, "y": 180    },
+    "facing=south,half=top,shape=outer_left":    { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 90     },
+    "facing=south,half=top,shape=outer_right":   { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 180    },
+    "facing=south,half=top,shape=straight":      { "model": "nifty:stairs_top_straight_grass", "x": 180, "y": 90  },
+
+    "facing=west,half=bottom,shape=inner_left":  { "model": "nifty:stairs_bottom_inner_grass", "y": 90            },
+    "facing=west,half=bottom,shape=outer_left":  { "model": "nifty:stairs_bottom_outer_grass", "y": 90            },
+    "facing=west,half=top,shape=inner_left":     { "model": "nifty:stairs_top_inner_grass", "x": 180, "y": 180    },
+    "facing=west,half=top,shape=inner_right":    { "model": "nifty:stairs_top_inner_grass", "x": 180, "y": 270    },
+    "facing=west,half=top,shape=outer_left":     { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 180    },
+    "facing=west,half=top,shape=outer_right":    { "model": "nifty:stairs_top_outer_grass", "x": 180, "y": 270    },
+    "facing=west,half=top,shape=straight":       { "model": "nifty:stairs_top_straight_grass", "x": 180, "y": 180 }
+  }
+}

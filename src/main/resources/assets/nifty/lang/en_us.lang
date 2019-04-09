@@ -10,6 +10,8 @@ tile.nifty.coal_stairs.name=Coal Stairs
 tile.nifty.redstone_stairs.name=Redstone Stairs
 tile.nifty.missingno_stairs.name=§kMissingno Stairs
 tile.nifty.clay_stairs.name=Clay Stairs
+tile.nifty.dirt_stairs.name=Dirt Stairs
+tile.nifty.grass_stairs.name=Grass Stairs
 
 tile.nifty.iron_slab.name=Iron Slab
 tile.nifty.gold_slab.name=Gold Slab
@@ -21,6 +23,8 @@ tile.nifty.coal_slab.name=Coal Slab
 tile.nifty.redstone_slab.name=Redstone Slab
 tile.nifty.missingno_slab.name=§kMissingno Slab
 tile.nifty.clay_slab.name=Clay Slab
+tile.nifty.dirt_slab.name=Dirt Slab
+tile.nifty.grass_slab.name=Grass Slab
 
 tile.nifty.iron_fence.name=Iron Fence
 tile.nifty.gold_fence.name=Gold Fence
@@ -32,6 +36,8 @@ tile.nifty.coal_fence.name=Coal Fence
 tile.nifty.redstone_fence.name=Redstone Fence
 tile.nifty.missingno_fence.name=§kMissingno Fence
 tile.nifty.clay_fence.name=Clay Fence
+tile.nifty.dirt_fence.name=Dirt Fence
+tile.nifty.grass_fence.name=Grass Fence
 
 tile.nifty.gold_trapdoor.name=Gold Trapdoor
 tile.nifty.diamond_trapdoor.name=Diamond Trapdoor
@@ -42,6 +48,8 @@ tile.nifty.coal_trapdoor.name=Coal Trapdoor
 tile.nifty.redstone_trapdoor.name=Redstone Trapdoor
 tile.nifty.missingno_trapdoor.name=§kMissingno Trapdoor
 tile.nifty.clay_trapdoor.name=Clay Trapdoor
+tile.nifty.dirt_trapdoor.name=Dirt Trapdoor
+tile.nifty.grass_trapdoor.name=Grass Trapdoor
 
 tile.nifty.iron_fence_gate.name=Iron Fence Gate
 tile.nifty.gold_fence_gate.name=Gold Fence Gate
@@ -53,6 +61,8 @@ tile.nifty.coal_fence_gate.name=Coal Fence Gate
 tile.nifty.redstone_fence_gate.name=Redstone Fence Gate
 tile.nifty.missingno_fence_gate.name=§kMissingno Fence Gate
 tile.nifty.clay_fence_gate.name=Clay Fence Gate
+tile.nifty.dirt_fence_gate.name=Dirt Fence Gate
+tile.nifty.grass_fence_gate.name=Grass Fence Gate
 
 
 tile.nifty.ironwood_stairs.name=Ironwood Stairs

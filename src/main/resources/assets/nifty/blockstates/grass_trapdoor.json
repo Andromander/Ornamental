@@ -1,0 +1,46 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "bottom": "blocks/dirt",
+      "top": "blocks/grass_top",
+      "side": "blocks/grass_side",
+      "overlay": "blocks/grass_side_overlay",
+      "particle": "blocks/dirt"
+    }
+  },
+  "variants": {
+    "facing":   {
+      "east":   { },
+      "west":   { },
+      "south":  { },
+      "north":  { }
+    }, "half":  {
+      "bottom": { },
+      "top":    { }
+    }, "open":  {
+      "false":  { },
+      "true":   { }
+    },
+
+    "facing=east,half=bottom,open=false": { "model": "nifty:trapdoor_bottom_grass"        },
+    "facing=east,half=bottom,open=true":  { "model": "nifty:trapdoor_open_grass", "y": 90 },
+    "facing=east,half=top,open=false":    { "model": "nifty:trapdoor_top_grass"           },
+    "facing=east,half=top,open=true":     { "model": "nifty:trapdoor_open_grass", "y": 90 },
+
+    "facing=west,half=bottom,open=false": { "model": "nifty:trapdoor_bottom_grass"         },
+    "facing=west,half=bottom,open=true":  { "model": "nifty:trapdoor_open_grass", "y": 270 },
+    "facing=west,half=top,open=false":    { "model": "nifty:trapdoor_top_grass"            },
+    "facing=west,half=top,open=true":     { "model": "nifty:trapdoor_open_grass", "y": 270 },
+
+    "facing=south,half=bottom,open=false": { "model": "nifty:trapdoor_bottom_grass"         },
+    "facing=south,half=bottom,open=true":  { "model": "nifty:trapdoor_open_grass", "y": 180 },
+    "facing=south,half=top,open=false":    { "model": "nifty:trapdoor_top_grass"            },
+    "facing=south,half=top,open=true":     { "model": "nifty:trapdoor_open_grass", "y": 180 },
+
+    "facing=north,half=bottom,open=false": { "model": "nifty:trapdoor_bottom_grass" },
+    "facing=north,half=bottom,open=true":  { "model": "nifty:trapdoor_open_grass"   },
+    "facing=north,half=top,open=false":    { "model": "nifty:trapdoor_top_grass"    },
+    "facing=north,half=top,open=true":     { "model": "nifty:trapdoor_open_grass"   }
+  }
+}

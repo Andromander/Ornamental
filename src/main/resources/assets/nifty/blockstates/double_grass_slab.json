@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "grass",
+    "textures": {
+      "bottom": "blocks/dirt",
+      "top": "blocks/grass_top",
+      "side": "blocks/grass_side",
+      "overlay": "blocks/grass_side_overlay",
+      "particle": "blocks/dirt"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

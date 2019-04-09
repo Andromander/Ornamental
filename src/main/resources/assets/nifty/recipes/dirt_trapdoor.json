@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "nifty:dirt_trapdoor"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:dirt_slab",
+      "data": 0
+    }
+  }
+}

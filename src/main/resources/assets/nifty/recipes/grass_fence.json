@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "nifty:grass_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:grass_slab",
+      "data": 0
+    },
+    "B": {
+      "item": "minecraft:grass",
+      "data": 2
+    }
+  }
+}

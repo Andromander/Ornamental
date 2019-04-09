@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:dirt_slab",
+    "count": 6,
+    "data": 0
+  },
+  "pattern": [
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:dirt",
+      "data": 0
+    }
+  }
+}

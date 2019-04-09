@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "nifty:dirt_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:dirt_slab",
+      "data": 0
+    },
+    "B": {
+      "item": "minecraft:dirt",
+      "data": 0
+    }
+  }
+}

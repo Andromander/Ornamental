@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true
+  },
+  "variants": {
+    "half": {
+      "bottom": { "model": "nifty:half_slab_bottom_grass" },
+      "top": { "model": "nifty:half_slab_top_grass" }
+    }
+  }
+}

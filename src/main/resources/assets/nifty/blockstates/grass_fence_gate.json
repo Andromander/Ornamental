@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "uvlock": true
+  },
+  "variants": {
+    "facing":      {
+      "east":      { },
+      "west":      { },
+      "south":     { },
+      "north":     { }
+    }, "in_wall":  {
+      "true":      { },
+      "false":     { }
+    }, "open":     {
+      "false":     { },
+      "true":      { }
+    },
+
+    "facing=east,in_wall=true,open=false":  { "model": "nifty:fence_gate_closed_grass", "y": 270 },
+    "facing=east,in_wall=true,open=true":   { "model": "nifty:fence_gate_open_grass", "y": 270   },
+    "facing=east,in_wall=false,open=false": { "model": "nifty:fence_gate_closed_grass", "y": 270 },
+    "facing=east,in_wall=false,open=true":  { "model": "nifty:fence_gate_open_grass", "y": 270   },
+
+    "facing=west,in_wall=true,open=false":  { "model": "nifty:fence_gate_closed_grass", "y": 90 },
+    "facing=west,in_wall=true,open=true":   { "model": "nifty:fence_gate_open_grass", "y": 90   },
+    "facing=west,in_wall=false,open=false": { "model": "nifty:fence_gate_closed_grass", "y": 90 },
+    "facing=west,in_wall=false,open=true":  { "model": "nifty:fence_gate_open_grass", "y": 90   },
+
+    "facing=south,in_wall=true,open=false":  { "model": "nifty:fence_gate_closed_grass" },
+    "facing=south,in_wall=true,open=true":   { "model": "nifty:fence_gate_open_grass"   },
+    "facing=south,in_wall=false,open=false": { "model": "nifty:fence_gate_closed_grass" },
+    "facing=south,in_wall=false,open=true":  { "model": "nifty:fence_gate_open_grass"   },
+
+    "facing=north,in_wall=true,open=false":  { "model": "nifty:fence_gate_closed_grass", "y": 180 },
+    "facing=north,in_wall=true,open=true":   { "model": "nifty:fence_gate_open_grass", "y": 180   },
+    "facing=north,in_wall=false,open=false": { "model": "nifty:fence_gate_closed_grass", "y": 180 },
+    "facing=north,in_wall=false,open=true":  { "model": "nifty:fence_gate_open_grass", "y": 180   }
+  }
+}
