@@ -31,6 +31,8 @@ public class ModBlocks {
     private static Block redstone =  new Block(Block.Properties.create(Material.IRON, MaterialColor.TNT));
     private static Block missingno = new Block(Block.Properties.create(Material.IRON, MaterialColor.MAGENTA));
     private static Block clay =      new Block(Block.Properties.create(Material.CLAY, MaterialColor.CLAY));
+    private static Block dirt =      new Block(Block.Properties.create(Material.GROUND, MaterialColor.DIRT));
+    private static Block grass =     new Block(Block.Properties.create(Material.GRASS, MaterialColor.GRASS));
 
     public static final Block iron_stairs      = new NiftyStairs(iron.getDefaultState(), IRON, false).setRegistryName("iron_stairs");
     public static final Block gold_stairs      = new NiftyStairs(gold.getDefaultState(), GOLD, true).setRegistryName("gold_stairs");
@@ -42,6 +44,8 @@ public class ModBlocks {
     public static final Block redstone_stairs  = new NiftyRedstoneStairs(redstone.getDefaultState()).setRegistryName("redstone_stairs");
     public static final Block missingno_stairs = new NiftyStairs(missingno.getDefaultState(), MISSINGNO, false).setRegistryName("missingno_stairs");
     public static final Block clay_stairs      = new NiftyStairs(clay.getDefaultState(), CLAY, false).setRegistryName("clay_stairs");
+    public static final Block dirt_stairs      = new NiftyDirtStairs(dirt.getDefaultState()).setRegistryName("dirt_stairs");
+    public static final Block grass_stairs     = new NiftyGrassStairs(grass.getDefaultState()).setRegistryName("grass_stairs");
 
     public static final Block iron_slab      = new NiftySlab(IRON).setRegistryName("iron_slab");
     public static final Block gold_slab      = new NiftySlab(GOLD).setRegistryName("gold_slab");
@@ -53,6 +57,8 @@ public class ModBlocks {
     public static final Block redstone_slab  = new NiftyRedstoneSlab().setRegistryName("redstone_slab");
     public static final Block missingno_slab = new NiftySlab(MISSINGNO).setRegistryName("missingno_slab");
     public static final Block clay_slab      = new NiftySlab(CLAY).setRegistryName("clay_slab");
+    public static final Block dirt_slab      = new NiftyDirtSlab().setRegistryName("dirt_slab");
+    public static final Block grass_slab     = new NiftyGrassSlab().setRegistryName("grass_slab");
 
     public static final Block iron_fence      = new NiftyFence(IRON).setRegistryName("iron_fence");
     public static final Block gold_fence      = new NiftyFence(GOLD).setRegistryName("gold_fence");
@@ -64,6 +70,8 @@ public class ModBlocks {
     public static final Block redstone_fence  = new NiftyRedstoneFence().setRegistryName("redstone_fence");
     public static final Block missingno_fence = new NiftyFence(MISSINGNO).setRegistryName("missingno_fence");
     public static final Block clay_fence      = new NiftyFence(CLAY).setRegistryName("clay_fence");
+    public static final Block dirt_fence      = new NiftyDirtFence().setRegistryName("dirt_fence");
+    public static final Block grass_fence     = new NiftyGrassFence().setRegistryName("grass_fence");
 
     public static final Block gold_trapdoor      = new NiftyTrapDoor(GOLD).setRegistryName("gold_trapdoor");
     public static final Block diamond_trapdoor   = new NiftyTrapDoor(DIAMOND).setRegistryName("diamond_trapdoor");
@@ -74,6 +82,8 @@ public class ModBlocks {
     public static final Block redstone_trapdoor  = new NiftyRedstoneTrapDoor().setRegistryName("redstone_trapdoor");
     public static final Block missingno_trapdoor = new NiftyTrapDoor(MISSINGNO).setRegistryName("missingno_trapdoor");
     public static final Block clay_trapdoor      = new NiftyTrapDoor(CLAY).setRegistryName("clay_trapdoor");
+    public static final Block dirt_trapdoor      = new NiftyDirtTrapDoor().setRegistryName("dirt_trapdoor");
+    public static final Block grass_trapdoor     = new NiftyGrassTrapDoor().setRegistryName("grass_trapdoor");
 
     public static final Block iron_fence_gate      = new NiftyFenceGate(IRON).setRegistryName("iron_fence_gate");
     public static final Block gold_fence_gate      = new NiftyFenceGate(GOLD).setRegistryName("gold_fence_gate");
@@ -85,20 +95,22 @@ public class ModBlocks {
     public static final Block redstone_fence_gate  = new NiftyRedstoneFenceGate().setRegistryName("redstone_fence_gate");
     public static final Block missingno_fence_gate = new NiftyFenceGate(MISSINGNO).setRegistryName("missingno_fence_gate");
     public static final Block clay_fence_gate      = new NiftyFenceGate(CLAY).setRegistryName("clay_fence_gate");
+    public static final Block dirt_fence_gate      = new NiftyDirtFenceGate().setRegistryName("dirt_fence_gate");
+    public static final Block grass_fence_gate     = new NiftyGrassFenceGate().setRegistryName("grass_fence_gate");
 
     @SubscribeEvent
     public static void onRegisterBlocks(RegistryEvent.Register<Block> e) {
         final Block blocks[] = new Block[] {
                 //Stairs
-                iron_stairs, gold_stairs, diamond_stairs, emerald_stairs, lapis_stairs, obsidian_stairs, coal_stairs, redstone_stairs, missingno_stairs, clay_stairs,
+                iron_stairs, gold_stairs, diamond_stairs, emerald_stairs, lapis_stairs, obsidian_stairs, coal_stairs, redstone_stairs, missingno_stairs, clay_stairs, dirt_stairs, grass_stairs,
                 //Slabs
-                iron_slab, gold_slab, diamond_slab, emerald_slab, lapis_slab, obsidian_slab, coal_slab, redstone_slab, missingno_slab, clay_slab,
+                iron_slab, gold_slab, diamond_slab, emerald_slab, lapis_slab, obsidian_slab, coal_slab, redstone_slab, missingno_slab, clay_slab, dirt_slab, grass_slab,
                 //Fences
-                iron_fence, gold_fence, diamond_fence, emerald_fence, lapis_fence, obsidian_fence, coal_fence, redstone_fence, missingno_fence, clay_fence,
+                iron_fence, gold_fence, diamond_fence, emerald_fence, lapis_fence, obsidian_fence, coal_fence, redstone_fence, missingno_fence, clay_fence, dirt_fence, grass_fence,
                 //Trapdoors
-                gold_trapdoor, diamond_trapdoor, emerald_trapdoor, lapis_trapdoor, obsidian_trapdoor, coal_trapdoor, redstone_trapdoor, missingno_trapdoor, clay_trapdoor,
+                gold_trapdoor, diamond_trapdoor, emerald_trapdoor, lapis_trapdoor, obsidian_trapdoor, coal_trapdoor, redstone_trapdoor, missingno_trapdoor, clay_trapdoor, dirt_trapdoor, grass_trapdoor,
                 //Fence Gates
-                iron_fence_gate, gold_fence_gate, diamond_fence_gate, emerald_fence_gate, lapis_fence_gate, obsidian_fence_gate, coal_fence_gate, redstone_fence_gate, missingno_fence_gate, clay_fence_gate
+                iron_fence_gate, gold_fence_gate, diamond_fence_gate, emerald_fence_gate, lapis_fence_gate, obsidian_fence_gate, coal_fence_gate, redstone_fence_gate, missingno_fence_gate, clay_fence_gate, dirt_fence_gate, grass_fence_gate
         };
 
         e.getRegistry().registerAll(blocks);
@@ -123,6 +135,8 @@ public class ModBlocks {
         registry.register(new ItemBlock(redstone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_stairs"));
         registry.register(new ItemBlock(missingno_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_stairs"));
         registry.register(new ItemBlock(clay_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("clay_stairs"));
+        registry.register(new ItemBlock(dirt_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("dirt_stairs"));
+        registry.register(new ItemBlock(grass_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("grass_stairs"));
 
         registry.register(new ItemBlock(iron_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_slab"));
         registry.register(new ItemBlock(gold_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gold_slab"));
@@ -139,6 +153,8 @@ public class ModBlocks {
         registry.register(new ItemBlock(redstone_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_slab"));
         registry.register(new ItemBlock(missingno_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_slab"));
         registry.register(new ItemBlock(clay_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("clay_slab"));
+        registry.register(new ItemBlock(dirt_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("dirt_slab"));
+        registry.register(new ItemBlock(grass_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("grass_slab"));
 
         registry.register(new ItemBlock(iron_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("iron_fence"));
         registry.register(new ItemBlock(gold_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("gold_fence"));
@@ -155,6 +171,8 @@ public class ModBlocks {
         registry.register(new ItemBlock(redstone_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("redstone_fence"));
         registry.register(new ItemBlock(missingno_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("missingno_fence"));
         registry.register(new ItemBlock(clay_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("clay_fence"));
+        registry.register(new ItemBlock(dirt_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("dirt_fence"));
+        registry.register(new ItemBlock(grass_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("grass_fence"));
 
         registry.register(new ItemBlock(gold_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_trapdoor"));
         registry.register(new ItemBlock(diamond_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("diamond_trapdoor"));
@@ -170,6 +188,8 @@ public class ModBlocks {
         registry.register(new ItemBlock(redstone_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_trapdoor"));
         registry.register(new ItemBlock(missingno_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_trapdoor"));
         registry.register(new ItemBlock(clay_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("clay_trapdoor"));
+        registry.register(new ItemBlock(dirt_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("dirt_trapdoor"));
+        registry.register(new ItemBlock(grass_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("grass_trapdoor"));
 
         registry.register(new ItemBlock(iron_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("iron_fence_gate"));
         registry.register(new ItemBlock(gold_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_fence_gate"));
@@ -186,5 +206,7 @@ public class ModBlocks {
         registry.register(new ItemBlock(redstone_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_fence_gate"));
         registry.register(new ItemBlock(missingno_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_fence_gate"));
         registry.register(new ItemBlock(clay_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("clay_fence_gate"));
+        registry.register(new ItemBlock(dirt_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("dirt_fence_gate"));
+        registry.register(new ItemBlock(grass_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("grass_fence_gate"));
     }
 }

@@ -9,6 +9,8 @@
   "block.nifty.redstone_stairs": "Redstone Stairs",
   "block.nifty.missingno_stairs": "§kMissingno Stairs",
   "block.nifty.clay_stairs": "Clay Stairs",
+  "block.nifty.dirt_stairs": "Dirt Stairs",
+  "block.nifty.grass_stairs": "Grass Stairs",
 
   "block.nifty.iron_slab": "Iron Slab",
   "block.nifty.gold_slab": "Gold Slab",
@@ -20,6 +22,8 @@
   "block.nifty.redstone_slab": "Redstone Slab",
   "block.nifty.missingno_slab": "§kMissingno Slab",
   "block.nifty.clay_slab": "Clay Slab",
+  "block.nifty.dirt_slab": "Dirt Slab",
+  "block.nifty.grass_slab": "Grass Slab",
 
   "block.nifty.iron_fence": "Iron Fence",
   "block.nifty.gold_fence": "Gold Fence",
@@ -31,6 +35,8 @@
   "block.nifty.redstone_fence": "Redstone Fence",
   "block.nifty.missingno_fence": "§kMissingno Fence",
   "block.nifty.clay_fence": "Clay Fence",
+  "block.nifty.dirt_fence": "Dirt Fence",
+  "block.nifty.grass_fence": "Grass Fence",
 
   "block.nifty.gold_trapdoor": "Gold Trapdoor",
   "block.nifty.diamond_trapdoor": "Diamond Trapdoor",
@@ -41,6 +47,8 @@
   "block.nifty.redstone_trapdoor": "Redstone Trapdoor",
   "block.nifty.missingno_trapdoor": "§kMissingno Trapdoor",
   "block.nifty.clay_trapdoor": "Clay Trapdoor",
+  "block.nifty.dirt_trapdoor": "Dirt Trapdoor",
+  "block.nifty.grass_trapdoor": "Grass Trapdoor",
 
   "block.nifty.iron_fence_gate": "Iron Fence Gate",
   "block.nifty.gold_fence_gate": "Gold Fence Gate",
@@ -51,5 +59,7 @@
   "block.nifty.coal_fence_gate": "Coal Fence Gate",
   "block.nifty.redstone_fence_gate": "Redstone Fence Gate",
   "block.nifty.missingno_fence_gate": "§kMissingno Fence Gate",
-  "block.nifty.clay_fence_gate": "Clay Fence Gate"
+  "block.nifty.clay_fence_gate": "Clay Fence Gate",
+  "block.nifty.dirt_fence_gate": "Dirt Fence Gate",
+  "block.nifty.grass_fence_gate": "Grass Fence Gate"
 }

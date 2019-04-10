@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "nifty:block/dirt/dirt_slab" },
+    "type=top":    { "model": "nifty:block/dirt/dirt_slab_top" },
+    "type=double": { "model": "block/dirt" }
+  }
+}

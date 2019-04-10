@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:dirt_stairs",
+    "count": 8
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:dirt"
+    }
+  }
+}

@@ -17,7 +17,9 @@ public enum NiftyBlock {
     COAL(Material.ROCK, MaterialColor.BLACK, SoundType.STONE, 5.0F, 10.0F, PICKAXE, 0),
     REDSTONE(Material.IRON, MaterialColor.TNT, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 0),
     MISSINGNO(Material.IRON, MaterialColor.MAGENTA, SoundType.METAL, 5.0F, 10.0F, PICKAXE, 2),
-    CLAY(Material.GROUND, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, 0);
+    CLAY(Material.GROUND, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, 0),
+    DIRT(Material.GROUND, MaterialColor.DIRT, SoundType.GROUND, 0.5F, 0.0F, SHOVEL, 0),
+    GRASS(Material.GRASS, MaterialColor.GRASS, SoundType.PLANT, 0.6F, 0.0F, SHOVEL, 0);
 
     public final Material material;
     public final MaterialColor color;
