@@ -59,7 +59,7 @@ public class NiftyTrapDoor extends BlockTrapDoor {
         IBlockState state = worldIn.getBlockState(pos);
 
         if (!state.get(OPEN)) {
-            if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH) {
+            if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH || material == Material.GROUND || material == Material.GRASS) {
                 state = state.cycle(OPEN);
                 worldIn.setBlockState(pos, state, 2);
                 this.playSound(null, worldIn, pos, state.get(OPEN));
