@@ -9,7 +9,8 @@
   ],
   "key": {
     "#": {
-      "item": "nifty:grass_slab"
+      "item": "nifty:grass_slab",
+      "data": 0
     }
   }
 }
