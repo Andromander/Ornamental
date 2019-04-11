@@ -7,16 +7,19 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NiftyStairs extends BlockStairs implements BlockModelHelper {
 
+    private final float fallDamage;
     private boolean isBeaconBase;
 
     public NiftyStairs(IBlockState state, NiftyBlock block, boolean beacon) {
@@ -29,7 +32,13 @@ public class NiftyStairs extends BlockStairs implements BlockModelHelper {
         this.setHarvestLevel(block.tool, block.level);
 
         this.useNeighborBrightness = true;
+        this.fallDamage = block.multiplier;
         this.isBeaconBase = beacon;
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {

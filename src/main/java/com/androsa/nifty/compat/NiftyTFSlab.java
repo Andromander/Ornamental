@@ -18,21 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NiftyTFSlab extends NiftySlab {
 
-    private final float multiplier;
     private final boolean isArctic;
 
     public NiftyTFSlab(boolean isDouble, NiftyBlock block) {
         super(isDouble, block);
 
-        multiplier = block == NiftyBlock.STEELEAF ? 0.75F : block == NiftyBlock.ARCTIC ? 0.1F : 1.0F;
         isArctic = block == NiftyBlock.ARCTIC;
     }
-
-    @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.fall(fallDistance, multiplier);
-    }
-
     @Override
     @Deprecated
     public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos) {

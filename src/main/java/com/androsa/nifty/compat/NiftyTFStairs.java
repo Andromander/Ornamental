@@ -18,19 +18,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NiftyTFStairs extends NiftyStairs {
 
-    private final float multiplier;
     private final boolean isArctic;
 
     public NiftyTFStairs(IBlockState state, NiftyBlock block) {
         super(state, block, true);
 
-        multiplier = block == NiftyBlock.STEELEAF ? 0.75F : block == NiftyBlock.ARCTIC ? 0.1F : 1.0F;
         isArctic = block == NiftyBlock.ARCTIC;
-    }
-
-    @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.fall(fallDistance, multiplier);
     }
 
     @Override

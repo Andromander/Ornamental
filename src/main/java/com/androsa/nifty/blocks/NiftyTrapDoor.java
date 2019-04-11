@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
 
     private final MapColor mapColor;
+    private final float fallDamage;
 
     public NiftyTrapDoor(NiftyBlock block) {
         super(block.material);
@@ -32,6 +33,7 @@ public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
         this.setHarvestLevel(block.tool, block.level);
 
         this.mapColor = block.color;
+        this.fallDamage = block.multiplier;
     }
 
     // Yeah, screw you too BlockTrapDoor
@@ -39,6 +41,11 @@ public class NiftyTrapDoor extends BlockTrapDoor implements BlockModelHelper {
     @Deprecated
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return mapColor;
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override

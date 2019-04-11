@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,7 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
     public static final PropertyEnum<NiftySlabEnum> VARIANT = PropertyEnum.create("variant", NiftySlabEnum.class);
 
     private final boolean isDouble;
+    private final float fallDamage;
     private final Supplier<Item> dropItem;
 
     public NiftySlab(boolean isDouble, NiftyBlock block) {
@@ -47,6 +49,7 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
         this.setDefaultState(state);
 
         this.isDouble = isDouble;
+        this.fallDamage = block.multiplier;
         this.dropItem = block.dropItem;
     }
 
@@ -72,6 +75,11 @@ public class NiftySlab extends BlockSlab implements BlockModelHelper {
 
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(dropItem.get());
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override

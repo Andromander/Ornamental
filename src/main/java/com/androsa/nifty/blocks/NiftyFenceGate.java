@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -25,6 +26,7 @@ import java.util.function.Supplier;
 public class NiftyFenceGate extends BlockFenceGate implements BlockModelHelper {
 
     private final Supplier<IBlockState> blockstate;
+    private final float fallDamage;
 
     public NiftyFenceGate(Supplier<IBlockState> state, NiftyBlock block) {
         super(BlockPlanks.EnumType.OAK);
@@ -37,6 +39,7 @@ public class NiftyFenceGate extends BlockFenceGate implements BlockModelHelper {
         this.setDefaultState(this.blockState.getBaseState().withProperty(OPEN, false).withProperty(POWERED, false).withProperty(IN_WALL, false));
 
         blockstate = state;
+        fallDamage = block.multiplier;
     }
 
     //HATE...
@@ -51,6 +54,11 @@ public class NiftyFenceGate extends BlockFenceGate implements BlockModelHelper {
     @Deprecated
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return blockstate.get().getMapColor(worldIn, pos);
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override
