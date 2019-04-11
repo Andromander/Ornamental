@@ -20,6 +20,7 @@ public enum NiftyBlock {
     CLAY(Material.GROUND, MapColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, "shovel", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.clay_slab)),
     DIRT(Material.GROUND, MapColor.DIRT, SoundType.GROUND, 0.5F, 0.0F, "shovel", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.dirt_slab)),
     GRASS(Material.GRASS, MapColor.GRASS, SoundType.PLANT, 0.6F, 0.0F, "shovel", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.grass_slab)),
+    HAY(Material.GRASS, MapColor.YELLOW, SoundType.PLANT, 0.5F, 0.0F, null, 0, 0.2F, () -> Item.getItemFromBlock(ModBlocks.hay_slab)),
 
     IRONWOOD(Material.WOOD, MapColor.WOOD, SoundType.WOOD, 5.0F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.ironwood_slab)),
     FIERY(Material.IRON, MapColor.BLACK_STAINED_HARDENED_CLAY, SoundType.METAL, 5.0F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.fiery_slab)),

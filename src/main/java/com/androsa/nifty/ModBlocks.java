@@ -37,6 +37,7 @@ public class ModBlocks {
     public static final BlockStairs dirt_stairs = null;
     public static final BlockStairs grass_stairs = null;
     public static final BlockStairs clay_stairs = null;
+    public static final BlockStairs hay_stairs = null;
     public static final BlockSlab iron_slab = null;
     public static final BlockSlab gold_slab = null;
     public static final BlockSlab diamond_slab = null;
@@ -49,6 +50,7 @@ public class ModBlocks {
     public static final BlockSlab clay_slab = null;
     public static final BlockSlab dirt_slab = null;
     public static final BlockSlab grass_slab = null;
+    public static final BlockSlab hay_slab = null;
     public static final BlockSlab double_iron_slab = null;
     public static final BlockSlab double_gold_slab = null;
     public static final BlockSlab double_diamond_slab = null;
@@ -61,6 +63,7 @@ public class ModBlocks {
     public static final BlockSlab double_clay_slab = null;
     public static final BlockSlab double_dirt_slab = null;
     public static final BlockSlab double_grass_slab = null;
+    public static final BlockSlab double_hay_slab = null;
     public static final BlockFence iron_fence = null;
     public static final BlockFence gold_fence = null;
     public static final BlockFence diamond_fence = null;
@@ -73,6 +76,7 @@ public class ModBlocks {
     public static final BlockFence clay_fence = null;
     public static final BlockFence dirt_fence = null;
     public static final BlockFence grass_fence = null;
+    public static final BlockFence hay_fence = null;
     public static final BlockTrapDoor gold_trapdoor = null;
     public static final BlockTrapDoor diamond_trapdoor = null;
     public static final BlockTrapDoor emerald_trapdoor = null;
@@ -84,6 +88,7 @@ public class ModBlocks {
     public static final BlockTrapDoor clay_trapdoor = null;
     public static final BlockTrapDoor dirt_trapdoor = null;
     public static final BlockTrapDoor grass_trapdoor = null;
+    public static final BlockTrapDoor hay_trapdoor = null;
     public static final BlockFenceGate iron_fence_gate = null;
     public static final BlockFenceGate gold_fence_gate = null;
     public static final BlockFenceGate diamond_fence_gate = null;
@@ -96,6 +101,7 @@ public class ModBlocks {
     public static final BlockFenceGate clay_fence_gate = null;
     public static final BlockFenceGate dirt_fence_gate = null;
     public static final BlockFenceGate grass_fence_gate = null;
+    public static final BlockFenceGate hay_fence_gate = null;
 
     /**
      * MOD COMPAT BELOW HERE.
@@ -148,7 +154,8 @@ public class ModBlocks {
         Block missingno = new Block(Material.IRON, MapColor.MAGENTA);
         Block clay =      new Block(Material.CLAY, MapColor.CLAY);
         Block dirt =      new Block(Material.GROUND, MapColor.DIRT);
-        Block grass =     new Block(Material.GROUND, MapColor.GRASS);
+        Block grass =     new Block(Material.GRASS, MapColor.GRASS);
+        Block hay =       new Block(Material.GRASS, MapColor.YELLOW);
 
         blocks.registerBlock("iron_stairs",      new NiftyStairs(iron.getDefaultState(), IRON, true));
         blocks.registerBlock("gold_stairs",      new NiftyStairs(gold.getDefaultState(), GOLD, true));
@@ -162,6 +169,7 @@ public class ModBlocks {
         blocks.registerBlock("clay_stairs",      new NiftyStairs(clay.getDefaultState(), CLAY, false));
         blocks.registerBlock("dirt_stairs",      new NiftyDirtStairs(dirt.getDefaultState()));
         blocks.registerBlock("grass_stairs",     new NiftyGrassStairs(grass.getDefaultState()));
+        blocks.registerBlock("hay_stairs",       new NiftyStairs(hay.getDefaultState(), HAY, false));
         blocks.registerBlock("iron_slab",      new NiftySlab(false, IRON));
         blocks.registerBlock("gold_slab",      new NiftySlab(false, GOLD));
         blocks.registerBlock("diamond_slab",   new NiftySlab(false, DIAMOND));
@@ -174,6 +182,7 @@ public class ModBlocks {
         blocks.registerBlock("clay_slab",      new NiftySlab(false, CLAY));
         blocks.registerBlock("dirt_slab",      new NiftyDirtSlab(false));
         blocks.registerBlock("grass_slab",     new NiftyGrassSlab(false));
+        blocks.registerBlock("hay_slab",       new NiftySlab(false, HAY));
         blocks.registerBlock("double_iron_slab",      new NiftySlab(true, IRON));
         blocks.registerBlock("double_gold_slab",      new NiftySlab(true, GOLD));
         blocks.registerBlock("double_diamond_slab",   new NiftySlab(true, DIAMOND));
@@ -186,6 +195,7 @@ public class ModBlocks {
         blocks.registerBlock("double_clay_slab",      new NiftySlab(true, CLAY));
         blocks.registerBlock("double_dirt_slab",      new NiftyDirtSlab(true));
         blocks.registerBlock("double_grass_slab",     new NiftyGrassSlab(true));
+        blocks.registerBlock("double_hay_slab",       new NiftySlab(true, HAY));
         blocks.registerBlock("iron_fence",      new NiftyFence(IRON));
         blocks.registerBlock("gold_fence",      new NiftyFence(GOLD));
         blocks.registerBlock("diamond_fence",   new NiftyFence(DIAMOND));
@@ -198,6 +208,7 @@ public class ModBlocks {
         blocks.registerBlock("clay_fence",      new NiftyFence(CLAY));
         blocks.registerBlock("dirt_fence",      new NiftyDirtFence());
         blocks.registerBlock("grass_fence",     new NiftyGrassFence());
+        blocks.registerBlock("hay_fence",       new NiftyFence(HAY));
         blocks.registerBlock("gold_trapdoor",      new NiftyTrapDoor(GOLD));
         blocks.registerBlock("diamond_trapdoor",   new NiftyTrapDoor(DIAMOND));
         blocks.registerBlock("emerald_trapdoor",   new NiftyTrapDoor(EMERALD));
@@ -209,6 +220,7 @@ public class ModBlocks {
         blocks.registerBlock("clay_trapdoor",      new NiftyTrapDoor(CLAY));
         blocks.registerBlock("dirt_trapdoor",      new NiftyDirtTrapDoor());
         blocks.registerBlock("grass_trapdoor",     new NiftyGrassTrapDoor());
+        blocks.registerBlock("hay_trapdoor",       new NiftyTrapDoor(HAY));
         blocks.registerBlock("iron_fence_gate",      new NiftyFenceGate(iron::getDefaultState, IRON));
         blocks.registerBlock("gold_fence_gate",      new NiftyFenceGate(gold::getDefaultState, GOLD));
         blocks.registerBlock("diamond_fence_gate",   new NiftyFenceGate(diamond::getDefaultState, DIAMOND));
@@ -221,6 +233,7 @@ public class ModBlocks {
         blocks.registerBlock("clay_fence_gate",      new NiftyFenceGate(clay::getDefaultState, CLAY));
         blocks.registerBlock("dirt_fence_gate",      new NiftyDirtFenceGate(dirt::getDefaultState));
         blocks.registerBlock("grass_fence_gate",     new NiftyGrassFenceGate(grass::getDefaultState));
+        blocks.registerBlock("hay_fence_gate",       new NiftyFenceGate(hay::getDefaultState, HAY));
 
         NiftyCompat.initCompatBlocks(blocks);
     }
@@ -250,6 +263,7 @@ public class ModBlocks {
         items.registerBlock(clay_stairs);
         items.registerBlock(dirt_stairs);
         items.registerBlock(grass_stairs);
+        items.registerBlock(hay_stairs);
         items.register(new ItemSlab(iron_slab, iron_slab, double_iron_slab));
         items.register(new ItemSlab(gold_slab, gold_slab, double_gold_slab));
         items.register(new ItemSlab(diamond_slab, diamond_slab, double_diamond_slab));
@@ -267,6 +281,7 @@ public class ModBlocks {
         items.register(new ItemSlab(clay_slab, clay_slab, double_clay_slab));
         items.register(new ItemSlab(dirt_slab, dirt_slab, double_dirt_slab));
         items.register(new ItemSlab(grass_slab, grass_slab, double_grass_slab));
+        items.register(new ItemSlab(hay_slab, hay_slab, double_hay_slab));
         items.registerBlock(iron_fence);
         items.registerBlock(gold_fence);
         items.registerBlock(diamond_fence);
@@ -284,6 +299,7 @@ public class ModBlocks {
         items.registerBlock(clay_fence);
         items.registerBlock(dirt_fence);
         items.registerBlock(grass_fence);
+        items.registerBlock(hay_fence);
         items.registerBlock(gold_trapdoor);
         items.registerBlock(diamond_trapdoor);
         items.registerBlock(emerald_trapdoor);
@@ -300,6 +316,7 @@ public class ModBlocks {
         items.registerBlock(clay_trapdoor);
         items.registerBlock(dirt_trapdoor);
         items.registerBlock(grass_trapdoor);
+        items.registerBlock(hay_trapdoor);
         items.registerBlock(iron_fence_gate);
         items.registerBlock(gold_fence_gate);
         items.registerBlock(diamond_fence_gate);
@@ -317,6 +334,7 @@ public class ModBlocks {
         items.registerBlock(clay_fence_gate);
         items.registerBlock(dirt_fence_gate);
         items.registerBlock(grass_fence_gate);
+        items.registerBlock(hay_fence_gate);
 
         NiftyCompat.initCompatItems(items);
     }
