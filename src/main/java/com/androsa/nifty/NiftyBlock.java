@@ -20,6 +20,7 @@ public enum NiftyBlock {
     CLAY(Material.GROUND, MaterialColor.CLAY, SoundType.GROUND, 0.6F, 0.6F, SHOVEL, 0, 1.0F),
     DIRT(Material.GROUND, MaterialColor.DIRT, SoundType.GROUND, 0.5F, 0.0F, SHOVEL, 0, 1.0F),
     GRASS(Material.GRASS, MaterialColor.GRASS, SoundType.PLANT, 0.6F, 0.0F, SHOVEL, 0, 1.0F),
+    HAY(Material.GRASS, MaterialColor.YELLOW, SoundType.PLANT, 0.5F, 0.0F, null, 0, 0.2F);
 
     public final Material material;
     public final MaterialColor color;
