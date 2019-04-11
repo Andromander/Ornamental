@@ -4,14 +4,17 @@ import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 public class NiftyStairs extends BlockStairs {
 
     private boolean isBeaconBase;
     private ToolType toolType;
+    private float fallDamage;
     private int toolLevel;
 
     public NiftyStairs(IBlockState state, NiftyBlock block, boolean base) {
@@ -19,6 +22,7 @@ public class NiftyStairs extends BlockStairs {
 
         this.toolType = block.tool;
         this.toolLevel = block.level;
+        this.fallDamage = block.multiplier;
         this.isBeaconBase = base;
     }
 
@@ -30,6 +34,11 @@ public class NiftyStairs extends BlockStairs {
     @Override
     public int getHarvestLevel(IBlockState state) {
         return toolLevel;
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override

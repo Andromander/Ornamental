@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -16,12 +17,14 @@ public class NiftyFenceGate extends BlockFenceGate {
 
     private ToolType toolType;
     private int toolLevel;
+    private float fallDamage;
 
     public NiftyFenceGate(NiftyBlock block) {
         super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
 
         this.toolType = block.tool;
         this.toolLevel = block.level;
+        this.fallDamage = block.multiplier;
     }
 
     @Override
@@ -32,6 +35,11 @@ public class NiftyFenceGate extends BlockFenceGate {
     @Override
     public int getHarvestLevel(IBlockState state) {
         return toolLevel;
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override

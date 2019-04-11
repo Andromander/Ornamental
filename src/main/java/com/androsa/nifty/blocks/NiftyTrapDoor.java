@@ -20,12 +20,14 @@ public class NiftyTrapDoor extends BlockTrapDoor {
 
     private ToolType toolType;
     private int toolLevel;
+    private float fallDamage;
 
     public NiftyTrapDoor(NiftyBlock block) {
         super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
 
         this.toolType = block.tool;
         this.toolLevel = block.level;
+        this.fallDamage = block.multiplier;
     }
 
     @Override
@@ -36,6 +38,11 @@ public class NiftyTrapDoor extends BlockTrapDoor {
     @Override
     public int getHarvestLevel(IBlockState state) {
         return toolLevel;
+    }
+
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.fall(fallDistance, fallDamage);
     }
 
     @Override
