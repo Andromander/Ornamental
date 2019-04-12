@@ -28,11 +28,11 @@ public enum NiftyBlock {
     ARCTIC(Material.CLOTH, MapColor.CLOTH, SoundType.CLOTH, 0.8F, 10.0F, null, 0, 0.1F, () -> Item.getItemFromBlock(ModBlocks.arctic_fur_slab)),
     CARMINITE(Material.CLAY, MapColor.RED, SoundType.SLIME, 0.0F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.carminite_slab)),
 
-    OCTINE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.octine_slab)),
-    SYRMORITE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.syrmorite_slab)),
-    VALONITE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.valonite_slab)),
-    SCABYST(Material.ROCK, MapColor.STONE, SoundType.STONE, 1.5F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.scabyst_slab)),
-    SULFUR(Material.ROCK, MapColor.STONE, SoundType.STONE, 1.5F, 10.0F, null, 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.sulfur_slab));
+    OCTINE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, "pickaxe", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.octine_slab)),
+    SYRMORITE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, "pickaxe", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.syrmorite_slab)),
+    VALONITE(Material.IRON, MapColor.IRON, SoundType.METAL, 1.5F, 10.0F, "pickaxe", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.valonite_slab)),
+    SCABYST(Material.ROCK, MapColor.STONE, SoundType.STONE, 1.5F, 10.0F, "pickaxe", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.scabyst_slab)),
+    SULFUR(Material.ROCK, MapColor.STONE, SoundType.STONE, 1.5F, 10.0F, "pickaxe", 0, 1.0F, () -> Item.getItemFromBlock(ModBlocks.sulfur_slab));
 
     public final Material material;
     public final MapColor color;
