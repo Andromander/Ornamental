@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "nifty:sulfur_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "thebetweenlands:items_misc",
+      "data": 18
+    },
+    "B": {
+      "item": "thebetweenlands:sulfur_block"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "thebetweenlands"
+  }]
+}

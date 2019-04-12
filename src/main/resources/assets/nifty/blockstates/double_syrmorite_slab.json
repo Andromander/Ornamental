@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "thebetweenlands:blocks/syrmorite_block"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

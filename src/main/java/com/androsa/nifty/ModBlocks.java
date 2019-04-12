@@ -138,6 +138,35 @@ public class ModBlocks {
     public static final BlockFenceGate steeleaf_fence_gate = null;
     public static final BlockFenceGate arctic_fur_fence_gate = null;
     public static final BlockFenceGate carminite_fence_gate = null;
+    /*THE BETWEENLANDS*/
+    public static final BlockStairs octine_stairs = null;
+    public static final BlockStairs syrmorite_stairs = null;
+    public static final BlockStairs valonite_stairs = null;
+    public static final BlockStairs scabyst_stairs = null;
+    public static final BlockStairs sulfur_stairs = null;
+    public static final BlockSlab octine_slab = null;
+    public static final BlockSlab syrmorite_slab = null;
+    public static final BlockSlab valonite_slab = null;
+    public static final BlockSlab scabyst_slab = null;
+    public static final BlockSlab sulfur_slab = null;
+    public static final BlockSlab double_octine_slab = null;
+    public static final BlockSlab double_syrmorite_slab = null;
+    public static final BlockSlab double_valonite_slab = null;
+    public static final BlockSlab double_scabyst_slab = null;
+    public static final BlockSlab double_sulfur_slab = null;
+    public static final BlockFence octine_fence = null;
+    public static final BlockFence syrmorite_fence = null;
+    public static final BlockFence valonite_fence = null;
+    public static final BlockFence scabyst_fence = null;
+    public static final BlockFence sulfur_fence = null;
+    public static final BlockTrapDoor octine_trapdoor = null;
+    public static final BlockTrapDoor valonite_trapdoor = null;
+    public static final BlockTrapDoor sulfur_trapdoor = null;
+    public static final BlockFenceGate octine_fence_gate = null;
+    public static final BlockFenceGate syrmorite_fence_gate = null;
+    public static final BlockFenceGate valonite_fence_gate = null;
+    public static final BlockFenceGate scabyst_fence_gate = null;
+    public static final BlockFenceGate sulfur_fence_gate = null;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> e) {

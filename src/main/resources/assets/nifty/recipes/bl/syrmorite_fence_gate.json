@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nifty:syrmorite_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "thebetweenlands:items_misc",
+      "data": 11
+    },
+    "B": {
+      "item": "thebetweenlands:syrmorite_block"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "thebetweenlands"
+  }]
+}

@@ -49,6 +49,8 @@ dependencies {
     deobfCompile "team.chisel.ctm:CTM:MC${mc_version}-${ctm_version}"
 
     deobfCompile "the-twilight-forest:twilightforest-${mc_version}:${tf_version}:universal"
+
+    deobfCompile  "angry-pixel-the-betweenlands-mod:TheBetweenlands:${bl_version}:universal"
 }
 
 processResources {

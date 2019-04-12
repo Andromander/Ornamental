@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "nifty:octine_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "thebetweenlands:octine_ingot"
+    },
+    "B": {
+      "item": "thebetweenlands:octine_block"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "thebetweenlands"
+  }]
+}

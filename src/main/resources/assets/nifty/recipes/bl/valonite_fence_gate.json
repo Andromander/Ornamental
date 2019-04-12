@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nifty:valonite_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "thebetweenlands:items_misc",
+      "data": 19
+    },
+    "B": {
+      "item": "thebetweenlands:valonite_block"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "thebetweenlands"
+  }]
+}

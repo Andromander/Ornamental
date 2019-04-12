@@ -107,6 +107,72 @@ public enum NiftyCompat {
             items.registerBlock(ModBlocks.arctic_fur_fence_gate);
             items.registerBlock(ModBlocks.carminite_fence_gate);
         }
+    },
+    THE_BETWEENLANDS("The Betweenlands") {
+        @Override
+        protected void registerBlocks(ModBlocks.BlockRegistryHelper blocks) {
+            Block octine = new Block(Material.IRON, MapColor.IRON);
+            Block syrmorite = new Block(Material.IRON, MapColor.IRON);
+            Block valonite = new Block(Material.IRON, MapColor.IRON);
+            Block scabyst = new Block(Material.ROCK, MapColor.STONE);
+            Block sulfur = new Block(Material.ROCK, MapColor.STONE);
+
+            blocks.registerBlock("octine_stairs",    new NiftyBLStairs(octine.getDefaultState(), OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("syrmorite_stairs", new NiftyBLStairs(syrmorite.getDefaultState(), SYRMORITE));
+            blocks.registerBlock("valonite_stairs",  new NiftyBLStairs(valonite.getDefaultState(), VALONITE));
+            blocks.registerBlock("scabyst_stairs",   new NiftyBLStairs(scabyst.getDefaultState(), SCABYST));
+            blocks.registerBlock("sulfur_stairs",    new NiftyBLStairs(sulfur.getDefaultState(), SULFUR));
+            blocks.registerBlock("octine_slab",    new NiftyBLSlab(false, OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("syrmorite_slab", new NiftyBLSlab(false, SYRMORITE));
+            blocks.registerBlock("valonite_slab",  new NiftyBLSlab(false, VALONITE));
+            blocks.registerBlock("scabyst_slab",   new NiftyBLSlab(false, SCABYST));
+            blocks.registerBlock("sulfur_slab",    new NiftyBLSlab(false, SULFUR));
+            blocks.registerBlock("double_octine_slab",    new NiftyBLSlab(true, OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("double_syrmorite_slab", new NiftyBLSlab(true, SYRMORITE));
+            blocks.registerBlock("double_valonite_slab",  new NiftyBLSlab(true, VALONITE));
+            blocks.registerBlock("double_scabyst_slab",   new NiftyBLSlab(true, SCABYST));
+            blocks.registerBlock("double_sulfur_slab",    new NiftyBLSlab(true, SULFUR));
+            blocks.registerBlock("octine_fence",    new NiftyBLFence(OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("syrmorite_fence", new NiftyBLFence(SYRMORITE));
+            blocks.registerBlock("valonite_fence",  new NiftyBLFence(VALONITE));
+            blocks.registerBlock("scabyst_fence",   new NiftyBLFence(SCABYST));
+            blocks.registerBlock("sulfur_fence",    new NiftyBLFence(SULFUR));
+            blocks.registerBlock("octine_trapdoor",    new NiftyBLTrapDoor(OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("valonite_trapdoor",  new NiftyBLTrapDoor(VALONITE));
+            blocks.registerBlock("sulfur_trapdoor",    new NiftyBLTrapDoor(SULFUR));
+            blocks.registerBlock("octine_fence_gate",    new NiftyBLFenceGate(octine::getDefaultState, OCTINE).setLightLevel(0.875F));
+            blocks.registerBlock("syrmorite_fence_gate", new NiftyBLFenceGate(syrmorite::getDefaultState, SYRMORITE));
+            blocks.registerBlock("valonite_fence_gate",  new NiftyBLFenceGate(valonite::getDefaultState, VALONITE));
+            blocks.registerBlock("scabyst_fence_gate",   new NiftyBLFenceGate(scabyst::getDefaultState, SCABYST));
+            blocks.registerBlock("sulfur_fence_gate",    new NiftyBLFenceGate(sulfur::getDefaultState, SULFUR));
+        }
+
+        @Override
+        protected void registerItems(ModBlocks.ItemRegistryHelper items) {
+            items.registerBlock(ModBlocks.octine_stairs);
+            items.registerBlock(ModBlocks.syrmorite_stairs);
+            items.registerBlock(ModBlocks.valonite_stairs);
+            items.registerBlock(ModBlocks.scabyst_stairs);
+            items.registerBlock(ModBlocks.sulfur_stairs);
+            items.register(new ItemSlab(ModBlocks.octine_slab, ModBlocks.octine_slab, ModBlocks.double_octine_slab));
+            items.register(new ItemSlab(ModBlocks.syrmorite_slab, ModBlocks.syrmorite_slab, ModBlocks.double_syrmorite_slab));
+            items.register(new ItemSlab(ModBlocks.valonite_slab, ModBlocks.valonite_slab, ModBlocks.double_valonite_slab));
+            items.register(new ItemSlab(ModBlocks.scabyst_slab, ModBlocks.scabyst_slab, ModBlocks.double_scabyst_slab));
+            items.register(new ItemSlab(ModBlocks.sulfur_slab, ModBlocks.sulfur_slab, ModBlocks.double_sulfur_slab));
+            items.registerBlock(ModBlocks.octine_fence);
+            items.registerBlock(ModBlocks.syrmorite_fence);
+            items.registerBlock(ModBlocks.valonite_fence);
+            items.registerBlock(ModBlocks.scabyst_fence);
+            items.registerBlock(ModBlocks.sulfur_fence);
+            items.registerBlock(ModBlocks.octine_trapdoor);
+            items.registerBlock(ModBlocks.valonite_trapdoor);
+            items.registerBlock(ModBlocks.sulfur_trapdoor);
+            items.registerBlock(ModBlocks.octine_fence_gate);
+            items.registerBlock(ModBlocks.syrmorite_fence_gate);
+            items.registerBlock(ModBlocks.valonite_fence_gate);
+            items.registerBlock(ModBlocks.scabyst_fence_gate);
+            items.registerBlock(ModBlocks.sulfur_fence_gate);
+        }
     };
 
     protected void registerBlocks(ModBlocks.BlockRegistryHelper blocks) {}

@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "nifty:sulfur_slab",
+    "count": 6,
+    "data": 0
+  },
+  "pattern": [
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "thebetweenlands:sulfur_block"
+    }
+  },
+  "conditions": [{
+    "type": "forge:mod_loaded",
+    "modid": "thebetweenlands"
+  }]
+}

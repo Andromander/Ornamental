@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "thebetweenlands:blocks/octine_block"
+    }
+  },
+  "variants": { "normal": [{}] }
+}

@@ -99,3 +99,32 @@ tile.nifty.fiery_fence_gate.name=Fiery Fence Gate
 tile.nifty.steeleaf_fence_gate.name=Steeleaf Fence Gate
 tile.nifty.arctic_fur_fence_gate.name=Arctic Fur Fence Gate
 tile.nifty.carminite_fence_gate.name=Carminite Fence Gate
+
+
+tile.nifty.octine_stairs.name=Octine Stairs
+tile.nifty.syrmorite_stairs.name=Syrmorite Stairs
+tile.nifty.valonite_stairs.name=Valonite Stairs
+tile.nifty.scabyst_stairs.name=Scabyst Stairs
+tile.nifty.sulfur_stairs.name=Sulfur Stairs
+
+tile.nifty.octine_slab.name=Octine Slab
+tile.nifty.syrmorite_slab.name=Syrmorite Slab
+tile.nifty.valonite_slab.name=Valonite Slab
+tile.nifty.scabyst_slab.name=Scabyst Slab
+tile.nifty.sulfur_slab.name=Sulfur Slab
+
+tile.nifty.octine_fence.name=Octine Fence
+tile.nifty.syrmorite_fence.name=Syrmorite Fence
+tile.nifty.valonite_fence.name=Valonite Fence
+tile.nifty.scabyst_fence.name=Scabyst Fence
+tile.nifty.sulfur_fence.name=Sulfur Fence
+
+tile.nifty.octine_trapdoor.name=Octine Trapdoor
+tile.nifty.valonite_trapdoor.name=Valonite Trapdoor
+tile.nifty.sulfur_trapdoor.name=Sulfur Trapdoor
+
+tile.nifty.octine_fence_gate.name=Octine Fence Gate
+tile.nifty.syrmorite_fence_gate.name=Syrmorite Fence Gate
+tile.nifty.valonite_fence_gate.name=Valonite Fence Gate
+tile.nifty.scabyst_fence_gate.name=Scabyst Fence Gate
+tile.nifty.sulfur_fence_gate.name=Sulfur Fence Gate
