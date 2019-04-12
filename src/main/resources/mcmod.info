@@ -6,7 +6,7 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://minecraft.curseforge.com/projects/nifty",
-  "updateUrl": "",
+  "updateUrl": "https://raw.githubusercontent.com/Andromander/Nifty/master/update.json",
   "authorList": ["Androsa"],
   "credits": "Androsa, or AlphaLeaf, your choice.",
   "logoFile": "",
