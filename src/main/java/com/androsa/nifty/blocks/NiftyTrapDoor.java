@@ -2,21 +2,21 @@ package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTrapDoor;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Fluids;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class NiftyTrapDoor extends BlockTrapDoor {
+public class NiftyTrapDoor extends TrapDoorBlock {
 
     private ToolType toolType;
     private int toolLevel;
@@ -31,12 +31,12 @@ public class NiftyTrapDoor extends BlockTrapDoor {
     }
 
     @Override
-    public ToolType getHarvestTool(IBlockState state) {
+    public ToolType getHarvestTool(BlockState state) {
         return toolType;
     }
 
     @Override
-    public int getHarvestLevel(IBlockState state) {
+    public int getHarvestLevel(BlockState state) {
         return toolLevel;
     }
 
@@ -46,7 +46,7 @@ public class NiftyTrapDoor extends BlockTrapDoor {
     }
 
     @Override
-    public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         if (this.material == Material.IRON || this.material == Material.ROCK) {
             return false;
         } else {
@@ -63,10 +63,10 @@ public class NiftyTrapDoor extends BlockTrapDoor {
 
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-        IBlockState state = worldIn.getBlockState(pos);
+        BlockState state = worldIn.getBlockState(pos);
 
         if (!state.get(OPEN)) {
-            if (material == Material.CLAY || material == Material.LEAVES || material == Material.CLOTH || material == Material.GROUND || material == Material.GRASS) {
+            if (material == Material.CLAY || material == Material.LEAVES || material == Material.WOOL || material == Material.EARTH || material == Material.ORGANIC) {
                 state = state.cycle(OPEN);
                 worldIn.setBlockState(pos, state, 2);
                 this.playSound(null, worldIn, pos, state.get(OPEN));
@@ -75,7 +75,7 @@ public class NiftyTrapDoor extends BlockTrapDoor {
     }
 
     @Override
-    protected void playSound(@Nullable EntityPlayer player, World worldIn, BlockPos pos, boolean state) {
+    protected void playSound(@Nullable PlayerEntity player, World worldIn, BlockPos pos, boolean state) {
         if (state) {
             int i = this.material == Material.IRON ? 1037 : 1007;
             worldIn.playEvent(player, i, pos, 0);

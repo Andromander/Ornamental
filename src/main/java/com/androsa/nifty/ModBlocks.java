@@ -2,10 +2,8 @@ package com.androsa.nifty;
 
 import com.androsa.nifty.blocks.*;
 import net.minecraft.block.*;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -18,36 +16,22 @@ import static com.androsa.nifty.NiftyBlock.*;
 
 @ObjectHolder(NiftyMod.MODID)
 @Mod.EventBusSubscriber(modid = NiftyMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@SuppressWarnings("WeakerAccess")
 public class ModBlocks {
 
-    /** Blockstates */
-    private static Block iron =      new Block(Block.Properties.create(Material.IRON, MaterialColor.IRON));
-    private static Block gold =      new Block(Block.Properties.create(Material.IRON, MaterialColor.GOLD));
-    private static Block diamond =   new Block(Block.Properties.create(Material.IRON, MaterialColor.DIAMOND));
-    private static Block emerald =   new Block(Block.Properties.create(Material.IRON, MaterialColor.EMERALD));
-    private static Block lapis =     new Block(Block.Properties.create(Material.IRON, MaterialColor.LAPIS));
-    private static Block obsidian =  new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK));
-    private static Block coal =      new Block(Block.Properties.create(Material.ROCK, MaterialColor.BLACK));
-    private static Block redstone =  new Block(Block.Properties.create(Material.IRON, MaterialColor.TNT));
-    private static Block missingno = new Block(Block.Properties.create(Material.IRON, MaterialColor.MAGENTA));
-    private static Block clay =      new Block(Block.Properties.create(Material.CLAY, MaterialColor.CLAY));
-    private static Block dirt =      new Block(Block.Properties.create(Material.GROUND, MaterialColor.DIRT));
-    private static Block grass =     new Block(Block.Properties.create(Material.GRASS, MaterialColor.GRASS));
-    private static Block hay =       new Block(Block.Properties.create(Material.GRASS, MaterialColor.YELLOW));
-
-    public static final Block iron_stairs      = new NiftyStairs(iron.getDefaultState(), IRON, false).setRegistryName("iron_stairs");
-    public static final Block gold_stairs      = new NiftyStairs(gold.getDefaultState(), GOLD, true).setRegistryName("gold_stairs");
-    public static final Block diamond_stairs   = new NiftyStairs(diamond.getDefaultState(), DIAMOND, true).setRegistryName("diamond_stairs");
-    public static final Block emerald_stairs   = new NiftyStairs(emerald.getDefaultState(), EMERALD, true).setRegistryName("emerald_stairs");
-    public static final Block lapis_stairs     = new NiftyStairs(lapis.getDefaultState(), LAPIS, false).setRegistryName("lapis_stairs");
-    public static final Block obsidian_stairs  = new NiftyStairs(obsidian.getDefaultState(), OBSIDIAN, false).setRegistryName("obsidian_stairs");
-    public static final Block coal_stairs      = new NiftyStairs(coal.getDefaultState(), COAL, false).setRegistryName("coal_stairs");
-    public static final Block redstone_stairs  = new NiftyRedstoneStairs(redstone.getDefaultState()).setRegistryName("redstone_stairs");
-    public static final Block missingno_stairs = new NiftyStairs(missingno.getDefaultState(), MISSINGNO, false).setRegistryName("missingno_stairs");
-    public static final Block clay_stairs      = new NiftyStairs(clay.getDefaultState(), CLAY, false).setRegistryName("clay_stairs");
-    public static final Block dirt_stairs      = new NiftyDirtStairs(dirt.getDefaultState()).setRegistryName("dirt_stairs");
-    public static final Block grass_stairs     = new NiftyGrassStairs(grass.getDefaultState()).setRegistryName("grass_stairs");
-    public static final Block hay_stairs       = new NiftyStairs(hay.getDefaultState(), HAY, false).setRegistryName("hay_stairs");
+    public static final Block iron_stairs      = new NiftyStairs(IRON, false).setRegistryName("iron_stairs");
+    public static final Block gold_stairs      = new NiftyStairs(GOLD, true).setRegistryName("gold_stairs");
+    public static final Block diamond_stairs   = new NiftyStairs(DIAMOND, true).setRegistryName("diamond_stairs");
+    public static final Block emerald_stairs   = new NiftyStairs(EMERALD, true).setRegistryName("emerald_stairs");
+    public static final Block lapis_stairs     = new NiftyStairs(LAPIS, false).setRegistryName("lapis_stairs");
+    public static final Block obsidian_stairs  = new NiftyStairs(OBSIDIAN, false).setRegistryName("obsidian_stairs");
+    public static final Block coal_stairs      = new NiftyStairs(COAL, false).setRegistryName("coal_stairs");
+    public static final Block redstone_stairs  = new NiftyRedstoneStairs().setRegistryName("redstone_stairs");
+    public static final Block missingno_stairs = new NiftyStairs(MISSINGNO, false).setRegistryName("missingno_stairs");
+    public static final Block clay_stairs      = new NiftyStairs(CLAY, false).setRegistryName("clay_stairs");
+    public static final Block dirt_stairs      = new NiftyDirtStairs().setRegistryName("dirt_stairs");
+    public static final Block grass_stairs     = new NiftyGrassStairs().setRegistryName("grass_stairs");
+    public static final Block hay_stairs       = new NiftyStairs(HAY, false).setRegistryName("hay_stairs");
 
     public static final Block iron_slab      = new NiftySlab(IRON).setRegistryName("iron_slab");
     public static final Block gold_slab      = new NiftySlab(GOLD).setRegistryName("gold_slab");
@@ -126,98 +110,90 @@ public class ModBlocks {
     public static void onRegisterItems(RegistryEvent.Register<Item> e) {
         final IForgeRegistry<Item> registry = e.getRegistry();
 
-        registry.register(new ItemBlock(iron_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_stairs"));
-        registry.register(new ItemBlock(gold_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gold_stairs"));
-        registry.register(new ItemBlock(diamond_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("diamond_stairs"));
-        registry.register(new ItemBlock(emerald_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("emerald_stairs"));
-        registry.register(new ItemBlock(lapis_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("lapis_stairs"));
-        registry.register(new ItemBlock(obsidian_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("obsidian_stairs"));
-        registry.register(new ItemBlock(coal_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)) {
-            @Override
-            public int getBurnTime(ItemStack stack) {
-                return 12000;
-            }
-        }.setRegistryName("coal_stairs"));
-        registry.register(new ItemBlock(redstone_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_stairs"));
-        registry.register(new ItemBlock(missingno_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_stairs"));
-        registry.register(new ItemBlock(clay_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("clay_stairs"));
-        registry.register(new ItemBlock(dirt_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("dirt_stairs"));
-        registry.register(new ItemBlock(grass_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("grass_stairs"));
-        registry.register(new ItemBlock(hay_stairs, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("hay_stairs"));
+        registry.register(registerBlock(iron_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(gold_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(diamond_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(emerald_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(lapis_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(obsidian_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(coal_stairs, ItemGroup.BUILDING_BLOCKS, 12000));
+        registry.register(registerBlock(redstone_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(missingno_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(clay_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(dirt_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(grass_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(hay_stairs, ItemGroup.BUILDING_BLOCKS));
 
-        registry.register(new ItemBlock(iron_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("iron_slab"));
-        registry.register(new ItemBlock(gold_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gold_slab"));
-        registry.register(new ItemBlock(diamond_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("diamond_slab"));
-        registry.register(new ItemBlock(emerald_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("emerald_slab"));
-        registry.register(new ItemBlock(lapis_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("lapis_slab"));
-        registry.register(new ItemBlock(obsidian_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("obsidian_slab"));
-        registry.register(new ItemBlock(coal_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)) {
-            @Override
-            public int getBurnTime(ItemStack stack) {
-                return 8000;
-            }
-        }.setRegistryName("coal_slab"));
-        registry.register(new ItemBlock(redstone_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("redstone_slab"));
-        registry.register(new ItemBlock(missingno_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("missingno_slab"));
-        registry.register(new ItemBlock(clay_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("clay_slab"));
-        registry.register(new ItemBlock(dirt_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("dirt_slab"));
-        registry.register(new ItemBlock(grass_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("grass_slab"));
-        registry.register(new ItemBlock(hay_slab, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("hay_slab"));
+        registry.register(registerBlock(iron_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(gold_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(diamond_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(emerald_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(lapis_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(obsidian_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(coal_slab, ItemGroup.BUILDING_BLOCKS, 8000));
+        registry.register(registerBlock(redstone_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(missingno_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(clay_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(dirt_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(grass_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlock(hay_slab, ItemGroup.BUILDING_BLOCKS));
 
-        registry.register(new ItemBlock(iron_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("iron_fence"));
-        registry.register(new ItemBlock(gold_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("gold_fence"));
-        registry.register(new ItemBlock(diamond_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("diamond_fence"));
-        registry.register(new ItemBlock(emerald_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("emerald_fence"));
-        registry.register(new ItemBlock(lapis_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("lapis_fence"));
-        registry.register(new ItemBlock(obsidian_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("obsidian_fence"));
-        registry.register(new ItemBlock(coal_fence, new Item.Properties().group(ItemGroup.DECORATIONS)) {
-            @Override
-            public int getBurnTime(ItemStack stack) {
-                return 5250;
-            }
-        }.setRegistryName("coal_fence"));
-        registry.register(new ItemBlock(redstone_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("redstone_fence"));
-        registry.register(new ItemBlock(missingno_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("missingno_fence"));
-        registry.register(new ItemBlock(clay_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("clay_fence"));
-        registry.register(new ItemBlock(dirt_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("dirt_fence"));
-        registry.register(new ItemBlock(grass_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("grass_fence"));
-        registry.register(new ItemBlock(hay_fence, new Item.Properties().group(ItemGroup.DECORATIONS)).setRegistryName("hay_fence"));
+        registry.register(registerBlock(iron_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(gold_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(diamond_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(emerald_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(lapis_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(obsidian_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(coal_fence, ItemGroup.DECORATIONS, 5250));
+        registry.register(registerBlock(redstone_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(missingno_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(clay_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(dirt_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(grass_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlock(hay_fence, ItemGroup.DECORATIONS));
 
-        registry.register(new ItemBlock(gold_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_trapdoor"));
-        registry.register(new ItemBlock(diamond_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("diamond_trapdoor"));
-        registry.register(new ItemBlock(emerald_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("emerald_trapdoor"));
-        registry.register(new ItemBlock(lapis_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("lapis_trapdoor"));
-        registry.register(new ItemBlock(obsidian_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("obsidian_trapdoor"));
-        registry.register(new ItemBlock(coal_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)) {
-            @Override
-            public int getBurnTime(ItemStack stack) {
-                return 5250;
-            }
-        }.setRegistryName("coal_trapdoor"));
-        registry.register(new ItemBlock(redstone_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_trapdoor"));
-        registry.register(new ItemBlock(missingno_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_trapdoor"));
-        registry.register(new ItemBlock(clay_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("clay_trapdoor"));
-        registry.register(new ItemBlock(dirt_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("dirt_trapdoor"));
-        registry.register(new ItemBlock(grass_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("grass_trapdoor"));
-        registry.register(new ItemBlock(hay_trapdoor, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("hay_trapdoor"));
+        registry.register(registerBlock(gold_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(diamond_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(emerald_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(lapis_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(obsidian_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(coal_trapdoor, ItemGroup.REDSTONE, 5250));
+        registry.register(registerBlock(redstone_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(missingno_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(clay_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(dirt_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(grass_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlock(hay_trapdoor, ItemGroup.REDSTONE));
 
-        registry.register(new ItemBlock(iron_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("iron_fence_gate"));
-        registry.register(new ItemBlock(gold_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("gold_fence_gate"));
-        registry.register(new ItemBlock(diamond_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("diamond_fence_gate"));
-        registry.register(new ItemBlock(emerald_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("emerald_fence_gate"));
-        registry.register(new ItemBlock(lapis_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("lapis_fence_gate"));
-        registry.register(new ItemBlock(obsidian_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("obsidian_fence_gate"));
-        registry.register(new ItemBlock(coal_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)) {
-            @Override
-            public int getBurnTime(ItemStack stack) {
-                return 4000;
-            }
-        }.setRegistryName("coal_fence_gate"));
-        registry.register(new ItemBlock(redstone_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("redstone_fence_gate"));
-        registry.register(new ItemBlock(missingno_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("missingno_fence_gate"));
-        registry.register(new ItemBlock(clay_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("clay_fence_gate"));
-        registry.register(new ItemBlock(dirt_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("dirt_fence_gate"));
-        registry.register(new ItemBlock(grass_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("grass_fence_gate"));
-        registry.register(new ItemBlock(hay_fence_gate, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName("hay_fence_gate"));
+        registry.register(registerBlock(iron_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(gold_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(diamond_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(emerald_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(lapis_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(obsidian_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(coal_fence_gate, ItemGroup.REDSTONE, 4000));
+        registry.register(registerBlock(redstone_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(missingno_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(clay_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(dirt_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(grass_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlock(hay_fence_gate, ItemGroup.REDSTONE));
+    }
+
+    private static Item registerBlock(Block block, ItemGroup group) {
+        return registerBlock(block, group, 0);
+    }
+
+    private static Item registerBlock(Block block, ItemGroup group, int burnTime) {
+        if (burnTime == 0) {
+            return new BlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName());
+        } else {
+            return new BlockItem(block, new Item.Properties().group(group)) {
+                @Override
+                public int getBurnTime(ItemStack stack) {
+                    return burnTime;
+                }
+            }.setRegistryName(block.getRegistryName());
+        }
     }
 }

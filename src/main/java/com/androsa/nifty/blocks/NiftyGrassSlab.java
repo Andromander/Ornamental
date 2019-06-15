@@ -2,16 +2,16 @@ package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyBlock;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,17 +23,18 @@ public class NiftyGrassSlab extends NiftySlab {
     }
 
     @Override
-    public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    @Deprecated
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = playerIn.getHeldItem(hand);
 
-        if (!itemstack.isEmpty() && itemstack.getItem() instanceof ItemSpade) {
-            IBlockState blockstate = worldIn.getBlockState(pos);
+        if (!itemstack.isEmpty() && itemstack.getItem() instanceof ShovelItem) {
+            BlockState blockstate = worldIn.getBlockState(pos);
             worldIn.setBlockState(pos, ModBlocks.dirt_slab.getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            itemstack.damageItem(1, playerIn);
+            itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
             return true;
         } else {
-            return super.onBlockActivated(state, worldIn, pos, playerIn, hand, facing, hitX, hitY, hitZ);
+            return super.onBlockActivated(state, worldIn, pos, playerIn, hand, result);
         }
     }
 

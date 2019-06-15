@@ -2,18 +2,19 @@ package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class NiftyFenceGate extends BlockFenceGate {
+public class NiftyFenceGate extends FenceGateBlock {
 
     private ToolType toolType;
     private int toolLevel;
@@ -28,12 +29,12 @@ public class NiftyFenceGate extends BlockFenceGate {
     }
 
     @Override
-    public ToolType getHarvestTool(IBlockState state) {
+    public ToolType getHarvestTool(BlockState state) {
         return toolType;
     }
 
     @Override
-    public int getHarvestLevel(IBlockState state) {
+    public int getHarvestLevel(BlockState state) {
         return toolLevel;
     }
 
@@ -43,7 +44,7 @@ public class NiftyFenceGate extends BlockFenceGate {
     }
 
     @Override
-    public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         if(material == Material.IRON || material == Material.ROCK) {
             return false;
         } else {
@@ -51,7 +52,7 @@ public class NiftyFenceGate extends BlockFenceGate {
                 state = state.with(OPEN, Boolean.FALSE);
                 worldIn.setBlockState(pos, state, 10);
             } else {
-                EnumFacing enumfacing = player.getHorizontalFacing();
+                Direction enumfacing = player.getHorizontalFacing();
                 if (state.get(HORIZONTAL_FACING) == enumfacing.getOpposite()) {
                     state = state.with(HORIZONTAL_FACING, enumfacing);
                 }

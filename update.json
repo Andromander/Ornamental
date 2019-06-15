@@ -11,10 +11,15 @@
     "2.1": "• Added Clay Stairs, Slabs, Fences, Trapdoors, and Fence Gates. Nifty was feeling out of balance, so this should fix it up.\n • Removed some leftover console prints. Those were from creating a new project and served no purpose.\n • Guess what? More things I did in the background that nobody should really care about.",
     "2.2": "Still taking up from where Mojang left off here.\n • Added Dirt Nifty Blocks. Start out your flaunting adventure by pimping up your Dirt house.\n • Added Grass Nifty Blocks. A greener alternative to Dirt houses, and self-sustaining.\n • Grass and Dirt Nifty blocks don't decay or grow, so they maintain their form in builds. To change between the two, use a Shovel or Bone Meal.\n • Added Hay Nifty Blocks. I'm surprised there wasn't some sort of Hay Stairs or Hay Slab in Minecraft already; now I know.\n • All this time I was doing the Nifty Trapdoor recipes wrong.\n • I want to brag about how much rewriting I did in the background because it looks good, but nobody really cares."
   },
+  "1.14.2": {
+    "2.3": "Nifty is now out for 1.14.2! Some textures have been adjusted slightly to fit with the new texture update, but they should be relatively similar to the classic textures. This is just a port of Nifty from 1.13.2, so no new features, and mod compat is still excluded for now. THIS IS NOT A FABRIC MOD. PLEASE USE FORGE."
+  },
   "promos": {
     "1.12.2-latest": "1.5",
     "1.12.2-recommended": "1.5",
     "1.13.2-latest": "2.2",
-    "1.13.2-recommended": "2.2"
+    "1.13.2-recommended": "2.2",
+    "1.14.2-latest": "2.3",
+    "1.14.2-recommended": "2.3"
   }
 }

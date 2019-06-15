@@ -1,8 +1,8 @@
 package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.NiftyBlock;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -14,13 +14,13 @@ public class NiftyRedstoneFenceGate extends NiftyFenceGate {
 
     @Override
     @Deprecated
-    public boolean canProvidePower(IBlockState state) {
+    public boolean canProvidePower(BlockState state) {
         return true;
     }
 
     @Override
     @Deprecated
-    public int getWeakPower(IBlockState blockState, IBlockReader blockReader, BlockPos pos, EnumFacing side) {
+    public int getWeakPower(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
         return 3;
     }
 }

@@ -2,7 +2,7 @@ package com.androsa.nifty;
 
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +30,7 @@ public class ColourHandler {
         BlockColors blocks = e.getBlockColors();
         ItemColors items = e.getItemColors();
 
-        items.register((stack, tintIndex) -> blocks.getColor(((ItemBlock)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
+        items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
                 ModBlocks.grass_fence,
                 ModBlocks.grass_fence_gate,
                 ModBlocks.grass_slab,

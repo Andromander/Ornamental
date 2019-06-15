@@ -2,14 +2,14 @@ package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-public class NiftySlab extends BlockSlab {
+public class NiftySlab extends SlabBlock {
 
     private ToolType toolType;
     private int toolLevel;
@@ -29,12 +29,12 @@ public class NiftySlab extends BlockSlab {
     }
 
     @Override
-    public ToolType getHarvestTool(IBlockState state) {
+    public ToolType getHarvestTool(BlockState state) {
         return toolType;
     }
 
     @Override
-    public int getHarvestLevel(IBlockState state) {
+    public int getHarvestLevel(BlockState state) {
         return toolLevel;
     }
 }

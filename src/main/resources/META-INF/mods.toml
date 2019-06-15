@@ -1,11 +1,11 @@
 modLoader="javafml" #mandatory
-loaderVersion="[25,)" #mandatory
+loaderVersion="[26,)" #mandatory
 issueTrackerURL="https://github.com/Andromander/Nifty/issues" #optional
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="nifty" #mandatory
-version="2.2" #mandatory
+version="2.3" #mandatory
 displayName="Nifty" #mandatory
 updateJSONURL="https://raw.githubusercontent.com/Andromander/Nifty/master/update.json" #optional
 displayURL="https://minecraft.curseforge.com/projects/nifty" #optional
@@ -18,16 +18,15 @@ Nifty aims to make your extravagant life of building in vanilla that much better
 The possibilities are...a bit more expansive. Not limitless, but just a little bit of convenience.
 '''
 
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.nifty]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[25,)" #mandatory
+    versionRange="[26,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.nifty]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.13.2]"
+    versionRange="[1.14.2]"
     ordering="NONE"
     side="BOTH"
