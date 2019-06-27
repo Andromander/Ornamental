@@ -14,12 +14,17 @@
   "1.14.2": {
     "2.3": "Nifty is now out for 1.14.2! Some textures have been adjusted slightly to fit with the new texture update, but they should be relatively similar to the classic textures. This is just a port of Nifty from 1.13.2, so no new features, and mod compat is still excluded for now. THIS IS NOT A FABRIC MOD. PLEASE USE FORGE."
   },
+  "1.14.3": {
+    "2.4": "Nifty is now out for 1.14.3! This is mostly just porting up a version, but also includes a couple fixes. First being that later versions of Forge would break the Grass Nifty blocks with their color. The second being that Grass Trapdoors weren't dropping because of an error in the loot table. No new features just yet."
+  },
   "promos": {
     "1.12.2-latest": "1.5",
     "1.12.2-recommended": "1.5",
     "1.13.2-latest": "2.2",
     "1.13.2-recommended": "2.2",
-    "1.14.2-latest": "2.3",
-    "1.14.2-recommended": "2.3"
+    "1.14.2-latest": "2.4",
+    "1.14.2-recommended": "2.4",
+    "1.14.3-latest": "2.4",
+    "1.14.3-recommended": "2.4"
   }
 }

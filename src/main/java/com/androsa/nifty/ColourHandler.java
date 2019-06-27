@@ -10,7 +10,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = NiftyMod.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = NiftyMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ColourHandler {
 
     @SubscribeEvent

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nifty:iron_trapdoor"
+          "name": "nifty:grass_trapdoor"
         }
       ],
       "conditions": [
