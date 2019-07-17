@@ -4,6 +4,7 @@ import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.util.BlockRenderLayer;
@@ -26,7 +27,7 @@ public class NiftyGrassFenceGate extends NiftyFenceGate {
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = playerIn.getHeldItem(hand);
 
-        if (!itemstack.isEmpty() && itemstack.getItem() instanceof ShovelItem) {
+        if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
             BlockState blockstate = worldIn.getBlockState(pos);
             worldIn.setBlockState(pos, ModBlocks.dirt_fence_gate.getDefaultState().with(HORIZONTAL_FACING, blockstate.get(HORIZONTAL_FACING)).with(OPEN, blockstate.get(OPEN)).with(POWERED, blockstate.get(POWERED)).with(IN_WALL, blockstate.get(IN_WALL)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
