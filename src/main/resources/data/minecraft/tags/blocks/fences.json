@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:iron_fence",
+    "nifty:gold_fence",
+    "nifty:diamond_fence",
+    "nifty:emerald_fence",
+    "nifty:lapis_fence",
+    "nifty:obsidian_fence",
+    "nifty:coal_fence",
+    "nifty:redstone_fence",
+    "nifty:missingno_fence",
+    "nifty:clay_fence",
+    "nifty:dirt_fence",
+    "nifty:grass_fence",
+    "nifty:hay_fence",
+    "nifty:grass_path_fence"
+  ]
+}
