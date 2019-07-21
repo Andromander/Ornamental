@@ -17,6 +17,9 @@
   "1.14.3": {
     "2.4": "Nifty is now out for 1.14.3! This is mostly just porting up a version, but also includes a couple fixes. First being that later versions of Forge would break the Grass Nifty blocks with their color. The second being that Grass Trapdoors weren't dropping because of an error in the loot table. No new features just yet."
   },
+  "1.14.4": {
+    "2.5": "Nifty is now out for 1.14.4! Unlike the last couple updates, this does include new features.\n • Added Grass Path Stairs, Slabs, Fences, Trapdoors, and Fence Gates. This one's by popular demand, and most certainly a necessity for 1.14.\n   • Nifty Grass Path blocks are obtained by using a Shovel on any Grass Nifty block. They will keep their form until a Hoe is used on them, where they will revert back to Nifty Grass blocks.\n    • Because of this new feature, obtaining Dirt Nifty blocks now require using a Hoe instead of a Shovel.\n   • As mentioned eariler, Grass Path Nifty blocks will keep their form until a Hoe is used on them, for building convenience.\n • Fixed an issue with Fence blocks not connecting to each other. I'm still not great with this whole datapack thing.\n • The behind-the-scenes tweaks are back, and nobody is required to care still."
+  },
   "promos": {
     "1.12.2-latest": "1.5",
     "1.12.2-recommended": "1.5",
@@ -25,6 +28,8 @@
     "1.14.2-latest": "2.4",
     "1.14.2-recommended": "2.4",
     "1.14.3-latest": "2.4",
-    "1.14.3-recommended": "2.4"
+    "1.14.3-recommended": "2.4",
+    "1.14.4-latest": "2.5",
+    "1.14.4-recommended": "2.5"
   }
 }

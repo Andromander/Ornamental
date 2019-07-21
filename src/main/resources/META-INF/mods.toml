@@ -1,11 +1,11 @@
 modLoader="javafml" #mandatory
-loaderVersion="[27,)" #mandatory
+loaderVersion="[28,)" #mandatory
 issueTrackerURL="https://github.com/Andromander/Nifty/issues" #optional
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="nifty" #mandatory
-version="2.4" #mandatory
+version="2.5" #mandatory
 displayName="Nifty" #mandatory
 updateJSONURL="https://raw.githubusercontent.com/Andromander/Nifty/master/update.json" #optional
 displayURL="https://minecraft.curseforge.com/projects/nifty" #optional
@@ -21,12 +21,12 @@ The possibilities are...a bit more expansive. Not limitless, but just a little b
 [[dependencies.nifty]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[27,)" #mandatory
+    versionRange="[28,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.nifty]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.3]"
+    versionRange="[1.14.4]"
     ordering="NONE"
     side="BOTH"
