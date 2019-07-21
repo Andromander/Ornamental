@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "nifty:grass_path_trapdoor"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:grass_path_slab"
+    }
+  }
+}

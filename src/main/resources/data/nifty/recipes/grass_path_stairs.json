@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:grass_path_stairs",
+    "count": 8
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:grass_path"
+    }
+  }
+}

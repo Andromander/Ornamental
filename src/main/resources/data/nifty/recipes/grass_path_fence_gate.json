@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "nifty:grass_path_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:grass_path_slab"
+    },
+    "B": {
+      "item": "minecraft:grass_path"
+    }
+  }
+}
