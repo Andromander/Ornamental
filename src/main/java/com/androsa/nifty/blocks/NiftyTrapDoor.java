@@ -12,32 +12,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
 public class NiftyTrapDoor extends TrapDoorBlock {
 
-    private ToolType toolType;
-    private int toolLevel;
     private float fallDamage;
 
     public NiftyTrapDoor(NiftyBlock block) {
-        super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
+        super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
 
-        this.toolType = block.tool;
-        this.toolLevel = block.level;
         this.fallDamage = block.multiplier;
-    }
-
-    @Override
-    public ToolType getHarvestTool(BlockState state) {
-        return toolType;
-    }
-
-    @Override
-    public int getHarvestLevel(BlockState state) {
-        return toolLevel;
     }
 
     @Override

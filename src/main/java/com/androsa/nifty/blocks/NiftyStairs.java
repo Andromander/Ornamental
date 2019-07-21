@@ -8,32 +8,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 
 public class NiftyStairs extends StairsBlock {
 
     private boolean isBeaconBase;
-    private ToolType toolType;
     private float fallDamage;
-    private int toolLevel;
 
     public NiftyStairs(NiftyBlock block, boolean base) {
-        super(new Block(Properties.create(block.material, block.color)).getDefaultState(), Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound));
+        super(new Block(Properties.create(block.material, block.color)).getDefaultState(), Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
 
-        this.toolType = block.tool;
-        this.toolLevel = block.level;
         this.fallDamage = block.multiplier;
         this.isBeaconBase = base;
-    }
-
-    @Override
-    public ToolType getHarvestTool(BlockState state) {
-        return toolType;
-    }
-
-    @Override
-    public int getHarvestLevel(BlockState state) {
-        return toolLevel;
     }
 
     @Override
