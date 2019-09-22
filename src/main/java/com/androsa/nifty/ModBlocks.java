@@ -140,7 +140,7 @@ public class ModBlocks {
         registry.register(registerBlock(obsidian_stairs, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(coal_stairs, ItemGroup.BUILDING_BLOCKS, 12000));
         registry.register(registerBlock(redstone_stairs, ItemGroup.BUILDING_BLOCKS));
-        registry.register(registerBlock(missingno_stairs, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlockOptional(missingno_stairs, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(clay_stairs, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(dirt_stairs, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(grass_stairs, ItemGroup.BUILDING_BLOCKS));
@@ -155,7 +155,7 @@ public class ModBlocks {
         registry.register(registerBlock(obsidian_slab, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(coal_slab, ItemGroup.BUILDING_BLOCKS, 8000));
         registry.register(registerBlock(redstone_slab, ItemGroup.BUILDING_BLOCKS));
-        registry.register(registerBlock(missingno_slab, ItemGroup.BUILDING_BLOCKS));
+        registry.register(registerBlockOptional(missingno_slab, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(clay_slab, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(dirt_slab, ItemGroup.BUILDING_BLOCKS));
         registry.register(registerBlock(grass_slab, ItemGroup.BUILDING_BLOCKS));
@@ -170,7 +170,7 @@ public class ModBlocks {
         registry.register(registerBlock(obsidian_fence, ItemGroup.DECORATIONS));
         registry.register(registerBlock(coal_fence, ItemGroup.DECORATIONS, 5250));
         registry.register(registerBlock(redstone_fence, ItemGroup.DECORATIONS));
-        registry.register(registerBlock(missingno_fence, ItemGroup.DECORATIONS));
+        registry.register(registerBlockOptional(missingno_fence, ItemGroup.DECORATIONS));
         registry.register(registerBlock(clay_fence, ItemGroup.DECORATIONS));
         registry.register(registerBlock(dirt_fence, ItemGroup.DECORATIONS));
         registry.register(registerBlock(grass_fence, ItemGroup.DECORATIONS));
@@ -184,7 +184,7 @@ public class ModBlocks {
         registry.register(registerBlock(obsidian_trapdoor, ItemGroup.REDSTONE));
         registry.register(registerBlock(coal_trapdoor, ItemGroup.REDSTONE, 5250));
         registry.register(registerBlock(redstone_trapdoor, ItemGroup.REDSTONE));
-        registry.register(registerBlock(missingno_trapdoor, ItemGroup.REDSTONE));
+        registry.register(registerBlockOptional(missingno_trapdoor, ItemGroup.REDSTONE));
         registry.register(registerBlock(clay_trapdoor, ItemGroup.REDSTONE));
         registry.register(registerBlock(dirt_trapdoor, ItemGroup.REDSTONE));
         registry.register(registerBlock(grass_trapdoor, ItemGroup.REDSTONE));
@@ -199,7 +199,7 @@ public class ModBlocks {
         registry.register(registerBlock(obsidian_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(coal_fence_gate, ItemGroup.REDSTONE, 4000));
         registry.register(registerBlock(redstone_fence_gate, ItemGroup.REDSTONE));
-        registry.register(registerBlock(missingno_fence_gate, ItemGroup.REDSTONE));
+        registry.register(registerBlockOptional(missingno_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(clay_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(dirt_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(grass_fence_gate, ItemGroup.REDSTONE));
@@ -213,6 +213,7 @@ public class ModBlocks {
         registry.register(registerDoorBlock(obsidian_door, 0));
         registry.register(registerDoorBlock(coal_door, 10500));
         registry.register(registerDoorBlock(redstone_door, 0));
+        registry.register(new NiftyTallBlockItem(missingno_door, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName(missingno_door.getRegistryName()));
         registry.register(registerDoorBlock(clay_door, 0));
         registry.register(registerDoorBlock(dirt_door, 0));
         registry.register(registerDoorBlock(grass_door, 0));
@@ -232,6 +233,9 @@ public class ModBlocks {
             }.setRegistryName(block.getRegistryName());
         }
     }
+
+    private static Item registerBlockOptional(Block block, ItemGroup group) {
+        return new NiftyBlockItem(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName());
     }
 
     private static Item registerBlock(Block block, ItemGroup group) {
