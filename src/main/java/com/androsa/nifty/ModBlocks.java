@@ -1,16 +1,17 @@
 package com.androsa.nifty;
 
 import com.androsa.nifty.blocks.*;
+import com.androsa.nifty.items.NiftyBlockItem;
+import com.androsa.nifty.items.NiftyTallBlockItem;
 import net.minecraft.block.*;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
+
+import javax.annotation.Nullable;
 
 import static com.androsa.nifty.NiftyBlock.*;
 
@@ -93,6 +94,20 @@ public class ModBlocks {
     public static final Block hay_fence_gate       = new NiftyFenceGate(HAY).setRegistryName("hay_fence_gate");
     public static final Block path_fence_gate      = new NiftyPathFenceGate().setRegistryName("grass_path_fence_gate");
 
+    public static final Block gold_door      = new NiftyDoor(GOLD).setRegistryName("gold_door");
+    public static final Block diamond_door   = new NiftyDoor(DIAMOND).setRegistryName("diamond_door");
+    public static final Block emerald_door   = new NiftyDoor(EMERALD).setRegistryName("emerald_door");
+    public static final Block lapis_door     = new NiftyDoor(LAPIS).setRegistryName("lapis_door");
+    public static final Block obsidian_door  = new NiftyDoor(OBSIDIAN).setRegistryName("obsidian_door");
+    public static final Block coal_door      = new NiftyDoor(COAL).setRegistryName("coal_door");
+    public static final Block redstone_door  = new NiftyRedstoneDoor().setRegistryName("redstone_door");
+    public static final Block missingno_door = new NiftyDoor(MISSINGNO).setRegistryName("missingno_door");
+    public static final Block clay_door      = new NiftyDoor(CLAY).setRegistryName("clay_door");
+    public static final Block dirt_door      = new NiftyDirtDoor().setRegistryName("dirt_door");
+    public static final Block grass_door     = new NiftyGrassDoor().setRegistryName("grass_door");
+    public static final Block hay_door       = new NiftyDoor(HAY).setRegistryName("hay_door");
+    public static final Block path_door      = new NiftyPathDoor().setRegistryName("grass_path_door");
+
     @SubscribeEvent
     public static void onRegisterBlocks(RegistryEvent.Register<Block> e) {
         final Block blocks[] = new Block[] {
@@ -105,7 +120,9 @@ public class ModBlocks {
                 //Trapdoors
                 gold_trapdoor, diamond_trapdoor, emerald_trapdoor, lapis_trapdoor, obsidian_trapdoor, coal_trapdoor, redstone_trapdoor, missingno_trapdoor, clay_trapdoor, dirt_trapdoor, grass_trapdoor, hay_trapdoor, path_trapdoor,
                 //Fence Gates
-                iron_fence_gate, gold_fence_gate, diamond_fence_gate, emerald_fence_gate, lapis_fence_gate, obsidian_fence_gate, coal_fence_gate, redstone_fence_gate, missingno_fence_gate, clay_fence_gate, dirt_fence_gate, grass_fence_gate, hay_fence_gate, path_fence_gate
+                iron_fence_gate, gold_fence_gate, diamond_fence_gate, emerald_fence_gate, lapis_fence_gate, obsidian_fence_gate, coal_fence_gate, redstone_fence_gate, missingno_fence_gate, clay_fence_gate, dirt_fence_gate, grass_fence_gate, hay_fence_gate, path_fence_gate,
+                //Doors
+                gold_door, diamond_door, emerald_door, lapis_door, obsidian_door, coal_door, redstone_door, missingno_door, clay_door, dirt_door, grass_door, hay_door, path_door
         };
 
         e.getRegistry().registerAll(blocks);
@@ -188,6 +205,33 @@ public class ModBlocks {
         registry.register(registerBlock(grass_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(hay_fence_gate, ItemGroup.REDSTONE));
         registry.register(registerBlock(path_fence_gate, ItemGroup.REDSTONE));
+
+        registry.register(registerDoorBlock(gold_door, 0));
+        registry.register(registerDoorBlock(diamond_door, 0));
+        registry.register(registerDoorBlock(emerald_door, 0));
+        registry.register(registerDoorBlock(lapis_door, 0));
+        registry.register(registerDoorBlock(obsidian_door, 0));
+        registry.register(registerDoorBlock(coal_door, 10500));
+        registry.register(registerDoorBlock(redstone_door, 0));
+        registry.register(registerDoorBlock(clay_door, 0));
+        registry.register(registerDoorBlock(dirt_door, 0));
+        registry.register(registerDoorBlock(grass_door, 0));
+        registry.register(registerDoorBlock(hay_door, 0));
+        registry.register(registerDoorBlock(path_door, 0));
+    }
+
+    private static Item registerDoorBlock(Block block, int burnTime) {
+        if (burnTime == 0) {
+            return new TallBlockItem(block, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName(block.getRegistryName());
+        } else {
+            return new TallBlockItem(block, new Item.Properties().group(ItemGroup.REDSTONE)) {
+                @Override
+                public int getBurnTime(ItemStack stack) {
+                    return burnTime;
+                }
+            }.setRegistryName(block.getRegistryName());
+        }
+    }
     }
 
     private static Item registerBlock(Block block, ItemGroup group) {

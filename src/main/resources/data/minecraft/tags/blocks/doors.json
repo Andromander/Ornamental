@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:gold_door",
+    "nifty:diamond_door",
+    "nifty:emerald_door",
+    "nifty:lapis_door",
+    "nifty:obsidian_door",
+    "nifty:coal_door",
+    "nifty:redstone_door",
+    "nifty:missingno_door",
+    "nifty:clay_door",
+    "nifty:dirt_door",
+    "nifty:grass_door",
+    "nifty:hay_door",
+    "nifty:grass_path_door"
+  ]
+}

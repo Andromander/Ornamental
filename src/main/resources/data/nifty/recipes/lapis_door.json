@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "nifty:lapis_door"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  }
+}

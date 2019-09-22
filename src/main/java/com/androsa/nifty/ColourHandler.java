@@ -22,7 +22,8 @@ public class ColourHandler {
                 ModBlocks.grass_fence_gate,
                 ModBlocks.grass_slab,
                 ModBlocks.grass_stairs,
-                ModBlocks.grass_trapdoor);
+                ModBlocks.grass_trapdoor,
+                ModBlocks.grass_door);
     }
 
     @SubscribeEvent
