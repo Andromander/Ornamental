@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:redstone_stairs",
+    "nifty:coal_stairs",
+    "nifty:lapis_stairs",
+    "minecraft:quartz_stairs"
+  ]
+}
