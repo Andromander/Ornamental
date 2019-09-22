@@ -11,8 +11,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
-import javax.annotation.Nullable;
-
 import static com.androsa.nifty.NiftyBlock.*;
 
 @ObjectHolder(NiftyMod.MODID)
