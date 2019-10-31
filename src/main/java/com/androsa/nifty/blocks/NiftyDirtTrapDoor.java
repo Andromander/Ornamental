@@ -25,7 +25,7 @@ public class NiftyDirtTrapDoor extends NiftyTrapDoor {
 
         if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
             BlockState blockstate =  worldIn.getBlockState(pos);
-            worldIn.setBlockState(pos, ModBlocks.grass_trapdoor.getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+            worldIn.setBlockState(pos, ModBlocks.grass_trapdoor.get().getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
             if (!player.abilities.isCreativeMode) {

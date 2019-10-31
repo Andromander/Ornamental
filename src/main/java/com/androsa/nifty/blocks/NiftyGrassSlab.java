@@ -31,13 +31,13 @@ public class NiftyGrassSlab extends NiftySlab {
         if (!itemstack.isEmpty()) {
             if (itemstack.getItem() instanceof HoeItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.dirt_slab.getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.dirt_slab.get().getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;
             } else if (itemstack.getItem() instanceof ShovelItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.path_slab.getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.path_slab.get().getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;

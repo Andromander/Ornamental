@@ -15,7 +15,7 @@ public class NiftyStairs extends StairsBlock {
     private float fallDamage;
 
     public NiftyStairs(NiftyBlock block, boolean base) {
-        super(new Block(Properties.create(block.material, block.color)).getDefaultState(), Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
+        super(() -> new Block(Properties.create(block.material, block.color)).getDefaultState(), Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
 
         this.fallDamage = block.multiplier;
         this.isBeaconBase = base;

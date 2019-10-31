@@ -10,14 +10,22 @@ import net.minecraft.util.NonNullList;
 
 public class NiftyBlockItem extends BlockItem {
 
-    public NiftyBlockItem(Block blockIn, Item.Properties builder) {
+    private final boolean isOptional;
+
+    public NiftyBlockItem(Block blockIn, Item.Properties builder, boolean optional) {
         super(blockIn, builder);
+
+        isOptional = optional;
     }
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (NiftyConfig.showMissingnoBlocks.get()) {
+        if (!isOptional) {
             super.fillItemGroup(group, items);
+        } else {
+            if (NiftyConfig.showMissingnoBlocks.get()) {
+                super.fillItemGroup(group, items);
+            }
         }
     }
 }

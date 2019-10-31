@@ -45,7 +45,7 @@ public class NiftyPathFence extends NiftyFence {
 
         if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
             BlockState blockstate =  worldIn.getBlockState(pos);
-            worldIn.setBlockState(pos, ModBlocks.grass_fence.getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+            worldIn.setBlockState(pos, ModBlocks.grass_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
             return true;

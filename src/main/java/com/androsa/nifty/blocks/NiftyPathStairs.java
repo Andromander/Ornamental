@@ -81,7 +81,7 @@ public class NiftyPathStairs extends NiftyStairs {
 
         if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
             BlockState blockstate = worldIn.getBlockState(pos);
-            worldIn.setBlockState(pos, ModBlocks.grass_stairs.getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+            worldIn.setBlockState(pos, ModBlocks.grass_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
             return true;

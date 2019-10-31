@@ -51,7 +51,7 @@ public class NiftyPathSlab extends NiftySlab {
 
         if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
             BlockState blockstate = worldIn.getBlockState(pos);
-            worldIn.setBlockState(pos, ModBlocks.grass_slab.getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+            worldIn.setBlockState(pos, ModBlocks.grass_slab.get().getDefaultState().with(TYPE, blockstate.get(TYPE)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
             return true;

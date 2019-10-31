@@ -10,14 +10,29 @@ import net.minecraft.util.NonNullList;
 
 public class NiftyTallBlockItem extends TallBlockItem {
 
-    public NiftyTallBlockItem(Block blockIn, Item.Properties builder) {
+    private final int burnTime;
+    private final boolean isOptional;
+
+    public NiftyTallBlockItem(Block blockIn, Item.Properties builder, int time, boolean optional) {
         super(blockIn, builder);
+
+        burnTime = time;
+        isOptional = optional;
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack) {
+        return burnTime;
     }
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (NiftyConfig.showMissingnoBlocks.get()) {
+        if (!isOptional) {
             super.fillItemGroup(group, items);
+        } else {
+            if (NiftyConfig.showMissingnoBlocks.get()) {
+                super.fillItemGroup(group, items);
+            }
         }
     }
 }

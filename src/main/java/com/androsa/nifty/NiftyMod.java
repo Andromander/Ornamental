@@ -21,6 +21,9 @@ public class NiftyMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
 
+        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         final Pair<NiftyConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(NiftyConfig::new);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, specPair.getRight());
         config = specPair.getLeft();

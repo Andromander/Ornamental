@@ -30,13 +30,13 @@ public class NiftyGrassTrapDoor extends NiftyTrapDoor {
         if (!itemstack.isEmpty()) {
             if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.dirt_trapdoor.getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.dirt_trapdoor.get().getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;
             } else if (!itemstack.isEmpty() && itemstack.getItem() instanceof ShovelItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.path_trapdoor.getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.path_trapdoor.get().getDefaultState().with(POWERED, blockstate.get(POWERED)).with(OPEN, blockstate.get(OPEN)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;

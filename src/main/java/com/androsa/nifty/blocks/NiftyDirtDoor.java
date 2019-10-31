@@ -32,14 +32,14 @@ public class NiftyDirtDoor extends NiftyDoor {
             if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
                 isReplacing = true;
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-                worldIn.setBlockState(pos.up(), ModBlocks.grass_door.getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.UPPER), 3);
-                worldIn.setBlockState(pos, ModBlocks.grass_door.getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.LOWER), 3);
+                worldIn.setBlockState(pos.up(), ModBlocks.grass_door.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.UPPER), 3);
+                worldIn.setBlockState(pos, ModBlocks.grass_door.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.LOWER), 3);
                 isReplacing = false;
             } else {
                 isReplacing = true;
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-                worldIn.setBlockState(pos.down(), ModBlocks.grass_door.getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.LOWER), 3);
-                worldIn.setBlockState(pos, ModBlocks.grass_door.getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.UPPER), 3);
+                worldIn.setBlockState(pos.down(), ModBlocks.grass_door.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.LOWER), 3);
+                worldIn.setBlockState(pos, ModBlocks.grass_door.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(OPEN, blockstate.get(OPEN)).with(HINGE, blockstate.get(HINGE)).with(POWERED, blockstate.get(POWERED)).with(HALF, DoubleBlockHalf.UPPER), 3);
                 isReplacing = false;
             }
 

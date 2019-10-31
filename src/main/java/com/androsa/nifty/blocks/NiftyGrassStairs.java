@@ -30,13 +30,13 @@ public class NiftyGrassStairs extends NiftyStairs {
         if (!itemstack.isEmpty()) {
             if (itemstack.getItem() instanceof HoeItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.dirt_stairs.getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.dirt_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;
             } else if (itemstack.getItem() instanceof ShovelItem) {
                 BlockState blockstate = worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.path_stairs.getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.path_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;

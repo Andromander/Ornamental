@@ -30,13 +30,13 @@ public class NiftyGrassFence extends NiftyFence {
         if (!itemstack.isEmpty()) {
             if (itemstack.getItem() instanceof HoeItem) {
                 BlockState blockstate =  worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.dirt_fence.getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.dirt_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;
             } else if (itemstack.getItem() instanceof ShovelItem) {
                 BlockState blockstate =  worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.path_fence.getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                worldIn.setBlockState(pos, ModBlocks.path_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;

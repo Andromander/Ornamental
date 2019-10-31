@@ -18,12 +18,12 @@ public class ColourHandler {
         BlockColors blocks = e.getBlockColors();
 
         blocks.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? BiomeColors.getGrassColor(worldIn, pos) : GrassColors.get(0.5D, 1.0D),
-                ModBlocks.grass_fence,
-                ModBlocks.grass_fence_gate,
-                ModBlocks.grass_slab,
-                ModBlocks.grass_stairs,
-                ModBlocks.grass_trapdoor,
-                ModBlocks.grass_door);
+                ModBlocks.grass_fence.get(),
+                ModBlocks.grass_fence_gate.get(),
+                ModBlocks.grass_slab.get(),
+                ModBlocks.grass_stairs.get(),
+                ModBlocks.grass_trapdoor.get(),
+                ModBlocks.grass_door.get());
     }
 
     @SubscribeEvent
@@ -32,10 +32,10 @@ public class ColourHandler {
         ItemColors items = e.getItemColors();
 
         items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
-                ModBlocks.grass_fence,
-                ModBlocks.grass_fence_gate,
-                ModBlocks.grass_slab,
-                ModBlocks.grass_stairs,
-                ModBlocks.grass_trapdoor);
+                ModBlocks.grass_fence.get(),
+                ModBlocks.grass_fence_gate.get(),
+                ModBlocks.grass_slab.get(),
+                ModBlocks.grass_stairs.get(),
+                ModBlocks.grass_trapdoor.get());
     }
 }

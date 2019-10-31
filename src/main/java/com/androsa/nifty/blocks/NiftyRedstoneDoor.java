@@ -13,11 +13,13 @@ public class NiftyRedstoneDoor extends NiftyDoor {
     }
 
     @Override
+    @Deprecated
     public boolean hasComparatorInputOverride(BlockState state) {
         return true;
     }
 
     @Override
+    @Deprecated
     public int getComparatorInputOverride(BlockState state, World worldIn, BlockPos pos) {
         return state.get(POWERED) ? 10 : 0;
     }
