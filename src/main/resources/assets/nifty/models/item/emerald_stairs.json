@@ -1,3 +1,8 @@
 {
-  "parent": "nifty:block/emerald/emerald_stairs"
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "block/emerald_block",
+    "top": "block/emerald_block",
+    "side": "block/emerald_block"
+  }
 }

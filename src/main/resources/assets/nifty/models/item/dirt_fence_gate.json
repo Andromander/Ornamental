@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/dirt/dirt_fence_gate"
+  "parent": "block/template_fence_gate",
+  "textures": {
+    "texture": "block/dirt"
+  }
 }

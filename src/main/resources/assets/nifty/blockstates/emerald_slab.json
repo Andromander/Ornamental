@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "block/emerald_block",
+      "bottom": "block/emerald_block",
+      "side": "block/emerald_block"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "type=bottom": { "model": "nifty:block/emerald/emerald_slab" },
-    "type=top":    { "model": "nifty:block/emerald/emerald_slab_top" },
-    "type=double": { "model": "block/emerald_block" }
+    "type=bottom": { "model": "block/slab" },
+    "type=top":    { "model": "block/slab_top" },
+    "type=double": { "model": "block/cube_bottom_top" }
   }
 }

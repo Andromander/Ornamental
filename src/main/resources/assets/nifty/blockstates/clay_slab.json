@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "block/clay",
+      "bottom": "block/clay",
+      "side": "block/clay"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "type=bottom": { "model": "nifty:block/clay/clay_slab" },
-    "type=top":    { "model": "nifty:block/clay/clay_slab_top" },
-    "type=double": { "model": "block/clay" }
+    "type=bottom": { "model": "block/slab" },
+    "type=top":    { "model": "block/slab_top" },
+    "type=double": { "model": "block/cube_bottom_top" }
   }
 }

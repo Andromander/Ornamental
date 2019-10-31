@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "missingno",
+      "bottom": "missingno",
+      "side": "missingno"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "type=bottom": { "model": "nifty:block/missingno/missingno_slab" },
-    "type=top":    { "model": "nifty:block/missingno/missingno_slab_top" },
-    "type=double": { "model": "nifty:block/missingno/missingno_block" }
+    "type=bottom": { "model": "block/slab" },
+    "type=top":    { "model": "block/slab_top" },
+    "type=double": { "model": "block/cube_bottom_top" }
   }
 }

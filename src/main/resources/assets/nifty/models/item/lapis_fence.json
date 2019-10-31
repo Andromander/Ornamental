@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/lapis/lapis_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/lapis_block"
+  }
 }

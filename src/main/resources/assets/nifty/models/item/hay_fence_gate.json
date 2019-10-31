@@ -1,3 +1,7 @@
 {
-  "parent": "nifty:block/hay/hay_fence_gate"
+  "parent": "nifty:block/util/fence_gate_column",
+  "textures": {
+    "end":    "block/hay_block_top",
+    "side":   "block/hay_block_side"
+  }
 }

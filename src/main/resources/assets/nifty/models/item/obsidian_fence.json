@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/obsidian/obsidian_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/obsidian"
+  }
 }

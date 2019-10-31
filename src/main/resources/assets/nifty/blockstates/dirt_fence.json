@@ -1,22 +1,32 @@
 {
-  "multipart": [
-    {
-      "apply": { "model": "nifty:block/dirt/dirt_fence_post" }},
-    {
-      "when": { "north": "true" },
-      "apply": { "model": "nifty:block/dirt/dirt_fence_side", "uvlock": true }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "block/fence_post",
+    "textures": {
+      "texture": "block/dirt"
     },
-    {
-      "when": { "east": "true" },
-      "apply": { "model": "nifty:block/dirt/dirt_fence_side", "y": 90, "uvlock": true }
+    "uvlock": true
+  },
+  "variants": {
+    "north": {
+      "true": { "submodel": "block/fence_side" },
+      "false": { }
     },
-    {
-      "when": { "south": "true" },
-      "apply": { "model": "nifty:block/dirt/dirt_fence_side", "y": 180, "uvlock": true }
+    "east": {
+      "true": { "submodel": "block/fence_side", "y": 90 },
+      "false": { }
     },
-    {
-      "when": { "west": "true" },
-      "apply": { "model": "nifty:block/dirt/dirt_fence_side", "y": 270, "uvlock": true }
+    "south": {
+      "true": { "submodel": "block/fence_side", "y": 180 },
+      "false": { }
+    },
+    "west": {
+      "true": { "submodel": "block/fence_side", "y": 270 },
+      "false": { }
+    },
+    "waterlogged": {
+      "true": { },
+      "false": { }
     }
-  ]
+  }
 }

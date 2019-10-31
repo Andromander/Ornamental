@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "block/gold_block",
+      "bottom": "block/gold_block",
+      "side": "block/gold_block"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "type=bottom": { "model": "nifty:block/gold/gold_slab" },
-    "type=top":    { "model": "nifty:block/gold/gold_slab_top" },
-    "type=double": { "model": "block/gold_block" }
+    "type=bottom": { "model": "block/slab" },
+    "type=top":    { "model": "block/slab_top" },
+    "type=double": { "model": "block/cube_bottom_top" }
   }
 }

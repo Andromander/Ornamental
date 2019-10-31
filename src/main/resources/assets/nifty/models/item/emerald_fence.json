@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/emerald/emerald_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/emerald_block"
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/clay/clay_trapdoor_bottom"
+  "parent": "block/template_orientable_trapdoor_bottom",
+  "textures": {
+    "texture": "nifty:block/clay_trapdoor"
+  }
 }

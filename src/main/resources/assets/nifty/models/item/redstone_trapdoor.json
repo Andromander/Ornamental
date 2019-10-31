@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/redstone/redstone_trapdoor_bottom"
+  "parent": "block/template_orientable_trapdoor_bottom",
+  "textures": {
+    "texture": "nifty:block/redstone_trapdoor"
+  }
 }

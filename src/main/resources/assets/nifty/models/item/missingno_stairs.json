@@ -1,3 +1,8 @@
 {
-  "parent": "nifty:block/missingno/missingno_stairs"
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "missingno",
+    "top": "missingno",
+    "side": "missingno"
+  }
 }

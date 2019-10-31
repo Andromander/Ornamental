@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/iron/iron_fence_gate"
+  "parent": "block/template_fence_gate",
+  "textures": {
+    "texture": "block/iron_block"
+  }
 }

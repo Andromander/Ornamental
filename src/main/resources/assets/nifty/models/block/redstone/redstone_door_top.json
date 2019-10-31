@@ -1,7 +1,0 @@
-{
-  "parent": "block/door_top",
-  "textures": {
-    "bottom": "nifty:block/redstone_door_bottom",
-    "top": "nifty:block/redstone_door_top"
-  }
-}

@@ -1,20 +1,43 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "end": "block/hay_block_top",
+      "side": "block/hay_block_side"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "facing=south,in_wall=false,open=false": { "model": "nifty:block/hay/hay_fence_gate", "uvlock": true },
-    "facing=west,in_wall=false,open=false":  { "model": "nifty:block/hay/hay_fence_gate", "uvlock": true, "y": 90 },
-    "facing=north,in_wall=false,open=false": { "model": "nifty:block/hay/hay_fence_gate", "uvlock": true, "y": 180 },
-    "facing=east,in_wall=false,open=false":  { "model": "nifty:block/hay/hay_fence_gate", "uvlock": true, "y": 270 },
-    "facing=south,in_wall=false,open=true":  { "model": "nifty:block/hay/hay_fence_gate_open", "uvlock": true },
-    "facing=west,in_wall=false,open=true":   { "model": "nifty:block/hay/hay_fence_gate_open", "uvlock": true, "y": 90 },
-    "facing=north,in_wall=false,open=true":  { "model": "nifty:block/hay/hay_fence_gate_open", "uvlock": true, "y": 180 },
-    "facing=east,in_wall=false,open=true":   { "model": "nifty:block/hay/hay_fence_gate_open", "uvlock": true, "y": 270 },
-    "facing=south,in_wall=true,open=false":  { "model": "nifty:block/hay/hay_fence_gate_wall", "uvlock": true },
-    "facing=west,in_wall=true,open=false":   { "model": "nifty:block/hay/hay_fence_gate_wall", "uvlock": true, "y": 90 },
-    "facing=north,in_wall=true,open=false":  { "model": "nifty:block/hay/hay_fence_gate_wall", "uvlock": true, "y": 180 },
-    "facing=east,in_wall=true,open=false":   { "model": "nifty:block/hay/hay_fence_gate_wall", "uvlock": true, "y": 270 },
-    "facing=south,in_wall=true,open=true":   { "model": "nifty:block/hay/hay_fence_gate_wall_open", "uvlock": true },
-    "facing=west,in_wall=true,open=true":    { "model": "nifty:block/hay/hay_fence_gate_wall_open", "uvlock": true, "y": 90 },
-    "facing=north,in_wall=true,open=true":   { "model": "nifty:block/hay/hay_fence_gate_wall_open", "uvlock": true, "y": 180 },
-    "facing=east,in_wall=true,open=true":    { "model": "nifty:block/hay/hay_fence_gate_wall_open", "uvlock": true, "y": 270 }
+    "facing":      {
+      "east":      { "y": 270 },
+      "west":      { "y": 90 },
+      "south":     { },
+      "north":     { "y": 180 }
+    },
+    "in_wall": {
+      "true": { },
+      "false": { }
+    },
+    "open": {
+      "true": { },
+      "false": { }
+    },
+
+    "facing=south,in_wall=false,open=false": { "model": "nifty:block/util/fence_gate_column" },
+    "facing=west,in_wall=false,open=false":  { "model": "nifty:block/util/fence_gate_column" },
+    "facing=north,in_wall=false,open=false": { "model": "nifty:block/util/fence_gate_column" },
+    "facing=east,in_wall=false,open=false":  { "model": "nifty:block/util/fence_gate_column" },
+    "facing=south,in_wall=false,open=true":  { "model": "nifty:block/util/fence_gate_open_column" },
+    "facing=west,in_wall=false,open=true":   { "model": "nifty:block/util/fence_gate_open_column" },
+    "facing=north,in_wall=false,open=true":  { "model": "nifty:block/util/fence_gate_open_column" },
+    "facing=east,in_wall=false,open=true":   { "model": "nifty:block/util/fence_gate_open_column" },
+    "facing=south,in_wall=true,open=false":  { "model": "nifty:block/util/fence_gate_wall_column" },
+    "facing=west,in_wall=true,open=false":   { "model": "nifty:block/util/fence_gate_wall_column" },
+    "facing=north,in_wall=true,open=false":  { "model": "nifty:block/util/fence_gate_wall_column" },
+    "facing=east,in_wall=true,open=false":   { "model": "nifty:block/util/fence_gate_wall_column" },
+    "facing=south,in_wall=true,open=true":   { "model": "nifty:block/util/fence_gate_wall_open_column" },
+    "facing=west,in_wall=true,open=true":    { "model": "nifty:block/util/fence_gate_wall_open_column" },
+    "facing=north,in_wall=true,open=true":   { "model": "nifty:block/util/fence_gate_wall_open_column" },
+    "facing=east,in_wall=true,open=true":    { "model": "nifty:block/util/fence_gate_wall_open_column" }
   }
 }

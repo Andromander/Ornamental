@@ -1,3 +1,7 @@
 {
-  "parent": "nifty:block/hay/hay_fence_inventory"
+  "parent": "nifty:block/util/fence_inventory_column",
+  "textures": {
+    "end":    "block/hay_block_top",
+    "side":   "block/hay_block_side"
+  }
 }

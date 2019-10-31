@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/missingno/missingno_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "missingno"
+  }
 }

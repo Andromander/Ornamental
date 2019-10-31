@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "block/redstone_block",
+      "bottom": "block/redstone_block",
+      "side": "block/redstone_block"
+    },
+    "uvlock": true
+  },
   "variants": {
-    "type=bottom": { "model": "nifty:block/redstone/redstone_slab" },
-    "type=top":    { "model": "nifty:block/redstone/redstone_slab_top" },
-    "type=double": { "model": "block/redstone_block" }
+    "type=bottom": { "model": "block/slab" },
+    "type=top":    { "model": "block/slab_top" },
+    "type=double": { "model": "block/cube_bottom_top" }
   }
 }

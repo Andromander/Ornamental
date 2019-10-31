@@ -1,22 +1,33 @@
 {
-  "multipart": [
-    {
-      "apply": { "model": "nifty:block/hay/hay_fence_post" }},
-    {
-      "when": { "north": "true" },
-      "apply": { "model": "nifty:block/hay/hay_fence_side", "uvlock": true }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nifty:block/util/fence_post_column",
+    "textures": {
+      "end":  "block/hay_block_top",
+      "side": "block/hay_block_side"
     },
-    {
-      "when": { "east": "true" },
-      "apply": { "model": "nifty:block/hay/hay_fence_side", "y": 90, "uvlock": true }
+    "uvlock": true
+  },
+  "variants": {
+    "north": {
+      "true": { "submodel": "nifty:block/util/fence_side_column" },
+      "false": { }
     },
-    {
-      "when": { "south": "true" },
-      "apply": { "model": "nifty:block/hay/hay_fence_side", "y": 180, "uvlock": true }
+    "east": {
+      "true": { "submodel": "nifty:block/util/fence_side_column", "y": 90 },
+      "false": { }
     },
-    {
-      "when": { "west": "true" },
-      "apply": { "model": "nifty:block/hay/hay_fence_side", "y": 270, "uvlock": true }
+    "south": {
+      "true": { "submodel": "nifty:block/util/fence_side_column", "y": 180 },
+      "false": { }
+    },
+    "west": {
+      "true": { "submodel": "nifty:block/util/fence_side_column", "y": 270 },
+      "false": { }
+    },
+    "waterlogged": {
+      "true": { },
+      "false": { }
     }
-  ]
+  }
 }

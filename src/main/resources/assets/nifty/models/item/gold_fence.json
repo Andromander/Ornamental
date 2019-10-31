@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/gold/gold_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/gold_block"
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/redstone/redstone_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/redstone_block"
+  }
 }

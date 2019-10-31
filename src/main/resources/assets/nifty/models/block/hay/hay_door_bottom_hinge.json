@@ -1,7 +1,0 @@
-{
-  "parent": "block/door_bottom_rh",
-  "textures": {
-    "bottom": "nifty:block/hay_door_bottom",
-    "top": "block/hay_block_top"
-  }
-}

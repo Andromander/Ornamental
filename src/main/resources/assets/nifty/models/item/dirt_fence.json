@@ -1,3 +1,6 @@
 {
-  "parent": "nifty:block/dirt/dirt_fence_inventory"
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "block/dirt"
+  }
 }
