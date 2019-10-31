@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "nifty:brick_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:brick"
+    },
+    "B": {
+      "item": "minecraft:bricks"
+    }
+  }
+}

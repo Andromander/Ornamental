@@ -13,6 +13,7 @@
   "block.nifty.grass_stairs": "Grass Stairs",
   "block.nifty.hay_stairs": "Hay Stairs",
   "block.nifty.grass_path_stairs": "Grass Path Stairs",
+  "block.nifty.bone_stairs": "Bone Stairs",
 
   "block.nifty.iron_slab": "Iron Slab",
   "block.nifty.gold_slab": "Gold Slab",
@@ -28,6 +29,7 @@
   "block.nifty.grass_slab": "Grass Slab",
   "block.nifty.hay_slab": "Hay Slab",
   "block.nifty.grass_path_slab": "Grass Path Slab",
+  "block.nifty.bone_slab": "Bone Slab",
 
   "block.nifty.iron_fence": "Iron Fence",
   "block.nifty.gold_fence": "Gold Fence",
@@ -43,6 +45,10 @@
   "block.nifty.grass_fence": "Grass Fence",
   "block.nifty.hay_fence": "Hay Fence",
   "block.nifty.grass_path_fence": "Grass Path Fence",
+  "block.nifty.brick_fence": "Brick Fence",
+  "block.nifty.quartz_fence": "Quartz Fence",
+  "block.nifty.bone_fence": "Bone Fence",
+  "block.nifty.red_nether_brick_fence": "Red Nether Brick Fence",
 
   "block.nifty.gold_trapdoor": "Gold Trapdoor",
   "block.nifty.diamond_trapdoor": "Diamond Trapdoor",
@@ -57,6 +63,11 @@
   "block.nifty.grass_trapdoor": "Grass Trapdoor",
   "block.nifty.hay_trapdoor": "Hay Trapdoor",
   "block.nifty.grass_path_trapdoor": "Grass Path Trapdoor",
+  "block.nifty.brick_trapdoor": "Brick Trapdoor",
+  "block.nifty.quartz_trapdoor": "Quartz Trapdoor",
+  "block.nifty.bone_trapdoor": "Bone Trapdoor",
+  "block.nifty.nether_brick_trapdoor": "Nether Brick Trapdoor",
+  "block.nifty.red_nether_brick_trapdoor": "Red Nether Brick Trapdoor",
 
   "block.nifty.iron_fence_gate": "Iron Fence Gate",
   "block.nifty.gold_fence_gate": "Gold Fence Gate",
@@ -72,6 +83,11 @@
   "block.nifty.grass_fence_gate": "Grass Fence Gate",
   "block.nifty.hay_fence_gate": "Hay Fence Gate",
   "block.nifty.grass_path_fence_gate": "Grass Path Fence Gate",
+  "block.nifty.brick_fence_gate": "Brick Fence Gate",
+  "block.nifty.quartz_fence_gate": "Quartz Fence Gate",
+  "block.nifty.bone_fence_gate": "Bone Fence Gate",
+  "block.nifty.nether_brick_fence_gate": "Nether Brick Fence Gate",
+  "block.nifty.red_nether_brick_fence_gate": "Red Nether Brick Fence Gate",
 
   "block.nifty.gold_door": "Gold Door",
   "block.nifty.diamond_door": "Diamond Door",
@@ -85,5 +101,10 @@
   "block.nifty.dirt_door": "Dirt Door",
   "block.nifty.grass_door": "Grass Door",
   "block.nifty.hay_door": "Hay Door",
-  "block.nifty.grass_path_door": "Grass Path Door"
+  "block.nifty.grass_path_door": "Grass Path Door",
+  "block.nifty.brick_door": "Brick Door",
+  "block.nifty.quartz_door": "Quartz Door",
+  "block.nifty.bone_door": "Bone Door",
+  "block.nifty.nether_brick_door": "Nether Brick Door",
+  "block.nifty.red_nether_brick_door": "Red Nether Brick Door"
 }

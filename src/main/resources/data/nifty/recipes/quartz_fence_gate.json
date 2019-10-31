@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "nifty:quartz_fence_gate"
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz"
+    },
+    "B": {
+      "item": "minecraft:quartz_block"
+    }
+  }
+}

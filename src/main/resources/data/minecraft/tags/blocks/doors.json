@@ -13,6 +13,11 @@
     "nifty:dirt_door",
     "nifty:grass_door",
     "nifty:hay_door",
-    "nifty:grass_path_door"
+    "nifty:grass_path_door",
+    "nifty:brick_door",
+    "nifty:quartz_door",
+    "nifty:bone_door",
+    "nifty:nether_brick_door",
+    "nifty:red_nether_brick_door"
   ]
 }

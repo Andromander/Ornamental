@@ -14,6 +14,10 @@
     "nifty:dirt_fence",
     "nifty:grass_fence",
     "nifty:hay_fence",
-    "nifty:grass_path_fence"
+    "nifty:grass_path_fence",
+    "nifty:brick_fence",
+    "nifty:quartz_fence",
+    "nifty:bone_fence",
+    "nifty:red_nether_brick_fence"
   ]
 }

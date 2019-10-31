@@ -22,6 +22,10 @@ public enum NiftyBlock {
     GRASS(Material.ORGANIC, MaterialColor.GRASS, SoundType.PLANT, 0.6F, 0.0F, SHOVEL, 0, 1.0F, true),
     HAY(Material.ORGANIC, MaterialColor.YELLOW, SoundType.PLANT, 0.5F, 0.0F, null, 0, 0.2F, true),
     PATH(Material.EARTH, MaterialColor.DIRT, SoundType.PLANT, 0.6F, 0.0F, SHOVEL, 0, 1.0F, true),
+    BRICK(Material.ROCK, MaterialColor.RED, SoundType.STONE, 2.0F, 6.0F, PICKAXE, 0, 1.0F, false),
+    QUARTZ(Material.ROCK, MaterialColor.QUARTZ, SoundType.STONE, 0.8F, 0.8F, PICKAXE, 0, 1.0F, false),
+    BONE(Material.ROCK, MaterialColor.SAND, SoundType.STONE, 2.0F, 2.0F, PICKAXE, 0, 1.0F, true),
+    NETHER_BRICK(Material.ROCK, MaterialColor.NETHERRACK, SoundType.STONE, 2.0F, 6.0F, PICKAXE, 0, 1.0F, false);
 
     public final Material material;
     public final MaterialColor color;

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:bone_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bone_meal"
+    },
+    "B": {
+      "item": "minecraft:bone_block"
+    }
+  }
+}
