@@ -18,11 +18,13 @@ import javax.annotation.Nullable;
 public class NiftyTrapDoor extends TrapDoorBlock {
 
     private float fallDamage;
+    private boolean noRedstone;
 
     public NiftyTrapDoor(NiftyBlock block) {
         super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
 
         this.fallDamage = block.multiplier;
+        this.noRedstone = block.canOpen;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class NiftyTrapDoor extends TrapDoorBlock {
 
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        if (this.material == Material.IRON || this.material == Material.ROCK) {
+        if (!noRedstone) {
             return false;
         } else {
             state = state.cycle(OPEN);

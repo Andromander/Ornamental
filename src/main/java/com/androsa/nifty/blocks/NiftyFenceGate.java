@@ -4,7 +4,6 @@ import com.androsa.nifty.NiftyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -16,11 +15,13 @@ import net.minecraft.world.World;
 public class NiftyFenceGate extends FenceGateBlock {
 
     private float fallDamage;
+    private boolean noRedstone;
 
     public NiftyFenceGate(NiftyBlock block) {
         super(Block.Properties.create(block.material, block.color).hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
 
         this.fallDamage = block.multiplier;
+        this.noRedstone = block.canOpen;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class NiftyFenceGate extends FenceGateBlock {
 
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        if(material == Material.IRON || material == Material.ROCK) {
+        if(!noRedstone) {
             return false;
         } else {
             if (state.get(OPEN)) {
