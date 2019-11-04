@@ -21,7 +21,8 @@
     "2.5": "Nifty is now out for 1.14.4! Unlike the last couple updates, this does include new features.\n • Added Grass Path Stairs, Slabs, Fences, Trapdoors, and Fence Gates. This one's by popular demand, and most certainly a necessity for 1.14.\n   • Nifty Grass Path blocks are obtained by using a Shovel on any Grass Nifty block. They will keep their form until a Hoe is used on them, where they will revert back to Nifty Grass blocks.\n    • Because of this new feature, obtaining Dirt Nifty blocks now require using a Hoe instead of a Shovel.\n   • As mentioned eariler, Grass Path Nifty blocks will keep their form until a Hoe is used on them, for building convenience.\n • Fixed an issue with Fence blocks not connecting to each other. I'm still not great with this whole datapack thing.\n • The behind-the-scenes tweaks are back, and nobody is required to care still.",
     "2.5.1": "Added a Polish translation for Nifty. Thanks to DarkKnightComes for the translation work.",
     "2.6": "• Added Doors for each available material. Your houses can now be feature complete.\n   • Redstone Doors, unlike other Nifty Redstone blocks, does not emit a Redstone signal, but it has a Comparator output. Open the door with a Comparator nearby to emit a signal.\n • Added a config file. Currently, the only option is disabling Missingno blocks from being obtained. This will not remove them from the world; too invasive of a change.\n • Added Bad Beacon compat. Now if Nifty is installed along with Bad Beacon, Redstone Stairs, Coal Stairs, Lapis Stairs, and Quartz Stairs can be used to build a Bad Beacon pyramid.\n • We're now officially released on a stable version of Forge. Probably doesn't change much.",
-    "2.7": "How fitting; spooky-themed blocks for a spooky day.\n • Added Nifty blocks for Bone, Brick, Quartz, Nether Brick, and Red Nether Brick. They needed some love, and I was going to give them that.\n • Coal Doors can now be opened by hand. This was a part of a little rewrite to how doors can be opened, allowing future materials like Bone be opened without Redstone.\n • Absolutely totally destroyed how blockstate and model files are done. They now use Forge Blockstate. \n • Fixed some Clay Nifty block recipes. Now the Doors and Trapdoors can be made with Clay Balls. Don't ask why they were Slabs to start with.\n • Yeah, that's right, I'm dedicating this spot to behind-the-scenes changes that nobody needs to care about. Just know it makes me satisfied."
+    "2.7": "How fitting; spooky-themed blocks for a spooky day.\n • Added Nifty blocks for Bone, Brick, Quartz, Nether Brick, and Red Nether Brick. They needed some love, and I was going to give them that.\n • Coal Doors can now be opened by hand. This was a part of a little rewrite to how doors can be opened, allowing future materials like Bone be opened without Redstone.\n • Absolutely totally destroyed how blockstate and model files are done. They now use Forge Blockstate. \n • Fixed some Clay Nifty block recipes. Now the Doors and Trapdoors can be made with Clay Balls. Don't ask why they were Slabs to start with.\n • Yeah, that's right, I'm dedicating this spot to behind-the-scenes changes that nobody needs to care about. Just know it makes me satisfied.",
+    "2.7.1": "Fixed some Stairs models not looking right. When placed upside down, sometimes the model itself wouldn't reflect this."
   },
   "promos": {
     "1.12.2-latest": "1.5",
@@ -32,7 +33,7 @@
     "1.14.2-recommended": "2.4",
     "1.14.3-latest": "2.4",
     "1.14.3-recommended": "2.4",
-    "1.14.4-latest": "2.6",
-    "1.14.4-recommended": "2.6"
+    "1.14.4-latest": "2.7.1",
+    "1.14.4-recommended": "2.7.1"
   }
 }
