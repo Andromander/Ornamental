@@ -1,0 +1,32 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "block/fence_post",
+    "textures": {
+      "texture": "block/packed_ice"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "north": {
+      "true": { "submodel": "block/fence_side" },
+      "false": { }
+    },
+    "east": {
+      "true": { "submodel": "block/fence_side", "y": 90 },
+      "false": { }
+    },
+    "south": {
+      "true": { "submodel": "block/fence_side", "y": 180 },
+      "false": { }
+    },
+    "west": {
+      "true": { "submodel": "block/fence_side", "y": 270 },
+      "false": { }
+    },
+    "waterlogged": {
+      "true": { },
+      "false": { }
+    }
+  }
+}

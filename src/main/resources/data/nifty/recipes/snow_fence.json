@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:snow_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:snowball"
+    },
+    "B": {
+      "item": "minecraft:snow_block"
+    }
+  }
+}

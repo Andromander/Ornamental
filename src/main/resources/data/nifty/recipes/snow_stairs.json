@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "nifty:snow_stairs",
+    "count": 8
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:snow_block"
+    }
+  }
+}

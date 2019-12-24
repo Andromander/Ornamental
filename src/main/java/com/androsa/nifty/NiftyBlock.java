@@ -25,7 +25,11 @@ public enum NiftyBlock {
     BRICK(Material.ROCK, MaterialColor.RED, SoundType.STONE, 2.0F, 6.0F, PICKAXE, 0, 1.0F, false),
     QUARTZ(Material.ROCK, MaterialColor.QUARTZ, SoundType.STONE, 0.8F, 0.8F, PICKAXE, 0, 1.0F, false),
     BONE(Material.ROCK, MaterialColor.SAND, SoundType.STONE, 2.0F, 2.0F, PICKAXE, 0, 1.0F, true),
-    NETHER_BRICK(Material.ROCK, MaterialColor.NETHERRACK, SoundType.STONE, 2.0F, 6.0F, PICKAXE, 0, 1.0F, false);
+    NETHER_BRICK(Material.ROCK, MaterialColor.NETHERRACK, SoundType.STONE, 2.0F, 6.0F, PICKAXE, 0, 1.0F, false),
+    SNOW(Material.SNOW_BLOCK, MaterialColor.SNOW, SoundType.SNOW, 0.1F, 0.1F, SHOVEL, 0, 1.0F, true),
+    ICE(Material.ICE, MaterialColor.ICE, SoundType.GLASS, 0.5F, 0.5F, PICKAXE, 0, 1.0F, true),
+    PACKED_ICE(Material.PACKED_ICE, MaterialColor.ICE, SoundType.GLASS, 0.5F, 0.5F, PICKAXE, 0, 1.0F, true),
+    BLUE_ICE(Material.PACKED_ICE, MaterialColor.ICE, SoundType.GLASS, 2.8F, 2.8F, PICKAXE, 0, 1.0F, true);
 
     public final Material material;
     public final MaterialColor color;

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "nifty:packed_ice_fence",
+    "count": 3
+  },
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#B",
+    "B#B"
+  ],
+  "key": {
+    "#": {
+      "item": "nifty:packed_ice_slab"
+    },
+    "B": {
+      "item": "minecraft:packed_ice"
+    }
+  }
+}

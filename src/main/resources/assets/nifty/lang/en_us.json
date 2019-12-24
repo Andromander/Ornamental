@@ -14,6 +14,10 @@
   "block.nifty.hay_stairs": "Hay Stairs",
   "block.nifty.grass_path_stairs": "Grass Path Stairs",
   "block.nifty.bone_stairs": "Bone Stairs",
+  "block.nifty.snow_stairs": "Snow Stairs",
+  "block.nifty.ice_stairs": "Ice Stairs",
+  "block.nifty.packed_ice_stairs": "Packed Ice Stairs",
+  "block.nifty.blue_ice_stairs": "Blue Ice Stairs",
 
   "block.nifty.iron_slab": "Iron Slab",
   "block.nifty.gold_slab": "Gold Slab",
@@ -30,6 +34,10 @@
   "block.nifty.hay_slab": "Hay Slab",
   "block.nifty.grass_path_slab": "Grass Path Slab",
   "block.nifty.bone_slab": "Bone Slab",
+  "block.nifty.snow_slab": "Snow Slab",
+  "block.nifty.ice_slab": "Ice Slab",
+  "block.nifty.packed_ice_slab": "Packed Ice Slab",
+  "block.nifty.blue_ice_slab": "Blue Ice Slab",
 
   "block.nifty.iron_fence": "Iron Fence",
   "block.nifty.gold_fence": "Gold Fence",
@@ -49,6 +57,10 @@
   "block.nifty.quartz_fence": "Quartz Fence",
   "block.nifty.bone_fence": "Bone Fence",
   "block.nifty.red_nether_brick_fence": "Red Nether Brick Fence",
+  "block.nifty.snow_fence": "Snow Fence",
+  "block.nifty.ice_fence": "Ice Fence",
+  "block.nifty.packed_ice_fence": "Packed Ice Fence",
+  "block.nifty.blue_ice_fence": "Blue Ice Fence",
 
   "block.nifty.gold_trapdoor": "Gold Trapdoor",
   "block.nifty.diamond_trapdoor": "Diamond Trapdoor",
@@ -68,6 +80,10 @@
   "block.nifty.bone_trapdoor": "Bone Trapdoor",
   "block.nifty.nether_brick_trapdoor": "Nether Brick Trapdoor",
   "block.nifty.red_nether_brick_trapdoor": "Red Nether Brick Trapdoor",
+  "block.nifty.snow_trapdoor": "Snow Trapdoor",
+  "block.nifty.ice_trapdoor": "Ice Trapdoor",
+  "block.nifty.packed_ice_trapdoor": "Packed Ice Trapdoor",
+  "block.nifty.blue_ice_trapdoor": "Blue Ice Trapdoor",
 
   "block.nifty.iron_fence_gate": "Iron Fence Gate",
   "block.nifty.gold_fence_gate": "Gold Fence Gate",
@@ -88,6 +104,10 @@
   "block.nifty.bone_fence_gate": "Bone Fence Gate",
   "block.nifty.nether_brick_fence_gate": "Nether Brick Fence Gate",
   "block.nifty.red_nether_brick_fence_gate": "Red Nether Brick Fence Gate",
+  "block.nifty.snow_fence_gate": "Snow Fence Gate",
+  "block.nifty.ice_fence_gate": "Ice Fence Gate",
+  "block.nifty.packed_ice_fence_gate": "Packed Ice Fence Gate",
+  "block.nifty.blue_ice_fence_gate": "Blue Ice Fence Gate",
 
   "block.nifty.gold_door": "Gold Door",
   "block.nifty.diamond_door": "Diamond Door",
@@ -106,5 +126,9 @@
   "block.nifty.quartz_door": "Quartz Door",
   "block.nifty.bone_door": "Bone Door",
   "block.nifty.nether_brick_door": "Nether Brick Door",
-  "block.nifty.red_nether_brick_door": "Red Nether Brick Door"
+  "block.nifty.red_nether_brick_door": "Red Nether Brick Door",
+  "block.nifty.snow_door": "Snow Door",
+  "block.nifty.ice_door": "Ice Door",
+  "block.nifty.packed_ice_door": "Packed Ice Door",
+  "block.nifty.blue_ice_door": "Blue Ice Door"
 }
