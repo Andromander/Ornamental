@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:obsidian_stairs",
+    "nifty:obsidian_slab",
+    "nifty:obsidian_fence",
+    "nifty:obsidian_trapdoor",
+    "nifty:obsidian_fence_gate",
+    "nifty:obsidian_door"
+  ]
+}
