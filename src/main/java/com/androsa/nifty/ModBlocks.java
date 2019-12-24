@@ -1,6 +1,10 @@
 package com.androsa.nifty;
 
 import com.androsa.nifty.blocks.*;
+import com.androsa.nifty.blocks.dirt.*;
+import com.androsa.nifty.blocks.grass.*;
+import com.androsa.nifty.blocks.path.*;
+import com.androsa.nifty.blocks.redstone.*;
 import com.androsa.nifty.items.NiftyBlockItem;
 import com.androsa.nifty.items.NiftyTallBlockItem;
 import net.minecraft.block.*;

@@ -1,7 +1,8 @@
-package com.androsa.nifty.blocks;
+package com.androsa.nifty.blocks.dirt;
 
 import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.blocks.NiftyStairs;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,10 +14,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public class NiftyDirtFence extends NiftyFence {
+public class NiftyDirtStairs extends NiftyStairs {
 
-    public NiftyDirtFence() {
-        super(NiftyBlock.DIRT);
+    public NiftyDirtStairs() {
+        super(NiftyBlock.DIRT, false);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class NiftyDirtFence extends NiftyFence {
 
         if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
             BlockState blockstate =  worldIn.getBlockState(pos);
-            worldIn.setBlockState(pos, ModBlocks.grass_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+            worldIn.setBlockState(pos, ModBlocks.grass_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
             if (!player.abilities.isCreativeMode) {

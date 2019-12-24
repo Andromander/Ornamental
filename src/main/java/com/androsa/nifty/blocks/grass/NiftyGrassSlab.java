@@ -1,7 +1,8 @@
-package com.androsa.nifty.blocks;
+package com.androsa.nifty.blocks.grass;
 
 import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.blocks.NiftySlab;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;

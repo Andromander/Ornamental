@@ -1,12 +1,13 @@
-package com.androsa.nifty.blocks;
+package com.androsa.nifty.blocks.grass;
 
 import com.androsa.nifty.ModBlocks;
 import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.blocks.NiftyStairs;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -17,10 +18,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class NiftyGrassFence extends NiftyFence {
+public class NiftyGrassStairs extends NiftyStairs {
 
-    public NiftyGrassFence() {
-        super(NiftyBlock.GRASS);
+    public NiftyGrassStairs() {
+        super(NiftyBlock.GRASS, false);
     }
 
     @Override
@@ -29,14 +30,14 @@ public class NiftyGrassFence extends NiftyFence {
 
         if (!itemstack.isEmpty()) {
             if (itemstack.getItem() instanceof HoeItem) {
-                BlockState blockstate =  worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.dirt_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                BlockState blockstate = worldIn.getBlockState(pos);
+                worldIn.setBlockState(pos, ModBlocks.dirt_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;
             } else if (itemstack.getItem() instanceof ShovelItem) {
-                BlockState blockstate =  worldIn.getBlockState(pos);
-                worldIn.setBlockState(pos, ModBlocks.path_fence.get().getDefaultState().with(NORTH, blockstate.get(NORTH)).with(SOUTH, blockstate.get(SOUTH)).with(EAST, blockstate.get(EAST)).with(WEST, blockstate.get(WEST)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
+                BlockState blockstate = worldIn.getBlockState(pos);
+                worldIn.setBlockState(pos, ModBlocks.path_stairs.get().getDefaultState().with(FACING, blockstate.get(FACING)).with(SHAPE, blockstate.get(SHAPE)).with(HALF, blockstate.get(HALF)).with(WATERLOGGED, blockstate.get(WATERLOGGED)), 3);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 itemstack.damageItem(1, playerIn, (user) -> user.sendBreakAnimation(hand));
                 return true;

@@ -1,6 +1,7 @@
-package com.androsa.nifty.blocks;
+package com.androsa.nifty.blocks.redstone;
 
 import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.blocks.NiftyStairs;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
