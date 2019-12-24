@@ -21,7 +21,7 @@ The possibilities are...a bit more expansive. Not limitless, but just a little b
 [[dependencies.nifty]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[28,)" #mandatory
+    versionRange="[28.1.96,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.nifty]]
