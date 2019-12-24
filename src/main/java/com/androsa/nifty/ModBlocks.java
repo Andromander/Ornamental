@@ -47,7 +47,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> lapis_slab = registerBlockGeneral("lapis_slab", () -> new NiftySlab(LAPIS), ItemGroup.BUILDING_BLOCKS, false);
     public static final RegistryObject<Block> obsidian_slab = registerBlockGeneral("obsidian_slab", () -> new NiftySlab(OBSIDIAN), ItemGroup.BUILDING_BLOCKS, false);
     public static final RegistryObject<Block> coal_slab = registerBlockWithFuel("coal_slab", () -> new NiftySlab(COAL), ItemGroup.BUILDING_BLOCKS, 8000);
-    public static final RegistryObject<Block> redstone_slab  = registerBlockGeneral("redstone_slab", NiftyRedstoneSlab::new, ItemGroup.BUILDING_BLOCKS, false);
+    public static final RegistryObject<Block> redstone_slab = registerBlockGeneral("redstone_slab", NiftyRedstoneSlab::new, ItemGroup.BUILDING_BLOCKS, false);
     public static final RegistryObject<Block> missingno_slab = registerBlockGeneral("missingno_slab", () -> new NiftySlab(MISSINGNO), ItemGroup.BUILDING_BLOCKS, true);
     public static final RegistryObject<Block> clay_slab = registerBlockGeneral("clay_slab", () -> new NiftySlab(CLAY), ItemGroup.BUILDING_BLOCKS, false);
     public static final RegistryObject<Block> dirt_slab = registerBlockGeneral("dirt_slab", NiftyDirtSlab::new, ItemGroup.BUILDING_BLOCKS, false);
@@ -99,9 +99,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> diamond_fence_gate = registerBlockGeneral("diamond_fence_gate", () -> new NiftyFenceGate(DIAMOND), ItemGroup.REDSTONE, false);
     public static final RegistryObject<Block> emerald_fence_gate = registerBlockGeneral("emerald_fence_gate", () -> new NiftyFenceGate(EMERALD), ItemGroup.REDSTONE, false);
     public static final RegistryObject<Block> lapis_fence_gate = registerBlockGeneral("lapis_fence_gate", () -> new NiftyFenceGate(LAPIS), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> obsidian_fence_gate  = registerBlockGeneral("obsidian_fence_gate", () -> new NiftyFenceGate(OBSIDIAN), ItemGroup.REDSTONE, false);
+    public static final RegistryObject<Block> obsidian_fence_gate = registerBlockGeneral("obsidian_fence_gate", () -> new NiftyFenceGate(OBSIDIAN), ItemGroup.REDSTONE, false);
     public static final RegistryObject<Block> coal_fence_gate = registerBlockWithFuel("coal_fence_gate", () -> new NiftyFenceGate(COAL), ItemGroup.REDSTONE, 4000);
-    public static final RegistryObject<Block> redstone_fence_gate  = registerBlockGeneral("redstone_fence_gate", NiftyRedstoneFenceGate::new, ItemGroup.REDSTONE, false);
+    public static final RegistryObject<Block> redstone_fence_gate = registerBlockGeneral("redstone_fence_gate", NiftyRedstoneFenceGate::new, ItemGroup.REDSTONE, false);
     public static final RegistryObject<Block> missingno_fence_gate = registerBlockGeneral("missingno_fence_gate", () -> new NiftyFenceGate(MISSINGNO), ItemGroup.REDSTONE, true);
     public static final RegistryObject<Block> clay_fence_gate = registerBlockGeneral("clay_fence_gate", () -> new NiftyFenceGate(CLAY), ItemGroup.REDSTONE, false);
     public static final RegistryObject<Block> dirt_fence_gate = registerBlockGeneral("dirt_fence_gate", NiftyDirtFenceGate::new, ItemGroup.REDSTONE, false);
