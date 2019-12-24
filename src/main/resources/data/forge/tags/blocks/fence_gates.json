@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "iron_fence_gate",
+    "gold_fence_gate",
+    "diamond_fence_gate",
+    "emerald_fence_gate",
+    "lapis_fence_gate",
+    "obsidian_fence_gate",
+    "coal_fence_gate",
+    "redstone_fence_gate",
+    "missingno_fence_gate",
+    "clay_fence_gate",
+    "dirt_fence_gate",
+    "grass_fence_gate",
+    "hay_fence_gate",
+    "path_fence_gate",
+    "brick_fence_gate",
+    "quartz_fence_gate",
+    "bone_fence_gate",
+    "nether_brick_fence_gate",
+    "red_nether_brick_fence_gate",
+    "snow_fence_gate",
+    "ice_fence_gate",
+    "packed_ice_fence_gate",
+    "blue_ice_fence_gate"
+  ]
+}

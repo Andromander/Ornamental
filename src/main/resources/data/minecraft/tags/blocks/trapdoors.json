@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "gold_trapdoor",
+    "diamond_trapdoor",
+    "emerald_trapdoor",
+    "lapis_trapdoor",
+    "obsidian_trapdoor",
+    "coal_trapdoor",
+    "redstone_trapdoor",
+    "missingno_trapdoor",
+    "clay_trapdoor",
+    "dirt_trapdoor",
+    "grass_trapdoor",
+    "hay_trapdoor",
+    "path_trapdoor",
+    "brick_trapdoor",
+    "quartz_trapdoor",
+    "bone_trapdoor",
+    "nether_brick_trapdoor",
+    "red_nether_brick_trapdoor",
+    "snow_trapdoor",
+    "ice_trapdoor",
+    "packed_ice_trapdoor",
+    "blue_ice_trapdoor"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:iron_stairs",
+    "nifty:gold_stairs",
+    "nifty:diamond_stairs",
+    "nifty:emerald_stairs",
+    "nifty:lapis_stairs",
+    "nifty:obsidian_stairs",
+    "nifty:coal_stairs",
+    "nifty:redstone_stairs",
+    "nifty:missingno_stairs",
+    "nifty:clay_stairs",
+    "nifty:dirt_stairs",
+    "nifty:grass_stairs",
+    "nifty:hay_stairs",
+    "nifty:path_stairs",
+    "nifty:bone_stairs",
+    "nifty:snow_stairs",
+    "nifty:ice_stairs",
+    "nifty:packed_ice_stairs",
+    "nifty:blue_ice_stairs"
+  ]
+}
