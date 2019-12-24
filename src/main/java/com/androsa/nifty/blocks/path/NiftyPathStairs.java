@@ -39,7 +39,7 @@ public class NiftyPathStairs extends NiftyStairs {
     private static final int[] metaInt = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
     public NiftyPathStairs() {
-        super(NiftyBlock.PATH, false);
+        super(NiftyBlock.PATH);
     }
 
     private static VoxelShape[] makeShapes(VoxelShape slabShape, VoxelShape nwCorner, VoxelShape neCorner, VoxelShape swCorner, VoxelShape seCorner) {

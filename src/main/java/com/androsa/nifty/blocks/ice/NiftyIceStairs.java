@@ -31,7 +31,7 @@ public class NiftyIceStairs extends NiftyStairs {
     private final boolean canMelt;
 
     public NiftyIceStairs(NiftyBlock block, float slip, boolean melt) {
-        super(block, false);
+        super(block);
 
         sliperiness = slip;
         canMelt = melt;

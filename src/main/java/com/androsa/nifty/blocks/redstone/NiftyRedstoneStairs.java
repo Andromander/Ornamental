@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockReader;
 public class NiftyRedstoneStairs extends NiftyStairs {
 
     public NiftyRedstoneStairs() {
-        super(NiftyBlock.REDSTONE, false);
+        super(NiftyBlock.REDSTONE);
     }
 
     @Override

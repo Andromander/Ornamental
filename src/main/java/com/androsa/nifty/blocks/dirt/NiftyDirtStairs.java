@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class NiftyDirtStairs extends NiftyStairs {
 
     public NiftyDirtStairs() {
-        super(NiftyBlock.DIRT, false);
+        super(NiftyBlock.DIRT);
     }
 
     @Override

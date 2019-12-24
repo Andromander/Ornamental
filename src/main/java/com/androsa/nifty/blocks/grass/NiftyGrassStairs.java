@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class NiftyGrassStairs extends NiftyStairs {
 
     public NiftyGrassStairs() {
-        super(NiftyBlock.GRASS, false);
+        super(NiftyBlock.GRASS);
     }
 
     @Override
