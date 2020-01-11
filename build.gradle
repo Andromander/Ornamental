@@ -19,6 +19,12 @@ archivesBaseName = project.archives_base_name
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
+repositories {
+    maven {
+        url "https://maven.tterrag.com/"
+    }
+}
+
 minecraft {
     mappings channel: project.forge_channel, version: project.forge_mappings
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
