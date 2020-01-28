@@ -1,7 +1,0 @@
-{
-  "parent": "nifty:block/util/fence_inventory_column",
-  "textures": {
-    "end":    "block/quartz_block_bottom",
-    "side":   "block/quartz_block_side"
-  }
-}

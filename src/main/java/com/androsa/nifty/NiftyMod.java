@@ -1,5 +1,7 @@
 package com.androsa.nifty;
 
+import com.androsa.nifty.data.NiftyBlockStates;
+import com.androsa.nifty.data.NiftyItemModels;
 import com.androsa.nifty.data.NiftyLootTables;
 import com.androsa.nifty.data.NiftyRecipes;
 import com.androsa.nifty.data.conditions.ConfigCondition;
@@ -68,6 +70,10 @@ public class NiftyMod {
 
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
+        if (event.includeClient()) {
+            generator.addProvider(new NiftyBlockStates(generator, event.getExistingFileHelper()));
+            generator.addProvider(new NiftyItemModels(generator, event.getExistingFileHelper()));
+        }
         if (event.includeServer()) {
             generator.addProvider(new NiftyLootTables(generator));
             generator.addProvider(new NiftyRecipes(generator));
