@@ -1,11 +1,6 @@
 package com.androsa.nifty;
 
 import com.androsa.nifty.blocks.*;
-import com.androsa.nifty.blocks.dirt.*;
-import com.androsa.nifty.blocks.grass.*;
-import com.androsa.nifty.blocks.ice.*;
-import com.androsa.nifty.blocks.path.*;
-import com.androsa.nifty.blocks.redstone.*;
 import com.androsa.nifty.items.NiftyBlockItem;
 import com.androsa.nifty.items.NiftyTallBlockItem;
 import net.minecraft.block.*;
@@ -25,172 +20,201 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, NiftyMod.MODID);
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, NiftyMod.MODID);
 
-    public static final RegistryObject<Block> iron_stairs = registerBlockGeneral("iron_stairs", () -> new NiftyStairs(IRON), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> gold_stairs = registerBlockGeneral("gold_stairs", () -> new NiftyStairs(GOLD), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> diamond_stairs = registerBlockGeneral("diamond_stairs", () -> new NiftyStairs(DIAMOND), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> emerald_stairs = registerBlockGeneral("emerald_stairs", () -> new NiftyStairs(EMERALD), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> lapis_stairs = registerBlockGeneral("lapis_stairs", () -> new NiftyStairs(LAPIS), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> obsidian_stairs = registerBlockGeneral("obsidian_stairs", () -> new NiftyStairs(OBSIDIAN), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> coal_stairs = registerBlockWithFuel("coal_stairs", () -> new NiftyStairs(COAL), ItemGroup.BUILDING_BLOCKS, 12000);
-    public static final RegistryObject<Block> redstone_stairs = registerBlockGeneral("redstone_stairs", NiftyRedstoneStairs::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> missingno_stairs = registerBlockGeneral("missingno_stairs", () -> new NiftyStairs(MISSINGNO), ItemGroup.BUILDING_BLOCKS, true);
-    public static final RegistryObject<Block> clay_stairs = registerBlockGeneral("clay_stairs", () -> new NiftyStairs(CLAY), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> dirt_stairs = registerBlockGeneral("dirt_stairs", NiftyDirtStairs::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> grass_stairs = registerBlockGeneral("grass_stairs", NiftyGrassStairs::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> hay_stairs = registerBlockGeneral("hay_stairs", () -> new NiftyStairs(HAY), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> path_stairs = registerBlockGeneral("grass_path_stairs", NiftyPathStairs::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> bone_stairs = registerBlockGeneral("bone_stairs", () -> new NiftyStairs(BONE), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> snow_stairs = registerBlockGeneral("snow_stairs", () -> new NiftyStairs(SNOW), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> ice_stairs = registerBlockGeneral("ice_stairs", () -> new NiftyIceStairs(ICE, 0.98F, true), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> packed_ice_stairs = registerBlockGeneral("packed_ice_stairs", () -> new NiftyIceStairs(PACKED_ICE, 0.98F, false), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> blue_ice_stairs = registerBlockGeneral("blue_ice_stairs", () -> new NiftyIceStairs(BLUE_ICE, 0.989F, false), ItemGroup.BUILDING_BLOCKS, false);
+    public static final RegistryObject<StairsBlock> iron_stairs = registerStairs("iron", IRON, 0);
+    public static final RegistryObject<StairsBlock> gold_stairs = registerStairs("gold", GOLD, 0);
+    public static final RegistryObject<StairsBlock> diamond_stairs = registerStairs("diamond", DIAMOND, 0);
+    public static final RegistryObject<StairsBlock> emerald_stairs = registerStairs("emerald", EMERALD, 0);
+    public static final RegistryObject<StairsBlock> lapis_stairs = registerStairs("lapis", LAPIS, 0);
+    public static final RegistryObject<StairsBlock> obsidian_stairs = registerStairs("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<StairsBlock> coal_stairs = registerStairs("coal", COAL, 12000);
+    public static final RegistryObject<StairsBlock> redstone_stairs = registerStairs("redstone", REDSTONE, 0);
+    public static final RegistryObject<StairsBlock> missingno_stairs = registerStairs("missingno", MISSINGNO, 0);
+    public static final RegistryObject<StairsBlock> clay_stairs = registerStairs("clay", CLAY, 0);
+    public static final RegistryObject<StairsBlock> dirt_stairs = registerStairs("dirt", DIRT, 0);
+    public static final RegistryObject<StairsBlock> grass_stairs = registerStairs("grass", GRASS, 0);
+    public static final RegistryObject<StairsBlock> hay_stairs = registerStairs("hay", HAY, 0);
+    public static final RegistryObject<StairsBlock> path_stairs = registerStairs("grass_path", PATH, 0);
+    public static final RegistryObject<StairsBlock> bone_stairs = registerStairs("bone", BONE, 0);
+    public static final RegistryObject<StairsBlock> snow_stairs = registerStairs("snow", SNOW, 0);
+    public static final RegistryObject<StairsBlock> ice_stairs = registerStairs("ice", ICE, 0);
+    public static final RegistryObject<StairsBlock> packed_ice_stairs = registerStairs("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<StairsBlock> blue_ice_stairs = registerStairs("blue_ice", BLUE_ICE, 0);
 
-    public static final RegistryObject<Block> iron_slab = registerBlockGeneral("iron_slab", () -> new NiftySlab(IRON), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> gold_slab = registerBlockGeneral("gold_slab", () -> new NiftySlab(GOLD), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> diamond_slab = registerBlockGeneral("diamond_slab", () -> new NiftySlab(DIAMOND), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> emerald_slab = registerBlockGeneral("emerald_slab", () -> new NiftySlab(EMERALD), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> lapis_slab = registerBlockGeneral("lapis_slab", () -> new NiftySlab(LAPIS), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> obsidian_slab = registerBlockGeneral("obsidian_slab", () -> new NiftySlab(OBSIDIAN), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> coal_slab = registerBlockWithFuel("coal_slab", () -> new NiftySlab(COAL), ItemGroup.BUILDING_BLOCKS, 8000);
-    public static final RegistryObject<Block> redstone_slab = registerBlockGeneral("redstone_slab", NiftyRedstoneSlab::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> missingno_slab = registerBlockGeneral("missingno_slab", () -> new NiftySlab(MISSINGNO), ItemGroup.BUILDING_BLOCKS, true);
-    public static final RegistryObject<Block> clay_slab = registerBlockGeneral("clay_slab", () -> new NiftySlab(CLAY), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> dirt_slab = registerBlockGeneral("dirt_slab", NiftyDirtSlab::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> grass_slab = registerBlockGeneral("grass_slab", NiftyGrassSlab::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> hay_slab = registerBlockGeneral("hay_slab", () -> new NiftySlab(HAY), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> path_slab = registerBlockGeneral("grass_path_slab", NiftyPathSlab::new, ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> bone_slab = registerBlockGeneral("bone_slab", () -> new NiftySlab(BONE), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> snow_slab = registerBlockGeneral("snow_slab", () -> new NiftySlab(SNOW), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> ice_slab = registerBlockGeneral("ice_slab", () -> new NiftyIceSlab(ICE, 0.98F, true), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> packed_ice_slab = registerBlockGeneral("packed_ice_slab", () -> new NiftyIceSlab(PACKED_ICE, 0.98F, false), ItemGroup.BUILDING_BLOCKS, false);
-    public static final RegistryObject<Block> blue_ice_slab = registerBlockGeneral("blue_ice_slab", () -> new NiftyIceSlab(BLUE_ICE, 0.989F, false), ItemGroup.BUILDING_BLOCKS, false);
+    public static final RegistryObject<SlabBlock> iron_slab = registerSlab("iron", IRON, 0);
+    public static final RegistryObject<SlabBlock> gold_slab = registerSlab("gold", GOLD, 0);
+    public static final RegistryObject<SlabBlock> diamond_slab = registerSlab("diamond", DIAMOND, 0);
+    public static final RegistryObject<SlabBlock> emerald_slab = registerSlab("emerald", EMERALD, 0);
+    public static final RegistryObject<SlabBlock> lapis_slab = registerSlab("lapis", LAPIS, 0);
+    public static final RegistryObject<SlabBlock> obsidian_slab = registerSlab("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<SlabBlock> coal_slab = registerSlab("coal", COAL, 8000);
+    public static final RegistryObject<SlabBlock> redstone_slab = registerSlab("redstone", REDSTONE, 0);
+    public static final RegistryObject<SlabBlock> missingno_slab = registerSlab("missingno", MISSINGNO, 0);
+    public static final RegistryObject<SlabBlock> clay_slab = registerSlab("clay", CLAY, 0);
+    public static final RegistryObject<SlabBlock> dirt_slab = registerSlab("dirt", DIRT, 0);
+    public static final RegistryObject<SlabBlock> grass_slab = registerSlab("grass", GRASS, 0);
+    public static final RegistryObject<SlabBlock> hay_slab = registerSlab("hay", HAY, 0);
+    public static final RegistryObject<SlabBlock> path_slab = registerSlab("grass_path", PATH, 0);
+    public static final RegistryObject<SlabBlock> bone_slab = registerSlab("bone", BONE, 0);
+    public static final RegistryObject<SlabBlock> snow_slab = registerSlab("snow", SNOW, 0);
+    public static final RegistryObject<SlabBlock> ice_slab = registerSlab("ice", ICE, 0);
+    public static final RegistryObject<SlabBlock> packed_ice_slab = registerSlab("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<SlabBlock> blue_ice_slab = registerSlab("blue_ice", BLUE_ICE, 0);
 
-    public static final RegistryObject<Block> iron_fence = registerBlockGeneral("iron_fence", () -> new NiftyFence(IRON), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> gold_fence = registerBlockGeneral("gold_fence", () -> new NiftyFence(GOLD), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> diamond_fence = registerBlockGeneral("diamond_fence", () -> new NiftyFence(DIAMOND), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> emerald_fence = registerBlockGeneral("emerald_fence", () -> new NiftyFence(EMERALD), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> lapis_fence = registerBlockGeneral("lapis_fence", () -> new NiftyFence(LAPIS), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> obsidian_fence = registerBlockGeneral("obsidian_fence", () -> new NiftyFence(OBSIDIAN), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> coal_fence = registerBlockWithFuel("coal_fence", () -> new NiftyFence(COAL), ItemGroup.DECORATIONS, 5250);
-    public static final RegistryObject<Block> redstone_fence = registerBlockGeneral("redstone_fence", NiftyRedstoneFence::new, ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> missingno_fence = registerBlockGeneral("missingno_fence", () -> new NiftyFence(MISSINGNO), ItemGroup.DECORATIONS, true);
-    public static final RegistryObject<Block> clay_fence = registerBlockGeneral("clay_fence", () -> new NiftyFence(CLAY), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> dirt_fence = registerBlockGeneral("dirt_fence", NiftyDirtFence::new, ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> grass_fence = registerBlockGeneral("grass_fence", NiftyGrassFence::new, ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> hay_fence = registerBlockGeneral("hay_fence", () -> new NiftyFence(HAY), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> path_fence = registerBlockGeneral("grass_path_fence", NiftyPathFence::new, ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> brick_fence = registerBlockGeneral("brick_fence", () -> new NiftyFence(BRICK), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> quartz_fence = registerBlockGeneral("quartz_fence", () -> new NiftyFence(QUARTZ), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> bone_fence = registerBlockGeneral("bone_fence", () -> new NiftyFence(BONE), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> red_nether_brick_fence = registerBlockGeneral("red_nether_brick_fence", () -> new NiftyFence(NETHER_BRICK), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> snow_fence = registerBlockGeneral("snow_fence", () -> new NiftyFence(SNOW), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> ice_fence = registerBlockGeneral("ice_fence", () -> new NiftyIceFence(ICE, 0.98F, true), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> packed_ice_fence = registerBlockGeneral("packed_ice_fence", () -> new NiftyIceFence(PACKED_ICE, 0.98F, false), ItemGroup.DECORATIONS, false);
-    public static final RegistryObject<Block> blue_ice_fence = registerBlockGeneral("blue_ice_fence", () -> new NiftyIceFence(BLUE_ICE, 0.989F, false), ItemGroup.DECORATIONS, false);
+    public static final RegistryObject<FenceBlock> iron_fence = registerFence("iron", IRON, 0);
+    public static final RegistryObject<FenceBlock> gold_fence = registerFence("gold", GOLD, 0);
+    public static final RegistryObject<FenceBlock> diamond_fence = registerFence("diamond", DIAMOND, 0);
+    public static final RegistryObject<FenceBlock> emerald_fence = registerFence("emerald", EMERALD, 0);
+    public static final RegistryObject<FenceBlock> lapis_fence = registerFence("lapis", LAPIS, 0);
+    public static final RegistryObject<FenceBlock> obsidian_fence = registerFence("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<FenceBlock> coal_fence = registerFence("coal", COAL, 5250);
+    public static final RegistryObject<FenceBlock> redstone_fence = registerFence("redstone", REDSTONE, 0);
+    public static final RegistryObject<FenceBlock> missingno_fence = registerFence("missingno", MISSINGNO, 0);
+    public static final RegistryObject<FenceBlock> clay_fence = registerFence("clay", CLAY, 0);
+    public static final RegistryObject<FenceBlock> dirt_fence = registerFence("dirt", DIRT, 0);
+    public static final RegistryObject<FenceBlock> grass_fence = registerFence("grass", GRASS, 0);
+    public static final RegistryObject<FenceBlock> hay_fence = registerFence("hay", HAY, 0);
+    public static final RegistryObject<FenceBlock> path_fence = registerFence("grass_path", PATH, 0);
+    public static final RegistryObject<FenceBlock> brick_fence = registerFence("brick", BRICK, 0);
+    public static final RegistryObject<FenceBlock> quartz_fence = registerFence("quartz", QUARTZ, 0);
+    public static final RegistryObject<FenceBlock> bone_fence = registerFence("bone", BONE, 0);
+    public static final RegistryObject<FenceBlock> red_nether_brick_fence = registerFence("red_nether_brick", RED_NETHER_BRICK, 0);
+    public static final RegistryObject<FenceBlock> snow_fence = registerFence("snow", SNOW, 0);
+    public static final RegistryObject<FenceBlock> ice_fence = registerFence("ice", ICE, 0);
+    public static final RegistryObject<FenceBlock> packed_ice_fence = registerFence("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<FenceBlock> blue_ice_fence = registerFence("blue_ice", BLUE_ICE, 0);
 
-    public static final RegistryObject<Block> gold_trapdoor = registerBlockGeneral("gold_trapdoor", () -> new NiftyTrapDoor(GOLD), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> diamond_trapdoor = registerBlockGeneral("diamond_trapdoor", () -> new NiftyTrapDoor(DIAMOND), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> emerald_trapdoor = registerBlockGeneral("emerald_trapdoor", () -> new NiftyTrapDoor(EMERALD), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> lapis_trapdoor = registerBlockGeneral("lapis_trapdoor", () -> new NiftyTrapDoor(LAPIS), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> obsidian_trapdoor = registerBlockGeneral("obsidian_trapdoor", () -> new NiftyTrapDoor(OBSIDIAN), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> coal_trapdoor = registerBlockWithFuel("coal_trapdoor", () -> new NiftyTrapDoor(COAL), ItemGroup.REDSTONE, 5250);
-    public static final RegistryObject<Block> redstone_trapdoor = registerBlockGeneral("redstone_trapdoor", NiftyRedstoneTrapDoor::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> missingno_trapdoor = registerBlockGeneral("missingno_trapdoor", () -> new NiftyTrapDoor(MISSINGNO), ItemGroup.REDSTONE, true);
-    public static final RegistryObject<Block> clay_trapdoor = registerBlockGeneral("clay_trapdoor", () -> new NiftyTrapDoor(CLAY), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> dirt_trapdoor = registerBlockGeneral("dirt_trapdoor", NiftyDirtTrapDoor::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> grass_trapdoor = registerBlockGeneral("grass_trapdoor", NiftyGrassTrapDoor::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> hay_trapdoor = registerBlockGeneral("hay_trapdoor", () -> new NiftyTrapDoor(HAY), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> path_trapdoor = registerBlockGeneral("grass_path_trapdoor", NiftyPathTrapDoor::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> brick_trapdoor = registerBlockGeneral("brick_trapdoor", () -> new NiftyTrapDoor(BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> quartz_trapdoor = registerBlockGeneral("quartz_trapdoor", () -> new NiftyTrapDoor(QUARTZ), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> bone_trapdoor = registerBlockGeneral("bone_trapdoor", () -> new NiftyTrapDoor(BONE), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> nether_brick_trapdoor = registerBlockGeneral("nether_brick_trapdoor", () -> new NiftyTrapDoor(NETHER_BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> red_nether_brick_trapdoor = registerBlockGeneral("red_nether_brick_trapdoor", () -> new NiftyTrapDoor(NETHER_BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> snow_trapdoor = registerBlockGeneral("snow_trapdoor", () -> new NiftyTrapDoor(SNOW), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> ice_trapdoor = registerBlockGeneral("ice_trapdoor", () -> new NiftyIceTrapdoor(ICE, 0.98F, true), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> packed_ice_trapdoor = registerBlockGeneral("packed_ice_trapdoor", () -> new NiftyIceTrapdoor(PACKED_ICE, 0.98F, false), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> blue_ice_trapdoor = registerBlockGeneral("blue_ice_trapdoor", () -> new NiftyIceTrapdoor(BLUE_ICE, 0.989F, false), ItemGroup.REDSTONE, false);
+    public static final RegistryObject<TrapDoorBlock> gold_trapdoor = registerTrapdoor("gold", GOLD, 0);
+    public static final RegistryObject<TrapDoorBlock> diamond_trapdoor = registerTrapdoor("diamond", DIAMOND, 0);
+    public static final RegistryObject<TrapDoorBlock> emerald_trapdoor = registerTrapdoor("emerald", EMERALD, 0);
+    public static final RegistryObject<TrapDoorBlock> lapis_trapdoor = registerTrapdoor("lapis", LAPIS, 0);
+    public static final RegistryObject<TrapDoorBlock> obsidian_trapdoor = registerTrapdoor("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<TrapDoorBlock> coal_trapdoor = registerTrapdoor("coal", COAL, 5250);
+    public static final RegistryObject<TrapDoorBlock> redstone_trapdoor = registerTrapdoor("redstone", REDSTONE, 0);
+    public static final RegistryObject<TrapDoorBlock> missingno_trapdoor = registerTrapdoor("missingno", MISSINGNO, 0);
+    public static final RegistryObject<TrapDoorBlock> clay_trapdoor = registerTrapdoor("clay", CLAY, 0);
+    public static final RegistryObject<TrapDoorBlock> dirt_trapdoor = registerTrapdoor("dirt", DIRT, 0);
+    public static final RegistryObject<TrapDoorBlock> grass_trapdoor = registerTrapdoor("grass", GRASS, 0);
+    public static final RegistryObject<TrapDoorBlock> hay_trapdoor = registerTrapdoor("hay", HAY, 0);
+    public static final RegistryObject<TrapDoorBlock> path_trapdoor = registerTrapdoor("grass_path", PATH, 0);
+    public static final RegistryObject<TrapDoorBlock> brick_trapdoor = registerTrapdoor("brick", BRICK, 0);
+    public static final RegistryObject<TrapDoorBlock> quartz_trapdoor = registerTrapdoor("quartz", QUARTZ, 0);
+    public static final RegistryObject<TrapDoorBlock> bone_trapdoor = registerTrapdoor("bone", BONE, 0);
+    public static final RegistryObject<TrapDoorBlock> nether_brick_trapdoor = registerTrapdoor("nether_brick", NETHER_BRICK, 0);
+    public static final RegistryObject<TrapDoorBlock> red_nether_brick_trapdoor = registerTrapdoor("red_nether_brick", RED_NETHER_BRICK, 0);
+    public static final RegistryObject<TrapDoorBlock> snow_trapdoor = registerTrapdoor("snow", SNOW, 0);
+    public static final RegistryObject<TrapDoorBlock> ice_trapdoor = registerTrapdoor("ice", ICE, 0);
+    public static final RegistryObject<TrapDoorBlock> packed_ice_trapdoor = registerTrapdoor("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<TrapDoorBlock> blue_ice_trapdoor = registerTrapdoor("blue_ice", BLUE_ICE, 0);
 
-    public static final RegistryObject<Block> iron_fence_gate = registerBlockGeneral("iron_fence_gate", () -> new NiftyFenceGate(IRON), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> gold_fence_gate = registerBlockGeneral("gold_fence_gate", () -> new NiftyFenceGate(GOLD), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> diamond_fence_gate = registerBlockGeneral("diamond_fence_gate", () -> new NiftyFenceGate(DIAMOND), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> emerald_fence_gate = registerBlockGeneral("emerald_fence_gate", () -> new NiftyFenceGate(EMERALD), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> lapis_fence_gate = registerBlockGeneral("lapis_fence_gate", () -> new NiftyFenceGate(LAPIS), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> obsidian_fence_gate = registerBlockGeneral("obsidian_fence_gate", () -> new NiftyFenceGate(OBSIDIAN), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> coal_fence_gate = registerBlockWithFuel("coal_fence_gate", () -> new NiftyFenceGate(COAL), ItemGroup.REDSTONE, 4000);
-    public static final RegistryObject<Block> redstone_fence_gate = registerBlockGeneral("redstone_fence_gate", NiftyRedstoneFenceGate::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> missingno_fence_gate = registerBlockGeneral("missingno_fence_gate", () -> new NiftyFenceGate(MISSINGNO), ItemGroup.REDSTONE, true);
-    public static final RegistryObject<Block> clay_fence_gate = registerBlockGeneral("clay_fence_gate", () -> new NiftyFenceGate(CLAY), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> dirt_fence_gate = registerBlockGeneral("dirt_fence_gate", NiftyDirtFenceGate::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> grass_fence_gate = registerBlockGeneral("grass_fence_gate", NiftyGrassFenceGate::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> hay_fence_gate = registerBlockGeneral("hay_fence_gate", () -> new NiftyFenceGate(HAY), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> path_fence_gate = registerBlockGeneral("grass_path_fence_gate", NiftyPathFenceGate::new, ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> brick_fence_gate = registerBlockGeneral("brick_fence_gate", () -> new NiftyFenceGate(BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> quartz_fence_gate = registerBlockGeneral("quartz_fence_gate", () -> new NiftyFenceGate(QUARTZ), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> bone_fence_gate = registerBlockGeneral("bone_fence_gate", () -> new NiftyFenceGate(BONE), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> nether_brick_fence_gate = registerBlockGeneral("nether_brick_fence_gate", () -> new NiftyFenceGate(NETHER_BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> red_nether_brick_fence_gate = registerBlockGeneral("red_nether_brick_fence_gate", () -> new NiftyFenceGate(NETHER_BRICK), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> snow_fence_gate = registerBlockGeneral("snow_fence_gate", () -> new NiftyFenceGate(SNOW), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> ice_fence_gate = registerBlockGeneral("ice_fence_gate", () -> new NiftyIceFenceGate(ICE, 0.98F, true), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> packed_ice_fence_gate = registerBlockGeneral("packed_ice_fence_gate", () -> new NiftyIceFenceGate(PACKED_ICE, 0.98F, false), ItemGroup.REDSTONE, false);
-    public static final RegistryObject<Block> blue_ice_fence_gate = registerBlockGeneral("blue_ice_fence_gate", () -> new NiftyIceFenceGate(BLUE_ICE, 0.989F, false), ItemGroup.REDSTONE, false);
+    public static final RegistryObject<FenceGateBlock> iron_fence_gate = registerFenceGate("iron", IRON, 0);
+    public static final RegistryObject<FenceGateBlock> gold_fence_gate = registerFenceGate("gold", GOLD, 0);
+    public static final RegistryObject<FenceGateBlock> diamond_fence_gate = registerFenceGate("diamond", DIAMOND, 0);
+    public static final RegistryObject<FenceGateBlock> emerald_fence_gate = registerFenceGate("emerald", EMERALD, 0);
+    public static final RegistryObject<FenceGateBlock> lapis_fence_gate = registerFenceGate("lapis", LAPIS, 0);
+    public static final RegistryObject<FenceGateBlock> obsidian_fence_gate = registerFenceGate("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<FenceGateBlock> coal_fence_gate = registerFenceGate("coal", COAL, 4000);
+    public static final RegistryObject<FenceGateBlock> redstone_fence_gate = registerFenceGate("redstone", REDSTONE, 0);
+    public static final RegistryObject<FenceGateBlock> missingno_fence_gate = registerFenceGate("missingno", MISSINGNO, 0);
+    public static final RegistryObject<FenceGateBlock> clay_fence_gate = registerFenceGate("clay", CLAY, 0);
+    public static final RegistryObject<FenceGateBlock> dirt_fence_gate = registerFenceGate("dirt", DIRT, 0);
+    public static final RegistryObject<FenceGateBlock> grass_fence_gate = registerFenceGate("grass", GRASS, 0);
+    public static final RegistryObject<FenceGateBlock> hay_fence_gate = registerFenceGate("hay", HAY, 0);
+    public static final RegistryObject<FenceGateBlock> path_fence_gate = registerFenceGate("grass_path", PATH, 0);
+    public static final RegistryObject<FenceGateBlock> brick_fence_gate = registerFenceGate("brick", BRICK, 0);
+    public static final RegistryObject<FenceGateBlock> quartz_fence_gate = registerFenceGate("quartz", QUARTZ, 0);
+    public static final RegistryObject<FenceGateBlock> bone_fence_gate = registerFenceGate("bone", BONE, 0);
+    public static final RegistryObject<FenceGateBlock> nether_brick_fence_gate = registerFenceGate("nether_brick", NETHER_BRICK, 0);
+    public static final RegistryObject<FenceGateBlock> red_nether_brick_fence_gate = registerFenceGate("red_nether_brick", RED_NETHER_BRICK, 0);
+    public static final RegistryObject<FenceGateBlock> snow_fence_gate = registerFenceGate("snow", SNOW, 0);
+    public static final RegistryObject<FenceGateBlock> ice_fence_gate = registerFenceGate("ice", ICE, 0);
+    public static final RegistryObject<FenceGateBlock> packed_ice_fence_gate = registerFenceGate("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<FenceGateBlock> blue_ice_fence_gate = registerFenceGate("blue_ice", BLUE_ICE, 0);
 
-    public static final RegistryObject<Block> gold_door = registerBlockDoor("gold_door", () -> new NiftyDoor(GOLD), 0, false);
-    public static final RegistryObject<Block> diamond_door = registerBlockDoor("diamond_door", () -> new NiftyDoor(DIAMOND), 0, false);
-    public static final RegistryObject<Block> emerald_door = registerBlockDoor("emerald_door", () -> new NiftyDoor(EMERALD), 0, false);
-    public static final RegistryObject<Block> lapis_door = registerBlockDoor("lapis_door", () -> new NiftyDoor(LAPIS), 0, false);
-    public static final RegistryObject<Block> obsidian_door = registerBlockDoor("obsidian_door", () -> new NiftyDoor(OBSIDIAN), 0, false);
-    public static final RegistryObject<Block> coal_door = registerBlockDoor("coal_door", () -> new NiftyDoor(COAL), 10500, false);
-    public static final RegistryObject<Block> redstone_door = registerBlockDoor("redstone_door", NiftyRedstoneDoor::new, 0, false);
-    public static final RegistryObject<Block> missingno_door = registerBlockDoor("missingno_door", () -> new NiftyDoor(MISSINGNO), 0, true);
-    public static final RegistryObject<Block> clay_door = registerBlockDoor("clay_door", () -> new NiftyDoor(CLAY), 0, false);
-    public static final RegistryObject<Block> dirt_door = registerBlockDoor("dirt_door", NiftyDirtDoor::new, 0, false);
-    public static final RegistryObject<Block> grass_door = registerBlockDoor("grass_door", NiftyGrassDoor::new, 0, false);
-    public static final RegistryObject<Block> hay_door = registerBlockDoor("hay_door", () -> new NiftyDoor(HAY), 0, false);
-    public static final RegistryObject<Block> path_door = registerBlockDoor("grass_path_door", NiftyPathDoor::new, 0, false);
-    public static final RegistryObject<Block> brick_door = registerBlockDoor("brick_door", () -> new NiftyDoor(BRICK), 0, false);
-    public static final RegistryObject<Block> quartz_door = registerBlockDoor("quartz_door", () -> new NiftyDoor(QUARTZ), 0, false);
-    public static final RegistryObject<Block> bone_door = registerBlockDoor("bone_door", () -> new NiftyDoor(BONE), 0, false);
-    public static final RegistryObject<Block> nether_brick_door = registerBlockDoor("nether_brick_door", () -> new NiftyDoor(NETHER_BRICK), 0, false);
-    public static final RegistryObject<Block> red_nether_brick_door = registerBlockDoor("red_nether_brick_door", () -> new NiftyDoor(NETHER_BRICK), 0, false);
-    public static final RegistryObject<Block> snow_door = registerBlockDoor("snow_door", () -> new NiftyDoor(SNOW), 0, false);
-    public static final RegistryObject<Block> ice_door = registerBlockDoor("ice_door", () -> new NiftyIceDoor(ICE, 0.98F, true), 0, false);
-    public static final RegistryObject<Block> packed_ice_door = registerBlockDoor("packed_ice_door", () -> new NiftyIceDoor(PACKED_ICE, 0.98F, false), 0, false);
-    public static final RegistryObject<Block> blue_ice_door = registerBlockDoor("blue_ice_door", () -> new NiftyIceDoor(BLUE_ICE, 0.989F, false), 0, false);
+    public static final RegistryObject<DoorBlock> gold_door = registerDoor("gold", GOLD, 0);
+    public static final RegistryObject<DoorBlock> diamond_door = registerDoor("diamond", DIAMOND, 0);
+    public static final RegistryObject<DoorBlock> emerald_door = registerDoor("emerald", EMERALD, 0);
+    public static final RegistryObject<DoorBlock> lapis_door = registerDoor("lapis", LAPIS, 0);
+    public static final RegistryObject<DoorBlock> obsidian_door = registerDoor("obsidian", OBSIDIAN, 0);
+    public static final RegistryObject<DoorBlock> coal_door = registerDoor("coal", COAL, 10500);
+    public static final RegistryObject<DoorBlock> redstone_door = registerDoor("redstone", REDSTONE, 0);
+    public static final RegistryObject<DoorBlock> missingno_door = registerDoor("missingno", MISSINGNO, 0);
+    public static final RegistryObject<DoorBlock> clay_door = registerDoor("clay", CLAY, 0);
+    public static final RegistryObject<DoorBlock> dirt_door = registerDoor("dirt", DIRT, 0);
+    public static final RegistryObject<DoorBlock> grass_door = registerDoor("grass", GRASS, 0);
+    public static final RegistryObject<DoorBlock> hay_door = registerDoor("hay", HAY, 0);
+    public static final RegistryObject<DoorBlock> path_door = registerDoor("grass_path", PATH, 0);
+    public static final RegistryObject<DoorBlock> brick_door = registerDoor("brick", BRICK, 0);
+    public static final RegistryObject<DoorBlock> quartz_door = registerDoor("quartz", QUARTZ, 0);
+    public static final RegistryObject<DoorBlock> bone_door = registerDoor("bone", BONE, 0);
+    public static final RegistryObject<DoorBlock> nether_brick_door = registerDoor("nether_brick", RED_NETHER_BRICK, 0);
+    public static final RegistryObject<DoorBlock> red_nether_brick_door = registerDoor("red_nether_brick", NETHER_BRICK, 0);
+    public static final RegistryObject<DoorBlock> snow_door = registerDoor("snow", SNOW, 0);
+    public static final RegistryObject<DoorBlock> ice_door = registerDoor("ice", ICE, 0);
+    public static final RegistryObject<DoorBlock> packed_ice_door = registerDoor("packed_ice", PACKED_ICE, 0);
+    public static final RegistryObject<DoorBlock> blue_ice_door = registerDoor("blue_ice", BLUE_ICE, 0);
 
+    /*public static final List<RegistryObject<Block>> test = registerArray("wool", "fence", ItemGroup.DECORATIONS);
 
-    private static <T extends Block> RegistryObject<T> registerBlockGeneral(String name, Supplier<? extends T> block, ItemGroup group, boolean isOptional) {
-        return registerBlock(name, block, 0, item -> registerBlockItem(item, group, isOptional));
+    private static List<RegistryObject<Block>> registerArray(String matName, String blockName, ItemGroup group) {
+        List<RegistryObject<Block>> blocks = new ArrayList<>();
+
+        for (DyeColor i : DyeColor.values()) {
+            String name = i.getName() + "_" + matName + "_" + blockName;
+            RegistryObject<Block> reg = BLOCKS.register(name, () -> new NiftyFence(MISSINGNO));
+            ITEMS.register(name, () -> new BlockItem(reg.get(), new Item.Properties().group(group)));
+            blocks.add(reg);
+        }
+
+        return blocks;
+    }*/
+
+    private static RegistryObject<StairsBlock> registerStairs(String name, NiftyBlock nifty, int fuelTime) {
+        Block.Properties props = Block.Properties.create(nifty.material, nifty.color);
+        if (nifty == NiftyBlock.ICE) props.nonOpaque();
+
+        return registerBlock(name + "_stairs", () -> new NiftyStairs(props, nifty), item ->
+                registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, nifty, fuelTime));
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlockWithFuel(String name, Supplier<? extends T> block, ItemGroup group, int burnTime) {
-        return registerBlock(name, block, burnTime, item -> registerBlockItemFuel(item, group, burnTime));
+    private static RegistryObject<SlabBlock> registerSlab(String name, NiftyBlock nifty, int fuelTime) {
+        Block.Properties props = Block.Properties.create(nifty.material, nifty.color);
+        if (nifty == NiftyBlock.ICE) props.nonOpaque();
+
+        return registerBlock(name + "_slab", () -> new NiftySlab(props, nifty), item ->
+                registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, nifty, fuelTime));
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlockDoor(String name, Supplier<? extends T> block, int burnTime, boolean isOptional) {
-        return registerBlock(name, block, burnTime, item -> registerBlockItemDoor(item, burnTime, isOptional));
+    private static RegistryObject<FenceBlock> registerFence(String name, NiftyBlock nifty, int fuelTime) {
+        return registerBlock(name + "_fence", () -> new NiftyFence(Block.Properties.create(nifty.material, nifty.color), nifty), item ->
+                registerBlockItem(item, ItemGroup.DECORATIONS, nifty, fuelTime));
     }
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, int burnTime, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
+    private static RegistryObject<TrapDoorBlock> registerTrapdoor(String name, NiftyBlock nifty, int fuelTime) {
+        return registerBlock(name + "_trapdoor", () -> new NiftyTrapDoor(Block.Properties.create(nifty.material, nifty.color), nifty), item ->
+                registerBlockItem(item, ItemGroup.REDSTONE, nifty, fuelTime));
+    }
+
+    private static RegistryObject<FenceGateBlock> registerFenceGate(String name, NiftyBlock nifty, int fuelTime) {
+        return registerBlock(name + "_fence_gate", () -> new NiftyFenceGate(Block.Properties.create(nifty.material, nifty.color), nifty), item ->
+                registerBlockItem(item, ItemGroup.REDSTONE, nifty, fuelTime));
+    }
+
+    private static RegistryObject<DoorBlock> registerDoor(String name, NiftyBlock nifty, int fuelTime) {
+        return registerBlock(name + "_door", () -> new NiftyDoor(Block.Properties.create(nifty.material, nifty.color), nifty), item ->
+                registerBlockItemDoor(item, nifty, fuelTime));
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
         RegistryObject<T> reg = BLOCKS.register(name, block);
         ITEMS.register(name, item.apply(reg));
         return reg;
     }
 
-    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block, ItemGroup group, boolean isOptional) {
-        return () -> new NiftyBlockItem(block.get(), new Item.Properties().group(group), isOptional);
+    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block, ItemGroup group, NiftyBlock nifty, int fuelTime) {
+        return () -> new NiftyBlockItem(block.get(), new Item.Properties().group(group), nifty, fuelTime);
     }
 
-    private static <T extends Block> Supplier<BlockItem> registerBlockItemFuel(final RegistryObject<T> block, ItemGroup group, int burnTime) {
-        return () -> new NiftyBlockItem(block.get(), new Item.Properties().group(group), false) {
-            @Override
-            public int getBurnTime(ItemStack itemStack) {
-                return burnTime;
-            }
-        };
-    }
-
-    private static <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, int burnTime, boolean isOptional) {
-        return () -> new NiftyTallBlockItem(block.get(), new Item.Properties().group(ItemGroup.REDSTONE), burnTime, isOptional);
+    private static <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, NiftyBlock nifty, int burnTime) {
+        return () -> new NiftyTallBlockItem(block.get(), new Item.Properties().group(ItemGroup.REDSTONE), burnTime, nifty);
     }
 }
