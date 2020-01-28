@@ -65,7 +65,21 @@ minecraft {
                 }
             }
         }
+
+        data {
+            args '--mod', 'nifty', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
+
+            mods {
+                nifty {
+                    source sourceSets.main
+                }
+            }
+        }
     }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
 }
 
 dependencies {

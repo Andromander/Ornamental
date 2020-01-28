@@ -1,8 +1,10 @@
 package com.androsa.nifty;
 
+import com.androsa.nifty.data.NiftyLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
@@ -48,6 +51,13 @@ public class NiftyMod {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> NiftyMod::registerRenders);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
+    }
+
+    public void gatherData(GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        if (event.includeServer()) {
+            generator.addProvider(new NiftyLootTables(generator));
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
