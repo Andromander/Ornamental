@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCoalBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:coal_block"
+          }
+        },
+        "result": {
+          "item": "nifty:coal_slab",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

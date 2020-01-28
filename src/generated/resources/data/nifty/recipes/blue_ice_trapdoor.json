@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBlueIceBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "nifty:blue_ice_slab"
+          }
+        },
+        "result": {
+          "item": "nifty:blue_ice_trapdoor"
+        }
+      }
+    }
+  ]
+}

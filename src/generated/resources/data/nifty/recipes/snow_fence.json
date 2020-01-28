@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showSnowBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:snow_block"
+          },
+          "/": {
+            "item": "minecraft:snowball"
+          }
+        },
+        "result": {
+          "item": "nifty:snow_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

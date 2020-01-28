@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showDirtBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:dirt"
+          },
+          "/": {
+            "item": "nifty:dirt_slab"
+          }
+        },
+        "result": {
+          "item": "nifty:dirt_fence_gate"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showGrassBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:grass_block"
+          },
+          "/": {
+            "item": "nifty:grass_slab"
+          }
+        },
+        "result": {
+          "item": "nifty:grass_fence_gate"
+        }
+      }
+    }
+  ]
+}

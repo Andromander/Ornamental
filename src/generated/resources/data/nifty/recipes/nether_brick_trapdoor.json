@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showNetherBrickBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:nether_brick"
+          }
+        },
+        "result": {
+          "item": "nifty:nether_brick_trapdoor"
+        }
+      }
+    }
+  ]
+}

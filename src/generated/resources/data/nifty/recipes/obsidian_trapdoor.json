@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showObsidianBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "nifty:obsidian_slab"
+          }
+        },
+        "result": {
+          "item": "nifty:obsidian_trapdoor"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showHayBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:hay_block"
+          }
+        },
+        "result": {
+          "item": "nifty:hay_stairs",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

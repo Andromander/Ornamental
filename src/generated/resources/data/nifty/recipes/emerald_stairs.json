@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showEmeraldBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:emerald_block"
+          }
+        },
+        "result": {
+          "item": "nifty:emerald_stairs",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

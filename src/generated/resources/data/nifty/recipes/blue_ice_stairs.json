@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBlueIceBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blue_ice"
+          }
+        },
+        "result": {
+          "item": "nifty:blue_ice_stairs",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

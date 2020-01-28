@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showHayBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:hay_block"
+          },
+          "/": {
+            "item": "minecraft:wheat"
+          }
+        },
+        "result": {
+          "item": "nifty:hay_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

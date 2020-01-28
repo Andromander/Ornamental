@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBoneBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:bone_block"
+          },
+          "/": {
+            "item": "minecraft:bone_meal"
+          }
+        },
+        "result": {
+          "item": "nifty:bone_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

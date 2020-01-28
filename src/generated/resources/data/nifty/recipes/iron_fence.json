@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showIronBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:iron_block"
+          },
+          "/": {
+            "item": "minecraft:iron_ingot"
+          }
+        },
+        "result": {
+          "item": "nifty:iron_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

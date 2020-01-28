@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBlueIceBlocks",
+          "type": "nifty:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:blue_ice"
+          },
+          "/": {
+            "item": "nifty:blue_ice_slab"
+          }
+        },
+        "result": {
+          "item": "nifty:blue_ice_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}
