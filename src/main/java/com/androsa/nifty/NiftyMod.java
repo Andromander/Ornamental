@@ -1,14 +1,20 @@
 package com.androsa.nifty;
 
 import com.androsa.nifty.data.NiftyLootTables;
+import com.androsa.nifty.data.NiftyRecipes;
+import com.androsa.nifty.data.conditions.ConfigCondition;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +30,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.function.Supplier;
 
 @Mod(NiftyMod.MODID)
+@Mod.EventBusSubscriber(modid = NiftyMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NiftyMod {
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "nifty";
@@ -32,6 +39,7 @@ public class NiftyMod {
     public NiftyMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
         MinecraftForge.EVENT_BUS.register(this);
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -53,10 +61,16 @@ public class NiftyMod {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
     }
 
+    @SubscribeEvent
+    public static void registerSerializer(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        CraftingHelper.register(new ConfigCondition.Serializer());
+    }
+
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         if (event.includeServer()) {
             generator.addProvider(new NiftyLootTables(generator));
+            generator.addProvider(new NiftyRecipes(generator));
         }
     }
 
