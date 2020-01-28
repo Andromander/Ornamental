@@ -46,6 +46,8 @@ public class NiftyMod {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> NiftyMod::registerRenders);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
     }
 
     @OnlyIn(Dist.CLIENT)
