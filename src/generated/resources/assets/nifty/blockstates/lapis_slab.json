@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "nifty:block/lapis_slab_top"
+    },
+    "type=bottom": {
+      "model": "nifty:block/lapis_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/lapis_block"
+    }
+  }
+}

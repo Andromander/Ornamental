@@ -1,5 +1,8 @@
 {
   "textures": {
+    "bottom": "block/ice",
+    "top": "block/ice",
+    "side": "block/ice",
     "particle": "#side"
   },
   "elements": [

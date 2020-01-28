@@ -1,5 +1,6 @@
 {
   "textures": {
+    "texture": "block/ice",
     "particle": "#texture"
   },
   "elements": [

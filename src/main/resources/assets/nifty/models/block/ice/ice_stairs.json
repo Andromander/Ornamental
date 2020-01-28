@@ -1,4 +1,5 @@
-{   "parent": "block/block",
+{
+  "parent": "block/block",
   "display": {
     "gui": {
       "rotation": [ 30, 135, 0 ],
@@ -17,6 +18,9 @@
     }
   },
   "textures": {
+    "bottom": "block/ice",
+    "top": "block/ice",
+    "side": "block/ice",
     "particle": "#side"
   },
   "elements": [

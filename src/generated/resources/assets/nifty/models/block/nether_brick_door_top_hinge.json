@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_top_rh",
+  "textures": {
+    "bottom": "nifty:block/nether_brick_door_bottom",
+    "top": "nifty:block/nether_brick_door_top"
+  }
+}

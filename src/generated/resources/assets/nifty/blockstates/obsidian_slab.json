@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "nifty:block/obsidian_slab_top"
+    },
+    "type=bottom": {
+      "model": "nifty:block/obsidian_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/obsidian"
+    }
+  }
+}
