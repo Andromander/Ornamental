@@ -25,6 +25,10 @@
     "2.7.1": "Fixed some Stairs models not looking right. When placed upside down, sometimes the model itself wouldn't reflect this.",
     "2.8": "It's now Christmas, which means Nifty is now over a year old now. Here's a fitting update.\n • Added Snow Nifty blocks. Layers of Snow are fun and all, but what about decorative blocks?\n • Added Ice Nifty blocks. Translucent, melts in light just like Ice, and just as slippery.\n • Added Packed Ice Nifty blocks. For an opaque, no-melt solution.\n • Added Blue Ice Nifty blocks. I don't really have any fun quips for Blue Ice; why was it even added outside of feature bloat?\n • All the icy blocks are slippery, however some vanilla logic may make it not slippery. Currently there is no way to control this.\n • All Obsidian Nifty blocks are now immune to being destroyed by the Enderdragon. Make what you will with this fact.\n • Tagged some more blocks. It now uses some more vanilla or Forge Tags, for quality purposes.\n • Look, every time I'm proud of doing something in the background, not everyone cares. You know the drill."
   },
+  "1.15.2": {
+    "2.9": "Nifty is now out for 1.15.2! This one got quite some changes, mostly for the back-end, but very useful.\n • Added a config option for each material. It's like the option to disable Missingno blocks, but for each type.\n • Created generators for Loot Tables, Blockstates, Models, and Recipes. Won't affect players, but may speed up future development when it happens.\n • Adding the new config gave me the opportunity to make the code much better. Nobody needs to care about this.\n • Some Trapdoor recipes now only require 4 ingredients rather than 6. Thank you Mojang, for your consistency.\n • If another mod or config errors, Nifty will now longer be at fault with block tinting. Still, not my fault."
+  },
+
   "promos": {
     "1.12.2-latest": "1.5",
     "1.12.2-recommended": "1.5",
@@ -35,6 +39,8 @@
     "1.14.3-latest": "2.4",
     "1.14.3-recommended": "2.4",
     "1.14.4-latest": "2.8",
-    "1.14.4-recommended": "2.8"
+    "1.14.4-recommended": "2.8",
+    "1.15.2-latest": "2.9",
+    "1.15.2=recommended": "2.9"
   }
 }
