@@ -42,7 +42,6 @@ public class NiftyMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
-        MinecraftForge.EVENT_BUS.register(this);
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
