@@ -13,7 +13,6 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,6 +44,8 @@ public class NiftyMod {
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         final Pair<NiftyConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(NiftyConfig::new);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, specPair.getRight());
@@ -60,6 +61,8 @@ public class NiftyMod {
         DistExecutor.runWhenOn(Dist.CLIENT, () -> NiftyMod::registerRenders);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ModEntities::registerRenders);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
     }
 
     @SubscribeEvent
