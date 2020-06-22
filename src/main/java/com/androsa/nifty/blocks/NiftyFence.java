@@ -1,7 +1,7 @@
 package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.ModBlocks;
-import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.NiftyBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,10 +24,10 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -37,107 +37,82 @@ public class NiftyFence extends FenceBlock {
     protected final VoxelShape[] collisionShapes = this.makeShapes(2.0F, 2.0F, 23.0F, 0.0F, 23.0F);
     protected final VoxelShape[] shapes = this.makeShapes(2.0F, 2.0F, 15.0F, 0.0F, 15.0F);
 
-    private float fallDamage;
-    private NiftyBlock blockType;
+    private final NiftyBuilder builder;
 
-    public NiftyFence(Properties props, NiftyBlock block) {
-        super(props.hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
-        if (block == NiftyBlock.ICE) props.nonOpaque();
-
-        this.fallDamage = block.multiplier;
-        this.blockType = block;
+    public NiftyFence(Properties props, NiftyBuilder builder) {
+        super(props);
+        this.builder = builder;
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return blockType == NiftyBlock.PATH ? this.shapes[this.getIndex(state)] : super.getShape(state, worldIn, pos, context);
+        return builder.isPath ? this.shapes[this.getIndex(state)] : super.getShape(state, worldIn, pos, context);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return blockType == NiftyBlock.PATH ? this.collisionShapes[this.getIndex(state)] : super.getCollisionShape(state, worldIn, pos, context);
-    }
-
-    @Override
-    public float getSlipperiness(BlockState state, IWorldReader world, BlockPos pos, Entity entity) {
-        switch (blockType) {
-            case ICE:
-            case PACKED_ICE:
-                return 0.98F;
-            case BLUE_ICE:
-                return 0.989F;
-            default:
-                return super.getSlipperiness(state, world, pos, entity);
-        }
-    }
-
-    @Override
-    public boolean ticksRandomly(BlockState state) {
-        return blockType == NiftyBlock.ICE;
+        return builder.isPath ? this.collisionShapes[this.getIndex(state)] : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.handleFallDamage(fallDistance, fallDamage);
+        entityIn.handleFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
     public boolean canProvidePower(BlockState state) {
-        return blockType == NiftyBlock.REDSTONE;
+        return builder.hasPower;
     }
 
     @Override
     @Deprecated
     public int getWeakPower(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
-        return blockType == NiftyBlock.REDSTONE ? 5 : 0;
+        return builder.hasPower ? 5 : 0;
     }
 
     @Override
     public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        switch (blockType) {
-            case DIRT:
-                if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
-                    this.setBlock(worldIn, pos, ModBlocks.grass_fence);
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        if (builder.isDirt) {
+            if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
+                this.setBlock(worldIn, pos, ModBlocks.grass_fence);
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                    if (!player.abilities.isCreativeMode) {
-                        itemstack.shrink(1);
-                    }
+                if (!player.abilities.isCreativeMode) {
+                    itemstack.shrink(1);
+                }
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        if (builder.isGrass) {
+            if (!itemstack.isEmpty()) {
+                if (itemstack.getItem() instanceof HoeItem) {
+                    this.setBlock(worldIn, pos, ModBlocks.dirt_fence);
+                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
                     return ActionResultType.SUCCESS;
-                }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            case GRASS:
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.getItem() instanceof HoeItem) {
-                        this.setBlock(worldIn, pos, ModBlocks.dirt_fence);
-                        worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    } else if (itemstack.getItem() instanceof ShovelItem) {
-                        this.setBlock(worldIn, pos, ModBlocks.path_fence);
-                        worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    }
-                }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            case PATH:
-                if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
-                    this.setBlock(worldIn, pos, ModBlocks.grass_fence);
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                } else if (itemstack.getItem() instanceof ShovelItem) {
+                    this.setBlock(worldIn, pos, ModBlocks.path_fence);
+                    worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
                     return ActionResultType.SUCCESS;
                 }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            default:
-                return super.onUse(state, worldIn, pos, player, hand, result);
+            }
         }
+
+        if (builder.isPath) {
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
+                this.setBlock(worldIn, pos, ModBlocks.grass_fence);
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        return super.onUse(state, worldIn, pos, player, hand, result);
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends Block> block) {
@@ -152,15 +127,23 @@ public class NiftyFence extends FenceBlock {
 
     @Override
     public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (blockType.booleanValue.get().get()) {
-            super.onBlockHarvested(world, pos, state, player);
+        if (builder.hasConfig) {
+            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
+
+            if (val == null) {
+                throw new NullPointerException(builder.name + " expected a config value but found null.");
+            } else {
+                if (val.get()) {
+                    super.onBlockHarvested(world, pos, state, player);
+                }
+            }
         }
     }
 
     @Override
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
                 if (worldIn.dimension.doesWaterVaporize()) {
                     worldIn.removeBlock(pos, false);
@@ -178,7 +161,7 @@ public class NiftyFence extends FenceBlock {
     @Override
     @Deprecated
     public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             if (worldIn.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
@@ -197,12 +180,12 @@ public class NiftyFence extends FenceBlock {
     @Override
     @Deprecated
     public PushReaction getPushReaction(BlockState state) {
-        return blockType == NiftyBlock.ICE ? PushReaction.NORMAL : super.getPushReaction(state);
+        return builder.isIce ? PushReaction.NORMAL : super.getPushReaction(state);
     }
 
     @Override
     @Deprecated
     public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type) {
-        return blockType == NiftyBlock.ICE ? type == EntityType.POLAR_BEAR : super.canEntitySpawn(state, worldIn, pos, type);
+        return builder.isIce ? type == EntityType.POLAR_BEAR : super.canEntitySpawn(state, worldIn, pos, type);
     }
 }

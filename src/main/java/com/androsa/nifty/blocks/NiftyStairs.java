@@ -1,7 +1,7 @@
 package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.ModBlocks;
-import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.NiftyBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,6 +30,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -51,15 +52,11 @@ public class NiftyStairs extends StairsBlock {
     protected static final VoxelShape[] PATH_SLAB_BOTTOM_SHAPES = makeShapes(PATH_AABB_SLAB_BOTTOM, PATH_NWU_CORNER, PATH_NEU_CORNER, PATH_SWU_CORNER, PATH_SEU_CORNER);
     private static final int[] metaInt = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
-    private float fallDamage;
-    private NiftyBlock blockType;
+    private NiftyBuilder builder;
 
-    public NiftyStairs(Properties props, NiftyBlock block) {
-        super(() -> new Block(Properties.create(block.material, block.color)).getDefaultState(), props.hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level));
-        if (block == NiftyBlock.ICE) props.nonOpaque();
-
-        this.fallDamage = block.multiplier;
-        this.blockType = block;
+    public NiftyStairs(Properties props, NiftyBuilder builder) {
+        super(() -> new Block(props).getDefaultState(), props);
+        this.builder = builder;
     }
 
     private static VoxelShape[] makeShapes(VoxelShape slabShape, VoxelShape nwCorner, VoxelShape neCorner, VoxelShape swCorner, VoxelShape seCorner) {
@@ -89,7 +86,7 @@ public class NiftyStairs extends StairsBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        if (blockType == NiftyBlock.PATH)
+        if (builder.isPath)
             return (state.get(HALF) == Half.TOP ? PATH_SLAB_TOP_SHAPES : PATH_SLAB_BOTTOM_SHAPES)[metaInt[this.getShapeMeta(state)]];
         return super.getShape(state, worldIn, pos, context);
     }
@@ -100,84 +97,68 @@ public class NiftyStairs extends StairsBlock {
 
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.handleFallDamage(fallDistance, fallDamage);
+        entityIn.handleFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
-    public float getSlipperiness(BlockState state, IWorldReader world, BlockPos pos, Entity entity) {
-        switch (blockType) {
-            case ICE:
-            case PACKED_ICE:
-                return 0.98F;
-            case BLUE_ICE:
-                return 0.989F;
-            default:
-                return super.getSlipperiness(state, world, pos, entity);
-        }
-    }
-
-    @Override
-    public boolean ticksRandomly(BlockState state) {
-        return blockType == NiftyBlock.ICE;
+    public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
+        return builder.isBase;
     }
 
     @Override
     @Deprecated
     public boolean canProvidePower(BlockState state) {
-        return blockType == NiftyBlock.REDSTONE;
+        return builder.hasPower;
     }
 
     @Override
     @Deprecated
     public int getWeakPower(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
-        return blockType == NiftyBlock.REDSTONE ? 11 : 0;
+        return builder.hasPower ? 11 : 0;
     }
 
     @Override
     public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        switch (blockType) {
-            case DIRT:
-                if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
-                    this.setBlock(worldIn, pos, ModBlocks.grass_stairs);
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        if (builder.isDirt) {
+            if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
+                this.setBlock(worldIn, pos, ModBlocks.grass_stairs);
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                    if (!player.abilities.isCreativeMode) {
-                        itemstack.shrink(1);
-                    }
+                if (!player.abilities.isCreativeMode) {
+                    itemstack.shrink(1);
+                }
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        if (builder.isGrass) {
+            if (!itemstack.isEmpty()) {
+                if (itemstack.getItem() instanceof HoeItem) {
+                    this.setBlock(worldIn, pos, ModBlocks.dirt_stairs);
+                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
                     return ActionResultType.SUCCESS;
-                }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            case GRASS:
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.getItem() instanceof HoeItem) {
-                        this.setBlock(worldIn, pos, ModBlocks.dirt_stairs);
-                        worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    } else if (itemstack.getItem() instanceof ShovelItem) {
-                        this.setBlock(worldIn, pos, ModBlocks.path_stairs);
-                        worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    }
-                }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            case PATH:
-                if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
-                    this.setBlock(worldIn, pos, ModBlocks.grass_stairs);
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                } else if (itemstack.getItem() instanceof ShovelItem) {
+                    this.setBlock(worldIn, pos, ModBlocks.path_stairs);
+                    worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
                     return ActionResultType.SUCCESS;
                 }
-                return super.onUse(state, worldIn, pos, player, hand, result);
-
-            default:
-                return super.onUse(state, worldIn, pos, player, hand, result);
+            }
         }
+
+        if (builder.isPath) {
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
+                this.setBlock(worldIn, pos, ModBlocks.grass_stairs);
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        return super.onUse(state, worldIn, pos, player, hand, result);
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends Block> block) {
@@ -191,15 +172,23 @@ public class NiftyStairs extends StairsBlock {
 
     @Override
     public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (blockType.booleanValue.get().get()) {
-            super.onBlockHarvested(world, pos, state, player);
+        if (builder.hasConfig) {
+            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
+
+            if (val == null) {
+                throw new NullPointerException(builder.name + " expected a config value but found null.");
+            } else {
+                if (val.get()) {
+                    super.onBlockHarvested(world, pos, state, player);
+                }
+            }
         }
     }
 
     @Override
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
                 if (worldIn.dimension.doesWaterVaporize()) {
                     worldIn.removeBlock(pos, false);
@@ -217,7 +206,7 @@ public class NiftyStairs extends StairsBlock {
     @Override
     public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.scheduledTick(state, worldIn, pos, random);
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             if (worldIn.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
@@ -236,7 +225,7 @@ public class NiftyStairs extends StairsBlock {
     @Override
     @Deprecated
     public PushReaction getPushReaction(BlockState state) {
-        if (blockType == NiftyBlock.ICE)
+        if (builder.isIce)
             return PushReaction.NORMAL;
         return super.getPushReaction(state);
     }
@@ -244,7 +233,7 @@ public class NiftyStairs extends StairsBlock {
     @Override
     @Deprecated
     public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type) {
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             return type == EntityType.POLAR_BEAR;
         }
         return super.canEntitySpawn(state, worldIn, pos, type);

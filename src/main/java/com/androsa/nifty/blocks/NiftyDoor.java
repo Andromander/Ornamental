@@ -1,7 +1,7 @@
 package com.androsa.nifty.blocks;
 
 import com.androsa.nifty.ModBlocks;
-import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.NiftyBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,10 +24,10 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -39,22 +39,17 @@ public class NiftyDoor extends DoorBlock {
     protected static final VoxelShape PATH_WEST_AABB_TOP = Block.makeCuboidShape(13.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
     protected static final VoxelShape PATH_EAST_AABB_TOP = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 3.0D, 15.0D, 16.0D);
 
-    private float fallDamage;
-    private boolean noRedstone;
-    private NiftyBlock blockType;
+    private final NiftyBuilder builder;
     protected boolean isReplacing = false;
 
-    public NiftyDoor(Properties props, NiftyBlock block) {
-        super(props.hardnessAndResistance(block.hardness, block.resistance).sound(block.sound).harvestTool(block.tool).harvestLevel(block.level).nonOpaque());
-
-        this.fallDamage = block.multiplier;
-        this.noRedstone = block.canOpen;
-        this.blockType = block;
+    public NiftyDoor(Properties props, NiftyBuilder builder) {
+        super(props);
+        this.builder = builder;
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        if (blockType == NiftyBlock.PATH) {
+        if (builder.isPath) {
             Direction direction = state.get(FACING);
             boolean flag = !state.get(OPEN);
             boolean flag1 = state.get(HINGE) == DoorHingeSide.RIGHT;
@@ -89,38 +84,20 @@ public class NiftyDoor extends DoorBlock {
     }
 
     @Override
-    public float getSlipperiness(BlockState state, IWorldReader world, BlockPos pos, Entity entity) {
-        switch (blockType) {
-            case ICE:
-            case PACKED_ICE:
-                return 0.98F;
-            case BLUE_ICE:
-                return 0.989F;
-            default:
-                return super.getSlipperiness(state, world, pos, entity);
-        }
-    }
-
-    @Override
-    public boolean ticksRandomly(BlockState state) {
-        return blockType == NiftyBlock.ICE;
-    }
-
-    @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.handleFallDamage(fallDistance, fallDamage);
+        entityIn.handleFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
     public boolean hasComparatorInputOverride(BlockState state) {
-        return blockType == NiftyBlock.REDSTONE;
+        return builder.hasPower;
     }
 
     @Override
     @Deprecated
     public int getComparatorInputOverride(BlockState state, World worldIn, BlockPos pos) {
-        return state.get(POWERED) ? 10 : 0;
+        return builder.hasPower && state.get(POWERED) ? 10 : 0;
     }
 
     @Override
@@ -133,78 +110,75 @@ public class NiftyDoor extends DoorBlock {
     public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        switch (blockType) {
-            case DIRT:
-                if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
-                    BlockState blockstate =  worldIn.getBlockState(pos);
+        if (builder.isDirt) {
+            if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
+                BlockState blockstate =  worldIn.getBlockState(pos);
 
-                    if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-                        setBlocks(ModBlocks.grass_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
-                    } else {
-                        setBlocks(ModBlocks.grass_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
-                    }
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-
-                    if (!player.abilities.isCreativeMode) {
-                        itemstack.shrink(1);
-                    }
-                    return ActionResultType.SUCCESS;
+                if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+                    setBlocks(ModBlocks.grass_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
+                } else {
+                    setBlocks(ModBlocks.grass_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
                 }
-                return this.performNormally(state, worldIn, pos, player);
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-            case GRASS:
-                if (!itemstack.isEmpty()) {
-                    if (itemstack.getItem() instanceof HoeItem) {
-                        BlockState blockstate = worldIn.getBlockState(pos);
-
-                        if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-                            setBlocks(ModBlocks.dirt_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
-                        } else {
-                            setBlocks(ModBlocks.dirt_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
-                        }
-
-                        worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    } else if (itemstack.getItem() instanceof ShovelItem) {
-                        BlockState blockstate = worldIn.getBlockState(pos);
-
-                        if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-                            setBlocks(ModBlocks.path_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
-                        } else {
-                            setBlocks(ModBlocks.path_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
-                        }
-
-                        worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                        itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                        return ActionResultType.SUCCESS;
-                    }
+                if (!player.abilities.isCreativeMode) {
+                    itemstack.shrink(1);
                 }
-                return this.performNormally(state, worldIn, pos, player);
+                return ActionResultType.SUCCESS;
+            }
+        }
 
-            case PATH:
-                if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
+        if (builder.isGrass) {
+            if (!itemstack.isEmpty()) {
+                if (itemstack.getItem() instanceof HoeItem) {
                     BlockState blockstate = worldIn.getBlockState(pos);
 
                     if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-                        setBlocks(ModBlocks.grass_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
+                        setBlocks(ModBlocks.dirt_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
                     } else {
-                        setBlocks(ModBlocks.grass_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
+                        setBlocks(ModBlocks.dirt_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
                     }
 
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+                    return ActionResultType.SUCCESS;
+                } else if (itemstack.getItem() instanceof ShovelItem) {
+                    BlockState blockstate = worldIn.getBlockState(pos);
+
+                    if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+                        setBlocks(ModBlocks.path_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
+                    } else {
+                        setBlocks(ModBlocks.path_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
+                    }
+
+                    worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
                     return ActionResultType.SUCCESS;
                 }
-                return this.performNormally(state, worldIn, pos, player);
-
-            default:
-                return this.performNormally(state, worldIn, pos, player);
+            }
         }
+
+        if (builder.isPath) {
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
+                BlockState blockstate = worldIn.getBlockState(pos);
+
+                if (blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+                    setBlocks(ModBlocks.grass_door, worldIn, pos, pos.up(), DoubleBlockHalf.UPPER);
+                } else {
+                    setBlocks(ModBlocks.grass_door, worldIn, pos, pos.down(), DoubleBlockHalf.LOWER);
+                }
+
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        return this.performNormally(state, worldIn, pos, player);
     }
 
     public ActionResultType performNormally(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        if (!noRedstone) {
+        if (!builder.canOpen) {
             return ActionResultType.PASS;
         } else {
             state = state.cycle(OPEN);
@@ -233,10 +207,16 @@ public class NiftyDoor extends DoorBlock {
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (blockType.booleanValue.get().get()) {
-            if (!isReplacing) {
-                super.onBlockHarvested(worldIn, pos, state, player);
+    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (builder.hasConfig) {
+            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
+
+            if (val == null) {
+                throw new NullPointerException(builder.name + " expected a config value but found null.");
+            } else {
+                if (val.get()) {
+                    super.onBlockHarvested(world, pos, state, player);
+                }
             }
         }
     }
@@ -244,7 +224,7 @@ public class NiftyDoor extends DoorBlock {
     @Override
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             isReplacing = true;
             if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
                 if (worldIn.dimension.doesWaterVaporize()) {
@@ -264,7 +244,7 @@ public class NiftyDoor extends DoorBlock {
     @Override
     @Deprecated
     public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (blockType == NiftyBlock.ICE) {
+        if (builder.isIce) {
             if (worldIn.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
