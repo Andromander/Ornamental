@@ -1,12 +1,19 @@
 package com.androsa.nifty.data;
 
 import com.androsa.nifty.ModBlocks;
+import com.androsa.nifty.ModEntities;
+import com.androsa.nifty.data.provider.GolemLootTableProvider;
 import com.androsa.nifty.data.provider.NiftyLootTableProvider;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootParameterSet;
 import net.minecraft.world.storage.loot.LootParameterSets;
@@ -15,6 +22,7 @@ import net.minecraft.world.storage.loot.ValidationTracker;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -33,13 +41,13 @@ public class NiftyLootTables extends LootTableProvider {
 
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
-        return ImmutableList.of(Pair.of(Blocks::new, LootParameterSets.BLOCK));
+        return ImmutableList.of(Pair.of(BlockTables::new, LootParameterSets.BLOCK), Pair.of(EntityTables::new, LootParameterSets.ENTITY));
     }
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> tableMap, ValidationTracker tracker) { }
 
-    public static class Blocks extends NiftyLootTableProvider {
+    public static class BlockTables extends NiftyLootTableProvider {
         @Override
         protected void addTables() {
             dropSelf(ModBlocks.iron_stairs);
@@ -179,6 +187,66 @@ public class NiftyLootTables extends LootTableProvider {
         @Override
         protected Iterable<Block> getKnownBlocks() {
             return ModBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        }
+    }
+
+    public static class EntityTables extends GolemLootTableProvider {
+
+        private static final Set<EntityType<?>> ALLOWED_ENTITIES = ImmutableSet.of(
+                ModEntities.GOLD_GOLEM.get(),
+                ModEntities.DIAMOND_GOLEM.get(),
+                ModEntities.EMERALD_GOLEM.get(),
+                ModEntities.LAPIS_GOLEM.get(),
+                ModEntities.OBSIDIAN_GOLEM.get(),
+                ModEntities.COAL_GOLEM.get(),
+                ModEntities.REDSTONE_GOLEM.get(),
+                ModEntities.CLAY_GOLEM.get(),
+                ModEntities.DIRT_GOLEM.get(),
+                ModEntities.GRASS_GOLEM.get(),
+                ModEntities.HAY_GOLEM.get(),
+                ModEntities.PATH_GOLEM.get(),
+                ModEntities.BRICK_GOLEM.get(),
+                ModEntities.QUARTZ_GOLEM.get(),
+                ModEntities.BONE_GOLEM.get(),
+                ModEntities.NETHER_BRICK_GOLEM.get(),
+                ModEntities.RED_NETHER_BRICK_GOLEM.get(),
+                ModEntities.ICE_GOLEM.get(),
+                ModEntities.PACKED_ICE_GOLEM.get(),
+                ModEntities.BLUE_ICE_GOLEM.get()
+        );
+
+        @Override
+        protected void addTables() {
+            registerLootTable(ModEntities.GOLD_GOLEM, flowerGolemTable(Blocks.DANDELION, Items.GOLD_INGOT));
+            registerLootTable(ModEntities.DIAMOND_GOLEM, flowerGolemTable(Blocks.BLUE_ORCHID, Items.DIAMOND));
+            registerLootTable(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.ALLIUM));
+            registerLootTable(ModEntities.LAPIS_GOLEM, golemTable(Items.LAPIS_LAZULI));
+            registerLootTable(ModEntities.OBSIDIAN_GOLEM, golemTableBlock(Blocks.OBSIDIAN));
+            registerLootTable(ModEntities.COAL_GOLEM, golemTable(Items.COAL));
+            registerLootTable(ModEntities.REDSTONE_GOLEM, golemTable(Items.REDSTONE));
+            registerLootTable(ModEntities.CLAY_GOLEM, golemTable(Items.CLAY_BALL));
+            registerLootTable(ModEntities.DIRT_GOLEM, golemTableBlock(Blocks.DIRT));
+            registerLootTable(ModEntities.GRASS_GOLEM, golemTableBlock(Blocks.GRASS_BLOCK));
+            registerLootTable(ModEntities.HAY_GOLEM, golemTable(Items.WHEAT));
+            registerLootTable(ModEntities.PATH_GOLEM, golemTableBlock(Blocks.GRASS_PATH));
+            registerLootTable(ModEntities.BRICK_GOLEM, golemTable(Items.BRICK));
+            registerLootTable(ModEntities.QUARTZ_GOLEM, golemTable(Items.QUARTZ));
+            registerLootTable(ModEntities.BONE_GOLEM, golemTable(Items.BONE));
+            registerLootTable(ModEntities.NETHER_BRICK_GOLEM, golemTable(Items.NETHER_BRICK));
+            registerLootTable(ModEntities.RED_NETHER_BRICK_GOLEM, golemTable(Items.NETHER_WART));
+            registerLootTable(ModEntities.ICE_GOLEM, golemTableBlock(Blocks.ICE));
+            registerLootTable(ModEntities.PACKED_ICE_GOLEM, golemTableBlock(Blocks.PACKED_ICE));
+            registerLootTable(ModEntities.BLUE_ICE_GOLEM, golemTableBlock(Blocks.BLUE_ICE));
+        }
+
+        @Override
+        protected Iterable<EntityType<?>> getKnownEntities() {
+            return ModEntities.ENTITIES.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        }
+
+        @Override
+        protected boolean isNonLiving(EntityType<?> type) {
+            return !ALLOWED_ENTITIES.contains(type) && type.getClassification() == EntityClassification.MISC;
         }
     }
 }
