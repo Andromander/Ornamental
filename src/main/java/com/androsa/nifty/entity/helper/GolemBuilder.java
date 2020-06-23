@@ -49,21 +49,25 @@ public class GolemBuilder {
 
     //For Golems with only a height
     private static void checkPatternSmall(PatternType type, World world, BlockPos pos, int y) {
-        BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
-        if (pattern != null) {
-            setAirSmall(type, pattern, world);
-            addGolem(type, world, pattern, 0, y);
-            notifySmall(type, pattern, world);
+        if (type.canBuild()) {
+            BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
+            if (pattern != null) {
+                setAirSmall(type, pattern, world);
+                addGolem(type, world, pattern, 0, y);
+                notifySmall(type, pattern, world);
+            }
         }
     }
 
     //For Golems with a width and height
     private static void checkPatternLarge(PatternType type, World world, BlockPos pos, int x, int y) {
-        BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
-        if (pattern != null) {
-            setAirLarge(type, pattern, world);
-            addGolem(type, world, pattern, x, y);
-            notifyLarge(type, pattern, world);
+        if (type.canBuild()) {
+            BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
+            if (pattern != null) {
+                setAirLarge(type, pattern, world);
+                addGolem(type, world, pattern, x, y);
+                notifyLarge(type, pattern, world);
+            }
         }
     }
 
