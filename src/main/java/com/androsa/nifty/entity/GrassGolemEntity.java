@@ -2,12 +2,14 @@ package com.androsa.nifty.entity;
 
 import com.androsa.nifty.ModEntities;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -49,6 +51,18 @@ public class GrassGolemEntity extends DirtGolemEntity {
     protected void registerData() {
         super.registerData();
         this.dataManager.register(HAS_POPPY, false);
+    }
+
+    @Override
+    public void writeAdditional(CompoundNBT nbt) {
+        super.writeAdditional(nbt);
+        nbt.putBoolean("has_poppy", this.hasPoppy());
+    }
+
+    @Override
+    public void readAdditional(CompoundNBT nbt) {
+        super.readAdditional(nbt);
+        this.setPoppy(nbt.getBoolean("has_poppy"));
     }
 
     public boolean hasPoppy() {
@@ -99,6 +113,14 @@ public class GrassGolemEntity extends DirtGolemEntity {
         }
 
         return false;
+    }
+
+    @Override
+    protected void spawnDrops(DamageSource source) {
+        super.spawnDrops(source);
+        if (hasPoppy()) {
+            entityDropItem(new ItemStack(Blocks.POPPY), 1);
+        }
     }
 
     private void addEntity(MobEntity entity) {
