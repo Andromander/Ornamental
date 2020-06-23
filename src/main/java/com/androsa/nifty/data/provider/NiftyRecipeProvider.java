@@ -1,13 +1,22 @@
 package com.androsa.nifty.data.provider;
 
-import com.androsa.nifty.NiftyBlock;
+import com.androsa.nifty.NiftyBuilder;
+import com.androsa.nifty.NiftyMod;
+import com.androsa.nifty.blocks.*;
 import com.androsa.nifty.data.conditions.ConfigCondition;
+import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.data.ForgeRecipeProvider;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements IConditionBuilder {
 
@@ -15,83 +24,114 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
         super(generator);
     }
 
-    public ConditionalRecipe.Builder stairsRecipe(IItemProvider result, IItemProvider ingredient, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result, 8)
+    private ResourceLocation loc(String name) {
+        return new ResourceLocation(NiftyMod.MODID, name);
+    }
+
+    public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyStairs> result, Block ingredient, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 8)
                         .patternLine("#  ")
                         .patternLine("## ")
                         .patternLine("###")
                         .key('#', ingredient)
-                        .addCriterion("has_" + criterion, hasItem(ingredient))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(ingredient))
+                        ::build)
+                .build(consumer, loc(builder.name + "_stairs"));
     }
 
-    public ConditionalRecipe.Builder slabRecipe(IItemProvider result, IItemProvider ingredient, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result, 6)
+    public void slab(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftySlab> result, Block ingredient, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
                         .patternLine("###")
                         .key('#', ingredient)
-                        .addCriterion("has_" + criterion, hasItem(ingredient))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(ingredient))
+                        ::build)
+                .build(consumer, loc(builder.name + "_slab"));
     }
 
-    public ConditionalRecipe.Builder fenceRecipe(IItemProvider result, IItemProvider bigItem, IItemProvider smallItem, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result, 3)
+    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem, NiftyBuilder builder) {
+        fence(consumer, result, bigItem, smallItem.get(), builder);
+    }
+
+    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, IItemProvider smallItem, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 3)
                         .patternLine("#/#")
                         .patternLine("#/#")
                         .key('#', bigItem)
                         .key('/', smallItem)
-                        .addCriterion("has_" + criterion, hasItem(bigItem))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(bigItem))
+                        ::build)
+                .build(consumer, loc(builder.name + "_fence"));
     }
 
-    public ConditionalRecipe.Builder trapdoorRecipe(IItemProvider result, IItemProvider ingredient, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result)
+    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
+        trapdoor(consumer, result, ingredient.get(), builder);
+    }
+
+    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
                         .patternLine("##")
                         .patternLine("##")
                         .key('#', ingredient)
-                        .addCriterion("has_" + criterion, hasItem(ingredient))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(ingredient))
+                        ::build)
+                .build(consumer, loc(builder.name + "_trapdoor"));
     }
 
-    public ConditionalRecipe.Builder trapdoorRecipeWide(IItemProvider result, IItemProvider ingredient, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result)
+    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
+        trapdoorWide(consumer, result, ingredient.get(), builder);
+    }
+
+    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
                         .patternLine("###")
                         .patternLine("###")
                         .key('#', ingredient)
-                        .addCriterion("has_" + criterion, hasItem(ingredient))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(ingredient))
+                        ::build)
+                .build(consumer, loc(builder.name + "_trapdoor"));
     }
 
-    public ConditionalRecipe.Builder fenceGateRecipe(IItemProvider result, IItemProvider bigItem, IItemProvider smallItem, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result)
+    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, Supplier<? extends NiftySlab> smallItem, NiftyBuilder builder) {
+        fencegate(consumer, result, bigItem, smallItem.get(), builder);
+    }
+
+    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, IItemProvider smallItem, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
                         .patternLine("/#/")
                         .patternLine("/#/")
                         .key('#', bigItem)
                         .key('/', smallItem)
-                        .addCriterion("has_" + criterion, hasItem(bigItem))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(bigItem))
+                        ::build)
+                .build(consumer, loc(builder.name + "_fence_gate"));
     }
 
-    public ConditionalRecipe.Builder doorRecipe(IItemProvider result, IItemProvider ingredient, String criterion, NiftyBlock config) {
-        return ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(config.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result)
+    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
+        door(consumer, result, ingredient.get(), builder);
+    }
+
+    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+        ConditionalRecipe.builder()
+                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
                         .patternLine("##")
                         .patternLine("##")
                         .patternLine("##")
                         .key('#', ingredient)
-                        .addCriterion("has_" + criterion, hasItem(ingredient))
-                        ::build);
+                        .addCriterion("has_" + builder.name, hasItem(ingredient))
+                        ::build)
+                .build(consumer, loc(builder.name + "_door"));
     }
 }
