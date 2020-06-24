@@ -11,10 +11,7 @@ import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -76,7 +73,7 @@ public class PathGolemEntity extends DirtGolemEntity {
 
             grass.setInvulnerable(this.isInvulnerable());
             this.world.addEntity(grass);
-            //this.world.playEvent((PlayerEntity)null, 1026, new BlockPos(this), 0); TODO: Grass sound
+            this.world.playSound(null, new BlockPos(this), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_PATH)  {
             float f = this.getHealth();
             this.heal(25.0F);

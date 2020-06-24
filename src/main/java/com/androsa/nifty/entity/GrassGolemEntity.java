@@ -13,10 +13,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -93,9 +90,11 @@ public class GrassGolemEntity extends DirtGolemEntity {
         } else if (item instanceof ShovelItem) {
             PathGolemEntity path = ModEntities.PATH_GOLEM.get().create(this.world);
             addEntity(path);
+            this.world.playSound(null, new BlockPos(this), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item instanceof HoeItem) {
             DirtGolemEntity dirt = ModEntities.DIRT_GOLEM.get().create(this.world);
             addEntity(dirt);
+            this.world.playSound(null, new BlockPos(this), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_BLOCK) {
             float f = this.getHealth();
             this.heal(25.0F);
@@ -142,7 +141,6 @@ public class GrassGolemEntity extends DirtGolemEntity {
 
         entity.setInvulnerable(this.isInvulnerable());
         this.world.addEntity(entity);
-        //this.world.playEvent((PlayerEntity)null, 1026, new BlockPos(this), 0); TODO: Grass sound
     }
 
     @Override

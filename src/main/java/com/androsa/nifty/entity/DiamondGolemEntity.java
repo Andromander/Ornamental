@@ -24,7 +24,6 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
         this.stepHeight = 0.5F;
     }
 
-    //TODO: When I am alerted to an enemy, call on my friends
     @Override
     protected void registerGoals() {
         super.registerGoals();
