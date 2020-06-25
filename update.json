@@ -27,7 +27,9 @@
   },
   "1.15.2": {
     "2.9": "Nifty is now out for 1.15.2! This one got quite some changes, mostly for the back-end, but very useful.\n • Added a config option for each material. It's like the option to disable Missingno blocks, but for each type. This is stored in the server config (per save).\n • Created generators for Loot Tables, Blockstates, Models, and Recipes. Won't affect players, but may speed up future development when it happens.\n • Adding the new config gave me the opportunity to make the code much better. Nobody needs to care about this.\n • Some Trapdoor recipes now only require 4 ingredients rather than 6. Thank you Mojang, for your consistency.\n • If another mod or config errors, Nifty will now longer be at fault with block tinting. Still, not my fault.",
-    "2.9.1": "Hotfix a crash with running Nifty on dedicated server. It's a weird fix, but it's a fix."
+    "2.9.1": "Hotfix a crash with running Nifty on dedicated server. It's a weird fix, but it's a fix.",
+    "3.0": "We are ready for the next major update for Nifty. I'd say it's pretty big.\n • Added Nifty Golems. This rather ambitious project took me months to complete, and it is finally here. Barring Iron, Snow, and Missingno, every material provided by Nifty has a Golem each.\n • Each Golem has their own creation pattern. Some are like Snow Golems, others are like Iron Golems, and a few with completely different shapes. Check the changelog for 3.0 on Curseforge for more info.\n • Disabling Golem creation is also tied to disabling materials from creation. If Gold decoration blocks are disabled, so are Gold Golems, and so on.\n • Implemented a new system called NiftyBuilder. This is like a 3.0 of registering blocks, but this time it can be used by anybody. By using the provided decoration block classes and creating a material with NiftyBlock, you can make your own addon for Nifty. Details on how to use are documented in the class NiftyBuilder.\n • Removed use of supports_beacon Tag. This was removed by Forge, thus meaning it was useless here.",
+    "3.1": "I wrote this changelog because Curseforge corrupted the upload for 3.0 as of writing this. It might even be skipped, so here's a rehashed changelog, plus some extra sounds in some places so I could upload this file. See the changelog for 3.1 on Curseforge for more info."
   },
 
   "promos": {
@@ -41,7 +43,7 @@
     "1.14.3-recommended": "2.4",
     "1.14.4-latest": "2.8",
     "1.14.4-recommended": "2.8",
-    "1.15.2-latest": "2.9.1",
+    "1.15.2-latest": "3.1",
     "1.15.2=recommended": "2.9.1"
   }
 }
