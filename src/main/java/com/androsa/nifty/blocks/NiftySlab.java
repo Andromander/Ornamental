@@ -34,7 +34,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class NiftySlab extends SlabBlock {
+public class NiftySlab extends SlabBlock implements INiftyBlock {
 
     protected static final VoxelShape PATH_BOTTOM_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
     protected static final VoxelShape PATH_TOP_SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 15.0D, 16.0D);
@@ -45,6 +45,11 @@ public class NiftySlab extends SlabBlock {
     public NiftySlab(Properties props, NiftyBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     @Override

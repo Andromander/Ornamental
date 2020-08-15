@@ -32,7 +32,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class NiftyDoor extends DoorBlock {
+public class NiftyDoor extends DoorBlock implements INiftyBlock {
 
     protected static final VoxelShape PATH_SOUTH_AABB_TOP = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 3.0D);
     protected static final VoxelShape PATH_NORTH_AABB_TOP = Block.makeCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 15.0D, 16.0D);
@@ -45,6 +45,11 @@ public class NiftyDoor extends DoorBlock {
     public NiftyDoor(Properties props, NiftyBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     @Override

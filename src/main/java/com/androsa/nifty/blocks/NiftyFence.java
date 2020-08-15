@@ -31,7 +31,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class NiftyFence extends FenceBlock {
+public class NiftyFence extends FenceBlock implements INiftyBlock {
 
     protected final VoxelShape[] collisionShapes = this.makeShapes(2.0F, 2.0F, 23.0F, 0.0F, 23.0F);
     protected final VoxelShape[] shapes = this.makeShapes(2.0F, 2.0F, 15.0F, 0.0F, 15.0F);
@@ -41,6 +41,11 @@ public class NiftyFence extends FenceBlock {
     public NiftyFence(Properties props, NiftyBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     @Override

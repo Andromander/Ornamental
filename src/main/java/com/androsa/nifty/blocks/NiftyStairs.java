@@ -34,7 +34,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class NiftyStairs extends StairsBlock {
+public class NiftyStairs extends StairsBlock implements INiftyBlock {
 
     protected static final VoxelShape PATH_AABB_SLAB_TOP = NiftySlab.PATH_TOP_SHAPE;
     protected static final VoxelShape PATH_AABB_SLAB_BOTTOM = NiftySlab.PATH_BOTTOM_SHAPE;
@@ -55,6 +55,11 @@ public class NiftyStairs extends StairsBlock {
     public NiftyStairs(Properties props, NiftyBuilder builder) {
         super(() -> new Block(props).getDefaultState(), props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     private static VoxelShape[] makeShapes(VoxelShape slabShape, VoxelShape nwCorner, VoxelShape neCorner, VoxelShape swCorner, VoxelShape seCorner) {

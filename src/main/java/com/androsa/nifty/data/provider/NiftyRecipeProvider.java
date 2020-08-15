@@ -28,7 +28,8 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
         return new ResourceLocation(NiftyMod.MODID, name);
     }
 
-    public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyStairs> result, Block ingredient, NiftyBuilder builder) {
+    public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyStairs> result, Block ingredient) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 8)
@@ -41,7 +42,8 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_stairs"));
     }
 
-    public void slab(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftySlab> result, Block ingredient, NiftyBuilder builder) {
+    public void slab(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftySlab> result, Block ingredient) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
@@ -52,11 +54,12 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_slab"));
     }
 
-    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem, NiftyBuilder builder) {
-        fence(consumer, result, bigItem, smallItem.get(), builder);
+    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
+        fence(consumer, result, bigItem, smallItem.get());
     }
 
-    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, IItemProvider smallItem, NiftyBuilder builder) {
+    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFence> result, Block bigItem, IItemProvider smallItem) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 3)
@@ -69,11 +72,12 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_fence"));
     }
 
-    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
-        trapdoor(consumer, result, ingredient.get(), builder);
+    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient) {
+        trapdoor(consumer, result, ingredient.get());
     }
 
-    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
@@ -85,11 +89,12 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_trapdoor"));
     }
 
-    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
-        trapdoorWide(consumer, result, ingredient.get(), builder);
+    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, Supplier<? extends NiftySlab> ingredient) {
+        trapdoorWide(consumer, result, ingredient.get());
     }
 
-    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyTrapDoor> result, IItemProvider ingredient) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
@@ -101,11 +106,12 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_trapdoor"));
     }
 
-    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, Supplier<? extends NiftySlab> smallItem, NiftyBuilder builder) {
-        fencegate(consumer, result, bigItem, smallItem.get(), builder);
+    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, Supplier<? extends NiftySlab> smallItem) {
+        fencegate(consumer, result, bigItem, smallItem.get());
     }
 
-    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, IItemProvider smallItem, NiftyBuilder builder) {
+    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyFenceGate> result, Block bigItem, IItemProvider smallItem) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
@@ -118,11 +124,12 @@ public abstract class NiftyRecipeProvider extends ForgeRecipeProvider implements
                 .build(consumer, loc(builder.name + "_fence_gate"));
     }
 
-    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, Supplier<? extends NiftySlab> ingredient, NiftyBuilder builder) {
-        door(consumer, result, ingredient.get(), builder);
+    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, Supplier<? extends NiftySlab> ingredient) {
+        door(consumer, result, ingredient.get());
     }
 
-    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, IItemProvider ingredient, NiftyBuilder builder) {
+    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends NiftyDoor> result, IItemProvider ingredient) {
+        NiftyBuilder builder = result.get().getBuilder();
         ConditionalRecipe.builder()
                 .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                 .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())

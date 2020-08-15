@@ -32,7 +32,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class NiftyFenceGate extends FenceGateBlock {
+public class NiftyFenceGate extends FenceGateBlock implements INiftyBlock {
 
     protected static final VoxelShape PATH_HITBOX_ZAXIS = Block.makeCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 15.0D, 10.0D);
     protected static final VoxelShape PATH_HITBOX_XAXIS = Block.makeCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 15.0D, 16.0D);
@@ -50,6 +50,11 @@ public class NiftyFenceGate extends FenceGateBlock {
     public NiftyFenceGate(Properties props, NiftyBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     @Override

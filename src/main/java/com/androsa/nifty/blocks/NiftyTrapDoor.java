@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class NiftyTrapDoor extends TrapDoorBlock {
+public class NiftyTrapDoor extends TrapDoorBlock implements INiftyBlock {
 
     protected static final VoxelShape PATH_EAST_OPEN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 2.0D, 16.0D, 16.0D);
     protected static final VoxelShape PATH_WEST_OPEN_AABB = Block.makeCuboidShape(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -48,6 +48,11 @@ public class NiftyTrapDoor extends TrapDoorBlock {
     public NiftyTrapDoor(Properties props, NiftyBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public NiftyBuilder getBuilder() {
+        return builder;
     }
 
     @Override
