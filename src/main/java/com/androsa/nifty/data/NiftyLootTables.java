@@ -218,7 +218,8 @@ public class NiftyLootTables extends LootTableProvider {
                 ModEntities.RED_NETHER_BRICK_GOLEM.get(),
                 ModEntities.ICE_GOLEM.get(),
                 ModEntities.PACKED_ICE_GOLEM.get(),
-                ModEntities.BLUE_ICE_GOLEM.get()
+                ModEntities.BLUE_ICE_GOLEM.get(),
+                ModEntities.NETHERITE_GOLEM.get()
         );
 
         @Override
@@ -243,6 +244,7 @@ public class NiftyLootTables extends LootTableProvider {
             registerLootTable(ModEntities.ICE_GOLEM, golemTableBlock(Blocks.ICE));
             registerLootTable(ModEntities.PACKED_ICE_GOLEM, golemTableBlock(Blocks.PACKED_ICE));
             registerLootTable(ModEntities.BLUE_ICE_GOLEM, golemTableBlock(Blocks.BLUE_ICE));
+            registerLootTable(ModEntities.NETHERITE_GOLEM, golemTable(Items.NETHERITE_INGOT));
         }
 
         @Override
