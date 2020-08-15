@@ -29,6 +29,7 @@ public class NiftyConfig {
     public static BooleanValue showIceBlocks;
     public static BooleanValue showPackedIceBlocks;
     public static BooleanValue showBlueIceBlocks;
+    public static BooleanValue showNetheriteBlocks;
 
     public NiftyConfig(ForgeConfigSpec.Builder builder) {
         showIronBlocks = builder
@@ -123,5 +124,9 @@ public class NiftyConfig {
                 .translation(NiftyMod.MODID + ".config.show_blue_ice_blocks")
                 .comment("Should Blue Ice blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showBlueIceBlocks", true);
+        showNetheriteBlocks = builder
+                .translation(NiftyMod.MODID + ".config.show_netherite_blocks")
+                .comment("Should Netherite blocks be obtainable as items. Will not remove existing blocks from worlds.")
+                .define("showNetheriteBlocks", true);
     }
 }

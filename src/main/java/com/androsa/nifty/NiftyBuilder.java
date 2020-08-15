@@ -1,9 +1,11 @@
 package com.androsa.nifty;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ToolType;
 
@@ -36,10 +38,12 @@ public class NiftyBuilder {
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0};
-    public boolean isBase = false;
     public boolean canOpen = false;
     public boolean hasPower = false;
     public boolean doesTick = false;
+    public boolean requiresTool = false;
+    public boolean fireproof = false;
+    public AbstractBlock.IExtendedPositionPredicate<EntityType<?>> entitySpawnPredicate = null;
     /** This should only be altered by {@link NiftyBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
     public boolean hasConfig = false;
     public boolean isDirt = false;
@@ -121,23 +125,27 @@ public class NiftyBuilder {
 
     /**
      * Setter for the block's ToolType. Harvest level will be 0.
-     * To set a harvest level, use {@link NiftyBuilder#tool(ToolType, int)}
+     * To set a harvest level, use {@link NiftyBuilder#tool(ToolType, int, boolean)}
      * @param tool The block's ToolType
+     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#setRequiresTool()}
      */
-    public NiftyBuilder tool(ToolType tool) {
+    public NiftyBuilder tool(ToolType tool, boolean required) {
         this.harvestTool = tool;
+        this.requiresTool = required;
         return this;
     }
 
     /**
      * Setter for the blocks' harvest tool and level.
-     * To set only a harvst tool, use {@link NiftyBuilder#tool(ToolType)}
+     * To set only a harvst tool, use {@link NiftyBuilder#tool(ToolType, boolean)}
      * @param tool The block's ToolType
      * @param level The block's harvest level
+     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#setRequiresTool()}
      */
-    public NiftyBuilder tool(ToolType tool, int level) {
+    public NiftyBuilder tool(ToolType tool, int level, boolean required) {
         this.harvestTool = tool;
         this.harvestLevel = level;
+        this.requiresTool = required;
         return this;
     }
 
@@ -176,14 +184,6 @@ public class NiftyBuilder {
     }
 
     /**
-     * Sets the block to be an applicable Beacon base. Only used in NiftyStairs by default.
-     */
-    public NiftyBuilder isBeaconBase() {
-        this.isBase = true;
-        return this;
-    }
-
-    /**
      * Sets the block to be opened by hand. Used in blocks with an open/close state. Redstone power still applies if false.
      */
     public NiftyBuilder canOpen() {
@@ -200,10 +200,28 @@ public class NiftyBuilder {
     }
 
     /**
-     * Sets the block to tick randomly. Used to enable {@link Block.Properties#tickRandomly()}
+     * Sets the block to tick randomly. Used to enable {@link AbstractBlock.Properties#tickRandomly()}
      */
     public NiftyBuilder ticks() {
         this.doesTick = true;
+        return this;
+    }
+
+    /**
+     * Sets the block's item to resist being destroyed in fire or lava. Used to enable {@link Item.Properties#isImmuneToFire()}
+     */
+    public NiftyBuilder isFireproof() {
+        this.fireproof = true;
+        return this;
+    }
+
+    /**
+     * Sets the entity spawn logic on the block. Used in {@link AbstractBlock.Properties#setAllowsSpawn(AbstractBlock.IExtendedPositionPredicate)}
+     * If left null (unused), will default to regular placement logic.
+     * @param predicate The spawn predicate to test. If true, an entity can spawn on it.
+     */
+    public NiftyBuilder setCanEntitySpawn(AbstractBlock.IExtendedPositionPredicate<EntityType<?>> predicate) {
+        this.entitySpawnPredicate = predicate;
         return this;
     }
 

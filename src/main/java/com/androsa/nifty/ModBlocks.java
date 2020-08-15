@@ -40,6 +40,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftyStairs> ice_stairs = registerStairs(NiftyBuilders.ICE);
     public static final RegistryObject<NiftyStairs> packed_ice_stairs = registerStairs(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftyStairs> blue_ice_stairs = registerStairs(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftyStairs> netherite_stairs = registerStairs(NiftyBuilders.NETHERITE);
 
     public static final RegistryObject<NiftySlab> iron_slab = registerSlab(NiftyBuilders.IRON);
     public static final RegistryObject<NiftySlab> gold_slab = registerSlab(NiftyBuilders.GOLD);
@@ -60,6 +61,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftySlab> ice_slab = registerSlab(NiftyBuilders.ICE);
     public static final RegistryObject<NiftySlab> packed_ice_slab = registerSlab(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftySlab> blue_ice_slab = registerSlab(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftySlab> netherite_slab = registerSlab(NiftyBuilders.NETHERITE);
 
     public static final RegistryObject<NiftyFence> iron_fence = registerFence(NiftyBuilders.IRON);
     public static final RegistryObject<NiftyFence> gold_fence = registerFence(NiftyBuilders.GOLD);
@@ -83,6 +85,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftyFence> ice_fence = registerFence(NiftyBuilders.ICE);
     public static final RegistryObject<NiftyFence> packed_ice_fence = registerFence(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftyFence> blue_ice_fence = registerFence(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftyFence> netherite_fence = registerFence(NiftyBuilders.NETHERITE);
 
     public static final RegistryObject<NiftyTrapDoor> gold_trapdoor = registerTrapdoor(NiftyBuilders.GOLD);
     public static final RegistryObject<NiftyTrapDoor> diamond_trapdoor = registerTrapdoor(NiftyBuilders.DIAMOND);
@@ -106,6 +109,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftyTrapDoor> ice_trapdoor = registerTrapdoor(NiftyBuilders.ICE);
     public static final RegistryObject<NiftyTrapDoor> packed_ice_trapdoor = registerTrapdoor(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftyTrapDoor> blue_ice_trapdoor = registerTrapdoor(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftyTrapDoor> netherite_trapdoor = registerTrapdoor(NiftyBuilders.NETHERITE);
 
     public static final RegistryObject<NiftyFenceGate> iron_fence_gate = registerFenceGate(NiftyBuilders.IRON);
     public static final RegistryObject<NiftyFenceGate> gold_fence_gate = registerFenceGate(NiftyBuilders.GOLD);
@@ -130,6 +134,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftyFenceGate> ice_fence_gate = registerFenceGate(NiftyBuilders.ICE);
     public static final RegistryObject<NiftyFenceGate> packed_ice_fence_gate = registerFenceGate(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftyFenceGate> blue_ice_fence_gate = registerFenceGate(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftyFenceGate> netherite_fence_gate = registerFenceGate(NiftyBuilders.NETHERITE);
 
     public static final RegistryObject<NiftyDoor> gold_door = registerDoor(NiftyBuilders.GOLD);
     public static final RegistryObject<NiftyDoor> diamond_door = registerDoor(NiftyBuilders.DIAMOND);
@@ -153,6 +158,7 @@ public class ModBlocks {
     public static final RegistryObject<NiftyDoor> ice_door = registerDoor(NiftyBuilders.ICE);
     public static final RegistryObject<NiftyDoor> packed_ice_door = registerDoor(NiftyBuilders.PACKED_ICE);
     public static final RegistryObject<NiftyDoor> blue_ice_door = registerDoor(NiftyBuilders.BLUE_ICE);
+    public static final RegistryObject<NiftyDoor> netherite_door = registerDoor(NiftyBuilders.NETHERITE);
 
     /*public static final List<RegistryObject<Block>> test = registerArray("wool", "fence", ItemGroup.DECORATIONS);
 

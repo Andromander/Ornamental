@@ -34,6 +34,7 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItem(ModBlocks.snow_stairs);
         blockItem(ModBlocks.packed_ice_stairs);
         blockItem(ModBlocks.blue_ice_stairs);
+        blockItem(ModBlocks.netherite_stairs);
 
         blockItem(ModBlocks.iron_slab);
         blockItem(ModBlocks.gold_slab);
@@ -52,6 +53,7 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItem(ModBlocks.ice_slab);
         blockItem(ModBlocks.packed_ice_slab);
         blockItem(ModBlocks.blue_ice_slab);
+        blockItem(ModBlocks.netherite_slab);
 
         blockItemFence(ModBlocks.iron_fence, "iron_block");
         blockItemFence(ModBlocks.gold_fence, "gold_block");
@@ -73,6 +75,7 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItemFence(ModBlocks.ice_fence, "ice");
         blockItemFence(ModBlocks.packed_ice_fence, "packed_ice");
         blockItemFence(ModBlocks.blue_ice_fence, "blue_ice");
+        blockItemFence(ModBlocks.netherite_fence, "netherite_block");
 
         blockItemTrapdoor(ModBlocks.gold_trapdoor);
         blockItemTrapdoor(ModBlocks.diamond_trapdoor);
@@ -94,6 +97,7 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItemTrapdoor(ModBlocks.ice_trapdoor);
         blockItemTrapdoor(ModBlocks.packed_ice_trapdoor);
         blockItemTrapdoor(ModBlocks.blue_ice_trapdoor);
+        blockItemTrapdoor(ModBlocks.netherite_trapdoor);
 
         blockItem(ModBlocks.iron_fence_gate);
         blockItem(ModBlocks.gold_fence_gate);
@@ -116,6 +120,7 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItem(ModBlocks.ice_fence_gate);
         blockItem(ModBlocks.packed_ice_fence_gate);
         blockItem(ModBlocks.blue_ice_fence_gate);
+        blockItem(ModBlocks.netherite_fence_gate);
 
         blockItemModel(ModBlocks.gold_door);
         blockItemModel(ModBlocks.diamond_door);
@@ -139,5 +144,6 @@ public class NiftyItemModels extends NiftyItemModelProvider {
         blockItemModel(ModBlocks.ice_door);
         blockItemModel(ModBlocks.packed_ice_door);
         blockItemModel(ModBlocks.blue_ice_door);
+        blockItemModel(ModBlocks.netherite_door);
     }
 }

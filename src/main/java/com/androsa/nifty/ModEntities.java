@@ -45,6 +45,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<IceGolemEntity>> ICE_GOLEM = makeEntity("ice", IceGolemEntity::new, 0.7F, 1.9F, false);
     public static final RegistryObject<EntityType<PackedIceGolemEntity>> PACKED_ICE_GOLEM = makeEntity("packed_ice", PackedIceGolemEntity::new, 0.7F, 1.9F, false);
     public static final RegistryObject<EntityType<BlueIceGolemEntity>> BLUE_ICE_GOLEM = makeEntity("blue_ice", BlueIceGolemEntity::new, 0.7F, 1.9F, false);
+    public static final RegistryObject<EntityType<NetheriteGolemEntity>> NETHERITE_GOLEM = makeEntity("netherite", NetheriteGolemEntity::new, 1.8F, 3.1F, true);
 
     public static final RegistryObject<EntityType<LapisBulletEntity>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBulletEntity::new, 0.25F, 0.25F, 4, 10);
     public static final RegistryObject<EntityType<RedstoneBulletEntity>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBulletEntity::new, 0.25F, 0.25F, 4, 10);
@@ -95,6 +96,7 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(ICE_GOLEM.get(), IceGolemTransparentRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(PACKED_ICE_GOLEM.get(), IceGolemRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(BLUE_ICE_GOLEM.get(), IceGolemRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(), 1.0F));
 
         RenderingRegistry.registerEntityRenderingHandler(LAPIS_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(REDSTONE_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
@@ -125,6 +127,7 @@ public class ModEntities {
         putAttributes(ICE_GOLEM, IceGolemEntity.registerAttributes());
         putAttributes(PACKED_ICE_GOLEM, IceGolemEntity.registerAttributes());
         putAttributes(BLUE_ICE_GOLEM, IceGolemEntity.registerAttributes());
+        putAttributes(NETHERITE_GOLEM, NetheriteGolemEntity.registerAttributes());
     }
 
     private static void putAttributes(Supplier<? extends EntityType<? extends LivingEntity>> entity, AttributeModifierMap.MutableAttribute map) {

@@ -30,6 +30,7 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         stairsBasic(ModBlocks.snow_stairs, "snow");
         stairsBasic(ModBlocks.packed_ice_stairs, "packed_ice");
         stairsBasic(ModBlocks.blue_ice_stairs, "blue_ice");
+        stairsBasic(ModBlocks.netherite_stairs, "netherite_block");
 
         slabBasic(ModBlocks.iron_slab, "iron_block");
         slabBasic(ModBlocks.gold_slab, "gold_block");
@@ -48,6 +49,7 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         slabBasic(ModBlocks.ice_slab, "ice");
         slabBasic(ModBlocks.packed_ice_slab, "packed_ice");
         slabBasic(ModBlocks.blue_ice_slab, "blue_ice");
+        slabBasic(ModBlocks.netherite_slab, "netherite_block");
 
         fenceBasic(ModBlocks.iron_fence, "iron_block");
         fenceBasic(ModBlocks.gold_fence, "gold_block");
@@ -68,6 +70,7 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         fenceBasic(ModBlocks.snow_fence, "snow");
         fenceBasic(ModBlocks.packed_ice_fence, "packed_ice");
         fenceBasic(ModBlocks.blue_ice_fence, "blue_ice");
+        fenceBasic(ModBlocks.netherite_fence, "netherite_block");
 
         trapdoorBasic(ModBlocks.gold_trapdoor, "gold");
         trapdoorBasic(ModBlocks.diamond_trapdoor, "diamond");
@@ -89,6 +92,7 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         trapdoorBasic(ModBlocks.ice_trapdoor, "ice");
         trapdoorBasic(ModBlocks.packed_ice_trapdoor, "packed_ice");
         trapdoorBasic(ModBlocks.blue_ice_trapdoor, "blue_ice");
+        trapdoorBasic(ModBlocks.netherite_trapdoor, "netherite");
 
         fenceGateBasic(ModBlocks.iron_fence_gate, "iron_block");
         fenceGateBasic(ModBlocks.gold_fence_gate, "gold_block");
@@ -111,6 +115,7 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         fenceGateBasic(ModBlocks.ice_fence_gate, "ice");
         fenceGateBasic(ModBlocks.packed_ice_fence_gate, "packed_ice");
         fenceGateBasic(ModBlocks.blue_ice_fence_gate, "blue_ice");
+        fenceGateBasic(ModBlocks.netherite_fence_gate, "netherite_block");
 
         doorBasic(ModBlocks.gold_door, "gold");
         doorBasic(ModBlocks.diamond_door, "diamond");
@@ -132,5 +137,6 @@ public class NiftyBlockStates extends NiftyBlockStateProvider {
         doorBasic(ModBlocks.ice_door, "ice");
         doorBasic(ModBlocks.packed_ice_door, "packed_ice");
         doorBasic(ModBlocks.blue_ice_door, "blue_ice");
+        doorBasic(ModBlocks.netherite_door, "netherite");
     }
 }

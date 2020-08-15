@@ -69,6 +69,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropSelf(ModBlocks.ice_stairs);
             dropSelf(ModBlocks.packed_ice_stairs);
             dropSelf(ModBlocks.blue_ice_stairs);
+            dropSelf(ModBlocks.netherite_stairs);
 
             dropSlab(ModBlocks.iron_slab);
             dropSlab(ModBlocks.gold_slab);
@@ -89,6 +90,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropSlab(ModBlocks.ice_slab);
             dropSlab(ModBlocks.packed_ice_slab);
             dropSlab(ModBlocks.blue_ice_slab);
+            dropSlab(ModBlocks.netherite_slab);
 
             dropSelf(ModBlocks.iron_fence);
             dropSelf(ModBlocks.gold_fence);
@@ -112,6 +114,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropSelf(ModBlocks.ice_fence);
             dropSelf(ModBlocks.packed_ice_fence);
             dropSelf(ModBlocks.blue_ice_fence);
+            dropSelf(ModBlocks.netherite_fence);
 
             dropSelf(ModBlocks.gold_trapdoor);
             dropSelf(ModBlocks.diamond_trapdoor);
@@ -135,6 +138,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropSelf(ModBlocks.ice_trapdoor);
             dropSelf(ModBlocks.packed_ice_trapdoor);
             dropSelf(ModBlocks.blue_ice_trapdoor);
+            dropSelf(ModBlocks.netherite_trapdoor);
 
             dropSelf(ModBlocks.iron_fence_gate);
             dropSelf(ModBlocks.gold_fence_gate);
@@ -159,6 +163,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropSelf(ModBlocks.ice_fence_gate);
             dropSelf(ModBlocks.packed_ice_fence_gate);
             dropSelf(ModBlocks.blue_ice_fence_gate);
+            dropSelf(ModBlocks.netherite_fence_gate);
 
             dropDoor(ModBlocks.gold_door);
             dropDoor(ModBlocks.diamond_door);
@@ -182,6 +187,7 @@ public class NiftyLootTables extends LootTableProvider {
             dropDoor(ModBlocks.ice_door);
             dropDoor(ModBlocks.packed_ice_door);
             dropDoor(ModBlocks.blue_ice_door);
+            dropDoor(ModBlocks.netherite_door);
         }
 
         @Override

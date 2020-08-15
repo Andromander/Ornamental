@@ -30,7 +30,8 @@ public enum PatternType {
     RED_NETHER_BRICK (ModEntities.RED_NETHER_BRICK_GOLEM, GolemPatterns.getRedNetherBrickPattern(), NiftyBuilders.RED_NETHER_BRICK),
     ICE              (ModEntities.ICE_GOLEM, GolemPatterns.getIcePattern(), NiftyBuilders.ICE),
     PACKED_ICE       (ModEntities.PACKED_ICE_GOLEM, GolemPatterns.getPackedIcePattern(), NiftyBuilders.PACKED_ICE),
-    BLUE_ICE         (ModEntities.BLUE_ICE_GOLEM, GolemPatterns.getBlueIcePattern(), NiftyBuilders.BLUE_ICE);
+    BLUE_ICE         (ModEntities.BLUE_ICE_GOLEM, GolemPatterns.getBlueIcePattern(), NiftyBuilders.BLUE_ICE),
+    NETHERITE        (ModEntities.NETHERITE_GOLEM, GolemPatterns.getNetheritePattern(), NiftyBuilders.NETHERITE);
 
     private final Supplier<? extends EntityType<? extends GolemEntity>> supplierEntity;
     private final BlockPattern blockPattern;
