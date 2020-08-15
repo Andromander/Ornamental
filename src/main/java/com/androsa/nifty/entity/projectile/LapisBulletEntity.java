@@ -1,7 +1,7 @@
 package com.androsa.nifty.entity.projectile;
 
-import com.androsa.nifty.ModEntities;
-import com.androsa.nifty.ModParticles;
+import com.androsa.nifty.registry.ModEntities;
+import com.androsa.nifty.registry.ModParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

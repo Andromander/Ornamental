@@ -1,5 +1,6 @@
-package com.androsa.nifty;
+package com.androsa.nifty.registry;
 
+import com.androsa.nifty.NiftyMod;
 import com.androsa.nifty.particle.NiftyBreakingParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;

@@ -1,5 +1,6 @@
-package com.androsa.nifty;
+package com.androsa.nifty.registry;
 
+import com.androsa.nifty.NiftyMod;
 import com.androsa.nifty.entity.*;
 import com.androsa.nifty.entity.model.*;
 import com.androsa.nifty.entity.projectile.*;

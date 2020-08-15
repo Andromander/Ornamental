@@ -1,6 +1,6 @@
 package com.androsa.nifty.entity;
 
-import com.androsa.nifty.ModEntities;
+import com.androsa.nifty.registry.ModEntities;
 import com.androsa.nifty.entity.projectile.ThrownBrickEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;

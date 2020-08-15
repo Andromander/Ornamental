@@ -1,7 +1,7 @@
 package com.androsa.nifty.data;
 
-import com.androsa.nifty.*;
 import com.androsa.nifty.data.provider.NiftyRecipeProvider;
+import com.androsa.nifty.registry.ModBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;

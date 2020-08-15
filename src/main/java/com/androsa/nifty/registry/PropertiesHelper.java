@@ -1,4 +1,4 @@
-package com.androsa.nifty;
+package com.androsa.nifty.registry;
 
 import com.androsa.nifty.builder.NiftyBuilder;
 import net.minecraft.block.AbstractBlock;

@@ -1,6 +1,6 @@
 package com.androsa.nifty.items;
 
-import com.androsa.nifty.NiftyBuilder;
+import com.androsa.nifty.builder.NiftyBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;

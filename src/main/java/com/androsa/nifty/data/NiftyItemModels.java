@@ -1,6 +1,6 @@
 package com.androsa.nifty.data;
 
-import com.androsa.nifty.ModBlocks;
+import com.androsa.nifty.registry.ModBlocks;
 import com.androsa.nifty.data.provider.NiftyItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;

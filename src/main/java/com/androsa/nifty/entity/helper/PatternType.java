@@ -1,8 +1,8 @@
 package com.androsa.nifty.entity.helper;
 
-import com.androsa.nifty.ModEntities;
-import com.androsa.nifty.NiftyBuilder;
-import com.androsa.nifty.NiftyBuilders;
+import com.androsa.nifty.registry.ModEntities;
+import com.androsa.nifty.builder.NiftyBuilder;
+import com.androsa.nifty.builder.NiftyBuilders;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.GolemEntity;

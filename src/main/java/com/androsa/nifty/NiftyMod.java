@@ -2,6 +2,9 @@ package com.androsa.nifty;
 
 import com.androsa.nifty.data.*;
 import com.androsa.nifty.data.conditions.ConfigCondition;
+import com.androsa.nifty.registry.ModBlocks;
+import com.androsa.nifty.registry.ModEntities;
+import com.androsa.nifty.registry.ModParticles;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;

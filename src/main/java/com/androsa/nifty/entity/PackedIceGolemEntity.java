@@ -1,6 +1,6 @@
 package com.androsa.nifty.entity;
 
-import com.androsa.nifty.ModEntities;
+import com.androsa.nifty.registry.ModEntities;
 import com.androsa.nifty.entity.projectile.PackedIceEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;

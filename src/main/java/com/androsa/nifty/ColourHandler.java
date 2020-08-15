@@ -1,5 +1,6 @@
 package com.androsa.nifty;
 
+import com.androsa.nifty.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;

@@ -1,13 +1,13 @@
-package com.androsa.nifty;
+package com.androsa.nifty.registry;
 
+import com.androsa.nifty.builder.NiftyBuilder;
+import com.androsa.nifty.builder.NiftyBuilders;
+import com.androsa.nifty.NiftyMod;
 import com.androsa.nifty.blocks.*;
 import com.androsa.nifty.items.NiftyBlockItem;
 import com.androsa.nifty.items.NiftyTallBlockItem;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.block.*;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

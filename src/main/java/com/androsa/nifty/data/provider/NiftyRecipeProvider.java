@@ -1,6 +1,6 @@
 package com.androsa.nifty.data.provider;
 
-import com.androsa.nifty.NiftyBuilder;
+import com.androsa.nifty.builder.NiftyBuilder;
 import com.androsa.nifty.NiftyMod;
 import com.androsa.nifty.blocks.*;
 import com.androsa.nifty.data.conditions.ConfigCondition;

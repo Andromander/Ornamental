@@ -1,5 +1,6 @@
-package com.androsa.nifty;
+package com.androsa.nifty.builder;
 
+import com.androsa.nifty.NiftyConfig;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

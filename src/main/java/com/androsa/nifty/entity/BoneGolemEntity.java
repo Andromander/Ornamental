@@ -144,9 +144,9 @@ public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttac
         ItemStack itemstack = this.findAmmo(this.getHeldItem(ProjectileHelper.getHandWith(this, Items.BOW)));
         AbstractArrowEntity abstractarrowentity = this.fireArrow(itemstack, multiplier);
 
-        double x = entity.getX() - this.getX();
-        double y = entity.getBodyY(0.3333333333333333D) - abstractarrowentity.getY();
-        double z = entity.getZ() - this.getZ();
+        double x = entity.getPosX() - this.getPosX();
+        double y = entity.getPosYHeight(0.3333333333333333D) - abstractarrowentity.getPosY();
+        double z = entity.getPosZ() - this.getPosZ();
         double sqrt = (double) MathHelper.sqrt(x * x + z * z);
         abstractarrowentity.shoot(x, y + sqrt * (double)0.2F, z, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
         this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));

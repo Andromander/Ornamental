@@ -1,4 +1,4 @@
-package com.androsa.nifty;
+package com.androsa.nifty.builder;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;

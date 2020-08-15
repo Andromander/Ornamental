@@ -1,7 +1,7 @@
 package com.androsa.nifty.data;
 
-import com.androsa.nifty.ModBlocks;
-import com.androsa.nifty.ModEntities;
+import com.androsa.nifty.registry.ModBlocks;
+import com.androsa.nifty.registry.ModEntities;
 import com.androsa.nifty.data.provider.GolemLootTableProvider;
 import com.androsa.nifty.data.provider.NiftyLootTableProvider;
 import com.google.common.collect.ImmutableList;
