@@ -3,7 +3,8 @@ package com.androsa.nifty.entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.GolemEntity;
@@ -18,15 +19,14 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
+import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IceGolemEntity extends GolemEntity implements IShearable {
+public class IceGolemEntity extends GolemEntity implements IForgeShearable {
     private static final DataParameter<Boolean> PUMPKIN_EQUIPPED = EntityDataManager.createKey(IceGolemEntity.class, DataSerializers.BOOLEAN);
     protected boolean canMelt;
 
@@ -44,11 +44,10 @@ public class IceGolemEntity extends GolemEntity implements IShearable {
                 target instanceof IMob));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D);
     }
 
     @Override
@@ -75,11 +74,11 @@ public class IceGolemEntity extends GolemEntity implements IShearable {
     public void livingTick() {
         super.livingTick();
         if (!this.world.isRemote) {
-            int i = MathHelper.floor(this.getX());
-            int j = MathHelper.floor(this.getY());
-            int k = MathHelper.floor(this.getZ());
+            int i = MathHelper.floor(this.getPosX());
+            int j = MathHelper.floor(this.getPosY());
+            int k = MathHelper.floor(this.getPosZ());
 
-            if (this.world.getBiome(new BlockPos(i, 0, k)).getTemperatureCached(new BlockPos(i, j, k)) > 1.0F) {
+            if (this.world.getBiome(new BlockPos(i, 0, k)).getTemperature(new BlockPos(i, j, k)) > 1.0F) {
                 this.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
             }
         }
@@ -109,12 +108,12 @@ public class IceGolemEntity extends GolemEntity implements IShearable {
     }
 
     @Override
-    public boolean isShearable(ItemStack item, IWorldReader world, BlockPos pos) {
+    public boolean isShearable(ItemStack item, World world, BlockPos pos) {
         return this.isPumpkinEquipped();
     }
 
     @Override
-    public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IWorld world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(PlayerEntity player, ItemStack item, World world, BlockPos pos, int fortune) {
         this.setPumpkinEquipped(false);
         return new ArrayList<>();
     }

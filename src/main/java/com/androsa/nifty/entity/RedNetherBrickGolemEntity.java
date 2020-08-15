@@ -4,6 +4,8 @@ import com.androsa.nifty.ModEntities;
 import com.androsa.nifty.entity.projectile.ThrownNetherBrickEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.WitchEntity;
@@ -13,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -42,12 +41,11 @@ public class RedNetherBrickGolemEntity extends AbstractGolemEntity implements IR
                 target instanceof IMob));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
     }
 
     @Override
@@ -79,25 +77,26 @@ public class RedNetherBrickGolemEntity extends AbstractGolemEntity implements IR
         return SoundEvents.BLOCK_STONE_BREAK;
     }
 
+    //processInteract
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
         if (item != Items.NETHER_BRICK || item != Items.NETHER_WART) {
-            return false;
+            return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
     }
@@ -110,10 +109,10 @@ public class RedNetherBrickGolemEntity extends AbstractGolemEntity implements IR
     @Override
     public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
         ThrownNetherBrickEntity brickentity = new ThrownNetherBrickEntity(ModEntities.THROWN_NETHER_BRICK.get(), this.world, this);
-        double eye = entity.getEyeY() - (double)1.1F;
-        double x = entity.getX() - this.getX();
-        double y = eye - brickentity.getY();
-        double z = entity.getZ() - this.getZ();
+        double eye = entity.getPosYEye() - (double)1.1F;
+        double x = entity.getPosX() - this.getPosX();
+        double y = eye - brickentity.getPosY();
+        double z = entity.getPosZ() - this.getPosZ();
         float f = MathHelper.sqrt(x * x + z * z) * 0.2F;
 
         brickentity.shoot(x, y + (double)f, z, 1.6F, 12.0F);

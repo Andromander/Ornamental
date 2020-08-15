@@ -49,7 +49,7 @@ public class PackedIceEntity extends ProjectileItemEntity {
             IParticleData iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -59,7 +59,7 @@ public class PackedIceEntity extends ProjectileItemEntity {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
             int i = entity instanceof BlazeEntity ? 5 : 2;
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), (float)i); //getThrower
             if (entity instanceof LivingEntity) {
                 ((LivingEntity)entity).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 20 * 5, getAmplifier()));
             }

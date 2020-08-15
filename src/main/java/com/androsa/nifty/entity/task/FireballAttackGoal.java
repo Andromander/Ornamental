@@ -4,7 +4,6 @@ import com.androsa.nifty.entity.QuartzGolemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.projectile.SmallFireballEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
@@ -36,12 +35,12 @@ public class FireballAttackGoal extends Goal {
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {
-                double x = target.getX() - this.parentEntity.getX();
-                double y = target.getBodyY(0.5D) - (0.5D + this.parentEntity.getBodyY(0.5D));
-                double z = target.getZ() - this.parentEntity.getZ();
-                world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, new BlockPos(this.parentEntity), 0);
+                double x = target.getPosX() - this.parentEntity.getPosX();
+                double y = target.getPosYHeight(0.5D) - (0.5D + this.parentEntity.getPosYHeight(0.5D));
+                double z = target.getPosZ() - this.parentEntity.getPosZ();
+                world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.getPosition(), 0);
                 SmallFireballEntity fireball = new SmallFireballEntity(world, this.parentEntity, x, y, z);
-                fireball.setPosition(this.parentEntity.getX(), this.parentEntity.getBodyY(0.5D) + 0.5D, fireball.getZ());
+                fireball.setPosition(this.parentEntity.getPosX(), this.parentEntity.getPosYHeight(0.5D) + 0.5D, fireball.getPosZ());
                 world.addEntity(fireball);
                 this.attackTimer = -40;
             }

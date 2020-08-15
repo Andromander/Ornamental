@@ -42,7 +42,7 @@ public class IceGolemTransparentRenderer<T extends IceGolemEntity> extends IceGo
 
         public void render(MatrixStack stack, IRenderTypeBuffer buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
             IVertexBuilder vertex = buffer.getBuffer(RenderType.getEntityTranslucent(texIce));
-            IceGolemTransparentRenderer.this.entityModel.render(stack, vertex, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+            IceGolemTransparentRenderer.this.entityModel.render(stack, vertex, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 }

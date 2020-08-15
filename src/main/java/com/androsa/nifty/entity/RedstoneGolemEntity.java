@@ -2,6 +2,8 @@ package com.androsa.nifty.entity;
 
 import com.androsa.nifty.entity.projectile.RedstoneBulletEntity;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
@@ -9,10 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -34,12 +33,11 @@ public class RedstoneGolemEntity extends AbstractGolemEntity implements IRangedA
                 target instanceof IMob && !(target instanceof CreeperEntity)));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 70.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4D);
     }
 
     @Override
@@ -71,25 +69,26 @@ public class RedstoneGolemEntity extends AbstractGolemEntity implements IRangedA
         return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
     }
 
+    //processInteract
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
         if (item != Items.REDSTONE) {
-            return false;
+            return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
     }
@@ -97,10 +96,10 @@ public class RedstoneGolemEntity extends AbstractGolemEntity implements IRangedA
     @Override
     public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
         RedstoneBulletEntity bullet = new RedstoneBulletEntity(this.world, this);
-        double eye = entity.getEyeY() - (double)1.1F;
-        double x = entity.getX() - this.getX();
-        double y = eye - bullet.getY();
-        double z = entity.getZ() - this.getZ();
+        double eye = entity.getPosYEye() - (double)1.1F;
+        double x = entity.getPosX() - this.getPosX();
+        double y = eye - bullet.getPosY();
+        double z = entity.getPosZ() - this.getPosZ();
         float f = MathHelper.sqrt(x * x + z * z) * 0.2F;
 
         bullet.shoot(x, y + (double)f, z, 1.6F, 12.0F);

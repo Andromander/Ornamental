@@ -43,7 +43,7 @@ public class ThrownNetherBrickEntity extends ThrownBrickEntity {
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 5.0F);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 5.0F); //getThrower
         }
 
         if (!this.world.isRemote) {

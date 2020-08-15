@@ -3,8 +3,11 @@ package com.androsa.nifty;
 import com.androsa.nifty.blocks.*;
 import com.androsa.nifty.items.NiftyBlockItem;
 import com.androsa.nifty.items.NiftyTallBlockItem;
-import net.minecraft.block.*;
-import net.minecraft.item.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -12,11 +15,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess"})
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, NiftyMod.MODID);
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, NiftyMod.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, NiftyMod.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, NiftyMod.MODID);
 
     public static final RegistryObject<NiftyStairs> iron_stairs = registerStairs(NiftyBuilders.IRON);
     public static final RegistryObject<NiftyStairs> gold_stairs = registerStairs(NiftyBuilders.GOLD);
@@ -166,56 +169,45 @@ public class ModBlocks {
         return blocks;
     }*/
 
-    private static Block.Properties createProps(NiftyBuilder builder) {
-        Block.Properties props = Block.Properties.create(builder.material, builder.color)
-                .hardnessAndResistance(builder.hardness, builder.resistance)
-                .sound(builder.sound)
-                .harvestTool(builder.harvestTool)
-                .harvestLevel(builder.harvestLevel)
-                .slipperiness(builder.slipperiness);
-        if (builder.doesTick) props.tickRandomly();
-        if (builder.isIce) props.nonOpaque();
-
-        return props;
-    }
-
     private static RegistryObject<NiftyStairs> registerStairs(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder);
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_stairs", () -> new NiftyStairs(props, builder), item ->
                 registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, builder, 4));
     }
 
     private static RegistryObject<NiftySlab> registerSlab(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder);
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_slab", () -> new NiftySlab(props, builder), item ->
                 registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, builder, 3));
     }
 
     private static RegistryObject<NiftyFence> registerFence(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder);
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_fence", () -> new NiftyFence(props, builder), item ->
                 registerBlockItem(item, ItemGroup.DECORATIONS, builder, 1));
     }
 
     private static RegistryObject<NiftyTrapDoor> registerTrapdoor(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder).nonOpaque();
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder)
+                .notSolid()
+                .setAllowsSpawn((state, reader, pos, type) -> false);
 
         return registerBlock(builder.name + "_trapdoor", () -> new NiftyTrapDoor(props, builder), item ->
                 registerBlockItem(item, ItemGroup.REDSTONE, builder, 5));
     }
 
     private static RegistryObject<NiftyFenceGate> registerFenceGate(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder);
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_fence_gate", () -> new NiftyFenceGate(props, builder), item ->
                 registerBlockItem(item, ItemGroup.REDSTONE, builder, 2));
     }
 
     private static RegistryObject<NiftyDoor> registerDoor(NiftyBuilder builder) {
-        Block.Properties props = createProps(builder).nonOpaque();
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder).notSolid();
 
         return registerBlock(builder.name + "_door", () -> new NiftyDoor(props, builder), item ->
                 registerBlockItemDoor(item, builder, 0));
@@ -228,10 +220,10 @@ public class ModBlocks {
     }
 
     private static <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block, ItemGroup group, NiftyBuilder nifty, int fuelindex) {
-        return () -> new NiftyBlockItem(block.get(), new Item.Properties().group(group), nifty, fuelindex);
+        return () -> new NiftyBlockItem(block.get(), PropertiesHelper.createProps(nifty, group), nifty, fuelindex);
     }
 
     private static <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, NiftyBuilder nifty, int fuelindex) {
-        return () -> new NiftyTallBlockItem(block.get(), new Item.Properties().group(ItemGroup.REDSTONE), nifty, fuelindex);
+        return () -> new NiftyTallBlockItem(block.get(), PropertiesHelper.createProps(nifty, ItemGroup.REDSTONE), nifty, fuelindex);
     }
 }

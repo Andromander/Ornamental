@@ -19,29 +19,29 @@ public class EmeraldGolemModel<T extends EmeraldGolemEntity> extends FlowerGolem
 
         this.nose = new ModelRenderer(this, 76, 0);
         this.nose.setRotationPoint(0.0F, -5.0F, -2.0F);
-        this.nose.addCuboid(-1.0F, 0.0F, -5.5F, 2, 4, 2, 0.0F);
+        this.nose.addBox(-1.0F, 0.0F, -5.5F, 2, 4, 2, 0.0F);
         this.legL = new ModelRenderer(this, 56, 0);
         this.legL.setRotationPoint(-4.0F, 13.0F, 0.5F);
-        this.legL.addCuboid(-2.5F, -3.0F, -3.0F, 5, 14, 5, 0.0F);
+        this.legL.addBox(-2.5F, -3.0F, -3.0F, 5, 14, 5, 0.0F);
         this.legR = new ModelRenderer(this, 18, 0);
         this.legR.mirror = true;
         this.legR.setRotationPoint(4.0F, 13.0F, 0.5F);
-        this.legR.addCuboid(-2.5F, -3.0F, -3.0F, 5, 14, 5, 0.0F);
+        this.legR.addBox(-2.5F, -3.0F, -3.0F, 5, 14, 5, 0.0F);
         this.torso = new ModelRenderer(this, 46, 27);
         this.torso.setRotationPoint(0.0F, 10.0F, 0.0F);
-        this.torso.addCuboid(-7.5F, 0.0F, -5.0F, 15, 10, 10, 0.0F);
+        this.torso.addBox(-7.5F, 0.0F, -5.0F, 15, 10, 10, 0.0F);
         this.head = new ModelRenderer(this, 10, 23);
         this.head.setRotationPoint(0.0F, -5.0F, -2.0F);
-        this.head.addCuboid(-4.0F, -12.0F, -5.5F, 8, 10, 8, 0.0F);
+        this.head.addBox(-4.0F, -12.0F, -5.5F, 8, 10, 8, 0.0F);
         this.armL = new ModelRenderer(this, 0, 0);
         this.armL.setRotationPoint(0.0F, -4.0F, 0.0F);
-        this.armL.addCuboid(7.5F, -2.5F, -3.0F, 4, 26, 5, 0.0F);
+        this.armL.addBox(7.5F, -2.5F, -3.0F, 4, 26, 5, 0.0F);
         this.armR = new ModelRenderer(this, 38, 0);
         this.armR.setRotationPoint(0.0F, -4.0F, 0.0F);
-        this.armR.addCuboid(-11.5F, -2.5F, -3.0F, 4, 26, 5, 0.0F);
+        this.armR.addBox(-11.5F, -2.5F, -3.0F, 4, 26, 5, 0.0F);
         this.body = new ModelRenderer(this, 76, 0);
         this.body.setRotationPoint(0.0F, -5.0F, 0.0F);
-        this.body.addCuboid(-7.5F, -2.0F, -5.0F, 15, 17, 10, 0.0F);
+        this.body.addBox(-7.5F, -2.0F, -5.0F, 15, 17, 10, 0.0F);
 
         this.head.addChild(this.nose);
     }

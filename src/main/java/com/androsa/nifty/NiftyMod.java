@@ -55,14 +55,16 @@ public class NiftyMod {
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("Nifty is a mod by ???");
+
+        ModEntities.addEntityAttributes();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> NiftyMod::registerRenders);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> ModEntities::registerRenders);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> NiftyMod::registerRenders);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModEntities::registerRenders);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
     }
 
     @SubscribeEvent

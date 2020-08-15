@@ -3,6 +3,8 @@ package com.androsa.nifty.entity;
 import com.androsa.nifty.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
@@ -14,6 +16,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class PathGolemEntity extends DirtGolemEntity {
 
@@ -33,12 +36,11 @@ public class PathGolemEntity extends DirtGolemEntity {
                 target instanceof IMob && !(target instanceof CreeperEntity)));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 8.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 
     @Override
@@ -51,8 +53,9 @@ public class PathGolemEntity extends DirtGolemEntity {
         return SoundEvents.BLOCK_GRASS_BREAK;
     }
 
+    //processInteract
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
 
@@ -60,7 +63,7 @@ public class PathGolemEntity extends DirtGolemEntity {
             GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
             grass.copyLocationAndAnglesFrom(this);
             this.remove();
-            grass.onInitialSpawn(this.world, this.world.getDifficultyForLocation(new BlockPos(grass)), SpawnReason.CONVERSION, null, null);
+            grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
             grass.setNoAI(this.isAIDisabled());
             if (this.hasCustomName()) {
                 grass.setCustomName(this.getCustomName());
@@ -73,24 +76,24 @@ public class PathGolemEntity extends DirtGolemEntity {
 
             grass.setInvulnerable(this.isInvulnerable());
             this.world.addEntity(grass);
-            this.world.playSound(null, new BlockPos(this), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_PATH)  {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
 
-        return false;
+        return ActionResultType.PASS;
     }
 
     @Override

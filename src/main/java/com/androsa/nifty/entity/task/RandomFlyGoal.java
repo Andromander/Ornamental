@@ -27,7 +27,7 @@ public class RandomFlyGoal extends Goal {
 
     @Override
     public void startExecuting() {
-        BlockPos pos = new BlockPos(parentEntity);
+        BlockPos pos = parentEntity.getPosition();
 
         for(int i = 0; i < 3; ++i) {
             BlockPos blockpos1 = pos.add(parentEntity.getRNG().nextInt(15) - 7, parentEntity.getRNG().nextInt(11) - 5, parentEntity.getRNG().nextInt(15) - 7);

@@ -9,6 +9,9 @@ import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
@@ -16,9 +19,11 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+
 public class ModEntities {
 
-    public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, NiftyMod.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, NiftyMod.MODID);
 
     public static final RegistryObject<EntityType<GoldGolemEntity>> GOLD_GOLEM = makeEntity("gold", GoldGolemEntity::new, 1.3F, 2.7F, false);
     public static final RegistryObject<EntityType<DiamondGolemEntity>> DIAMOND_GOLEM = makeEntity("diamond", DiamondGolemEntity::new, 1.0F, 1.5F, false);
@@ -97,5 +102,32 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(THROWN_NETHER_BRICK.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(PACKED_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
         RenderingRegistry.registerEntityRenderingHandler(BLUE_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
+    }
+
+    public static void addEntityAttributes() {
+        putAttributes(GOLD_GOLEM, GoldGolemEntity.registerAttributes());
+        putAttributes(DIAMOND_GOLEM, DiamondGolemEntity.registerAttributes());
+        putAttributes(EMERALD_GOLEM, EmeraldGolemEntity.registerAttributes());
+        putAttributes(LAPIS_GOLEM, LapisGolemEntity.registerAttributes());
+        putAttributes(OBSIDIAN_GOLEM, ObsidianGolemEntity.registerAttributes());
+        putAttributes(COAL_GOLEM, CoalGolemEntity.registerAttributes());
+        putAttributes(REDSTONE_GOLEM, RedstoneGolemEntity.registerAttributes());
+        putAttributes(CLAY_GOLEM, ClayGolemEntity.registerAttributes());
+        putAttributes(DIRT_GOLEM, DirtGolemEntity.registerAttributes());
+        putAttributes(GRASS_GOLEM, GrassGolemEntity.registerAttributes());
+        putAttributes(HAY_GOLEM, HayGolemEntity.registerAttributes());
+        putAttributes(PATH_GOLEM, PathGolemEntity.registerAttributes());
+        putAttributes(BRICK_GOLEM, BrickGolemEntity.registerAttributes());
+        putAttributes(QUARTZ_GOLEM, QuartzGolemEntity.registerAttributes());
+        putAttributes(BONE_GOLEM, BoneGolemEntity.registerAttributes());
+        putAttributes(NETHER_BRICK_GOLEM, NetherBrickGolemEntity.registerAttributes());
+        putAttributes(RED_NETHER_BRICK_GOLEM, RedNetherBrickGolemEntity.registerAttributes());
+        putAttributes(ICE_GOLEM, IceGolemEntity.registerAttributes());
+        putAttributes(PACKED_ICE_GOLEM, IceGolemEntity.registerAttributes());
+        putAttributes(BLUE_ICE_GOLEM, IceGolemEntity.registerAttributes());
+    }
+
+    private static void putAttributes(Supplier<? extends EntityType<? extends LivingEntity>> entity, AttributeModifierMap.MutableAttribute map) {
+        GlobalEntityTypeAttributes.put(entity.get(), map.create());
     }
 }

@@ -39,7 +39,7 @@ public abstract class AbstractGolemModel<T extends AbstractGolemEntity> extends 
     }
 
     @Override
-    public void setAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
         this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
         this.legL.rotateAngleX = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;

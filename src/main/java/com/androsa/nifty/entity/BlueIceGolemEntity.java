@@ -27,21 +27,15 @@ public class BlueIceGolemEntity extends IceGolemEntity implements IRangedAttackM
                 target instanceof IMob));
     }
 
-    //TODO: Slip slip
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
-    }
+    //TODO: Slip slip (Attributes from Ice Golem)
 
     @Override
     public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
         BlueIceEntity projectile = new BlueIceEntity(ModEntities.BLUE_ICEBALL.get(), this.world, this);
-        double d0 = entity.getEyeY() - (double)1.1F;
-        double d1 = entity.getX() - this.getX();
-        double d2 = d0 - projectile.getY();
-        double d3 = entity.getZ() - this.getZ();
+        double d0 = entity.getPosYEye() - (double)1.1F;
+        double d1 = entity.getPosX() - this.getPosX();
+        double d2 = d0 - projectile.getPosY();
+        double d3 = entity.getPosZ() - this.getPosZ();
         float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
         projectile.shoot(d1, d2 + (double)f, d3, 1.6F, 12.0F);
         this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));

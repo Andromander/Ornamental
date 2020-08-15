@@ -3,9 +3,9 @@ package com.androsa.nifty.data.provider;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
+import net.minecraft.loot.*;
+import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.world.storage.loot.*;
-import net.minecraft.world.storage.loot.functions.SetCount;
 
 import java.util.function.Supplier;
 

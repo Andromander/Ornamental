@@ -47,21 +47,21 @@ public class AbstractGolemEntity extends GolemEntity {
 
     @Override
     public boolean isNotColliding(IWorldReader reader) {
-        BlockPos blockpos = new BlockPos(this);
-        BlockPos posBelow = blockpos.down();
-        BlockState blockstate = reader.getBlockState(posBelow);
-        if (!blockstate.isTopSolid(reader, posBelow, this)) {
+        BlockPos entityPos = this.getPosition();
+        BlockPos posBelow = entityPos.down();
+        BlockState stateBelow = reader.getBlockState(posBelow);
+        if (!stateBelow.canSpawnMobs(reader, posBelow, this)) {
             return false;
         } else {
             for(int i = 1; i < 3; ++i) {
-                BlockPos posAbove = blockpos.up(i);
-                BlockState blockstate1 = reader.getBlockState(posAbove);
-                if (!WorldEntitySpawner.isSpawnableSpace(reader, posAbove, blockstate1, blockstate1.getFluidState())) {
+                BlockPos posAbove = entityPos.up(i);
+                BlockState stateAbove = reader.getBlockState(posAbove);
+                if (!WorldEntitySpawner.func_234968_a_(reader, posAbove, stateAbove, stateAbove.getFluidState(), this.getType())) { //isSpawnableSpace with EntityType
                     return false;
                 }
             }
 
-            return WorldEntitySpawner.isSpawnableSpace(reader, blockpos, reader.getBlockState(blockpos), Fluids.EMPTY.getDefaultState()) && reader.intersectsEntities(this);
+            return WorldEntitySpawner.func_234968_a_(reader, entityPos, reader.getBlockState(entityPos), Fluids.EMPTY.getDefaultState(), this.getType()) && reader.checkNoEntityCollision(this);
         }
     }
 }

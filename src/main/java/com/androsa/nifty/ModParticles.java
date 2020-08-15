@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = NiftyMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModParticles {
 
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = new DeferredRegister<>(ForgeRegistries.PARTICLE_TYPES, NiftyMod.MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, NiftyMod.MODID);
 
     public static final RegistryObject<BasicParticleType> ITEM_LAPIS = PARTICLE_TYPE.register("item_lapis", () -> new BasicParticleType(false));
     public static final RegistryObject<BasicParticleType> ITEM_REDSTONE = PARTICLE_TYPE.register("item_redstone", () -> new BasicParticleType(false));

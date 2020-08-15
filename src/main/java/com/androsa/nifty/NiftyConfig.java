@@ -33,117 +33,94 @@ public class NiftyConfig {
     public NiftyConfig(ForgeConfigSpec.Builder builder) {
         showIronBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_iron_blocks")
-                .worldRestart()
                 .comment("Should Iron blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showIronBlocks", true);
         showGoldBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_gold_blocks")
-                .worldRestart()
                 .comment("Should Gold blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showGoldBlocks", true);
         showDiamondBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_diamond_blocks")
-                .worldRestart()
                 .comment("Should Diamond blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showDiamondBlocks", true);
         showEmeraldBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_emerald_blocks")
-                .worldRestart()
                 .comment("Should Emerald blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showEmeraldBlocks", true);
         showLapisBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_lapis_blocks")
-                .worldRestart()
                 .comment("Should Lapis Lazuli blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showLapisBlocks", true);
         showObsidianBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_obsidian_blocks")
-                .worldRestart()
                 .comment("Should Obsidian blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showObsidianBlocks", true);
         showCoalBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_coal_blocks")
-                .worldRestart()
                 .comment("Should Coal blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showCoalBlocks", true);
         showRedstoneBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_redstone_blocks")
-                .worldRestart()
                 .comment("Should Redstone blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showRedstoneBlocks", true);
         showMissingnoBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_missingno_blocks")
-                .worldRestart()
                 .comment("Should Missingno blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showMissingnoBlocks", true);
         showClayBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_clay_blocks")
-                .worldRestart()
                 .comment("Should Clay blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showClayBlocks", true);
         showDirtBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_dirt_blocks")
-                .worldRestart()
                 .comment("Should Dirt blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showDirtBlocks", true);
         showGrassBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_grass_blocks")
-                .worldRestart()
                 .comment("Should Grass blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showGrassBlocks", true);
         showHayBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_hay_blocks")
-                .worldRestart()
                 .comment("Should Hay blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showHayBlocks", true);
         showPathBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_path_blocks")
-                .worldRestart()
                 .comment("Should Path blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showPathBlocks", true);
         showBrickBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_brick_blocks")
-                .worldRestart()
                 .comment("Should Brick blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showBrickBlocks", true);
         showQuartzBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_quartz_blocks")
-                .worldRestart()
                 .comment("Should Quartz blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showQuartzBlocks", true);
         showBoneBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_bone_blocks")
-                .worldRestart()
                 .comment("Should Bone blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showBoneBlocks", true);
         showNetherBrickBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_nether_brick_blocks")
-                .worldRestart()
                 .comment("Should Nether Brick blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showNetherBrickBlocks", true);
         showRedNetherBrickBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_red_nether_brick_blocks")
-                .worldRestart()
                 .comment("Should Red Nether Brick blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showRedNetherBrickBlocks", true);
         showSnowBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_snow_blocks")
-                .worldRestart()
                 .comment("Should Snow blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showSnowBlocks", true);
         showIceBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_ice_blocks")
-                .worldRestart()
                 .comment("Should Ice blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showIceBlocks", true);
         showPackedIceBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_packed_ice_blocks")
-                .worldRestart()
                 .comment("Should Packed Ice blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showPackedIceBlocks", true);
         showBlueIceBlocks = builder
                 .translation(NiftyMod.MODID + ".config.show_blue_ice_blocks")
-                .worldRestart()
                 .comment("Should Blue Ice blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showBlueIceBlocks", true);
     }

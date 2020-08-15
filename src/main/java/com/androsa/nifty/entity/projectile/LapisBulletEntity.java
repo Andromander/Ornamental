@@ -43,7 +43,7 @@ public class LapisBulletEntity extends ProjectileItemEntity {
             IParticleData iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -62,7 +62,7 @@ public class LapisBulletEntity extends ProjectileItemEntity {
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 3.0F);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 3.0F); //getThrower
         }
 
         if (!this.world.isRemote) {

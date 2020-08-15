@@ -3,6 +3,8 @@ package com.androsa.nifty.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
@@ -13,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -43,13 +42,12 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
                 target instanceof IMob && !(target instanceof CreeperEntity)));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(90.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.9D);
-        this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(13.0D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 90.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.9D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 13.0D);
     }
 
     @Override
@@ -71,13 +69,13 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
         super.livingTick();
 
         if (horizontalMag(this.getMotion()) > (double)2.5000003E-7F && this.rand.nextInt(5) == 0) {
-            int x = MathHelper.floor(this.getX());
-            int y = MathHelper.floor(this.getY() - (double)0.2F);
-            int z = MathHelper.floor(this.getZ());
+            int x = MathHelper.floor(this.getPosX());
+            int y = MathHelper.floor(this.getPosY() - (double)0.2F);
+            int z = MathHelper.floor(this.getPosZ());
             BlockPos pos = new BlockPos(x, y, z);
             BlockState blockstate = this.world.getBlockState(pos);
             if (!blockstate.isAir(this.world, pos)) {
-                this.world.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+                this.world.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getPosX() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), this.getPosY() + 0.1D, this.getPosZ() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
@@ -88,7 +86,7 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
     }
 
     private float getAttackDamage() {
-        return (float)this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue();
+        return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
     @Override
@@ -117,24 +115,26 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
         return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
     }
 
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    //processInteract
+    @Override
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
         if (item != Items.EMERALD) {
-            return false;
+            return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
     }

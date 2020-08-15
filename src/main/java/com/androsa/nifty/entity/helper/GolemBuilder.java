@@ -10,7 +10,9 @@ import net.minecraft.entity.passive.GolemEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.CachedBlockInfo;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,7 +25,7 @@ public class GolemBuilder {
     @SubscribeEvent
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().getBlock() instanceof CarvedPumpkinBlock) {
-            World world = event.getWorld().getWorld();
+            ServerWorld world = ((IServerWorld)event.getWorld()).getWorld();
             BlockPos pos = event.getPos();
 
             checkPatternLarge(PatternType.GOLD, world, pos, 1, 2);
@@ -103,7 +105,7 @@ public class GolemBuilder {
     private static void notifySmall(PatternType type, BlockPattern.PatternHelper pattern, World world) {
         for(int j1 = 0; j1 < type.getThumb(); ++j1) {
             CachedBlockInfo cachedblockinfo1 = pattern.translateOffset(0, j1, 0);
-            world.notifyNeighbors(cachedblockinfo1.getPos(), Blocks.AIR);
+            world.func_230547_a_(cachedblockinfo1.getPos(), Blocks.AIR); //notifyNeighbors
         }
     }
 
@@ -111,7 +113,7 @@ public class GolemBuilder {
         for(int i1 = 0; i1 < type.getPalm(); ++i1) {
             for(int j1 = 0; j1 < type.getThumb(); ++j1) {
                 CachedBlockInfo cachedblockinfo1 = pattern.translateOffset(i1, j1, 0);
-                world.notifyNeighbors(cachedblockinfo1.getPos(), Blocks.AIR);
+                world.func_230547_a_(cachedblockinfo1.getPos(), Blocks.AIR); //notifyNeighbors
             }
         }
     }

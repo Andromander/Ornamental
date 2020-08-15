@@ -3,6 +3,8 @@ package com.androsa.nifty.entity;
 import com.androsa.nifty.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.IMob;
@@ -10,12 +12,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 
 public class ClayGolemEntity extends AbstractGolemEntity {
@@ -37,13 +37,12 @@ public class ClayGolemEntity extends AbstractGolemEntity {
                 target instanceof IMob && !(target instanceof CreeperEntity)));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
-        this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 30.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 0.0D);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class ClayGolemEntity extends AbstractGolemEntity {
             BrickGolemEntity brick = ModEntities.BRICK_GOLEM.get().create(this.world);
             brick.copyLocationAndAnglesFrom(this);
             this.remove();
-            brick.onInitialSpawn(this.world, this.world.getDifficultyForLocation(new BlockPos(brick)), SpawnReason.CONVERSION, null, null);
+            brick.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(brick.getPosition()), SpawnReason.CONVERSION, null, null);
             brick.setNoAI(this.isAIDisabled());
             if (this.hasCustomName()) {
                 brick.setCustomName(this.getCustomName());
@@ -97,7 +96,7 @@ public class ClayGolemEntity extends AbstractGolemEntity {
 
             brick.setInvulnerable(this.isInvulnerable());
             this.world.addEntity(brick);
-            this.world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, new BlockPos(this), 0);
+            this.world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.getPosition(), 0);
         }
         super.livingTick();
     }
@@ -112,25 +111,26 @@ public class ClayGolemEntity extends AbstractGolemEntity {
         return SoundEvents.BLOCK_GRAVEL_BREAK;
     }
 
+    //processInteract
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
         if (item != Items.CLAY_BALL) {
-            return false;
+            return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
     }

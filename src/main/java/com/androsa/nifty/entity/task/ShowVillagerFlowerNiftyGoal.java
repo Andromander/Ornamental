@@ -29,7 +29,7 @@ public class ShowVillagerFlowerNiftyGoal extends Goal {
         } else if (this.golem.getRNG().nextInt(8000) != 0) {
             return false;
         } else {
-            this.villager = this.golem.world.getClosestEntityWithinAABB(VillagerEntity.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().grow(6.0D, 2.0D, 6.0D));
+            this.villager = this.golem.world.getClosestEntityWithinAABB(VillagerEntity.class, IS_FRIENDLY, this.golem, this.golem.getPosX(), this.golem.getPosY(), this.golem.getPosZ(), this.golem.getBoundingBox().grow(6.0D, 2.0D, 6.0D));
             return this.villager != null;
         }
     }

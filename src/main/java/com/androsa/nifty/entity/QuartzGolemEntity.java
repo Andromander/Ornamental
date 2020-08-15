@@ -5,6 +5,8 @@ import com.androsa.nifty.entity.task.QuartzMoveController;
 import com.androsa.nifty.entity.task.RandomFlyGoal;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,13 +17,10 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -35,7 +34,6 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
         this.moveController = new QuartzMoveController(this);
     }
 
-    //TODO: Shoot fire
     @Override
     protected void registerGoals() {
         super.registerGoals();
@@ -48,12 +46,11 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
                 target instanceof IMob));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(70.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.4D);
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 70.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.6D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4D);
     }
 
     @Override
@@ -71,7 +68,7 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    public boolean handleFallDamage(float amount, float multiplier) {
+    public boolean onLivingFall(float amount, float multiplier) {
         return false;
     }
 
@@ -81,7 +78,7 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
 
     //[VanillaCopy] FlyingEntity.travel so we can have a flying non-FlyingEntity
     @Override
-    public void travel(Vec3d motion) {
+    public void travel(Vector3d motion) {
         if (this.isInWater()) {
             this.moveRelative(0.02F, motion);
             this.move(MoverType.SELF, this.getMotion());
@@ -91,7 +88,7 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
             this.move(MoverType.SELF, this.getMotion());
             this.setMotion(this.getMotion().scale(0.5D));
         } else {
-            BlockPos ground = new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ());
+            BlockPos ground = new BlockPos(this.getPosX(), this.getPosY() - 1.0D, this.getPosZ());
             float f = 0.91F;
             if (this.onGround) {
                 f = this.world.getBlockState(ground).getSlipperiness(this.world, ground, this) * 0.91F;
@@ -109,8 +106,8 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
         }
 
         this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d1 = this.getX() - this.prevPosX;
-        double d0 = this.getZ() - this.prevPosZ;
+        double d1 = this.getPosX() - this.prevPosX;
+        double d0 = this.getPosZ() - this.prevPosZ;
         float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
         if (f2 > 1.0F) {
             f2 = 1.0F;
@@ -169,32 +166,33 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
     public void livingTick() {
         if (this.world.isRemote && isTargeting()) {
             for(int i = 0; i < 2; ++i) {
-                this.world.addParticle(ParticleTypes.FLAME, this.getParticleX(0.5D), this.getRandomBodyY(), this.getParticleZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(ParticleTypes.FLAME, this.getPosXRandom(0.5D), this.getPosYRandom(), this.getPosZRandom(0.5D), 0.0D, 0.0D, 0.0D);
             }
         }
 
         super.livingTick();
     }
 
+    //processInteract
     @Override
-    protected boolean processInteract(PlayerEntity player, Hand hand) {
+    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
         if (item != Items.QUARTZ) {
-            return false;
+            return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return false;
+                return ActionResultType.PASS;
             } else {
                 float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.field_226143_fP_, 1.0F, f1);
+                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
                 if (!player.abilities.isCreativeMode) {
                     itemstack.shrink(1);
                 }
 
-                return true;
+                return ActionResultType.func_233537_a_(this.world.isRemote);
             }
         }
     }

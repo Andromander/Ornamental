@@ -90,7 +90,7 @@ public class NiftyFenceGate extends FenceGateBlock {
 
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.handleFallDamage(fallDistance, builder.fallMultiplier);
+        entityIn.onLivingFall(fallDistance, builder.fallMultiplier);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class NiftyFenceGate extends FenceGateBlock {
     }
 
     @Override
-    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = player.getHeldItem(hand);
 
         if (builder.isDirt) {
@@ -197,7 +197,7 @@ public class NiftyFenceGate extends FenceGateBlock {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
         if (builder.isIce) {
             if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
-                if (worldIn.dimension.doesWaterVaporize()) {
+                if (worldIn.func_230315_m_().func_236040_e_()) { //doesWaterVaporize
                     worldIn.removeBlock(pos, false);
                     return;
                 }
@@ -212,16 +212,17 @@ public class NiftyFenceGate extends FenceGateBlock {
 
     @Override
     @Deprecated
-    public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        super.randomTick(state, worldIn, pos, random);
         if (builder.isIce) {
-            if (worldIn.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+            if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
     protected void turnIntoWater(World world, BlockPos pos) {
-        if (world.dimension.doesWaterVaporize()) {
+        if (world.func_230315_m_().func_236040_e_()) { //doesWaterVaporize
             world.removeBlock(pos, false);
         } else {
             world.setBlockState(pos, Blocks.WATER.getDefaultState());
