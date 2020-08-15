@@ -1,5 +1,5 @@
 {
-  "parent": "block/slab_top",
+  "parent": "minecraft:block/slab_top",
   "textures": {
     "side": "nifty:block/missingno",
     "bottom": "nifty:block/missingno",

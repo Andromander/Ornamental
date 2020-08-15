@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:gold_trapdoor",
+    "nifty:diamond_trapdoor",
+    "nifty:emerald_trapdoor",
+    "nifty:lapis_trapdoor",
+    "nifty:obsidian_trapdoor",
+    "nifty:coal_trapdoor",
+    "nifty:redstone_trapdoor",
+    "nifty:missingno_trapdoor",
+    "nifty:clay_trapdoor",
+    "nifty:dirt_trapdoor",
+    "nifty:grass_trapdoor",
+    "nifty:hay_trapdoor",
+    "nifty:grass_path_trapdoor",
+    "nifty:brick_trapdoor",
+    "nifty:quartz_trapdoor",
+    "nifty:bone_trapdoor",
+    "nifty:nether_brick_trapdoor",
+    "nifty:red_nether_brick_trapdoor",
+    "nifty:snow_trapdoor",
+    "nifty:ice_trapdoor",
+    "nifty:packed_ice_trapdoor",
+    "nifty:blue_ice_trapdoor",
+    "nifty:netherite_trapdoor"
+  ]
+}

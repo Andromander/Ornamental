@@ -1,8 +1,8 @@
 {
-  "parent": "block/slab_top",
+  "parent": "minecraft:block/slab_top",
   "textures": {
-    "side": "block/blue_ice",
-    "bottom": "block/blue_ice",
-    "top": "block/blue_ice"
+    "side": "minecraft:block/blue_ice",
+    "bottom": "minecraft:block/blue_ice",
+    "top": "minecraft:block/blue_ice"
   }
 }

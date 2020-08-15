@@ -1,5 +1,5 @@
 {
-  "parent": "block/door_top",
+  "parent": "minecraft:block/door_top",
   "textures": {
     "bottom": "nifty:block/ice_door_bottom",
     "top": "nifty:block/ice_door_top"

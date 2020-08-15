@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:gold_stairs",
+    "nifty:gold_slab",
+    "nifty:gold_fence",
+    "nifty:gold_trapdoor",
+    "nifty:gold_fence_gate",
+    "nifty:gold_door"
+  ]
+}

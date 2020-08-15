@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "nifty:gold_door",
+    "nifty:diamond_door",
+    "nifty:emerald_door",
+    "nifty:lapis_door",
+    "nifty:obsidian_door",
+    "nifty:coal_door",
+    "nifty:redstone_door",
+    "nifty:missingno_door",
+    "nifty:clay_door",
+    "nifty:dirt_door",
+    "nifty:grass_door",
+    "nifty:hay_door",
+    "nifty:grass_path_door",
+    "nifty:brick_door",
+    "nifty:quartz_door",
+    "nifty:bone_door",
+    "nifty:nether_brick_door",
+    "nifty:red_nether_brick_door",
+    "nifty:snow_door",
+    "nifty:ice_door",
+    "nifty:packed_ice_door",
+    "nifty:blue_ice_door",
+    "nifty:netherite_door"
+  ]
+}

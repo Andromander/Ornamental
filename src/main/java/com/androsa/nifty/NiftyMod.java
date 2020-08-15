@@ -1,13 +1,11 @@
 package com.androsa.nifty;
 
-import com.androsa.nifty.data.NiftyBlockStates;
-import com.androsa.nifty.data.NiftyItemModels;
-import com.androsa.nifty.data.NiftyLootTables;
-import com.androsa.nifty.data.NiftyRecipes;
+import com.androsa.nifty.data.*;
 import com.androsa.nifty.data.conditions.ConfigCondition;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -74,6 +72,8 @@ public class NiftyMod {
 
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
+        BlockTagsProvider blockTags = new NiftyBlockTags(generator);
+
         if (event.includeClient()) {
             generator.addProvider(new NiftyBlockStates(generator, event.getExistingFileHelper()));
             generator.addProvider(new NiftyItemModels(generator, event.getExistingFileHelper()));
@@ -81,6 +81,8 @@ public class NiftyMod {
         if (event.includeServer()) {
             generator.addProvider(new NiftyLootTables(generator));
             generator.addProvider(new NiftyRecipes(generator));
+            generator.addProvider(blockTags);
+            generator.addProvider(new NiftyItemTags(generator, blockTags));
         }
     }
 

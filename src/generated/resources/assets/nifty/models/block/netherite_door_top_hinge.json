@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "bottom": "nifty:block/netherite_door_bottom",
+    "top": "nifty:block/netherite_door_top"
+  }
+}
