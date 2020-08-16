@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "nifty:block/missingno",
-    "bottom": "nifty:block/missingno",
-    "top": "nifty:block/missingno"
-  }
-}

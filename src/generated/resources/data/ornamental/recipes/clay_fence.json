@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showClayBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:clay"
+          },
+          "/": {
+            "item": "minecraft:clay_ball"
+          }
+        },
+        "result": {
+          "item": "ornamental:clay_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCoalBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:coal_block"
+          },
+          "/": {
+            "item": "minecraft:coal"
+          }
+        },
+        "result": {
+          "item": "ornamental:coal_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showLapisBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:lapis_block"
+          },
+          "/": {
+            "item": "minecraft:lapis_block"
+          }
+        },
+        "result": {
+          "item": "ornamental:lapis_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

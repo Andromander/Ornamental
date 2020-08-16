@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showDirtBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:dirt"
+          },
+          "/": {
+            "item": "ornamental:dirt_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:dirt_fence_gate"
+        }
+      }
+    }
+  ]
+}

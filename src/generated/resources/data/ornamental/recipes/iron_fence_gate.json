@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showIronBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:iron_block"
+          },
+          "/": {
+            "item": "minecraft:iron_ingot"
+          }
+        },
+        "result": {
+          "item": "ornamental:iron_fence_gate"
+        }
+      }
+    }
+  ]
+}

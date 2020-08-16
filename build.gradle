@@ -38,7 +38,7 @@ minecraft {
             //property 'forge.logging.console.level', 'debug'
 
             mods {
-                nifty {
+                ornamental {
                     source sourceSets.main
                 }
             }
@@ -54,17 +54,17 @@ minecraft {
             //property 'forge.logging.console.level', 'debug'
 
             mods {
-                nifty {
+                ornamental {
                     source sourceSets.main
                 }
             }
         }
 
         data {
-            args '--mod', 'nifty', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
+            args '--mod', 'ornamental', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
 
             mods {
-                nifty {
+                ornamental {
                     source sourceSets.main
                 }
             }
@@ -90,7 +90,7 @@ dependencies {
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
-        attributes(["Specification-Title": "nifty",
+        attributes(["Specification-Title": "ornamental",
                     "Specification-Vendor": "Androsa",
                     "Specification-Version": "1", // We are version 1 of the modlauncher specification
                     "Implementation-Title": project.name,

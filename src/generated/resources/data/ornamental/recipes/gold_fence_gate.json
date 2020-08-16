@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showGoldBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:gold_block"
+          },
+          "/": {
+            "item": "minecraft:gold_ingot"
+          }
+        },
+        "result": {
+          "item": "ornamental:gold_fence_gate"
+        }
+      }
+    }
+  ]
+}

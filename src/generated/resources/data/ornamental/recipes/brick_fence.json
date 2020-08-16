@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBrickBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:bricks"
+          },
+          "/": {
+            "item": "minecraft:brick"
+          }
+        },
+        "result": {
+          "item": "ornamental:brick_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

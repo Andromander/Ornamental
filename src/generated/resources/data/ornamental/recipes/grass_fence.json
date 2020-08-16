@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showGrassBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:grass_block"
+          },
+          "/": {
+            "item": "ornamental:grass_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:grass_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

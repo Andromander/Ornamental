@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showHayBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:wheat"
+          }
+        },
+        "result": {
+          "item": "ornamental:hay_door"
+        }
+      }
+    }
+  ]
+}

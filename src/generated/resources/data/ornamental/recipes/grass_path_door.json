@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showPathBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:grass_path_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:grass_path_door"
+        }
+      }
+    }
+  ]
+}

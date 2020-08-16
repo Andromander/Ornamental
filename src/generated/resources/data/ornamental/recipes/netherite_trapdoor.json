@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showNetheriteBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:netherite_ingot"
+          }
+        },
+        "result": {
+          "item": "ornamental:netherite_trapdoor"
+        }
+      }
+    }
+  ]
+}

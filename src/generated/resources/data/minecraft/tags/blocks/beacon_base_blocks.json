@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "nifty:iron_stairs",
-    "nifty:gold_stairs",
-    "nifty:diamond_stairs",
-    "nifty:emerald_stairs",
-    "nifty:netherite_stairs"
+    "ornamental:iron_stairs",
+    "ornamental:gold_stairs",
+    "ornamental:diamond_stairs",
+    "ornamental:emerald_stairs",
+    "ornamental:netherite_stairs"
   ]
 }

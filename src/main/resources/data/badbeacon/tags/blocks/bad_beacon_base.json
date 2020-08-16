@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "nifty:redstone_stairs",
-    "nifty:coal_stairs",
-    "nifty:lapis_stairs",
+    "ornamental:redstone_stairs",
+    "ornamental:coal_stairs",
+    "ornamental:lapis_stairs",
     "minecraft:quartz_stairs",
-    "nifty:bone_stairs"
+    "ornamental:bone_stairs"
   ]
 }

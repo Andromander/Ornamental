@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showQuartzBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:quartz_block"
+          },
+          "/": {
+            "item": "minecraft:quartz"
+          }
+        },
+        "result": {
+          "item": "ornamental:quartz_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

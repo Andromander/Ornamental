@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top",
-  "textures": {
-    "bottom": "nifty:block/snow_door_bottom",
-    "top": "nifty:block/snow_door_top"
-  }
-}

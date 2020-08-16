@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "nifty:gold_stairs",
-    "nifty:gold_slab",
-    "nifty:gold_fence",
-    "nifty:gold_trapdoor",
-    "nifty:gold_fence_gate",
-    "nifty:gold_door"
+    "ornamental:gold_stairs",
+    "ornamental:gold_slab",
+    "ornamental:gold_fence",
+    "ornamental:gold_trapdoor",
+    "ornamental:gold_fence_gate",
+    "ornamental:gold_door"
   ]
 }

@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "nifty:block/path/path_slab" },
-    "type=top":    { "model": "nifty:block/path/path_slab_top" },
-    "type=double": { "model": "block/grass_path" }
-  }
-}

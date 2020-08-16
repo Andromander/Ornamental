@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showIceBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:ice"
+          },
+          "/": {
+            "item": "ornamental:ice_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:ice_fence_gate"
+        }
+      }
+    }
+  ]
+}
