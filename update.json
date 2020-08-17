@@ -1,5 +1,5 @@
 {
-  "homepage": "https://minecraft.curseforge.com/projects/nifty",
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/ornamental",
   "1.12.2": {
     "1.2": "• Whoops, that was not Vanilla, that looks more like Twilight Forest compatibility.\n     • Ironwood Fences, Stairs, and Slabs. For those who want more than wood, but less than iron.\n     • Fiery Fences, Stairs, and Slabs. It's perfect for heating your home during Winter!\n     • Steeleaf Fences, Slabs, and Stairs. It's the natural alternative for fine steel!\n     • Arctic Fur Fences, Slabs, and Stairs. The soft and cushiony blocks are perfect for those who are a little faithful to the leap.\n    • Carminite Fences, Slabs, and Stairs. Whatever it is, how well does it bode as something durable?\n    • As a note, these blocks will persist without Twilight Forest installed. This is perfectly normal behaviour.\n • Silly me, that wasn't the right thing to put into the Mod Info. The players are aware that this version is for 1.12.2, but what about the mod itself?\n • Maybe I should let players know what to expect in updates to this mod?",
     "1.3": "Here, have an early Christmas present.\n • Added Coal Stairs, Slabs, and Fences. Only for the naughtiest builders, but viable Furnace fuel.\n • Added Redstone Stairs, Slabs, and Fences. Each with their own emission rates, I want to see some clever Redstone builds.\n • Added ■■■■■■■■■ Stairs, Slabs, and Fences. Wait, what's happening?\n • Couple more behind the scenes changes that nobody should really care about.",
@@ -31,6 +31,9 @@
     "3.0": "We are ready for the next major update for Nifty. I'd say it's pretty big.\n • Added Nifty Golems. This rather ambitious project took me months to complete, and it is finally here. Barring Iron, Snow, and Missingno, every material provided by Nifty has a Golem each.\n • Each Golem has their own creation pattern. Some are like Snow Golems, others are like Iron Golems, and a few with completely different shapes. Check the changelog for 3.0 on Curseforge for more info.\n • Disabling Golem creation is also tied to disabling materials from creation. If Gold decoration blocks are disabled, so are Gold Golems, and so on.\n • Implemented a new system called NiftyBuilder. This is like a 3.0 of registering blocks, but this time it can be used by anybody. By using the provided decoration block classes and creating a material with NiftyBlock, you can make your own addon for Nifty. Details on how to use are documented in the class NiftyBuilder.\n • Removed use of supports_beacon Tag. This was removed by Forge, thus meaning it was useless here.",
     "3.1": "I wrote this changelog because Curseforge corrupted the upload for 3.0 as of writing this. It might even be skipped, so here's a rehashed changelog, plus some extra sounds in some places so I could upload this file. See the changelog for 3.1 on Curseforge for more info."
   },
+  "1.16.2": {
+    "4.0": "After much deliberation with myself, I have decided that 4.0 will be dedicated to moving Nifty to Ornamental!\n • Added Netherite Ornaments and Golem.\n  • Netherite Ornaments are just like Netherite where they cannot be burned in fire.\n  • Netherite Golems are destructive powerhouses. Beware when creating one, otherwise you might see everything around it burned or destroyed. They can be created with a 2x3 grid of Netherite Blocks with a Carved Pumpkin on top.\n • NiftyBuilder has been renamed to OrnamentBuilder. Fundamentally, it isn't any different from before, but there are changes.\n • Added 'isFireproof'. Helps determine if the item can burn.\n  • Added 'setCanEntitySpawn'. Helps to handle custom spawning logic on the block.\n  • Modified 'tool' so it can check if a block requires a tool to harvest.\n  • Removed 'isBeaconBase'. This is now determined with a vanilla Tag.\n  • For ease of registration, PropertiesHelper can be used to quickly build a Block or Item Property from an OrnamentBuilder.\n • Ornamental will take over old Nifty names. If you load a world that had Nifty, Ornamental will take those mappings and change them, that way you won't lose any progress on construction.\n • Piglins will now guard and love any of the Gold Ornament blocks. Makes sense, really.\n • Added Bone Stairs as a usable base block for the mod Bad Beacon.\n • Plenty of backend changes, but I had lost track of what I did change because the whole mod was renamed."
+  },
 
   "promos": {
     "1.12.2-latest": "1.5",
@@ -44,6 +47,8 @@
     "1.14.4-latest": "2.8",
     "1.14.4-recommended": "2.8",
     "1.15.2-latest": "3.1",
-    "1.15.2=recommended": "2.9.1"
+    "1.15.2-recommended": "3.1",
+    "1.16.2-latest": "4.0",
+    "1.16.2-recommended": "4.0"
   }
 }
