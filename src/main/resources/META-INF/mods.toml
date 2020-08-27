@@ -22,7 +22,7 @@ This mod provides decorative blocks of usually absurd materials.
 [[dependencies.ornamental]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[33,)" #mandatory
+    versionRange="[33.0.5,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.ornamental]]

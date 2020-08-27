@@ -110,7 +110,7 @@ public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttac
     protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
-        if (!item.isIn(Tags.Items.BONES) || item != Items.BONE_MEAL ) {
+        if (!item.isIn(Tags.Items.BONES) || item != Items.BONE_MEAL) {
             return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
