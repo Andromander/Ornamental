@@ -80,22 +80,25 @@ public class ClayGolemEntity extends AbstractGolemEntity {
     @Override
     public void livingTick() {
         if (this.isBurning()) {
-            BrickGolemEntity brick = ModEntities.BRICK_GOLEM.get().create(this.world);
-            brick.copyLocationAndAnglesFrom(this);
-            this.remove();
-            brick.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(brick.getPosition()), SpawnReason.CONVERSION, null, null);
-            brick.setNoAI(this.isAIDisabled());
-            if (this.hasCustomName()) {
-                brick.setCustomName(this.getCustomName());
-                brick.setCustomNameVisible(this.isCustomNameVisible());
+            if (!world.isRemote()) {
+                BrickGolemEntity brick = ModEntities.BRICK_GOLEM.get().create(this.world);
+                brick.copyLocationAndAnglesFrom(this);
+                this.remove();
+                brick.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(brick.getPosition()), SpawnReason.CONVERSION, null, null);
+                brick.setNoAI(this.isAIDisabled());
+                if (this.hasCustomName()) {
+                    brick.setCustomName(this.getCustomName());
+                    brick.setCustomNameVisible(this.isCustomNameVisible());
+                }
+
+                if (this.isNoDespawnRequired()) {
+                    brick.enablePersistence();
+                }
+
+                brick.setInvulnerable(this.isInvulnerable());
+                this.world.addEntity(brick);
             }
 
-            if (this.isNoDespawnRequired()) {
-                brick.enablePersistence();
-            }
-
-            brick.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(brick);
             this.world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.getPosition(), 0);
         }
         super.livingTick();

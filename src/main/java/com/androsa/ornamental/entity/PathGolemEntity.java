@@ -60,22 +60,24 @@ public class PathGolemEntity extends DirtGolemEntity {
         Item item = itemstack.getItem();
 
         if (item instanceof HoeItem) {
-            GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
-            grass.copyLocationAndAnglesFrom(this);
-            this.remove();
-            grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
-            grass.setNoAI(this.isAIDisabled());
-            if (this.hasCustomName()) {
-                grass.setCustomName(this.getCustomName());
-                grass.setCustomNameVisible(this.isCustomNameVisible());
-            }
+            if (!world.isRemote()) {
+                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
+                grass.copyLocationAndAnglesFrom(this);
+                this.remove();
+                grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
+                grass.setNoAI(this.isAIDisabled());
+                if (this.hasCustomName()) {
+                    grass.setCustomName(this.getCustomName());
+                    grass.setCustomNameVisible(this.isCustomNameVisible());
+                }
 
-            if (this.isNoDespawnRequired()) {
-                grass.enablePersistence();
-            }
+                if (this.isNoDespawnRequired()) {
+                    grass.enablePersistence();
+                }
 
-            grass.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(grass);
+                grass.setInvulnerable(this.isInvulnerable());
+                this.world.addEntity(grass);
+            }
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_PATH)  {
             float f = this.getHealth();

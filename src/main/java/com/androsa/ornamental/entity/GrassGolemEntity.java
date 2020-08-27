@@ -129,21 +129,24 @@ public class GrassGolemEntity extends DirtGolemEntity {
         if (this.hasPoppy()) {
             this.entityDropItem(new ItemStack(Items.POPPY));
         }
-        entity.copyLocationAndAnglesFrom(this);
-        this.remove();
-        entity.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(entity.getPosition()), SpawnReason.CONVERSION, null, null);
-        entity.setNoAI(this.isAIDisabled());
-        if (this.hasCustomName()) {
-            entity.setCustomName(this.getCustomName());
-            entity.setCustomNameVisible(this.isCustomNameVisible());
-        }
 
-        if (this.isNoDespawnRequired()) {
-            entity.enablePersistence();
-        }
+        if (!world.isRemote()) {
+            entity.copyLocationAndAnglesFrom(this);
+            this.remove();
+            entity.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(entity.getPosition()), SpawnReason.CONVERSION, null, null);
+            entity.setNoAI(this.isAIDisabled());
+            if (this.hasCustomName()) {
+                entity.setCustomName(this.getCustomName());
+                entity.setCustomNameVisible(this.isCustomNameVisible());
+            }
 
-        entity.setInvulnerable(this.isInvulnerable());
-        this.world.addEntity(entity);
+            if (this.isNoDespawnRequired()) {
+                entity.enablePersistence();
+            }
+
+            entity.setInvulnerable(this.isInvulnerable());
+            this.world.addEntity(entity);
+        }
     }
 
     @Override

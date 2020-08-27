@@ -80,24 +80,32 @@ public class DirtGolemEntity extends AbstractGolemEntity {
     protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getHeldItem(hand);
         Item item = itemstack.getItem();
+
         if (item == Items.BONE_MEAL) {
-            GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
-            grass.copyLocationAndAnglesFrom(this);
-            this.remove();
-            grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
-            grass.setNoAI(this.isAIDisabled());
-            if (this.hasCustomName()) {
-                grass.setCustomName(this.getCustomName());
-                grass.setCustomNameVisible(this.isCustomNameVisible());
+
+            if (!world.isRemote()) {
+                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
+                grass.copyLocationAndAnglesFrom(this);
+                this.remove();
+                grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
+                grass.setNoAI(this.isAIDisabled());
+                if (this.hasCustomName()) {
+                    grass.setCustomName(this.getCustomName());
+                    grass.setCustomNameVisible(this.isCustomNameVisible());
+                }
+
+                if (this.isNoDespawnRequired()) {
+                    grass.enablePersistence();
+                }
+
+                grass.setInvulnerable(this.isInvulnerable());
+                this.world.addEntity(grass);
             }
 
-            if (this.isNoDespawnRequired()) {
-                grass.enablePersistence();
             }
 
-            grass.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(grass);
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
         } else if (item == Items.DIRT) {
             float f = this.getHealth();
             this.heal(25.0F);
