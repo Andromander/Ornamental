@@ -43,7 +43,8 @@ public class GrassGolemEntity extends DirtGolemEntity {
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
         return MobEntity.func_233666_p_()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 8.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 
     @Override
