@@ -90,13 +90,18 @@ public class GrassGolemEntity extends DirtGolemEntity {
 
         if (item == Items.POPPY && !this.hasPoppy()) {
             setPoppy(true);
+            if (!player.abilities.isCreativeMode) {
+                itemstack.shrink(1);
+            }
         } else if (item instanceof ShovelItem) {
             PathGolemEntity path = ModEntities.PATH_GOLEM.get().create(this.world);
             addEntity(path);
+            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item instanceof HoeItem) {
             DirtGolemEntity dirt = ModEntities.DIRT_GOLEM.get().create(this.world);
             addEntity(dirt);
+            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_BLOCK) {
             float f = this.getHealth();

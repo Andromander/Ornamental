@@ -78,7 +78,9 @@ public class PathGolemEntity extends DirtGolemEntity {
                 grass.setInvulnerable(this.isInvulnerable());
                 this.world.addEntity(grass);
             }
+            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
         } else if (item == Items.GRASS_PATH)  {
             float f = this.getHealth();
             this.heal(25.0F);

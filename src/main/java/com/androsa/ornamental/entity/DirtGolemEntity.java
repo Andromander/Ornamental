@@ -102,6 +102,8 @@ public class DirtGolemEntity extends AbstractGolemEntity {
                 this.world.addEntity(grass);
             }
 
+            if (!player.abilities.isCreativeMode) {
+                itemstack.shrink(1);
             }
 
             this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
