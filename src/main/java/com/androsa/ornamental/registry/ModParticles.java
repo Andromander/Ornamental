@@ -28,7 +28,7 @@ public class ModParticles {
         ParticleManager manager = Minecraft.getInstance().particles;
 
         manager.registerFactory(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
-        manager.registerFactory(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.RedstoneFactory());
+        manager.registerFactory(ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
         manager.registerFactory(ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
         manager.registerFactory(ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
     }
