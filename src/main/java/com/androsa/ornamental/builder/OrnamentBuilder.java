@@ -1,6 +1,7 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.data.conditions.ConfigCondition;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -373,11 +374,13 @@ public class OrnamentBuilder {
     /**
      * Sets the config value of a block. Used for showing/hiding blocks by material, as well as crafting and harvesting.
      * If left unused, all config checks will be ignored.
+     * Adding a config value will also add it to a ConfigCondition.
      * @param entry The supplied BooleanValue for the block to use.
      */
     public OrnamentBuilder config(Supplier<ForgeConfigSpec.BooleanValue> entry) {
         this.booleanValue = entry;
         this.hasConfig = true;
+        ConfigCondition.putValue(this, entry);
         return this;
     }
 }
