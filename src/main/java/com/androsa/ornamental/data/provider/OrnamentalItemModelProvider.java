@@ -3,7 +3,7 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 
 import java.util.function.Supplier;
