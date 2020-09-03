@@ -22,7 +22,7 @@ public class PropertiesHelper {
                 .harvestLevel(builder.harvestLevel)
                 .slipperiness(builder.slipperiness);
         if (builder.doesTick) props.tickRandomly();
-        if (builder.isIce) props.notSolid();
+        if (builder.isIce || !builder.isSolid) props.notSolid();
         if (builder.requiresTool) props.setRequiresTool();
         if (builder.entitySpawnPredicate != null) props.setAllowsSpawn(builder.entitySpawnPredicate);
 

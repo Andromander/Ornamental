@@ -1,9 +1,13 @@
 package com.androsa.ornamental.builder;
 
+import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -46,10 +50,25 @@ public class OrnamentBuilder {
     public AbstractBlock.IExtendedPositionPredicate<EntityType<?>> entitySpawnPredicate = null;
     /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
     public boolean hasConfig = false;
+    @Deprecated
     public boolean isDirt = false;
+    public boolean mealGrass = false;
+    @Deprecated
     public boolean isGrass = false;
+    public boolean hoeDirt = false;
+    public boolean shovelPath = false;
+    @Deprecated
     public boolean isPath = false;
+    public boolean pathShape = false;
+    public boolean hoeGrass = false;
+    @Deprecated
     public boolean isIce = false;
+    public boolean canMelt = false;
+    public Block meltResult = Blocks.WATER;
+    public boolean canVaporise = false;
+    public boolean isSolid = true;
+    public boolean breakableCull = false;
+    public PushReaction pushReaction = material.getPushReaction();
     public Supplier<ForgeConfigSpec.BooleanValue> booleanValue = null;
 
     /**
@@ -226,41 +245,135 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block is Dirt. Used to turn Dirt into Grass blocks. THIS IS FOR DIRT BLOCKS ONLY
+     * Sets if the block is Dirt. Used to turn Dirt into Grass blocks. THIS IS FOR DIRT BLOCKS ONLY.
+     * @deprecated use {@link OrnamentBuilder#boneMealToGrass()} to allow X -> Path conversion.
      */
+    @Deprecated
     public OrnamentBuilder isDirtMaterial() {
         this.isDirt = true;
         return this;
     }
 
     /**
-     * Sets if the block is Grass. Used to turn Grass into Dirt or Grass Path. THIS IS FOR GRASS BLOCKS ONLY
+     * Sets if the block can become Grass with Bone Meal. If set, the block will become the respective Grass block when Bone Meal is used on it.
      */
+    public OrnamentBuilder boneMealToGrass() {
+        this.mealGrass = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block is Grass. Used to turn Grass into Dirt or Grass Path. THIS IS FOR GRASS BLOCKS ONLY
+     * @deprecated use {@link OrnamentBuilder#hoeToDirt()} to allow X -> Dirt conversion and {@link OrnamentBuilder#shovelToPath()} to allow X -> Path conversion
+     */
+    @Deprecated
     public OrnamentBuilder isGrassMaterial() {
         this.isGrass = true;
         return this;
     }
 
     /**
-     * Sets if the block is Grass Path. Used to turn Grass Path into Grass and alter block shape. THIS IS FOR GRASS PATH BLOCKS ONLY
+     * Sets if the block can become Dirt with a Hoe. If set, the block will become the respective Dirt block when a Hoe is used on it.
      */
+    public OrnamentBuilder hoeToDirt() {
+        this.hoeDirt = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block can become Path with a Shovel. If set, the block will become the respective Path block when a Shovel is used on it.
+     */
+    public OrnamentBuilder shovelToPath() {
+        this.shovelPath = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block is Grass Path. Used to turn Grass Path into Grass and alter block shape. THIS IS FOR GRASS PATH BLOCKS ONLY.
+     * @deprecated use {@link OrnamentBuilder#usePathShapes()} for altered height and {@link OrnamentBuilder#hoeToGrass()} ()} to allow X -> Grass conversion.
+     */
+    @Deprecated
     public OrnamentBuilder isPathMaterial() {
         this.isPath = true;
         return this;
     }
 
     /**
-     * Sets if the block is Ice. Used for harvesting and melting the blocks. THIS IS FOR ICE BLOCKS ONLY
+     * Sets if the block's VoxelShape should be altered. If true, the height of the blocks will be lowered by 1.
      */
+    public OrnamentBuilder usePathShapes() {
+        this.pathShape = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block can become Grass with a Hoe. If set, the block will become the respective Grass block when a Hoe is used.
+     */
+    public OrnamentBuilder hoeToGrass() {
+        this.hoeGrass = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block is Ice. Used for harvesting and melting the blocks. THIS IS FOR ICE BLOCKS ONLY.
+     * @deprecated Use {@link #canMelt(Block, boolean)} for melting logic, {@link OrnamentBuilder#notSolid()} to make the block a non-solid, and {@link OrnamentBuilder#doBreakableBlockCull()} for translucent block culling.
+     */
+    @Deprecated
     public OrnamentBuilder isIceMaterial() {
         this.isIce = true;
         return this;
     }
 
     /**
+     * Sets if the block can melt. When this is set, the block will melt in high light levels at random by default.
+     * The block may also vaporise if the dimension does so and is set to here.
+     * Ideally, a Fluid should be set here. If not, will default to Water.
+     * @param melt The resulting block if the block melts. Best use is a fluid.
+     * @param vaporise Sets if the block may vaporise in certain dimensions. If true, will turn to Air in said dimensions.
+     */
+    public OrnamentBuilder canMelt(Block melt, boolean vaporise) {
+        this.canMelt = true;
+        this.meltResult = melt;
+        if (!meltResult.getDefaultState().getMaterial().isLiquid()) {
+            OrnamentalMod.LOGGER.warn("Supplied melt result for {} was not a liquid, was {}! Defaulting to Water.", name, melt.getDefaultState().getMaterial());
+            meltResult = Blocks.WATER;
+        }
+        this.canVaporise = vaporise;
+        return this;
+    }
+
+    /**
+     * Sets if the block is not solid if the block would normally be solid. Used to enable {@link AbstractBlock.Properties#notSolid()}.
+     */
+    public OrnamentBuilder notSolid() {
+        this.isSolid = false;
+        return this;
+    }
+
+    /**
+     * Sets if the block should have invisible faces. If true, neighboring blocks of the same ornament material will cull their face, akin to BreakableBlock.
+     * This logic applies to Slabs by default, where it will only check if the neighbor block shares the same material and is Double.
+     * Note: this will only logically work with translucent or transparent blocks. Fully opaque blocks will not see any change.
+     */
+    public OrnamentBuilder doBreakableBlockCull() {
+        this.breakableCull = true;
+        return this;
+    }
+
+    /**
+     * Sets an overriding PushReaction for a block if the block normally checks based on Material. Will check the Material's reaction by default.
+     * Some blocks may not follow this, ie. Doors always have PushReaction.DESTROY.
+     * @param reaction The push reaction this material should use.
+     */
+    public OrnamentBuilder pushReactOverride(PushReaction reaction) {
+        this.pushReaction = reaction;
+        return this;
+    }
+
+    /**
      * Sets the config value of a block. Used for showing/hiding blocks by material, as well as crafting and harvesting.
-     * If left unused, all config checks will be ignored
-     * @param entry The supplied BooleanValue for the block to use
+     * If left unused, all config checks will be ignored.
+     * @param entry The supplied BooleanValue for the block to use.
      */
     public OrnamentBuilder config(Supplier<ForgeConfigSpec.BooleanValue> entry) {
         this.booleanValue = entry;

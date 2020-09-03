@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 @Mod(OrnamentalMod.MODID)
 @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OrnamentalMod {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
     public static OrnamentalConfig config;
 

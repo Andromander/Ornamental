@@ -1,9 +1,11 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalConfig;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.ToolType;
@@ -87,7 +89,7 @@ public class OrnamentBuilders {
             .hardness(0.5F)
             .tool(ToolType.SHOVEL, false)
             .canOpen()
-            .isDirtMaterial()
+            .boneMealToGrass()
             .config(() -> OrnamentalConfig.showDirtBlocks);
 
     public static final OrnamentBuilder GRASS = new OrnamentBuilder("grass")
@@ -96,7 +98,8 @@ public class OrnamentBuilders {
             .hardness(0.6F)
             .tool(ToolType.SHOVEL, false)
             .canOpen()
-            .isGrassMaterial()
+            .hoeToDirt()
+            .shovelToPath()
             .config(() -> OrnamentalConfig.showGrassBlocks);
 
     public static final OrnamentBuilder HAY = new OrnamentBuilder("hay")
@@ -113,7 +116,8 @@ public class OrnamentBuilders {
             .hardness(0.6F)
             .tool(ToolType.SHOVEL, false)
             .canOpen()
-            .isPathMaterial()
+            .hoeToGrass()
+            .usePathShapes()
             .config(() -> OrnamentalConfig.showPathBlocks);
 
     public static final OrnamentBuilder BRICK = new OrnamentBuilder("brick")
@@ -163,7 +167,10 @@ public class OrnamentBuilders {
             .slip(0.98F)
             .canOpen()
             .ticks()
-            .isIceMaterial()
+            .canMelt(Blocks.WATER, true)
+            .notSolid()
+            .doBreakableBlockCull()
+            .pushReactOverride(PushReaction.NORMAL)
             .setCanEntitySpawn((state, reader, pos, type) -> type == EntityType.POLAR_BEAR && state.isSolidSide(reader, pos, Direction.UP))
             .config(() -> OrnamentalConfig.showIceBlocks);
 

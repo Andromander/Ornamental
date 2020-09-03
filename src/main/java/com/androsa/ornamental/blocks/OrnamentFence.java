@@ -2,21 +2,12 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FenceBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.PushReaction;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -50,12 +41,12 @@ public class OrnamentFence extends FenceBlock implements IOrnamentalBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return builder.isPath ? this.shapes[this.getIndex(state)] : super.getShape(state, worldIn, pos, context);
+        return builder.isPath || builder.pathShape ? this.shapes[this.getIndex(state)] : super.getShape(state, worldIn, pos, context);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return builder.isPath ? this.collisionShapes[this.getIndex(state)] : super.getCollisionShape(state, worldIn, pos, context);
+        return builder.isPath || builder.pathShape ? this.collisionShapes[this.getIndex(state)] : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
@@ -78,48 +69,41 @@ public class OrnamentFence extends FenceBlock implements IOrnamentalBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
         ItemStack itemstack = player.getHeldItem(hand);
+        Item item = itemstack.getItem();
 
-        if (builder.isDirt) {
-            if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE_MEAL) {
-                this.setBlock(worldIn, pos, ModBlocks.grass_fence);
-                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-
-                if (!player.abilities.isCreativeMode) {
-                    itemstack.shrink(1);
-                }
-                return ActionResultType.SUCCESS;
+        if (!itemstack.isEmpty()) {
+            if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
+                return changeBlock(itemstack, ModBlocks.grass_fence, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
             }
-        }
 
-        if (builder.isGrass) {
-            if (!itemstack.isEmpty()) {
-                if (itemstack.getItem() instanceof HoeItem) {
-                    this.setBlock(worldIn, pos, ModBlocks.dirt_fence);
-                    worldIn.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                    return ActionResultType.SUCCESS;
-                } else if (itemstack.getItem() instanceof ShovelItem) {
-                    this.setBlock(worldIn, pos, ModBlocks.path_fence);
-                    worldIn.playSound(null, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                    return ActionResultType.SUCCESS;
-                }
+            if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
+                return changeBlock(itemstack, ModBlocks.dirt_fence, SoundEvents.BLOCK_GRAVEL_BREAK, worldIn, pos, player, hand);
             }
-        }
+            if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
+                return changeBlock(itemstack, ModBlocks.path_fence, SoundEvents.ITEM_SHOVEL_FLATTEN, worldIn, pos, player, hand);
+            }
 
-        if (builder.isPath) {
-            if (!itemstack.isEmpty() && itemstack.getItem() instanceof HoeItem) {
-                this.setBlock(worldIn, pos, ModBlocks.grass_fence);
-                worldIn.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-                return ActionResultType.SUCCESS;
+            if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
+                return changeBlock(itemstack, ModBlocks.grass_fence, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
 
         return super.onBlockActivated(state, worldIn, pos, player, hand, result);
     }
 
-    private void setBlock(World world, BlockPos pos, Supplier<? extends Block> block) {
+    private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentFence> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
+        this.setBlock(worldIn, pos, newblock);
+        worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        if (!player.abilities.isCreativeMode && !itemstack.isDamageable()) {
+            itemstack.shrink(1);
+        } else {
+            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+        }
+        return ActionResultType.SUCCESS;
+    }
+
+    private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentFence> block) {
         BlockState state = world.getBlockState(pos);
         world.setBlockState(pos, block.get().getDefaultState()
                 .with(NORTH, state.get(NORTH))
@@ -145,28 +129,10 @@ public class OrnamentFence extends FenceBlock implements IOrnamentalBlock {
     }
 
     @Override
-    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-        if (builder.isIce) {
-            if (EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) == 0) {
-                if (worldIn.func_230315_m_().func_236040_e_()) { //doesWaterVaporize
-                    worldIn.removeBlock(pos, false);
-                    return;
-                }
-
-                Material material = worldIn.getBlockState(pos.down()).getMaterial();
-                if (material.blocksMovement() || material.isLiquid()) {
-                    worldIn.setBlockState(pos, Blocks.WATER.getDefaultState());
-                }
-            }
-        }
-    }
-
-    @Override
     @Deprecated
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
-        if (builder.isIce) {
+        if (builder.isIce || builder.canMelt) {
             if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
@@ -174,17 +140,17 @@ public class OrnamentFence extends FenceBlock implements IOrnamentalBlock {
     }
 
     protected void turnIntoWater(World world, BlockPos pos) {
-        if (world.func_230315_m_().func_236040_e_()) { //doesWaterVaporize
+        if (world.func_230315_m_().func_236040_e_() && builder.canVaporise) { //doesWaterVaporize
             world.removeBlock(pos, false);
         } else {
-            world.setBlockState(pos, Blocks.WATER.getDefaultState());
-            world.neighborChanged(pos, Blocks.WATER, pos);
+            world.setBlockState(pos, builder.meltResult.getDefaultState());
+            world.neighborChanged(pos, builder.meltResult, pos);
         }
     }
 
     @Override
     @Deprecated
     public PushReaction getPushReaction(BlockState state) {
-        return builder.isIce ? PushReaction.NORMAL : super.getPushReaction(state);
+        return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
     }
 }
