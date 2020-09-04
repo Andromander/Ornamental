@@ -1,10 +1,12 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalBlockTagProvider;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
@@ -42,8 +44,8 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.clay_trapdoor, ModBlocks.dirt_trapdoor, ModBlocks.grass_trapdoor, ModBlocks.hay_trapdoor, ModBlocks.path_trapdoor, ModBlocks.brick_trapdoor, ModBlocks.quartz_trapdoor, ModBlocks.bone_trapdoor,
             ModBlocks.nether_brick_trapdoor, ModBlocks.red_nether_brick_trapdoor, ModBlocks.snow_trapdoor, ModBlocks.ice_trapdoor, ModBlocks.packed_ice_trapdoor, ModBlocks.blue_ice_trapdoor, ModBlocks.netherite_trapdoor);
 
-    public OrnamentalBlockTags(DataGenerator generator) {
-        super(generator);
+    public OrnamentalBlockTags(DataGenerator generator, ExistingFileHelper helper) {
+        super(generator, OrnamentalMod.MODID, helper);
     }
 
     @Override

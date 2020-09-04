@@ -5,14 +5,15 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Set;
 import java.util.function.Supplier;
 
 public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
 
-    public OrnamentalBlockTagProvider(DataGenerator generator) {
-        super(generator);
+    public OrnamentalBlockTagProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
+        super(generator, modid, helper);
     }
 
     protected void beaconBaseTag(Set<Supplier<? extends Block>> set) {

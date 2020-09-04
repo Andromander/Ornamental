@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
 import com.google.common.collect.ImmutableSet;
@@ -9,6 +10,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
@@ -17,8 +19,8 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
     private ImmutableSet<Supplier<? extends Block>> piglin_loved = ImmutableSet.of(
             ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door);
 
-    public OrnamentalItemTags(DataGenerator generator, BlockTagsProvider blockTags) {
-        super(generator, blockTags);
+    public OrnamentalItemTags(DataGenerator generator, BlockTagsProvider blockTags, ExistingFileHelper helper) {
+        super(generator, OrnamentalMod.MODID, helper, blockTags);
     }
 
     @Override

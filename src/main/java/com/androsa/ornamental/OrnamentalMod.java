@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -73,17 +74,18 @@ public class OrnamentalMod {
 
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
-        BlockTagsProvider blockTags = new OrnamentalBlockTags(generator);
+        ExistingFileHelper helper = event.getExistingFileHelper();
+        BlockTagsProvider blockTags = new OrnamentalBlockTags(generator, helper);
 
         if (event.includeClient()) {
-            generator.addProvider(new OrnamentalBlockStates(generator, event.getExistingFileHelper()));
-            generator.addProvider(new OrnamentalItemModels(generator, event.getExistingFileHelper()));
+            generator.addProvider(new OrnamentalBlockStates(generator, helper));
+            generator.addProvider(new OrnamentalItemModels(generator, helper));
         }
         if (event.includeServer()) {
             generator.addProvider(new OrnamentalLootTables(generator));
             generator.addProvider(new OrnamentalRecipes(generator));
             generator.addProvider(blockTags);
-            generator.addProvider(new OrnamentalItemTags(generator, blockTags));
+            generator.addProvider(new OrnamentalItemTags(generator, blockTags, helper));
         }
     }
 
