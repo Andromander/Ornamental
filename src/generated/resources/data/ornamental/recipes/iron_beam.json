@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showIronBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:iron_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:iron_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showLapisBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:lapis_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:lapis_pole",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

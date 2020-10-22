@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showEmeraldBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:emerald_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:emerald_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

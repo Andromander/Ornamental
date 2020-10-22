@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showObsidianBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:obsidian_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:obsidian_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

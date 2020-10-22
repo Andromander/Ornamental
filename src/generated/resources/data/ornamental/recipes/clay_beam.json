@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showClayBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:clay_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:clay_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

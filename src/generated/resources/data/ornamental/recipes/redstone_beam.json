@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showRedstoneBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:redstone_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:redstone_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

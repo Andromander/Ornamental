@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBlueIceBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:blue_ice_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:blue_ice_pole",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

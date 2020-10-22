@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showQuartzBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:quartz_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:quartz_beam",
+          "count": 6
+        }
+      }
+    }
+  ]
+}
