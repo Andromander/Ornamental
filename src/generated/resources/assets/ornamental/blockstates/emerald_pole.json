@@ -1,0 +1,69 @@
+{
+  "variants": {
+    "type=topleft_corner": {
+      "model": "ornamental:block/emerald_pole_corner"
+    },
+    "type=topright_corner": {
+      "model": "ornamental:block/emerald_pole_corner",
+      "y": 90,
+      "uvlock": true
+    },
+    "type=bottomleft_corner": {
+      "model": "ornamental:block/emerald_pole_corner",
+      "y": 270,
+      "uvlock": true
+    },
+    "type=bottomright_corner": {
+      "model": "ornamental:block/emerald_pole_corner",
+      "y": 180,
+      "uvlock": true
+    },
+    "type=top_half": {
+      "model": "ornamental:block/emerald_pole_half"
+    },
+    "type=left_half": {
+      "model": "ornamental:block/emerald_pole_half",
+      "y": 270,
+      "uvlock": true
+    },
+    "type=right_half": {
+      "model": "ornamental:block/emerald_pole_half",
+      "y": 90,
+      "uvlock": true
+    },
+    "type=bottom_half": {
+      "model": "ornamental:block/emerald_pole_half",
+      "y": 180,
+      "uvlock": true
+    },
+    "type=topleft_bottomright": {
+      "model": "ornamental:block/emerald_pole_cross"
+    },
+    "type=topright_bottomleft": {
+      "model": "ornamental:block/emerald_pole_cross",
+      "y": 90,
+      "uvlock": true
+    },
+    "type=topleft_fill": {
+      "model": "ornamental:block/emerald_pole_fill"
+    },
+    "type=topright_fill": {
+      "model": "ornamental:block/emerald_pole_fill",
+      "y": 90,
+      "uvlock": true
+    },
+    "type=bottomleft_fill": {
+      "model": "ornamental:block/emerald_pole_fill",
+      "y": 270,
+      "uvlock": true
+    },
+    "type=bottomright_fill": {
+      "model": "ornamental:block/emerald_pole_fill",
+      "y": 180,
+      "uvlock": true
+    },
+    "type=full": {
+      "model": "minecraft:block/emerald_block"
+    }
+  }
+}

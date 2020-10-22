@@ -44,4 +44,70 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("end", end)
                 .texture("side", side);
     }
+
+    public BlockModelBuilder poleCorner(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "pole_corner")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder poleCornerColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "pole_corner_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder slabVertical(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "slab_vertical")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder slabVerticalColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "slab_vertical_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder poleCross(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "pole_cross")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder poleCrossColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "pole_cross_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder stairsStraightSide(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "stairs_straight_side")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder stairsStraightSideColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "stairs_straight_side_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder beamCorner(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "beam_corner")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder beamCornerColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "beam_corner_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder beamCross(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "beam_cross")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder beamCrossColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "beam_cross_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
 }

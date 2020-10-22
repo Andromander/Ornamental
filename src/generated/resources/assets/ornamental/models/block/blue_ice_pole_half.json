@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/slab_vertical",
+  "textures": {
+    "texture": "minecraft:block/blue_ice"
+  }
+}

@@ -138,5 +138,49 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.packed_ice_door, "packed_ice");
         doorBasic(ModBlocks.blue_ice_door, "blue_ice");
         doorBasic(ModBlocks.netherite_door, "netherite");
+
+        poleBasic(ModBlocks.iron_pole, "iron_block");
+        poleBasic(ModBlocks.gold_pole, "gold_block");
+        poleBasic(ModBlocks.diamond_pole, "diamond_block");
+        poleBasic(ModBlocks.emerald_pole, "emerald_block");
+        poleBasic(ModBlocks.lapis_pole, "lapis_block");
+        poleBasic(ModBlocks.obsidian_pole, "obsidian");
+        poleBasic(ModBlocks.coal_pole, "coal_block");
+        poleBasic(ModBlocks.redstone_pole, "redstone_block");
+        poleMissing(ModBlocks.missingno_pole, "missingno");
+        poleBasic(ModBlocks.clay_pole, "clay");
+        poleBasic(ModBlocks.dirt_pole, "dirt");
+        poleColumn(ModBlocks.hay_pole, "hay_block");
+        poleBasic(ModBlocks.brick_pole, "bricks");
+        poleColumn(ModBlocks.quartz_pole, "quartz_block");
+        poleColumn(ModBlocks.bone_pole, "bone_block");
+        poleBasic(ModBlocks.nether_brick_pole, "nether_bricks");
+        poleBasic(ModBlocks.red_nether_brick_pole, "red_nether_bricks");
+        poleBasic(ModBlocks.snow_pole, "snow", "snow_block");
+        poleBasic(ModBlocks.packed_ice_pole, "packed_ice");
+        poleBasic(ModBlocks.blue_ice_pole, "blue_ice");
+        poleBasic(ModBlocks.netherite_pole, "netherite_block");
+
+        beamBasic(ModBlocks.iron_beam, "iron", "iron_block", false, false);
+        beamBasic(ModBlocks.gold_beam, "gold", "gold_block", false, false);
+        beamBasic(ModBlocks.diamond_beam, "diamond", "diamond_block", false, false);
+        beamBasic(ModBlocks.emerald_beam, "emerald", "emerald_block", false, false);
+        beamBasic(ModBlocks.lapis_beam, "lapis", "lapis_block", false, false);
+        beamBasic(ModBlocks.obsidian_beam, "obsidian", "obsidian", false, false);
+        beamBasic(ModBlocks.coal_beam, "coal", "coal_block", false, false);
+        beamBasic(ModBlocks.redstone_beam, "redstone", "redstone_block", false, false);
+        beamMissing(ModBlocks.missingno_beam, "missingno");
+        beamBasic(ModBlocks.clay_beam, "clay", "clay", false, false);
+        beamBasic(ModBlocks.dirt_beam, "dirt", "dirt", false, false);
+        beamColumn(ModBlocks.hay_beam, "hay", "hay_block", false, false);
+        beamBasic(ModBlocks.brick_beam, "brick", "bricks", true, true);
+        beamColumn(ModBlocks.quartz_beam, "quartz", "quartz_block", true, true);
+        beamColumn(ModBlocks.bone_beam, "bone", "bone_block", false, false);
+        beamBasic(ModBlocks.nether_brick_beam, "nether_brick", "nether_bricks", true, true);
+        beamBasic(ModBlocks.red_nether_brick_beam, "red_nether_brick", "red_nether_bricks", true, true);
+        beamBasic(ModBlocks.snow_beam, "snow", "snow", "snow_block", false, false);
+        beamBasic(ModBlocks.packed_ice_beam, "packed_ice", "packed_ice", false, false);
+        beamBasic(ModBlocks.blue_ice_beam, "blue_ice", "blue_ice", false, false);
+        beamBasic(ModBlocks.netherite_beam, "netherite", "netherite_block", false, false);
     }
 }

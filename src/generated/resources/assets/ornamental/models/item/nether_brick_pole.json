@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/pole_inventory",
+  "textures": {
+    "end": "minecraft:block/nether_bricks",
+    "side": "minecraft:block/nether_bricks"
+  }
+}

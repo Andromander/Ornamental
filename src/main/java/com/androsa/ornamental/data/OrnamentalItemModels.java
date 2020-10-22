@@ -145,5 +145,51 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemModel(ModBlocks.packed_ice_door);
         blockItemModel(ModBlocks.blue_ice_door);
         blockItemModel(ModBlocks.netherite_door);
+
+        blockItemPole(ModBlocks.iron_pole, "iron_block");
+        blockItemPole(ModBlocks.gold_pole, "gold_block");
+        blockItemPole(ModBlocks.diamond_pole, "diamond_block");
+        blockItemPole(ModBlocks.emerald_pole, "emerald_block");
+        blockItemPole(ModBlocks.lapis_pole, "lapis_block");
+        blockItemPole(ModBlocks.obsidian_pole, "obsidian");
+        blockItemPole(ModBlocks.coal_pole, "coal_block");
+        blockItemPole(ModBlocks.redstone_pole, "redstone_block");
+        blockItemPoleMissing(ModBlocks.missingno_pole);
+        blockItemPole(ModBlocks.clay_pole, "clay");
+        blockItemPole(ModBlocks.dirt_pole, "dirt");
+        blockItemPole(ModBlocks.hay_pole, "hay_block_top", "hay_block_side");
+        blockItemPole(ModBlocks.brick_pole, "bricks");
+        blockItemPole(ModBlocks.quartz_pole, "quartz_block_top", "quartz_block_side");
+        blockItemPole(ModBlocks.bone_pole, "bone_block_top", "bone_block_side");
+        blockItemPole(ModBlocks.nether_brick_pole, "nether_bricks");
+        blockItemPole(ModBlocks.red_nether_brick_pole, "red_nether_bricks");
+        blockItemPole(ModBlocks.snow_pole, "snow");
+        blockItemPole(ModBlocks.ice_pole, "ice");
+        blockItemPole(ModBlocks.packed_ice_pole, "packed_ice");
+        blockItemPole(ModBlocks.blue_ice_pole, "blue_ice");
+        blockItemPole(ModBlocks.netherite_pole, "netherite_block");
+
+        blockItemBeam(ModBlocks.iron_beam, "iron_block");
+        blockItemBeam(ModBlocks.gold_beam, "gold_block");
+        blockItemBeam(ModBlocks.diamond_beam, "diamond_block");
+        blockItemBeam(ModBlocks.emerald_beam, "emerald_block");
+        blockItemBeam(ModBlocks.lapis_beam, "lapis_block");
+        blockItemBeam(ModBlocks.obsidian_beam, "obsidian");
+        blockItemBeam(ModBlocks.coal_beam, "coal_block");
+        blockItemBeam(ModBlocks.redstone_beam, "redstone_block");
+        blockItemPoleMissing(ModBlocks.missingno_beam);
+        blockItemBeam(ModBlocks.clay_beam, "clay");
+        blockItemBeam(ModBlocks.dirt_beam, "dirt");
+        blockItemBeam(ModBlocks.hay_beam, "hay_block_top", "hay_block_side");
+        blockItemBeam(ModBlocks.brick_beam, "bricks");
+        blockItemBeam(ModBlocks.quartz_beam, "quartz_block_top", "quartz_block_side");
+        blockItemBeam(ModBlocks.bone_beam, "bone_block_top", "bone_block_side");
+        blockItemBeam(ModBlocks.nether_brick_beam, "nether_bricks");
+        blockItemBeam(ModBlocks.red_nether_brick_beam, "red_nether_bricks");
+        blockItemBeam(ModBlocks.snow_beam, "snow");
+        blockItemBeam(ModBlocks.ice_beam, "ice");
+        blockItemBeam(ModBlocks.packed_ice_beam, "packed_ice");
+        blockItemBeam(ModBlocks.blue_ice_beam, "blue_ice");
+        blockItemBeam(ModBlocks.netherite_beam, "netherite_block");
     }
 }

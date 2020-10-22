@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/pole_cross",
+  "textures": {
+    "texture": "minecraft:block/netherite_block"
+  }
+}

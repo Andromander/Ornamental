@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/beam_cross_column",
+  "textures": {
+    "side": "minecraft:block/hay_block_side",
+    "end": "minecraft:block/hay_block_top"
+  }
+}

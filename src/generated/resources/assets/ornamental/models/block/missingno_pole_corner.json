@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/pole_corner",
+  "textures": {
+    "texture": "ornamental:block/missingno"
+  }
+}

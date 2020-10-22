@@ -51,4 +51,36 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     public void blockItemTrapdoor(Supplier<? extends Block> block) {
         withExistingParent(blockName(block), modLoc("block/" + blockName(block) + "_bottom"));
     }
+
+    public void blockItemPole(Supplier<? extends Block> block, String name) {
+        blockItemPole(block, name, name);
+    }
+
+    public void blockItemPole(Supplier<? extends Block> block, String end, String side) {
+        withExistingParent(blockName(block), modLoc("block/util/pole_inventory"))
+                .texture("end", mcLoc("block/" + end))
+                .texture("side", mcLoc("block/" + side));
+    }
+
+    public void blockItemPoleMissing(Supplier<? extends Block> block) {
+        withExistingParent(blockName(block), modLoc("block/util/pole_inventory"))
+                .texture("end", modLoc("block/missingno"))
+                .texture("side", modLoc("block/missingno"));
+    }
+
+    public void blockItemBeam(Supplier<? extends Block> block, String name) {
+        blockItemBeam(block, name, name);
+    }
+
+    public void blockItemBeam(Supplier<? extends Block> block, String end, String side) {
+        withExistingParent(blockName(block), modLoc("block/util/beam_inventory"))
+                .texture("end", mcLoc("block/" + end))
+                .texture("side", mcLoc("block/" + side));
+    }
+
+    public void blockItemBeamMissing(Supplier<? extends Block> block) {
+        withExistingParent(blockName(block), modLoc("block/util/beam_inventory"))
+                .texture("end", modLoc("block/missingno"))
+                .texture("side", modLoc("block/missingno"));
+    }
 }

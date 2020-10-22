@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/stairs_straight_side",
+  "textures": {
+    "texture": "minecraft:block/blue_ice"
+  }
+}
