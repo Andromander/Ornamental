@@ -18,7 +18,7 @@ public abstract class OrnamentalItemTagProvider extends ItemTagsProvider {
 
     protected void piglinLoveTag(Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
-            getOrCreateBuilder(ItemTags.field_232903_N_).add(block.get().asItem()); //piglin_loved
+            getOrCreateBuilder(ItemTags.PIGLIN_LOVED).add(block.get().asItem());
         }
     }
 }

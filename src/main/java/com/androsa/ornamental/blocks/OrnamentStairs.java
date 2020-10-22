@@ -179,7 +179,7 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
     }
 
     private void turnIntoWater(World world, BlockPos pos) {
-        if (world.func_230315_m_().func_236040_e_() && builder.canVaporise) { //doesWaterVaporize
+        if (world.getDimensionType().isUltrawarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
             world.setBlockState(pos, builder.meltResult.getDefaultState());
