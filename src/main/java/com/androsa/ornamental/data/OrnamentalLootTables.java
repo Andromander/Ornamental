@@ -188,6 +188,56 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropDoor(ModBlocks.packed_ice_door);
             dropDoor(ModBlocks.blue_ice_door);
             dropDoor(ModBlocks.netherite_door);
+
+            dropPole(ModBlocks.iron_pole);
+            dropPole(ModBlocks.gold_pole);
+            dropPole(ModBlocks.diamond_pole);
+            dropPole(ModBlocks.emerald_pole);
+            dropPole(ModBlocks.lapis_pole);
+            dropPole(ModBlocks.obsidian_pole);
+            dropPole(ModBlocks.coal_pole);
+            dropPole(ModBlocks.redstone_pole);
+            dropPole(ModBlocks.missingno_pole);
+            dropPole(ModBlocks.clay_pole);
+            dropPole(ModBlocks.dirt_pole);
+            dropPole(ModBlocks.grass_pole);
+            dropPole(ModBlocks.hay_pole);
+            dropPole(ModBlocks.path_pole);
+            dropPole(ModBlocks.brick_pole);
+            dropPole(ModBlocks.quartz_pole);
+            dropPole(ModBlocks.bone_pole);
+            dropPole(ModBlocks.nether_brick_pole);
+            dropPole(ModBlocks.red_nether_brick_pole);
+            dropPole(ModBlocks.snow_pole);
+            dropPole(ModBlocks.ice_pole);
+            dropPole(ModBlocks.packed_ice_pole);
+            dropPole(ModBlocks.blue_ice_pole);
+            dropPole(ModBlocks.netherite_pole);
+
+            dropBeam(ModBlocks.iron_beam);
+            dropBeam(ModBlocks.gold_beam);
+            dropBeam(ModBlocks.diamond_beam);
+            dropBeam(ModBlocks.emerald_beam);
+            dropBeam(ModBlocks.lapis_beam);
+            dropBeam(ModBlocks.obsidian_beam);
+            dropBeam(ModBlocks.coal_beam);
+            dropBeam(ModBlocks.redstone_beam);
+            dropBeam(ModBlocks.missingno_beam);
+            dropBeam(ModBlocks.clay_beam);
+            dropBeam(ModBlocks.dirt_beam);
+            dropBeam(ModBlocks.grass_beam);
+            dropBeam(ModBlocks.hay_beam);
+            dropBeam(ModBlocks.path_beam);
+            dropBeam(ModBlocks.brick_beam);
+            dropBeam(ModBlocks.quartz_beam);
+            dropBeam(ModBlocks.bone_beam);
+            dropBeam(ModBlocks.nether_brick_beam);
+            dropBeam(ModBlocks.red_nether_brick_beam);
+            dropBeam(ModBlocks.snow_beam);
+            dropBeam(ModBlocks.ice_beam);
+            dropBeam(ModBlocks.packed_ice_beam);
+            dropBeam(ModBlocks.blue_ice_beam);
+            dropBeam(ModBlocks.netherite_beam);
         }
 
         @Override
