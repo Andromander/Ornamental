@@ -152,6 +152,14 @@ public class OrnamentalMod {
         renderBlock(ModBlocks.ice_door, RenderType.getTranslucent());
         renderBlock(ModBlocks.packed_ice_door, RenderType.getCutout());
         renderBlock(ModBlocks.blue_ice_door, RenderType.getCutout());
+
+        renderBlock(ModBlocks.grass_pole, RenderType.getCutoutMipped());
+        renderBlock(ModBlocks.path_pole, RenderType.getCutoutMipped());
+        renderBlock(ModBlocks.ice_pole, RenderType.getTranslucent());
+
+        renderBlock(ModBlocks.grass_beam, RenderType.getCutoutMipped());
+        renderBlock(ModBlocks.path_beam, RenderType.getCutoutMipped());
+        renderBlock(ModBlocks.ice_beam, RenderType.getTranslucent());
     }
 
     private static void renderBlock(Supplier<? extends Block> block, RenderType render) {

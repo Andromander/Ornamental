@@ -160,6 +160,56 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentDoor> blue_ice_door = registerDoor(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentDoor> netherite_door = registerDoor(OrnamentBuilders.NETHERITE);
 
+    public static final RegistryObject<OrnamentPole> iron_pole = registerPole(OrnamentBuilders.IRON);
+    public static final RegistryObject<OrnamentPole> gold_pole = registerPole(OrnamentBuilders.GOLD);
+    public static final RegistryObject<OrnamentPole> diamond_pole = registerPole(OrnamentBuilders.DIAMOND);
+    public static final RegistryObject<OrnamentPole> emerald_pole = registerPole(OrnamentBuilders.EMERALD);
+    public static final RegistryObject<OrnamentPole> lapis_pole = registerPole(OrnamentBuilders.LAPIS);
+    public static final RegistryObject<OrnamentPole> obsidian_pole = registerPole(OrnamentBuilders.OBSIDIAN);
+    public static final RegistryObject<OrnamentPole> coal_pole = registerPole(OrnamentBuilders.COAL);
+    public static final RegistryObject<OrnamentPole> redstone_pole = registerPole(OrnamentBuilders.REDSTONE);
+    public static final RegistryObject<OrnamentPole> missingno_pole = registerPole(OrnamentBuilders.MISSINGNO);
+    public static final RegistryObject<OrnamentPole> clay_pole = registerPole(OrnamentBuilders.CLAY);
+    public static final RegistryObject<OrnamentPole> dirt_pole = registerPole(OrnamentBuilders.DIRT);
+    public static final RegistryObject<OrnamentPole> grass_pole = registerPole(OrnamentBuilders.GRASS);
+    public static final RegistryObject<OrnamentPole> hay_pole = registerPole(OrnamentBuilders.HAY);
+    public static final RegistryObject<OrnamentPole> path_pole = registerPole(OrnamentBuilders.PATH);
+    public static final RegistryObject<OrnamentPole> brick_pole = registerPole(OrnamentBuilders.BRICK);
+    public static final RegistryObject<OrnamentPole> quartz_pole = registerPole(OrnamentBuilders.QUARTZ);
+    public static final RegistryObject<OrnamentPole> bone_pole = registerPole(OrnamentBuilders.BONE);
+    public static final RegistryObject<OrnamentPole> nether_brick_pole = registerPole(OrnamentBuilders.NETHER_BRICK);
+    public static final RegistryObject<OrnamentPole> red_nether_brick_pole = registerPole(OrnamentBuilders.RED_NETHER_BRICK);
+    public static final RegistryObject<OrnamentPole> snow_pole = registerPole(OrnamentBuilders.SNOW);
+    public static final RegistryObject<OrnamentPole> ice_pole = registerPole(OrnamentBuilders.ICE);
+    public static final RegistryObject<OrnamentPole> packed_ice_pole = registerPole(OrnamentBuilders.PACKED_ICE);
+    public static final RegistryObject<OrnamentPole> blue_ice_pole = registerPole(OrnamentBuilders.BLUE_ICE);
+    public static final RegistryObject<OrnamentPole> netherite_pole = registerPole(OrnamentBuilders.NETHERITE);
+
+    public static final RegistryObject<OrnamentBeam> iron_beam = registerBeam(OrnamentBuilders.IRON);
+    public static final RegistryObject<OrnamentBeam> gold_beam = registerBeam(OrnamentBuilders.GOLD);
+    public static final RegistryObject<OrnamentBeam> diamond_beam = registerBeam(OrnamentBuilders.DIAMOND);
+    public static final RegistryObject<OrnamentBeam> emerald_beam = registerBeam(OrnamentBuilders.EMERALD);
+    public static final RegistryObject<OrnamentBeam> lapis_beam = registerBeam(OrnamentBuilders.LAPIS);
+    public static final RegistryObject<OrnamentBeam> obsidian_beam = registerBeam(OrnamentBuilders.OBSIDIAN);
+    public static final RegistryObject<OrnamentBeam> coal_beam = registerBeam(OrnamentBuilders.COAL);
+    public static final RegistryObject<OrnamentBeam> redstone_beam = registerBeam(OrnamentBuilders.REDSTONE);
+    public static final RegistryObject<OrnamentBeam> missingno_beam = registerBeam(OrnamentBuilders.MISSINGNO);
+    public static final RegistryObject<OrnamentBeam> clay_beam = registerBeam(OrnamentBuilders.CLAY);
+    public static final RegistryObject<OrnamentBeam> dirt_beam = registerBeam(OrnamentBuilders.DIRT);
+    public static final RegistryObject<OrnamentBeam> grass_beam = registerBeam(OrnamentBuilders.GRASS);
+    public static final RegistryObject<OrnamentBeam> hay_beam = registerBeam(OrnamentBuilders.HAY);
+    public static final RegistryObject<OrnamentBeam> path_beam = registerBeam(OrnamentBuilders.PATH);
+    public static final RegistryObject<OrnamentBeam> brick_beam = registerBeam(OrnamentBuilders.BRICK);
+    public static final RegistryObject<OrnamentBeam> quartz_beam = registerBeam(OrnamentBuilders.QUARTZ);
+    public static final RegistryObject<OrnamentBeam> bone_beam = registerBeam(OrnamentBuilders.BONE);
+    public static final RegistryObject<OrnamentBeam> nether_brick_beam = registerBeam(OrnamentBuilders.NETHER_BRICK);
+    public static final RegistryObject<OrnamentBeam> red_nether_brick_beam = registerBeam(OrnamentBuilders.RED_NETHER_BRICK);
+    public static final RegistryObject<OrnamentBeam> snow_beam = registerBeam(OrnamentBuilders.SNOW);
+    public static final RegistryObject<OrnamentBeam> ice_beam = registerBeam(OrnamentBuilders.ICE);
+    public static final RegistryObject<OrnamentBeam> packed_ice_beam = registerBeam(OrnamentBuilders.PACKED_ICE);
+    public static final RegistryObject<OrnamentBeam> blue_ice_beam = registerBeam(OrnamentBuilders.BLUE_ICE);
+    public static final RegistryObject<OrnamentBeam> netherite_beam = registerBeam(OrnamentBuilders.NETHERITE);
+
     private static RegistryObject<OrnamentStairs> registerStairs(OrnamentBuilder builder) {
         AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
@@ -202,6 +252,20 @@ public class ModBlocks {
 
         return registerBlock(builder.name + "_door", () -> new OrnamentDoor(props, builder), item ->
                 registerBlockItemDoor(item, builder, 0));
+    }
+
+    private static RegistryObject<OrnamentPole> registerPole(OrnamentBuilder builder) {
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
+
+        return registerBlock(builder.name + "_pole", () -> new OrnamentPole(props, builder), item ->
+                registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, builder, 6));
+    }
+
+    private static RegistryObject<OrnamentBeam> registerBeam(OrnamentBuilder builder) {
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
+
+        return registerBlock(builder.name + "_beam", () -> new OrnamentBeam(props, builder), item ->
+                registerBlockItem(item, ItemGroup.BUILDING_BLOCKS, builder, 7));
     }
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {

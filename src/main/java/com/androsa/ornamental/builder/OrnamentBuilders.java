@@ -56,7 +56,7 @@ public class OrnamentBuilders {
             .properties(Material.ROCK, MaterialColor.BLACK)
             .hardnessAndResistance(5.0F, 10.0F)
             .tool(ToolType.PICKAXE, true)
-            .burnTime(10500, 5250, 4000, 8000, 12000, 5250)
+            .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000)
             .canOpen()
             .config(() -> OrnamentalConfig.showCoalBlocks);
 
