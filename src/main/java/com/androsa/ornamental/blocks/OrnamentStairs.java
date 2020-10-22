@@ -30,12 +30,12 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
 
     protected static final VoxelShape PATH_AABB_SLAB_TOP = OrnamentSlab.PATH_TOP_SHAPE;
     protected static final VoxelShape PATH_AABB_SLAB_BOTTOM = OrnamentSlab.PATH_BOTTOM_SHAPE;
-    protected static final VoxelShape PATH_NWD_CORNER = Block.makeCuboidShape(0.0D, 1.0D, 0.0D, 8.0D, 8.0D, 8.0D);
-    protected static final VoxelShape PATH_SWD_CORNER = Block.makeCuboidShape(0.0D, 1.0D, 8.0D, 8.0D, 8.0D, 16.0D);
+    protected static final VoxelShape PATH_NWD_CORNER = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 8.0D, 8.0D);
+    protected static final VoxelShape PATH_SWD_CORNER = Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 8.0D, 8.0D, 16.0D);
     protected static final VoxelShape PATH_NWU_CORNER = Block.makeCuboidShape(0.0D, 7.0D, 0.0D, 8.0D, 15.0D, 8.0D);
     protected static final VoxelShape PATH_SWU_CORNER = Block.makeCuboidShape(0.0D, 7.0D, 8.0D, 8.0D, 15.0D, 16.0D);
-    protected static final VoxelShape PATH_NED_CORNER = Block.makeCuboidShape(8.0D, 1.0D, 0.0D, 16.0D, 8.0D, 8.0D);
-    protected static final VoxelShape PATH_SED_CORNER = Block.makeCuboidShape(8.0D, 1.0D, 8.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape PATH_NED_CORNER = Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 8.0D, 8.0D);
+    protected static final VoxelShape PATH_SED_CORNER = Block.makeCuboidShape(8.0D, 0.0D, 8.0D, 16.0D, 8.0D, 16.0D);
     protected static final VoxelShape PATH_NEU_CORNER = Block.makeCuboidShape(8.0D, 7.0D, 0.0D, 16.0D, 15.0D, 8.0D);
     protected static final VoxelShape PATH_SEU_CORNER = Block.makeCuboidShape(8.0D, 7.0D, 8.0D, 16.0D, 15.0D, 16.0D);
     protected static final VoxelShape[] PATH_SLAB_TOP_SHAPES = makeShapes(PATH_AABB_SLAB_TOP, PATH_NWD_CORNER, PATH_NED_CORNER, PATH_SWD_CORNER, PATH_SED_CORNER);
