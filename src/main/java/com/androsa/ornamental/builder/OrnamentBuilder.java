@@ -42,7 +42,7 @@ public class OrnamentBuilder {
     public int harvestLevel = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
-    public int[] burnTime = new int[]{0,0,0,0,0,0};
+    public int[] burnTime = new int[]{0,0,0,0,0,0,0,0};
     public boolean canOpen = false;
     public boolean hasPower = false;
     public boolean doesTick = false;
