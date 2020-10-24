@@ -177,7 +177,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemBeam(ModBlocks.obsidian_beam, "obsidian");
         blockItemBeam(ModBlocks.coal_beam, "coal_block");
         blockItemBeam(ModBlocks.redstone_beam, "redstone_block");
-        blockItemPoleMissing(ModBlocks.missingno_beam);
+        blockItemBeamMissing(ModBlocks.missingno_beam);
         blockItemBeam(ModBlocks.clay_beam, "clay");
         blockItemBeam(ModBlocks.dirt_beam, "dirt");
         blockItemBeam(ModBlocks.hay_beam, "hay_block_top", "hay_block_side");

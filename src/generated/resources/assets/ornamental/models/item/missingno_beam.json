@@ -1,5 +1,5 @@
 {
-  "parent": "ornamental:block/util/pole_inventory",
+  "parent": "ornamental:block/util/beam_inventory",
   "textures": {
     "end": "ornamental:block/missingno",
     "side": "ornamental:block/missingno"
