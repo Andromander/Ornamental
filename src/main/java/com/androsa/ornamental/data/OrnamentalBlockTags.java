@@ -6,6 +6,8 @@ import com.androsa.ornamental.data.provider.OrnamentalBlockTagProvider;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
@@ -59,5 +61,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         slabTag(slabs);
         stairsTag(stairs);
         trapdoorTag(trapdoors);
+
+        getOrCreateBuilder(Tags.Blocks.FENCES_NETHER_BRICK).add(ModBlocks.red_nether_brick_fence.get());
     }
 }

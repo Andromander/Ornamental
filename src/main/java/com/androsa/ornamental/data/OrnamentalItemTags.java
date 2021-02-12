@@ -32,6 +32,7 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
         copy(BlockTags.TRAPDOORS, ItemTags.TRAPDOORS);
+        copy(Tags.Blocks.FENCES_NETHER_BRICK, Tags.Items.FENCES_NETHER_BRICK);
 
         piglinLoveTag(piglin_loved);
     }
