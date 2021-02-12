@@ -33,28 +33,40 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentStairs> result, Block ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 8)
-                        .patternLine("#  ")
-                        .patternLine("## ")
-                        .patternLine("###")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_stairs"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get(), 8)
+                .patternLine("#  ")
+                .patternLine("## ")
+                .patternLine("###")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_stairs"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_stairs"));
+        }
     }
 
     public void slab(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
-                        .patternLine("###")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_slab"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
+                .patternLine("###")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_slab"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_slab"));
+        }
     }
 
     public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
@@ -63,16 +75,22 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, IItemProvider smallItem) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 3)
-                        .patternLine("#/#")
-                        .patternLine("#/#")
-                        .key('#', bigItem)
-                        .key('/', smallItem)
-                        .addCriterion("has_" + builder.name, hasItem(bigItem))
-                        ::build)
-                .build(consumer, loc(builder.name + "_fence"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get(), 3)
+                .patternLine("#/#")
+                .patternLine("#/#")
+                .key('#', bigItem)
+                .key('/', smallItem)
+                .addCriterion("has_" + builder.name, hasItem(bigItem));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_fence"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_fence"));
+        }
     }
 
     public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -81,15 +99,21 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, IItemProvider ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
-                        .patternLine("##")
-                        .patternLine("##")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_trapdoor"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get())
+                .patternLine("##")
+                .patternLine("##")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_trapdoor"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_trapdoor"));
+        }
     }
 
     public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -98,15 +122,21 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, IItemProvider ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
-                        .patternLine("###")
-                        .patternLine("###")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_trapdoor"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get())
+                .patternLine("###")
+                .patternLine("###")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_trapdoor"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_trapdoor"));
+        }
     }
 
     public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, Supplier<? extends OrnamentSlab> smallItem) {
@@ -115,16 +145,22 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, IItemProvider smallItem) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
-                        .patternLine("/#/")
-                        .patternLine("/#/")
-                        .key('#', bigItem)
-                        .key('/', smallItem)
-                        .addCriterion("has_" + builder.name, hasItem(bigItem))
-                        ::build)
-                .build(consumer, loc(builder.name + "_fence_gate"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get())
+                .patternLine("/#/")
+                .patternLine("/#/")
+                .key('#', bigItem)
+                .key('/', smallItem)
+                .addCriterion("has_" + builder.name, hasItem(bigItem));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_fence_gate"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_fence_gate"));
+        }
     }
 
     public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -133,16 +169,22 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, IItemProvider ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get())
-                        .patternLine("##")
-                        .patternLine("##")
-                        .patternLine("##")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_door"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get())
+                .patternLine("##")
+                .patternLine("##")
+                .patternLine("##")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_door"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_door"));
+        }
     }
 
     public void pole(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -151,16 +193,22 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void pole(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, IItemProvider ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
-                        .patternLine("#")
-                        .patternLine("#")
-                        .patternLine("#")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_pole"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
+                .patternLine("#")
+                .patternLine("#")
+                .patternLine("#")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_pole"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_pole"));
+        }
     }
 
     public void beam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -169,33 +217,49 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 
     public void beam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, IItemProvider ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
-                        .patternLine("###")
-                        .key('#', ingredient)
-                        .addCriterion("has_" + builder.name, hasItem(ingredient))
-                        ::build)
-                .build(consumer, loc(builder.name + "_beam"));
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shapedRecipe(result.get(), 6)
+                .patternLine("###")
+                .key('#', ingredient)
+                .addCriterion("has_" + builder.name, hasItem(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::build)
+                    .build(consumer, loc(builder.name + "_beam"));
+        } else {
+            recipe.build(consumer, loc(builder.name + "_beam"));
+        }
     }
 
     public void convertPoleBeam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
         OrnamentBuilder polebuilder = pole.get().getBuilder();
         OrnamentBuilder beambuilder = beam.get().getBuilder();
 
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(polebuilder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapelessRecipeBuilder.shapelessRecipe(beam.get())
-                        .addIngredient(pole.get())
-                        .addCriterion("has_" + polebuilder.name, hasItem(pole.get()))
-                        ::build)
-                .build(consumer, loc(polebuilder.name + "_pole_to_beam"));
-        ConditionalRecipe.builder()
-                .addCondition(new ConfigCondition(beambuilder.booleanValue.get().getPath().get(0)))
-                .addRecipe(ShapelessRecipeBuilder.shapelessRecipe(pole.get())
-                        .addIngredient(beam.get())
-                        .addCriterion("has_" + beambuilder.name, hasItem(beam.get()))
-                        ::build)
-                .build(consumer, loc(beambuilder.name + "_beam_to_pole"));
+        ShapelessRecipeBuilder polerecipe = ShapelessRecipeBuilder.shapelessRecipe(beam.get())
+                .addIngredient(pole.get())
+                .addCriterion("has_" + polebuilder.name, hasItem(pole.get()));
+        ShapelessRecipeBuilder beamrecipe = ShapelessRecipeBuilder.shapelessRecipe(pole.get())
+                .addIngredient(beam.get())
+                .addCriterion("has_" + beambuilder.name, hasItem(beam.get()));
+
+        if (polebuilder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(polebuilder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(polerecipe::build)
+                    .build(consumer, loc(polebuilder.name + "_pole_to_beam"));
+        } else {
+            polerecipe.build(consumer, loc(polebuilder.name + "_pole_to_beam"));
+        }
+
+        if (beambuilder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(beambuilder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(beamrecipe::build)
+                    .build(consumer, loc(beambuilder.name + "_beam_to_pole"));
+        } else {
+            beamrecipe.build(consumer, loc(beambuilder.name + "_beam_to_pole"));
+        }
     }
 }
