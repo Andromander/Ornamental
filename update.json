@@ -39,7 +39,8 @@
     "4.2": "Added support for 1.16.3. Thought it would have, except it wouldn't be because it was told to only work on 1.16.2, no higher, no lower. Should also work on 1.16.2.",
     "4.3": "The next phase for Ornamental: new Blocks! • Added Poles and Beams. All materials in Ornamental have been given this new block.\n   • Poles have 15 variations, ranging from corners to a full block.\n   • Beams have 30 variations, ranging from corners to a full block, facing either North-South or East-West.\n   • All blocks function as quarter blocks. Like Slabs, but smaller.\n • Changes to OrnamentBuilder:\n   • A variation of the burnTime method was added. This one adds two new parameters for Pole and Beam burn times. The previous iteration of this method has been Deprecated, and any use of it will result in Poles and Beams of that material not burning.\n • Modified the shape of upside-down Grass Path Stairs. The bottom part now touches the ground.\n • Fixed some culling issues with Grass Path ornaments. Now the tops won't disappear if another block is placed on top.",
     "4.3.1": "Hotfix a crash where putting Poles or Beams into a Furnace fuel slot would cause a crash. Also, fix a minor visual bug with Missingno Beams looking like Missingno Poles.",
-    "4.3.2": "Critical fix caused by slow computers not telling you you're moving files, not copying."
+    "4.3.2": "Critical fix caused by slow computers not telling you you're moving files, not copying.",
+    "4.4": "No new features for Ornamental, but some cleaning for better compat.\n • Red Nether Brick Fences have now been tagged for Nether Brick Fences.\n • Fixed checks in places for config values. Now if a block has no config option, it will always drop rather than not.\n • Generators now respect that other mods have different mod IDs. This means other mods may now use Ornamental's generators.\n • Recipe generators now respect blocks with no config value. Those that did not would crash the generation, which means no automatically-created recipes.\n Don't forget to keep an eye out for Ornamental: Unusually Decorative, an expansion to Ornamental with more vanilla features."
   },
 
   "promos": {
@@ -57,7 +58,7 @@
     "1.15.2-recommended": "3.1",
     "1.16.2-latest": "4.1",
     "1.16.2-recommended": "4.1",
-    "1.16.3-latest": "4.3.2",
-    "1.16.3-recommended": "4.3.2"
+    "1.16.3-latest": "4.4",
+    "1.16.3-recommended": "4.4"
   }
 }
