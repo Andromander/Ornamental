@@ -3,6 +3,7 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 
@@ -10,8 +11,12 @@ import java.util.function.Supplier;
 
 public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
 
-    public OrnamentalItemModelProvider(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, OrnamentalMod.MODID, helper);
+    public OrnamentalItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
+        super(generator, modid, helper);
+    }
+
+    public ResourceLocation ornamentLoc(String path) {
+        return new ResourceLocation(OrnamentalMod.MODID, path);
     }
 
     public String blockName(Supplier<? extends Block> block) {
@@ -38,7 +43,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemFenceColumn(Supplier<? extends Block> block, String side, String top) {
-        withExistingParent(blockName(block), modLoc("block/util/fence_inventory_column"))
+        withExistingParent(blockName(block), ornamentLoc("block/util/fence_inventory_column"))
                 .texture("end", mcLoc("block/" + top))
                 .texture("side", mcLoc("block/" + side));
     }
@@ -57,13 +62,13 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemPole(Supplier<? extends Block> block, String end, String side) {
-        withExistingParent(blockName(block), modLoc("block/util/pole_inventory"))
+        withExistingParent(blockName(block), ornamentLoc("block/util/pole_inventory"))
                 .texture("end", mcLoc("block/" + end))
                 .texture("side", mcLoc("block/" + side));
     }
 
     public void blockItemPoleMissing(Supplier<? extends Block> block) {
-        withExistingParent(blockName(block), modLoc("block/util/pole_inventory"))
+        withExistingParent(blockName(block), ornamentLoc("block/util/pole_inventory"))
                 .texture("end", modLoc("block/missingno"))
                 .texture("side", modLoc("block/missingno"));
     }
@@ -73,13 +78,13 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemBeam(Supplier<? extends Block> block, String end, String side) {
-        withExistingParent(blockName(block), modLoc("block/util/beam_inventory"))
+        withExistingParent(blockName(block), ornamentLoc("block/util/beam_inventory"))
                 .texture("end", mcLoc("block/" + end))
                 .texture("side", mcLoc("block/" + side));
     }
 
     public void blockItemBeamMissing(Supplier<? extends Block> block) {
-        withExistingParent(blockName(block), modLoc("block/util/beam_inventory"))
+        withExistingParent(blockName(block), ornamentLoc("block/util/beam_inventory"))
                 .texture("end", modLoc("block/missingno"))
                 .texture("side", modLoc("block/missingno"));
     }

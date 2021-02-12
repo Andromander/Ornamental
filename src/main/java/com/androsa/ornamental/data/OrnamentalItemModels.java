@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemModelProvider;
 import net.minecraft.data.DataGenerator;
@@ -8,7 +9,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class OrnamentalItemModels extends OrnamentalItemModelProvider {
 
     public OrnamentalItemModels(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, helper);
+        super(generator, OrnamentalMod.MODID, helper);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.androsa.ornamental.data.provider;
 
-import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
 import com.androsa.ornamental.blocks.PoleType;
@@ -20,11 +19,13 @@ import java.util.function.Supplier;
 public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
 
     private final OrnamentalBlockModelProvider blockModels;
+    private final String modID;
 
     public OrnamentalBlockStateProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
         super(generator, modid, helper);
+        modID = modid;
 
-        blockModels = new OrnamentalBlockModelProvider(generator, helper) {
+        blockModels = new OrnamentalBlockModelProvider(generator, modid, helper) {
             @Override
             protected void registerModels() { }
 
@@ -41,6 +42,10 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         return "Ornamental Blockstates and Block Models";
     }
 
+    public String getModID() {
+        return modID;
+    }
+
     public OrnamentalBlockModelProvider models() {
         return blockModels;
     }
@@ -50,7 +55,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     protected ResourceLocation locOrnament(String name) {
-        return new ResourceLocation(OrnamentalMod.MODID, "block/" + name);
+        return new ResourceLocation(getModID(), "block/" + name);
     }
 
     public void stairsBasic(Supplier<? extends StairsBlock> block, String name) {

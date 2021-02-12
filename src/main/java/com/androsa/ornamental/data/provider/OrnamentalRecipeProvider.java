@@ -1,7 +1,6 @@
 package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.conditions.ConfigCondition;
 import net.minecraft.block.Block;
@@ -21,12 +20,15 @@ import java.util.function.Supplier;
 
 public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider implements IConditionBuilder {
 
-    public OrnamentalRecipeProvider(DataGenerator generator) {
+    private final String modID;
+
+    public OrnamentalRecipeProvider(DataGenerator generator, String modid) {
         super(generator);
+        this.modID = modid;
     }
 
     private ResourceLocation loc(String name) {
-        return new ResourceLocation(OrnamentalMod.MODID, name);
+        return new ResourceLocation(modID, name);
     }
 
     public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentStairs> result, Block ingredient) {

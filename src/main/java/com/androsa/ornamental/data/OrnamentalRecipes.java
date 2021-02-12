@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
 import net.minecraft.block.Blocks;
@@ -12,7 +13,7 @@ import java.util.function.Consumer;
 public class OrnamentalRecipes extends OrnamentalRecipeProvider {
 
     public OrnamentalRecipes(DataGenerator generator) {
-        super(generator);
+        super(generator, OrnamentalMod.MODID);
     }
 
     @Override
