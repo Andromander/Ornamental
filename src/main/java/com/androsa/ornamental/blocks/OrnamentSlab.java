@@ -142,18 +142,17 @@ public class OrnamentSlab extends SlabBlock implements IOrnamentalBlock {
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
         if (builder.hasConfig) {
             ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
             if (val == null) {
                 throw new NullPointerException(builder.name + " expected a config value but found null.");
             } else {
-                if (val.get()) {
-                    super.onBlockHarvested(world, pos, state, player);
-                }
+                return val.get() && super.canHarvestBlock(state, world, pos, player);
             }
         }
+        return super.canHarvestBlock(state, world, pos, player);
     }
 
     @Override

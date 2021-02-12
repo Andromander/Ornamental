@@ -32,6 +32,8 @@ public class OrnamentBlockItem extends BlockItem {
                     super.fillItemGroup(group, items);
                 }
             }
+        } else {
+            super.fillItemGroup(group, items);
         }
     }
 
