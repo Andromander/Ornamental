@@ -48,20 +48,20 @@
       "model": "minecraft:block/nether_brick_slab_top"
     },
     "axis=x,type=left_half": {
-      "model": "minecraft:block/nether_brick_slab"
+      "model": "ornamental:block/nether_brick_pole_half"
     },
     "axis=z,type=left_half": {
-      "model": "minecraft:block/nether_brick_slab",
+      "model": "ornamental:block/nether_brick_pole_half",
       "y": 270,
       "uvlock": true
     },
     "axis=x,type=right_half": {
-      "model": "minecraft:block/nether_brick_slab",
+      "model": "ornamental:block/nether_brick_pole_half",
       "y": 180,
       "uvlock": true
     },
     "axis=z,type=right_half": {
-      "model": "minecraft:block/nether_brick_slab",
+      "model": "ornamental:block/nether_brick_pole_half",
       "y": 90,
       "uvlock": true
     },

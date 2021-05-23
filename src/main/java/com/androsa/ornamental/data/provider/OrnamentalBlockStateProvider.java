@@ -189,7 +189,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         ModelFile corner = models().beamCorner(block.getId().toString() + "_corner", locVanilla(name));
         ModelFile top = models().getExistingFile(vslab ? locVanilla(nametop) : locOrnament(nametop));
         ModelFile bottom = models().getExistingFile(vslab ? locVanilla(namebottom) : locOrnament(namebottom));
-        ModelFile side = models().getExistingFile(vslab ? locVanilla(namebottom) : locOrnament(namehalf));
+        ModelFile side = models().getExistingFile(locOrnament(namehalf));
         ModelFile cross  = models().beamCross(block.getId().toString() + "_cross", locVanilla(name));
         ModelFile fill   = models().getExistingFile(vstairs ? locVanilla(stairs) : locOrnament(stairs));
         ModelFile full   = models().getExistingFile(locVanilla(fullblock));
