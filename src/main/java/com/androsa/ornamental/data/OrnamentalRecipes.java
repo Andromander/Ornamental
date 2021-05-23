@@ -52,7 +52,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         slab(consumer, ModBlocks.hay_slab, Blocks.HAY_BLOCK);
         slab(consumer, ModBlocks.path_slab, Blocks.GRASS_PATH);
         slab(consumer, ModBlocks.bone_slab, Blocks.BONE_BLOCK);
-        slab(consumer, ModBlocks.snow_slab, Blocks.SNOW_BLOCK);
+        slabOverride(consumer, ModBlocks.snow_slab, Blocks.SNOW_BLOCK);
         slab(consumer, ModBlocks.ice_slab, Blocks.ICE);
         slab(consumer, ModBlocks.packed_ice_slab, Blocks.PACKED_ICE);
         slab(consumer, ModBlocks.blue_ice_slab, Blocks.BLUE_ICE);
@@ -62,7 +62,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fence(consumer, ModBlocks.gold_fence, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
         fence(consumer, ModBlocks.diamond_fence, Blocks.DIAMOND_BLOCK, Items.DIAMOND);
         fence(consumer, ModBlocks.emerald_fence, Blocks.EMERALD_BLOCK, Items.EMERALD);
-        fence(consumer, ModBlocks.lapis_fence, Blocks.LAPIS_BLOCK, Items.LAPIS_BLOCK);
+        fence(consumer, ModBlocks.lapis_fence, Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI);
         fence(consumer, ModBlocks.obsidian_fence, Blocks.OBSIDIAN, ModBlocks.obsidian_slab);
         fence(consumer, ModBlocks.coal_fence, Blocks.COAL_BLOCK, Items.COAL);
         fence(consumer, ModBlocks.redstone_fence, Blocks.REDSTONE_BLOCK, Items.REDSTONE);
@@ -108,7 +108,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fencegate(consumer, ModBlocks.gold_fence_gate, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
         fencegate(consumer, ModBlocks.diamond_fence_gate, Blocks.DIAMOND_BLOCK, Items.DIAMOND);
         fencegate(consumer, ModBlocks.emerald_fence_gate, Blocks.EMERALD_BLOCK, Items.EMERALD);
-        fencegate(consumer, ModBlocks.lapis_fence_gate, Blocks.LAPIS_BLOCK, Items.LAPIS_BLOCK);
+        fencegate(consumer, ModBlocks.lapis_fence_gate, Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI);
         fencegate(consumer, ModBlocks.obsidian_fence_gate, Blocks.OBSIDIAN, ModBlocks.obsidian_slab);
         fencegate(consumer, ModBlocks.coal_fence_gate, Blocks.COAL_BLOCK, Items.COAL);
         fencegate(consumer, ModBlocks.redstone_fence_gate, Blocks.REDSTONE_BLOCK, Items.REDSTONE);

@@ -9,6 +9,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
@@ -68,6 +69,26 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
             recipe.save(consumer, loc(builder.name + "_slab"));
         }
     }
+
+    public void slabOverride(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
+		OrnamentBuilder builder = result.get().getBuilder();
+
+		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+				.pattern(" / ")
+				.pattern("###")
+				.define('/', ItemTags.SLABS)
+				.define('#', ingredient)
+				.unlockedBy("has_" + builder.name, has(ingredient));
+
+		if (builder.hasConfig) {
+			ConditionalRecipe.builder()
+					.addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+					.addRecipe(recipe::save)
+					.build(consumer, loc(builder.name + "_slab"));
+		} else {
+			recipe.save(consumer, loc(builder.name + "_slab"));
+		}
+	}
 
     public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
         fence(consumer, result, bigItem, smallItem.get());
