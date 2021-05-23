@@ -37,49 +37,49 @@ public class PathGolemEntity extends DirtGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 8.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 8.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.7D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GRASS_HIT;
+        return SoundEvents.GRASS_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GRASS_BREAK;
+        return SoundEvents.GRASS_BREAK;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (item instanceof HoeItem) {
-            if (!world.isRemote()) {
-                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
-                grass.copyLocationAndAnglesFrom(this);
+            if (!this.level.isClientSide()) {
+                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.level);
+                grass.copyPosition(this);
                 this.remove();
-                grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
-                grass.setNoAI(this.isAIDisabled());
+                grass.finalizeSpawn((ServerWorld)this.level, this.level.getCurrentDifficultyAt(grass.blockPosition()), SpawnReason.CONVERSION, null, null);
+                grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());
                     grass.setCustomNameVisible(this.isCustomNameVisible());
                 }
 
-                if (this.isNoDespawnRequired()) {
-                    grass.enablePersistence();
+                if (this.isPersistenceRequired()) {
+                    grass.setPersistenceRequired();
                 }
 
                 grass.setInvulnerable(this.isInvulnerable());
-                this.world.addEntity(grass);
+                this.level.addFreshEntity(grass);
             }
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-            this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            this.level.playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         } else if (item == Items.GRASS_PATH)  {
             float f = this.getHealth();
@@ -87,13 +87,13 @@ public class PathGolemEntity extends DirtGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
 
@@ -102,6 +102,6 @@ public class PathGolemEntity extends DirtGolemEntity {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_GRASS_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.GRASS_STEP, 1.0F, 1.0F);
     }
 }

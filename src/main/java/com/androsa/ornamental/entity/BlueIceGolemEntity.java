@@ -30,15 +30,15 @@ public class BlueIceGolemEntity extends IceGolemEntity implements IRangedAttackM
     //TODO: Slip slip (Attributes from Ice Golem)
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
-        BlueIceEntity projectile = new BlueIceEntity(ModEntities.BLUE_ICEBALL.get(), this.world, this);
-        double d0 = entity.getPosYEye() - (double)1.1F;
-        double d1 = entity.getPosX() - this.getPosX();
-        double d2 = d0 - projectile.getPosY();
-        double d3 = entity.getPosZ() - this.getPosZ();
+    public void performRangedAttack(LivingEntity entity, float multiplier) {
+        BlueIceEntity projectile = new BlueIceEntity(ModEntities.BLUE_ICEBALL.get(), this.level, this);
+        double d0 = entity.getEyeY() - (double)1.1F;
+        double d1 = entity.getX() - this.getX();
+        double d2 = d0 - projectile.getY();
+        double d3 = entity.getZ() - this.getZ();
         float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
         projectile.shoot(d1, d2 + (double)f, d3, 1.6F, 12.0F);
-        this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.addEntity(projectile);
+        this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(projectile);
     }
 }

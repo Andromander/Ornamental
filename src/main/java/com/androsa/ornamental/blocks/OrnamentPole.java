@@ -42,14 +42,14 @@ import java.util.function.Supplier;
 
 public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBlock {
 
-    protected static final VoxelShape TL_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 8.0D);
-    protected static final VoxelShape TR_SHAPE = Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
-    protected static final VoxelShape BL_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 8.0D, 16.0D, 16.0D);
-    protected static final VoxelShape BR_SHAPE = Block.makeCuboidShape(8.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape TL_SHAPE_PATH = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 15.0D, 8.0D);
-    protected static final VoxelShape TR_SHAPE_PATH = Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 15.0D, 8.0D);
-    protected static final VoxelShape BL_SHAPE_PATH = Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 8.0D, 15.0D, 16.0D);
-    protected static final VoxelShape BR_SHAPE_PATH = Block.makeCuboidShape(8.0D, 0.0D, 8.0D, 16.0D, 15.0D, 16.0D);
+    protected static final VoxelShape TL_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 8.0D);
+    protected static final VoxelShape TR_SHAPE = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+    protected static final VoxelShape BL_SHAPE = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 16.0D, 16.0D);
+    protected static final VoxelShape BR_SHAPE = Block.box(8.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape TL_SHAPE_PATH = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 15.0D, 8.0D);
+    protected static final VoxelShape TR_SHAPE_PATH = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 15.0D, 8.0D);
+    protected static final VoxelShape BL_SHAPE_PATH = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 15.0D, 16.0D);
+    protected static final VoxelShape BR_SHAPE_PATH = Block.box(8.0D, 0.0D, 8.0D, 16.0D, 15.0D, 16.0D);
     private static VoxelShape[] POLE_SHAPES = new VoxelShape[]{ TL_SHAPE, TR_SHAPE, BL_SHAPE, BR_SHAPE };
     private static VoxelShape[] POLE_SHAPES_PATH = new VoxelShape[]{ TL_SHAPE_PATH, TR_SHAPE_PATH, BL_SHAPE_PATH, BR_SHAPE_PATH };
 
@@ -60,11 +60,11 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
     public OrnamentPole(Properties props, OrnamentBuilder builder) {
         super(props);
         this.builder = builder;
-        this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, PoleType.TL_CORNER).with(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, PoleType.TL_CORNER).setValue(WATERLOGGED, false));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> container) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> container) {
         container.add(TYPE, WATERLOGGED);
     }
 
@@ -77,7 +77,7 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
     @Deprecated
     public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
         List<VoxelShape> shapes = Lists.newArrayList();
-        boolean[] corners = state.get(TYPE).getCorners();
+        boolean[] corners = state.getValue(TYPE).getCorners();
 
         for (int i = 0; i < corners.length; i++) {
             if (builder.isPath || builder.pathShape) {
@@ -91,7 +91,7 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
 
         if (!optional.isPresent()) {
             OrnamentalMod.LOGGER.error("Ornament Pole had no shapes! Resorting to full cube");
-            return VoxelShapes.fullCube();
+            return VoxelShapes.block();
         }
         return optional.get();
     }
@@ -105,124 +105,124 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
          * 4. Check look context to determine which corner we place.
          */
 
-        BlockPos pos = context.getPos();
-        BlockState state = context.getWorld().getBlockState(pos);
+        BlockPos pos = context.getClickedPos();
+        BlockState state = context.getLevel().getBlockState(pos);
         //All true: TL. Z true: TR. X true: BL. No true: BR.
-        boolean x = context.getHitVec().x - (double)context.getPos().getX() < 0.5D;
-        boolean z = context.getHitVec().z - (double)context.getPos().getZ() < 0.5D;
-        FluidState fluidstate = context.getWorld().getFluidState(pos);
-        boolean filled = fluidstate.getFluid() == Fluids.WATER;
-        Direction direction = context.getFace();
+        boolean x = context.getClickLocation().x - (double)context.getClickedPos().getX() < 0.5D;
+        boolean z = context.getClickLocation().z - (double)context.getClickedPos().getZ() < 0.5D;
+        FluidState fluidstate = context.getLevel().getFluidState(pos);
+        boolean filled = fluidstate.getType() == Fluids.WATER;
+        Direction direction = context.getClickedFace();
         Direction.Axis axis = direction.getAxis();
 
         //Are we placing inside a Pole?
-        if (state.isIn(this)) {
+        if (state.is(this)) {
 
-            switch (state.get(TYPE)) {
+            switch (state.getValue(TYPE)) {
                 case TL_FILL:
                 case TR_FILL:
                 case BL_FILL:
                 case BR_FILL:
-                    return state.with(TYPE, PoleType.FULL).with(WATERLOGGED, false);
+                    return state.setValue(TYPE, PoleType.FULL).setValue(WATERLOGGED, false);
                 case TL_CORNER:
                     if (direction != Direction.NORTH && !x && z) {
-                        return state.with(TYPE, PoleType.T_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.T_HALF).setValue(WATERLOGGED, filled);
                     } else if (direction != Direction.WEST && x && !z) {
-                        return state.with(TYPE, PoleType.L_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.L_HALF).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.TL_BR).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TL_BR).setValue(WATERLOGGED, filled);
                     }
                 case TR_CORNER:
                     if (direction != Direction.NORTH && x && z || direction == Direction.WEST && z) {
-                        return state.with(TYPE, PoleType.T_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.T_HALF).setValue(WATERLOGGED, filled);
                     } else if (direction != Direction.EAST && !x && !z) {
-                        return state.with(TYPE, PoleType.R_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.R_HALF).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.TR_BL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TR_BL).setValue(WATERLOGGED, filled);
                     }
                 case BL_CORNER:
                     if (direction != Direction.WEST && x && z || direction == Direction.NORTH && x) {
-                        return state.with(TYPE, PoleType.L_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.L_HALF).setValue(WATERLOGGED, filled);
                     } else if (direction != Direction.SOUTH && !x && !z) {
-                        return state.with(TYPE, PoleType.B_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.B_HALF).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.TR_BL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TR_BL).setValue(WATERLOGGED, filled);
                     }
                 case BR_CORNER:
                     if (direction != Direction.EAST && !x && z || direction == Direction.NORTH && !x) {
-                        return state.with(TYPE, PoleType.R_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.R_HALF).setValue(WATERLOGGED, filled);
                     } else if (direction != Direction.SOUTH && x && !z || direction == Direction.WEST && !z) {
-                        return state.with(TYPE, PoleType.B_HALF).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.B_HALF).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.TL_BR).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TL_BR).setValue(WATERLOGGED, filled);
                     }
                 case T_HALF:
                     if (direction != Direction.WEST && x) {
-                        return state.with(TYPE, PoleType.TL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.TR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
                     }
                 case L_HALF:
                     if (direction != Direction.NORTH && z) {
-                        return state.with(TYPE, PoleType.TL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.BL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
                     }
                 case R_HALF:
                     if (direction != Direction.NORTH && z) {
-                        return state.with(TYPE, PoleType.TR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.BR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
                     }
                 case B_HALF:
                     if (direction != Direction.WEST && x) {
-                        return state.with(TYPE, PoleType.BL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.BR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
                     }
                 case TR_BL:
                     if ((axis.isVertical() || direction == Direction.EAST || direction == Direction.SOUTH) && x && z || direction == Direction.NORTH && x || direction == Direction.WEST && z) {
-                        return state.with(TYPE, PoleType.TL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.BR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
                     }
                 case TL_BR:
                     if ((axis.isVertical() || direction == Direction.EAST || direction == Direction.SOUTH) && !x && z || direction == Direction.NORTH && !x || direction == Direction.WEST && z) {
-                        return state.with(TYPE, PoleType.TR_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
                     } else {
-                        return state.with(TYPE, PoleType.BL_FILL).with(WATERLOGGED, filled);
+                        return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
                     }
                 default:
                     //fallback. Just go full
                     OrnamentalMod.LOGGER.error("Ornamental Pole failed to place properly. State: " + state);
-                    return state.with(TYPE, PoleType.FULL).with(WATERLOGGED, false);
+                    return state.setValue(TYPE, PoleType.FULL).setValue(WATERLOGGED, false);
             }
         } else {
             if (x && z) {
-                return getDefaultState().with(TYPE, PoleType.TL_CORNER).with(WATERLOGGED, filled);
+                return defaultBlockState().setValue(TYPE, PoleType.TL_CORNER).setValue(WATERLOGGED, filled);
             } else if (!x && z) {
-                return getDefaultState().with(TYPE, PoleType.TR_CORNER).with(WATERLOGGED, filled);
+                return defaultBlockState().setValue(TYPE, PoleType.TR_CORNER).setValue(WATERLOGGED, filled);
             } else if (x && !z) {
-                return getDefaultState().with(TYPE, PoleType.BL_CORNER).with(WATERLOGGED, filled);
+                return defaultBlockState().setValue(TYPE, PoleType.BL_CORNER).setValue(WATERLOGGED, filled);
             } else {
-                return getDefaultState().with(TYPE, PoleType.BR_CORNER).with(WATERLOGGED, filled);
+                return defaultBlockState().setValue(TYPE, PoleType.BR_CORNER).setValue(WATERLOGGED, filled);
             }
         }
     }
 
     @Override
     @Deprecated
-    public boolean isReplaceable(BlockState state, BlockItemUseContext context) {
-        ItemStack stack = context.getItem();
-        PoleType type = state.get(TYPE);
+    public boolean canBeReplaced(BlockState state, BlockItemUseContext context) {
+        ItemStack stack = context.getItemInHand();
+        PoleType type = state.getValue(TYPE);
 
         //Only Full shapes are non-replaceable.
         if (type != PoleType.FULL && stack.getItem() == this.asItem()) {
             if (context.replacingClickedOnBlock()) {
                 //All true: TL. Z true: TR. X true: BL. No true: BR.
-                boolean x = context.getHitVec().x - (double)context.getPos().getX() < 0.5D;
-                boolean z = context.getHitVec().z - (double)context.getPos().getZ() < 0.5D;
-                Direction direction = context.getFace();
+                boolean x = context.getClickLocation().x - (double)context.getClickedPos().getX() < 0.5D;
+                boolean z = context.getClickLocation().z - (double)context.getClickedPos().getZ() < 0.5D;
+                Direction direction = context.getClickedFace();
 
                 switch (type) {
                     case TL_CORNER:
@@ -265,132 +265,126 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
     }
 
     @Override
-    public void onFallenUpon(World world, BlockPos pos, Entity entity, float distance) {
-        entity.onLivingFall(distance, builder.fallMultiplier);
+    public void fallOn(World world, BlockPos pos, Entity entity, float distance) {
+        entity.causeFallDamage(distance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
-    public boolean canProvidePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return builder.hasPower;
     }
 
     @Override
     @Deprecated
-    public int getWeakPower(BlockState state, IBlockReader world, BlockPos pos, Direction direction) {
+    public int getSignal(BlockState state, IBlockReader world, BlockPos pos, Direction direction) {
         if (builder.hasPower) {
-            switch (state.get(TYPE).getShape()) {
+            switch (state.getValue(TYPE).getShape()) {
                 case CORNER: return 4;
                 case HALF: return 8;
                 case FILL: return 12;
                 case BLOCK: return 15;
             }
         }
-        return super.getWeakPower(state, world, pos, direction);
+        return super.getSignal(state, world, pos, direction);
     }
 
     @Override
     @Deprecated
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return state.get(TYPE) != PoleType.FULL && IWaterLoggable.super.receiveFluid(worldIn, pos, state, fluidStateIn);
+    public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+        return state.getValue(TYPE) != PoleType.FULL && IWaterLoggable.super.placeLiquid(worldIn, pos, state, fluidStateIn);
     }
 
     @Override
-    public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return state.get(TYPE) != PoleType.FULL && IWaterLoggable.super.canContainFluid(worldIn, pos, state, fluidIn);
+    public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+        return state.getValue(TYPE) != PoleType.FULL && IWaterLoggable.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
     }
 
     @Override
     @Deprecated
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (stateIn.getValue(WATERLOGGED)) {
+            worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
     @Override
     @Deprecated
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
             if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_pole, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_pole, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
             if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_pole, SoundEvents.BLOCK_GRAVEL_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.dirt_pole, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
             if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_pole, SoundEvents.ITEM_SHOVEL_FLATTEN, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.path_pole, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
             if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_pole, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_pole, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
 
-        return super.onBlockActivated(state, worldIn, pos, player, hand, result);
+        return super.use(state, worldIn, pos, player, hand, result);
     }
 
     private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentPole> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
         this.setBlock(worldIn, pos, newblock);
         worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.isCreativeMode && !itemstack.isDamageable()) {
+        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return ActionResultType.SUCCESS;
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentPole> block) {
         BlockState state = world.getBlockState(pos);
-        world.setBlockState(pos, block.get().getDefaultState()
-                .with(TYPE, state.get(TYPE))
-                .with(WATERLOGGED, state.get(WATERLOGGED)));
+        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
+                .setValue(TYPE, state.getValue(TYPE))
+                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override
     @Deprecated
     @OnlyIn(Dist.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState otherState, Direction direction) {
+    public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.isIce || builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentPole && state.getBlock() instanceof OrnamentPole) {
                 OrnamentPole pole = (OrnamentPole) state.getBlock();
                 OrnamentPole otherPole = (OrnamentPole) otherState.getBlock();
 
-                if (otherPole.getBuilder() == pole.getBuilder() && otherState.get(TYPE) == PoleType.FULL && state.get(TYPE) == PoleType.FULL) {
+                if (otherPole.getBuilder() == pole.getBuilder() && otherState.getValue(TYPE) == PoleType.FULL && state.getValue(TYPE) == PoleType.FULL) {
                     return true;
                 }
             }
         }
-        return super.isSideInvisible(state, otherState, direction);
+        return super.skipRendering(state, otherState, direction);
     }
 
     @Override
     @Deprecated
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-        switch(type) {
-            case LAND:
-                return false;
-            case WATER:
-                return worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
-            case AIR:
-                return false;
-            default:
-                return false;
-        }
-    }
+    public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+		if (type == PathType.WATER) {
+			return worldIn.getFluidState(pos).is(FluidTags.WATER);
+		}
+		return false;
+	}
 
     @Override
     public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
@@ -411,24 +405,24 @@ public class OrnamentPole extends Block implements IWaterLoggable, IOrnamentalBl
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.isIce || builder.canMelt) {
-            if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
     protected void turnIntoWater(World world, BlockPos pos) {
-        if (world.getDimensionType().isUltrawarm() && builder.canVaporise) {
+        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
-            world.setBlockState(pos, builder.meltResult.getDefaultState());
+            world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
         }
     }
 
     @Override
     @Deprecated
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(BlockState state) {
         return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
     }
 }

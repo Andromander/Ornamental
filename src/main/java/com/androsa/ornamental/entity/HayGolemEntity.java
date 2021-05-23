@@ -21,7 +21,7 @@ public class HayGolemEntity extends AbstractGolemEntity {
 
     public HayGolemEntity(EntityType<? extends HayGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -33,30 +33,30 @@ public class HayGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 40.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.6D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 40.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
-        if (!ForgeEventFactory.getMobGriefingEvent(this.world, this)) {
+        if (!ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
             return;
         }
 
-        BlockState blockstate = Blocks.FIRE.getDefaultState();
+        BlockState blockstate = Blocks.FIRE.defaultBlockState();
 
-        if (this.isBurning()) {
+        if (this.isOnFire()) {
             for(int l = 0; l < 4; ++l) {
-                int x = MathHelper.floor(this.getPosX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
-                int y = MathHelper.floor(this.getPosY());
-                int z = MathHelper.floor(this.getPosZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+                int x = MathHelper.floor(this.getX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
+                int y = MathHelper.floor(this.getY());
+                int z = MathHelper.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(x, y, z);
-                if (this.world.isAirBlock(blockpos) && blockstate.isValidPosition(this.world, blockpos)) {
-                    this.world.setBlockState(blockpos, blockstate);
+                if (this.level.isEmptyBlock(blockpos) && blockstate.canSurvive(this.level, blockpos)) {
+                    this.level.setBlockAndUpdate(blockpos, blockstate);
                 }
             }
         }
@@ -69,18 +69,18 @@ public class HayGolemEntity extends AbstractGolemEntity {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GRASS_HIT;
+        return SoundEvents.GRASS_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GRASS_BREAK;
+        return SoundEvents.GRASS_BREAK;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.WHEAT) {
             return ActionResultType.PASS;
@@ -90,20 +90,20 @@ public class HayGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_GRASS_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.GRASS_STEP, 1.0F, 1.0F);
     }
 
     @Override

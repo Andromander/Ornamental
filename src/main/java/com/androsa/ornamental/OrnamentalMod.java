@@ -91,75 +91,75 @@ public class OrnamentalMod {
 
     @OnlyIn(Dist.CLIENT)
     private static void registerRenders() {
-        renderBlock(ModBlocks.grass_stairs, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_stairs, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_stairs, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_stairs, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_stairs, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_stairs, RenderType.translucent());
 
-        renderBlock(ModBlocks.grass_slab, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_slab, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_slab, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_slab, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_slab, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_slab, RenderType.translucent());
 
-        renderBlock(ModBlocks.grass_fence, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_fence, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_fence, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_fence, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_fence, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_fence, RenderType.translucent());
 
-        renderBlock(ModBlocks.gold_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.diamond_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.emerald_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.lapis_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.obsidian_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.coal_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.redstone_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.missingno_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.clay_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.dirt_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.grass_trapdoor, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.hay_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.path_trapdoor, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.brick_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.quartz_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.bone_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.nether_brick_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.red_nether_brick_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.snow_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.ice_trapdoor, RenderType.getTranslucent());
-        renderBlock(ModBlocks.packed_ice_trapdoor, RenderType.getCutout());
-        renderBlock(ModBlocks.blue_ice_trapdoor, RenderType.getCutout());
+        renderBlock(ModBlocks.gold_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.diamond_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.emerald_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.lapis_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.obsidian_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.coal_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.redstone_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.missingno_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.clay_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.dirt_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.grass_trapdoor, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.hay_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.path_trapdoor, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.brick_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.quartz_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.bone_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.nether_brick_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.red_nether_brick_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.snow_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.ice_trapdoor, RenderType.translucent());
+        renderBlock(ModBlocks.packed_ice_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.blue_ice_trapdoor, RenderType.cutout());
 
-        renderBlock(ModBlocks.grass_fence_gate, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_fence_gate, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_fence_gate, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_fence_gate, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_fence_gate, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_fence_gate, RenderType.translucent());
 
-        renderBlock(ModBlocks.gold_door, RenderType.getCutout());
-        renderBlock(ModBlocks.diamond_door, RenderType.getCutout());
-        renderBlock(ModBlocks.emerald_door, RenderType.getCutout());
-        renderBlock(ModBlocks.lapis_door, RenderType.getCutout());
-        renderBlock(ModBlocks.obsidian_door, RenderType.getCutout());
-        renderBlock(ModBlocks.coal_door, RenderType.getCutout());
-        renderBlock(ModBlocks.redstone_door, RenderType.getCutout());
-        renderBlock(ModBlocks.missingno_door, RenderType.getCutout());
-        renderBlock(ModBlocks.clay_door, RenderType.getCutout());
-        renderBlock(ModBlocks.dirt_door, RenderType.getCutout());
-        renderBlock(ModBlocks.grass_door, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.hay_door, RenderType.getCutout());
-        renderBlock(ModBlocks.path_door, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.brick_door, RenderType.getCutout());
-        renderBlock(ModBlocks.quartz_door, RenderType.getCutout());
-        renderBlock(ModBlocks.bone_door, RenderType.getCutout());
-        renderBlock(ModBlocks.nether_brick_door, RenderType.getCutout());
-        renderBlock(ModBlocks.red_nether_brick_door, RenderType.getCutout());
-        renderBlock(ModBlocks.snow_door, RenderType.getCutout());
-        renderBlock(ModBlocks.ice_door, RenderType.getTranslucent());
-        renderBlock(ModBlocks.packed_ice_door, RenderType.getCutout());
-        renderBlock(ModBlocks.blue_ice_door, RenderType.getCutout());
+        renderBlock(ModBlocks.gold_door, RenderType.cutout());
+        renderBlock(ModBlocks.diamond_door, RenderType.cutout());
+        renderBlock(ModBlocks.emerald_door, RenderType.cutout());
+        renderBlock(ModBlocks.lapis_door, RenderType.cutout());
+        renderBlock(ModBlocks.obsidian_door, RenderType.cutout());
+        renderBlock(ModBlocks.coal_door, RenderType.cutout());
+        renderBlock(ModBlocks.redstone_door, RenderType.cutout());
+        renderBlock(ModBlocks.missingno_door, RenderType.cutout());
+        renderBlock(ModBlocks.clay_door, RenderType.cutout());
+        renderBlock(ModBlocks.dirt_door, RenderType.cutout());
+        renderBlock(ModBlocks.grass_door, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.hay_door, RenderType.cutout());
+        renderBlock(ModBlocks.path_door, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.brick_door, RenderType.cutout());
+        renderBlock(ModBlocks.quartz_door, RenderType.cutout());
+        renderBlock(ModBlocks.bone_door, RenderType.cutout());
+        renderBlock(ModBlocks.nether_brick_door, RenderType.cutout());
+        renderBlock(ModBlocks.red_nether_brick_door, RenderType.cutout());
+        renderBlock(ModBlocks.snow_door, RenderType.cutout());
+        renderBlock(ModBlocks.ice_door, RenderType.translucent());
+        renderBlock(ModBlocks.packed_ice_door, RenderType.cutout());
+        renderBlock(ModBlocks.blue_ice_door, RenderType.cutout());
 
-        renderBlock(ModBlocks.grass_pole, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_pole, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_pole, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_pole, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_pole, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_pole, RenderType.translucent());
 
-        renderBlock(ModBlocks.grass_beam, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.path_beam, RenderType.getCutoutMipped());
-        renderBlock(ModBlocks.ice_beam, RenderType.getTranslucent());
+        renderBlock(ModBlocks.grass_beam, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_beam, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_beam, RenderType.translucent());
     }
 
     private static void renderBlock(Supplier<? extends Block> block, RenderType render) {

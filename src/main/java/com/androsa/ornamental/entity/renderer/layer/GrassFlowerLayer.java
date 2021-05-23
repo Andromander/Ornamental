@@ -24,14 +24,14 @@ public class GrassFlowerLayer<T extends GrassGolemEntity, M extends DirtGolemMod
     @Override
     public void render(MatrixStack stack, IRenderTypeBuffer buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
         if (!entity.isInvisible() && entity.hasPoppy()) {
-            stack.push();
-            this.getEntityModel().getHead().translateRotate(stack);
+            stack.pushPose();
+            this.getParentModel().getHead().translateAndRotate(stack);
             stack.translate(0.0D, -0.43D, -0.05D);
-            stack.rotate(Vector3f.YP.rotationDegrees(-78.0F));
+            stack.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(Blocks.POPPY.getDefaultState(), stack, buffer, light, LivingRenderer.getPackedOverlay(entity, 0.0F), EmptyModelData.INSTANCE);
-            stack.pop();
+            Minecraft.getInstance().getBlockRenderer().renderBlock(Blocks.POPPY.defaultBlockState(), stack, buffer, light, LivingRenderer.getOverlayCoords(entity, 0.0F), EmptyModelData.INSTANCE);
+            stack.popPose();
         }
     }
 }

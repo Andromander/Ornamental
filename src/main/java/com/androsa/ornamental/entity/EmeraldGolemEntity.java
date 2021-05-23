@@ -24,7 +24,7 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
 
     public EmeraldGolemEntity(EntityType<? extends EmeraldGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -43,11 +43,11 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 90.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.9D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 13.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 90.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D)
+                .add(Attributes.ATTACK_DAMAGE, 13.0D);
     }
 
     @Override
@@ -56,33 +56,33 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
-        if (horizontalMag(this.getMotion()) > (double)2.5000003E-7F && this.rand.nextInt(5) == 0) {
-            int x = MathHelper.floor(this.getPosX());
-            int y = MathHelper.floor(this.getPosY() - (double)0.2F);
-            int z = MathHelper.floor(this.getPosZ());
+        if (getHorizontalDistanceSqr(this.getDeltaMovement()) > (double)2.5000003E-7F && this.random.nextInt(5) == 0) {
+            int x = MathHelper.floor(this.getX());
+            int y = MathHelper.floor(this.getY() - (double)0.2F);
+            int z = MathHelper.floor(this.getZ());
             BlockPos pos = new BlockPos(x, y, z);
-            BlockState blockstate = this.world.getBlockState(pos);
-            if (!blockstate.isAir(this.world, pos)) {
-                this.world.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getPosX() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), this.getPosY() + 0.1D, this.getPosZ() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(), 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+            BlockState blockstate = this.level.getBlockState(pos);
+            if (!blockstate.isAir(this.level, pos)) {
+                this.level.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.CREEPER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.CREEPER && super.canAttackType(target);
     }
 
     private float getAttackDamage() {
@@ -90,35 +90,35 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity target) {
+    public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.world.setEntityState(this, (byte)4);
+        this.level.broadcastEntityEvent(this, (byte)4);
         float attack = this.getAttackDamage();
-        float mul = attack > 0.0F ? attack / 2.0F + (float)this.rand.nextInt((int)attack) : 0.0F;
-        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), mul);
+        float mul = attack > 0.0F ? attack / 2.0F + (float)this.random.nextInt((int)attack) : 0.0F;
+        boolean flag = target.hurt(DamageSource.mobAttack(this), mul);
         if (flag) {
-            target.setMotion(target.getMotion().add(0.0D, (double)0.4F, 0.0D));
-            this.applyEnchantments(this, target);
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, (double)0.4F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
         }
 
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
         return flag;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.EMERALD) {
             return ActionResultType.PASS;
@@ -128,20 +128,20 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState stats) {
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class EmeraldGolemEntity extends FlowerGolemEntity {
 
     @Override
     public BlockState getFlower() {
-        return Blocks.ALLIUM.getDefaultState();
+        return Blocks.ALLIUM.defaultBlockState();
     }
 
     @Override

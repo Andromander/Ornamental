@@ -234,13 +234,12 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     public void poleBlock(Supplier<? extends OrnamentPole> block, ModelFile corner, ModelFile half, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {
-                    PoleType type = state.get(OrnamentPole.TYPE);
+                    PoleType type = state.getValue(OrnamentPole.TYPE);
                     PoleType.Shape shape = type.getShape();
                     ModelFile model;
                     int yRot;
 
                     switch (shape) {
-                        case CORNER: model = corner; break;
                         case HALF: model = half; break;
                         case CROSS: model = cross; break;
                         case FILL: model = fill; break;
@@ -268,14 +267,13 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     public void beamBlock(Supplier<? extends OrnamentBeam> block, ModelFile corner, ModelFile topslab, ModelFile bottomslab, ModelFile halfpole, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {
-                    PoleType type = state.get(OrnamentBeam.TYPE);
-                    Direction.Axis axis = state.get(OrnamentBeam.HORIZONTAL_AXIS);
+                    PoleType type = state.getValue(OrnamentBeam.TYPE);
+                    Direction.Axis axis = state.getValue(OrnamentBeam.HORIZONTAL_AXIS);
                     PoleType.Shape shape = type.getShape();
                     ModelFile model;
                     int xRot, yRot;
 
                     switch (shape) {
-                        case CORNER: model = corner; break;
                         case HALF:
                             if (type == PoleType.T_HALF) model = topslab;
                             else if (type == PoleType.B_HALF) model = bottomslab;

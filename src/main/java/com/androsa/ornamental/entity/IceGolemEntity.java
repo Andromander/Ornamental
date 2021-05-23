@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IceGolemEntity extends GolemEntity implements IForgeShearable {
-    private static final DataParameter<Boolean> PUMPKIN_EQUIPPED = EntityDataManager.createKey(IceGolemEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PUMPKIN_EQUIPPED = EntityDataManager.defineId(IceGolemEntity.class, DataSerializers.BOOLEAN);
     protected boolean canMelt;
 
     public IceGolemEntity(EntityType<? extends IceGolemEntity> entity, World world) {
@@ -45,66 +45,66 @@ public class IceGolemEntity extends GolemEntity implements IForgeShearable {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 3.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 3.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(PUMPKIN_EQUIPPED, true);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(PUMPKIN_EQUIPPED, true);
     }
 
     @Override
-    public void writeAdditional(CompoundNBT nbt) {
-        super.writeAdditional(nbt);
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
         nbt.putBoolean("Pumpkin", this.isPumpkinEquipped());
     }
 
     @Override
-    public void readAdditional(CompoundNBT nbt) {
-        super.readAdditional(nbt);
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
         if (nbt.contains("Pumpkin")) {
             this.setPumpkinEquipped(nbt.getBoolean("Pumpkin"));
         }
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
-        if (!this.world.isRemote) {
-            int i = MathHelper.floor(this.getPosX());
-            int j = MathHelper.floor(this.getPosY());
-            int k = MathHelper.floor(this.getPosZ());
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level.isClientSide) {
+            int i = MathHelper.floor(this.getX());
+            int j = MathHelper.floor(this.getY());
+            int k = MathHelper.floor(this.getZ());
 
-            if (this.world.getBiome(new BlockPos(i, 0, k)).getTemperature(new BlockPos(i, j, k)) > 1.0F) {
-                this.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
+            if (this.level.getBiome(new BlockPos(i, 0, k)).getTemperature(new BlockPos(i, j, k)) > 1.0F) {
+                this.hurt(DamageSource.ON_FIRE, 1.0F);
             }
         }
     }
 
     public boolean isPumpkinEquipped() {
-        return this.dataManager.get(PUMPKIN_EQUIPPED);
+        return this.entityData.get(PUMPKIN_EQUIPPED);
     }
 
     public void setPumpkinEquipped(boolean equipped) {
-        this.dataManager.set(PUMPKIN_EQUIPPED, equipped);
+        this.entityData.set(PUMPKIN_EQUIPPED, equipped);
     }
 
     @Nullable
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SNOW_GOLEM_AMBIENT;
+        return SoundEvents.SNOW_GOLEM_AMBIENT;
     }
 
     @Nullable
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GLASS_HIT;
+        return SoundEvents.GLASS_HIT;
     }
 
     @Nullable
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GLASS_BREAK;
+        return SoundEvents.GLASS_BREAK;
     }
 
     @Override

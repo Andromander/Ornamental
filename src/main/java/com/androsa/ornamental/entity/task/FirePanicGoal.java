@@ -10,7 +10,7 @@ public class FirePanicGoal extends PanicGoal {
     }
 
     @Override
-    public boolean shouldExecute() {
-        return creature.isBurning() && super.shouldExecute();
+    public boolean canUse() {
+        return mob.isOnFire() && super.canUse();
     }
 }

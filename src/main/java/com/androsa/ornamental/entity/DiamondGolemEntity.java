@@ -20,7 +20,7 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
 
     public DiamondGolemEntity(EntityType<? extends DiamondGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 0.5F;
+        this.maxUpStep = 0.5F;
     }
 
     @Override
@@ -31,17 +31,17 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
         this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setCallsForHelp());
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, 5, false, false, (target) ->
                 target instanceof IMob && !(target instanceof CreeperEntity)));
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 60.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.45D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 20.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 60.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.45D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .add(Attributes.ATTACK_DAMAGE, 20.0D);
     }
 
     @Override
@@ -50,17 +50,17 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     private float getAttackDamage() {
@@ -68,35 +68,35 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity target) {
+    public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.world.setEntityState(this, (byte)4);
+        this.level.broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
-        float mul = damage > 0.0F ? damage / 2.0F + (float)this.rand.nextInt((int)damage) : 0.0F;
-        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), mul);
+        float mul = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
+        boolean flag = target.hurt(DamageSource.mobAttack(this), mul);
         if (flag) {
-            target.setMotion(target.getMotion().add(0.0D, (double)0.3F, 0.0D));
-            this.applyEnchantments(this, target);
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, (double)0.3F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
         }
 
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
         return flag;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.DIAMOND) {
             return ActionResultType.PASS;
@@ -106,20 +106,20 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class DiamondGolemEntity extends FlowerGolemEntity {
 
     @Override
     public BlockState getFlower() {
-        return Blocks.BLUE_ORCHID.getDefaultState();
+        return Blocks.BLUE_ORCHID.defaultBlockState();
     }
 
     @Override

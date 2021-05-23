@@ -27,11 +27,11 @@ import javax.annotation.Nullable;
 
 public class QuartzGolemEntity extends AbstractGolemEntity {
 
-    private static final DataParameter<Boolean> TARGETING = EntityDataManager.createKey(QuartzGolemEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> TARGETING = EntityDataManager.defineId(QuartzGolemEntity.class, DataSerializers.BOOLEAN);
 
     public QuartzGolemEntity(EntityType<? extends QuartzGolemEntity> entity, World world) {
         super(entity, world);
-        this.moveController = new QuartzMoveController(this);
+        this.moveControl = new QuartzMoveController(this);
     }
 
     @Override
@@ -47,33 +47,33 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 70.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.6D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.4D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 70.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.4D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(TARGETING, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(TARGETING, false);
     }
 
     public boolean isTargeting() {
-        return dataManager.get(TARGETING);
+        return entityData.get(TARGETING);
     }
 
     public void setTargeting(boolean flag) {
-        dataManager.set(TARGETING, flag);
+        entityData.set(TARGETING, flag);
     }
 
     @Override
-    public boolean onLivingFall(float amount, float multiplier) {
+    public boolean causeFallDamage(float amount, float multiplier) {
         return false;
     }
 
     @Override
-    protected void updateFallState(double amount, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double amount, boolean onGround, BlockState state, BlockPos pos) {
     }
 
     //[VanillaCopy] FlyingEntity.travel so we can have a flying non-FlyingEntity
@@ -81,40 +81,40 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
     public void travel(Vector3d motion) {
         if (this.isInWater()) {
             this.moveRelative(0.02F, motion);
-            this.move(MoverType.SELF, this.getMotion());
-            this.setMotion(this.getMotion().scale((double)0.8F));
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale((double)0.8F));
         } else if (this.isInLava()) {
             this.moveRelative(0.02F, motion);
-            this.move(MoverType.SELF, this.getMotion());
-            this.setMotion(this.getMotion().scale(0.5D));
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
         } else {
-            BlockPos ground = new BlockPos(this.getPosX(), this.getPosY() - 1.0D, this.getPosZ());
+            BlockPos ground = new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ());
             float f = 0.91F;
             if (this.onGround) {
-                f = this.world.getBlockState(ground).getSlipperiness(this.world, ground, this) * 0.91F;
+                f = this.level.getBlockState(ground).getSlipperiness(this.level, ground, this) * 0.91F;
             }
 
             float f1 = 0.16277137F / (f * f * f);
             f = 0.91F;
             if (this.onGround) {
-                f = this.world.getBlockState(ground).getSlipperiness(this.world, ground, this) * 0.91F;
+                f = this.level.getBlockState(ground).getSlipperiness(this.level, ground, this) * 0.91F;
             }
 
             this.moveRelative(this.onGround ? 0.1F * f1 : 0.02F, motion);
-            this.move(MoverType.SELF, this.getMotion());
-            this.setMotion(this.getMotion().scale((double)f));
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale((double)f));
         }
 
-        this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d1 = this.getPosX() - this.prevPosX;
-        double d0 = this.getPosZ() - this.prevPosZ;
+        this.animationSpeedOld = this.animationSpeed;
+        double d1 = this.getX() - this.xo;
+        double d0 = this.getZ() - this.zo;
         float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
         if (f2 > 1.0F) {
             f2 = 1.0F;
         }
 
-        this.limbSwingAmount += (f2 - this.limbSwingAmount) * 0.4F;
-        this.limbSwing += this.limbSwingAmount;
+        this.animationSpeed += (f2 - this.animationSpeed) * 0.4F;
+        this.animationPosition += this.animationSpeed;
     }
 
     @Override
@@ -123,60 +123,60 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    public boolean isOnLadder() {
+    public boolean onClimbable() {
         return false;
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public void setAttackTarget(@Nullable LivingEntity target) {
+    public void setTarget(@Nullable LivingEntity target) {
         setTargeting(target != null);
-        super.setAttackTarget(target);
+        super.setTarget(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     @Override
-    protected float getSoundPitch() {
-        return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.6F;
+    protected float getVoicePitch() {
+        return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.6F;
     }
 
     @Override
-    public void livingTick() {
-        if (this.world.isRemote && isTargeting()) {
+    public void aiStep() {
+        if (this.level.isClientSide && isTargeting()) {
             for(int i = 0; i < 2; ++i) {
-                this.world.addParticle(ParticleTypes.FLAME, this.getPosXRandom(0.5D), this.getPosYRandom(), this.getPosZRandom(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
             }
         }
 
-        super.livingTick();
+        super.aiStep();
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.QUARTZ) {
             return ActionResultType.PASS;
@@ -186,13 +186,13 @@ public class QuartzGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }

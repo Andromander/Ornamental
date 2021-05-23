@@ -25,11 +25,11 @@ public class ModParticles {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerClientParticles() {
-        ParticleManager manager = Minecraft.getInstance().particles;
+        ParticleManager manager = Minecraft.getInstance().particleEngine;
 
-        manager.registerFactory(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
-        manager.registerFactory(ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
-        manager.registerFactory(ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
-        manager.registerFactory(ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
+        manager.register(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
+        manager.register(ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
+        manager.register(ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
+        manager.register(ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
     }
 }

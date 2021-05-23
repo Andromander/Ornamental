@@ -20,34 +20,34 @@ public class LapisGolemModel<T extends LapisGolemEntity> extends AbstractGolemMo
         super(64, 64, false);
 
         this.armL = new ModelRenderer(this, 40, 21);
-        this.armL.setRotationPoint(6.5F, -4.5F, 0.0F);
+        this.armL.setPos(6.5F, -4.5F, 0.0F);
         this.armL.addBox(0.0F, 0.0F, -2.0F, 3, 10, 4, 0.0F);
         this.lowerArmR = new ModelRenderer(this, 0, 47);
-        this.lowerArmR.setRotationPoint(-1.5F, 10.0F, 0.0F);
+        this.lowerArmR.setPos(-1.5F, 10.0F, 0.0F);
         this.lowerArmR.addBox(-2.5F, 0.0F, -2.5F, 5, 10, 5, 0.0F);
         this.legR = new ModelRenderer(this, 28, 0);
-        this.legR.setRotationPoint(-3.0F, 16.0F, 0.0F);
+        this.legR.setPos(-3.0F, 16.0F, 0.0F);
         this.legR.addBox(-2.5F, 0.0F, -2.5F, 5, 8, 5, 0.0F);
         this.body = new ModelRenderer(this, 0, 0);
-        this.body.setRotationPoint(0.0F, 4.0F, 0.0F);
+        this.body.setPos(0.0F, 4.0F, 0.0F);
         this.body.addBox(-4.5F, 0.0F, -2.5F, 9, 12, 5, 0.0F);
         this.armR = new ModelRenderer(this, 0, 33);
-        this.armR.setRotationPoint(-6.5F, -4.5F, 0.0F);
+        this.armR.setPos(-6.5F, -4.5F, 0.0F);
         this.armR.addBox(-3.0F, 0.0F, -2.0F, 3, 10, 4, 0.0F);
         this.legL = new ModelRenderer(this, 43, 8);
-        this.legL.setRotationPoint(3.0F, 16.0F, 0.0F);
+        this.legL.setPos(3.0F, 16.0F, 0.0F);
         this.legL.addBox(-2.5F, 0.0F, -2.5F, 5, 8, 5, 0.0F);
         this.torso = new ModelRenderer(this, 0, 17);
-        this.torso.setRotationPoint(0.0F, -5.0F, 0.0F);
+        this.torso.setPos(0.0F, -5.0F, 0.0F);
         this.torso.addBox(-6.5F, 0.0F, -3.5F, 13, 9, 7, 0.0F);
         this.head = new ModelRenderer(this, 14, 33);
-        this.head.setRotationPoint(0.0F, -4.8F, -3.0F);
+        this.head.setPos(0.0F, -4.8F, -3.0F);
         this.head.addBox(-3.5F, -8.0F, -2.5F, 7, 8, 6, 0.0F);
         this.lowerArmL = new ModelRenderer(this, 40, 35);
-        this.lowerArmL.setRotationPoint(1.5F, 10.0F, 0.0F);
+        this.lowerArmL.setPos(1.5F, 10.0F, 0.0F);
         this.lowerArmL.addBox(-2.5F, 0.0F, -2.5F, 5, 10, 5, 0.0F);
         this.nose = new ModelRenderer(this, 48, 0);
-        this.nose.setRotationPoint(0.0F, -3.0F, -2.5F);
+        this.nose.setPos(0.0F, -3.0F, -2.5F);
         this.nose.addBox(-1.0F, 0.0F, -2.0F, 2, 4, 2, 0.0F);
 
         this.armR.addChild(this.lowerArmR);
@@ -56,17 +56,17 @@ public class LapisGolemModel<T extends LapisGolemEntity> extends AbstractGolemMo
     }
 
     @Override
-    public void setLivingAnimations(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
+    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
         if (entity.isTargeting()) {
-            this.armR.rotateAngleX = -1.5F;
-            this.armL.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+            this.armR.xRot = -1.5F;
+            this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
         } else {
             swingArms(limbSwing, limbSwingAmount);
         }
     }
 
     @Override
-    public Iterable<ModelRenderer> getParts() {
+    public Iterable<ModelRenderer> parts() {
         return ImmutableList.of(
                 head,
                 torso,

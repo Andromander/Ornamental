@@ -11,35 +11,35 @@ import java.util.function.Supplier;
 
 public class GolemLootTableProvider extends EntityLootTables {
 
-    public void registerLootTable(Supplier<? extends EntityType<?>> entity, LootTable.Builder table) {
-        super.registerLootTable(entity.get(), table);
+    public void add(Supplier<? extends EntityType<?>> entity, LootTable.Builder table) {
+        super.add(entity.get(), table);
     }
 
     public LootTable.Builder flowerGolemTable(Block flower, IItemProvider drop) {
-        return LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .rolls(ConstantRange.of(1))
-                        .addEntry(ItemLootEntry.builder(flower)
-                                .acceptFunction(SetCount.builder(RandomValueRange.of(0.0F, 2.0F)))))
-                .addLootPool(LootPool.builder()
-                        .rolls(ConstantRange.of(1))
-                        .addEntry(ItemLootEntry.builder(drop)
-                                .acceptFunction(SetCount.builder(RandomValueRange.of(3.0F, 5.0F)))));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(flower)
+                                .apply(SetCount.setCount(RandomValueRange.between(0.0F, 2.0F)))))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(drop)
+                                .apply(SetCount.setCount(RandomValueRange.between(3.0F, 5.0F)))));
     }
 
     public LootTable.Builder golemTable(IItemProvider drop) {
-        return LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .rolls(ConstantRange.of(1))
-                        .addEntry(ItemLootEntry.builder(drop)
-                                .acceptFunction(SetCount.builder(RandomValueRange.of(3.0F, 5.0F)))));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(drop)
+                                .apply(SetCount.setCount(RandomValueRange.between(3.0F, 5.0F)))));
     }
 
     public LootTable.Builder golemTableBlock(IItemProvider drop) {
-        return LootTable.builder()
-                .addLootPool(LootPool.builder()
-                        .rolls(ConstantRange.of(1))
-                        .addEntry(ItemLootEntry.builder(drop)
-                                .acceptFunction(SetCount.builder(RandomValueRange.of(1.0F, 3.0F)))));
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantRange.exactly(1))
+                        .add(ItemLootEntry.lootTableItem(drop)
+                                .apply(SetCount.setCount(RandomValueRange.between(1.0F, 3.0F)))));
     }
 }

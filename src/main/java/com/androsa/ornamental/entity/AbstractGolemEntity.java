@@ -21,8 +21,8 @@ public class AbstractGolemEntity extends GolemEntity {
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
         if (this.attackTimer > 0) {
             --this.attackTimer;
@@ -31,12 +31,12 @@ public class AbstractGolemEntity extends GolemEntity {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte data) {
+    public void handleEntityEvent(byte data) {
         if (data == 4) {
             this.attackTimer = 10;
-            this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+            this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
         } else {
-            super.handleStatusUpdate(data);
+            super.handleEntityEvent(data);
         }
     }
 
@@ -46,22 +46,22 @@ public class AbstractGolemEntity extends GolemEntity {
     }
 
     @Override
-    public boolean isNotColliding(IWorldReader reader) {
-        BlockPos entityPos = this.getPosition();
-        BlockPos posBelow = entityPos.down();
+    public boolean checkSpawnObstruction(IWorldReader reader) {
+        BlockPos entityPos = this.blockPosition();
+        BlockPos posBelow = entityPos.below();
         BlockState stateBelow = reader.getBlockState(posBelow);
-        if (!stateBelow.canSpawnMobs(reader, posBelow, this)) {
+        if (!stateBelow.entityCanStandOn(reader, posBelow, this)) {
             return false;
         } else {
             for(int i = 1; i < 3; ++i) {
-                BlockPos posAbove = entityPos.up(i);
+                BlockPos posAbove = entityPos.above(i);
                 BlockState stateAbove = reader.getBlockState(posAbove);
-                if (!WorldEntitySpawner.func_234968_a_(reader, posAbove, stateAbove, stateAbove.getFluidState(), this.getType())) { //isSpawnableSpace with EntityType
+                if (!WorldEntitySpawner.isValidEmptySpawnBlock(reader, posAbove, stateAbove, stateAbove.getFluidState(), this.getType())) {
                     return false;
                 }
             }
 
-            return WorldEntitySpawner.func_234968_a_(reader, entityPos, reader.getBlockState(entityPos), Fluids.EMPTY.getDefaultState(), this.getType()) && reader.checkNoEntityCollision(this);
+            return WorldEntitySpawner.isValidEmptySpawnBlock(reader, entityPos, reader.getBlockState(entityPos), Fluids.EMPTY.defaultFluidState(), this.getType()) && reader.isUnobstructed(this);
         }
     }
 }

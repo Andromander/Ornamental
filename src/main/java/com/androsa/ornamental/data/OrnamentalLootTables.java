@@ -274,27 +274,27 @@ public class OrnamentalLootTables extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            registerLootTable(ModEntities.GOLD_GOLEM, flowerGolemTable(Blocks.DANDELION, Items.GOLD_INGOT));
-            registerLootTable(ModEntities.DIAMOND_GOLEM, flowerGolemTable(Blocks.BLUE_ORCHID, Items.DIAMOND));
-            registerLootTable(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.ALLIUM));
-            registerLootTable(ModEntities.LAPIS_GOLEM, golemTable(Items.LAPIS_LAZULI));
-            registerLootTable(ModEntities.OBSIDIAN_GOLEM, golemTableBlock(Blocks.OBSIDIAN));
-            registerLootTable(ModEntities.COAL_GOLEM, golemTable(Items.COAL));
-            registerLootTable(ModEntities.REDSTONE_GOLEM, golemTable(Items.REDSTONE));
-            registerLootTable(ModEntities.CLAY_GOLEM, golemTable(Items.CLAY_BALL));
-            registerLootTable(ModEntities.DIRT_GOLEM, golemTableBlock(Blocks.DIRT));
-            registerLootTable(ModEntities.GRASS_GOLEM, golemTableBlock(Blocks.GRASS_BLOCK));
-            registerLootTable(ModEntities.HAY_GOLEM, golemTable(Items.WHEAT));
-            registerLootTable(ModEntities.PATH_GOLEM, golemTableBlock(Blocks.GRASS_PATH));
-            registerLootTable(ModEntities.BRICK_GOLEM, golemTable(Items.BRICK));
-            registerLootTable(ModEntities.QUARTZ_GOLEM, golemTable(Items.QUARTZ));
-            registerLootTable(ModEntities.BONE_GOLEM, golemTable(Items.BONE));
-            registerLootTable(ModEntities.NETHER_BRICK_GOLEM, golemTable(Items.NETHER_BRICK));
-            registerLootTable(ModEntities.RED_NETHER_BRICK_GOLEM, golemTable(Items.NETHER_WART));
-            registerLootTable(ModEntities.ICE_GOLEM, golemTableBlock(Blocks.ICE));
-            registerLootTable(ModEntities.PACKED_ICE_GOLEM, golemTableBlock(Blocks.PACKED_ICE));
-            registerLootTable(ModEntities.BLUE_ICE_GOLEM, golemTableBlock(Blocks.BLUE_ICE));
-            registerLootTable(ModEntities.NETHERITE_GOLEM, golemTable(Items.NETHERITE_INGOT));
+            add(ModEntities.GOLD_GOLEM, flowerGolemTable(Blocks.DANDELION, Items.GOLD_INGOT));
+            add(ModEntities.DIAMOND_GOLEM, flowerGolemTable(Blocks.BLUE_ORCHID, Items.DIAMOND));
+            add(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.ALLIUM));
+            add(ModEntities.LAPIS_GOLEM, golemTable(Items.LAPIS_LAZULI));
+            add(ModEntities.OBSIDIAN_GOLEM, golemTableBlock(Blocks.OBSIDIAN));
+            add(ModEntities.COAL_GOLEM, golemTable(Items.COAL));
+            add(ModEntities.REDSTONE_GOLEM, golemTable(Items.REDSTONE));
+            add(ModEntities.CLAY_GOLEM, golemTable(Items.CLAY_BALL));
+            add(ModEntities.DIRT_GOLEM, golemTableBlock(Blocks.DIRT));
+            add(ModEntities.GRASS_GOLEM, golemTableBlock(Blocks.GRASS_BLOCK));
+            add(ModEntities.HAY_GOLEM, golemTable(Items.WHEAT));
+            add(ModEntities.PATH_GOLEM, golemTableBlock(Blocks.GRASS_PATH));
+            add(ModEntities.BRICK_GOLEM, golemTable(Items.BRICK));
+            add(ModEntities.QUARTZ_GOLEM, golemTable(Items.QUARTZ));
+            add(ModEntities.BONE_GOLEM, golemTable(Items.BONE));
+            add(ModEntities.NETHER_BRICK_GOLEM, golemTable(Items.NETHER_BRICK));
+            add(ModEntities.RED_NETHER_BRICK_GOLEM, golemTable(Items.NETHER_WART));
+            add(ModEntities.ICE_GOLEM, golemTableBlock(Blocks.ICE));
+            add(ModEntities.PACKED_ICE_GOLEM, golemTableBlock(Blocks.PACKED_ICE));
+            add(ModEntities.BLUE_ICE_GOLEM, golemTableBlock(Blocks.BLUE_ICE));
+            add(ModEntities.NETHERITE_GOLEM, golemTable(Items.NETHERITE_INGOT));
         }
 
         @Override
@@ -304,7 +304,7 @@ public class OrnamentalLootTables extends LootTableProvider {
 
         @Override
         protected boolean isNonLiving(EntityType<?> type) {
-            return !ALLOWED_ENTITIES.contains(type) && type.getClassification() == EntityClassification.MISC;
+            return !ALLOWED_ENTITIES.contains(type) && type.getCategory() == EntityClassification.MISC;
         }
     }
 }

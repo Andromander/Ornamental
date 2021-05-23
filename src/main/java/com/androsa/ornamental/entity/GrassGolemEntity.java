@@ -22,7 +22,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class GrassGolemEntity extends DirtGolemEntity {
 
-    protected static final DataParameter<Boolean> HAS_POPPY = EntityDataManager.createKey(GrassGolemEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> HAS_POPPY = EntityDataManager.defineId(GrassGolemEntity.class, DataSerializers.BOOLEAN);
 
     public GrassGolemEntity(EntityType<? extends GrassGolemEntity> entity, World world) {
         super(entity, world);
@@ -41,82 +41,82 @@ public class GrassGolemEntity extends DirtGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 8.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 8.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.7D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(HAS_POPPY, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(HAS_POPPY, false);
     }
 
     @Override
-    public void writeAdditional(CompoundNBT nbt) {
-        super.writeAdditional(nbt);
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
         nbt.putBoolean("has_poppy", this.hasPoppy());
     }
 
     @Override
-    public void readAdditional(CompoundNBT nbt) {
-        super.readAdditional(nbt);
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
         this.setPoppy(nbt.getBoolean("has_poppy"));
     }
 
     public boolean hasPoppy() {
-        return this.dataManager.get(HAS_POPPY);
+        return this.entityData.get(HAS_POPPY);
     }
 
     public void setPoppy(boolean flag) {
-        this.dataManager.set(HAS_POPPY, flag);
+        this.entityData.set(HAS_POPPY, flag);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GRASS_HIT;
+        return SoundEvents.GRASS_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GRASS_BREAK;
+        return SoundEvents.GRASS_BREAK;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (item == Items.POPPY && !this.hasPoppy()) {
             setPoppy(true);
-            if (!player.abilities.isCreativeMode) {
+            if (!player.abilities.instabuild) {
                 itemstack.shrink(1);
             }
         } else if (item instanceof ShovelItem) {
-            PathGolemEntity path = ModEntities.PATH_GOLEM.get().create(this.world);
-            addEntity(path);
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-            this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            PathGolemEntity path = ModEntities.PATH_GOLEM.get().create(this.level);
+            addFreshEntity(path);
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            this.level.playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item instanceof HoeItem) {
-            DirtGolemEntity dirt = ModEntities.DIRT_GOLEM.get().create(this.world);
-            addEntity(dirt);
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
-            this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            DirtGolemEntity dirt = ModEntities.DIRT_GOLEM.get().create(this.level);
+            addFreshEntity(dirt);
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            this.level.playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (item == Items.GRASS_BLOCK) {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
 
@@ -124,39 +124,39 @@ public class GrassGolemEntity extends DirtGolemEntity {
     }
 
     @Override
-    protected void spawnDrops(DamageSource source) {
-        super.spawnDrops(source);
+    protected void dropAllDeathLoot(DamageSource source) {
+        super.dropAllDeathLoot(source);
         if (hasPoppy()) {
-            entityDropItem(new ItemStack(Blocks.POPPY), 1);
+            spawnAtLocation(new ItemStack(Blocks.POPPY), 1);
         }
     }
 
-    private void addEntity(MobEntity entity) {
+    private void addFreshEntity(MobEntity entity) {
         if (this.hasPoppy()) {
-            this.entityDropItem(new ItemStack(Items.POPPY));
+            this.spawnAtLocation(new ItemStack(Items.POPPY));
         }
 
-        if (!world.isRemote()) {
-            entity.copyLocationAndAnglesFrom(this);
+        if (!this.level.isClientSide()) {
+            entity.copyPosition(this);
             this.remove();
-            entity.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(entity.getPosition()), SpawnReason.CONVERSION, null, null);
-            entity.setNoAI(this.isAIDisabled());
+            entity.finalizeSpawn((ServerWorld)this.level, this.level.getCurrentDifficultyAt(entity.blockPosition()), SpawnReason.CONVERSION, null, null);
+            entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());
                 entity.setCustomNameVisible(this.isCustomNameVisible());
             }
 
-            if (this.isNoDespawnRequired()) {
-                entity.enablePersistence();
+            if (this.isPersistenceRequired()) {
+                entity.setPersistenceRequired();
             }
 
             entity.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(entity);
+            this.level.addFreshEntity(entity);
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_GRASS_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.GRASS_STEP, 1.0F, 1.0F);
     }
 }

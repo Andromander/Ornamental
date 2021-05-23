@@ -35,10 +35,10 @@ public class DirtGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 5.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 0.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 5.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.7D)
+                .add(Attributes.ATTACK_DAMAGE, 0.0D);
     }
 
     @Override
@@ -47,66 +47,66 @@ public class DirtGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GRAVEL_HIT;
+        return SoundEvents.GRAVEL_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GRAVEL_BREAK;
+        return SoundEvents.GRAVEL_BREAK;
     }
 
     @Override
-    protected float getSoundPitch() {
-        return (this.rand.nextFloat() - this.rand.nextFloat()) * 1.2F + 0.6F;
+    protected float getVoicePitch() {
+        return (this.random.nextFloat() - this.random.nextFloat()) * 1.2F + 0.6F;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (item == Items.BONE_MEAL) {
 
-            if (!world.isRemote()) {
-                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.world);
-                grass.copyLocationAndAnglesFrom(this);
+            if (!this.level.isClientSide()) {
+                GrassGolemEntity grass = ModEntities.GRASS_GOLEM.get().create(this.level);
+                grass.copyPosition(this);
                 this.remove();
-                grass.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(grass.getPosition()), SpawnReason.CONVERSION, null, null);
-                grass.setNoAI(this.isAIDisabled());
+                grass.finalizeSpawn((ServerWorld)this.level, this.level.getCurrentDifficultyAt(grass.blockPosition()), SpawnReason.CONVERSION, null, null);
+                grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());
                     grass.setCustomNameVisible(this.isCustomNameVisible());
                 }
 
-                if (this.isNoDespawnRequired()) {
-                    grass.enablePersistence();
+                if (this.isPersistenceRequired()) {
+                    grass.setPersistenceRequired();
                 }
 
                 grass.setInvulnerable(this.isInvulnerable());
-                this.world.addEntity(grass);
+                this.level.addFreshEntity(grass);
             }
 
-            if (!player.abilities.isCreativeMode) {
+            if (!player.abilities.instabuild) {
                 itemstack.shrink(1);
             }
 
-            this.world.playSound(null, this.getPosition(), SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            this.level.playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         } else if (item == Items.DIRT) {
             float f = this.getHealth();
@@ -114,13 +114,13 @@ public class DirtGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
 
@@ -129,7 +129,7 @@ public class DirtGolemEntity extends AbstractGolemEntity {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_GRAVEL_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.GRAVEL_STEP, 1.0F, 1.0F);
     }
 
     @Override

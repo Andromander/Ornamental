@@ -15,16 +15,16 @@ public class PropertiesHelper {
      * @param builder the material being used for that block.
      */
     public static AbstractBlock.Properties createProps(OrnamentBuilder builder) {
-        AbstractBlock.Properties props = AbstractBlock.Properties.create(builder.material, builder.color)
-                .hardnessAndResistance(builder.hardness, builder.resistance)
+        AbstractBlock.Properties props = AbstractBlock.Properties.of(builder.material, builder.color)
+                .strength(builder.hardness, builder.resistance)
                 .sound(builder.sound)
                 .harvestTool(builder.harvestTool)
                 .harvestLevel(builder.harvestLevel)
-                .slipperiness(builder.slipperiness);
-        if (builder.doesTick) props.tickRandomly();
-        if (builder.isIce || !builder.isSolid) props.notSolid();
-        if (builder.requiresTool) props.setRequiresTool();
-        if (builder.entitySpawnPredicate != null) props.setAllowsSpawn(builder.entitySpawnPredicate);
+                .friction(builder.slipperiness);
+        if (builder.doesTick) props.randomTicks();
+        if (builder.isIce || !builder.isSolid) props.noOcclusion();
+        if (builder.requiresTool) props.requiresCorrectToolForDrops();
+        if (builder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
 
         return props;
     }
@@ -36,8 +36,8 @@ public class PropertiesHelper {
      */
     public static Item.Properties createProps(OrnamentBuilder builder, ItemGroup group) {
         Item.Properties props = new Item.Properties()
-                .group(group);
-        if (builder.fireproof) props.isImmuneToFire();
+                .tab(group);
+        if (builder.fireproof) props.fireResistant();
 
         return props;
     }

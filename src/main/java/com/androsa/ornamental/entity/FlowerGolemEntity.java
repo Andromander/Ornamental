@@ -26,16 +26,16 @@ public abstract class FlowerGolemEntity extends AbstractGolemEntity {
     public void setHoldingFlower(boolean holding) {
         if (holding) {
             this.holdFlowerTimer = 400;
-            this.world.setEntityState(this, (byte)11);
+            this.level.broadcastEntityEvent(this, (byte)11);
         } else {
             this.holdFlowerTimer = 0;
-            this.world.setEntityState(this, (byte)34);
+            this.level.broadcastEntityEvent(this, (byte)34);
         }
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
         if (this.holdFlowerTimer > 0) {
             --this.holdFlowerTimer;
@@ -44,13 +44,13 @@ public abstract class FlowerGolemEntity extends AbstractGolemEntity {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte data) {
+    public void handleEntityEvent(byte data) {
         if (data == 11) {
             this.holdFlowerTimer = 400;
         } else if (data == 34) {
             this.holdFlowerTimer = 0;
         } else {
-            super.handleStatusUpdate(data);
+            super.handleEntityEvent(data);
         }
     }
 

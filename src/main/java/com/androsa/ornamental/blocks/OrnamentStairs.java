@@ -30,14 +30,14 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
 
     protected static final VoxelShape PATH_AABB_SLAB_TOP = OrnamentSlab.PATH_TOP_SHAPE;
     protected static final VoxelShape PATH_AABB_SLAB_BOTTOM = OrnamentSlab.PATH_BOTTOM_SHAPE;
-    protected static final VoxelShape PATH_NWD_CORNER = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 8.0D, 8.0D);
-    protected static final VoxelShape PATH_SWD_CORNER = Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 8.0D, 8.0D, 16.0D);
-    protected static final VoxelShape PATH_NWU_CORNER = Block.makeCuboidShape(0.0D, 7.0D, 0.0D, 8.0D, 15.0D, 8.0D);
-    protected static final VoxelShape PATH_SWU_CORNER = Block.makeCuboidShape(0.0D, 7.0D, 8.0D, 8.0D, 15.0D, 16.0D);
-    protected static final VoxelShape PATH_NED_CORNER = Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 8.0D, 8.0D);
-    protected static final VoxelShape PATH_SED_CORNER = Block.makeCuboidShape(8.0D, 0.0D, 8.0D, 16.0D, 8.0D, 16.0D);
-    protected static final VoxelShape PATH_NEU_CORNER = Block.makeCuboidShape(8.0D, 7.0D, 0.0D, 16.0D, 15.0D, 8.0D);
-    protected static final VoxelShape PATH_SEU_CORNER = Block.makeCuboidShape(8.0D, 7.0D, 8.0D, 16.0D, 15.0D, 16.0D);
+    protected static final VoxelShape PATH_NWD_CORNER = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 8.0D, 8.0D);
+    protected static final VoxelShape PATH_SWD_CORNER = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 8.0D, 16.0D);
+    protected static final VoxelShape PATH_NWU_CORNER = Block.box(0.0D, 7.0D, 0.0D, 8.0D, 15.0D, 8.0D);
+    protected static final VoxelShape PATH_SWU_CORNER = Block.box(0.0D, 7.0D, 8.0D, 8.0D, 15.0D, 16.0D);
+    protected static final VoxelShape PATH_NED_CORNER = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 8.0D, 8.0D);
+    protected static final VoxelShape PATH_SED_CORNER = Block.box(8.0D, 0.0D, 8.0D, 16.0D, 8.0D, 16.0D);
+    protected static final VoxelShape PATH_NEU_CORNER = Block.box(8.0D, 7.0D, 0.0D, 16.0D, 15.0D, 8.0D);
+    protected static final VoxelShape PATH_SEU_CORNER = Block.box(8.0D, 7.0D, 8.0D, 16.0D, 15.0D, 16.0D);
     protected static final VoxelShape[] PATH_SLAB_TOP_SHAPES = makeShapes(PATH_AABB_SLAB_TOP, PATH_NWD_CORNER, PATH_NED_CORNER, PATH_SWD_CORNER, PATH_SED_CORNER);
     protected static final VoxelShape[] PATH_SLAB_BOTTOM_SHAPES = makeShapes(PATH_AABB_SLAB_BOTTOM, PATH_NWU_CORNER, PATH_NEU_CORNER, PATH_SWU_CORNER, PATH_SEU_CORNER);
     private static final int[] metaInt = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
@@ -45,7 +45,7 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
     private OrnamentBuilder builder;
 
     public OrnamentStairs(Properties props, OrnamentBuilder builder) {
-        super(() -> new Block(props).getDefaultState(), props);
+        super(() -> new Block(props).defaultBlockState(), props);
         this.builder = builder;
     }
 
@@ -82,75 +82,75 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (builder.isPath || builder.pathShape)
-            return (state.get(HALF) == Half.TOP ? PATH_SLAB_TOP_SHAPES : PATH_SLAB_BOTTOM_SHAPES)[metaInt[this.getShapeMeta(state)]];
+            return (state.getValue(HALF) == Half.TOP ? PATH_SLAB_TOP_SHAPES : PATH_SLAB_BOTTOM_SHAPES)[metaInt[this.getShapeMeta(state)]];
         return super.getShape(state, worldIn, pos, context);
     }
 
     private int getShapeMeta(BlockState state) {
-        return state.get(SHAPE).ordinal() * 4 + state.get(FACING).getHorizontalIndex();
+        return state.getValue(SHAPE).ordinal() * 4 + state.getValue(FACING).get2DDataValue();
     }
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.onLivingFall(fallDistance, builder.fallMultiplier);
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
-    public boolean canProvidePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return builder.hasPower;
     }
 
     @Override
     @Deprecated
-    public int getWeakPower(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
         return builder.hasPower ? 11 : 0;
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
             if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_stairs, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_stairs, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
             if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_stairs, SoundEvents.BLOCK_GRAVEL_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.dirt_stairs, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
             if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_stairs, SoundEvents.ITEM_SHOVEL_FLATTEN, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.path_stairs, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
             if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_stairs, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_stairs, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
 
-        return super.onBlockActivated(state, worldIn, pos, player, hand, result);
+        return super.use(state, worldIn, pos, player, hand, result);
     }
 
     private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentStairs> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
         this.setBlock(worldIn, pos, newblock);
         worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.isCreativeMode && !itemstack.isDamageable()) {
+        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return ActionResultType.SUCCESS;
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentStairs> block) {
         BlockState state = world.getBlockState(pos);
-        world.setBlockState(pos, block.get().getDefaultState()
-                .with(FACING, state.get(FACING))
-                .with(SHAPE, state.get(SHAPE))
-                .with(HALF, state.get(HALF))
-                .with(WATERLOGGED, state.get(WATERLOGGED)));
+        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
+                .setValue(FACING, state.getValue(FACING))
+                .setValue(SHAPE, state.getValue(SHAPE))
+                .setValue(HALF, state.getValue(HALF))
+                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override
@@ -171,24 +171,24 @@ public class OrnamentStairs extends StairsBlock implements IOrnamentalBlock {
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.isIce || builder.canMelt) {
-            if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
     private void turnIntoWater(World world, BlockPos pos) {
-        if (world.getDimensionType().isUltrawarm() && builder.canVaporise) {
+        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
-            world.setBlockState(pos, builder.meltResult.getDefaultState());
+            world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
         }
     }
 
     @Override
     @Deprecated
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(BlockState state) {
         return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
     }
 }

@@ -21,7 +21,7 @@ public class NetherBrickGolemEntity extends AbstractGolemEntity implements IRang
 
     public NetherBrickGolemEntity(EntityType<? extends NetherBrickGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -37,10 +37,10 @@ public class NetherBrickGolemEntity extends AbstractGolemEntity implements IRang
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
     }
 
     @Override
@@ -49,33 +49,33 @@ public class NetherBrickGolemEntity extends AbstractGolemEntity implements IRang
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_STONE_HIT;
+        return SoundEvents.STONE_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_STONE_BREAK;
+        return SoundEvents.STONE_BREAK;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.NETHER_BRICK) {
             return ActionResultType.PASS;
@@ -85,40 +85,40 @@ public class NetherBrickGolemEntity extends AbstractGolemEntity implements IRang
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_STONE_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.STONE_STEP, 1.0F, 1.0F);
     }
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
-        ThrownNetherBrickEntity brickentity = new ThrownNetherBrickEntity(ModEntities.THROWN_NETHER_BRICK.get(), this.world, this);
-        double eye = entity.getPosYEye() - (double)1.1F;
-        double x = entity.getPosX() - this.getPosX();
-        double y = eye - brickentity.getPosY();
-        double z = entity.getPosZ() - this.getPosZ();
+    public void performRangedAttack(LivingEntity entity, float multiplier) {
+        ThrownNetherBrickEntity brickentity = new ThrownNetherBrickEntity(ModEntities.THROWN_NETHER_BRICK.get(), this.level, this);
+        double eye = entity.getEyeY() - (double)1.1F;
+        double x = entity.getX() - this.getX();
+        double y = eye - brickentity.getY();
+        double z = entity.getZ() - this.getZ();
         float f = MathHelper.sqrt(x * x + z * z) * 0.2F;
 
         brickentity.shoot(x, y + (double)f, z, 1.6F, 12.0F);
-        this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.addEntity(brickentity);
+        this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(brickentity);
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float multiplier) {
-        float modifier = source.isMagicDamage() ? 0.5F : multiplier;
-        return super.attackEntityFrom(source, modifier);
+    public boolean hurt(DamageSource source, float multiplier) {
+        float modifier = source.isMagic() ? 0.5F : multiplier;
+        return super.hurt(source, modifier);
     }
 
     @Override

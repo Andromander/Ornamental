@@ -24,7 +24,7 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(Tags.Blocks.FENCES, Tags.Items.FENCES);

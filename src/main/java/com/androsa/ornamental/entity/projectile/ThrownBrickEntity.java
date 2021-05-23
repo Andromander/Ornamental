@@ -32,17 +32,17 @@ public class ThrownBrickEntity extends ProjectileItemEntity {
 
     @OnlyIn(Dist.CLIENT)
     protected IParticleData makeParticle() {
-        ItemStack itemstack = this.func_213882_k();
+        ItemStack itemstack = this.getItemRaw();
         return itemstack.isEmpty() ? ModParticles.ITEM_BRICK.get() : new ItemParticleData(ParticleTypes.ITEM, itemstack);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte data) {
+    public void handleEntityEvent(byte data) {
         if (data == 3) {
             IParticleData iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -53,20 +53,20 @@ public class ThrownBrickEntity extends ProjectileItemEntity {
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
+    protected void onHit(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 3.0F); //getThrower
+            entity.hurt(DamageSource.thrown(this, this.getOwner()), 3.0F);
         }
 
-        if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte)3);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte)3);
             this.remove();
         }
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

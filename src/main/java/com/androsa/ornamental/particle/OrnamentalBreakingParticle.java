@@ -18,25 +18,25 @@ public class OrnamentalBreakingParticle extends BreakingParticle {
 
     @OnlyIn(Dist.CLIENT)
     public static class LapisFactory implements IParticleFactory<BasicParticleType> {
-        public Particle makeParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.LAPIS_LAZULI));
         }
     }
     @OnlyIn(Dist.CLIENT)
     public static class RedstoneFactory implements IParticleFactory<BasicParticleType> {
-        public Particle makeParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.REDSTONE));
         }
     }
     @OnlyIn(Dist.CLIENT)
     public static class BrickFactory implements IParticleFactory<BasicParticleType> {
-        public Particle makeParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.BRICK));
         }
     }
     @OnlyIn(Dist.CLIENT)
     public static class NetherBrickFactory implements IParticleFactory<BasicParticleType> {
-        public Particle makeParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(BasicParticleType particle, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.NETHER_BRICK));
         }
     }

@@ -19,7 +19,7 @@ public class IceGolemRenderer<T extends IceGolemEntity> extends MobRenderer<T, S
     }
 
     @Override
-    public ResourceLocation getEntityTexture(T entity) {
+    public ResourceLocation getTextureLocation(T entity) {
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entity.getType().getRegistryName().getPath() + ".png");
     }
 }

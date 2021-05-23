@@ -29,12 +29,12 @@ import java.util.function.Supplier;
 
 public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock {
 
-    protected static final VoxelShape PATH_EAST_OPEN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 2.0D, 16.0D, 16.0D);
-    protected static final VoxelShape PATH_WEST_OPEN_AABB = Block.makeCuboidShape(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape PATH_SOUTH_OPEN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 2.0D);
-    protected static final VoxelShape PATH_NORTH_OPEN_AABB = Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape PATH_BOTTOM_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
-    protected static final VoxelShape PATH_TOP_AABB = Block.makeCuboidShape(0.0D, 13.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+    protected static final VoxelShape PATH_EAST_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 2.0D, 16.0D, 16.0D);
+    protected static final VoxelShape PATH_WEST_OPEN_AABB = Block.box(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape PATH_SOUTH_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 2.0D);
+    protected static final VoxelShape PATH_NORTH_OPEN_AABB = Block.box(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape PATH_BOTTOM_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+    protected static final VoxelShape PATH_TOP_AABB = Block.box(0.0D, 13.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 
     private final OrnamentBuilder builder;
 
@@ -51,10 +51,10 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (builder.isPath || builder.pathShape) {
-            if (!state.get(OPEN)) {
-                return state.get(HALF) == Half.TOP ? PATH_TOP_AABB : PATH_BOTTOM_AABB;
+            if (!state.getValue(OPEN)) {
+                return state.getValue(HALF) == Half.TOP ? PATH_TOP_AABB : PATH_BOTTOM_AABB;
             } else {
-                switch(state.get(HORIZONTAL_FACING)) {
+                switch(state.getValue(FACING)) {
                     case NORTH:
                     default:
                         return PATH_NORTH_OPEN_AABB;
@@ -72,41 +72,41 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
     }
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.onLivingFall(fallDistance, builder.fallMultiplier);
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
-    public boolean canProvidePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return builder.hasPower;
     }
 
     @Override
     @Deprecated
-    public int getWeakPower(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
         return builder.hasPower ? 5 : 0;
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
             if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_trapdoor, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_trapdoor, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
             if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_trapdoor, SoundEvents.BLOCK_GRAVEL_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.dirt_trapdoor, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
             if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_trapdoor, SoundEvents.ITEM_SHOVEL_FLATTEN, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.path_trapdoor, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
             if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_trapdoor, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_trapdoor, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
 
@@ -117,13 +117,13 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
         if (!builder.canOpen) {
             return ActionResultType.PASS;
         } else {
-            state = state.func_235896_a_(OPEN); //cycle
-            world.setBlockState(pos, state, 2);
-            if (state.get(WATERLOGGED)) {
-                world.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            state = state.cycle(OPEN);
+            world.setBlock(pos, state, 2);
+            if (state.getValue(WATERLOGGED)) {
+                world.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
             }
 
-            this.playSound(player, world, pos, state.get(OPEN));
+            this.playSound(player, world, pos, state.getValue(OPEN));
             return ActionResultType.SUCCESS;
         }
     }
@@ -132,32 +132,32 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
         this.setBlock(worldIn, pos, newblock);
         worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.isCreativeMode && !itemstack.isDamageable()) {
+        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return ActionResultType.SUCCESS;
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentTrapDoor> block) {
         BlockState state = world.getBlockState(pos);
-        world.setBlockState(pos, block.get().getDefaultState()
-                .with(POWERED, state.get(POWERED))
-                .with(OPEN, state.get(OPEN))
-                .with(HALF, state.get(HALF))
-                .with(WATERLOGGED, state.get(WATERLOGGED)));
+        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
+                .setValue(POWERED, state.getValue(POWERED))
+                .setValue(OPEN, state.getValue(OPEN))
+                .setValue(HALF, state.getValue(HALF))
+                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+    public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
         BlockState state = worldIn.getBlockState(pos);
 
-        if (!state.get(OPEN)) {
-            if (material == Material.CLAY || material == Material.LEAVES || material == Material.WOOL || material == Material.EARTH || material == Material.ORGANIC) {
-                state = state.func_235896_a_(OPEN); //cycle
-                worldIn.setBlockState(pos, state, 2);
-                this.playSound(null, worldIn, pos, state.get(OPEN));
+        if (!state.getValue(OPEN)) {
+            if (material == Material.CLAY || material == Material.LEAVES || material == Material.WOOL || material == Material.DIRT || material == Material.GRASS) {
+                state = state.cycle(OPEN);
+                worldIn.setBlock(pos, state, 2);
+                this.playSound(null, worldIn, pos, state.getValue(OPEN));
             }
         }
     }
@@ -165,11 +165,11 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
     @Override
     protected void playSound(@Nullable PlayerEntity player, World worldIn, BlockPos pos, boolean state) {
         if (state) {
-            int i = this.material == Material.IRON ? 1037 : 1007;
-            worldIn.playEvent(player, i, pos, 0);
+            int i = this.material == Material.METAL ? 1037 : 1007;
+            worldIn.levelEvent(player, i, pos, 0);
         } else {
-            int j = this.material == Material.IRON ? 1036 : 1013;
-            worldIn.playEvent(player, j, pos, 0);
+            int j = this.material == Material.METAL ? 1036 : 1013;
+            worldIn.levelEvent(player, j, pos, 0);
         }
     }
 
@@ -192,24 +192,24 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements IOrnamentalBlock 
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.isIce || builder.canMelt) {
-            if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
     protected void turnIntoWater(World world, BlockPos pos) {
-        if (world.getDimensionType().isUltrawarm() && builder.canVaporise) {
+        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
-            world.setBlockState(pos, builder.meltResult.getDefaultState());
+            world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
         }
     }
 
     @Override
     @Deprecated
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(BlockState state) {
         return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
     }
 }

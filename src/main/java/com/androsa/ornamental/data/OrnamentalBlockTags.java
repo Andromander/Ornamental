@@ -51,7 +51,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         beaconBaseTag(beacon_bases);
         doorTag(doors);
         dragonImmuneTag(dragon_immune);
@@ -62,6 +62,6 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         stairsTag(stairs);
         trapdoorTag(trapdoors);
 
-        getOrCreateBuilder(Tags.Blocks.FENCES_NETHER_BRICK).add(ModBlocks.red_nether_brick_fence.get());
+        tag(Tags.Blocks.FENCES_NETHER_BRICK).add(ModBlocks.red_nether_brick_fence.get());
     }
 }

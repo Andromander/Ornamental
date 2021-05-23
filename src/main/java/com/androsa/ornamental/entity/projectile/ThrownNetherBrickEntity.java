@@ -30,7 +30,7 @@ public class ThrownNetherBrickEntity extends ThrownBrickEntity {
 
     @OnlyIn(Dist.CLIENT)
     protected IParticleData makeParticle() {
-        ItemStack itemstack = this.func_213882_k();
+        ItemStack itemstack = this.getItemRaw();
         return itemstack.isEmpty() ? ModParticles.ITEM_NETHER_BRICK.get() : new ItemParticleData(ParticleTypes.ITEM, itemstack);
     }
 
@@ -40,14 +40,14 @@ public class ThrownNetherBrickEntity extends ThrownBrickEntity {
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
+    protected void onHit(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 5.0F); //getThrower
+            entity.hurt(DamageSource.thrown(this, this.getOwner()), 5.0F);
         }
 
-        if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte)3);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte)3);
             this.remove();
         }
     }

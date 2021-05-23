@@ -16,12 +16,12 @@ public class HeavyGolemRenderer<T extends AbstractGolemEntity, M extends Abstrac
     }
 
     @Override
-    protected void applyRotations(T entity, MatrixStack stack, float rotationPitch, float rotationYaw, float partialTicks) {
-        super.applyRotations(entity, stack, rotationPitch, rotationYaw, partialTicks);
-        if (!((double)entity.limbSwingAmount < 0.01D)) {
-            float f1 = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks) + 6.0F;
+    protected void setupRotations(T entity, MatrixStack stack, float rotationPitch, float rotationYaw, float partialTicks) {
+        super.setupRotations(entity, stack, rotationPitch, rotationYaw, partialTicks);
+        if (!((double)entity.animationSpeed < 0.01D)) {
+            float f1 = entity.animationPosition - entity.animationSpeed * (1.0F - partialTicks) + 6.0F;
             float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
-            stack.rotate(Vector3f.ZP.rotationDegrees(6.5F * f2));
+            stack.mulPose(Vector3f.ZP.rotationDegrees(6.5F * f2));
         }
     }
 }

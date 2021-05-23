@@ -22,7 +22,7 @@ public class ClayGolemEntity extends AbstractGolemEntity {
 
     public ClayGolemEntity(EntityType<? extends ClayGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class ClayGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 30.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 0.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .add(Attributes.ATTACK_DAMAGE, 0.0D);
     }
 
     @Override
@@ -51,73 +51,73 @@ public class ClayGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && !(target instanceof CreeperEntity) && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity target) {
+    public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.world.setEntityState(this, (byte)4);
-        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), 0.0F);
+        this.level.broadcastEntityEvent(this, (byte)4);
+        boolean flag = target.hurt(DamageSource.mobAttack(this), 0.0F);
         if (flag) {
-            target.setMotion(target.getMotion().add(0.0D, (double)0.3F, 0.0D));
-            this.applyEnchantments(this, target);
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, (double)0.3F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
         }
 
         return flag;
     }
 
     @Override
-    public void livingTick() {
-        if (this.isBurning()) {
-            if (!world.isRemote()) {
-                BrickGolemEntity brick = ModEntities.BRICK_GOLEM.get().create(this.world);
-                brick.copyLocationAndAnglesFrom(this);
+    public void aiStep() {
+        if (this.isOnFire()) {
+            if (!this.level.isClientSide()) {
+                BrickGolemEntity brick = ModEntities.BRICK_GOLEM.get().create(this.level);
+                brick.copyPosition(this);
                 this.remove();
-                brick.onInitialSpawn((ServerWorld)this.world, this.world.getDifficultyForLocation(brick.getPosition()), SpawnReason.CONVERSION, null, null);
-                brick.setNoAI(this.isAIDisabled());
+                brick.finalizeSpawn((ServerWorld)this.level, this.level.getCurrentDifficultyAt(brick.blockPosition()), SpawnReason.CONVERSION, null, null);
+                brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());
                     brick.setCustomNameVisible(this.isCustomNameVisible());
                 }
 
-                if (this.isNoDespawnRequired()) {
-                    brick.enablePersistence();
+                if (this.isPersistenceRequired()) {
+                    brick.setPersistenceRequired();
                 }
 
                 brick.setInvulnerable(this.isInvulnerable());
-                this.world.addEntity(brick);
+                this.level.addFreshEntity(brick);
             }
 
-            this.world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.getPosition(), 0);
+            this.level.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.blockPosition(), 0);
         }
-        super.livingTick();
+        super.aiStep();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_GRAVEL_HIT;
+        return SoundEvents.GRAVEL_HIT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_GRAVEL_BREAK;
+        return SoundEvents.GRAVEL_BREAK;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.CLAY_BALL) {
             return ActionResultType.PASS;
@@ -127,20 +127,20 @@ public class ClayGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.BLOCK_GRAVEL_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.GRAVEL_STEP, 1.0F, 1.0F);
     }
 
     @Override

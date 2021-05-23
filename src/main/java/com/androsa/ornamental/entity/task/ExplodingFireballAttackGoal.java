@@ -16,37 +16,37 @@ public class ExplodingFireballAttackGoal extends Goal {
 
     public ExplodingFireballAttackGoal(NetheriteGolemEntity entity) {
         this.parentEntity = entity;
-        setMutexFlags(EnumSet.of(Flag.LOOK));
+        setFlags(EnumSet.of(Flag.LOOK));
     }
 
     @Override
-    public boolean shouldExecute() {
-        return this.parentEntity.getAttackTarget() != null && this.parentEntity.getFireballs() > 0;
+    public boolean canUse() {
+        return this.parentEntity.getTarget() != null && this.parentEntity.getFireballs() > 0;
     }
 
     @Override
-    public void startExecuting() {
+    public void start() {
         this.attackTimer = 0;
     }
 
     @Override
     public void tick() {
-        LivingEntity target = this.parentEntity.getAttackTarget();
-        this.parentEntity.getLookController().setLookPositionWithEntity(target, 10.0F, (float)this.parentEntity.getVerticalFaceSpeed());
-        if (target.getDistanceSq(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(target)) {
-            World world = this.parentEntity.world;
+        LivingEntity target = this.parentEntity.getTarget();
+        this.parentEntity.getLookControl().setLookAt(target, 10.0F, (float)this.parentEntity.getMaxHeadXRot());
+        if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.canSee(target)) {
+            World world = this.parentEntity.level;
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {
-                double x = target.getPosX() - this.parentEntity.getPosX();
-                double y = target.getPosYHeight(0.5D) - (0.5D + this.parentEntity.getPosYHeight(0.5D));
-                double z = target.getPosZ() - this.parentEntity.getPosZ();
+                double x = target.getX() - this.parentEntity.getX();
+                double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
+                double z = target.getZ() - this.parentEntity.getZ();
 
-                world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.getPosition(), 0);
+                world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
                 FireballEntity fireball = new FireballEntity(world, this.parentEntity, x, y, z);
                 fireball.explosionPower = 2;
-                fireball.setPosition(this.parentEntity.getPosX(), this.parentEntity.getPosYHeight(0.5D) + 0.5D, fireball.getPosZ());
-                world.addEntity(fireball);
+                fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
+                world.addFreshEntity(fireball);
                 parentEntity.shootFireball();
                 this.attackTimer = -10;
             }

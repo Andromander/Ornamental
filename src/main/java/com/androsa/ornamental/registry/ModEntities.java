@@ -57,17 +57,17 @@ public class ModEntities {
 
     private static <T extends Entity> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.IFactory<T> entity, float width, float height, boolean fireRes) {
         String regname = name + "_golem";
-        EntityType.Builder<T> builder = EntityType.Builder.create(entity, EntityClassification.MISC)
-                .size(width, height);
-        if (fireRes) builder.immuneToFire();
+        EntityType.Builder<T> builder = EntityType.Builder.of(entity, EntityClassification.MISC)
+                .sized(width, height);
+        if (fireRes) builder.fireImmune();
 
         return ENTITIES.register(regname, () -> builder.build(regname));
     }
 
     private static <T extends Entity> RegistryObject<EntityType<T>> makeProjectile(String name, EntityType.IFactory<T> entity, float width, float height, int tracking, int interval) {
         return ENTITIES.register(name, () ->
-                EntityType.Builder.create(entity, EntityClassification.MISC)
-                        .size(width, height)
+                EntityType.Builder.of(entity, EntityClassification.MISC)
+                        .sized(width, height)
                         .setTrackingRange(tracking)
                         .setUpdateInterval(interval)
                         .setShouldReceiveVelocityUpdates(true)
@@ -132,6 +132,6 @@ public class ModEntities {
     }
 
     private static void putAttributes(Supplier<? extends EntityType<? extends LivingEntity>> entity, AttributeModifierMap.MutableAttribute map) {
-        GlobalEntityTypeAttributes.put(entity.get(), map.create());
+        GlobalEntityTypeAttributes.put(entity.get(), map.build());
     }
 }

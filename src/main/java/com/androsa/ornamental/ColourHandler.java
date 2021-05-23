@@ -16,7 +16,7 @@ public class ColourHandler {
     public static void registerBlockColors() {
         BlockColors blocks = Minecraft.getInstance().getBlockColors();
 
-        blocks.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? BiomeColors.getGrassColor(worldIn, pos) : GrassColors.get(0.5D, 1.0D),
+        blocks.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? BiomeColors.getAverageGrassColor(worldIn, pos) : GrassColors.get(0.5D, 1.0D),
                 ModBlocks.grass_fence.get(),
                 ModBlocks.grass_fence_gate.get(),
                 ModBlocks.grass_slab.get(),
@@ -31,7 +31,7 @@ public class ColourHandler {
         BlockColors blocks = Minecraft.getInstance().getBlockColors();
         ItemColors items = Minecraft.getInstance().getItemColors();
 
-        items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
+        items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
                 ModBlocks.grass_fence.get(),
                 ModBlocks.grass_fence_gate.get(),
                 ModBlocks.grass_slab.get(),

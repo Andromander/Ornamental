@@ -10,9 +10,9 @@ public class NextMeleeAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    public boolean shouldExecute() {
-        if (((NetheriteGolemEntity)attacker).getFireballs() <= 0) {
-            return super.shouldExecute();
+    public boolean canUse() {
+        if (((NetheriteGolemEntity)mob).getFireballs() <= 0) {
+            return super.canUse();
         }
         return false;
     }

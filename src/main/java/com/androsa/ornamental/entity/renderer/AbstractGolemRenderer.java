@@ -17,7 +17,7 @@ public class AbstractGolemRenderer<T extends AbstractGolemEntity, M extends Abst
     }
 
     @Override
-    public ResourceLocation getEntityTexture(T entity) {
+    public ResourceLocation getTextureLocation(T entity) {
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entity.getType().getRegistryName().getPath() + ".png");
     }
 }

@@ -51,17 +51,17 @@ public enum PatternType {
         return blockPattern;
     }
 
-    public int getThumb() {
-        return blockPattern.getThumbLength();
+    public int getHeight() {
+        return blockPattern.getHeight();
     }
 
-    public int getPalm() {
-        return blockPattern.getPalmLength();
+    public int getWidth() {
+        return blockPattern.getWidth();
     }
 
     @Nullable
     public BlockPattern.PatternHelper getMatch(World world, BlockPos pos) {
-        return getBlockPattern().match(world, pos);
+        return getBlockPattern().find(world, pos);
     }
 
     public boolean canBuild() {

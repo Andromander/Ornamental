@@ -25,11 +25,11 @@ import javax.annotation.Nullable;
 
 public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttackMob {
 
-    private static final DataParameter<Boolean> TARGETING = EntityDataManager.createKey(BoneGolemEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> TARGETING = EntityDataManager.defineId(BoneGolemEntity.class, DataSerializers.BOOLEAN);
 
     public BoneGolemEntity(EntityType<? extends BoneGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -45,24 +45,24 @@ public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttac
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 120.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.5D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 120.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(TARGETING, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(TARGETING, false);
     }
 
     public boolean isTargeting() {
-        return dataManager.get(TARGETING);
+        return entityData.get(TARGETING);
     }
 
     public void setTargeting(boolean flag) {
-        dataManager.set(TARGETING, flag);
+        entityData.set(TARGETING, flag);
     }
 
     @Override
@@ -71,46 +71,46 @@ public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttac
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
-    public void setAttackTarget(@Nullable LivingEntity target) {
+    public void setTarget(@Nullable LivingEntity target) {
         setTargeting(target != null);
-        super.setAttackTarget(target);
+        super.setTarget(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_SKELETON_HURT;
+        return SoundEvents.SKELETON_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
+        return SoundEvents.SKELETON_DEATH;
     }
 
     @Override
-    protected float getSoundPitch() {
-        return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.6F;
+    protected float getVoicePitch() {
+        return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.6F;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
-        if (!item.isIn(Tags.Items.BONES) || item != Items.BONE_MEAL) {
+        if (!item.is(Tags.Items.BONES) || item != Items.BONE_MEAL) {
             return ActionResultType.PASS;
         } else {
             float f = this.getHealth();
@@ -118,43 +118,43 @@ public class BoneGolemEntity extends AbstractGolemEntity implements IRangedAttac
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.SKELETON_STEP, 1.0F, 1.0F);
     }
 
     @Override
-    public ItemStack findAmmo(ItemStack stack) {
+    public ItemStack getProjectile(ItemStack stack) {
         return new ItemStack(Items.ARROW);
     }
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
-        ItemStack itemstack = this.findAmmo(this.getHeldItem(ProjectileHelper.getHandWith(this, Items.BOW)));
-        AbstractArrowEntity abstractarrowentity = this.fireArrow(itemstack, multiplier);
+    public void performRangedAttack(LivingEntity entity, float multiplier) {
+        ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileHelper.getWeaponHoldingHand(this, Items.BOW)));
+        AbstractArrowEntity abstractarrowentity = this.getArrow(itemstack, multiplier);
 
-        double x = entity.getPosX() - this.getPosX();
-        double y = entity.getPosYHeight(0.3333333333333333D) - abstractarrowentity.getPosY();
-        double z = entity.getPosZ() - this.getPosZ();
+        double x = entity.getX() - this.getX();
+        double y = entity.getY(0.3333333333333333D) - abstractarrowentity.getY();
+        double z = entity.getZ() - this.getZ();
         double sqrt = (double) MathHelper.sqrt(x * x + z * z);
-        abstractarrowentity.shoot(x, y + sqrt * (double)0.2F, z, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.addEntity(abstractarrowentity);
+        abstractarrowentity.shoot(x, y + sqrt * (double)0.2F, z, 1.6F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(abstractarrowentity);
     }
 
-    protected AbstractArrowEntity fireArrow(ItemStack stack, float multiplier) {
-        return ProjectileHelper.fireArrow(this, stack, multiplier);
+    protected AbstractArrowEntity getArrow(ItemStack stack, float multiplier) {
+        return ProjectileHelper.getMobArrow(this, stack, multiplier);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class IceGolemTransparentRenderer<T extends IceGolemEntity> extends IceGo
     }
 
     @Override
-    public ResourceLocation getEntityTexture(T entity) {
+    public ResourceLocation getTextureLocation(T entity) {
         return texGolem;
     }
 
@@ -41,8 +41,8 @@ public class IceGolemTransparentRenderer<T extends IceGolemEntity> extends IceGo
         }
 
         public void render(MatrixStack stack, IRenderTypeBuffer buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
-            IVertexBuilder vertex = buffer.getBuffer(RenderType.getEntityTranslucent(texIce));
-            IceGolemTransparentRenderer.this.entityModel.render(stack, vertex, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            IVertexBuilder vertex = buffer.getBuffer(RenderType.entityTranslucent(texIce));
+            IceGolemTransparentRenderer.this.model.renderToBuffer(stack, vertex, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 }

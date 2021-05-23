@@ -17,7 +17,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
     }
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
         stairs(consumer, ModBlocks.iron_stairs, Blocks.IRON_BLOCK);
         stairs(consumer, ModBlocks.gold_stairs, Blocks.GOLD_BLOCK);
         stairs(consumer, ModBlocks.diamond_stairs, Blocks.DIAMOND_BLOCK);

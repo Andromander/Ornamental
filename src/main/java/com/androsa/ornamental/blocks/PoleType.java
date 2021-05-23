@@ -38,7 +38,7 @@ public enum PoleType implements IStringSerializable {
 
     @Override
     @Nonnull
-    public String getString() {
+    public String getSerializedName() {
         return name;
     }
 

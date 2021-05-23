@@ -21,7 +21,7 @@ public class ObsidianGolemEntity extends AbstractGolemEntity {
 
     public ObsidianGolemEntity(EntityType<? extends ObsidianGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     //TODO: AoE attack
@@ -39,21 +39,21 @@ public class ObsidianGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 200.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 18.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 200.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
+                .add(Attributes.ATTACK_DAMAGE, 18.0D);
     }
 
     @Override
-    public void applyKnockback(float strength, double x, double z) {
+    public void knockback(float strength, double x, double z) {
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float multiplier) {
+    public boolean hurt(DamageSource source, float multiplier) {
         float modifier = source.isExplosion() ? 0.3F : multiplier;
-        return super.attackEntityFrom(source, modifier);
+        return super.hurt(source, modifier);
     }
 
     @Override
@@ -62,53 +62,53 @@ public class ObsidianGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
-        if (horizontalMag(this.getMotion()) > (double)2.5000003E-7F && this.rand.nextInt(5) == 0) {
-            int x = MathHelper.floor(this.getPosX());
-            int y = MathHelper.floor(this.getPosY() - (double)0.2F);
-            int z = MathHelper.floor(this.getPosZ());
+        if (getHorizontalDistanceSqr(this.getDeltaMovement()) > (double)2.5000003E-7F && this.random.nextInt(5) == 0) {
+            int x = MathHelper.floor(this.getX());
+            int y = MathHelper.floor(this.getY() - (double)0.2F);
+            int z = MathHelper.floor(this.getZ());
             BlockPos pos = new BlockPos(x, y, z);
-            BlockState blockstate = this.world.getBlockState(pos);
-            if (!blockstate.isAir(this.world, pos)) {
-                this.world.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos),
-                        this.getPosX() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(),
-                        this.getPosY() + 0.1D,
-                        this.getPosZ() + ((double)this.rand.nextFloat() - 0.5D) * (double)this.getWidth(),
-                        4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+            BlockState blockstate = this.level.getBlockState(pos);
+            if (!blockstate.isAir(this.level, pos)) {
+                this.level.addParticle(new BlockParticleData(ParticleTypes.BLOCK, blockstate).setPos(pos),
+                        this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),
+                        this.getY() + 0.1D,
+                        this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),
+                        4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.OBSIDIAN) {
             return ActionResultType.PASS;
@@ -118,20 +118,20 @@ public class ObsidianGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
     @Override

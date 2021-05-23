@@ -23,11 +23,11 @@ import javax.annotation.Nullable;
 
 public class LapisGolemEntity extends AbstractGolemEntity implements IRangedAttackMob {
 
-    private static final DataParameter<Boolean> TARGETING = EntityDataManager.createKey(LapisGolemEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> TARGETING = EntityDataManager.defineId(LapisGolemEntity.class, DataSerializers.BOOLEAN);
 
     public LapisGolemEntity(EntityType<? extends LapisGolemEntity> entity, World world) {
         super(entity, world);
-        this.stepHeight = 1.0F;
+        this.maxUpStep = 1.0F;
     }
 
     @Override
@@ -42,24 +42,24 @@ public class LapisGolemEntity extends AbstractGolemEntity implements IRangedAtta
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 70.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 70.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(TARGETING, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(TARGETING, false);
     }
 
     public boolean isTargeting() {
-        return dataManager.get(TARGETING);
+        return entityData.get(TARGETING);
     }
 
     public void setTargeting(boolean flag) {
-        dataManager.set(TARGETING, flag);
+        entityData.set(TARGETING, flag);
     }
 
     @Override
@@ -68,43 +68,43 @@ public class LapisGolemEntity extends AbstractGolemEntity implements IRangedAtta
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttack(target);
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
-    public void setAttackTarget(@Nullable LivingEntity target) {
+    public void setTarget(@Nullable LivingEntity target) {
         if (target == null) {
             setTargeting(false);
         } else {
             setTargeting(true);
         }
-        super.setAttackTarget(target);
+        super.setTarget(target);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.LAPIS_LAZULI) {
             return ActionResultType.PASS;
@@ -114,34 +114,34 @@ public class LapisGolemEntity extends AbstractGolemEntity implements IRangedAtta
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_STEP, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
     }
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity entity, float multiplier) {
-        LapisBulletEntity bullet = new LapisBulletEntity(this.world, this);
-        double eye = entity.getPosYEye() - (double)1.1F;
-        double x = entity.getPosX() - this.getPosX();
-        double y = eye - bullet.getPosY();
-        double z = entity.getPosZ() - this.getPosZ();
+    public void performRangedAttack(LivingEntity entity, float multiplier) {
+        LapisBulletEntity bullet = new LapisBulletEntity(this.level, this);
+        double eye = entity.getEyeY() - (double)1.1F;
+        double x = entity.getX() - this.getX();
+        double y = eye - bullet.getY();
+        double z = entity.getZ() - this.getZ();
         float f = MathHelper.sqrt(x * x + z * z) * 0.2F;
 
         bullet.shoot(x, y + (double)f, z, 1.6F, 12.0F);
-        this.playSound(SoundEvents.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.world.addEntity(bullet);
+        this.playSound(SoundEvents.CROSSBOW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(bullet);
     }
 
     @Override

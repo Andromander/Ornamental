@@ -24,8 +24,8 @@ public abstract class AbstractGolemModel<T extends AbstractGolemEntity> extends 
     private boolean useTimer;
 
     public AbstractGolemModel(int width, int height, boolean useTimer) {
-        this.textureWidth = width;
-        this.textureHeight = height;
+        this.texWidth = width;
+        this.texHeight = height;
         this.useTimer = useTimer;
     }
 
@@ -33,35 +33,35 @@ public abstract class AbstractGolemModel<T extends AbstractGolemEntity> extends 
      * This is a helper function from Tabula to set the rotation of model parts
      */
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+        modelRenderer.xRot = x;
+        modelRenderer.yRot = y;
+        modelRenderer.zRot = z;
     }
 
     @Override
-    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
-        this.legL.rotateAngleX = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
-        this.legR.rotateAngleX = 1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
-        this.legL.rotateAngleY = 0.0F;
-        this.legR.rotateAngleY = 0.0F;
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+        this.head.xRot = headPitch * ((float)Math.PI / 180F);
+        this.legL.xRot = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+        this.legR.xRot = 1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+        this.legL.yRot = 0.0F;
+        this.legR.yRot = 0.0F;
     }
 
     @Override
-    public void setLivingAnimations(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
+    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
         int attack = entity.getAttackTimer();
         if (attack > 0 && useTimer) {
-            this.armR.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
-            this.armL.rotateAngleX = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
+            this.armR.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
+            this.armL.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
         } else {
             swingArms(limbSwing, limbSwingAmount);
         }
     }
 
     protected void swingArms(float limbSwing, float limbSwingAmount) {
-        this.armR.rotateAngleX = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-        this.armL.rotateAngleX = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+        this.armR.xRot = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+        this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
     }
 
     protected float triangleWave(float limbSwing, float amount) {

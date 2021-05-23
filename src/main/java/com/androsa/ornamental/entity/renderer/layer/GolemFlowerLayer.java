@@ -25,16 +25,16 @@ public class GolemFlowerLayer<T extends FlowerGolemEntity, M extends FlowerGolem
     public void render(MatrixStack stack, IRenderTypeBuffer buffer, int i, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
         double[] pos = entity.getFlowerPos();
         if (entity.getHoldFlowerTick() != 0) {
-            stack.push();
-            ModelRenderer modelrenderer = this.getEntityModel().getArmHoldingRose();
-            modelrenderer.translateRotate(stack);
+            stack.pushPose();
+            ModelRenderer modelrenderer = this.getParentModel().getArmHoldingRose();
+            modelrenderer.translateAndRotate(stack);
             stack.translate(pos[0], pos[1], pos[2]);
             stack.translate(0.5D, 0.5D, 0.5D);
             stack.scale(0.5F, 0.5F, 0.5F);
-            stack.rotate(Vector3f.XP.rotationDegrees(-90.0F));
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(entity.getFlower(), stack, buffer, i, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE);
-            stack.pop();
+            Minecraft.getInstance().getBlockRenderer().renderBlock(entity.getFlower(), stack, buffer, i, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE);
+            stack.popPose();
         }
     }
 }

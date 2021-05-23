@@ -17,31 +17,31 @@ public class FireballAttackGoal extends Goal {
     }
 
     @Override
-    public boolean shouldExecute() {
-        return this.parentEntity.getAttackTarget() != null;
+    public boolean canUse() {
+        return this.parentEntity.getTarget() != null;
     }
 
     @Override
-    public void startExecuting() {
+    public void start() {
         this.attackTimer = 0;
     }
 
     @Override
     public void tick() {
-        LivingEntity target = this.parentEntity.getAttackTarget();
-        this.parentEntity.getLookController().setLookPositionWithEntity(target, 10.0F, (float)this.parentEntity.getVerticalFaceSpeed());
-        if (target.getDistanceSq(this.parentEntity) < 4096.0D && this.parentEntity.canEntityBeSeen(target)) {
-            World world = this.parentEntity.world;
+        LivingEntity target = this.parentEntity.getTarget();
+        this.parentEntity.getLookControl().setLookAt(target, 10.0F, (float)this.parentEntity.getMaxHeadXRot());
+        if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.canSee(target)) {
+            World world = this.parentEntity.level;
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {
-                double x = target.getPosX() - this.parentEntity.getPosX();
-                double y = target.getPosYHeight(0.5D) - (0.5D + this.parentEntity.getPosYHeight(0.5D));
-                double z = target.getPosZ() - this.parentEntity.getPosZ();
-                world.playEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.getPosition(), 0);
+                double x = target.getX() - this.parentEntity.getX();
+                double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
+                double z = target.getZ() - this.parentEntity.getZ();
+                world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
                 SmallFireballEntity fireball = new SmallFireballEntity(world, this.parentEntity, x, y, z);
-                fireball.setPosition(this.parentEntity.getPosX(), this.parentEntity.getPosYHeight(0.5D) + 0.5D, fireball.getPosZ());
-                world.addEntity(fireball);
+                fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
+                world.addFreshEntity(fireball);
                 this.attackTimer = -40;
             }
         } else if (this.attackTimer > 0) {

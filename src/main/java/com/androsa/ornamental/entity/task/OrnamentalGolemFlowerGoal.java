@@ -12,48 +12,48 @@ import java.util.EnumSet;
  */
 public class OrnamentalGolemFlowerGoal extends Goal {
 
-    private static final EntityPredicate IS_FRIENDLY = (new EntityPredicate()).setDistance(6.0D).allowFriendlyFire().allowInvulnerable();
+    private static final EntityPredicate IS_FRIENDLY = (new EntityPredicate()).range(6.0D).allowSameTeam().allowInvulnerable();
     private final FlowerGolemEntity golem;
     private VillagerEntity villager;
     private int lookTime;
 
     public OrnamentalGolemFlowerGoal(FlowerGolemEntity entity) {
         this.golem = entity;
-        this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
     @Override
-    public boolean shouldExecute() {
-        if (!this.golem.world.isDaytime()) {
+    public boolean canUse() {
+        if (!this.golem.level.isDay()) {
             return false;
-        } else if (this.golem.getRNG().nextInt(8000) != 0) {
+        } else if (this.golem.getRandom().nextInt(8000) != 0) {
             return false;
         } else {
-            this.villager = this.golem.world.getClosestEntityWithinAABB(VillagerEntity.class, IS_FRIENDLY, this.golem, this.golem.getPosX(), this.golem.getPosY(), this.golem.getPosZ(), this.golem.getBoundingBox().grow(6.0D, 2.0D, 6.0D));
+            this.villager = this.golem.level.getNearestEntity(VillagerEntity.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
             return this.villager != null;
         }
     }
 
     @Override
-    public boolean shouldContinueExecuting() {
+    public boolean canContinueToUse() {
         return this.lookTime > 0;
     }
 
     @Override
-    public void startExecuting() {
+    public void start() {
         this.lookTime = 400;
         this.golem.setHoldingFlower(true);
     }
 
     @Override
-    public void resetTask() {
+    public void stop() {
         this.golem.setHoldingFlower(false);
         this.villager = null;
     }
 
     @Override
     public void tick() {
-        this.golem.getLookController().setLookPositionWithEntity(this.villager, 30.0F, 30.0F);
+        this.golem.getLookControl().setLookAt(this.villager, 30.0F, 30.0F);
         --this.lookTime;
     }
 }

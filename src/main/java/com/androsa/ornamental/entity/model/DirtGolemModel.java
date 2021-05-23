@@ -17,27 +17,27 @@ public class DirtGolemModel<T extends DirtGolemEntity> extends AbstractGolemMode
         super(64, 32, true);
 
         this.legL = new ModelRenderer(this, 0, 0);
-        this.legL.setRotationPoint(0.5F, 21.0F, 0.0F);
+        this.legL.setPos(0.5F, 21.0F, 0.0F);
         this.legL.addBox(0.0F, 0.0F, -1.0F, 2, 3, 2, 0.0F);
         this.armR = new ModelRenderer(this, 52, 0);
-        this.armR.setRotationPoint(-2.5F, 15.5F, 0.0F);
+        this.armR.setPos(-2.5F, 15.5F, 0.0F);
         this.armR.addBox(-2.0F, 0.0F, -1.0F, 2, 4, 2, 0.0F);
         this.legR = new ModelRenderer(this, 8, 0);
-        this.legR.setRotationPoint(-0.5F, 21.0F, 0.0F);
+        this.legR.setPos(-0.5F, 21.0F, 0.0F);
         this.legR.addBox(-2.0F, 0.0F, -1.0F, 2, 3, 2, 0.0F);
         this.armL = new ModelRenderer(this, 44, 0);
-        this.armL.setRotationPoint(2.5F, 15.5F, 0.0F);
+        this.armL.setPos(2.5F, 15.5F, 0.0F);
         this.armL.addBox(0.0F, 0.0F, -1.0F, 2, 4, 2, 0.0F);
         this.body = new ModelRenderer(this, 16, 0);
-        this.body.setRotationPoint(0.0F, 15.0F, 0.0F);
+        this.body.setPos(0.0F, 15.0F, 0.0F);
         this.body.addBox(-2.5F, 0.0F, -1.5F, 5, 6, 3, 0.0F);
         this.head = new ModelRenderer(this, 32, 0);
-        this.head.setRotationPoint(0.0F, 15.0F, 0.0F);
+        this.head.setPos(0.0F, 15.0F, 0.0F);
         this.head.addBox(-1.5F, -3.0F, -2.0F, 3, 3, 3, 0.0F);
     }
 
     @Override
-    public Iterable<ModelRenderer> getParts() {
+    public Iterable<ModelRenderer> parts() {
         return ImmutableList.of(head, body, armL, armR, legL, legR);
     }
 

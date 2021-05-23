@@ -21,21 +21,21 @@ public class OrnamentBlockItem extends BlockItem {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+		if (builder.hasConfig) {
+			ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                if (val.get()) {
-                    super.fillItemGroup(group, items);
-                }
-            }
-        } else {
-            super.fillItemGroup(group, items);
-        }
-    }
+			if (val == null) {
+				throw new NullPointerException(builder.name + " expected a config value but found null.");
+			} else {
+				if (val.get()) {
+					super.fillItemCategory(group, items);
+				}
+			}
+		} else {
+			super.fillItemCategory(group, items);
+		}
+	}
 
     @Override
     public int getBurnTime(ItemStack itemStack) {

@@ -26,7 +26,7 @@ public class OrnamentTallBlockItem extends TallBlockItem {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         if (builder.hasConfig) {
             ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
@@ -34,11 +34,11 @@ public class OrnamentTallBlockItem extends TallBlockItem {
                 throw new NullPointerException(builder.name + " expected a config value but found null.");
             } else {
                 if (val.get()) {
-                    super.fillItemGroup(group, items);
+                    super.fillItemCategory(group, items);
                 }
             }
         } else {
-            super.fillItemGroup(group, items);
+            super.fillItemCategory(group, items);
         }
     }
 }

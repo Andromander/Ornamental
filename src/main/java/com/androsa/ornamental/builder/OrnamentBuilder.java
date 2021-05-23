@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 public class OrnamentBuilder {
 
     public final String name;
-    public Material material = Material.ROCK;
+    public Material material = Material.STONE;
     public MaterialColor color = material.getColor();
     public SoundType sound = SoundType.STONE;
     public float hardness = 0.0F;
@@ -102,7 +102,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's sound. Will default to SoundType.ROCK if unused.
+     * Setter for the block's sound. Will default to SoundType.STONE if unused.
      * @param sound The SoundType of the block
      */
     public OrnamentBuilder sound(SoundType sound) {
@@ -147,7 +147,7 @@ public class OrnamentBuilder {
      * Setter for the block's ToolType. Harvest level will be 0.
      * To set a harvest level, use {@link OrnamentBuilder#tool(ToolType, int, boolean)}
      * @param tool The block's ToolType
-     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#setRequiresTool()}
+     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#requiresCorrectToolForDrops()}
      */
     public OrnamentBuilder tool(ToolType tool, boolean required) {
         this.harvestTool = tool;
@@ -160,7 +160,7 @@ public class OrnamentBuilder {
      * To set only a harvst tool, use {@link OrnamentBuilder#tool(ToolType, boolean)}
      * @param tool The block's ToolType
      * @param level The block's harvest level
-     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#setRequiresTool()}
+     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#requiresCorrectToolForDrops()}
      */
     public OrnamentBuilder tool(ToolType tool, int level, boolean required) {
         this.harvestTool = tool;
@@ -238,7 +238,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block to tick randomly. Used to enable {@link AbstractBlock.Properties#tickRandomly()}
+     * Sets the block to tick randomly. Used to enable {@link AbstractBlock.Properties#randomTicks()}
      */
     public OrnamentBuilder ticks() {
         this.doesTick = true;
@@ -246,7 +246,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block's item to resist being destroyed in fire or lava. Used to enable {@link Item.Properties#isImmuneToFire()}
+     * Sets the block's item to resist being destroyed in fire or lava. Used to enable {@link Item.Properties#fireResistant()}
      */
     public OrnamentBuilder isFireproof() {
         this.fireproof = true;
@@ -254,7 +254,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the entity spawn logic on the block. Used in {@link AbstractBlock.Properties#setAllowsSpawn(AbstractBlock.IExtendedPositionPredicate)}
+     * Sets the entity spawn logic on the block. Used in {@link AbstractBlock.Properties#isValidSpawn(AbstractBlock.IExtendedPositionPredicate)}
      * If left null (unused), will default to regular placement logic.
      * @param predicate The spawn predicate to test. If true, an entity can spawn on it.
      */
@@ -353,8 +353,8 @@ public class OrnamentBuilder {
     public OrnamentBuilder canMelt(Block melt, boolean vaporise) {
         this.canMelt = true;
         this.meltResult = melt;
-        if (!meltResult.getDefaultState().getMaterial().isLiquid()) {
-            OrnamentalMod.LOGGER.warn("Supplied melt result for {} was not a liquid, was {}! Defaulting to Water.", name, melt.getDefaultState().getMaterial());
+        if (!meltResult.defaultBlockState().getMaterial().isLiquid()) {
+            OrnamentalMod.LOGGER.warn("Supplied melt result for {} was not a liquid, was {}! Defaulting to Water.", name, melt.defaultBlockState().getMaterial());
             meltResult = Blocks.WATER;
         }
         this.canVaporise = vaporise;
@@ -362,7 +362,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block is not solid if the block would normally be solid. Used to enable {@link AbstractBlock.Properties#notSolid()}.
+     * Sets if the block is not solid if the block would normally be solid. Used to enable {@link AbstractBlock.Properties#noOcclusion()}.
      */
     public OrnamentBuilder notSolid() {
         this.isSolid = false;

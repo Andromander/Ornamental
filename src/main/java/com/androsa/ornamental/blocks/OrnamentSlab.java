@@ -28,9 +28,9 @@ import java.util.function.Supplier;
 
 public class OrnamentSlab extends SlabBlock implements IOrnamentalBlock {
 
-    protected static final VoxelShape PATH_BOTTOM_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
-    protected static final VoxelShape PATH_TOP_SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 15.0D, 16.0D);
-    protected static final VoxelShape PATH_FULL_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+    protected static final VoxelShape PATH_BOTTOM_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
+    protected static final VoxelShape PATH_TOP_SHAPE = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+    protected static final VoxelShape PATH_FULL_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 
     private final OrnamentBuilder builder;
 
@@ -47,7 +47,7 @@ public class OrnamentSlab extends SlabBlock implements IOrnamentalBlock {
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (builder.isPath || builder.pathShape) {
-            SlabType slabtype = state.get(TYPE);
+            SlabType slabtype = state.getValue(TYPE);
             switch(slabtype) {
                 case DOUBLE:
                     return PATH_FULL_SHAPE;
@@ -61,84 +61,84 @@ public class OrnamentSlab extends SlabBlock implements IOrnamentalBlock {
     }
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.onLivingFall(fallDistance, builder.fallMultiplier);
+    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier);
     }
 
     @Override
     @Deprecated
-    public boolean canProvidePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return builder.hasPower;
     }
 
     @Override
     @Deprecated
-    public int getWeakPower(BlockState state, IBlockReader reader, BlockPos pos, Direction side) {
+    public int getSignal(BlockState state, IBlockReader reader, BlockPos pos, Direction side) {
         if (builder.hasPower)
-            return state.get(TYPE) == SlabType.DOUBLE ? 15 : 7;
-        return super.getWeakPower(state, reader, pos, side);
+            return state.getValue(TYPE) == SlabType.DOUBLE ? 15 : 7;
+        return super.getSignal(state, reader, pos, side);
     }
 
     @Override
     @Deprecated
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
             if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
             if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_slab, SoundEvents.BLOCK_GRAVEL_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.dirt_slab, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
             if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_slab, SoundEvents.ITEM_SHOVEL_FLATTEN, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.path_slab, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
             if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.BLOCK_GRASS_BREAK, worldIn, pos, player, hand);
+                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
 
-        return super.onBlockActivated(state, worldIn, pos, player, hand, result);
+        return super.use(state, worldIn, pos, player, hand, result);
     }
 
     private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentSlab> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
         this.setBlock(worldIn, pos, newblock);
         worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.isCreativeMode && !itemstack.isDamageable()) {
+        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.damageItem(1, player, (user) -> user.sendBreakAnimation(hand));
+            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return ActionResultType.SUCCESS;
     }
 
     private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentSlab> block) {
         BlockState state = world.getBlockState(pos);
-        world.setBlockState(pos, block.get().getDefaultState()
-                .with(TYPE, state.get(TYPE))
-                .with(WATERLOGGED, state.get(WATERLOGGED)));
+        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
+                .setValue(TYPE, state.getValue(TYPE))
+                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override
     @Deprecated
     @OnlyIn(Dist.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState otherState, Direction direction) {
+    public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.isIce || builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentSlab && state.getBlock() instanceof OrnamentSlab) {
                 OrnamentSlab slab = (OrnamentSlab) state.getBlock();
                 OrnamentSlab otherSlab = (OrnamentSlab) otherState.getBlock();
 
-                if (otherSlab.getBuilder() == slab.getBuilder() && otherState.get(TYPE) == SlabType.DOUBLE && state.get(TYPE) == SlabType.DOUBLE) {
+                if (otherSlab.getBuilder() == slab.getBuilder() && otherState.getValue(TYPE) == SlabType.DOUBLE && state.getValue(TYPE) == SlabType.DOUBLE) {
                     return true;
                 }
             }
         }
-        return super.isSideInvisible(state, otherState, direction);
+        return super.skipRendering(state, otherState, direction);
     }
 
     @Override
@@ -160,24 +160,24 @@ public class OrnamentSlab extends SlabBlock implements IOrnamentalBlock {
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.isIce || builder.canMelt) {
-            if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
     protected void turnIntoWater(World world, BlockPos pos) {
-        if (world.getDimensionType().isUltrawarm() && builder.canVaporise) {
+        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
-            world.setBlockState(pos, builder.meltResult.getDefaultState());
+            world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
         }
     }
 
     @Override
     @Deprecated
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPistonPushReaction(BlockState state) {
         return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
     }
 }

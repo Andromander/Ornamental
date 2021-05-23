@@ -25,7 +25,7 @@ public class GolemBuilder {
     @SubscribeEvent
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().getBlock() instanceof CarvedPumpkinBlock) {
-            ServerWorld world = ((IServerWorld)event.getWorld()).getWorld();
+            ServerWorld world = ((IServerWorld)event.getWorld()).getLevel();
             BlockPos pos = event.getPos();
 
             checkPatternLarge(PatternType.GOLD, world, pos, 1, 2);
@@ -75,46 +75,46 @@ public class GolemBuilder {
     }
 
     private static void setAirSmall(PatternType type, BlockPattern.PatternHelper pattern, World world) {
-        for(int k = 0; k < type.getThumb(); ++k) {
-            CachedBlockInfo info = pattern.translateOffset(0, k, 0);
-            world.setBlockState(info.getPos(), Blocks.AIR.getDefaultState(), 2);
-            world.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getStateId(info.getBlockState()));
+        for(int k = 0; k < type.getHeight(); ++k) {
+            CachedBlockInfo info = pattern.getBlock(0, k, 0);
+            world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
+            world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
         }
     }
 
     private static void setAirLarge(PatternType type, BlockPattern.PatternHelper pattern, World world) {
-        for(int j = 0; j < type.getPalm(); ++j) {
-            for(int k = 0; k < type.getThumb(); ++k) {
-                CachedBlockInfo info = pattern.translateOffset(j, k, 0);
-                world.setBlockState(info.getPos(), Blocks.AIR.getDefaultState(), 2);
-                world.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getStateId(info.getBlockState()));
+        for(int j = 0; j < type.getWidth(); ++j) {
+            for(int k = 0; k < type.getHeight(); ++k) {
+                CachedBlockInfo info = pattern.getBlock(j, k, 0);
+                world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
+                world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
             }
         }
     }
 
     private static void addGolem(PatternType type, World world, BlockPattern.PatternHelper pattern, int x, int y) {
         GolemEntity entity = type.getSupplierEntity().get().create(world);
-        BlockPos pos = pattern.translateOffset(x, y, 0).getPos();
-        entity.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
-        world.addEntity(entity);
+        BlockPos pos = pattern.getBlock(x, y, 0).getPos();
+        entity.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
+        world.addFreshEntity(entity);
 
-        for(ServerPlayerEntity player : world.getEntitiesWithinAABB(ServerPlayerEntity.class, entity.getBoundingBox().grow(5.0D))) {
+        for(ServerPlayerEntity player : world.getEntitiesOfClass(ServerPlayerEntity.class, entity.getBoundingBox().inflate(5.0D))) {
             CriteriaTriggers.SUMMONED_ENTITY.trigger(player, entity);
         }
     }
 
     private static void notifySmall(PatternType type, BlockPattern.PatternHelper pattern, World world) {
-        for(int j1 = 0; j1 < type.getThumb(); ++j1) {
-            CachedBlockInfo cachedblockinfo1 = pattern.translateOffset(0, j1, 0);
-            world.func_230547_a_(cachedblockinfo1.getPos(), Blocks.AIR); //notifyNeighbors
+        for(int j1 = 0; j1 < type.getHeight(); ++j1) {
+            CachedBlockInfo cachedblockinfo1 = pattern.getBlock(0, j1, 0);
+            world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
         }
     }
 
     private static void notifyLarge(PatternType type, BlockPattern.PatternHelper pattern, World world) {
-        for(int i1 = 0; i1 < type.getPalm(); ++i1) {
-            for(int j1 = 0; j1 < type.getThumb(); ++j1) {
-                CachedBlockInfo cachedblockinfo1 = pattern.translateOffset(i1, j1, 0);
-                world.func_230547_a_(cachedblockinfo1.getPos(), Blocks.AIR); //notifyNeighbors
+        for(int i1 = 0; i1 < type.getWidth(); ++i1) {
+            for(int j1 = 0; j1 < type.getHeight(); ++j1) {
+                CachedBlockInfo cachedblockinfo1 = pattern.getBlock(i1, j1, 0);
+                world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
             }
         }
     }

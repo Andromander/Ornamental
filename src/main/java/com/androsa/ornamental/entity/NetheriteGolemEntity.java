@@ -24,8 +24,8 @@ import javax.annotation.Nullable;
 
 public class NetheriteGolemEntity extends AbstractGolemEntity {
 
-    private static final DataParameter<Boolean> TARGETING = EntityDataManager.createKey(NetheriteGolemEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> FIREBALLS = EntityDataManager.createKey(NetheriteGolemEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> TARGETING = EntityDataManager.defineId(NetheriteGolemEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> FIREBALLS = EntityDataManager.defineId(NetheriteGolemEntity.class, DataSerializers.INT);
 
     private int rechargeTimer = 1200;
 
@@ -46,58 +46,58 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 180.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.4D)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 20.0D);
+        return MobEntity.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 180.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
+                .add(Attributes.ATTACK_DAMAGE, 20.0D);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(TARGETING, false);
-        this.dataManager.register(FIREBALLS, 6);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(TARGETING, false);
+        this.entityData.define(FIREBALLS, 6);
     }
 
     public boolean isTargeting() {
-        return dataManager.get(TARGETING);
+        return entityData.get(TARGETING);
     }
 
     public void setTargeting(boolean flag) {
-        dataManager.set(TARGETING, flag);
+        entityData.set(TARGETING, flag);
     }
 
     public int getFireballs() {
-        return dataManager.get(FIREBALLS);
+        return entityData.get(FIREBALLS);
     }
 
     public void addFireball() {
         if (getFireballs() < 6)
-            dataManager.set(FIREBALLS, getFireballs() + 1);
+            entityData.set(FIREBALLS, getFireballs() + 1);
     }
 
     public void shootFireball() {
         if (getFireballs() > 0) {
-            dataManager.set(FIREBALLS, getFireballs() - 1);
+            entityData.set(FIREBALLS, getFireballs() - 1);
         }
     }
 
     public void setFireballs(int count) {
         if (count > 6)
             count = 6;
-        dataManager.set(FIREBALLS, count);
+        entityData.set(FIREBALLS, count);
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundNBT compound) {
+        super.addAdditionalSaveData(compound);
         compound.putInt("Fireballs", this.getFireballs());
     }
 
     @Override
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
+    public void readAdditionalSaveData(CompoundNBT compound) {
+        super.readAdditionalSaveData(compound);
         this.setFireballs(compound.getInt("Fireballs"));
     }
 
@@ -107,62 +107,62 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    protected void collideWithEntity(Entity target) {
-        if (target instanceof IMob && this.getRNG().nextInt(20) == 0) {
-            this.setAttackTarget((LivingEntity)target);
+    protected void doPush(Entity target) {
+        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+            this.setTarget((LivingEntity)target);
         }
 
-        super.collideWithEntity(target);
+        super.doPush(target);
     }
 
     @Override
-    public void setAttackTarget(@Nullable LivingEntity target) {
+    public void setTarget(@Nullable LivingEntity target) {
         setTargeting(target != null);
-        super.setAttackTarget(target);
+        super.setTarget(target);
     }
 
     @Override
-    public boolean canAttack(EntityType<?> target) {
-        return target != EntityType.PLAYER || target.getClassification() != EntityClassification.MISC;
+    public boolean canAttackType(EntityType<?> target) {
+        return target != EntityType.PLAYER || target.getCategory() != EntityClassification.MISC;
     }
 
     private float getAttackDamage() {
         return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
-    public boolean attackEntityAsMob(Entity target) {
+    public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.world.setEntityState(this, (byte)4);
+        this.level.broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
-        float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.rand.nextInt((int)damage) : 0.0F;
-        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), multiplier);
+        float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
+        boolean flag = target.hurt(DamageSource.mobAttack(this), multiplier);
         if (flag) {
-            target.setMotion(target.getMotion().add(0.0D, (double)0.5F, 0.0D));
-            this.applyEnchantments(this, target);
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, (double)0.5F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
         }
 
-        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
         return flag;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_IRON_GOLEM_HURT;
+        return SoundEvents.IRON_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_IRON_GOLEM_DEATH;
+        return SoundEvents.IRON_GOLEM_DEATH;
     }
 
     @Override
-    protected float getSoundPitch() {
-        return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.6F;
+    protected float getVoicePitch() {
+        return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.6F;
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
 
         //Recharged. Add a fireball
         if (rechargeTimer < 0) {
@@ -181,8 +181,8 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
 
     //processInteract
     @Override
-    protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         if (item != Items.NETHERITE_INGOT) {
             return ActionResultType.PASS;
@@ -192,13 +192,13 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
             if (this.getHealth() == f) {
                 return ActionResultType.PASS;
             } else {
-                float f1 = 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.isCreativeMode) {
+                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
+                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
+                if (!player.abilities.instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.func_233537_a_(this.world.isRemote);
+                return ActionResultType.sidedSuccess(this.level.isClientSide);
             }
         }
     }
@@ -213,7 +213,7 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float multiplier) {
-        return source != DamageSource.WITHER && !source.isExplosion() && !source.isFireDamage() && super.attackEntityFrom(source, multiplier);
+    public boolean hurt(DamageSource source, float multiplier) {
+        return source != DamageSource.WITHER && !source.isExplosion() && !source.isFire() && super.hurt(source, multiplier);
     }
 }

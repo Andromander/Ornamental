@@ -18,57 +18,57 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
 
     protected void beaconBaseTag(Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
-            getOrCreateBuilder(BlockTags.BEACON_BASE_BLOCKS).add(block.get());
+            tag(BlockTags.BEACON_BASE_BLOCKS).add(block.get());
         }
     }
 
     protected void doorTag(Set<Supplier<? extends DoorBlock>> set) {
         for (Supplier<? extends DoorBlock> door : set) {
-            getOrCreateBuilder(BlockTags.DOORS).add(door.get());
+            tag(BlockTags.DOORS).add(door.get());
         }
     }
 
     protected void dragonImmuneTag(Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
-            getOrCreateBuilder(BlockTags.DRAGON_IMMUNE).add(block.get());
+            tag(BlockTags.DRAGON_IMMUNE).add(block.get());
         }
     }
 
     protected void fenceTag(Set<Supplier<? extends FenceBlock>> set) {
         for (Supplier<? extends FenceBlock> fence : set) {
-            getOrCreateBuilder(BlockTags.FENCES).add(fence.get());
-            getOrCreateBuilder(Tags.Blocks.FENCES).add(fence.get());
+            tag(BlockTags.FENCES).add(fence.get());
+            tag(Tags.Blocks.FENCES).add(fence.get());
         }
     }
 
     protected void fenceGateTag(Set<Supplier<? extends FenceGateBlock>> set) {
         for (Supplier<? extends FenceGateBlock> fencegate : set) {
-            getOrCreateBuilder(BlockTags.FENCE_GATES).add(fencegate.get());
-            getOrCreateBuilder(Tags.Blocks.FENCE_GATES).add(fencegate.get());
+            tag(BlockTags.FENCE_GATES).add(fencegate.get());
+            tag(Tags.Blocks.FENCE_GATES).add(fencegate.get());
         }
     }
 
     protected void piglinGuardedTag(Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
-            getOrCreateBuilder(BlockTags.GUARDED_BY_PIGLINS).add(block.get());
+            tag(BlockTags.GUARDED_BY_PIGLINS).add(block.get());
         }
     }
 
     protected void slabTag(Set<Supplier<? extends SlabBlock>> set) {
         for (Supplier<? extends SlabBlock> slab : set) {
-            getOrCreateBuilder(BlockTags.SLABS).add(slab.get());
+            tag(BlockTags.SLABS).add(slab.get());
         }
     }
 
     protected void stairsTag(Set<Supplier<? extends StairsBlock>> set) {
         for (Supplier<? extends StairsBlock> stairs : set) {
-            getOrCreateBuilder(BlockTags.STAIRS).add(stairs.get());
+            tag(BlockTags.STAIRS).add(stairs.get());
         }
     }
 
     protected void trapdoorTag(Set<Supplier<? extends TrapDoorBlock>> set) {
         for (Supplier<? extends TrapDoorBlock> trapdoor : set) {
-            getOrCreateBuilder(BlockTags.TRAPDOORS).add(trapdoor.get());
+            tag(BlockTags.TRAPDOORS).add(trapdoor.get());
         }
     }
 }
