@@ -21,7 +21,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.missingno_door, ModBlocks.clay_door, ModBlocks.dirt_door, ModBlocks.grass_door, ModBlocks.hay_door, ModBlocks.path_door, ModBlocks.brick_door, ModBlocks.quartz_door, ModBlocks.bone_door,
             ModBlocks.nether_brick_door, ModBlocks.red_nether_brick_door, ModBlocks.snow_door, ModBlocks.ice_door, ModBlocks.packed_ice_door, ModBlocks.blue_ice_door, ModBlocks.netherite_door);
     private ImmutableSet<Supplier<? extends Block>> dragon_immune = ImmutableSet.of(
-            ModBlocks.obsidian_stairs, ModBlocks.obsidian_slab, ModBlocks.obsidian_fence, ModBlocks.obsidian_trapdoor, ModBlocks.obsidian_fence_gate, ModBlocks.obsidian_door);
+            ModBlocks.obsidian_stairs, ModBlocks.obsidian_slab, ModBlocks.obsidian_fence, ModBlocks.obsidian_trapdoor, ModBlocks.obsidian_fence_gate, ModBlocks.obsidian_door, ModBlocks.obsidian_pole, ModBlocks.obsidian_beam);
     private ImmutableSet<Supplier<? extends FenceBlock>> fences = ImmutableSet.of(
             ModBlocks.iron_fence, ModBlocks.gold_fence, ModBlocks.diamond_fence, ModBlocks.emerald_fence, ModBlocks.lapis_fence, ModBlocks.obsidian_fence, ModBlocks.coal_fence, ModBlocks.redstone_fence,
             ModBlocks.missingno_fence, ModBlocks.clay_fence, ModBlocks.dirt_fence, ModBlocks.grass_fence, ModBlocks.hay_fence, ModBlocks.path_fence, ModBlocks.brick_fence, ModBlocks.quartz_fence,

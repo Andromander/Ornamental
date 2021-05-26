@@ -821,7 +821,7 @@ e40c960eba0839021a40e751fa0a61b7d3794653 data/forge/tags/items/fences.json
 ca4ee64c9e13a5bb03a547a62cb94053abed6cc8 data/forge/tags/items/fences/nether_brick.json
 ce9252707094ba7ea64a64bff5cca50fc7cf37b8 data/minecraft/tags/blocks/beacon_base_blocks.json
 69fa2c90a7421e27cfd1231f796873f969453feb data/minecraft/tags/blocks/doors.json
-086347b5d5f6585b6e2d4b4343e113e62e67d676 data/minecraft/tags/blocks/dragon_immune.json
+e8fd94a03f1246e9a1bc8e1c288bcb4762e6cf10 data/minecraft/tags/blocks/dragon_immune.json
 d73054791276fb57ef996b586ff6e6152864d2c4 data/minecraft/tags/blocks/fence_gates.json
 e40c960eba0839021a40e751fa0a61b7d3794653 data/minecraft/tags/blocks/fences.json
 557553f4001bd7ce22510087ed76829514c5aa03 data/minecraft/tags/blocks/guarded_by_piglins.json
