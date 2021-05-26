@@ -32,7 +32,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.brick_fence_gate, ModBlocks.quartz_fence_gate, ModBlocks.bone_fence_gate, ModBlocks.nether_brick_fence_gate, ModBlocks.red_nether_brick_fence_gate, ModBlocks.snow_fence_gate, ModBlocks.ice_fence_gate,
             ModBlocks.packed_ice_fence_gate, ModBlocks.blue_ice_fence_gate, ModBlocks.netherite_fence_gate);
     private ImmutableSet<Supplier<? extends Block>> piglin_guarded = ImmutableSet.of(
-            ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door);
+            ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door, ModBlocks.gold_pole, ModBlocks.gold_beam);
     private ImmutableSet<Supplier<? extends SlabBlock>> slabs = ImmutableSet.of(
             ModBlocks.iron_slab, ModBlocks.gold_slab, ModBlocks.diamond_slab, ModBlocks.emerald_slab, ModBlocks.lapis_slab, ModBlocks.obsidian_slab, ModBlocks.coal_slab, ModBlocks.redstone_slab,
             ModBlocks.missingno_slab, ModBlocks.clay_slab, ModBlocks.dirt_slab, ModBlocks.grass_slab, ModBlocks.hay_slab, ModBlocks.path_slab, ModBlocks.bone_slab, ModBlocks.snow_slab, ModBlocks.ice_slab,

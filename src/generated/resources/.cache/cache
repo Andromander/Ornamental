@@ -824,7 +824,7 @@ ce9252707094ba7ea64a64bff5cca50fc7cf37b8 data/minecraft/tags/blocks/beacon_base_
 e8fd94a03f1246e9a1bc8e1c288bcb4762e6cf10 data/minecraft/tags/blocks/dragon_immune.json
 d73054791276fb57ef996b586ff6e6152864d2c4 data/minecraft/tags/blocks/fence_gates.json
 e40c960eba0839021a40e751fa0a61b7d3794653 data/minecraft/tags/blocks/fences.json
-557553f4001bd7ce22510087ed76829514c5aa03 data/minecraft/tags/blocks/guarded_by_piglins.json
+33699288d896b20c4d63939ae8fda71c62729adb data/minecraft/tags/blocks/guarded_by_piglins.json
 03b0944633be940328b65937a09cf5d937b049ed data/minecraft/tags/blocks/slabs.json
 6d2d1208d12ae791d699b29538d153d6057f833e data/minecraft/tags/blocks/stairs.json
 c7121e5cfef86827cd4dd2ded8728dcdc4a719d2 data/minecraft/tags/blocks/trapdoors.json
