@@ -109,4 +109,22 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("side", side)
                 .texture("end", end);
     }
+
+    public BlockModelBuilder wallPostColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "wall_post_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder wallSideColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "wall_side_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder wallSideTallColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return withExistingParent(name, ORNAMENT_MODELS + "wall_side_tall_column")
+                .texture("side", side)
+                .texture("end", end);
+    }
 }

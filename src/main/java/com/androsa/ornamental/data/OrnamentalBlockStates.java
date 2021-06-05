@@ -182,5 +182,24 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.packed_ice_beam, "packed_ice", "packed_ice", false, false);
         beamBasic(ModBlocks.blue_ice_beam, "blue_ice", "blue_ice", false, false);
         beamBasic(ModBlocks.netherite_beam, "netherite", "netherite_block", false, false);
+
+        wallBasic(ModBlocks.iron_wall, "iron_block");
+        wallBasic(ModBlocks.gold_wall, "gold_block");
+        wallBasic(ModBlocks.diamond_wall, "diamond_block");
+        wallBasic(ModBlocks.emerald_wall, "emerald_block");
+        wallBasic(ModBlocks.lapis_wall, "lapis_block");
+        wallBasic(ModBlocks.obsidian_wall, "obsidian");
+        wallBasic(ModBlocks.coal_wall, "coal_block");
+        wallBasic(ModBlocks.redstone_wall, "redstone_block");
+        wallMissing(ModBlocks.missingno_wall, "missingno");
+        wallBasic(ModBlocks.clay_wall, "clay");
+        wallBasic(ModBlocks.dirt_wall, "dirt");
+        wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top");
+        wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top");
+        wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top");
+        wallBasic(ModBlocks.snow_wall, "snow");
+        wallBasic(ModBlocks.packed_ice_wall, "packed_ice");
+        wallBasic(ModBlocks.blue_ice_wall, "blue_ice");
+        wallBasic(ModBlocks.netherite_wall, "netherite_block");
     }
 }

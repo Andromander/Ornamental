@@ -210,6 +210,28 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentBeam> blue_ice_beam = registerBeam(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentBeam> netherite_beam = registerBeam(OrnamentBuilders.NETHERITE);
 
+    public static final RegistryObject<OrnamentWall> iron_wall = registerWall(OrnamentBuilders.IRON);
+    public static final RegistryObject<OrnamentWall> gold_wall = registerWall(OrnamentBuilders.GOLD);
+    public static final RegistryObject<OrnamentWall> diamond_wall = registerWall(OrnamentBuilders.DIAMOND);
+    public static final RegistryObject<OrnamentWall> emerald_wall = registerWall(OrnamentBuilders.EMERALD);
+    public static final RegistryObject<OrnamentWall> lapis_wall = registerWall(OrnamentBuilders.LAPIS);
+    public static final RegistryObject<OrnamentWall> obsidian_wall = registerWall(OrnamentBuilders.OBSIDIAN);
+    public static final RegistryObject<OrnamentWall> coal_wall = registerWall(OrnamentBuilders.COAL);
+    public static final RegistryObject<OrnamentWall> redstone_wall = registerWall(OrnamentBuilders.REDSTONE);
+    public static final RegistryObject<OrnamentWall> missingno_wall = registerWall(OrnamentBuilders.MISSINGNO);
+    public static final RegistryObject<OrnamentWall> clay_wall = registerWall(OrnamentBuilders.CLAY);
+    public static final RegistryObject<OrnamentWall> dirt_wall = registerWall(OrnamentBuilders.DIRT);
+    public static final RegistryObject<OrnamentWall> grass_wall = registerWall(OrnamentBuilders.GRASS);
+    public static final RegistryObject<OrnamentWall> hay_wall = registerWall(OrnamentBuilders.HAY);
+    public static final RegistryObject<OrnamentWall> path_wall = registerWall(OrnamentBuilders.PATH);
+    public static final RegistryObject<OrnamentWall> quartz_wall = registerWall(OrnamentBuilders.QUARTZ);
+    public static final RegistryObject<OrnamentWall> bone_wall = registerWall(OrnamentBuilders.BONE);
+    public static final RegistryObject<OrnamentWall> snow_wall = registerWall(OrnamentBuilders.SNOW);
+    public static final RegistryObject<OrnamentWall> ice_wall = registerWall(OrnamentBuilders.ICE);
+    public static final RegistryObject<OrnamentWall> packed_ice_wall = registerWall(OrnamentBuilders.PACKED_ICE);
+    public static final RegistryObject<OrnamentWall> blue_ice_wall = registerWall(OrnamentBuilders.BLUE_ICE);
+    public static final RegistryObject<OrnamentWall> netherite_wall = registerWall(OrnamentBuilders.NETHERITE);
+
     private static RegistryObject<OrnamentStairs> registerStairs(OrnamentBuilder builder) {
         AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
 
@@ -266,6 +288,13 @@ public class ModBlocks {
 
         return registerBlock(builder.name + "_beam", () -> new OrnamentBeam(props, builder), item ->
                 registerBlockItem(item, ItemGroup.TAB_BUILDING_BLOCKS, builder, 7));
+    }
+
+    private static RegistryObject<OrnamentWall> registerWall(OrnamentBuilder builder) {
+        AbstractBlock.Properties props = PropertiesHelper.createProps(builder);
+
+        return registerBlock(builder.name + "_wall", () -> new OrnamentWall(props, builder), item ->
+                registerBlockItem(item, ItemGroup.TAB_DECORATIONS, builder, 8));
     }
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {

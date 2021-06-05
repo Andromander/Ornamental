@@ -42,7 +42,7 @@ public class OrnamentBuilder {
     public int harvestLevel = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
-    public int[] burnTime = new int[]{0,0,0,0,0,0,0,0};
+    public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
     public boolean canOpen = false;
     public boolean hasPower = false;
     public boolean doesTick = false;
@@ -215,8 +215,28 @@ public class OrnamentBuilder {
      * @param trap Trap Door burn time
      * @param pole Pole burn time
      * @param beam Beam burn time
+	 * @deprecated use {@link OrnamentBuilder#burnTime(int, int, int, int, int, int, int, int, int)}
      */
+    @Deprecated
     public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam) {
+        this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam};
+        return this;
+    }
+
+    /**
+     * Setters for a block's burn time (measured by ticks). This is applied to the block's item. Defaults to all 0 (does not burn)
+     * For default behaviour, set value to -1. Any other value above 0, 1 second = 20 ticks
+     * @param door Door burn time
+     * @param fence Fence burn time
+     * @param gate Fence Gate burn time
+     * @param slab Slab burn time
+     * @param stairs Stairs burn time
+     * @param trap Trap Door burn time
+     * @param pole Pole burn time
+     * @param beam Beam burn time
+	 * @param wall Wall burn time
+     */
+    public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam, int wall) {
         this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam};
         return this;
     }

@@ -24,7 +24,8 @@ public class ColourHandler {
                 ModBlocks.grass_trapdoor.get(),
                 ModBlocks.grass_door.get(),
                 ModBlocks.grass_pole.get(),
-                ModBlocks.grass_beam.get());
+                ModBlocks.grass_beam.get(),
+                ModBlocks.grass_wall.get());
     }
 
     public static void registerItemColors() {
@@ -38,6 +39,7 @@ public class ColourHandler {
                 ModBlocks.grass_stairs.get(),
                 ModBlocks.grass_trapdoor.get(),
                 ModBlocks.grass_pole.get(),
-                ModBlocks.grass_beam.get());
+                ModBlocks.grass_beam.get(),
+                ModBlocks.grass_wall.get());
     }
 }

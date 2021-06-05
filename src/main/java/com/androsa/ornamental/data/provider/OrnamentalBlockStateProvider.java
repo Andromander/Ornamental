@@ -231,6 +231,23 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         beamBlock(block, corner, top, bottom, side, cross, fill, full);
     }
 
+    public void wallBasic(Supplier<? extends WallBlock> block, String name) {
+        wallBlock(block.get(), locVanilla(name));
+    }
+
+    public void wallMissing(Supplier<? extends WallBlock> block, String name) {
+        wallBlock(block.get(), locOrnament(name));
+    }
+
+    public void wallColumn(RegistryObject<? extends WallBlock> block, String side, String end) {
+        String basename = block.getId().toString();
+        ModelFile wallpost = models().wallPostColumn(basename + "_post", locVanilla(side), locVanilla(end));
+        ModelFile wallside = models().wallSideColumn(basename + "_side", locVanilla(side), locVanilla(end));
+        ModelFile walltall = models().wallSideTallColumn(basename + "_side_tall", locVanilla(side), locVanilla(end));
+
+        wallBlock(block.get(), wallpost, wallside, walltall);
+    }
+
     public void poleBlock(Supplier<? extends OrnamentPole> block, ModelFile corner, ModelFile half, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {

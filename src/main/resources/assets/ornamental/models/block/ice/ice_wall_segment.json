@@ -1,0 +1,22 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "wall": "minecraft:block/ice",
+    "particle": "#wall"
+  },
+  "elements": [
+    {
+      "from": [ 5, 0, 5 ],
+      "to": [ 11, 14, 11 ],
+      "faces": {
+        "down":  { "texture": "#wall", "cullface": "down" },
+        "up":    { "texture": "#wall", "cullface": "up" },
+        "north": { "texture": "#wall", "cullface": "north" },
+        "south": { "texture": "#wall", "cullface": "south" },
+        "west":  { "texture": "#wall", "cullface": "east" },
+        "east":  { "texture": "#wall", "cullface": "west" }
+      },
+      "__comment": "Center post"
+    }
+  ]
+}

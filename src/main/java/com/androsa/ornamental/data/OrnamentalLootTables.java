@@ -238,6 +238,28 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropBeam(ModBlocks.packed_ice_beam);
             dropBeam(ModBlocks.blue_ice_beam);
             dropBeam(ModBlocks.netherite_beam);
+
+            dropSelf(ModBlocks.iron_wall);
+            dropSelf(ModBlocks.gold_wall);
+            dropSelf(ModBlocks.diamond_wall);
+            dropSelf(ModBlocks.emerald_wall);
+            dropSelf(ModBlocks.lapis_wall);
+            dropSelf(ModBlocks.obsidian_wall);
+            dropSelf(ModBlocks.coal_wall);
+            dropSelf(ModBlocks.redstone_wall);
+            dropSelf(ModBlocks.missingno_wall);
+            dropSelf(ModBlocks.clay_wall);
+            dropSelf(ModBlocks.dirt_wall);
+            dropSelf(ModBlocks.grass_wall);
+            dropSelf(ModBlocks.hay_wall);
+            dropSelf(ModBlocks.path_wall);
+            dropSelf(ModBlocks.quartz_wall);
+            dropSelf(ModBlocks.bone_wall);
+            dropSelf(ModBlocks.snow_wall);
+            dropSelf(ModBlocks.ice_wall);
+            dropSelf(ModBlocks.packed_ice_wall);
+            dropSelf(ModBlocks.blue_ice_wall);
+            dropSelf(ModBlocks.netherite_wall);
         }
 
         @Override

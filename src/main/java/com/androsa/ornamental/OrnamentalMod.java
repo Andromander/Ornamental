@@ -160,6 +160,10 @@ public class OrnamentalMod {
         renderBlock(ModBlocks.grass_beam, RenderType.cutoutMipped());
         renderBlock(ModBlocks.path_beam, RenderType.cutoutMipped());
         renderBlock(ModBlocks.ice_beam, RenderType.translucent());
+
+        renderBlock(ModBlocks.grass_wall, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.path_wall, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.ice_wall, RenderType.translucent());
     }
 
     private static void renderBlock(Supplier<? extends Block> block, RenderType render) {

@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/wall_post_column",
+  "textures": {
+    "side": "minecraft:block/bone_block_side",
+    "end": "minecraft:block/bone_block_top"
+  }
+}

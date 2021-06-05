@@ -1,0 +1,92 @@
+{
+  "multipart": [
+    {
+      "when": { "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post" }
+    },
+    {
+      "when": { "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_segment" }
+    },
+    {
+      "when": { "east": "low", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "east": "low", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "east": "tall", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side_tall", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "east": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "east": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall_piece", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "north": "low", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side", "uvlock": true }
+    },
+    {
+      "when": { "north": "low", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side", "uvlock": true }
+    },
+    {
+      "when": { "north": "tall", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side_tall", "uvlock": true }
+    },
+    {
+      "when": { "north": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall", "uvlock": true }
+    },
+    {
+      "when": { "north": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall_piece", "uvlock": true }
+    },
+    {
+      "when": { "south": "low", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "south": "low", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "south": "tall", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side_tall", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "south": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "south": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall_piece", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "west": "low", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "west": "low", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "west": "tall", "up": "true" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_post_side_tall", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "west": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "west": "tall", "up": "false" },
+      "apply": { "model": "ornamental:block/ice/ice_wall_side_tall_piece", "y": 270, "uvlock": true }
+    }
+  ]
+}

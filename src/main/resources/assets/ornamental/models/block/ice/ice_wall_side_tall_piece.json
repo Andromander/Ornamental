@@ -1,0 +1,18 @@
+{
+  "textures": {
+    "wall": "minecraft:block/ice",
+    "particle": "#wall"
+  },
+  "elements": [
+    {
+      "from": [ 5, 14, 5 ],
+      "to": [ 11, 16, 8 ],
+      "faces": {
+        "up":    { "texture": "#wall", "cullface": "up" },
+        "north": { "texture": "#wall", "cullface": "north" },
+        "west":  { "texture": "#wall", "cullface": "west" },
+        "east":  { "texture": "#wall", "cullface": "east" }
+      }
+    }
+  ]
+}

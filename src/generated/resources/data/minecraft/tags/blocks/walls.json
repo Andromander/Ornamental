@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "ornamental:iron_wall",
+    "ornamental:gold_wall",
+    "ornamental:diamond_wall",
+    "ornamental:emerald_wall",
+    "ornamental:lapis_wall",
+    "ornamental:obsidian_wall",
+    "ornamental:coal_wall",
+    "ornamental:redstone_wall",
+    "ornamental:missingno_wall",
+    "ornamental:clay_wall",
+    "ornamental:dirt_wall",
+    "ornamental:grass_wall",
+    "ornamental:hay_wall",
+    "ornamental:grass_path_wall",
+    "ornamental:quartz_wall",
+    "ornamental:bone_wall",
+    "ornamental:snow_wall",
+    "ornamental:ice_wall",
+    "ornamental:packed_ice_wall",
+    "ornamental:blue_ice_wall",
+    "ornamental:netherite_wall"
+  ]
+}

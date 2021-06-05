@@ -71,4 +71,10 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
             tag(BlockTags.TRAPDOORS).add(trapdoor.get());
         }
     }
+
+    protected void wallTag(Set<Supplier<? extends WallBlock>> set) {
+        for (Supplier<? extends WallBlock> wall : set) {
+            tag(BlockTags.WALLS).add(wall.get());
+        }
+    }
 }

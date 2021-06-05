@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/wall_side_tall_column",
+  "textures": {
+    "side": "minecraft:block/quartz_block_side",
+    "end": "minecraft:block/quartz_block_top"
+  }
+}
