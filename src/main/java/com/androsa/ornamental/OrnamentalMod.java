@@ -23,7 +23,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.Pair;
@@ -40,7 +39,6 @@ public class OrnamentalMod {
     public static OrnamentalConfig config;
 
     public OrnamentalMod() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
 
@@ -52,11 +50,6 @@ public class OrnamentalMod {
         final Pair<OrnamentalConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(OrnamentalConfig::new);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, specPair.getRight());
         config = specPair.getLeft();
-    }
-
-    private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
-        ModEntities.addEntityAttributes();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

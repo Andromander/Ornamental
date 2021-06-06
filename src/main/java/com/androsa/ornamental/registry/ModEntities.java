@@ -10,18 +10,17 @@ import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.function.Supplier;
-
+@Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, OrnamentalMod.MODID);
@@ -107,31 +106,28 @@ public class ModEntities {
         RenderingRegistry.registerEntityRenderingHandler(BLUE_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
     }
 
-    public static void addEntityAttributes() {
-        putAttributes(GOLD_GOLEM, GoldGolemEntity.registerAttributes());
-        putAttributes(DIAMOND_GOLEM, DiamondGolemEntity.registerAttributes());
-        putAttributes(EMERALD_GOLEM, EmeraldGolemEntity.registerAttributes());
-        putAttributes(LAPIS_GOLEM, LapisGolemEntity.registerAttributes());
-        putAttributes(OBSIDIAN_GOLEM, ObsidianGolemEntity.registerAttributes());
-        putAttributes(COAL_GOLEM, CoalGolemEntity.registerAttributes());
-        putAttributes(REDSTONE_GOLEM, RedstoneGolemEntity.registerAttributes());
-        putAttributes(CLAY_GOLEM, ClayGolemEntity.registerAttributes());
-        putAttributes(DIRT_GOLEM, DirtGolemEntity.registerAttributes());
-        putAttributes(GRASS_GOLEM, GrassGolemEntity.registerAttributes());
-        putAttributes(HAY_GOLEM, HayGolemEntity.registerAttributes());
-        putAttributes(PATH_GOLEM, PathGolemEntity.registerAttributes());
-        putAttributes(BRICK_GOLEM, BrickGolemEntity.registerAttributes());
-        putAttributes(QUARTZ_GOLEM, QuartzGolemEntity.registerAttributes());
-        putAttributes(BONE_GOLEM, BoneGolemEntity.registerAttributes());
-        putAttributes(NETHER_BRICK_GOLEM, NetherBrickGolemEntity.registerAttributes());
-        putAttributes(RED_NETHER_BRICK_GOLEM, RedNetherBrickGolemEntity.registerAttributes());
-        putAttributes(ICE_GOLEM, IceGolemEntity.registerAttributes());
-        putAttributes(PACKED_ICE_GOLEM, IceGolemEntity.registerAttributes());
-        putAttributes(BLUE_ICE_GOLEM, IceGolemEntity.registerAttributes());
-        putAttributes(NETHERITE_GOLEM, NetheriteGolemEntity.registerAttributes());
-    }
-
-    private static void putAttributes(Supplier<? extends EntityType<? extends LivingEntity>> entity, AttributeModifierMap.MutableAttribute map) {
-        GlobalEntityTypeAttributes.put(entity.get(), map.build());
+    @SubscribeEvent
+    public static void addEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(GOLD_GOLEM.get(), GoldGolemEntity.registerAttributes().build());
+        event.put(DIAMOND_GOLEM.get(), DiamondGolemEntity.registerAttributes().build());
+        event.put(EMERALD_GOLEM.get(), EmeraldGolemEntity.registerAttributes().build());
+        event.put(LAPIS_GOLEM.get(), LapisGolemEntity.registerAttributes().build());
+        event.put(OBSIDIAN_GOLEM.get(), ObsidianGolemEntity.registerAttributes().build());
+        event.put(COAL_GOLEM.get(), CoalGolemEntity.registerAttributes().build());
+        event.put(REDSTONE_GOLEM.get(), RedstoneGolemEntity.registerAttributes().build());
+        event.put(CLAY_GOLEM.get(), ClayGolemEntity.registerAttributes().build());
+        event.put(DIRT_GOLEM.get(), DirtGolemEntity.registerAttributes().build());
+        event.put(GRASS_GOLEM.get(), GrassGolemEntity.registerAttributes().build());
+        event.put(HAY_GOLEM.get(), HayGolemEntity.registerAttributes().build());
+        event.put(PATH_GOLEM.get(), PathGolemEntity.registerAttributes().build());
+        event.put(BRICK_GOLEM.get(), BrickGolemEntity.registerAttributes().build());
+        event.put(QUARTZ_GOLEM.get(), QuartzGolemEntity.registerAttributes().build());
+        event.put(BONE_GOLEM.get(), BoneGolemEntity.registerAttributes().build());
+        event.put(NETHER_BRICK_GOLEM.get(), NetherBrickGolemEntity.registerAttributes().build());
+        event.put(RED_NETHER_BRICK_GOLEM.get(), RedNetherBrickGolemEntity.registerAttributes().build());
+        event.put(ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
+        event.put(PACKED_ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
+        event.put(BLUE_ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
+        event.put(NETHERITE_GOLEM.get(), NetheriteGolemEntity.registerAttributes().build());
     }
 }

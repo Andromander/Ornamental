@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[33,)" #mandatory
+loaderVersion="[36,)" #mandatory
 issueTrackerURL="https://github.com/Andromander/Ornamental/issues" #optional
 license="GNU Lesser General Public v3"
 
@@ -22,12 +22,12 @@ This mod provides decorative blocks of usually absurd materials.
 [[dependencies.ornamental]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[33.0.34,)" #mandatory
+    versionRange="[36.1.0,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.ornamental]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.2,]"
+    versionRange="[1.16.5,]"
     ordering="NONE"
     side="BOTH"
