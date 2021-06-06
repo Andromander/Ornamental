@@ -1,12 +1,15 @@
 package com.androsa.ornamental.data;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.blocks.OrnamentWall;
+import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Items;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Consumer;
 
@@ -222,5 +225,26 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         convertPoleBeam(consumer, ModBlocks.packed_ice_pole, ModBlocks.packed_ice_beam);
         convertPoleBeam(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_beam);
         convertPoleBeam(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_beam);
+
+        wall(consumer, ModBlocks.iron_wall, Blocks.IRON_BLOCK);
+        wall(consumer, ModBlocks.gold_wall, Blocks.GOLD_BLOCK);
+        wall(consumer, ModBlocks.diamond_wall, Blocks.DIAMOND_BLOCK);
+        wall(consumer, ModBlocks.emerald_wall, Blocks.EMERALD_BLOCK);
+        wall(consumer, ModBlocks.lapis_wall, Blocks.LAPIS_BLOCK);
+        wall(consumer, ModBlocks.obsidian_wall, Blocks.OBSIDIAN);
+        wall(consumer, ModBlocks.coal_wall, Blocks.COAL_BLOCK);
+        wall(consumer, ModBlocks.redstone_wall, Blocks.REDSTONE_BLOCK);
+        wall(consumer, ModBlocks.clay_wall, Blocks.CLAY);
+        wall(consumer, ModBlocks.dirt_wall, Blocks.DIRT);
+        wall(consumer, ModBlocks.grass_wall, Blocks.GRASS_BLOCK);
+        wall(consumer, ModBlocks.hay_wall, Blocks.HAY_BLOCK);
+        wall(consumer, ModBlocks.path_wall, Blocks.GRASS_PATH);
+        wall(consumer, ModBlocks.quartz_wall, Blocks.QUARTZ_BLOCK);
+        wall(consumer, ModBlocks.bone_wall, Blocks.BONE_BLOCK);
+        wall(consumer, ModBlocks.snow_wall, Blocks.SNOW_BLOCK);
+        wall(consumer, ModBlocks.ice_wall, Blocks.ICE);
+        wall(consumer, ModBlocks.packed_ice_wall, Blocks.PACKED_ICE);
+        wall(consumer, ModBlocks.blue_ice_wall, Blocks.BLUE_ICE);
+        wall(consumer, ModBlocks.netherite_wall, Blocks.NETHERITE_BLOCK);
     }
 }

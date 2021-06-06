@@ -283,4 +283,23 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
             beamrecipe.save(consumer, loc(beambuilder.name + "_beam_to_pole"));
         }
     }
+
+    public void wall(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, IItemProvider ingredient) {
+        OrnamentBuilder builder = result.get().getBuilder();
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+                .pattern("###")
+                .pattern("###")
+                .define('#', ingredient)
+                .unlockedBy("has_" + builder.name, has(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::save)
+                    .build(consumer, loc(builder.name + "_wall"));
+        } else {
+            recipe.save(consumer, loc(builder.name + "_wall"));
+        }
+    }
 }

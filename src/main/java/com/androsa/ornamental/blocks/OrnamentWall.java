@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class OrnamentWall extends WallBlock {
+public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
 
     protected final Map<BlockState, VoxelShape> collisionShapeByIndex = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
     protected final Map<BlockState, VoxelShape> shapeByIndex = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
@@ -38,6 +38,11 @@ public class OrnamentWall extends WallBlock {
     public OrnamentWall(AbstractBlock.Properties props, OrnamentBuilder builder) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public OrnamentBuilder getBuilder() {
+        return builder;
     }
 
     //Begin WallBlock vanillacopy
