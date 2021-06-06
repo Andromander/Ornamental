@@ -192,5 +192,25 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemBeam(ModBlocks.packed_ice_beam, "packed_ice");
         blockItemBeam(ModBlocks.blue_ice_beam, "blue_ice");
         blockItemBeam(ModBlocks.netherite_beam, "netherite_block");
+
+        blockItemWall(ModBlocks.iron_wall, "iron_block");
+        blockItemWall(ModBlocks.gold_wall, "gold_block");
+        blockItemWall(ModBlocks.diamond_wall, "diamond_block");
+        blockItemWall(ModBlocks.emerald_wall, "emerald_block");
+        blockItemWall(ModBlocks.lapis_wall, "lapis_block");
+        blockItemWall(ModBlocks.obsidian_wall, "obsidian");
+        blockItemWall(ModBlocks.coal_wall, "coal_block");
+        blockItemWall(ModBlocks.redstone_wall, "redstone_block");
+        blockItemWallMissing(ModBlocks.missingno_wall);
+        blockItemWall(ModBlocks.clay_wall, "clay");
+        blockItemWall(ModBlocks.dirt_wall, "dirt");
+        blockItemWallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top");
+        blockItemWallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top");
+        blockItemWallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top");
+        blockItemWall(ModBlocks.snow_wall, "snow");
+        blockItemWall(ModBlocks.ice_wall, "ice");
+        blockItemWall(ModBlocks.packed_ice_wall, "packed_ice");
+        blockItemWall(ModBlocks.blue_ice_wall, "blue_ice");
+        blockItemWall(ModBlocks.netherite_wall, "netherite_block");
     }
 }

@@ -727,6 +727,7 @@ b41b2c1e9b02154c08ff61666cb7fff7f376571c assets/ornamental/models/item/blue_ice_
 4f364899e3420a46ad111b49c08e732aafe4a273 assets/ornamental/models/item/blue_ice_slab.json
 a6218441ec7df54b728e8d422b30a6d8e72707b1 assets/ornamental/models/item/blue_ice_stairs.json
 3987d10f6f5c97fd952fdf97cba5d3d5474fa94b assets/ornamental/models/item/blue_ice_trapdoor.json
+ed099ea324ce1a1e12077299bd26167b69a2dd2e assets/ornamental/models/item/blue_ice_wall.json
 6f34f1622aa748336452436b09b516ee34f787b5 assets/ornamental/models/item/bone_beam.json
 68e9f71a5254603c1320d1b2ef7f42a6e5d502dc assets/ornamental/models/item/bone_door.json
 814613ccbdab4c2219bb591e30dc46236e0569e4 assets/ornamental/models/item/bone_fence.json
@@ -735,6 +736,7 @@ a6218441ec7df54b728e8d422b30a6d8e72707b1 assets/ornamental/models/item/blue_ice_
 f445914f57191baef23f2cf35564079ff40cacd9 assets/ornamental/models/item/bone_slab.json
 ba2407ed0c75b784aab2784e873baf25f610c177 assets/ornamental/models/item/bone_stairs.json
 c1492360a8356b355edc04d67050a2d74ad1022b assets/ornamental/models/item/bone_trapdoor.json
+404739a999e1634c30d76a688f0d9cfbcc104ec6 assets/ornamental/models/item/bone_wall.json
 0d4ae3c101d8ec5f7916e68c3254b1323c0246fa assets/ornamental/models/item/brick_beam.json
 fbc64d991f04f80bf8d71eb69d5e69ef97398551 assets/ornamental/models/item/brick_door.json
 58df043318c0bcd889b9c5b2e65c0ec508d435e3 assets/ornamental/models/item/brick_fence.json
@@ -749,6 +751,7 @@ aba82e31c2f1644fbe28ceda5b3102e5633e6c6d assets/ornamental/models/item/clay_door
 e3deee2e96aee1add1402d7bff18bb2e8ad16db1 assets/ornamental/models/item/clay_slab.json
 11730f4b8c52fb679ae76996c2ce9febb7fc6012 assets/ornamental/models/item/clay_stairs.json
 cc0b9200de7d9f4a40cdd7baa866797d80cfe05e assets/ornamental/models/item/clay_trapdoor.json
+1294dd0bbc4cfa3d07d7b3106419c7dfc7e847fb assets/ornamental/models/item/clay_wall.json
 25af5b772469ddfa556d905a36642237881ca5e8 assets/ornamental/models/item/coal_beam.json
 0e347fad8b8171f2aa463e69820aaa1c1ecc2291 assets/ornamental/models/item/coal_door.json
 e8aa2b1d85d539046a8468acd3e75fb3c598778c assets/ornamental/models/item/coal_fence.json
@@ -757,6 +760,7 @@ e8aa2b1d85d539046a8468acd3e75fb3c598778c assets/ornamental/models/item/coal_fenc
 ac446af16907494ef862ed90902bb30e1514273d assets/ornamental/models/item/coal_slab.json
 3b8b4b71f780e8828a0cce8ce28dbd7bec439b19 assets/ornamental/models/item/coal_stairs.json
 d08d986de098d054b2760d11313467c95d57c20e assets/ornamental/models/item/coal_trapdoor.json
+4f603b5f24da63b86644410a2d9b8263c8844e77 assets/ornamental/models/item/coal_wall.json
 1dd6195a376a12d345435e43c6a9eae74e3f2cf5 assets/ornamental/models/item/diamond_beam.json
 39933140557d3bd17503bc5896605c553b0b4301 assets/ornamental/models/item/diamond_door.json
 37c0c080c2e2aa14df460ad6d6b1770560291271 assets/ornamental/models/item/diamond_fence.json
@@ -765,6 +769,7 @@ ba5ac1deed2a28cb8726bbf4b2b277c537d4ca7f assets/ornamental/models/item/diamond_p
 410f0466ea8533bf4762fe05ad2d62fca52a711b assets/ornamental/models/item/diamond_slab.json
 b4bef599c04175b697281b9761437a09e13d0312 assets/ornamental/models/item/diamond_stairs.json
 2d5d208993c173998625ecef79b791b843ba241f assets/ornamental/models/item/diamond_trapdoor.json
+20c6dd2f6b73db84463e43e90d691a1294332b6a assets/ornamental/models/item/diamond_wall.json
 e1497958630b2db5d56f1c2d2b1cb42cfa4cfc83 assets/ornamental/models/item/dirt_beam.json
 cf659c5546393b985e62246d4b3188804a6cabd5 assets/ornamental/models/item/dirt_door.json
 e7a2861b00252f14a972514dc069e10f7f47e3f7 assets/ornamental/models/item/dirt_fence.json
@@ -773,6 +778,7 @@ d172fc70489aefdc46039f2bad793ec449cd65aa assets/ornamental/models/item/dirt_fenc
 7304e7e29dc273b80f4c4c5b2c112cc336439f66 assets/ornamental/models/item/dirt_slab.json
 160e72eb4aa29e1714ffa84138b9ceb06c31769d assets/ornamental/models/item/dirt_stairs.json
 aa156d5030d05dd40e713d76259bdcdaeb96f0a5 assets/ornamental/models/item/dirt_trapdoor.json
+61a5e81c21f900c79ee6a1549b621b61153c8b88 assets/ornamental/models/item/dirt_wall.json
 24277e577e6bb82bc3fc2bd32100f0d6e70db535 assets/ornamental/models/item/emerald_beam.json
 d00d650ef1b68ecae787d79bb6ac0d97281cc7fa assets/ornamental/models/item/emerald_door.json
 c4ce2ccd15c1312933ef87b450c160718386a2eb assets/ornamental/models/item/emerald_fence.json
@@ -781,6 +787,7 @@ c4ce2ccd15c1312933ef87b450c160718386a2eb assets/ornamental/models/item/emerald_f
 9db7e9049e166511f20f55896d0755cc7169755c assets/ornamental/models/item/emerald_slab.json
 eeabb40c7a258ad7a2422c011264c59d6c5376e3 assets/ornamental/models/item/emerald_stairs.json
 74de2b8e6939065aad8e67d1de583481a950eff1 assets/ornamental/models/item/emerald_trapdoor.json
+82bbc36e711c45bc686080ae363fef1023cc3c21 assets/ornamental/models/item/emerald_wall.json
 f8512717271c68301ebf8300422eef28d7a57280 assets/ornamental/models/item/gold_beam.json
 25d5da809e5761e8908192685de23ec9fdc4885d assets/ornamental/models/item/gold_door.json
 c16e17af2db3aff8165542fccb55c3f229cbf537 assets/ornamental/models/item/gold_fence.json
@@ -789,6 +796,7 @@ fc0500cb5de58f4ce7de29705fd37821a78e6f70 assets/ornamental/models/item/gold_fenc
 f0a8a49fa91dfaeb713db33dafbce6cbb2e00de6 assets/ornamental/models/item/gold_slab.json
 52628a4b8981e3770a6cf9d6f0214b737c73491d assets/ornamental/models/item/gold_stairs.json
 592977bc884e2278845d1eaa98e8970a71f5c629 assets/ornamental/models/item/gold_trapdoor.json
+1664886d49a70cf3ddc9cacfe2b484c69e638349 assets/ornamental/models/item/gold_wall.json
 a8fd13cbd50a278a568a2bd32f863b9c5982104e assets/ornamental/models/item/grass_door.json
 dc8c81976112f96998b50cfc52c15d1472900ab5 assets/ornamental/models/item/grass_path_door.json
 36afa6e0a94da2f84b5696f396c0d7e0b6c33df8 assets/ornamental/models/item/hay_beam.json
@@ -799,6 +807,7 @@ d144da40efc015c9df1861478c9008a6511468a4 assets/ornamental/models/item/hay_pole.
 468e7b5fb7cf150af1dd2ede81054e4fd5ba76c9 assets/ornamental/models/item/hay_slab.json
 914216ff2a5b92d22325fdc67712c5456fea393b assets/ornamental/models/item/hay_stairs.json
 5040da367872ae407d02ffad46e0256c06b9ea84 assets/ornamental/models/item/hay_trapdoor.json
+c15e175f58bf5a84ae65a9a2721842e3dbb07068 assets/ornamental/models/item/hay_wall.json
 b1d8cd0e41e743306f51987479b6f02edd6f3542 assets/ornamental/models/item/ice_beam.json
 389adaa6d4ed36e3d721f6577fbd3af2e12ac0db assets/ornamental/models/item/ice_door.json
 c848b05c3ae3037e86f35914071c6db63e4afde1 assets/ornamental/models/item/ice_fence.json
@@ -806,12 +815,14 @@ c848b05c3ae3037e86f35914071c6db63e4afde1 assets/ornamental/models/item/ice_fence
 f81edd2b937bece09bd16ef5c0f02960db6edb36 assets/ornamental/models/item/ice_pole.json
 544e9cb636853500250cc2ee7f165f6bd5d67972 assets/ornamental/models/item/ice_slab.json
 8c2aab5a1eb8d1c64b363c8b20ae1e1a97674167 assets/ornamental/models/item/ice_trapdoor.json
+d3af43a8bd42372f036e8d874861169a4f537b07 assets/ornamental/models/item/ice_wall.json
 71743d2da8a8214a8d345cd44812e8759da9bf46 assets/ornamental/models/item/iron_beam.json
 c7fa9850b40e8db63e42a5615e0970be968489c4 assets/ornamental/models/item/iron_fence.json
 803b5e739b6113e05a96f59f33b19634468593e9 assets/ornamental/models/item/iron_fence_gate.json
 375efe1090167055424603e48a7f853f767376de assets/ornamental/models/item/iron_pole.json
 2aa811b9680a17115bb3cfe85daf0d17c5ad3ccb assets/ornamental/models/item/iron_slab.json
 bd5361d8340a64ae4ed2f4fb4019a786d614033b assets/ornamental/models/item/iron_stairs.json
+f4f46b985f9e5c6e138635367d6b6fb84b09e41d assets/ornamental/models/item/iron_wall.json
 5dee2b07167f5a520d968fc7c90db8614d65f36c assets/ornamental/models/item/lapis_beam.json
 a268a9b2b0855064e9e6c20490b07a5688055648 assets/ornamental/models/item/lapis_door.json
 0a952c0659d9ae8ef05fb60a2a9211bacf584bc3 assets/ornamental/models/item/lapis_fence.json
@@ -820,6 +831,7 @@ ef9de028e5a890b174af3f07ab33e3dae570559b assets/ornamental/models/item/lapis_pol
 bd82d4a7924a1aebabb6382ee75d122425fe414f assets/ornamental/models/item/lapis_slab.json
 7cfb0878e9b13b65ed002b2f5576a6bf44895e0e assets/ornamental/models/item/lapis_stairs.json
 de121c84e8db0522cd53c4c5b23bd4077d6aa811 assets/ornamental/models/item/lapis_trapdoor.json
+49b4b99ece3e4b67a12ce30ac8312a3e5d4a4829 assets/ornamental/models/item/lapis_wall.json
 e7f95b1c81cd72939d6e932f688acf16cbb8be1a assets/ornamental/models/item/missingno_beam.json
 febbac62dfacb241a97e9784a196afc3e8aa7f7e assets/ornamental/models/item/missingno_door.json
 82898e081c8ca68785784cb4adac95d748937e5c assets/ornamental/models/item/missingno_fence.json
@@ -828,6 +840,7 @@ e1f2acd782aa08f7df1eaaaf52435276e390192f assets/ornamental/models/item/missingno
 a764ce3681fd3cd57491b69ecf32f966430f142b assets/ornamental/models/item/missingno_slab.json
 54c9a01a6e14478869a4344c34e9d4087bb3d5d5 assets/ornamental/models/item/missingno_stairs.json
 46cb42114323c5702d66795fabecb194fbe9d8f4 assets/ornamental/models/item/missingno_trapdoor.json
+4b1a72982dd717543dce02a74077a3e3e58db132 assets/ornamental/models/item/missingno_wall.json
 82ce652cf2920369ab3c9be533949b8de73d5b38 assets/ornamental/models/item/nether_brick_beam.json
 c5172f57c029d7d2fbed55d442418ef36d4141ed assets/ornamental/models/item/nether_brick_door.json
 c2797262f66b27be376f8ebfdae888f8cd6db20e assets/ornamental/models/item/nether_brick_fence_gate.json
@@ -841,6 +854,7 @@ f8fcc18854be39f18313597ed1c35fd5066bf2e6 assets/ornamental/models/item/netherite
 3d0b9bd6356aa0619505d5235000bd5e02276e44 assets/ornamental/models/item/netherite_slab.json
 cb0fcc1a5c1ec3a6990a94c570ae30d185cb30e4 assets/ornamental/models/item/netherite_stairs.json
 b25c191073139fc3e255f7d0341c541847aa3723 assets/ornamental/models/item/netherite_trapdoor.json
+fc82641482f5f5cff596aa55321dcefa4d280388 assets/ornamental/models/item/netherite_wall.json
 f985046a29c8973bb0a578d89c7d544606b83120 assets/ornamental/models/item/obsidian_beam.json
 7c16737f86bf3b79375a90867a11f1cca8b009ba assets/ornamental/models/item/obsidian_door.json
 089eb3b8ac5684f7f22a2324dbbd48b87c087331 assets/ornamental/models/item/obsidian_fence.json
@@ -849,6 +863,7 @@ fc463057e1f04d5e02aa8c2df97a7e5c9531d82c assets/ornamental/models/item/obsidian_
 db57f76720a95196b4bccea995e9b6eb32a607e5 assets/ornamental/models/item/obsidian_slab.json
 bca3bf74a964bf2a95b3fbda6571f0221bd2ee79 assets/ornamental/models/item/obsidian_stairs.json
 6ffc561bd638c74a791c8ae289f66c18c471c835 assets/ornamental/models/item/obsidian_trapdoor.json
+48ce5497982fd75cdeb476ac01709d2527b1ce07 assets/ornamental/models/item/obsidian_wall.json
 ce439b4b2e9f300f0eb1fed745011bf15d8cdd4b assets/ornamental/models/item/packed_ice_beam.json
 1fb0a30a398a4f39f69d45b76f5694f3f00ace32 assets/ornamental/models/item/packed_ice_door.json
 5eebe49c31f57129135a38fca1613304f8476519 assets/ornamental/models/item/packed_ice_fence.json
@@ -857,12 +872,14 @@ e7dda5ed452fe0f2f7964353e672168b80e457f7 assets/ornamental/models/item/packed_ic
 6da57aa7aa77013128185778c0c6151e071a97a5 assets/ornamental/models/item/packed_ice_slab.json
 ad8b36c4c9968ce8f7c457ed72137b5c4c626f03 assets/ornamental/models/item/packed_ice_stairs.json
 cc35a6ef53c9a83254128ae2cc639ea93f0808ca assets/ornamental/models/item/packed_ice_trapdoor.json
+848a742b5e5ef9f56171bb78489d2b7b275170d8 assets/ornamental/models/item/packed_ice_wall.json
 507adf6bdd19676806efe75ca15e79ca75e3dc30 assets/ornamental/models/item/quartz_beam.json
 d3749fecf04174082ba975a57dde465887fdfc29 assets/ornamental/models/item/quartz_door.json
 4ee50a9f38a551425f9044050c33446bb0b154e6 assets/ornamental/models/item/quartz_fence.json
 1b691b81e10f87c200c2e1bb26e4e523872cf6db assets/ornamental/models/item/quartz_fence_gate.json
 96dec764c5b73eb91f1c1d7412e77e3feb2b1e96 assets/ornamental/models/item/quartz_pole.json
 1c1fbff6b74173b6b6a5d4009a32cdb4a990a1e2 assets/ornamental/models/item/quartz_trapdoor.json
+d37c58dc1509754b0682a4798e60a1ba67b84043 assets/ornamental/models/item/quartz_wall.json
 468fa6a8aa7bf04f13527d0c45128503df2cec39 assets/ornamental/models/item/red_nether_brick_beam.json
 af6dcf70a678480abaef29d2decdd2ef7326fa51 assets/ornamental/models/item/red_nether_brick_door.json
 9bdc3ad0ba126373861e656c4c8f9dc60e6ac28f assets/ornamental/models/item/red_nether_brick_fence.json
@@ -877,6 +894,7 @@ a5c0dea355bd5b98f389318c916c40609bf315e2 assets/ornamental/models/item/redstone_
 ed1cbd3d57ace1c99fe283c1eabbd8ee8e834dd3 assets/ornamental/models/item/redstone_slab.json
 5883668ecac9463b63600b30eb35b764f5e8d820 assets/ornamental/models/item/redstone_stairs.json
 a8cfed0b9c41a7ce7a7dfe9858b22ed3f310305b assets/ornamental/models/item/redstone_trapdoor.json
+2f96eec365fd5dc7fcbf9d1f9d486e3d7ee29295 assets/ornamental/models/item/redstone_wall.json
 c56bd019f66f3e88a41c4ef5f50f075ce2d21b47 assets/ornamental/models/item/snow_beam.json
 176d347c598c642d0bab19894aa5da166eaaea20 assets/ornamental/models/item/snow_door.json
 522ee9569cf7253943f51d6e498aa61c3e45f472 assets/ornamental/models/item/snow_fence.json
@@ -885,6 +903,7 @@ c56bd019f66f3e88a41c4ef5f50f075ce2d21b47 assets/ornamental/models/item/snow_beam
 805d00896aaff324f7931fa6b41dba9e6cdf130e assets/ornamental/models/item/snow_slab.json
 ade4269a5495211a46bde96f643d2a21b89795ee assets/ornamental/models/item/snow_stairs.json
 35ce175256f59a532ab64a9df3609de5211a5c67 assets/ornamental/models/item/snow_trapdoor.json
+3d5ad4ed9b1292d26179986e2db03f6399d03a40 assets/ornamental/models/item/snow_wall.json
 d73054791276fb57ef996b586ff6e6152864d2c4 data/forge/tags/blocks/fence_gates.json
 e40c960eba0839021a40e751fa0a61b7d3794653 data/forge/tags/blocks/fences.json
 ca4ee64c9e13a5bb03a547a62cb94053abed6cc8 data/forge/tags/blocks/fences/nether_brick.json

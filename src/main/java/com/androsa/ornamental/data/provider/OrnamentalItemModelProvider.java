@@ -88,4 +88,20 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
                 .texture("end", modLoc("block/missingno"))
                 .texture("side", modLoc("block/missingno"));
     }
+
+    public void blockItemWall(Supplier<? extends Block> block, String name) {
+        withExistingParent(blockName(block), mcLoc("block/wall_inventory"))
+                .texture("wall", mcLoc("block/" + name));
+    }
+
+    public void blockItemWallColumn(Supplier<? extends Block> block, String side, String top) {
+        withExistingParent(blockName(block), ornamentLoc("block/util/wall_inventory_column"))
+                .texture("end", mcLoc("block/" + top))
+                .texture("side", mcLoc("block/" + side));
+    }
+
+    public void blockItemWallMissing(Supplier<? extends Block> block) {
+        withExistingParent(blockName(block), mcLoc("block/wall_inventory"))
+                .texture("wall", modLoc("block/missingno"));
+    }
 }

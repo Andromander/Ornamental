@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/wall_inventory_column",
+  "textures": {
+    "end": "minecraft:block/bone_block_top",
+    "side": "minecraft:block/bone_block_side"
+  }
+}
