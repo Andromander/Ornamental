@@ -201,7 +201,7 @@ public class OrnamentBuilder {
      */
     @Deprecated
     public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap) {
-        return this.burnTime(door, fence, gate, slab, stairs, trap, 0, 0);
+        return this.burnTime(door, fence, gate, slab, stairs, trap, 0, 0, 0);
     }
 
     /**
@@ -219,8 +219,7 @@ public class OrnamentBuilder {
      */
     @Deprecated
     public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam) {
-        this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam};
-        return this;
+        return this.burnTime(door, fence, gate, slab, stairs, trap, pole, beam, 0);
     }
 
     /**
@@ -237,7 +236,7 @@ public class OrnamentBuilder {
 	 * @param wall Wall burn time
      */
     public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam, int wall) {
-        this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam};
+        this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam, wall};
         return this;
     }
 
