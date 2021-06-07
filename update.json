@@ -42,6 +42,9 @@
     "4.3.2": "Critical fix caused by slow computers not telling you you're moving files, not copying.",
     "4.4": "No new features for Ornamental, but some cleaning for better compat.\n • Red Nether Brick Fences have now been tagged for Nether Brick Fences.\n • Fixed checks in places for config values. Now if a block has no config option, it will always drop rather than not.\n • Generators now respect that other mods have different mod IDs. This means other mods may now use Ornamental's generators.\n • Recipe generators now respect blocks with no config value. Those that did not would crash the generation, which means no automatically-created recipes.\n Don't forget to keep an eye out for Ornamental: Unusually Decorative, an expansion to Ornamental with more vanilla features."
   },
+  "1.16.5": {
+    "4.5": "Support has now been moved to 1.16.5 only due to changes implemented.\n • Added Wall ornaments. All materials in Ornamental have been given this new block.\n • Changes to OrnamentBuilder:\n   • A variation of the burnTime method was added. This one adds a new parameter for Wall burn times. The previous iteration of this method has been Deprecated, and any use of it will result in Walls of that material not burning.\n • Entities now handle Attributes properly. This means minimum support is now 1.16.5.\n • Fixed Gold Poles and Beams not tagged under guarded_by_piglins.\n • Fixed Obsidian Poles and Beams not tagged under dragon_immune.\n • Fixed incorrect Lapis Lazuli Fence Gates not having correct recipe.\n • Resolved a conflict with Snow Slab recipe. Now, it is 3 Snow Blocks in a row with any Slab on top.\n • Fixed a model generation error that made certain Beam placements render incorrectly."
+  },
 
   "promos": {
     "1.12.2-latest": "1.5",
@@ -59,6 +62,8 @@
     "1.16.2-latest": "4.1",
     "1.16.2-recommended": "4.1",
     "1.16.3-latest": "4.4",
-    "1.16.3-recommended": "4.4"
+    "1.16.3-recommended": "4.4",
+    "1.16.5-latest": "4.5",
+    "1.16.5-recommended": "4.5"
   }
 }
