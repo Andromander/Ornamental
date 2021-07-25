@@ -2,15 +2,15 @@ package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.conditions.ConfigCondition;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ToolType;
 
@@ -48,22 +48,14 @@ public class OrnamentBuilder {
     public boolean doesTick = false;
     public boolean requiresTool = false;
     public boolean fireproof = false;
-    public AbstractBlock.IExtendedPositionPredicate<EntityType<?>> entitySpawnPredicate = null;
+    public BlockBehaviour.StateArgumentPredicate<EntityType<?>> entitySpawnPredicate = null;
     /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
     public boolean hasConfig = false;
-    @Deprecated
-    public boolean isDirt = false;
     public boolean mealGrass = false;
-    @Deprecated
-    public boolean isGrass = false;
     public boolean hoeDirt = false;
     public boolean shovelPath = false;
-    @Deprecated
-    public boolean isPath = false;
     public boolean pathShape = false;
     public boolean hoeGrass = false;
-    @Deprecated
-    public boolean isIce = false;
     public boolean canMelt = false;
     public Block meltResult = Blocks.WATER;
     public boolean canVaporise = false;
@@ -147,7 +139,7 @@ public class OrnamentBuilder {
      * Setter for the block's ToolType. Harvest level will be 0.
      * To set a harvest level, use {@link OrnamentBuilder#tool(ToolType, int, boolean)}
      * @param tool The block's ToolType
-     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#requiresCorrectToolForDrops()}
+     * @param required If the block requires this tool. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
      */
     public OrnamentBuilder tool(ToolType tool, boolean required) {
         this.harvestTool = tool;
@@ -160,7 +152,7 @@ public class OrnamentBuilder {
      * To set only a harvst tool, use {@link OrnamentBuilder#tool(ToolType, boolean)}
      * @param tool The block's ToolType
      * @param level The block's harvest level
-     * @param required If the block requires this tool. Used to enable {@link AbstractBlock.Properties#requiresCorrectToolForDrops()}
+     * @param required If the block requires this tool. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
      */
     public OrnamentBuilder tool(ToolType tool, int level, boolean required) {
         this.harvestTool = tool;
@@ -186,40 +178,6 @@ public class OrnamentBuilder {
     public OrnamentBuilder slip(float amount) {
         this.slipperiness = amount;
         return this;
-    }
-
-    /**
-     * Setters for a block's burn time (measured by ticks). This is applied to the block's item. Defaults to all 0 (does not burn)
-     * For default behaviour, set value to -1. Any other value above 0, 1 second = 20 ticks
-     * @param door Door burn time
-     * @param fence Fence burn time
-     * @param gate Fence Gate burn time
-     * @param slab Slab burn time
-     * @param stairs Stairs burn time
-     * @param trap Trap Door burn time
-     * @deprecated use {@link OrnamentBuilder#burnTime(int, int, int, int, int, int, int, int)}
-     */
-    @Deprecated
-    public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap) {
-        return this.burnTime(door, fence, gate, slab, stairs, trap, 0, 0, 0);
-    }
-
-    /**
-     * Setters for a block's burn time (measured by ticks). This is applied to the block's item. Defaults to all 0 (does not burn)
-     * For default behaviour, set value to -1. Any other value above 0, 1 second = 20 ticks
-     * @param door Door burn time
-     * @param fence Fence burn time
-     * @param gate Fence Gate burn time
-     * @param slab Slab burn time
-     * @param stairs Stairs burn time
-     * @param trap Trap Door burn time
-     * @param pole Pole burn time
-     * @param beam Beam burn time
-	 * @deprecated use {@link OrnamentBuilder#burnTime(int, int, int, int, int, int, int, int, int)}
-     */
-    @Deprecated
-    public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam) {
-        return this.burnTime(door, fence, gate, slab, stairs, trap, pole, beam, 0);
     }
 
     /**
@@ -257,7 +215,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block to tick randomly. Used to enable {@link AbstractBlock.Properties#randomTicks()}
+     * Sets the block to tick randomly. Used to enable {@link BlockBehaviour.Properties#randomTicks()}
      */
     public OrnamentBuilder ticks() {
         this.doesTick = true;
@@ -273,22 +231,12 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the entity spawn logic on the block. Used in {@link AbstractBlock.Properties#isValidSpawn(AbstractBlock.IExtendedPositionPredicate)}
+     * Sets the entity spawn logic on the block. Used in {@link BlockBehaviour.Properties#isValidSpawn(BlockBehaviour.StateArgumentPredicate)}
      * If left null (unused), will default to regular placement logic.
      * @param predicate The spawn predicate to test. If true, an entity can spawn on it.
      */
-    public OrnamentBuilder setCanEntitySpawn(AbstractBlock.IExtendedPositionPredicate<EntityType<?>> predicate) {
+    public OrnamentBuilder setCanEntitySpawn(BlockBehaviour.StateArgumentPredicate<EntityType<?>> predicate) {
         this.entitySpawnPredicate = predicate;
-        return this;
-    }
-
-    /**
-     * Sets if the block is Dirt. Used to turn Dirt into Grass blocks. THIS IS FOR DIRT BLOCKS ONLY.
-     * @deprecated use {@link OrnamentBuilder#boneMealToGrass()} to allow X -> Path conversion.
-     */
-    @Deprecated
-    public OrnamentBuilder isDirtMaterial() {
-        this.isDirt = true;
         return this;
     }
 
@@ -297,16 +245,6 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder boneMealToGrass() {
         this.mealGrass = true;
-        return this;
-    }
-
-    /**
-     * Sets if the block is Grass. Used to turn Grass into Dirt or Grass Path. THIS IS FOR GRASS BLOCKS ONLY
-     * @deprecated use {@link OrnamentBuilder#hoeToDirt()} to allow X -> Dirt conversion and {@link OrnamentBuilder#shovelToPath()} to allow X -> Path conversion
-     */
-    @Deprecated
-    public OrnamentBuilder isGrassMaterial() {
-        this.isGrass = true;
         return this;
     }
 
@@ -327,16 +265,6 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block is Grass Path. Used to turn Grass Path into Grass and alter block shape. THIS IS FOR GRASS PATH BLOCKS ONLY.
-     * @deprecated use {@link OrnamentBuilder#usePathShapes()} for altered height and {@link OrnamentBuilder#hoeToGrass()} ()} to allow X -> Grass conversion.
-     */
-    @Deprecated
-    public OrnamentBuilder isPathMaterial() {
-        this.isPath = true;
-        return this;
-    }
-
-    /**
      * Sets if the block's VoxelShape should be altered. If true, the height of the blocks will be lowered by 1.
      */
     public OrnamentBuilder usePathShapes() {
@@ -349,16 +277,6 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder hoeToGrass() {
         this.hoeGrass = true;
-        return this;
-    }
-
-    /**
-     * Sets if the block is Ice. Used for harvesting and melting the blocks. THIS IS FOR ICE BLOCKS ONLY.
-     * @deprecated Use {@link #canMelt(Block, boolean)} for melting logic, {@link OrnamentBuilder#notSolid()} to make the block a non-solid, and {@link OrnamentBuilder#doBreakableBlockCull()} for translucent block culling.
-     */
-    @Deprecated
-    public OrnamentBuilder isIceMaterial() {
-        this.isIce = true;
         return this;
     }
 
@@ -381,7 +299,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block is not solid if the block would normally be solid. Used to enable {@link AbstractBlock.Properties#noOcclusion()}.
+     * Sets if the block is not solid if the block would normally be solid. Used to enable {@link BlockBehaviour.Properties#noOcclusion()}.
      */
     public OrnamentBuilder notSolid() {
         this.isSolid = false;
