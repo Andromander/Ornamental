@@ -1,16 +1,16 @@
 package com.androsa.ornamental.entity.task;
 
-import com.androsa.ornamental.entity.QuartzGolemEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.BlockPos;
+import com.androsa.ornamental.entity.QuartzGolem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 
 //[VanillaCopy] VexEntity.RandomFlyingGoal modified to accept a Golem
 public class RandomFlyGoal extends Goal {
-    private final QuartzGolemEntity parentEntity;
+    private final QuartzGolem parentEntity;
 
-    public RandomFlyGoal(QuartzGolemEntity entity) {
+    public RandomFlyGoal(QuartzGolem entity) {
         this.parentEntity = entity;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }

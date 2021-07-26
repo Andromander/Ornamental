@@ -2,34 +2,41 @@ package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.task.ExplodingFireballAttackGoal;
 import com.androsa.ornamental.entity.task.NextMeleeAttackGoal;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class NetheriteGolemEntity extends AbstractGolemEntity {
+public class NetheriteGolem extends OrnamentalGolem {
 
-    private static final DataParameter<Boolean> TARGETING = EntityDataManager.defineId(NetheriteGolemEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> FIREBALLS = EntityDataManager.defineId(NetheriteGolemEntity.class, DataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> TARGETING = SynchedEntityData.defineId(NetheriteGolem.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> FIREBALLS = SynchedEntityData.defineId(NetheriteGolem.class, EntityDataSerializers.INT);
 
     private int rechargeTimer = 1200;
 
-    public NetheriteGolemEntity(EntityType<? extends NetheriteGolemEntity> entity, World world) {
+    public NetheriteGolem(EntityType<? extends NetheriteGolem> entity, Level world) {
         super(entity, world);
     }
 
@@ -38,15 +45,15 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
         super.registerGoals();
         this.goalSelector.addGoal(1, new ExplodingFireballAttackGoal(this));
         this.goalSelector.addGoal(2, new NextMeleeAttackGoal(this));
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.4F));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.4F));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, MobEntity.class, false, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, false, false));
     }
 
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.createMobAttributes()
+    public static AttributeSupplier.Builder registerAttributes() {
+        return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 180.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
@@ -90,13 +97,13 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundNBT compound) {
+    public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("Fireballs", this.getFireballs());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundNBT compound) {
+    public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setFireballs(compound.getInt("Fireballs"));
     }
@@ -108,7 +115,7 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
 
     @Override
     protected void doPush(Entity target) {
-        if (target instanceof IMob && this.getRandom().nextInt(20) == 0) {
+        if (target instanceof Enemy && this.getRandom().nextInt(20) == 0) {
             this.setTarget((LivingEntity)target);
         }
 
@@ -123,7 +130,7 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
 
     @Override
     public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.PLAYER || target.getCategory() != EntityClassification.MISC;
+        return target != EntityType.PLAYER || target.getCategory() != MobCategory.MISC;
     }
 
     private float getAttackDamage() {
@@ -137,7 +144,7 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         boolean flag = target.hurt(DamageSource.mobAttack(this), multiplier);
         if (flag) {
-            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, (double)0.5F, 0.0D));
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
             this.doEnchantDamageEffects(this, target);
         }
 
@@ -156,7 +163,7 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
     }
 
     @Override
-    protected float getVoicePitch() {
+    public float getVoicePitch() {
         return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.6F;
     }
 
@@ -179,27 +186,25 @@ public class NetheriteGolemEntity extends AbstractGolemEntity {
         }
     }
 
-    //processInteract
     @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
-        if (item != Items.NETHERITE_INGOT) {
-            return ActionResultType.PASS;
-        } else {
+        if (itemstack.is(Items.NETHERITE_INGOT)) {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return ActionResultType.PASS;
+                return InteractionResult.PASS;
             } else {
                 float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                 this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.instabuild) {
+                if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.sidedSuccess(this.level.isClientSide);
+                return InteractionResult.sidedSuccess(this.level.isClientSide);
             }
+        } else {
+            return InteractionResult.PASS;
         }
     }
 

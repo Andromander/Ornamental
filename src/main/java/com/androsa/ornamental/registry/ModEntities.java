@@ -6,17 +6,15 @@ import com.androsa.ornamental.entity.model.*;
 import com.androsa.ornamental.entity.projectile.*;
 import com.androsa.ornamental.entity.renderer.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.SpriteRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,47 +23,47 @@ public class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, OrnamentalMod.MODID);
 
-    public static final RegistryObject<EntityType<GoldGolemEntity>> GOLD_GOLEM = makeEntity("gold", GoldGolemEntity::new, 1.3F, 2.7F, false);
-    public static final RegistryObject<EntityType<DiamondGolemEntity>> DIAMOND_GOLEM = makeEntity("diamond", DiamondGolemEntity::new, 1.0F, 1.5F, false);
-    public static final RegistryObject<EntityType<EmeraldGolemEntity>> EMERALD_GOLEM = makeEntity("emerald", EmeraldGolemEntity::new, 1.3F, 2.6F, false);
-    public static final RegistryObject<EntityType<LapisGolemEntity>> LAPIS_GOLEM = makeEntity("lapis", LapisGolemEntity::new, 1.2F, 2.3F, false);
-    public static final RegistryObject<EntityType<ObsidianGolemEntity>> OBSIDIAN_GOLEM = makeEntity("obsidian", ObsidianGolemEntity::new, 2.0F, 2.9F, true);
-    public static final RegistryObject<EntityType<CoalGolemEntity>> COAL_GOLEM = makeEntity("coal", CoalGolemEntity::new, 0.9F, 2.0F, false);
-    public static final RegistryObject<EntityType<RedstoneGolemEntity>> REDSTONE_GOLEM = makeEntity("redstone", RedstoneGolemEntity::new, 0.8F, 1.8F, false);
-    public static final RegistryObject<EntityType<ClayGolemEntity>> CLAY_GOLEM = makeEntity("clay", ClayGolemEntity::new, 1.0F, 1.9F, false);
-    public static final RegistryObject<EntityType<DirtGolemEntity>> DIRT_GOLEM = makeEntity("dirt", DirtGolemEntity::new, 0.6F, 0.8F, false);
-    public static final RegistryObject<EntityType<GrassGolemEntity>> GRASS_GOLEM = makeEntity("grass", GrassGolemEntity::new, 0.6F, 0.8F, false);
-    public static final RegistryObject<EntityType<HayGolemEntity>> HAY_GOLEM = makeEntity("hay", HayGolemEntity::new, 0.7F, 2.5F, false);
-    public static final RegistryObject<EntityType<PathGolemEntity>> PATH_GOLEM = makeEntity("grass_path", PathGolemEntity::new, 0.6F, 0.8F, false);
-    public static final RegistryObject<EntityType<BrickGolemEntity>> BRICK_GOLEM = makeEntity("brick", BrickGolemEntity::new, 1.0F, 1.9F, false);
-    public static final RegistryObject<EntityType<QuartzGolemEntity>> QUARTZ_GOLEM = makeEntity("quartz", QuartzGolemEntity::new, 1.2F, 2.2F, true);
-    public static final RegistryObject<EntityType<BoneGolemEntity>> BONE_GOLEM = makeEntity("bone", BoneGolemEntity::new, 1.0F, 3.1F, false);
-    public static final RegistryObject<EntityType<NetherBrickGolemEntity>> NETHER_BRICK_GOLEM = makeEntity("nether_brick", NetherBrickGolemEntity::new, 1.0F, 2.5F, true);
-    public static final RegistryObject<EntityType<RedNetherBrickGolemEntity>> RED_NETHER_BRICK_GOLEM = makeEntity("red_nether_brick", RedNetherBrickGolemEntity::new, 1.0F, 2.5F, true);
-    public static final RegistryObject<EntityType<IceGolemEntity>> ICE_GOLEM = makeEntity("ice", IceGolemEntity::new, 0.7F, 1.9F, false);
-    public static final RegistryObject<EntityType<PackedIceGolemEntity>> PACKED_ICE_GOLEM = makeEntity("packed_ice", PackedIceGolemEntity::new, 0.7F, 1.9F, false);
-    public static final RegistryObject<EntityType<BlueIceGolemEntity>> BLUE_ICE_GOLEM = makeEntity("blue_ice", BlueIceGolemEntity::new, 0.7F, 1.9F, false);
-    public static final RegistryObject<EntityType<NetheriteGolemEntity>> NETHERITE_GOLEM = makeEntity("netherite", NetheriteGolemEntity::new, 1.8F, 3.1F, true);
+    public static final RegistryObject<EntityType<GoldGolem>> GOLD_GOLEM = makeEntity("gold", GoldGolem::new, 1.3F, 2.7F, false);
+    public static final RegistryObject<EntityType<DiamondGolem>> DIAMOND_GOLEM = makeEntity("diamond", DiamondGolem::new, 1.0F, 1.5F, false);
+    public static final RegistryObject<EntityType<EmeraldGolem>> EMERALD_GOLEM = makeEntity("emerald", EmeraldGolem::new, 1.3F, 2.6F, false);
+    public static final RegistryObject<EntityType<LapisGolem>> LAPIS_GOLEM = makeEntity("lapis", LapisGolem::new, 1.2F, 2.3F, false);
+    public static final RegistryObject<EntityType<ObsidianGolem>> OBSIDIAN_GOLEM = makeEntity("obsidian", ObsidianGolem::new, 2.0F, 2.9F, true);
+    public static final RegistryObject<EntityType<CoalGolem>> COAL_GOLEM = makeEntity("coal", CoalGolem::new, 0.9F, 2.0F, false);
+    public static final RegistryObject<EntityType<RedstoneGolem>> REDSTONE_GOLEM = makeEntity("redstone", RedstoneGolem::new, 0.8F, 1.8F, false);
+    public static final RegistryObject<EntityType<ClayGolem>> CLAY_GOLEM = makeEntity("clay", ClayGolem::new, 1.0F, 1.9F, false);
+    public static final RegistryObject<EntityType<DirtGolem>> DIRT_GOLEM = makeEntity("dirt", DirtGolem::new, 0.6F, 0.8F, false);
+    public static final RegistryObject<EntityType<GrassGolem>> GRASS_GOLEM = makeEntity("grass", GrassGolem::new, 0.6F, 0.8F, false);
+    public static final RegistryObject<EntityType<HayGolem>> HAY_GOLEM = makeEntity("hay", HayGolem::new, 0.7F, 2.5F, false);
+    public static final RegistryObject<EntityType<PathGolem>> PATH_GOLEM = makeEntity("grass_path", PathGolem::new, 0.6F, 0.8F, false);
+    public static final RegistryObject<EntityType<BrickGolem>> BRICK_GOLEM = makeEntity("brick", BrickGolem::new, 1.0F, 1.9F, false);
+    public static final RegistryObject<EntityType<QuartzGolem>> QUARTZ_GOLEM = makeEntity("quartz", QuartzGolem::new, 1.2F, 2.2F, true);
+    public static final RegistryObject<EntityType<BoneGolem>> BONE_GOLEM = makeEntity("bone", BoneGolem::new, 1.0F, 3.1F, false);
+    public static final RegistryObject<EntityType<NetherBrickGolem>> NETHER_BRICK_GOLEM = makeEntity("nether_brick", NetherBrickGolem::new, 1.0F, 2.5F, true);
+    public static final RegistryObject<EntityType<RedNetherBrickGolem>> RED_NETHER_BRICK_GOLEM = makeEntity("red_nether_brick", RedNetherBrickGolem::new, 1.0F, 2.5F, true);
+    public static final RegistryObject<EntityType<IceGolem>> ICE_GOLEM = makeEntity("ice", IceGolem::new, 0.7F, 1.9F, false);
+    public static final RegistryObject<EntityType<PackedIceGolem>> PACKED_ICE_GOLEM = makeEntity("packed_ice", PackedIceGolem::new, 0.7F, 1.9F, false);
+    public static final RegistryObject<EntityType<BlueIceGolem>> BLUE_ICE_GOLEM = makeEntity("blue_ice", BlueIceGolem::new, 0.7F, 1.9F, false);
+    public static final RegistryObject<EntityType<NetheriteGolem>> NETHERITE_GOLEM = makeEntity("netherite", NetheriteGolem::new, 1.8F, 3.1F, true);
 
-    public static final RegistryObject<EntityType<LapisBulletEntity>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBulletEntity::new, 0.25F, 0.25F, 4, 10);
-    public static final RegistryObject<EntityType<RedstoneBulletEntity>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBulletEntity::new, 0.25F, 0.25F, 4, 10);
-    public static final RegistryObject<EntityType<ThrownBrickEntity>> THROWN_BRICK = makeProjectile("thrown_brick", ThrownBrickEntity::new, 0.25F, 0.25F, 150, 2);
-    public static final RegistryObject<EntityType<ThrownNetherBrickEntity>> THROWN_NETHER_BRICK = makeProjectile("thrown_nether_brick", ThrownNetherBrickEntity::new, 0.25F, 0.25F, 150, 2);
-    public static final RegistryObject<EntityType<PackedIceEntity>> PACKED_ICEBALL = makeProjectile("packed_iceball", PackedIceEntity::new, 0.25F, 0.25F, 150, 2);
-    public static final RegistryObject<EntityType<BlueIceEntity>> BLUE_ICEBALL = makeProjectile("blue_iceball", BlueIceEntity::new, 0.25F, 0.25F, 150, 2);
+    public static final RegistryObject<EntityType<LapisBullet>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBullet::new, 0.25F, 0.25F, 4, 10);
+    public static final RegistryObject<EntityType<RedstoneBullet>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBullet::new, 0.25F, 0.25F, 4, 10);
+    public static final RegistryObject<EntityType<Brick>> THROWN_BRICK = makeProjectile("thrown_brick", Brick::new, 0.25F, 0.25F, 150, 2);
+    public static final RegistryObject<EntityType<NetherBrick>> THROWN_NETHER_BRICK = makeProjectile("thrown_nether_brick", NetherBrick::new, 0.25F, 0.25F, 150, 2);
+    public static final RegistryObject<EntityType<PackedIce>> PACKED_ICEBALL = makeProjectile("packed_iceball", PackedIce::new, 0.25F, 0.25F, 150, 2);
+    public static final RegistryObject<EntityType<BlueIce>> BLUE_ICEBALL = makeProjectile("blue_iceball", BlueIce::new, 0.25F, 0.25F, 150, 2);
 
-    private static <T extends Entity> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.IFactory<T> entity, float width, float height, boolean fireRes) {
+    private static <T extends Entity> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, float width, float height, boolean fireRes) {
         String regname = name + "_golem";
-        EntityType.Builder<T> builder = EntityType.Builder.of(entity, EntityClassification.MISC)
+        EntityType.Builder<T> builder = EntityType.Builder.of(entity, MobCategory.MISC)
                 .sized(width, height);
         if (fireRes) builder.fireImmune();
 
         return ENTITIES.register(regname, () -> builder.build(regname));
     }
 
-    private static <T extends Entity> RegistryObject<EntityType<T>> makeProjectile(String name, EntityType.IFactory<T> entity, float width, float height, int tracking, int interval) {
+    private static <T extends Entity> RegistryObject<EntityType<T>> makeProjectile(String name, EntityType.EntityFactory<T> entity, float width, float height, int tracking, int interval) {
         return ENTITIES.register(name, () ->
-                EntityType.Builder.of(entity, EntityClassification.MISC)
+                EntityType.Builder.of(entity, MobCategory.MISC)
                         .sized(width, height)
                         .setTrackingRange(tracking)
                         .setUpdateInterval(interval)
@@ -108,26 +106,26 @@ public class ModEntities {
 
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(GOLD_GOLEM.get(), GoldGolemEntity.registerAttributes().build());
-        event.put(DIAMOND_GOLEM.get(), DiamondGolemEntity.registerAttributes().build());
-        event.put(EMERALD_GOLEM.get(), EmeraldGolemEntity.registerAttributes().build());
-        event.put(LAPIS_GOLEM.get(), LapisGolemEntity.registerAttributes().build());
-        event.put(OBSIDIAN_GOLEM.get(), ObsidianGolemEntity.registerAttributes().build());
-        event.put(COAL_GOLEM.get(), CoalGolemEntity.registerAttributes().build());
-        event.put(REDSTONE_GOLEM.get(), RedstoneGolemEntity.registerAttributes().build());
-        event.put(CLAY_GOLEM.get(), ClayGolemEntity.registerAttributes().build());
-        event.put(DIRT_GOLEM.get(), DirtGolemEntity.registerAttributes().build());
-        event.put(GRASS_GOLEM.get(), GrassGolemEntity.registerAttributes().build());
-        event.put(HAY_GOLEM.get(), HayGolemEntity.registerAttributes().build());
-        event.put(PATH_GOLEM.get(), PathGolemEntity.registerAttributes().build());
-        event.put(BRICK_GOLEM.get(), BrickGolemEntity.registerAttributes().build());
-        event.put(QUARTZ_GOLEM.get(), QuartzGolemEntity.registerAttributes().build());
-        event.put(BONE_GOLEM.get(), BoneGolemEntity.registerAttributes().build());
-        event.put(NETHER_BRICK_GOLEM.get(), NetherBrickGolemEntity.registerAttributes().build());
-        event.put(RED_NETHER_BRICK_GOLEM.get(), RedNetherBrickGolemEntity.registerAttributes().build());
-        event.put(ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
-        event.put(PACKED_ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
-        event.put(BLUE_ICE_GOLEM.get(), IceGolemEntity.registerAttributes().build());
-        event.put(NETHERITE_GOLEM.get(), NetheriteGolemEntity.registerAttributes().build());
+        event.put(GOLD_GOLEM.get(), GoldGolem.registerAttributes().build());
+        event.put(DIAMOND_GOLEM.get(), DiamondGolem.registerAttributes().build());
+        event.put(EMERALD_GOLEM.get(), EmeraldGolem.registerAttributes().build());
+        event.put(LAPIS_GOLEM.get(), LapisGolem.registerAttributes().build());
+        event.put(OBSIDIAN_GOLEM.get(), ObsidianGolem.registerAttributes().build());
+        event.put(COAL_GOLEM.get(), CoalGolem.registerAttributes().build());
+        event.put(REDSTONE_GOLEM.get(), RedstoneGolem.registerAttributes().build());
+        event.put(CLAY_GOLEM.get(), ClayGolem.registerAttributes().build());
+        event.put(DIRT_GOLEM.get(), DirtGolem.registerAttributes().build());
+        event.put(GRASS_GOLEM.get(), GrassGolem.registerAttributes().build());
+        event.put(HAY_GOLEM.get(), HayGolem.registerAttributes().build());
+        event.put(PATH_GOLEM.get(), PathGolem.registerAttributes().build());
+        event.put(BRICK_GOLEM.get(), BrickGolem.registerAttributes().build());
+        event.put(QUARTZ_GOLEM.get(), QuartzGolem.registerAttributes().build());
+        event.put(BONE_GOLEM.get(), BoneGolem.registerAttributes().build());
+        event.put(NETHER_BRICK_GOLEM.get(), NetherBrickGolem.registerAttributes().build());
+        event.put(RED_NETHER_BRICK_GOLEM.get(), RedNetherBrickGolem.registerAttributes().build());
+        event.put(ICE_GOLEM.get(), IceGolem.registerAttributes().build());
+        event.put(PACKED_ICE_GOLEM.get(), IceGolem.registerAttributes().build());
+        event.put(BLUE_ICE_GOLEM.get(), IceGolem.registerAttributes().build());
+        event.put(NETHERITE_GOLEM.get(), NetheriteGolem.registerAttributes().build());
     }
 }

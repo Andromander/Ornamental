@@ -1,22 +1,22 @@
 package com.androsa.ornamental.entity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.GolemEntity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.spawner.WorldEntitySpawner;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.NaturalSpawner;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class AbstractGolemEntity extends GolemEntity {
+public class OrnamentalGolem extends AbstractGolem {
 
     protected int attackTimer;
 
-    protected AbstractGolemEntity(EntityType<? extends GolemEntity> type, World world) {
+    protected OrnamentalGolem(EntityType<? extends AbstractGolem> type, Level world) {
         super(type, world);
     }
 
@@ -46,7 +46,7 @@ public class AbstractGolemEntity extends GolemEntity {
     }
 
     @Override
-    public boolean checkSpawnObstruction(IWorldReader reader) {
+    public boolean checkSpawnObstruction(LevelReader reader) {
         BlockPos entityPos = this.blockPosition();
         BlockPos posBelow = entityPos.below();
         BlockState stateBelow = reader.getBlockState(posBelow);
@@ -56,12 +56,12 @@ public class AbstractGolemEntity extends GolemEntity {
             for(int i = 1; i < 3; ++i) {
                 BlockPos posAbove = entityPos.above(i);
                 BlockState stateAbove = reader.getBlockState(posAbove);
-                if (!WorldEntitySpawner.isValidEmptySpawnBlock(reader, posAbove, stateAbove, stateAbove.getFluidState(), this.getType())) {
+                if (!NaturalSpawner.isValidEmptySpawnBlock(reader, posAbove, stateAbove, stateAbove.getFluidState(), this.getType())) {
                     return false;
                 }
             }
 
-            return WorldEntitySpawner.isValidEmptySpawnBlock(reader, entityPos, reader.getBlockState(entityPos), Fluids.EMPTY.defaultFluidState(), this.getType()) && reader.isUnobstructed(this);
+            return NaturalSpawner.isValidEmptySpawnBlock(reader, entityPos, reader.getBlockState(entityPos), Fluids.EMPTY.defaultFluidState(), this.getType()) && reader.isUnobstructed(this);
         }
     }
 }

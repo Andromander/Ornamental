@@ -1,9 +1,9 @@
 package com.androsa.ornamental.entity.task;
 
-import com.androsa.ornamental.entity.FlowerGolemEntity;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
+import com.androsa.ornamental.entity.FlowerGolem;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.npc.Villager;
 
 import java.util.EnumSet;
 
@@ -12,12 +12,12 @@ import java.util.EnumSet;
  */
 public class OrnamentalGolemFlowerGoal extends Goal {
 
-    private static final EntityPredicate IS_FRIENDLY = (new EntityPredicate()).range(6.0D).allowSameTeam().allowInvulnerable();
-    private final FlowerGolemEntity golem;
-    private VillagerEntity villager;
+    private static final TargetingConditions IS_FRIENDLY = TargetingConditions.forNonCombat().range(6.0D);
+    private final FlowerGolem golem;
+    private Villager villager;
     private int lookTime;
 
-    public OrnamentalGolemFlowerGoal(FlowerGolemEntity entity) {
+    public OrnamentalGolemFlowerGoal(FlowerGolem entity) {
         this.golem = entity;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
@@ -29,7 +29,7 @@ public class OrnamentalGolemFlowerGoal extends Goal {
         } else if (this.golem.getRandom().nextInt(8000) != 0) {
             return false;
         } else {
-            this.villager = this.golem.level.getNearestEntity(VillagerEntity.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
+            this.villager = this.golem.level.getNearestEntity(Villager.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
             return this.villager != null;
         }
     }

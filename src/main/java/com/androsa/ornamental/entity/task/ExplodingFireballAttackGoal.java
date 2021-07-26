@@ -1,20 +1,20 @@
 package com.androsa.ornamental.entity.task;
 
-import com.androsa.ornamental.entity.NetheriteGolemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.world.World;
+import com.androsa.ornamental.entity.NetheriteGolem;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.projectile.LargeFireball;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Constants;
 
 import java.util.EnumSet;
 
 //VanillaCopy of GhastEntity.FireballAttackGoal, modified for Netherite Golem
 public class ExplodingFireballAttackGoal extends Goal {
-    private final NetheriteGolemEntity parentEntity;
+    private final NetheriteGolem parentEntity;
     public int attackTimer;
 
-    public ExplodingFireballAttackGoal(NetheriteGolemEntity entity) {
+    public ExplodingFireballAttackGoal(NetheriteGolem entity) {
         this.parentEntity = entity;
         setFlags(EnumSet.of(Flag.LOOK));
     }
@@ -33,8 +33,8 @@ public class ExplodingFireballAttackGoal extends Goal {
     public void tick() {
         LivingEntity target = this.parentEntity.getTarget();
         this.parentEntity.getLookControl().setLookAt(target, 10.0F, (float)this.parentEntity.getMaxHeadXRot());
-        if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.canSee(target)) {
-            World world = this.parentEntity.level;
+        if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.hasLineOfSight(target)) {
+            Level world = this.parentEntity.level;
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {
@@ -43,8 +43,7 @@ public class ExplodingFireballAttackGoal extends Goal {
                 double z = target.getZ() - this.parentEntity.getZ();
 
                 world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
-                FireballEntity fireball = new FireballEntity(world, this.parentEntity, x, y, z);
-                fireball.explosionPower = 2;
+                LargeFireball fireball = new LargeFireball(world, this.parentEntity, x, y, z, 2);
                 fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
                 world.addFreshEntity(fireball);
                 parentEntity.shootFireball();

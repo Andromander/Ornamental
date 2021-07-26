@@ -1,20 +1,20 @@
 package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.task.OrnamentalGolemFlowerGoal;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * Class for Golems that hold a flower
  */
-public abstract class FlowerGolemEntity extends AbstractGolemEntity {
+public abstract class FlowerGolem extends OrnamentalGolem {
 
     protected int holdFlowerTimer;
 
-    public FlowerGolemEntity(EntityType<? extends FlowerGolemEntity> entity, World world) {
+    public FlowerGolem(EntityType<? extends FlowerGolem> entity, Level world) {
         super(entity, world);
     }
 

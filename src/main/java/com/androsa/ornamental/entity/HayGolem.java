@@ -1,25 +1,31 @@
 package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.task.FirePanicGoal;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class HayGolemEntity extends AbstractGolemEntity {
+public class HayGolem extends OrnamentalGolem {
 
-    public HayGolemEntity(EntityType<? extends HayGolemEntity> entity, World world) {
+    public HayGolem(EntityType<? extends HayGolem> entity, Level world) {
         super(entity, world);
         this.maxUpStep = 1.0F;
     }
@@ -28,12 +34,12 @@ public class HayGolemEntity extends AbstractGolemEntity {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new FirePanicGoal(this, 0.8D));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.createMobAttributes()
+    public static AttributeSupplier.Builder registerAttributes() {
+        return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
@@ -51,9 +57,9 @@ public class HayGolemEntity extends AbstractGolemEntity {
 
         if (this.isOnFire()) {
             for(int l = 0; l < 4; ++l) {
-                int x = MathHelper.floor(this.getX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
-                int y = MathHelper.floor(this.getY());
-                int z = MathHelper.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+                int x = Mth.floor(this.getX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
+                int y = Mth.floor(this.getY());
+                int z = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(x, y, z);
                 if (this.level.isEmptyBlock(blockpos) && blockstate.canSurvive(this.level, blockpos)) {
                     this.level.setBlockAndUpdate(blockpos, blockstate);
@@ -77,27 +83,25 @@ public class HayGolemEntity extends AbstractGolemEntity {
         return SoundEvents.GRASS_BREAK;
     }
 
-    //processInteract
     @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
-        if (item != Items.WHEAT) {
-            return ActionResultType.PASS;
-        } else {
+        if (itemstack.is(Items.WHEAT)) {
             float f = this.getHealth();
             this.heal(25.0F);
             if (this.getHealth() == f) {
-                return ActionResultType.PASS;
+                return InteractionResult.PASS;
             } else {
                 float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
                 this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.abilities.instabuild) {
+                if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
 
-                return ActionResultType.sidedSuccess(this.level.isClientSide);
+                return InteractionResult.sidedSuccess(this.level.isClientSide);
             }
+        } else {
+            return InteractionResult.PASS;
         }
     }
 

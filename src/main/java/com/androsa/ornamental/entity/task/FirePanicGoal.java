@@ -1,11 +1,11 @@
 package com.androsa.ornamental.entity.task;
 
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
 
 public class FirePanicGoal extends PanicGoal {
 
-    public FirePanicGoal(CreatureEntity creature, double speed) {
+    public FirePanicGoal(PathfinderMob creature, double speed) {
         super(creature, speed);
     }
 
