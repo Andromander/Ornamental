@@ -1,12 +1,13 @@
 package com.androsa.ornamental.items;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class OrnamentBlockItem extends BlockItem {
@@ -21,7 +22,7 @@ public class OrnamentBlockItem extends BlockItem {
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
 		if (builder.hasConfig) {
 			ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
@@ -38,7 +39,7 @@ public class OrnamentBlockItem extends BlockItem {
 	}
 
     @Override
-    public int getBurnTime(ItemStack itemStack) {
+    public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
         return builder.burnTime[index];
     }
 }

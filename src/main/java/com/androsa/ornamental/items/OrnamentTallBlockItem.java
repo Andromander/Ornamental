@@ -1,15 +1,16 @@
 package com.androsa.ornamental.items;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.TallBlockItem;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DoubleHighBlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class OrnamentTallBlockItem extends TallBlockItem {
+public class OrnamentTallBlockItem extends DoubleHighBlockItem {
 
     private final OrnamentBuilder builder;
     private final int index;
@@ -21,12 +22,12 @@ public class OrnamentTallBlockItem extends TallBlockItem {
     }
 
     @Override
-    public int getBurnTime(ItemStack itemStack) {
+    public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
         return builder.burnTime[index];
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         if (builder.hasConfig) {
             ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 

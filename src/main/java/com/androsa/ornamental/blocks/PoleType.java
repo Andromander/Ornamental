@@ -1,10 +1,10 @@
 package com.androsa.ornamental.blocks;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 
 import javax.annotation.Nonnull;
 
-public enum PoleType implements IStringSerializable {
+public enum PoleType implements StringRepresentable {
     TL_CORNER("topleft_corner"     , Shape.CORNER, true, false, false, false),
     TR_CORNER("topright_corner"    , Shape.CORNER, false, true, false, false),
     BL_CORNER("bottomleft_corner"  , Shape.CORNER, false, false, true, false),

@@ -3,24 +3,30 @@ package com.androsa.ornamental.blocks;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.*;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.state.properties.SlabType;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -29,13 +35,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
+public class OrnamentWall extends WallBlock implements OrnamentalBlock {
 
     protected final Map<BlockState, VoxelShape> collisionShapeByIndex = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
     protected final Map<BlockState, VoxelShape> shapeByIndex = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
     private final OrnamentBuilder builder;
 
-    public OrnamentWall(AbstractBlock.Properties props, OrnamentBuilder builder) {
+    public OrnamentWall(Properties props, OrnamentBuilder builder) {
         super(props);
         this.builder = builder;
     }
@@ -63,17 +69,17 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
         ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
 
         for (Boolean upstate : UP.getPossibleValues()) {
-            for (WallHeight eastheight : EAST_WALL.getPossibleValues()) {
-                for (WallHeight northheight : NORTH_WALL.getPossibleValues()) {
-                    for (WallHeight westheight : WEST_WALL.getPossibleValues()) {
-                        for (WallHeight southheight : SOUTH_WALL.getPossibleValues()) {
-                            VoxelShape totalshape = VoxelShapes.empty();
+            for (WallSide eastheight : EAST_WALL.getPossibleValues()) {
+                for (WallSide northheight : NORTH_WALL.getPossibleValues()) {
+                    for (WallSide westheight : WEST_WALL.getPossibleValues()) {
+                        for (WallSide southheight : SOUTH_WALL.getPossibleValues()) {
+                            VoxelShape totalshape = Shapes.empty();
                             totalshape = applyWallShape(totalshape, eastheight, eastlow, easttall);
                             totalshape = applyWallShape(totalshape, westheight, westlow, westtall);
                             totalshape = applyWallShape(totalshape, northheight, northlow, northtall);
                             totalshape = applyWallShape(totalshape, southheight, southlow, southtall);
                             if (upstate) {
-                                totalshape = VoxelShapes.or(totalshape, upshape);
+                                totalshape = Shapes.or(totalshape, upshape);
                             }
 
                             BlockState blockstate = this.defaultBlockState().setValue(UP, upstate).setValue(EAST_WALL, eastheight).setValue(WEST_WALL, westheight).setValue(NORTH_WALL, northheight).setValue(SOUTH_WALL, southheight);
@@ -88,12 +94,12 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
         return builder.build();
     }
 
-    private static VoxelShape applyWallShape(VoxelShape base, WallHeight wallheight, VoxelShape lowshape, VoxelShape tallshape) {
+    private static VoxelShape applyWallShape(VoxelShape base, WallSide wallheight, VoxelShape lowshape, VoxelShape tallshape) {
         switch (wallheight) {
             case TALL:
-                return VoxelShapes.or(base, tallshape);
+                return Shapes.or(base, tallshape);
             case LOW:
-                return VoxelShapes.or(base, lowshape);
+                return Shapes.or(base, lowshape);
             default:
                 return base;
         }
@@ -101,17 +107,17 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
     //End WallBlock vanillacopy
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return builder.isPath || builder.pathShape ? this.shapeByIndex.get(state) : super.getShape(state, worldIn, pos, context);
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return builder.pathShape ? this.shapeByIndex.get(state) : super.getShape(state, worldIn, pos, context);
     }
 
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return builder.isPath || builder.pathShape ? this.collisionShapeByIndex.get(state) : super.getCollisionShape(state, worldIn, pos, context);
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return builder.pathShape ? this.collisionShapeByIndex.get(state) : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
-    public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier);
+    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, DamageSource.FALL);
     }
 
     @Override
@@ -122,29 +128,29 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
 
     @Override
     @Deprecated
-    public int getSignal(BlockState blockState, IBlockReader blockReader, BlockPos pos, Direction side) {
+    public int getSignal(BlockState blockState, BlockGetter blockReader, BlockPos pos, Direction side) {
         return builder.hasPower ? 11 : 0;
     }
 
     @Override
     @Deprecated
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
-            if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
+            if (builder.mealGrass && item == Items.BONE_MEAL) {
                 return changeBlock(itemstack, ModBlocks.grass_wall, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
-            if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
+            if (builder.hoeDirt && item instanceof HoeItem) {
                 return changeBlock(itemstack, ModBlocks.dirt_wall, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
-            if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
+            if (builder.shovelPath && item instanceof ShovelItem) {
                 return changeBlock(itemstack, ModBlocks.path_wall, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
-            if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
+            if (builder.hoeGrass && item instanceof HoeItem) {
                 return changeBlock(itemstack, ModBlocks.grass_wall, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
@@ -152,19 +158,19 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
         return super.use(state, worldIn, pos, player, hand, result);
     }
 
-    private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentWall> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentWall> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         this.setBlock(worldIn, pos, newblock);
-        worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
+        if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentWall> block) {
+    private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentWall> block) {
         BlockState state = world.getBlockState(pos);
         world.setBlockAndUpdate(pos, block.get().defaultBlockState()
                 .setValue(UP, state.getValue(UP))
@@ -179,30 +185,30 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
     @Deprecated
     @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
-        if (builder.isIce || builder.breakableCull) {
+        if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentWall && state.getBlock() instanceof OrnamentWall) {
-                boolean crossS = !state.getValue(UP) && state.getValue(EAST_WALL) == WallHeight.TALL && state.getValue(WEST_WALL) == WallHeight.TALL && state.getValue(NORTH_WALL) == WallHeight.TALL && state.getValue(SOUTH_WALL) == WallHeight.TALL;
-                boolean crossO = !otherState.getValue(UP) && otherState.getValue(EAST_WALL) != WallHeight.NONE && otherState.getValue(WEST_WALL) != WallHeight.NONE && otherState.getValue(NORTH_WALL) != WallHeight.NONE && otherState.getValue(SOUTH_WALL) != WallHeight.NONE;
+                boolean crossS = !state.getValue(UP) && state.getValue(EAST_WALL) == WallSide.TALL && state.getValue(WEST_WALL) == WallSide.TALL && state.getValue(NORTH_WALL) == WallSide.TALL && state.getValue(SOUTH_WALL) == WallSide.TALL;
+                boolean crossO = !otherState.getValue(UP) && otherState.getValue(EAST_WALL) != WallSide.NONE && otherState.getValue(WEST_WALL) != WallSide.NONE && otherState.getValue(NORTH_WALL) != WallSide.NONE && otherState.getValue(SOUTH_WALL) != WallSide.NONE;
                 if (direction == Direction.UP) {
                     if (state.getValue(UP) && otherState.getValue(UP))
                         return true;
                     if (crossS && crossO)
                         return true;
-                    if (state.getValue(NORTH_WALL) == WallHeight.TALL && state.getValue(SOUTH_WALL) == WallHeight.TALL)
-                        return otherState.getValue(NORTH_WALL) != WallHeight.NONE && otherState.getValue(SOUTH_WALL) != WallHeight.NONE;
-                    if (state.getValue(WEST_WALL) == WallHeight.TALL && state.getValue(EAST_WALL) == WallHeight.TALL)
-                        return otherState.getValue(WEST_WALL) != WallHeight.NONE && otherState.getValue(EAST_WALL) != WallHeight.NONE;
+                    if (state.getValue(NORTH_WALL) == WallSide.TALL && state.getValue(SOUTH_WALL) == WallSide.TALL)
+                        return otherState.getValue(NORTH_WALL) != WallSide.NONE && otherState.getValue(SOUTH_WALL) != WallSide.NONE;
+                    if (state.getValue(WEST_WALL) == WallSide.TALL && state.getValue(EAST_WALL) == WallSide.TALL)
+                        return otherState.getValue(WEST_WALL) != WallSide.NONE && otherState.getValue(EAST_WALL) != WallSide.NONE;
                 } else if (direction == Direction.DOWN) {
                     if (state.getValue(UP) && otherState.getValue(UP))
                         return true;
-                    if (state.getValue(NORTH_WALL) != WallHeight.NONE && state.getValue(SOUTH_WALL) != WallHeight.NONE)
-                        return otherState.getValue(NORTH_WALL) != WallHeight.NONE && state.getValue(SOUTH_WALL) != WallHeight.NONE;
-                    if (state.getValue(WEST_WALL) != WallHeight.NONE && state.getValue(EAST_WALL) != WallHeight.NONE)
-                        return otherState.getValue(WEST_WALL) != WallHeight.NONE && state.getValue(EAST_WALL) != WallHeight.NONE;
+                    if (state.getValue(NORTH_WALL) != WallSide.NONE && state.getValue(SOUTH_WALL) != WallSide.NONE)
+                        return otherState.getValue(NORTH_WALL) != WallSide.NONE && state.getValue(SOUTH_WALL) != WallSide.NONE;
+                    if (state.getValue(WEST_WALL) != WallSide.NONE && state.getValue(EAST_WALL) != WallSide.NONE)
+                        return otherState.getValue(WEST_WALL) != WallSide.NONE && state.getValue(EAST_WALL) != WallSide.NONE;
                 } else {
-                    if (state.getValue(EAST_WALL) != WallHeight.NONE && state.getValue(WEST_WALL) != WallHeight.NONE)
+                    if (state.getValue(EAST_WALL) != WallSide.NONE && state.getValue(WEST_WALL) != WallSide.NONE)
                         return true;
-                    if (state.getValue(NORTH_WALL) != WallHeight.NONE && state.getValue(SOUTH_WALL) != WallHeight.NONE)
+                    if (state.getValue(NORTH_WALL) != WallSide.NONE && state.getValue(SOUTH_WALL) != WallSide.NONE)
                         return true;
                 }
             }
@@ -211,7 +217,7 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
     }
 
     @Override
-    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
         if (builder.hasConfig) {
             ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
@@ -226,16 +232,16 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
-        if (builder.isIce || builder.canMelt) {
-            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+        if (builder.canMelt) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
-    protected void turnIntoWater(World world, BlockPos pos) {
+    protected void turnIntoWater(Level world, BlockPos pos) {
         if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
@@ -247,6 +253,6 @@ public class OrnamentWall extends WallBlock implements IOrnamentalBlock {
     @Override
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
+        return builder.pushReaction;
     }
 }

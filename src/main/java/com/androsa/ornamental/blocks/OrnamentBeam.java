@@ -4,33 +4,40 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -40,7 +47,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBlock {
+public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, OrnamentalBlock {
 
     protected static final VoxelShape BL_SHAPE_X = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 8.0D);
     protected static final VoxelShape BR_SHAPE_X = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 8.0D, 16.0D);
@@ -76,7 +83,7 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TYPE, HORIZONTAL_AXIS, WATERLOGGED);
     }
 
@@ -87,25 +94,25 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         List<VoxelShape> shapes = Lists.newArrayList();
         PoleType type = state.getValue(TYPE);
         Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
         boolean[] corners = type.getCorners();
 
-        if (builder.isPath || builder.pathShape) {
+        if (builder.pathShape) {
             if (type == PoleType.L_HALF)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH) : VoxelShapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH);
             else if (type == PoleType.R_HALF)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BR_SHAPE_X, TR_SHAPE_X_PATH) : VoxelShapes.or(BR_SHAPE_Z, TR_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, TR_SHAPE_Z_PATH);
             else if (type == PoleType.TL_FILL)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : VoxelShapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
             else if (type == PoleType.TR_FILL)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BR_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : VoxelShapes.or(BR_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
             else if (type == PoleType.BL_FILL)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BL_SHAPE_X, BR_SHAPE_X_PATH, TL_SHAPE_X_PATH) : VoxelShapes.or(BL_SHAPE_Z, BR_SHAPE_Z_PATH, TL_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, BR_SHAPE_X_PATH, TL_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, BR_SHAPE_Z_PATH, TL_SHAPE_Z_PATH);
             else if (type == PoleType.BR_FILL)
-                return axis == Direction.Axis.X ? VoxelShapes.or(BR_SHAPE_X, BL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : VoxelShapes.or(BR_SHAPE_Z, BL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
+                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, BL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, BL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
             else if (type == PoleType.FULL)
                 return OrnamentSlab.PATH_FULL_SHAPE;
             else {
@@ -131,17 +138,17 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
             }
         }
 
-        Optional<VoxelShape> optional = shapes.stream().reduce(VoxelShapes::or);
+        Optional<VoxelShape> optional = shapes.stream().reduce(Shapes::or);
 
-        if (!optional.isPresent()) {
+        if (optional.isEmpty()) {
             OrnamentalMod.LOGGER.error("Ornament Pole had no shapes! Resorting to full cube");
-            return VoxelShapes.block();
+            return Shapes.block();
         }
         return optional.get();
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         /*
          * 1. Check 3 corner blocks so we can become Full and remove Waterlogged
          * 2. Check 2 corner blocks so we can determine what 3 corner block it becomes, checking look context
@@ -278,7 +285,7 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public boolean canBeReplaced(BlockState state, BlockItemUseContext context) {
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         ItemStack stack = context.getItemInHand();
         PoleType type = state.getValue(TYPE);
         Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
@@ -345,8 +352,8 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
     }
 
     @Override
-    public void fallOn(World world, BlockPos pos, Entity entity, float distance) {
-        entity.causeFallDamage(distance, builder.fallMultiplier);
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float distance) {
+        entity.causeFallDamage(distance, builder.fallMultiplier, DamageSource.FALL);
     }
 
     @Override
@@ -357,7 +364,7 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public int getSignal(BlockState state, IBlockReader world, BlockPos pos, Direction direction) {
+    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
         if (builder.hasPower) {
             switch (state.getValue(TYPE).getShape()) {
                 case CORNER: return 4;
@@ -376,18 +383,18 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
     }
 
     @Override
-    public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return state.getValue(TYPE) != PoleType.FULL && IWaterLoggable.super.placeLiquid(worldIn, pos, state, fluidStateIn);
+    public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+        return state.getValue(TYPE) != PoleType.FULL && SimpleWaterloggedBlock.super.placeLiquid(worldIn, pos, state, fluidStateIn);
     }
 
     @Override
-    public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return state.getValue(TYPE) != PoleType.FULL && IWaterLoggable.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
+    public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+        return state.getValue(TYPE) != PoleType.FULL && SimpleWaterloggedBlock.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
     }
 
     @Override
     @Deprecated
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
             worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
@@ -397,23 +404,23 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
         if (!itemstack.isEmpty()) {
-            if ((builder.isDirt || builder.mealGrass) && item == Items.BONE_MEAL) {
+            if (builder.mealGrass && item == Items.BONE_MEAL) {
                 return changeBlock(itemstack, ModBlocks.grass_beam, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
 
-            if ((builder.isGrass || builder.hoeDirt) && item instanceof HoeItem) {
+            if (builder.hoeDirt && item instanceof HoeItem) {
                 return changeBlock(itemstack, ModBlocks.dirt_beam, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
             }
-            if ((builder.isGrass || builder.shovelPath) && item instanceof ShovelItem) {
+            if (builder.shovelPath && item instanceof ShovelItem) {
                 return changeBlock(itemstack, ModBlocks.path_beam, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
             }
 
-            if ((builder.isPath || builder.hoeGrass) && item instanceof HoeItem) {
+            if (builder.hoeGrass && item instanceof HoeItem) {
                 return changeBlock(itemstack, ModBlocks.grass_beam, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
             }
         }
@@ -421,19 +428,19 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
         return super.use(state, worldIn, pos, player, hand, result);
     }
 
-    private ActionResultType changeBlock(ItemStack itemstack, Supplier<? extends OrnamentBeam> newblock, SoundEvent sound, World worldIn, BlockPos pos, PlayerEntity player, Hand hand) {
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentBeam> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         this.setBlock(worldIn, pos, newblock);
-        worldIn.playSound(null, pos, sound, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-        if (!player.abilities.instabuild && !itemstack.isDamageableItem()) {
+        if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    private void setBlock(World world, BlockPos pos, Supplier<? extends OrnamentBeam> block) {
+    private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentBeam> block) {
         BlockState state = world.getBlockState(pos);
         world.setBlockAndUpdate(pos, block.get().defaultBlockState()
                 .setValue(TYPE, state.getValue(TYPE))
@@ -445,7 +452,7 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
     @Deprecated
     @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
-        if (builder.isIce || builder.breakableCull) {
+        if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentBeam && state.getBlock() instanceof OrnamentBeam) {
                 OrnamentBeam pole = (OrnamentBeam) state.getBlock();
                 OrnamentBeam otherPole = (OrnamentBeam) otherState.getBlock();
@@ -460,15 +467,15 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-		if (type == PathType.WATER) {
+    public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
+		if (type == PathComputationType.WATER) {
 			return worldIn.getFluidState(pos).is(FluidTags.WATER);
 		}
 		return false;
 	}
 
     @Override
-    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
         if (builder.hasConfig) {
             ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
 
@@ -483,16 +490,16 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
         super.randomTick(state, worldIn, pos, random);
-        if (builder.isIce || builder.canMelt) {
-            if (worldIn.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+        if (builder.canMelt) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
     }
 
-    protected void turnIntoWater(World world, BlockPos pos) {
+    protected void turnIntoWater(Level world, BlockPos pos) {
         if (world.dimensionType().ultraWarm() && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
@@ -504,6 +511,6 @@ public class OrnamentBeam extends Block implements IWaterLoggable, IOrnamentalBl
     @Override
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.isIce ? PushReaction.NORMAL : builder.pushReaction;
+        return builder.pushReaction;
     }
 }
