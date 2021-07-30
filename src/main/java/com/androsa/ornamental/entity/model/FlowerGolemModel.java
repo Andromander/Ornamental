@@ -1,15 +1,15 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.FlowerGolemEntity;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.androsa.ornamental.entity.FlowerGolem;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class FlowerGolemModel<T extends FlowerGolemEntity> extends AbstractGolemModel<T> {
+public abstract class FlowerGolemModel<T extends FlowerGolem> extends AbstractGolemModel<T> {
 
-    public FlowerGolemModel(int width, int height) {
-        super(width, height, true);
+    public FlowerGolemModel(ModelPart root) {
+        super(root, true, true, true);
     }
 
     @Override
@@ -29,7 +29,7 @@ public abstract class FlowerGolemModel<T extends FlowerGolemEntity> extends Abst
         }
     }
 
-    public ModelRenderer getArmHoldingRose() {
+    public ModelPart getArmHoldingFlower() {
         return armR;
     }
 }

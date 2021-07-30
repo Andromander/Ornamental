@@ -1,8 +1,8 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.AbstractGolemEntity;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.androsa.ornamental.entity.OrnamentalGolem;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -11,31 +11,33 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Not all fields are required. Special cases can ignore certain fields
  */
 @OnlyIn(Dist.CLIENT)
-public abstract class AbstractGolemModel<T extends AbstractGolemEntity> extends SegmentedModel<T> {
+public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends HierarchicalModel<T> {
 
-    public ModelRenderer legL;
-    public ModelRenderer legR;
-    public ModelRenderer body;
-    public ModelRenderer torso;
-    public ModelRenderer armL;
-    public ModelRenderer armR;
-    public ModelRenderer head;
+    public final ModelPart root;
+    public ModelPart head;
+    public ModelPart legL;
+    public ModelPart legR;
+    public ModelPart armL;
+    public ModelPart armR;
+    private final boolean useTimer;
 
-    private boolean useTimer;
-
-    public AbstractGolemModel(int width, int height, boolean useTimer) {
-        this.texWidth = width;
-        this.texHeight = height;
+    public AbstractGolemModel(ModelPart root, boolean hasArms, boolean hasLegs, boolean useTimer) {
+        this.root = root;
+        this.head = root.getChild("head");
+        if (hasArms) {
+            this.armL = root.getChild("arm_left");
+            this.armR = root.getChild("arm_right");
+        }
+        if (hasLegs) {
+            this.legL = root.getChild("leg_left");
+            this.legR = root.getChild("leg_right");
+        }
         this.useTimer = useTimer;
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.xRot = x;
-        modelRenderer.yRot = y;
-        modelRenderer.zRot = z;
+    @Override
+    public ModelPart root() {
+        return this.root;
     }
 
     @Override

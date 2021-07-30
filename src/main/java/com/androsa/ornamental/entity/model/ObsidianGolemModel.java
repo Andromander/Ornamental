@@ -1,8 +1,12 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.ObsidianGolemEntity;
-import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.androsa.ornamental.entity.ObsidianGolem;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -11,60 +15,61 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ObsidianGolemModel<T extends ObsidianGolemEntity> extends AbstractGolemModel<T> {
-    public ModelRenderer chin;
-    public ModelRenderer lowerArmL;
-    public ModelRenderer lowerArmR;
+public class ObsidianGolemModel<T extends ObsidianGolem> extends AbstractGolemModel<T> {
 
-    public ObsidianGolemModel() {
-        super(96, 96, true);
-
-        this.armR = new ModelRenderer(this, 64, 38);
-        this.armR.setPos(-11.0F, -12.0F, 0.0F);
-        this.armR.addBox(-6.0F, 0.0F, -3.5F, 6, 15, 7, 0.0F);
-        this.armL = new ModelRenderer(this, 57, 16);
-        this.armL.setPos(11.0F, -12.0F, 0.0F);
-        this.armL.addBox(0.0F, 0.0F, -3.5F, 6, 15, 7, 0.0F);
-        this.head = new ModelRenderer(this, 64, 0);
-        this.head.setPos(0.0F, -13.0F, -4.0F);
-        this.head.addBox(-4.0F, -9.0F, -4.5F, 8, 9, 7, 0.0F);
-        this.legL = new ModelRenderer(this, 0, 0);
-        this.legL.setPos(1.5F, 12.0F, 0.0F);
-        this.legL.addBox(0.0F, 0.0F, -4.0F, 8, 12, 8, 0.0F);
-        this.torso = new ModelRenderer(this, 0, 40);
-        this.torso.setPos(0.0F, -13.0F, 0.0F);
-        this.torso.addBox(-11.0F, 0.0F, -5.0F, 22, 13, 10, 0.0F);
-        this.lowerArmL = new ModelRenderer(this, 0, 63);
-        this.lowerArmL.setPos(3.0F, 15.0F, 0.0F);
-        this.lowerArmL.addBox(-4.0F, 0.0F, -4.5F, 8, 11, 9, 0.0F);
-        this.chin = new ModelRenderer(this, 59, 60);
-        this.chin.setPos(0.0F, -2.0F, -5.5F);
-        this.chin.addBox(-5.0F, 0.0F, 0.0F, 10, 3, 5, 0.0F);
-        this.lowerArmR = new ModelRenderer(this, 34, 63);
-        this.lowerArmR.setPos(-3.0F, 15.0F, 0.0F);
-        this.lowerArmR.addBox(-4.0F, 0.0F, -4.5F, 8, 11, 9, 0.0F);
-        this.legR = new ModelRenderer(this, 0, 0);
-        this.legR.setPos(-1.5F, 12.0F, 0.0F);
-        this.legR.addBox(-8.0F, 0.0F, -4.0F, 8, 12, 8, 0.0F);
-        this.body = new ModelRenderer(this, 0, 20);
-        this.body.setPos(0.0F, 0.0F, 0.0F);
-        this.body.addBox(-7.5F, 0.0F, -4.0F, 15, 12, 8, 0.0F);
-
-        this.armL.addChild(this.lowerArmL);
-        this.head.addChild(this.chin);
-        this.armR.addChild(this.lowerArmR);
+    public ObsidianGolemModel(ModelPart root) {
+        super(root, true, true, true);
     }
 
-    @Override
-    public Iterable<ModelRenderer> parts() {
-        return ImmutableList.of(
-                armR,
-                armL,
-                head,
-                legL,
-                torso,
-                legR,
-                body
-        );
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition part = mesh.getRoot();
+
+        PartDefinition headdef = part.addOrReplaceChild("head", CubeListBuilder.create()
+                        .texOffs(64, 0)
+                        .addBox(-4.0F, -9.0F, -4.5F, 8, 9, 7),
+                PartPose.offset(0.0F, -13.0F, -4.0F));
+        headdef.addOrReplaceChild("chin", CubeListBuilder.create()
+                        .texOffs(59, 60)
+                        .addBox(-5.0F, 0.0F, 0.0F, 10, 3, 5),
+                PartPose.offset(0.0F, -2.0F, -5.5F));
+
+        part.addOrReplaceChild("torso", CubeListBuilder.create()
+                        .texOffs(0, 40)
+                        .addBox(-11.0F, 0.0F, -5.0F, 22, 13, 10),
+                PartPose.offset(0.0F, -13.0F, 0.0F));
+
+        PartDefinition leftarmdef = part.addOrReplaceChild("arm_left", CubeListBuilder.create()
+                        .texOffs(57, 16)
+                        .addBox(0.0F, 0.0F, -3.5F, 6, 15, 7),
+                PartPose.offset(11.0F, -12.0F, 0.0F));
+        leftarmdef.addOrReplaceChild("lower_arm_left", CubeListBuilder.create()
+                        .texOffs(0, 63)
+                        .addBox(-4.0F, 0.0F, -4.5F, 8, 11, 9),
+                PartPose.offset(3.0F, 15.0F, 0.0F));
+
+        PartDefinition rightarmdef = part.addOrReplaceChild("arm_right", CubeListBuilder.create()
+                        .texOffs(64, 38)
+                        .addBox(-6.0F, 0.0F, -3.5F, 6, 15, 7),
+                PartPose.offset(-11.0F, -12.0F, 0.0F));
+        rightarmdef.addOrReplaceChild("lower_arm_right", CubeListBuilder.create()
+                        .texOffs(34, 63)
+                        .addBox(-4.0F, 0.0F, -4.5F, 8, 11, 9),
+                PartPose.offset(-3.0F, 15.0F, 0.0F));
+
+        part.addOrReplaceChild("body", CubeListBuilder.create()
+                        .texOffs(0, 20)
+                        .addBox(-7.5F, 0.0F, -4.0F, 15, 12, 8),
+                PartPose.offset(0.0F, 0.0F, 0.0F));
+        part.addOrReplaceChild("leg_left", CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(0.0F, 0.0F, -4.0F, 8, 12, 8),
+                PartPose.offset(1.5F, 12.0F, 0.0F));
+        part.addOrReplaceChild("leg_right", CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(-8.0F, 0.0F, -4.0F, 8, 12, 8),
+                PartPose.offset(-1.5F, 12.0F, 0.0F));
+
+        return LayerDefinition.create(mesh, 96, 96);
     }
 }
