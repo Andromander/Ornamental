@@ -3,11 +3,11 @@ package com.androsa.ornamental.entity.helper;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.builder.OrnamentBuilders;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.GolemEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -33,17 +33,17 @@ public enum PatternType {
     BLUE_ICE         (ModEntities.BLUE_ICE_GOLEM, GolemPatterns.getBlueIcePattern(), OrnamentBuilders.BLUE_ICE),
     NETHERITE        (ModEntities.NETHERITE_GOLEM, GolemPatterns.getNetheritePattern(), OrnamentBuilders.NETHERITE);
 
-    private final Supplier<? extends EntityType<? extends GolemEntity>> supplierEntity;
+    private final Supplier<? extends EntityType<? extends AbstractGolem>> supplierEntity;
     private final BlockPattern blockPattern;
     private final OrnamentBuilder ornamentBuilder;
 
-    PatternType(Supplier<? extends EntityType<? extends GolemEntity>> entity, BlockPattern pattern, OrnamentBuilder builder) {
+    PatternType(Supplier<? extends EntityType<? extends AbstractGolem>> entity, BlockPattern pattern, OrnamentBuilder builder) {
         this.supplierEntity = entity;
         this.blockPattern = pattern;
         this.ornamentBuilder = builder;
     }
 
-    public Supplier<? extends EntityType<? extends GolemEntity>> getSupplierEntity() {
+    public Supplier<? extends EntityType<? extends AbstractGolem>> getSupplierEntity() {
         return supplierEntity;
     }
 
@@ -60,7 +60,7 @@ public enum PatternType {
     }
 
     @Nullable
-    public BlockPattern.PatternHelper getMatch(World world, BlockPos pos) {
+    public BlockPattern.BlockPatternMatch getMatch(Level world, BlockPos pos) {
         return getBlockPattern().find(world, pos);
     }
 

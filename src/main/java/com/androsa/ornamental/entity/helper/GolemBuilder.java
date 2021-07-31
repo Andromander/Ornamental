@@ -2,17 +2,17 @@ package com.androsa.ornamental.entity.helper;
 
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CarvedPumpkinBlock;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.entity.passive.GolemEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.CachedBlockInfo;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,7 +25,7 @@ public class GolemBuilder {
     @SubscribeEvent
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().getBlock() instanceof CarvedPumpkinBlock) {
-            ServerWorld world = ((IServerWorld)event.getWorld()).getLevel();
+            ServerLevel world = ((ServerLevelAccessor)event.getWorld()).getLevel();
             BlockPos pos = event.getPos();
 
             checkPatternLarge(PatternType.GOLD, world, pos, 1, 2);
@@ -51,9 +51,9 @@ public class GolemBuilder {
     }
 
     //For Golems with only a height
-    private static void checkPatternSmall(PatternType type, World world, BlockPos pos, int y) {
+    private static void checkPatternSmall(PatternType type, Level world, BlockPos pos, int y) {
         if (type.canBuild()) {
-            BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
+            BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
             if (pattern != null) {
                 setAirSmall(type, pattern, world);
                 addGolem(type, world, pattern, 0, y);
@@ -63,9 +63,9 @@ public class GolemBuilder {
     }
 
     //For Golems with a width and height
-    private static void checkPatternLarge(PatternType type, World world, BlockPos pos, int x, int y) {
+    private static void checkPatternLarge(PatternType type, Level world, BlockPos pos, int x, int y) {
         if (type.canBuild()) {
-            BlockPattern.PatternHelper pattern = type.getMatch(world, pos);
+            BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
             if (pattern != null) {
                 setAirLarge(type, pattern, world);
                 addGolem(type, world, pattern, x, y);
@@ -74,46 +74,46 @@ public class GolemBuilder {
         }
     }
 
-    private static void setAirSmall(PatternType type, BlockPattern.PatternHelper pattern, World world) {
+    private static void setAirSmall(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int k = 0; k < type.getHeight(); ++k) {
-            CachedBlockInfo info = pattern.getBlock(0, k, 0);
+            BlockInWorld info = pattern.getBlock(0, k, 0);
             world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
             world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
         }
     }
 
-    private static void setAirLarge(PatternType type, BlockPattern.PatternHelper pattern, World world) {
+    private static void setAirLarge(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int j = 0; j < type.getWidth(); ++j) {
             for(int k = 0; k < type.getHeight(); ++k) {
-                CachedBlockInfo info = pattern.getBlock(j, k, 0);
+                BlockInWorld info = pattern.getBlock(j, k, 0);
                 world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
                 world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
             }
         }
     }
 
-    private static void addGolem(PatternType type, World world, BlockPattern.PatternHelper pattern, int x, int y) {
-        GolemEntity entity = type.getSupplierEntity().get().create(world);
+    private static void addGolem(PatternType type, Level world, BlockPattern.BlockPatternMatch pattern, int x, int y) {
+        AbstractGolem entity = type.getSupplierEntity().get().create(world);
         BlockPos pos = pattern.getBlock(x, y, 0).getPos();
         entity.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addFreshEntity(entity);
 
-        for(ServerPlayerEntity player : world.getEntitiesOfClass(ServerPlayerEntity.class, entity.getBoundingBox().inflate(5.0D))) {
+        for(ServerPlayer player : world.getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(5.0D))) {
             CriteriaTriggers.SUMMONED_ENTITY.trigger(player, entity);
         }
     }
 
-    private static void notifySmall(PatternType type, BlockPattern.PatternHelper pattern, World world) {
+    private static void notifySmall(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int j1 = 0; j1 < type.getHeight(); ++j1) {
-            CachedBlockInfo cachedblockinfo1 = pattern.getBlock(0, j1, 0);
+            BlockInWorld cachedblockinfo1 = pattern.getBlock(0, j1, 0);
             world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
         }
     }
 
-    private static void notifyLarge(PatternType type, BlockPattern.PatternHelper pattern, World world) {
+    private static void notifyLarge(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int i1 = 0; i1 < type.getWidth(); ++i1) {
             for(int j1 = 0; j1 < type.getHeight(); ++j1) {
-                CachedBlockInfo cachedblockinfo1 = pattern.getBlock(i1, j1, 0);
+                BlockInWorld cachedblockinfo1 = pattern.getBlock(i1, j1, 0);
                 world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
             }
         }

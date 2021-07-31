@@ -1,11 +1,14 @@
 package com.androsa.ornamental.entity.helper;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.pattern.*;
-import net.minecraft.util.CachedBlockInfo;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
+import net.minecraft.world.level.block.state.predicate.BlockMaterialPredicate;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import net.minecraft.world.level.material.Material;
 
 import java.util.function.Predicate;
 
@@ -32,7 +35,7 @@ public class GolemPatterns {
     private static BlockPattern netheriteGolem;
 
     private static final Predicate<BlockState> IS_PUMPKIN = (state) ->
-            state != null && (state.getBlock() == Blocks.CARVED_PUMPKIN || state.getBlock() == Blocks.JACK_O_LANTERN);
+            state != null && (state.is(Blocks.CARVED_PUMPKIN ) || state.is(Blocks.JACK_O_LANTERN));
 
     public static BlockPattern getGoldPattern() {
         if (goldGolem == null) {
@@ -199,8 +202,8 @@ public class GolemPatterns {
 
     private static BlockPatternBuilder buildPattern(Block block) {
         return BlockPatternBuilder.start()
-                .where('^', CachedBlockInfo.hasState(IS_PUMPKIN))
-                .where('~', CachedBlockInfo.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
-                .where('#', CachedBlockInfo.hasState(BlockStateMatcher.forBlock(block)));
+                .where('^', BlockInWorld.hasState(IS_PUMPKIN))
+                .where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR)))
+                .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(block)));
     }
 }
