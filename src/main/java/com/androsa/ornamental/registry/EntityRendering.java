@@ -5,6 +5,7 @@ import com.androsa.ornamental.entity.model.*;
 import com.androsa.ornamental.entity.renderer.*;
 import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -92,11 +93,11 @@ public class EntityRendering {
         event.registerEntityRenderer(ModEntities.BLUE_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, BLUE_ICE_GOLEM));
         event.registerEntityRenderer(ModEntities.NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(m.bakeLayer(NETHERITE_GOLEM)), 1.0F));
 
-//        RenderingRegistry.registerEntityRenderingHandler(LAPIS_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-//        RenderingRegistry.registerEntityRenderingHandler(REDSTONE_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-//        RenderingRegistry.registerEntityRenderingHandler(THROWN_BRICK.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-//        RenderingRegistry.registerEntityRenderingHandler(THROWN_NETHER_BRICK.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-//        RenderingRegistry.registerEntityRenderingHandler(PACKED_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-//        RenderingRegistry.registerEntityRenderingHandler(BLUE_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
+        event.registerEntityRenderer(ModEntities.LAPIS_BULLET.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.REDSTONE_BULLET.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.THROWN_BRICK.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.THROWN_NETHER_BRICK.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.PACKED_ICEBALL.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLUE_ICEBALL.get(), ThrownItemRenderer::new);
     }
 }
