@@ -2,15 +2,10 @@ package com.androsa.ornamental.registry;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.*;
-import com.androsa.ornamental.entity.model.*;
 import com.androsa.ornamental.entity.projectile.*;
-import com.androsa.ornamental.entity.renderer.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -70,38 +65,6 @@ public class ModEntities {
                         .setShouldReceiveVelocityUpdates(true)
                         .build(name)
         );
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static void registerRenders() {
-        RenderingRegistry.registerEntityRenderingHandler(GOLD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new GoldGolemModel<>(), 0.6F));
-        RenderingRegistry.registerEntityRenderingHandler(DIAMOND_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new DiamondGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(EMERALD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new EmeraldGolemModel<>(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(LAPIS_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new LapisGolemModel<>(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(OBSIDIAN_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new ObsidianGolemModel<>(), 0.8F));
-        RenderingRegistry.registerEntityRenderingHandler(COAL_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new CoalGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(REDSTONE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new RedstoneGolemModel<>(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(CLAY_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new ClayGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(DIRT_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new DirtGolemModel<>(), 0.2F));
-        RenderingRegistry.registerEntityRenderingHandler(GRASS_GOLEM.get(), m -> new GrassGolemRenderer<>(m, new DirtGolemModel<>(), 0.2F));
-        RenderingRegistry.registerEntityRenderingHandler(HAY_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new HayGolemModel<>(), 0.3F));
-        RenderingRegistry.registerEntityRenderingHandler(PATH_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new DirtGolemModel<>(), 0.2F));
-        RenderingRegistry.registerEntityRenderingHandler(BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new ClayGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(QUARTZ_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new QuartzGolemModel<>(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(BONE_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new BoneGolemModel<>(), 0.6F));
-        RenderingRegistry.registerEntityRenderingHandler(NETHER_BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new NetherBrickGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(RED_NETHER_BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new NetherBrickGolemModel<>(), 0.4F));
-        RenderingRegistry.registerEntityRenderingHandler(ICE_GOLEM.get(), IceGolemTransparentRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(PACKED_ICE_GOLEM.get(), IceGolemRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(BLUE_ICE_GOLEM.get(), IceGolemRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(), 1.0F));
-
-        RenderingRegistry.registerEntityRenderingHandler(LAPIS_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(REDSTONE_BULLET.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(THROWN_BRICK.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(THROWN_NETHER_BRICK.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(PACKED_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(BLUE_ICEBALL.get(), m -> new SpriteRenderer<>(m, Minecraft.getInstance().getItemRenderer()));
     }
 
     @SubscribeEvent

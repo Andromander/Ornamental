@@ -1,20 +1,21 @@
 package com.androsa.ornamental.entity.renderer;
 
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.entity.IceGolemEntity;
+import com.androsa.ornamental.entity.IceGolem;
 import com.androsa.ornamental.entity.renderer.layer.IceGolemHeadLayer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.model.SnowGolemModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.model.SnowManModel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class IceGolemRenderer<T extends IceGolemEntity> extends MobRenderer<T, SnowManModel<T>> {
+public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGolemModel<T>> {
 
-    public IceGolemRenderer(EntityRendererManager manager) {
-        super(manager, new SnowManModel<>(), 0.5F);
+    public IceGolemRenderer(EntityRendererProvider.Context manager, ModelLayerLocation model) {
+        super(manager, new SnowGolemModel<>(manager.bakeLayer(model)), 0.5F);
         this.addLayer(new IceGolemHeadLayer<>(this));
     }
 
