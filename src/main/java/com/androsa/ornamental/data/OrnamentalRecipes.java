@@ -1,15 +1,12 @@
 package com.androsa.ornamental.data;
 
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.blocks.OrnamentWall;
-import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Items;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
 
@@ -20,7 +17,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         stairs(consumer, ModBlocks.iron_stairs, Blocks.IRON_BLOCK);
         stairs(consumer, ModBlocks.gold_stairs, Blocks.GOLD_BLOCK);
         stairs(consumer, ModBlocks.diamond_stairs, Blocks.DIAMOND_BLOCK);
@@ -33,7 +30,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         stairs(consumer, ModBlocks.dirt_stairs, Blocks.DIRT);
         stairs(consumer, ModBlocks.grass_stairs, Blocks.GRASS_BLOCK);
         stairs(consumer, ModBlocks.hay_stairs, Blocks.HAY_BLOCK);
-        stairs(consumer, ModBlocks.path_stairs, Blocks.GRASS_PATH);
+        stairs(consumer, ModBlocks.path_stairs, Blocks.DIRT_PATH);
         stairs(consumer, ModBlocks.bone_stairs, Blocks.BONE_BLOCK);
         stairs(consumer, ModBlocks.snow_stairs, Blocks.SNOW_BLOCK);
         stairs(consumer, ModBlocks.ice_stairs, Blocks.ICE);
@@ -53,7 +50,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         slab(consumer, ModBlocks.dirt_slab, Blocks.DIRT);
         slab(consumer, ModBlocks.grass_slab, Blocks.GRASS_BLOCK);
         slab(consumer, ModBlocks.hay_slab, Blocks.HAY_BLOCK);
-        slab(consumer, ModBlocks.path_slab, Blocks.GRASS_PATH);
+        slab(consumer, ModBlocks.path_slab, Blocks.DIRT_PATH);
         slab(consumer, ModBlocks.bone_slab, Blocks.BONE_BLOCK);
         slabOverride(consumer, ModBlocks.snow_slab, Blocks.SNOW_BLOCK);
         slab(consumer, ModBlocks.ice_slab, Blocks.ICE);
@@ -73,7 +70,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fence(consumer, ModBlocks.dirt_fence, Blocks.DIRT, ModBlocks.dirt_slab);
         fence(consumer, ModBlocks.grass_fence, Blocks.GRASS_BLOCK, ModBlocks.grass_slab);
         fence(consumer, ModBlocks.hay_fence, Blocks.HAY_BLOCK, Items.WHEAT);
-        fence(consumer, ModBlocks.path_fence, Blocks.GRASS_PATH, ModBlocks.path_slab);
+        fence(consumer, ModBlocks.path_fence, Blocks.DIRT_PATH, ModBlocks.path_slab);
         fence(consumer, ModBlocks.brick_fence, Blocks.BRICKS, Items.BRICK);
         fence(consumer, ModBlocks.quartz_fence, Blocks.QUARTZ_BLOCK, Items.QUARTZ);
         fence(consumer, ModBlocks.bone_fence, Blocks.BONE_BLOCK, Items.BONE_MEAL);
@@ -119,7 +116,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fencegate(consumer, ModBlocks.dirt_fence_gate, Blocks.DIRT, ModBlocks.dirt_slab);
         fencegate(consumer, ModBlocks.grass_fence_gate, Blocks.GRASS_BLOCK, ModBlocks.grass_slab);
         fencegate(consumer, ModBlocks.hay_fence_gate, Blocks.HAY_BLOCK, Items.WHEAT);
-        fencegate(consumer, ModBlocks.path_fence_gate, Blocks.GRASS_PATH, ModBlocks.path_slab);
+        fencegate(consumer, ModBlocks.path_fence_gate, Blocks.DIRT_PATH, ModBlocks.path_slab);
         fencegate(consumer, ModBlocks.brick_fence_gate, Blocks.BRICKS, Items.BRICK);
         fencegate(consumer, ModBlocks.quartz_fence_gate, Blocks.QUARTZ_BLOCK, Items.QUARTZ);
         fencegate(consumer, ModBlocks.bone_fence_gate, Blocks.BONE_BLOCK, Items.BONE_MEAL);
@@ -238,7 +235,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         wall(consumer, ModBlocks.dirt_wall, Blocks.DIRT);
         wall(consumer, ModBlocks.grass_wall, Blocks.GRASS_BLOCK);
         wall(consumer, ModBlocks.hay_wall, Blocks.HAY_BLOCK);
-        wall(consumer, ModBlocks.path_wall, Blocks.GRASS_PATH);
+        wall(consumer, ModBlocks.path_wall, Blocks.DIRT_PATH);
         wall(consumer, ModBlocks.quartz_wall, Blocks.QUARTZ_BLOCK);
         wall(consumer, ModBlocks.bone_wall, Blocks.BONE_BLOCK);
         wall(consumer, ModBlocks.snow_wall, Blocks.SNOW_BLOCK);

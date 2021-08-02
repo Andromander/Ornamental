@@ -7,18 +7,18 @@ import com.androsa.ornamental.data.provider.OrnamentLootTableProvider;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Items;
-import net.minecraft.loot.LootParameterSet;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.ValidationTracker;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.List;
 import java.util.Map;
@@ -40,12 +40,12 @@ public class OrnamentalLootTables extends LootTableProvider {
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
-        return ImmutableList.of(Pair.of(BlockTables::new, LootParameterSets.BLOCK), Pair.of(EntityTables::new, LootParameterSets.ENTITY));
+    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+        return ImmutableList.of(Pair.of(BlockTables::new, LootContextParamSets.BLOCK), Pair.of(EntityTables::new, LootContextParamSets.ENTITY));
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> tableMap, ValidationTracker tracker) { }
+    protected void validate(Map<ResourceLocation, LootTable> tableMap, ValidationContext tracker) { }
 
     public static class BlockTables extends OrnamentLootTableProvider {
         @Override
@@ -307,7 +307,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             add(ModEntities.DIRT_GOLEM, golemTableBlock(Blocks.DIRT));
             add(ModEntities.GRASS_GOLEM, golemTableBlock(Blocks.GRASS_BLOCK));
             add(ModEntities.HAY_GOLEM, golemTable(Items.WHEAT));
-            add(ModEntities.PATH_GOLEM, golemTableBlock(Blocks.GRASS_PATH));
+            add(ModEntities.PATH_GOLEM, golemTableBlock(Blocks.DIRT_PATH));
             add(ModEntities.BRICK_GOLEM, golemTable(Items.BRICK));
             add(ModEntities.QUARTZ_GOLEM, golemTable(Items.QUARTZ));
             add(ModEntities.BONE_GOLEM, golemTable(Items.BONE));
@@ -326,7 +326,7 @@ public class OrnamentalLootTables extends LootTableProvider {
 
         @Override
         protected boolean isNonLiving(EntityType<?> type) {
-            return !ALLOWED_ENTITIES.contains(type) && type.getCategory() == EntityClassification.MISC;
+            return !ALLOWED_ENTITIES.contains(type) && type.getCategory() == MobCategory.MISC;
         }
     }
 }

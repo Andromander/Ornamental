@@ -3,15 +3,15 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
 import com.androsa.ornamental.blocks.PoleType;
-import net.minecraft.block.*;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -58,15 +58,15 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         return new ResourceLocation(getModID(), "block/" + name);
     }
 
-    public void stairsBasic(Supplier<? extends StairsBlock> block, String name) {
+    public void stairsBasic(Supplier<? extends StairBlock> block, String name) {
         stairsBlock(block.get(), locVanilla(name));
     }
 
-    public void stairsMissing(Supplier<? extends StairsBlock> block) {
+    public void stairsMissing(Supplier<? extends StairBlock> block) {
         stairsBlock(block.get(), locOrnament("missingno"));
     }
 
-    public void stairsColumn(Supplier<? extends StairsBlock> block, String side, String end) {
+    public void stairsColumn(Supplier<? extends StairBlock> block, String side, String end) {
         stairsBlock(block.get(), locVanilla(side), locVanilla(end), locVanilla(end));
     }
 

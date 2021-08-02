@@ -4,8 +4,8 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalBlockTagProvider;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -36,7 +36,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.iron_slab, ModBlocks.gold_slab, ModBlocks.diamond_slab, ModBlocks.emerald_slab, ModBlocks.lapis_slab, ModBlocks.obsidian_slab, ModBlocks.coal_slab, ModBlocks.redstone_slab,
             ModBlocks.missingno_slab, ModBlocks.clay_slab, ModBlocks.dirt_slab, ModBlocks.grass_slab, ModBlocks.hay_slab, ModBlocks.path_slab, ModBlocks.bone_slab, ModBlocks.snow_slab, ModBlocks.ice_slab,
             ModBlocks.packed_ice_slab, ModBlocks.blue_ice_slab, ModBlocks.netherite_slab);
-    private ImmutableSet<Supplier<? extends StairsBlock>> stairs = ImmutableSet.of(
+    private ImmutableSet<Supplier<? extends StairBlock>> stairs = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.gold_stairs, ModBlocks.diamond_stairs, ModBlocks.emerald_stairs, ModBlocks.lapis_stairs, ModBlocks.obsidian_stairs, ModBlocks.coal_stairs, ModBlocks.redstone_stairs,
             ModBlocks.missingno_stairs, ModBlocks.clay_stairs, ModBlocks.dirt_stairs, ModBlocks.grass_stairs, ModBlocks.hay_stairs, ModBlocks.path_stairs, ModBlocks.bone_stairs, ModBlocks.snow_stairs,
             ModBlocks.ice_stairs, ModBlocks.packed_ice_stairs, ModBlocks.blue_ice_stairs, ModBlocks.netherite_stairs);

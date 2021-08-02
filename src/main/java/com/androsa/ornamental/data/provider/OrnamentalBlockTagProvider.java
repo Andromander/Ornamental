@@ -1,9 +1,9 @@
 package com.androsa.ornamental.data.provider;
 
-import net.minecraft.block.*;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -60,8 +60,8 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
         }
     }
 
-    protected void stairsTag(Set<Supplier<? extends StairsBlock>> set) {
-        for (Supplier<? extends StairsBlock> stairs : set) {
+    protected void stairsTag(Set<Supplier<? extends StairBlock>> set) {
+        for (Supplier<? extends StairBlock> stairs : set) {
             tag(BlockTags.STAIRS).add(stairs.get());
         }
     }

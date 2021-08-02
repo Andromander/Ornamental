@@ -4,11 +4,11 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.Block;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 

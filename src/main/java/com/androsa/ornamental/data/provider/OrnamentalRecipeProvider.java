@@ -3,23 +3,23 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.conditions.ConfigCondition;
-import net.minecraft.block.Block;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.common.data.ForgeRecipeProvider;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider implements IConditionBuilder {
+public abstract class OrnamentalRecipeProvider extends RecipeProvider implements IConditionBuilder {
 
     private final String modID;
 
@@ -32,7 +32,7 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         return new ResourceLocation(modID, name);
     }
 
-    public void stairs(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentStairs> result, Block ingredient) {
+    public void stairs(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentStair> result, Block ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 8)
@@ -52,7 +52,7 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void slab(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
+    public void slab(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
@@ -70,7 +70,7 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void slabOverride(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
+    public void slabOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
 		OrnamentBuilder builder = result.get().getBuilder();
 
 		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
@@ -90,11 +90,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
 		}
 	}
 
-    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
+    public void fence(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
         fence(consumer, result, bigItem, smallItem.get());
     }
 
-    public void fence(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, IItemProvider smallItem) {
+    public void fence(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 3)
@@ -114,11 +114,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
+    public void trapdoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
         trapdoor(consumer, result, ingredient.get());
     }
 
-    public void trapdoor(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, IItemProvider ingredient) {
+    public void trapdoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
@@ -137,11 +137,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
+    public void trapdoorWide(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
         trapdoorWide(consumer, result, ingredient.get());
     }
 
-    public void trapdoorWide(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, IItemProvider ingredient) {
+    public void trapdoorWide(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
@@ -160,11 +160,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, Supplier<? extends OrnamentSlab> smallItem) {
+    public void fencegate(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, Supplier<? extends OrnamentSlab> smallItem) {
         fencegate(consumer, result, bigItem, smallItem.get());
     }
 
-    public void fencegate(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, IItemProvider smallItem) {
+    public void fencegate(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
@@ -184,11 +184,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
+    public void door(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
         door(consumer, result, ingredient.get());
     }
 
-    public void door(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, IItemProvider ingredient) {
+    public void door(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
@@ -208,11 +208,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void pole(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, Supplier<? extends OrnamentSlab> ingredient) {
+    public void pole(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, Supplier<? extends OrnamentSlab> ingredient) {
         pole(consumer, result, ingredient.get());
     }
 
-    public void pole(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, IItemProvider ingredient) {
+    public void pole(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
@@ -232,11 +232,11 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void beam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, Supplier<? extends OrnamentSlab> ingredient) {
+    public void beam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, Supplier<? extends OrnamentSlab> ingredient) {
         beam(consumer, result, ingredient.get());
     }
 
-    public void beam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, IItemProvider ingredient) {
+    public void beam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
@@ -254,7 +254,7 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void convertPoleBeam(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
+    public void convertPoleBeam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
         OrnamentBuilder polebuilder = pole.get().getBuilder();
         OrnamentBuilder beambuilder = beam.get().getBuilder();
 
@@ -284,7 +284,7 @@ public abstract class OrnamentalRecipeProvider extends ForgeRecipeProvider imple
         }
     }
 
-    public void wall(Consumer<IFinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, IItemProvider ingredient) {
+    public void wall(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
         OrnamentBuilder builder = result.get().getBuilder();
 
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
