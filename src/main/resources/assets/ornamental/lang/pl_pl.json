@@ -12,7 +12,7 @@
   "block.ornamental.dirt_stairs": "Schody z ziemi",
   "block.ornamental.grass_stairs": "Trawiaste schody",
   "block.ornamental.hay_stairs": "Schody z siana",
-  "block.ornamental.grass_path_stairs": "Schody ze ścieżki",
+  "block.ornamental.dirt_path_stairs": "Schody ze ścieżki",
 
   "block.ornamental.iron_slab": "Żelazna płyta",
   "block.ornamental.gold_slab": "Złota płyta",
@@ -27,7 +27,7 @@
   "block.ornamental.dirt_slab": "Płyta z ziemi",
   "block.ornamental.grass_slab": "Trawiasta płyta",
   "block.ornamental.hay_slab": "Płyta z siana",
-  "block.ornamental.grass_path_slab": "Płyta ze ścieżki",
+  "block.ornamental.dirt_path_slab": "Płyta ze ścieżki",
 
   "block.ornamental.iron_fence": "Żelazny płot",
   "block.ornamental.gold_fence": "Złoty płot",
@@ -42,7 +42,7 @@
   "block.ornamental.dirt_fence": "Płot z ziemi",
   "block.ornamental.grass_fence": "Trawiasty płot",
   "block.ornamental.hay_fence": "Płot z siana",
-  "block.ornamental.grass_path_fence": "Płot ze ścieżki",
+  "block.ornamental.dirt_path_fence": "Płot ze ścieżki",
 
   "block.ornamental.gold_trapdoor": "Złota klapa",
   "block.ornamental.diamond_trapdoor": "Diamentowa klapa",
@@ -56,7 +56,7 @@
   "block.ornamental.dirt_trapdoor": "Klapa z ziemi",
   "block.ornamental.grass_trapdoor": "Trawiasta klapa",
   "block.ornamental.hay_trapdoor": "Klapa z siana",
-  "block.ornamental.grass_path_trapdoor": "Klapa ze ścieżki",
+  "block.ornamental.dirt_path_trapdoor": "Klapa ze ścieżki",
 
   "block.ornamental.iron_fence_gate": "Żelazna furtka",
   "block.ornamental.gold_fence_gate": "Złota furtka",
@@ -71,5 +71,5 @@
   "block.ornamental.dirt_fence_gate": "Furtka z ziemi",
   "block.ornamental.grass_fence_gate": "Trawiasta furtka",
   "block.ornamental.hay_fence_gate": "Furtka z siana",
-  "block.ornamental.grass_path_fence_gate": "Furtka ze ścieżki"
+  "block.ornamental.dirt_path_fence_gate": "Furtka ze ścieżki"
 }

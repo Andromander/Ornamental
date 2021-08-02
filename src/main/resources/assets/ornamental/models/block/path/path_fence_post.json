@@ -2,8 +2,8 @@
   "textures": {
     "particle": "block/dirt",
     "bottom": "block/dirt",
-    "top": "block/grass_path_top",
-    "side": "block/grass_path_side"
+    "top": "block/path_path_top",
+    "side": "block/path_path_side"
   },
   "elements": [{
     "from": [ 6, 0, 6 ],
