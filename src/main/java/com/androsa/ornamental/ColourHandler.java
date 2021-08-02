@@ -2,11 +2,11 @@ package com.androsa.ornamental;
 
 import com.androsa.ornamental.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.BlockItem;
-import net.minecraft.world.GrassColors;
-import net.minecraft.world.biome.BiomeColors;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.GrassColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -16,7 +16,7 @@ public class ColourHandler {
     public static void registerBlockColors() {
         BlockColors blocks = Minecraft.getInstance().getBlockColors();
 
-        blocks.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? BiomeColors.getAverageGrassColor(worldIn, pos) : GrassColors.get(0.5D, 1.0D),
+        blocks.register((state, worldIn, pos, tintIndex) -> worldIn != null && pos != null ? BiomeColors.getAverageGrassColor(worldIn, pos) : GrassColor.get(0.5D, 1.0D),
                 ModBlocks.grass_fence.get(),
                 ModBlocks.grass_fence_gate.get(),
                 ModBlocks.grass_slab.get(),
