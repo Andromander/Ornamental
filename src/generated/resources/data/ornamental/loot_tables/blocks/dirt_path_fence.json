@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ornamental:grass_path_fence"
+          "name": "ornamental:dirt_path_fence"
         }
       ],
       "conditions": [

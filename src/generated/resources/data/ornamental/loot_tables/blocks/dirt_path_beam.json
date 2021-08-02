@@ -13,7 +13,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "top_half"
                   }
@@ -27,7 +27,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "left_half"
                   }
@@ -41,7 +41,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "right_half"
                   }
@@ -55,7 +55,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "bottom_half"
                   }
@@ -69,7 +69,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "topleft_bottomright"
                   }
@@ -83,7 +83,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "topright_bottomleft"
                   }
@@ -97,7 +97,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "topleft_fill"
                   }
@@ -111,7 +111,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "topright_fill"
                   }
@@ -125,7 +125,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "bottomleft_fill"
                   }
@@ -139,7 +139,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "bottomright_fill"
                   }
@@ -153,7 +153,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ornamental:grass_path_beam",
+                  "block": "ornamental:dirt_path_beam",
                   "properties": {
                     "type": "full"
                   }
@@ -166,7 +166,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "ornamental:grass_path_beam"
+          "name": "ornamental:dirt_path_beam"
         }
       ]
     }

@@ -7,16 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:block_state_property",
-              "block": "ornamental:grass_path_door",
-              "properties": {
-                "half": "lower"
-              }
-            }
-          ],
-          "name": "ornamental:grass_path_door"
+          "name": "ornamental:dirt_path_trapdoor"
         }
       ],
       "conditions": [

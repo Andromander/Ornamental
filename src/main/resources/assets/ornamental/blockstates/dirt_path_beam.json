@@ -28,7 +28,7 @@
     "axis=z,type=bottomleft_fill":     { "model": "ornamental:block/path/path_stairs_bottom_straight", "y": 180, "uvlock": true },
     "axis=x,type=bottomright_fill":    { "model": "ornamental:block/path/path_stairs_bottom_straight", "y": 90, "uvlock": true },
     "axis=z,type=bottomright_fill":    { "model": "ornamental:block/path/path_stairs_bottom_straight" },
-    "axis=x,type=full":                { "model": "minecraft:block/grass_path" },
-    "axis=z,type=full":                { "model": "minecraft:block/grass_path" }
+    "axis=x,type=full":                { "model": "minecraft:block/dirt_path" },
+    "axis=z,type=full":                { "model": "minecraft:block/dirt_path" }
   }
 }

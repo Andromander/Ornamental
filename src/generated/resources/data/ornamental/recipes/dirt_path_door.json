@@ -11,16 +11,17 @@
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "pattern": [
-          "###",
-          "###"
+          "##",
+          "##",
+          "##"
         ],
         "key": {
           "#": {
-            "item": "ornamental:grass_path_slab"
+            "item": "ornamental:dirt_path_slab"
           }
         },
         "result": {
-          "item": "ornamental:grass_path_trapdoor"
+          "item": "ornamental:dirt_path_door"
         }
       }
     }

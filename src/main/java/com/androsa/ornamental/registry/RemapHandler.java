@@ -24,6 +24,7 @@ public class RemapHandler {
 
     /**
      * Remap blocks from "nifty" to "ornamental"
+     * Remap Grass Path to Dirt Path
      */
     @SubscribeEvent
     public static void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
@@ -32,17 +33,28 @@ public class RemapHandler {
                 ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
                 mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
             }
+            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
+                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
+                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
+                mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
+            }
         }
     }
 
     /**
      * Remap items from "nifty" to "ornamental"
+     * Remap Grass Path to Dirt Path
      */
     @SubscribeEvent
     public static void remapItems(RegistryEvent.MissingMappings<Item> event) {
         for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
             if (mapping.key.getNamespace().equals("nifty")) {
                 ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
+                mapping.remap(ForgeRegistries.ITEMS.getValue(remap));
+            }
+            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
+                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
+                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
                 mapping.remap(ForgeRegistries.ITEMS.getValue(remap));
             }
         }
@@ -63,12 +75,18 @@ public class RemapHandler {
 
     /**
      * Remap entities from "nifty" to "ornamental"
+     * Remap Grass Path Golem to Dirt Path Golem
      */
     @SubscribeEvent
     public static void remapEntities(RegistryEvent.MissingMappings<EntityType<?>> event) {
         for (RegistryEvent.MissingMappings.Mapping<EntityType<?>> mapping : event.getAllMappings()) {
             if (mapping.key.getNamespace().equals("nifty")) {
                 ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
+                mapping.remap(ForgeRegistries.ENTITIES.getValue(remap));
+            }
+            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
+                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
+                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
                 mapping.remap(ForgeRegistries.ENTITIES.getValue(remap));
             }
         }

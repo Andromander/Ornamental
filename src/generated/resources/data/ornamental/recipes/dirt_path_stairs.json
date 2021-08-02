@@ -11,6 +11,8 @@
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "pattern": [
+          "#  ",
+          "## ",
           "###"
         ],
         "key": {
@@ -19,8 +21,8 @@
           }
         },
         "result": {
-          "item": "ornamental:grass_path_slab",
-          "count": 6
+          "item": "ornamental:dirt_path_stairs",
+          "count": 8
         }
       }
     }

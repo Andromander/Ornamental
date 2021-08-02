@@ -11,17 +11,20 @@
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "pattern": [
-          "##",
-          "##",
-          "##"
+          "#/#",
+          "#/#"
         ],
         "key": {
           "#": {
-            "item": "ornamental:grass_path_slab"
+            "item": "minecraft:dirt_path"
+          },
+          "/": {
+            "item": "ornamental:dirt_path_slab"
           }
         },
         "result": {
-          "item": "ornamental:grass_path_door"
+          "item": "ornamental:dirt_path_fence",
+          "count": 3
         }
       }
     }

@@ -29,7 +29,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<DirtGolem>> DIRT_GOLEM = makeEntity("dirt", DirtGolem::new, 0.6F, 0.8F, false);
     public static final RegistryObject<EntityType<GrassGolem>> GRASS_GOLEM = makeEntity("grass", GrassGolem::new, 0.6F, 0.8F, false);
     public static final RegistryObject<EntityType<HayGolem>> HAY_GOLEM = makeEntity("hay", HayGolem::new, 0.7F, 2.5F, false);
-    public static final RegistryObject<EntityType<PathGolem>> PATH_GOLEM = makeEntity("grass_path", PathGolem::new, 0.6F, 0.8F, false);
+    public static final RegistryObject<EntityType<PathGolem>> PATH_GOLEM = makeEntity("dirt_path", PathGolem::new, 0.6F, 0.8F, false);
     public static final RegistryObject<EntityType<BrickGolem>> BRICK_GOLEM = makeEntity("brick", BrickGolem::new, 1.0F, 1.9F, false);
     public static final RegistryObject<EntityType<QuartzGolem>> QUARTZ_GOLEM = makeEntity("quartz", QuartzGolem::new, 1.2F, 2.2F, true);
     public static final RegistryObject<EntityType<BoneGolem>> BONE_GOLEM = makeEntity("bone", BoneGolem::new, 1.0F, 3.1F, false);

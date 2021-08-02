@@ -9,18 +9,14 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
-        "key": {
-          "#": {
-            "item": "ornamental:grass_path_slab"
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "ornamental:dirt_path_pole"
           }
-        },
+        ],
         "result": {
-          "item": "ornamental:grass_path_beam",
-          "count": 6
+          "item": "ornamental:dirt_path_beam"
         }
       }
     }

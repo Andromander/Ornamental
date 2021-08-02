@@ -7,7 +7,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ornamental:grass_path_stairs"
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "ornamental:dirt_path_door",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "ornamental:dirt_path_door"
         }
       ],
       "conditions": [

@@ -110,7 +110,7 @@ public class OrnamentBuilders {
             .canOpen()
             .config(() -> OrnamentalConfig.showHayBlocks);
 
-    public static final OrnamentBuilder PATH = new OrnamentBuilder("grass_path")
+    public static final OrnamentBuilder PATH = new OrnamentBuilder("dirt_path")
             .properties(Material.DIRT)
             .sound(SoundType.GRASS)
             .hardness(0.6F)

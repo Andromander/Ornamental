@@ -14,6 +14,6 @@
     "type=topright_fill":       { "model": "ornamental:block/path/path_stairs_straight_side", "y": 90, "uvlock": true },
     "type=bottomleft_fill":     { "model": "ornamental:block/path/path_stairs_straight_side", "y": 270, "uvlock": true },
     "type=bottomright_fill":    { "model": "ornamental:block/path/path_stairs_straight_side", "y": 180, "uvlock": true },
-    "type=full":                { "model": "minecraft:block/grass_path" }
+    "type=full":                { "model": "minecraft:block/dirt_path" }
   }
 }

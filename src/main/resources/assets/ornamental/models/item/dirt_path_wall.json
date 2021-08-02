@@ -16,8 +16,8 @@
     "textures": {
         "particle": "block/dirt",
         "bottom": "block/dirt",
-        "top": "block/grass_path_top",
-        "side": "block/grass_path_side"
+        "top": "block/dirt_path_top",
+        "side": "block/dirt_path_side"
     },
     "elements": [
         {
