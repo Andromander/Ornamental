@@ -2,8 +2,8 @@
   "ambientocclusion": false,
   "textures": {
     "particle": "block/dirt",
-    "pathbottom": "block/path_path_top",
-    "pathtop": "block/path_path_side"
+    "pathbottom": "block/dirt_path_top",
+    "pathtop": "block/dirt_path_side"
   },
   "elements": [{
     "from": [ 0, 0, 0 ],
