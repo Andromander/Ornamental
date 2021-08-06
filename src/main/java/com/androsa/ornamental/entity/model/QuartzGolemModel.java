@@ -24,9 +24,11 @@ public class QuartzGolemModel<T extends QuartzGolem> extends AbstractGolemModel<
     public QuartzGolemModel(ModelPart root) {
         super(root, true, false, false);
 
-        this.tail1 = root.getChild("tail1");
-        this.tail2 = root.getChild("tail2");
-        this.tail3 = root.getChild("tail3");
+        ModelPart torso = root.getChild("torso");
+        ModelPart body = torso.getChild("body");
+        this.tail1 = body.getChild("tail1");
+        this.tail2 = tail1.getChild("tail2");
+        this.tail3 = tail2.getChild("tail3");
     }
 
     public static LayerDefinition createBodyLayer() {
