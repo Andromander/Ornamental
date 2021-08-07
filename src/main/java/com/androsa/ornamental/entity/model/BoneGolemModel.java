@@ -27,7 +27,7 @@ public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
 
         part.addOrReplaceChild("head", CubeListBuilder.create()
                         .texOffs(53, 15)
-                        .addBox(-2.0F, 0.0F, -2.0F, 4, 10, 4),
+                        .addBox(-3.0F, -6.0F, -3.0F, 6, 7, 5),
                 PartPose.offset(0.0F, -19.0F, 0.0F));
 
         PartDefinition leftarmdef = part.addOrReplaceChild("arm_left", CubeListBuilder.create()
@@ -98,7 +98,7 @@ public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
                 PartPose.offset(0.0F, -20.0F, 2.0F));
         part.addOrReplaceChild("waist", CubeListBuilder.create()
                         .texOffs(24, 0)
-                        .addBox(-0.5F, 0.0F, 0.0F, 1, 7, 2),
+                        .addBox(-4.5F, 0.0F, -2.0F, 9, 3, 4),
                 PartPose.offset(0.0F, -3.0F, 0.0F));
 
         PartDefinition leftlegdef = part.addOrReplaceChild("leg_left", CubeListBuilder.create()
@@ -111,7 +111,7 @@ public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
                 PartPose.offset(1.5F, 10.0F, 0.0F));
         lowerleftlegdef.addOrReplaceChild("toe_left1", CubeListBuilder.create()
                         .texOffs(24, 7)
-                        .addBox(-1.0F, 0.0F, 0.0F, 2, 1, 8),
+                        .addBox(-1.0F, -1.0F, -5.0F, 2, 1, 5),
                 PartPose.offsetAndRotation(1.2F, 14.0F, -2.0F, 0.0F, -0.2617993877991494F, 0.0F));
         lowerleftlegdef.addOrReplaceChild("toe_left2", CubeListBuilder.create()
                         .texOffs(33, 8)

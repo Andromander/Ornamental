@@ -39,7 +39,7 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
                 PartPose.offset(0.0F, -4.0F, -5.0F));
 
         part.addOrReplaceChild("neck", CubeListBuilder.create()
-                        .texOffs(70, 42)
+                        .texOffs(46, 0)
                         .addBox(-1.5F, 0.0F, -1.5F, 3.0F, 5.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, -17.5F, -6.0F, 0.7819074915776542F, 0.0F, 0.0F));
         part.addOrReplaceChild("torso", CubeListBuilder.create()
@@ -53,7 +53,7 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
                 PartPose.offsetAndRotation(10.0F, -12.0F, 1.0F, -0.2708751078990032F, 0.0F, -0.45448375319828993F));
         PartDefinition leftforearmdef = leftarmdef.addOrReplaceChild("forearm_left", CubeListBuilder.create()
                         .texOffs(20, 12)
-                        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 14.0F, 4.0F),
+                        .addBox(0.0F, 0.0F, -3.5F, 7.0F, 14.0F, 7.0F),
                 PartPose.offsetAndRotation(0.5F, 10.0F, 0.5F, -0.5235987755982988F, -0.2792526803190927F, 0.47123889803846897F));
         leftforearmdef.addOrReplaceChild("left_finger_left", CubeListBuilder.create()
                         .texOffs(48, 21)
