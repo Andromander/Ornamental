@@ -93,23 +93,16 @@ public class PathGolem extends DirtGolem {
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
             this.level.playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-        } else if (itemstack.is(Items.DIRT_PATH))  {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
+        } else {
+            return this.repairGolem(player, hand);
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.DIRT_PATH);
     }
 
     @Override

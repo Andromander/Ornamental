@@ -6,8 +6,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.*;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -29,6 +27,7 @@ public class GoldGolem extends FlowerGolem {
     public GoldGolem(EntityType<? extends GoldGolem> entity, Level world) {
         super(entity, world);
         this.maxUpStep = 1.5F;
+        this.targetCreeper = false;
     }
 
     @Override
@@ -53,20 +52,6 @@ public class GoldGolem extends FlowerGolem {
     }
 
     @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
-    protected void doPush(Entity target) {
-        if (target instanceof Enemy && !(target instanceof Creeper) && this.getRandom().nextInt(20) == 0) {
-            this.setTarget((LivingEntity)target);
-        }
-
-        super.doPush(target);
-    }
-
-    @Override
     public void aiStep() {
         super.aiStep();
 
@@ -84,11 +69,6 @@ public class GoldGolem extends FlowerGolem {
                         4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
-    }
-
-    @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     private float getAttackDamage() {
@@ -121,25 +101,8 @@ public class GoldGolem extends FlowerGolem {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.GOLD_INGOT)) {
-            float health = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == health) {
-                return InteractionResult.PASS;
-            } else {
-                float pitch = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, pitch);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        } else {
-            return InteractionResult.PASS;
-        }
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.GOLD_INGOT);
     }
 
     @Override

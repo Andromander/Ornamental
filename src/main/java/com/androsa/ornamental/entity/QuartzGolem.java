@@ -37,6 +37,7 @@ public class QuartzGolem extends OrnamentalGolem {
     public QuartzGolem(EntityType<? extends QuartzGolem> entity, Level world) {
         super(entity, world);
         this.moveControl = new QuartzMoveController(this);
+        this.targetCreeper = true;
     }
 
     @Override
@@ -114,33 +115,14 @@ public class QuartzGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
     public boolean onClimbable() {
         return false;
-    }
-
-    @Override
-    protected void doPush(Entity target) {
-        if (target instanceof Enemy && this.getRandom().nextInt(20) == 0) {
-            this.setTarget((LivingEntity)target);
-        }
-
-        super.doPush(target);
     }
 
     @Override
     public void setTarget(@Nullable LivingEntity target) {
         setTargeting(target != null);
         super.setTarget(target);
-    }
-
-    @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
@@ -170,25 +152,8 @@ public class QuartzGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.QUARTZ)) {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        } else {
-            return InteractionResult.PASS;
-        }
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.QUARTZ);
     }
 
     @Override

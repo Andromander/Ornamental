@@ -5,8 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -69,11 +67,6 @@ public class HayGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.GRASS_HIT;
     }
@@ -84,25 +77,8 @@ public class HayGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.WHEAT)) {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        } else {
-            return InteractionResult.PASS;
-        }
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.WHEAT);
     }
 
     @Override

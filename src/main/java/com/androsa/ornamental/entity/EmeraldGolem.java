@@ -6,8 +6,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.*;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -30,6 +28,7 @@ public class EmeraldGolem extends FlowerGolem {
     public EmeraldGolem(EntityType<? extends EmeraldGolem> entity, Level world) {
         super(entity, world);
         this.maxUpStep = 1.0F;
+        this.targetCreeper = false;
     }
 
     @Override
@@ -56,20 +55,6 @@ public class EmeraldGolem extends FlowerGolem {
     }
 
     @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
-    protected void doPush(Entity target) {
-        if (target instanceof Enemy && !(target instanceof Creeper) && this.getRandom().nextInt(20) == 0) {
-            this.setTarget((LivingEntity)target);
-        }
-
-        super.doPush(target);
-    }
-
-    @Override
     public void aiStep() {
         super.aiStep();
 
@@ -83,11 +68,6 @@ public class EmeraldGolem extends FlowerGolem {
                 this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
-    }
-
-    @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.CREEPER && super.canAttackType(target);
     }
 
     private float getAttackDamage() {
@@ -121,25 +101,8 @@ public class EmeraldGolem extends FlowerGolem {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.EMERALD)) {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        } else {
-            return InteractionResult.PASS;
-        }
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.EMERALD);
     }
 
     @Override

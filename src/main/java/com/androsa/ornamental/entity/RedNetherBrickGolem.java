@@ -33,6 +33,7 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
     public RedNetherBrickGolem(EntityType<? extends RedNetherBrickGolem> entity, Level world) {
         super(entity, world);
         this.maxUpStep = 1.0F;
+        this.targetCreeper = true;
     }
 
     @Override
@@ -57,25 +58,6 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
     }
 
     @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
-    protected void doPush(Entity target) {
-        if (target instanceof Enemy && this.getRandom().nextInt(20) == 0) {
-            this.setTarget((LivingEntity)target);
-        }
-
-        super.doPush(target);
-    }
-
-    @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttackType(target);
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.STONE_HIT;
     }
@@ -86,25 +68,8 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.is(Items.NETHER_BRICK) || itemstack.is(Items.NETHER_WART)) {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
-        } else {
-            return InteractionResult.PASS;
-        }
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.NETHER_BRICK) || stack.is(Items.NETHER_WART);
     }
 
     @Override

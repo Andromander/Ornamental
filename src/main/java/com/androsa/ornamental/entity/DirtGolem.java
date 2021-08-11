@@ -29,6 +29,7 @@ public class DirtGolem extends OrnamentalGolem {
 
     public DirtGolem(EntityType<? extends DirtGolem> entity, Level world) {
         super(entity, world);
+        this.targetCreeper = true;
     }
 
     @Override
@@ -48,25 +49,6 @@ public class DirtGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 5.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.7D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D);
-    }
-
-    @Override
-    protected int decreaseAirSupply(int time) {
-        return time;
-    }
-
-    @Override
-    protected void doPush(Entity target) {
-        if (target instanceof Enemy && this.getRandom().nextInt(20) == 0) {
-            this.setTarget((LivingEntity)target);
-        }
-
-        super.doPush(target);
-    }
-
-    @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.PLAYER && super.canAttackType(target);
     }
 
     @Override
@@ -114,23 +96,16 @@ public class DirtGolem extends OrnamentalGolem {
             this.discard();
             this.level.playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-        } else if (itemstack.is(Items.DIRT)) {
-            float f = this.getHealth();
-            this.heal(25.0F);
-            if (this.getHealth() == f) {
-                return InteractionResult.PASS;
-            } else {
-                float f1 = 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F;
-                this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
-
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
-            }
+        } else {
+            return this.repairGolem(player, hand);
         }
 
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected boolean canRepair(ItemStack stack) {
+        return stack.is(Items.DIRT);
     }
 
     @Override
