@@ -35,6 +35,7 @@ public class EntityRendering {
     public static final ModelLayerLocation PACKED_ICE_GOLEM = makeEntity("packed_ice_golem");
     public static final ModelLayerLocation BLUE_ICE_GOLEM = makeEntity("blue_ice_golem");
     public static final ModelLayerLocation NETHERITE_GOLEM = makeEntity("netherite_golem");
+    public static final ModelLayerLocation COPPER_GOLEM = makeEntity("copper_golem");
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -59,6 +60,7 @@ public class EntityRendering {
         event.registerLayerDefinition(PACKED_ICE_GOLEM, SnowGolemModel::createBodyLayer);
         event.registerLayerDefinition(BLUE_ICE_GOLEM, SnowGolemModel::createBodyLayer);
         event.registerLayerDefinition(NETHERITE_GOLEM, NetheriteGolemModel::createBodyLayer);
+        event.registerLayerDefinition(COPPER_GOLEM, CopperGolemModel::createBodyLayer);
     }
 
     private static ModelLayerLocation makeEntity(String name) {
@@ -92,6 +94,7 @@ public class EntityRendering {
         event.registerEntityRenderer(ModEntities.PACKED_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, PACKED_ICE_GOLEM));
         event.registerEntityRenderer(ModEntities.BLUE_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, BLUE_ICE_GOLEM));
         event.registerEntityRenderer(ModEntities.NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(m.bakeLayer(NETHERITE_GOLEM)), 1.0F));
+        event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), m -> new CopperGolemRenderer<>(m, new CopperGolemModel<>(m.bakeLayer(COPPER_GOLEM)), 1.0F));
 
         event.registerEntityRenderer(ModEntities.LAPIS_BULLET.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.REDSTONE_BULLET.get(), ThrownItemRenderer::new);
@@ -99,5 +102,6 @@ public class EntityRendering {
         event.registerEntityRenderer(ModEntities.THROWN_NETHER_BRICK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.PACKED_ICEBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BLUE_ICEBALL.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.CHARGE_BALL.get(), ChargeBallRenderer::new);
     }
 }

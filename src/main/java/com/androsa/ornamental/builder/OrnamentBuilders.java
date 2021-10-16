@@ -199,4 +199,7 @@ public class OrnamentBuilders {
             .tool(ToolType.PICKAXE, 3, true)
             .isFireproof()
             .config(() -> OrnamentalConfig.showNetheriteBlocks);
+
+    //TODO: placeholder
+    public static final OrnamentBuilder COPPER = new OrnamentBuilder("copper");
 }

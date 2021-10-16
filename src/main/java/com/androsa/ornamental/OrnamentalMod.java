@@ -9,6 +9,10 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,11 +56,15 @@ public class OrnamentalMod {
         config = specPair.getLeft();
     }
 
+    public static DamageSource shocked(Entity source, Entity target) {
+        return new IndirectEntityDamageSource("ornamental.shocked", source, target).bypassArmor();
+    }
+
     private void clientSetup(final FMLClientSetupEvent event) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> OrnamentalMod::registerRenders);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
+        //DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
     }
 
     @SubscribeEvent

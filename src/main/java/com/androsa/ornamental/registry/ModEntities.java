@@ -39,6 +39,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<PackedIceGolem>> PACKED_ICE_GOLEM = makeEntity("packed_ice", PackedIceGolem::new, 0.7F, 1.9F, false);
     public static final RegistryObject<EntityType<BlueIceGolem>> BLUE_ICE_GOLEM = makeEntity("blue_ice", BlueIceGolem::new, 0.7F, 1.9F, false);
     public static final RegistryObject<EntityType<NetheriteGolem>> NETHERITE_GOLEM = makeEntity("netherite", NetheriteGolem::new, 1.8F, 3.1F, true);
+    public static final RegistryObject<EntityType<CopperGolem>> COPPER_GOLEM = makeEntity("copper", CopperGolem::new, 1.5F, 3.5F, false);
 
     public static final RegistryObject<EntityType<LapisBullet>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBullet::new, 0.25F, 0.25F, 4, 10);
     public static final RegistryObject<EntityType<RedstoneBullet>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBullet::new, 0.25F, 0.25F, 4, 10);
@@ -46,6 +47,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<NetherBrick>> THROWN_NETHER_BRICK = makeProjectile("thrown_nether_brick", NetherBrick::new, 0.25F, 0.25F, 150, 2);
     public static final RegistryObject<EntityType<PackedIce>> PACKED_ICEBALL = makeProjectile("packed_iceball", PackedIce::new, 0.25F, 0.25F, 150, 2);
     public static final RegistryObject<EntityType<BlueIce>> BLUE_ICEBALL = makeProjectile("blue_iceball", BlueIce::new, 0.25F, 0.25F, 150, 2);
+    public static final RegistryObject<EntityType<ChargeBall>> CHARGE_BALL = makeProjectile("charge_ball", ChargeBall::new, 0.25F, 0.35F, 150, 2);
 
     private static <T extends Entity> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, float width, float height, boolean fireRes) {
         String regname = name + "_golem";
@@ -60,9 +62,8 @@ public class ModEntities {
         return ENTITIES.register(name, () ->
                 EntityType.Builder.of(entity, MobCategory.MISC)
                         .sized(width, height)
-                        .setTrackingRange(tracking)
-                        .setUpdateInterval(interval)
-                        .setShouldReceiveVelocityUpdates(true)
+                        .clientTrackingRange(tracking)
+                        .updateInterval(interval)
                         .build(name)
         );
     }
@@ -90,5 +91,6 @@ public class ModEntities {
         event.put(PACKED_ICE_GOLEM.get(), IceGolem.registerAttributes().build());
         event.put(BLUE_ICE_GOLEM.get(), IceGolem.registerAttributes().build());
         event.put(NETHERITE_GOLEM.get(), NetheriteGolem.registerAttributes().build());
+        event.put(COPPER_GOLEM.get(), CopperGolem.registerAttributes().build());
     }
 }

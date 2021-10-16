@@ -31,7 +31,8 @@ public enum PatternType {
     ICE              (ModEntities.ICE_GOLEM, GolemPatterns.getIcePattern(), OrnamentBuilders.ICE),
     PACKED_ICE       (ModEntities.PACKED_ICE_GOLEM, GolemPatterns.getPackedIcePattern(), OrnamentBuilders.PACKED_ICE),
     BLUE_ICE         (ModEntities.BLUE_ICE_GOLEM, GolemPatterns.getBlueIcePattern(), OrnamentBuilders.BLUE_ICE),
-    NETHERITE        (ModEntities.NETHERITE_GOLEM, GolemPatterns.getNetheritePattern(), OrnamentBuilders.NETHERITE);
+    NETHERITE        (ModEntities.NETHERITE_GOLEM, GolemPatterns.getNetheritePattern(), OrnamentBuilders.NETHERITE),
+    COPPER           (ModEntities.COPPER_GOLEM, GolemPatterns.getCopperPattern(), OrnamentBuilders.COPPER);
 
     private final Supplier<? extends EntityType<? extends AbstractGolem>> supplierEntity;
     private final BlockPattern blockPattern;
