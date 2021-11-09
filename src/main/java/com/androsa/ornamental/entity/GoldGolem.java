@@ -75,6 +75,7 @@ public class GoldGolem extends FlowerGolem {
         return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
+    @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
         this.level.broadcastEntityEvent(this, (byte)4);

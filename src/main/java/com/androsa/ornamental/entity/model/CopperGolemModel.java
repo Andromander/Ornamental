@@ -205,7 +205,7 @@ public class CopperGolemModel<T extends CopperGolem> extends AbstractGolemModel<
 
     @Override
     public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity.isTargeting() && entity.getCharges() > 0) {
+        if (entity.isTargeting() && entity.isCharged() && entity.getCharges() > 0) {
             this.armR.xRot = -1.5F;
             this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
         } else {
