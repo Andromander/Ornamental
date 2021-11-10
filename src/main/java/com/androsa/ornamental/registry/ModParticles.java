@@ -1,14 +1,13 @@
 package com.androsa.ornamental.registry;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.particle.CastingParticle;
 import com.androsa.ornamental.particle.ChargeSparkParticle;
 import com.androsa.ornamental.particle.OrnamentalBreakingParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +25,7 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> ITEM_BRICK = PARTICLE_TYPE.register("item_brick", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> ITEM_NETHER_BRICK = PARTICLE_TYPE.register("item_nether_brick", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> CHARGE_SPARK = PARTICLE_TYPE.register("charge_spark", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> AMETHYST_CAST = PARTICLE_TYPE.register("amethyst_cast", () -> new SimpleParticleType(false));
 
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
@@ -36,5 +36,6 @@ public class ModParticles {
         engine.register(ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
         engine.register(ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
         engine.register(CHARGE_SPARK.get(), ChargeSparkParticle.ChargeSparkFactory::new);
+        engine.register(AMETHYST_CAST.get(), CastingParticle.AmethystFactory::new);
     }
 }

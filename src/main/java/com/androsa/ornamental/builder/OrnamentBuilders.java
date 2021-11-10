@@ -202,4 +202,7 @@ public class OrnamentBuilders {
 
     //TODO: placeholder
     public static final OrnamentBuilder COPPER = new OrnamentBuilder("copper");
+
+    //TODO: placeholder
+    public static final OrnamentBuilder AMETHYST = new OrnamentBuilder("amethyst");
 }

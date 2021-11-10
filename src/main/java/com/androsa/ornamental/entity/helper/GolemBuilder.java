@@ -48,6 +48,7 @@ public class GolemBuilder {
             checkPatternSmall(PatternType.BLUE_ICE, world, pos, 2);
             checkPatternLarge(PatternType.NETHERITE, world, pos, 1, 2);
             checkPatternLarge(PatternType.COPPER, world, pos, 1, 3);
+            checkPatternLarge(PatternType.AMETHYST, world, pos, 1, 2);
         }
     }
 

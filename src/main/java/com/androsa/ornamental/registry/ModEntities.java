@@ -40,6 +40,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BlueIceGolem>> BLUE_ICE_GOLEM = makeEntity("blue_ice", BlueIceGolem::new, 0.7F, 1.9F, false);
     public static final RegistryObject<EntityType<NetheriteGolem>> NETHERITE_GOLEM = makeEntity("netherite", NetheriteGolem::new, 1.8F, 3.1F, true);
     public static final RegistryObject<EntityType<CopperGolem>> COPPER_GOLEM = makeEntity("copper", CopperGolem::new, 1.5F, 3.5F, false);
+    public static final RegistryObject<EntityType<AmethystGolem>> AMETHYST_GOLEM = makeEntity("amethyst", AmethystGolem::new, 1.0F, 2.8F, false);
 
     public static final RegistryObject<EntityType<LapisBullet>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBullet::new, 0.25F, 0.25F, 4, 10);
     public static final RegistryObject<EntityType<RedstoneBullet>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBullet::new, 0.25F, 0.25F, 4, 10);
@@ -92,5 +93,6 @@ public class ModEntities {
         event.put(BLUE_ICE_GOLEM.get(), IceGolem.registerAttributes().build());
         event.put(NETHERITE_GOLEM.get(), NetheriteGolem.registerAttributes().build());
         event.put(COPPER_GOLEM.get(), CopperGolem.registerAttributes().build());
+        event.put(AMETHYST_GOLEM.get(), AmethystGolem.registerAttributes().build());
     }
 }
