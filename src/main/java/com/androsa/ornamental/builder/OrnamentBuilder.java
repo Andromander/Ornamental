@@ -12,7 +12,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ToolType;
 
 import java.util.function.Supplier;
 
@@ -38,8 +37,6 @@ public class OrnamentBuilder {
     public SoundType sound = SoundType.STONE;
     public float hardness = 0.0F;
     public float resistance = 0.0F;
-    public ToolType harvestTool = null;
-    public int harvestLevel = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
@@ -136,28 +133,10 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's ToolType. Harvest level will be 0.
-     * To set a harvest level, use {@link OrnamentBuilder#tool(ToolType, int, boolean)}
-     * @param tool The block's ToolType
-     * @param required If the block requires this tool. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
+     * Setter for whether a block needs the correct tool to be harvested. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
      */
-    public OrnamentBuilder tool(ToolType tool, boolean required) {
-        this.harvestTool = tool;
-        this.requiresTool = required;
-        return this;
-    }
-
-    /**
-     * Setter for the blocks' harvest tool and level.
-     * To set only a harvst tool, use {@link OrnamentBuilder#tool(ToolType, boolean)}
-     * @param tool The block's ToolType
-     * @param level The block's harvest level
-     * @param required If the block requires this tool. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
-     */
-    public OrnamentBuilder tool(ToolType tool, int level, boolean required) {
-        this.harvestTool = tool;
-        this.harvestLevel = level;
-        this.requiresTool = required;
+    public OrnamentBuilder requiresTool() {
+        this.requiresTool = true;
         return this;
     }
 

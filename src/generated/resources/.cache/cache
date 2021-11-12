@@ -916,6 +916,11 @@ ce9252707094ba7ea64a64bff5cca50fc7cf37b8 data/minecraft/tags/blocks/beacon_base_
 614d6d1a4eecbaed3d0be4c5fb131df66c74ae2a data/minecraft/tags/blocks/fence_gates.json
 85a1375b1b1687bb9abf941d983d26860ad6c61a data/minecraft/tags/blocks/fences.json
 96576e0aebac54bfb0f2232c24b9a4b0296746aa data/minecraft/tags/blocks/guarded_by_piglins.json
+bde751f1100b221b65a08292e100af90e0cdf042 data/minecraft/tags/blocks/mineable/pickaxe.json
+cadd99ab1e60bacaf85043fccec3fc1fb43c2f17 data/minecraft/tags/blocks/mineable/shovel.json
+5e7af12340a9334f12e15fe4d8eeccf2e0a3089a data/minecraft/tags/blocks/needs_diamond_tool.json
+1ad071f40f6a4cf39d91d85746cf14f437bcaec2 data/minecraft/tags/blocks/needs_iron_tool.json
+80f9cff4173d46c2d2c442f5714f022ca236efbf data/minecraft/tags/blocks/needs_stone_tool.json
 4f5a014e67d2200c23afbd0e9c5eee8ae3154471 data/minecraft/tags/blocks/slabs.json
 e12afdf41fd4a0445a4ab14f9361a0827383cbec data/minecraft/tags/blocks/stairs.json
 5aed72852dfb481092345d3c7b4aaad93ba9fe49 data/minecraft/tags/blocks/trapdoors.json

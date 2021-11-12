@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "ornamental:obsidian_stairs",
+    "ornamental:obsidian_slab",
+    "ornamental:obsidian_fence",
+    "ornamental:obsidian_trapdoor",
+    "ornamental:obsidian_fence_gate",
+    "ornamental:obsidian_door",
+    "ornamental:obsidian_pole",
+    "ornamental:obsidian_beam",
+    "ornamental:obsidian_wall",
+    "ornamental:netherite_stairs",
+    "ornamental:netherite_slab",
+    "ornamental:netherite_fence",
+    "ornamental:netherite_trapdoor",
+    "ornamental:netherite_fence_gate",
+    "ornamental:netherite_door",
+    "ornamental:netherite_pole",
+    "ornamental:netherite_beam",
+    "ornamental:netherite_wall"
+  ]
+}

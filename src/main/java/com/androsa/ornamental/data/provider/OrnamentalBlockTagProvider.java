@@ -2,9 +2,8 @@ package com.androsa.ornamental.data.provider;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Set;
@@ -16,65 +15,9 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
         super(generator, modid, helper);
     }
 
-    protected void beaconBaseTag(Set<Supplier<? extends Block>> set) {
+    protected void addToTag(Tag.Named<Block> tag, Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
-            tag(BlockTags.BEACON_BASE_BLOCKS).add(block.get());
-        }
-    }
-
-    protected void doorTag(Set<Supplier<? extends DoorBlock>> set) {
-        for (Supplier<? extends DoorBlock> door : set) {
-            tag(BlockTags.DOORS).add(door.get());
-        }
-    }
-
-    protected void dragonImmuneTag(Set<Supplier<? extends Block>> set) {
-        for (Supplier<? extends Block> block : set) {
-            tag(BlockTags.DRAGON_IMMUNE).add(block.get());
-        }
-    }
-
-    protected void fenceTag(Set<Supplier<? extends FenceBlock>> set) {
-        for (Supplier<? extends FenceBlock> fence : set) {
-            tag(BlockTags.FENCES).add(fence.get());
-            tag(Tags.Blocks.FENCES).add(fence.get());
-        }
-    }
-
-    protected void fenceGateTag(Set<Supplier<? extends FenceGateBlock>> set) {
-        for (Supplier<? extends FenceGateBlock> fencegate : set) {
-            tag(BlockTags.FENCE_GATES).add(fencegate.get());
-            tag(Tags.Blocks.FENCE_GATES).add(fencegate.get());
-        }
-    }
-
-    protected void piglinGuardedTag(Set<Supplier<? extends Block>> set) {
-        for (Supplier<? extends Block> block : set) {
-            tag(BlockTags.GUARDED_BY_PIGLINS).add(block.get());
-        }
-    }
-
-    protected void slabTag(Set<Supplier<? extends SlabBlock>> set) {
-        for (Supplier<? extends SlabBlock> slab : set) {
-            tag(BlockTags.SLABS).add(slab.get());
-        }
-    }
-
-    protected void stairsTag(Set<Supplier<? extends StairBlock>> set) {
-        for (Supplier<? extends StairBlock> stairs : set) {
-            tag(BlockTags.STAIRS).add(stairs.get());
-        }
-    }
-
-    protected void trapdoorTag(Set<Supplier<? extends TrapDoorBlock>> set) {
-        for (Supplier<? extends TrapDoorBlock> trapdoor : set) {
-            tag(BlockTags.TRAPDOORS).add(trapdoor.get());
-        }
-    }
-
-    protected void wallTag(Set<Supplier<? extends WallBlock>> set) {
-        for (Supplier<? extends WallBlock> wall : set) {
-            tag(BlockTags.WALLS).add(wall.get());
+            tag(tag).add(block.get());
         }
     }
 }

@@ -18,8 +18,6 @@ public class PropertiesHelper {
         BlockBehaviour.Properties props = BlockBehaviour.Properties.of(builder.material, builder.color)
                 .strength(builder.hardness, builder.resistance)
                 .sound(builder.sound)
-                .harvestTool(builder.harvestTool)
-                .harvestLevel(builder.harvestLevel)
                 .friction(builder.slipperiness);
         if (builder.doesTick) props.randomTicks();
         if (!builder.isSolid) props.noOcclusion();

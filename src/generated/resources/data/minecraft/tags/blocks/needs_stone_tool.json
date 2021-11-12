@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "ornamental:iron_stairs",
+    "ornamental:iron_slab",
+    "ornamental:iron_fence",
+    "ornamental:iron_fence_gate",
+    "ornamental:iron_pole",
+    "ornamental:iron_beam",
+    "ornamental:iron_wall",
+    "ornamental:lapis_stairs",
+    "ornamental:lapis_slab",
+    "ornamental:lapis_fence",
+    "ornamental:lapis_trapdoor",
+    "ornamental:lapis_fence_gate",
+    "ornamental:lapis_door",
+    "ornamental:lapis_pole",
+    "ornamental:lapis_beam",
+    "ornamental:lapis_wall"
+  ]
+}
