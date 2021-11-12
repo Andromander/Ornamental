@@ -46,8 +46,6 @@ public class OrnamentBuilder {
     public boolean requiresTool = false;
     public boolean fireproof = false;
     public BlockBehaviour.StateArgumentPredicate<EntityType<?>> entitySpawnPredicate = null;
-    /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
-    public boolean hasConfig = false;
     public boolean mealGrass = false;
     public boolean hoeDirt = false;
     public boolean shovelPath = false;
@@ -59,6 +57,9 @@ public class OrnamentBuilder {
     public boolean isSolid = true;
     public boolean breakableCull = false;
     public PushReaction pushReaction = material.getPushReaction();
+
+    /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
+    public boolean hasConfig = false;
     public Supplier<ForgeConfigSpec.BooleanValue> booleanValue = null;
 
     /**
