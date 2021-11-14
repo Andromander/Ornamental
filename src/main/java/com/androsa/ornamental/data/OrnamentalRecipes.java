@@ -37,6 +37,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         stairs(consumer, ModBlocks.packed_ice_stairs, Blocks.PACKED_ICE);
         stairs(consumer, ModBlocks.blue_ice_stairs, Blocks.BLUE_ICE);
         stairs(consumer, ModBlocks.netherite_stairs, Blocks.NETHERITE_BLOCK);
+        stairs(consumer, ModBlocks.amethyst_stairs, Blocks.AMETHYST_BLOCK);
 
         slab(consumer, ModBlocks.iron_slab, Blocks.IRON_BLOCK);
         slab(consumer, ModBlocks.gold_slab, Blocks.GOLD_BLOCK);
@@ -57,6 +58,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         slab(consumer, ModBlocks.packed_ice_slab, Blocks.PACKED_ICE);
         slab(consumer, ModBlocks.blue_ice_slab, Blocks.BLUE_ICE);
         slab(consumer, ModBlocks.netherite_slab, Blocks.NETHERITE_BLOCK);
+        slab(consumer, ModBlocks.amethyst_slab, Blocks.AMETHYST_BLOCK);
 
         fence(consumer, ModBlocks.iron_fence, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fence(consumer, ModBlocks.gold_fence, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -80,6 +82,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fence(consumer, ModBlocks.packed_ice_fence, Blocks.PACKED_ICE, ModBlocks.packed_ice_slab);
         fence(consumer, ModBlocks.blue_ice_fence, Blocks.BLUE_ICE, ModBlocks.blue_ice_slab);
         fence(consumer, ModBlocks.netherite_fence, Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT);
+        fence(consumer, ModBlocks.amethyst_fence, Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD);
 
         trapdoor(consumer, ModBlocks.gold_trapdoor, Items.GOLD_INGOT);
         trapdoor(consumer, ModBlocks.diamond_trapdoor, Items.DIAMOND);
@@ -103,6 +106,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         trapdoorWide(consumer, ModBlocks.packed_ice_trapdoor, ModBlocks.packed_ice_slab);
         trapdoorWide(consumer, ModBlocks.blue_ice_trapdoor, ModBlocks.blue_ice_slab);
         trapdoor(consumer, ModBlocks.netherite_trapdoor, Items.NETHERITE_INGOT);
+        trapdoorWide(consumer, ModBlocks.amethyst_trapdoor, Items.AMETHYST_SHARD);
 
         fencegate(consumer, ModBlocks.iron_fence_gate, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fencegate(consumer, ModBlocks.gold_fence_gate, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -127,6 +131,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fencegate(consumer, ModBlocks.packed_ice_fence_gate, Blocks.PACKED_ICE, ModBlocks.packed_ice_slab);
         fencegate(consumer, ModBlocks.blue_ice_fence_gate, Blocks.BLUE_ICE, ModBlocks.blue_ice_slab);
         fencegate(consumer, ModBlocks.netherite_fence_gate, Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT);
+        fencegate(consumer, ModBlocks.amethyst_fence_gate, Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD);
 
         door(consumer, ModBlocks.gold_door, Items.GOLD_INGOT);
         door(consumer, ModBlocks.diamond_door, Items.DIAMOND);
@@ -150,6 +155,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         door(consumer, ModBlocks.packed_ice_door, ModBlocks.packed_ice_slab);
         door(consumer, ModBlocks.blue_ice_door, ModBlocks.blue_ice_slab);
         door(consumer, ModBlocks.netherite_door, Items.NETHERITE_INGOT);
+        door(consumer, ModBlocks.amethyst_door, Items.AMETHYST_SHARD);
 
         pole(consumer, ModBlocks.iron_pole, ModBlocks.iron_slab);
         pole(consumer, ModBlocks.gold_pole, ModBlocks.gold_slab);
@@ -174,6 +180,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         pole(consumer, ModBlocks.packed_ice_pole, ModBlocks.packed_ice_slab);
         pole(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_slab);
         pole(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_slab);
+        pole(consumer, ModBlocks.amethyst_pole, Items.AMETHYST_SHARD);
 
         beam(consumer, ModBlocks.iron_beam, ModBlocks.iron_slab);
         beam(consumer, ModBlocks.gold_beam, ModBlocks.gold_slab);
@@ -198,6 +205,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         beam(consumer, ModBlocks.packed_ice_beam, ModBlocks.packed_ice_slab);
         beam(consumer, ModBlocks.blue_ice_beam, ModBlocks.blue_ice_slab);
         beam(consumer, ModBlocks.netherite_beam, ModBlocks.netherite_slab);
+        beam(consumer, ModBlocks.amethyst_beam, Items.AMETHYST_SHARD);
 
         convertPoleBeam(consumer, ModBlocks.iron_pole, ModBlocks.iron_beam);
         convertPoleBeam(consumer, ModBlocks.gold_pole, ModBlocks.gold_beam);
@@ -222,6 +230,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         convertPoleBeam(consumer, ModBlocks.packed_ice_pole, ModBlocks.packed_ice_beam);
         convertPoleBeam(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_beam);
         convertPoleBeam(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_beam);
+        convertPoleBeam(consumer, ModBlocks.amethyst_pole, ModBlocks.amethyst_beam);
 
         wall(consumer, ModBlocks.iron_wall, Blocks.IRON_BLOCK);
         wall(consumer, ModBlocks.gold_wall, Blocks.GOLD_BLOCK);
@@ -243,5 +252,6 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         wall(consumer, ModBlocks.packed_ice_wall, Blocks.PACKED_ICE);
         wall(consumer, ModBlocks.blue_ice_wall, Blocks.BLUE_ICE);
         wall(consumer, ModBlocks.netherite_wall, Blocks.NETHERITE_BLOCK);
+        wall(consumer, ModBlocks.amethyst_wall, Blocks.AMETHYST_BLOCK);
     }
 }

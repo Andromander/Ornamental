@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/beam_corner",
+  "textures": {
+    "texture": "minecraft:block/amethyst_block"
+  }
+}

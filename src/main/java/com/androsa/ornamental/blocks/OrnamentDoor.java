@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -216,6 +217,19 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
             } else {
                 world.setBlockAndUpdate(pos.relative(Direction.DOWN), builder.meltResult.defaultBlockState());
                 world.neighborChanged(pos.relative(Direction.DOWN), builder.meltResult, pos.relative(Direction.DOWN));
+            }
+        }
+    }
+
+    @Override
+    @Deprecated
+    public void onProjectileHit(Level level, BlockState state, BlockHitResult result, Projectile projectile) {
+        if (!builder.projectileHitSounds.isEmpty()) {
+            if (!level.isClientSide()) {
+                BlockPos pos = result.getBlockPos();
+                for (SoundEvent sound : builder.projectileHitSounds) {
+                    level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 0.5F + level.random.nextFloat() * 1.2F);
+                }
             }
         }
     }

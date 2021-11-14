@@ -36,6 +36,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.packed_ice_stairs);
         blockItem(ModBlocks.blue_ice_stairs);
         blockItem(ModBlocks.netherite_stairs);
+        blockItem(ModBlocks.amethyst_stairs);
 
         blockItem(ModBlocks.iron_slab);
         blockItem(ModBlocks.gold_slab);
@@ -55,6 +56,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.packed_ice_slab);
         blockItem(ModBlocks.blue_ice_slab);
         blockItem(ModBlocks.netherite_slab);
+        blockItem(ModBlocks.amethyst_slab);
 
         blockItemFence(ModBlocks.iron_fence, "iron_block");
         blockItemFence(ModBlocks.gold_fence, "gold_block");
@@ -77,6 +79,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemFence(ModBlocks.packed_ice_fence, "packed_ice");
         blockItemFence(ModBlocks.blue_ice_fence, "blue_ice");
         blockItemFence(ModBlocks.netherite_fence, "netherite_block");
+        blockItemFence(ModBlocks.amethyst_fence, "amethyst_block");
 
         blockItemTrapdoor(ModBlocks.gold_trapdoor);
         blockItemTrapdoor(ModBlocks.diamond_trapdoor);
@@ -99,6 +102,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemTrapdoor(ModBlocks.packed_ice_trapdoor);
         blockItemTrapdoor(ModBlocks.blue_ice_trapdoor);
         blockItemTrapdoor(ModBlocks.netherite_trapdoor);
+        blockItemTrapdoor(ModBlocks.amethyst_trapdoor);
 
         blockItem(ModBlocks.iron_fence_gate);
         blockItem(ModBlocks.gold_fence_gate);
@@ -122,6 +126,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.packed_ice_fence_gate);
         blockItem(ModBlocks.blue_ice_fence_gate);
         blockItem(ModBlocks.netherite_fence_gate);
+        blockItem(ModBlocks.amethyst_fence_gate);
 
         blockItemModel(ModBlocks.gold_door);
         blockItemModel(ModBlocks.diamond_door);
@@ -146,6 +151,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemModel(ModBlocks.packed_ice_door);
         blockItemModel(ModBlocks.blue_ice_door);
         blockItemModel(ModBlocks.netherite_door);
+        blockItemModel(ModBlocks.amethyst_door);
 
         blockItemPole(ModBlocks.iron_pole, "iron_block");
         blockItemPole(ModBlocks.gold_pole, "gold_block");
@@ -169,6 +175,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemPole(ModBlocks.packed_ice_pole, "packed_ice");
         blockItemPole(ModBlocks.blue_ice_pole, "blue_ice");
         blockItemPole(ModBlocks.netherite_pole, "netherite_block");
+        blockItemPole(ModBlocks.amethyst_pole, "amethyst_block");
 
         blockItemBeam(ModBlocks.iron_beam, "iron_block");
         blockItemBeam(ModBlocks.gold_beam, "gold_block");
@@ -192,6 +199,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemBeam(ModBlocks.packed_ice_beam, "packed_ice");
         blockItemBeam(ModBlocks.blue_ice_beam, "blue_ice");
         blockItemBeam(ModBlocks.netherite_beam, "netherite_block");
+        blockItemBeam(ModBlocks.amethyst_beam, "amethyst_block");
 
         blockItemWall(ModBlocks.iron_wall, "iron_block");
         blockItemWall(ModBlocks.gold_wall, "gold_block");
@@ -212,5 +220,6 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemWall(ModBlocks.packed_ice_wall, "packed_ice");
         blockItemWall(ModBlocks.blue_ice_wall, "blue_ice");
         blockItemWall(ModBlocks.netherite_wall, "netherite_block");
+        blockItemWall(ModBlocks.amethyst_wall, "amethyst_block");
     }
 }

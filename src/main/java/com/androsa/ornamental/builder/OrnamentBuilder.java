@@ -2,6 +2,7 @@ package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.conditions.ConfigCondition;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -57,6 +59,7 @@ public class OrnamentBuilder {
     public boolean isSolid = true;
     public boolean breakableCull = false;
     public PushReaction pushReaction = material.getPushReaction();
+    public List<SoundEvent> projectileHitSounds = null;
 
     /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
     public boolean hasConfig = false;
@@ -303,6 +306,15 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder pushReactOverride(PushReaction reaction) {
         this.pushReaction = reaction;
+        return this;
+    }
+
+    /**
+     * Sets the sounds the ornament will make when hit by a projectile.
+     * @param sounds The SoundEvents that play when the ornament is hit by a projectile
+     */
+    public OrnamentBuilder projectileHitSound(List<SoundEvent> sounds) {
+        this.projectileHitSounds = sounds;
         return this;
     }
 

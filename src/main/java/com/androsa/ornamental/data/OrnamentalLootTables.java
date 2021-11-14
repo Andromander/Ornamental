@@ -70,6 +70,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.packed_ice_stairs);
             dropSelf(ModBlocks.blue_ice_stairs);
             dropSelf(ModBlocks.netherite_stairs);
+            dropSelf(ModBlocks.amethyst_stairs);
 
             dropSlab(ModBlocks.iron_slab);
             dropSlab(ModBlocks.gold_slab);
@@ -91,6 +92,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSlab(ModBlocks.packed_ice_slab);
             dropSlab(ModBlocks.blue_ice_slab);
             dropSlab(ModBlocks.netherite_slab);
+            dropSlab(ModBlocks.amethyst_slab);
 
             dropSelf(ModBlocks.iron_fence);
             dropSelf(ModBlocks.gold_fence);
@@ -115,6 +117,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.packed_ice_fence);
             dropSelf(ModBlocks.blue_ice_fence);
             dropSelf(ModBlocks.netherite_fence);
+            dropSelf(ModBlocks.amethyst_fence);
 
             dropSelf(ModBlocks.gold_trapdoor);
             dropSelf(ModBlocks.diamond_trapdoor);
@@ -139,6 +142,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.packed_ice_trapdoor);
             dropSelf(ModBlocks.blue_ice_trapdoor);
             dropSelf(ModBlocks.netherite_trapdoor);
+            dropSelf(ModBlocks.amethyst_trapdoor);
 
             dropSelf(ModBlocks.iron_fence_gate);
             dropSelf(ModBlocks.gold_fence_gate);
@@ -164,6 +168,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.packed_ice_fence_gate);
             dropSelf(ModBlocks.blue_ice_fence_gate);
             dropSelf(ModBlocks.netherite_fence_gate);
+            dropSelf(ModBlocks.amethyst_fence_gate);
 
             dropDoor(ModBlocks.gold_door);
             dropDoor(ModBlocks.diamond_door);
@@ -188,6 +193,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropDoor(ModBlocks.packed_ice_door);
             dropDoor(ModBlocks.blue_ice_door);
             dropDoor(ModBlocks.netherite_door);
+            dropDoor(ModBlocks.amethyst_door);
 
             dropPole(ModBlocks.iron_pole);
             dropPole(ModBlocks.gold_pole);
@@ -213,6 +219,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropPole(ModBlocks.packed_ice_pole);
             dropPole(ModBlocks.blue_ice_pole);
             dropPole(ModBlocks.netherite_pole);
+            dropPole(ModBlocks.amethyst_pole);
 
             dropBeam(ModBlocks.iron_beam);
             dropBeam(ModBlocks.gold_beam);
@@ -238,6 +245,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropBeam(ModBlocks.packed_ice_beam);
             dropBeam(ModBlocks.blue_ice_beam);
             dropBeam(ModBlocks.netherite_beam);
+            dropBeam(ModBlocks.amethyst_beam);
 
             dropSelf(ModBlocks.iron_wall);
             dropSelf(ModBlocks.gold_wall);
@@ -260,6 +268,7 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.packed_ice_wall);
             dropSelf(ModBlocks.blue_ice_wall);
             dropSelf(ModBlocks.netherite_wall);
+            dropSelf(ModBlocks.amethyst_wall);
         }
 
         @Override

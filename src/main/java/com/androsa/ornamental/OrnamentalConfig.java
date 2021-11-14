@@ -30,6 +30,7 @@ public class OrnamentalConfig {
     public static BooleanValue showPackedIceBlocks;
     public static BooleanValue showBlueIceBlocks;
     public static BooleanValue showNetheriteBlocks;
+    public static BooleanValue showAmethystBlocks;
 
     public OrnamentalConfig(ForgeConfigSpec.Builder builder) {
         showIronBlocks = builder
@@ -128,5 +129,9 @@ public class OrnamentalConfig {
                 .translation(OrnamentalMod.MODID + ".config.show_netherite_blocks")
                 .comment("Should Netherite blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showNetheriteBlocks", true);
+        showAmethystBlocks = builder
+                .translation(OrnamentalMod.MODID + ".config.show_amethyst_blocks")
+                .comment("Should Amethyst blocks be obtainable as items. Will not remove existing blocks from worlds.")
+                .define("showAmethystBlocks", true);
     }
 }

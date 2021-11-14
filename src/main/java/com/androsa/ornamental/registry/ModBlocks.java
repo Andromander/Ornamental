@@ -44,6 +44,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentStair> packed_ice_stairs = registerStairs(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentStair> blue_ice_stairs = registerStairs(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentStair> netherite_stairs = registerStairs(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentStair> amethyst_stairs = registerStairs(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentSlab> iron_slab = registerSlab(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentSlab> gold_slab = registerSlab(OrnamentBuilders.GOLD);
@@ -65,6 +66,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSlab> packed_ice_slab = registerSlab(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentSlab> blue_ice_slab = registerSlab(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentSlab> netherite_slab = registerSlab(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentSlab> amethyst_slab = registerSlab(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentFence> iron_fence = registerFence(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentFence> gold_fence = registerFence(OrnamentBuilders.GOLD);
@@ -89,6 +91,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentFence> packed_ice_fence = registerFence(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentFence> blue_ice_fence = registerFence(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentFence> netherite_fence = registerFence(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentFence> amethyst_fence = registerFence(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentTrapDoor> gold_trapdoor = registerTrapdoor(OrnamentBuilders.GOLD);
     public static final RegistryObject<OrnamentTrapDoor> diamond_trapdoor = registerTrapdoor(OrnamentBuilders.DIAMOND);
@@ -113,6 +116,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentTrapDoor> packed_ice_trapdoor = registerTrapdoor(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentTrapDoor> blue_ice_trapdoor = registerTrapdoor(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentTrapDoor> netherite_trapdoor = registerTrapdoor(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentTrapDoor> amethyst_trapdoor = registerTrapdoor(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentFenceGate> iron_fence_gate = registerFenceGate(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentFenceGate> gold_fence_gate = registerFenceGate(OrnamentBuilders.GOLD);
@@ -138,6 +142,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentFenceGate> packed_ice_fence_gate = registerFenceGate(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentFenceGate> blue_ice_fence_gate = registerFenceGate(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentFenceGate> netherite_fence_gate = registerFenceGate(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentFenceGate> amethyst_fence_gate = registerFenceGate(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentDoor> gold_door = registerDoor(OrnamentBuilders.GOLD);
     public static final RegistryObject<OrnamentDoor> diamond_door = registerDoor(OrnamentBuilders.DIAMOND);
@@ -162,6 +167,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentDoor> packed_ice_door = registerDoor(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentDoor> blue_ice_door = registerDoor(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentDoor> netherite_door = registerDoor(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentDoor> amethyst_door = registerDoor(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentPole> iron_pole = registerPole(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentPole> gold_pole = registerPole(OrnamentBuilders.GOLD);
@@ -187,6 +193,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentPole> packed_ice_pole = registerPole(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentPole> blue_ice_pole = registerPole(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentPole> netherite_pole = registerPole(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentPole> amethyst_pole = registerPole(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentBeam> iron_beam = registerBeam(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentBeam> gold_beam = registerBeam(OrnamentBuilders.GOLD);
@@ -212,6 +219,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentBeam> packed_ice_beam = registerBeam(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentBeam> blue_ice_beam = registerBeam(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentBeam> netherite_beam = registerBeam(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentBeam> amethyst_beam = registerBeam(OrnamentBuilders.AMETHYST);
 
     public static final RegistryObject<OrnamentWall> iron_wall = registerWall(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentWall> gold_wall = registerWall(OrnamentBuilders.GOLD);
@@ -234,6 +242,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentWall> packed_ice_wall = registerWall(OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentWall> blue_ice_wall = registerWall(OrnamentBuilders.BLUE_ICE);
     public static final RegistryObject<OrnamentWall> netherite_wall = registerWall(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentWall> amethyst_wall = registerWall(OrnamentBuilders.AMETHYST);
 
     private static RegistryObject<OrnamentStair> registerStairs(OrnamentBuilder builder) {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);

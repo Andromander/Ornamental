@@ -31,6 +31,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBasic(ModBlocks.packed_ice_stairs, "packed_ice");
         stairsBasic(ModBlocks.blue_ice_stairs, "blue_ice");
         stairsBasic(ModBlocks.netherite_stairs, "netherite_block");
+        stairsBasic(ModBlocks.amethyst_stairs, "amethyst_block");
 
         slabBasic(ModBlocks.iron_slab, "iron_block");
         slabBasic(ModBlocks.gold_slab, "gold_block");
@@ -50,6 +51,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.packed_ice_slab, "packed_ice");
         slabBasic(ModBlocks.blue_ice_slab, "blue_ice");
         slabBasic(ModBlocks.netherite_slab, "netherite_block");
+        slabBasic(ModBlocks.amethyst_slab, "amethyst_block");
 
         fenceBasic(ModBlocks.iron_fence, "iron_block");
         fenceBasic(ModBlocks.gold_fence, "gold_block");
@@ -71,6 +73,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceBasic(ModBlocks.packed_ice_fence, "packed_ice");
         fenceBasic(ModBlocks.blue_ice_fence, "blue_ice");
         fenceBasic(ModBlocks.netherite_fence, "netherite_block");
+        fenceBasic(ModBlocks.amethyst_fence, "amethyst_block");
 
         trapdoorBasic(ModBlocks.gold_trapdoor, "gold");
         trapdoorBasic(ModBlocks.diamond_trapdoor, "diamond");
@@ -93,6 +96,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.packed_ice_trapdoor, "packed_ice");
         trapdoorBasic(ModBlocks.blue_ice_trapdoor, "blue_ice");
         trapdoorBasic(ModBlocks.netherite_trapdoor, "netherite");
+        trapdoorBasic(ModBlocks.amethyst_trapdoor, "amethyst");
 
         fenceGateBasic(ModBlocks.iron_fence_gate, "iron_block");
         fenceGateBasic(ModBlocks.gold_fence_gate, "gold_block");
@@ -116,6 +120,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBasic(ModBlocks.packed_ice_fence_gate, "packed_ice");
         fenceGateBasic(ModBlocks.blue_ice_fence_gate, "blue_ice");
         fenceGateBasic(ModBlocks.netherite_fence_gate, "netherite_block");
+        fenceGateBasic(ModBlocks.amethyst_fence_gate, "amethyst_block");
 
         doorBasic(ModBlocks.gold_door, "gold");
         doorBasic(ModBlocks.diamond_door, "diamond");
@@ -138,6 +143,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.packed_ice_door, "packed_ice");
         doorBasic(ModBlocks.blue_ice_door, "blue_ice");
         doorBasic(ModBlocks.netherite_door, "netherite");
+        doorBasic(ModBlocks.amethyst_door, "amethyst");
 
         poleBasic(ModBlocks.iron_pole, "iron_block");
         poleBasic(ModBlocks.gold_pole, "gold_block");
@@ -160,6 +166,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.packed_ice_pole, "packed_ice");
         poleBasic(ModBlocks.blue_ice_pole, "blue_ice");
         poleBasic(ModBlocks.netherite_pole, "netherite_block");
+        poleBasic(ModBlocks.amethyst_pole, "amethyst_block");
 
         beamBasic(ModBlocks.iron_beam, "iron", "iron_block", false, false);
         beamBasic(ModBlocks.gold_beam, "gold", "gold_block", false, false);
@@ -182,6 +189,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.packed_ice_beam, "packed_ice", "packed_ice", false, false);
         beamBasic(ModBlocks.blue_ice_beam, "blue_ice", "blue_ice", false, false);
         beamBasic(ModBlocks.netherite_beam, "netherite", "netherite_block", false, false);
+        beamBasic(ModBlocks.amethyst_beam, "amethyst", "amethyst_block", false, false);
 
         wallBasic(ModBlocks.iron_wall, "iron_block");
         wallBasic(ModBlocks.gold_wall, "gold_block");
@@ -201,5 +209,6 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.packed_ice_wall, "packed_ice");
         wallBasic(ModBlocks.blue_ice_wall, "blue_ice");
         wallBasic(ModBlocks.netherite_wall, "netherite_block");
+        wallBasic(ModBlocks.amethyst_wall, "amethyst_block");
     }
 }

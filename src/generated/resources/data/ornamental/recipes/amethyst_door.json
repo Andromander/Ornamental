@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showAmethystBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:amethyst_shard"
+          }
+        },
+        "result": {
+          "item": "ornamental:amethyst_door"
+        }
+      }
+    }
+  ]
+}

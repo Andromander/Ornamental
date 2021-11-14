@@ -14,6 +14,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -247,6 +248,19 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
+        }
+    }
+
+    @Override
+    @Deprecated
+    public void onProjectileHit(Level level, BlockState state, BlockHitResult result, Projectile projectile) {
+        if (!builder.projectileHitSounds.isEmpty()) {
+            if (!level.isClientSide()) {
+                BlockPos pos = result.getBlockPos();
+                for (SoundEvent sound : builder.projectileHitSounds) {
+                    level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 0.5F + level.random.nextFloat() * 1.2F);
+                }
+            }
         }
     }
 

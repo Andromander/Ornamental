@@ -1,7 +1,9 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalConfig;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -195,6 +197,11 @@ public class OrnamentBuilders {
     //TODO: placeholder
     public static final OrnamentBuilder COPPER = new OrnamentBuilder("copper");
 
-    //TODO: placeholder
-    public static final OrnamentBuilder AMETHYST = new OrnamentBuilder("amethyst");
+    public static final OrnamentBuilder AMETHYST = new OrnamentBuilder("amethyst")
+            .properties(Material.AMETHYST, MaterialColor.COLOR_PURPLE)
+            .sound(SoundType.AMETHYST)
+            .hardnessAndResistance(1.5F)
+            .requiresTool()
+            .projectileHitSound(ImmutableList.of(SoundEvents.AMETHYST_BLOCK_HIT, SoundEvents.AMETHYST_BLOCK_CHIME))
+            .config(() -> OrnamentalConfig.showAmethystBlocks);
 }

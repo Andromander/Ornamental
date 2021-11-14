@@ -16,40 +16,42 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
 
     private static final ImmutableSet<Supplier<? extends Block>> BEACON_BASES = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.gold_stairs, ModBlocks.diamond_stairs, ModBlocks.emerald_stairs, ModBlocks.netherite_stairs);
+    private static final ImmutableSet<Supplier<? extends Block>> CRYSTAL_SOUNDS = ImmutableSet.of(
+            ModBlocks.amethyst_stairs, ModBlocks.amethyst_slab, ModBlocks.amethyst_fence, ModBlocks.amethyst_trapdoor, ModBlocks.amethyst_fence_gate, ModBlocks.amethyst_door, ModBlocks.amethyst_pole, ModBlocks.amethyst_beam, ModBlocks.amethyst_wall);
     private static final ImmutableSet<Supplier<? extends Block>> DOORS = ImmutableSet.of(
             ModBlocks.gold_door, ModBlocks.diamond_door, ModBlocks.emerald_door, ModBlocks.lapis_door, ModBlocks.obsidian_door, ModBlocks.coal_door, ModBlocks.redstone_door,
             ModBlocks.missingno_door, ModBlocks.clay_door, ModBlocks.dirt_door, ModBlocks.grass_door, ModBlocks.hay_door, ModBlocks.path_door, ModBlocks.brick_door, ModBlocks.quartz_door, ModBlocks.bone_door,
-            ModBlocks.nether_brick_door, ModBlocks.red_nether_brick_door, ModBlocks.snow_door, ModBlocks.ice_door, ModBlocks.packed_ice_door, ModBlocks.blue_ice_door, ModBlocks.netherite_door);
+            ModBlocks.nether_brick_door, ModBlocks.red_nether_brick_door, ModBlocks.snow_door, ModBlocks.ice_door, ModBlocks.packed_ice_door, ModBlocks.blue_ice_door, ModBlocks.netherite_door, ModBlocks.amethyst_door);
     private static final ImmutableSet<Supplier<? extends Block>> DRAGON_IMMUNE = ImmutableSet.of(
             ModBlocks.obsidian_stairs, ModBlocks.obsidian_slab, ModBlocks.obsidian_fence, ModBlocks.obsidian_trapdoor, ModBlocks.obsidian_fence_gate, ModBlocks.obsidian_door, ModBlocks.obsidian_pole, ModBlocks.obsidian_beam, ModBlocks.obsidian_wall);
     private static final ImmutableSet<Supplier<? extends Block>> FENCES = ImmutableSet.of(
             ModBlocks.iron_fence, ModBlocks.gold_fence, ModBlocks.diamond_fence, ModBlocks.emerald_fence, ModBlocks.lapis_fence, ModBlocks.obsidian_fence, ModBlocks.coal_fence, ModBlocks.redstone_fence,
             ModBlocks.missingno_fence, ModBlocks.clay_fence, ModBlocks.dirt_fence, ModBlocks.grass_fence, ModBlocks.hay_fence, ModBlocks.path_fence, ModBlocks.brick_fence, ModBlocks.quartz_fence,
-            ModBlocks.bone_fence, ModBlocks.red_nether_brick_fence, ModBlocks.snow_fence, ModBlocks.ice_fence, ModBlocks.packed_ice_fence, ModBlocks.blue_ice_fence, ModBlocks.netherite_fence);
+            ModBlocks.bone_fence, ModBlocks.red_nether_brick_fence, ModBlocks.snow_fence, ModBlocks.ice_fence, ModBlocks.packed_ice_fence, ModBlocks.blue_ice_fence, ModBlocks.netherite_fence, ModBlocks.amethyst_fence);
     private static final ImmutableSet<Supplier<? extends Block>> FENCE_GATES = ImmutableSet.of(
             ModBlocks.iron_fence_gate, ModBlocks.gold_fence_gate, ModBlocks.diamond_fence_gate, ModBlocks.emerald_fence_gate, ModBlocks.lapis_fence_gate, ModBlocks.obsidian_fence_gate, ModBlocks.coal_fence_gate,
             ModBlocks.redstone_fence_gate, ModBlocks.missingno_fence_gate, ModBlocks.clay_fence_gate, ModBlocks.dirt_fence_gate, ModBlocks.grass_fence_gate, ModBlocks.hay_fence_gate, ModBlocks.path_fence_gate,
             ModBlocks.brick_fence_gate, ModBlocks.quartz_fence_gate, ModBlocks.bone_fence_gate, ModBlocks.nether_brick_fence_gate, ModBlocks.red_nether_brick_fence_gate, ModBlocks.snow_fence_gate, ModBlocks.ice_fence_gate,
-            ModBlocks.packed_ice_fence_gate, ModBlocks.blue_ice_fence_gate, ModBlocks.netherite_fence_gate);
+            ModBlocks.packed_ice_fence_gate, ModBlocks.blue_ice_fence_gate, ModBlocks.netherite_fence_gate, ModBlocks.amethyst_fence_gate);
     private static final ImmutableSet<Supplier<? extends Block>> PIGLIN_GUARDED = ImmutableSet.of(
             ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door, ModBlocks.gold_pole, ModBlocks.gold_beam, ModBlocks.gold_wall);
     private static final ImmutableSet<Supplier<? extends Block>> SLABS = ImmutableSet.of(
             ModBlocks.iron_slab, ModBlocks.gold_slab, ModBlocks.diamond_slab, ModBlocks.emerald_slab, ModBlocks.lapis_slab, ModBlocks.obsidian_slab, ModBlocks.coal_slab, ModBlocks.redstone_slab,
             ModBlocks.missingno_slab, ModBlocks.clay_slab, ModBlocks.dirt_slab, ModBlocks.grass_slab, ModBlocks.hay_slab, ModBlocks.path_slab, ModBlocks.bone_slab, ModBlocks.snow_slab, ModBlocks.ice_slab,
-            ModBlocks.packed_ice_slab, ModBlocks.blue_ice_slab, ModBlocks.netherite_slab);
+            ModBlocks.packed_ice_slab, ModBlocks.blue_ice_slab, ModBlocks.netherite_slab, ModBlocks.amethyst_slab);
     private static final ImmutableSet<Supplier<? extends Block>> STAIRS = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.gold_stairs, ModBlocks.diamond_stairs, ModBlocks.emerald_stairs, ModBlocks.lapis_stairs, ModBlocks.obsidian_stairs, ModBlocks.coal_stairs, ModBlocks.redstone_stairs,
             ModBlocks.missingno_stairs, ModBlocks.clay_stairs, ModBlocks.dirt_stairs, ModBlocks.grass_stairs, ModBlocks.hay_stairs, ModBlocks.path_stairs, ModBlocks.bone_stairs, ModBlocks.snow_stairs,
-            ModBlocks.ice_stairs, ModBlocks.packed_ice_stairs, ModBlocks.blue_ice_stairs, ModBlocks.netherite_stairs);
+            ModBlocks.ice_stairs, ModBlocks.packed_ice_stairs, ModBlocks.blue_ice_stairs, ModBlocks.netherite_stairs, ModBlocks.amethyst_stairs);
     private static final ImmutableSet<Supplier<? extends Block>> TRAPDOORS = ImmutableSet.of(
             ModBlocks.gold_trapdoor, ModBlocks.diamond_trapdoor, ModBlocks.emerald_trapdoor, ModBlocks.lapis_trapdoor, ModBlocks.obsidian_trapdoor, ModBlocks.coal_trapdoor, ModBlocks.redstone_trapdoor, ModBlocks.missingno_trapdoor,
             ModBlocks.clay_trapdoor, ModBlocks.dirt_trapdoor, ModBlocks.grass_trapdoor, ModBlocks.hay_trapdoor, ModBlocks.path_trapdoor, ModBlocks.brick_trapdoor, ModBlocks.quartz_trapdoor, ModBlocks.bone_trapdoor,
-            ModBlocks.nether_brick_trapdoor, ModBlocks.red_nether_brick_trapdoor, ModBlocks.snow_trapdoor, ModBlocks.ice_trapdoor, ModBlocks.packed_ice_trapdoor, ModBlocks.blue_ice_trapdoor, ModBlocks.netherite_trapdoor);
+            ModBlocks.nether_brick_trapdoor, ModBlocks.red_nether_brick_trapdoor, ModBlocks.snow_trapdoor, ModBlocks.ice_trapdoor, ModBlocks.packed_ice_trapdoor, ModBlocks.blue_ice_trapdoor, ModBlocks.netherite_trapdoor,
+            ModBlocks.amethyst_trapdoor);
     private static final ImmutableSet<Supplier<? extends Block>> WALLS = ImmutableSet.of(
 			ModBlocks.iron_wall, ModBlocks.gold_wall, ModBlocks.diamond_wall, ModBlocks.emerald_wall, ModBlocks.lapis_wall, ModBlocks.obsidian_wall, ModBlocks.coal_wall, ModBlocks.redstone_wall, ModBlocks.missingno_wall,
 			ModBlocks.clay_wall, ModBlocks.dirt_wall, ModBlocks.grass_wall, ModBlocks.hay_wall, ModBlocks.path_wall, ModBlocks.quartz_wall, ModBlocks.bone_wall, ModBlocks.snow_wall, ModBlocks.ice_wall, ModBlocks.packed_ice_wall,
-			ModBlocks.blue_ice_wall, ModBlocks.netherite_wall);
-    //TODO: Amethyst ornaments to Crystal Sound Blocks
+			ModBlocks.blue_ice_wall, ModBlocks.netherite_wall, ModBlocks.amethyst_wall);
 
     private static final ImmutableSet<Supplier<? extends Block>> PICKAXE_TOOL = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.iron_slab, ModBlocks.iron_fence, ModBlocks.iron_fence_gate, ModBlocks.iron_pole, ModBlocks.iron_beam, ModBlocks.iron_wall,
@@ -96,6 +98,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     @Override
     protected void addTags() {
         addToTag(BlockTags.BEACON_BASE_BLOCKS, BEACON_BASES);
+        addToTag(BlockTags.CRYSTAL_SOUND_BLOCKS, CRYSTAL_SOUNDS);
         addToTag(BlockTags.DOORS, DOORS);
         addToTag(BlockTags.DRAGON_IMMUNE, DRAGON_IMMUNE);
         addToTag(BlockTags.FENCES, FENCES);
