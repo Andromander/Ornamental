@@ -15,7 +15,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * QuartzGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class QuartzGolemModel<T extends QuartzGolem> extends AbstractGolemModel<T> {
     public ModelPart tail1;
     public ModelPart tail2;

@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * ModelIronGolem - Either Mojang or a mod author
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class EmeraldGolemModel<T extends EmeraldGolem> extends FlowerGolemModel<T> {
 
     public EmeraldGolemModel(ModelPart root) {

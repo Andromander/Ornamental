@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class IceGolemHeadLayer<T extends IceGolem> extends RenderLayer<T, SnowGolemModel<T>> {
 
     public IceGolemHeadLayer(RenderLayerParent<T, SnowGolemModel<T>> renderer) {

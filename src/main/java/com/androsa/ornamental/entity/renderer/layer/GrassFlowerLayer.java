@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
-@OnlyIn(Dist.CLIENT)
 public class GrassFlowerLayer<T extends GrassGolem, M extends DirtGolemModel<T>> extends RenderLayer<T, M> {
 
     public GrassFlowerLayer(RenderLayerParent<T, M> renderer) {

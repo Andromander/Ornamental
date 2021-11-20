@@ -15,7 +15,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * RedstoneGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemModel<T> {
     public ModelPart legL1;
     public ModelPart legL2;

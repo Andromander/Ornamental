@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * ObsidianGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class ObsidianGolemModel<T extends ObsidianGolem> extends AbstractGolemModel<T> {
 
     public ObsidianGolemModel(ModelPart root) {

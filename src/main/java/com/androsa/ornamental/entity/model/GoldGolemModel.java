@@ -11,7 +11,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * GoldGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class GoldGolemModel<T extends GoldGolem> extends FlowerGolemModel<T> {
 
     public GoldGolemModel(ModelPart root) {

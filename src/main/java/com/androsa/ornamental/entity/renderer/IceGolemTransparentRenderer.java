@@ -17,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class IceGolemTransparentRenderer<T extends IceGolem> extends IceGolemRenderer<T> {
 
     public static final ResourceLocation texIce = new ResourceLocation(OrnamentalMod.MODID, "textures/entity/ice_golem_body.png");

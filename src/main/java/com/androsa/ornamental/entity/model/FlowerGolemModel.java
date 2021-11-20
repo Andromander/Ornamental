@@ -5,7 +5,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public abstract class FlowerGolemModel<T extends FlowerGolem> extends AbstractGolemModel<T> {
 
     public FlowerGolemModel(ModelPart root) {

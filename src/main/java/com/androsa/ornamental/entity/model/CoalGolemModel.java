@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * CoalGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class CoalGolemModel<T extends CoalGolem> extends AbstractGolemModel<T> {
 
     public CoalGolemModel(ModelPart root) {

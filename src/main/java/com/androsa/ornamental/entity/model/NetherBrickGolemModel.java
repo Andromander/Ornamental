@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * NetherBrickGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class NetherBrickGolemModel<T extends OrnamentalGolem> extends AbstractGolemModel<T> {
 
     public NetherBrickGolemModel(ModelPart root) {

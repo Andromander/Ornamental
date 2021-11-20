@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class GrassGolemRenderer<T extends GrassGolem, M extends DirtGolemModel<T>> extends AbstractGolemRenderer<T,M> {
 
     public GrassGolemRenderer(EntityRendererProvider.Context manager, M model, float shadow) {

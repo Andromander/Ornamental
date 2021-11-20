@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class FlowerGolemRenderer<T extends FlowerGolem, M extends FlowerGolemModel<T>> extends HeavyGolemRenderer<T,M> {
 
     public FlowerGolemRenderer(EntityRendererProvider.Context manager, M model, float shadow) {

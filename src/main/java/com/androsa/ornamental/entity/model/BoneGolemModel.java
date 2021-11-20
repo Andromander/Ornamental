@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * BoneGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
 
     public BoneGolemModel(ModelPart root) {

@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * HayGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class HayGolemModel<T extends HayGolem> extends AbstractGolemModel<T> {
 
     public HayGolemModel(ModelPart root) {

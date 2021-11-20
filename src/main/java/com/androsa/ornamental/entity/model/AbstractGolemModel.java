@@ -10,7 +10,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Abstract class holding basic parts: Head, Torso, Body, 2 Arms, and 2 Legs. These are only fields
  * Not all fields are required. Special cases can ignore certain fields
  */
-@OnlyIn(Dist.CLIENT)
 public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends HierarchicalModel<T> {
 
     public final ModelPart root;

@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
-@OnlyIn(Dist.CLIENT)
 public class GolemFlowerLayer<T extends FlowerGolem, M extends FlowerGolemModel<T>> extends RenderLayer<T, M> {
 
     public GolemFlowerLayer(RenderLayerParent<T, M> renderer) {

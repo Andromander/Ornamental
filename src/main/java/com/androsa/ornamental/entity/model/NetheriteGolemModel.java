@@ -15,7 +15,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * NetheriteGolemModel - Androsa
  * Created using Tabula 8.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolemModel<T> {
     public ModelPart legB;
 

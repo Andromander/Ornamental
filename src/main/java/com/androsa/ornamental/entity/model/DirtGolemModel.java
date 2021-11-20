@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * DirtGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class DirtGolemModel<T extends DirtGolem> extends AbstractGolemModel<T> {
 
     public DirtGolemModel(ModelPart root) {

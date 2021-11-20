@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * LapisGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class LapisGolemModel<T extends LapisGolem> extends AbstractGolemModel<T> {
 
     public LapisGolemModel(ModelPart root) {

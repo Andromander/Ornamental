@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * ClayGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-@OnlyIn(Dist.CLIENT)
 public class ClayGolemModel<T extends OrnamentalGolem> extends AbstractGolemModel<T> {
 
     public ClayGolemModel(ModelPart root) {

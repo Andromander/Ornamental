@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class HeavyGolemRenderer<T extends OrnamentalGolem, M extends AbstractGolemModel<T>> extends AbstractGolemRenderer<T,M> {
 
     public HeavyGolemRenderer(EntityRendererProvider.Context manager, M model, float shadow) {

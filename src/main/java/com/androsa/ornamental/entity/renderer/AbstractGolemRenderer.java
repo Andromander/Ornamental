@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends AbstractGolemModel<T>> extends MobRenderer<T,M> {
 
     public AbstractGolemRenderer(EntityRendererProvider.Context manager, M model, float shadow) {
