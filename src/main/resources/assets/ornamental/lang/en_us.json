@@ -285,5 +285,8 @@
   "entity.ornamental.thrown_nether_brick": "Thrown Nether Brick",
   "entity.ornamental.packed_iceball": "Packed Iceball",
   "entity.ornamental.blue_iceball": "Blue Iceball",
-  "entity.ornamental.charge_ball": "Charge Ball"
+  "entity.ornamental.charge_ball": "Charge Ball",
+
+  "death.attack.ornamental.shocked": "%1$s was zapped",
+  "death.attack.ornamental.shocked.player": "%1$s was zapped whilst escaping %2$s"
 }
