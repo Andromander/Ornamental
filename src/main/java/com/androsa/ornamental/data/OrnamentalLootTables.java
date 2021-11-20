@@ -336,7 +336,9 @@ public class OrnamentalLootTables extends LootTableProvider {
                 ModEntities.ICE_GOLEM.get(),
                 ModEntities.PACKED_ICE_GOLEM.get(),
                 ModEntities.BLUE_ICE_GOLEM.get(),
-                ModEntities.NETHERITE_GOLEM.get()
+                ModEntities.NETHERITE_GOLEM.get(),
+                ModEntities.AMETHYST_GOLEM.get(),
+                ModEntities.COPPER_GOLEM.get()
         );
 
         @Override
@@ -362,6 +364,8 @@ public class OrnamentalLootTables extends LootTableProvider {
             add(ModEntities.PACKED_ICE_GOLEM, golemTableBlock(Blocks.PACKED_ICE));
             add(ModEntities.BLUE_ICE_GOLEM, golemTableBlock(Blocks.BLUE_ICE));
             add(ModEntities.NETHERITE_GOLEM, golemTable(Items.NETHERITE_INGOT));
+            add(ModEntities.AMETHYST_GOLEM, golemTable(Items.AMETHYST_SHARD));
+            add(ModEntities.COPPER_GOLEM, golemTable(Items.COPPER_INGOT));
         }
 
         @Override
