@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCopperBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:oxidized_copper"
+          },
+          "/": {
+            "item": "ornamental:oxidized_copper_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:oxidized_copper_fence",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

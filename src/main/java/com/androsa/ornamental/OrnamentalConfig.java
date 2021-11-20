@@ -31,6 +31,7 @@ public class OrnamentalConfig {
     public static BooleanValue showBlueIceBlocks;
     public static BooleanValue showNetheriteBlocks;
     public static BooleanValue showAmethystBlocks;
+    public static BooleanValue showCopperBlocks;
 
     public OrnamentalConfig(ForgeConfigSpec.Builder builder) {
         showIronBlocks = builder
@@ -133,5 +134,9 @@ public class OrnamentalConfig {
                 .translation(OrnamentalMod.MODID + ".config.show_amethyst_blocks")
                 .comment("Should Amethyst blocks be obtainable as items. Will not remove existing blocks from worlds.")
                 .define("showAmethystBlocks", true);
+        showCopperBlocks = builder
+                .translation(OrnamentalMod.MODID + ".config.show_copper_blocks")
+                .comment("Should Copper blocks be obtainable as items. Will not remove existing blocks from worlds. This also applies to Exposed, Weathered, and Oxidised Copper.")
+                .define("showCopperBlocks", true);
     }
 }

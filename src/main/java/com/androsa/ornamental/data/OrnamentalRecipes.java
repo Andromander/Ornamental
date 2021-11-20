@@ -38,6 +38,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         stairs(consumer, ModBlocks.blue_ice_stairs, Blocks.BLUE_ICE);
         stairs(consumer, ModBlocks.netherite_stairs, Blocks.NETHERITE_BLOCK);
         stairs(consumer, ModBlocks.amethyst_stairs, Blocks.AMETHYST_BLOCK);
+        stairs(consumer, ModBlocks.copper_stairs, Blocks.COPPER_BLOCK);
+        stairs(consumer, ModBlocks.exposed_copper_stairs, Blocks.EXPOSED_COPPER);
+        stairs(consumer, ModBlocks.weathered_copper_stairs, Blocks.WEATHERED_COPPER);
+        stairs(consumer, ModBlocks.oxidized_copper_stairs, Blocks.OXIDIZED_COPPER);
 
         slab(consumer, ModBlocks.iron_slab, Blocks.IRON_BLOCK);
         slab(consumer, ModBlocks.gold_slab, Blocks.GOLD_BLOCK);
@@ -59,6 +63,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         slab(consumer, ModBlocks.blue_ice_slab, Blocks.BLUE_ICE);
         slab(consumer, ModBlocks.netherite_slab, Blocks.NETHERITE_BLOCK);
         slab(consumer, ModBlocks.amethyst_slab, Blocks.AMETHYST_BLOCK);
+        slab(consumer, ModBlocks.copper_slab, Blocks.COPPER_BLOCK);
+        slab(consumer, ModBlocks.exposed_copper_slab, Blocks.EXPOSED_COPPER);
+        slab(consumer, ModBlocks.weathered_copper_slab, Blocks.WEATHERED_COPPER);
+        slab(consumer, ModBlocks.oxidized_copper_slab, Blocks.OXIDIZED_COPPER);
 
         fence(consumer, ModBlocks.iron_fence, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fence(consumer, ModBlocks.gold_fence, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -83,6 +91,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fence(consumer, ModBlocks.blue_ice_fence, Blocks.BLUE_ICE, ModBlocks.blue_ice_slab);
         fence(consumer, ModBlocks.netherite_fence, Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT);
         fence(consumer, ModBlocks.amethyst_fence, Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD);
+        fence(consumer, ModBlocks.copper_fence, Blocks.COPPER_BLOCK, Items.COPPER_INGOT);
+        fence(consumer, ModBlocks.exposed_copper_fence, Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab);
+        fence(consumer, ModBlocks.weathered_copper_fence, Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab);
+        fence(consumer, ModBlocks.oxidized_copper_fence, Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab);
 
         trapdoor(consumer, ModBlocks.gold_trapdoor, Items.GOLD_INGOT);
         trapdoor(consumer, ModBlocks.diamond_trapdoor, Items.DIAMOND);
@@ -107,6 +119,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         trapdoorWide(consumer, ModBlocks.blue_ice_trapdoor, ModBlocks.blue_ice_slab);
         trapdoor(consumer, ModBlocks.netherite_trapdoor, Items.NETHERITE_INGOT);
         trapdoorWide(consumer, ModBlocks.amethyst_trapdoor, Items.AMETHYST_SHARD);
+        trapdoor(consumer, ModBlocks.copper_trapdoor, Items.COPPER_INGOT);
+        trapdoor(consumer, ModBlocks.exposed_copper_trapdoor, ModBlocks.exposed_copper_slab);
+        trapdoor(consumer, ModBlocks.weathered_copper_trapdoor, ModBlocks.weathered_copper_slab);
+        trapdoor(consumer, ModBlocks.oxidized_copper_trapdoor, ModBlocks.oxidized_copper_slab);
 
         fencegate(consumer, ModBlocks.iron_fence_gate, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fencegate(consumer, ModBlocks.gold_fence_gate, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -132,6 +148,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fencegate(consumer, ModBlocks.blue_ice_fence_gate, Blocks.BLUE_ICE, ModBlocks.blue_ice_slab);
         fencegate(consumer, ModBlocks.netherite_fence_gate, Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT);
         fencegate(consumer, ModBlocks.amethyst_fence_gate, Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD);
+        fencegate(consumer, ModBlocks.copper_fence_gate, Blocks.COPPER_BLOCK, Items.COPPER_INGOT);
+        fencegate(consumer, ModBlocks.exposed_copper_fence_gate, Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab);
+        fencegate(consumer, ModBlocks.weathered_copper_fence_gate, Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab);
+        fencegate(consumer, ModBlocks.oxidized_copper_fence_gate, Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab);
 
         door(consumer, ModBlocks.gold_door, Items.GOLD_INGOT);
         door(consumer, ModBlocks.diamond_door, Items.DIAMOND);
@@ -156,6 +176,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         door(consumer, ModBlocks.blue_ice_door, ModBlocks.blue_ice_slab);
         door(consumer, ModBlocks.netherite_door, Items.NETHERITE_INGOT);
         door(consumer, ModBlocks.amethyst_door, Items.AMETHYST_SHARD);
+        door(consumer, ModBlocks.copper_door, Items.COPPER_INGOT);
+        door(consumer, ModBlocks.exposed_copper_door, ModBlocks.exposed_copper_slab);
+        door(consumer, ModBlocks.weathered_copper_door, ModBlocks.weathered_copper_slab);
+        door(consumer, ModBlocks.oxidized_copper_door, ModBlocks.oxidized_copper_slab);
 
         pole(consumer, ModBlocks.iron_pole, ModBlocks.iron_slab);
         pole(consumer, ModBlocks.gold_pole, ModBlocks.gold_slab);
@@ -181,6 +205,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         pole(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_slab);
         pole(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_slab);
         pole(consumer, ModBlocks.amethyst_pole, Items.AMETHYST_SHARD);
+        pole(consumer, ModBlocks.copper_pole, Items.COPPER_INGOT);
+        pole(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_slab);
+        pole(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_slab);
+        pole(consumer, ModBlocks.oxidized_copper_pole, ModBlocks.oxidized_copper_slab);
 
         beam(consumer, ModBlocks.iron_beam, ModBlocks.iron_slab);
         beam(consumer, ModBlocks.gold_beam, ModBlocks.gold_slab);
@@ -206,6 +234,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         beam(consumer, ModBlocks.blue_ice_beam, ModBlocks.blue_ice_slab);
         beam(consumer, ModBlocks.netherite_beam, ModBlocks.netherite_slab);
         beam(consumer, ModBlocks.amethyst_beam, Items.AMETHYST_SHARD);
+        beam(consumer, ModBlocks.copper_beam, Items.COPPER_INGOT);
+        beam(consumer, ModBlocks.exposed_copper_beam, ModBlocks.exposed_copper_slab);
+        beam(consumer, ModBlocks.weathered_copper_beam, ModBlocks.weathered_copper_slab);
+        beam(consumer, ModBlocks.oxidized_copper_beam, ModBlocks.oxidized_copper_slab);
 
         convertPoleBeam(consumer, ModBlocks.iron_pole, ModBlocks.iron_beam);
         convertPoleBeam(consumer, ModBlocks.gold_pole, ModBlocks.gold_beam);
@@ -231,6 +263,10 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         convertPoleBeam(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_beam);
         convertPoleBeam(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_beam);
         convertPoleBeam(consumer, ModBlocks.amethyst_pole, ModBlocks.amethyst_beam);
+        convertPoleBeam(consumer, ModBlocks.copper_pole, ModBlocks.copper_beam);
+        convertPoleBeam(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_beam);
+        convertPoleBeam(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_beam);
+        convertPoleBeam(consumer, ModBlocks.oxidized_copper_pole, ModBlocks.oxidized_copper_beam);
 
         wall(consumer, ModBlocks.iron_wall, Blocks.IRON_BLOCK);
         wall(consumer, ModBlocks.gold_wall, Blocks.GOLD_BLOCK);
@@ -253,5 +289,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         wall(consumer, ModBlocks.blue_ice_wall, Blocks.BLUE_ICE);
         wall(consumer, ModBlocks.netherite_wall, Blocks.NETHERITE_BLOCK);
         wall(consumer, ModBlocks.amethyst_wall, Blocks.AMETHYST_BLOCK);
+        wall(consumer, ModBlocks.copper_wall, Blocks.COPPER_BLOCK);
+        wall(consumer, ModBlocks.exposed_copper_wall, Blocks.EXPOSED_COPPER);
+        wall(consumer, ModBlocks.weathered_copper_wall, Blocks.WEATHERED_COPPER);
+        wall(consumer, ModBlocks.oxidized_copper_wall, Blocks.OXIDIZED_COPPER);
     }
 }

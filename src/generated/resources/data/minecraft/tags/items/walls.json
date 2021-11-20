@@ -22,6 +22,10 @@
     "ornamental:packed_ice_wall",
     "ornamental:blue_ice_wall",
     "ornamental:netherite_wall",
-    "ornamental:amethyst_wall"
+    "ornamental:amethyst_wall",
+    "ornamental:copper_wall",
+    "ornamental:exposed_copper_wall",
+    "ornamental:weathered_copper_wall",
+    "ornamental:oxidized_copper_wall"
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCopperBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:exposed_copper"
+          },
+          "/": {
+            "item": "ornamental:exposed_copper_slab"
+          }
+        },
+        "result": {
+          "item": "ornamental:exposed_copper_fence_gate"
+        }
+      }
+    }
+  ]
+}

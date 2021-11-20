@@ -21,6 +21,9 @@
     "ornamental:packed_ice_slab",
     "ornamental:blue_ice_slab",
     "ornamental:netherite_slab",
-    "ornamental:amethyst_slab"
+    "ornamental:amethyst_slab",
+    "ornamental:copper_slab",
+    "ornamental:exposed_copper_slab",
+    "ornamental:weathered_copper_slab"
   ]
 }

@@ -194,8 +194,33 @@ public class OrnamentBuilders {
             .isFireproof()
             .config(() -> OrnamentalConfig.showNetheriteBlocks);
 
-    //TODO: placeholder
-    public static final OrnamentBuilder COPPER = new OrnamentBuilder("copper");
+    public static final OrnamentBuilder COPPER = new OrnamentBuilder("copper")
+            .properties(Material.METAL, MaterialColor.COLOR_ORANGE)
+            .sound(SoundType.COPPER)
+            .hardnessAndResistance(3.0F, 6.0F)
+            .requiresTool()
+            .config(() -> OrnamentalConfig.showCopperBlocks);
+
+    public static final OrnamentBuilder EXPOSED_COPPER = new OrnamentBuilder("exposed_copper")
+            .properties(Material.METAL, MaterialColor.TERRACOTTA_LIGHT_GRAY)
+            .sound(SoundType.COPPER)
+            .hardnessAndResistance(3.0F, 6.0F)
+            .requiresTool()
+            .config(() -> OrnamentalConfig.showCopperBlocks);
+
+    public static final OrnamentBuilder WEATHERED_COPPER = new OrnamentBuilder("weathered_copper")
+            .properties(Material.METAL, MaterialColor.WARPED_STEM)
+            .sound(SoundType.COPPER)
+            .hardnessAndResistance(3.0F, 6.0F)
+            .requiresTool()
+            .config(() -> OrnamentalConfig.showCopperBlocks);
+
+    public static final OrnamentBuilder OXIDIZED_COPPER = new OrnamentBuilder("oxidized_copper")
+            .properties(Material.METAL, MaterialColor.WARPED_NYLIUM)
+            .sound(SoundType.COPPER)
+            .hardnessAndResistance(3.0F, 6.0F)
+            .requiresTool()
+            .config(() -> OrnamentalConfig.showCopperBlocks);
 
     public static final OrnamentBuilder AMETHYST = new OrnamentBuilder("amethyst")
             .properties(Material.AMETHYST, MaterialColor.COLOR_PURPLE)

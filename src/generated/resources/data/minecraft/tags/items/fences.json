@@ -24,6 +24,10 @@
     "ornamental:packed_ice_fence",
     "ornamental:blue_ice_fence",
     "ornamental:netherite_fence",
-    "ornamental:amethyst_fence"
+    "ornamental:amethyst_fence",
+    "ornamental:copper_fence",
+    "ornamental:exposed_copper_fence",
+    "ornamental:weathered_copper_fence",
+    "ornamental:oxidized_copper_fence"
   ]
 }

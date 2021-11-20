@@ -1,0 +1,7 @@
+{
+  "parent": "ornamental:block/util/beam_inventory",
+  "textures": {
+    "end": "minecraft:block/oxidized_copper",
+    "side": "minecraft:block/oxidized_copper"
+  }
+}

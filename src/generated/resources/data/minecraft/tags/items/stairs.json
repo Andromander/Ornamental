@@ -21,6 +21,10 @@
     "ornamental:packed_ice_stairs",
     "ornamental:blue_ice_stairs",
     "ornamental:netherite_stairs",
-    "ornamental:amethyst_stairs"
+    "ornamental:amethyst_stairs",
+    "ornamental:copper_stairs",
+    "ornamental:exposed_copper_stairs",
+    "ornamental:weathered_copper_stairs",
+    "ornamental:oxidized_copper_stairs"
   ]
 }

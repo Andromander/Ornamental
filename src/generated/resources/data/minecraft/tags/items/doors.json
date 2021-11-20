@@ -24,6 +24,10 @@
     "ornamental:packed_ice_door",
     "ornamental:blue_ice_door",
     "ornamental:netherite_door",
-    "ornamental:amethyst_door"
+    "ornamental:amethyst_door",
+    "ornamental:copper_door",
+    "ornamental:exposed_copper_door",
+    "ornamental:weathered_copper_door",
+    "ornamental:oxidized_copper_door"
   ]
 }

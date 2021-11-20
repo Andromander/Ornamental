@@ -24,6 +24,10 @@
     "ornamental:packed_ice_trapdoor",
     "ornamental:blue_ice_trapdoor",
     "ornamental:netherite_trapdoor",
-    "ornamental:amethyst_trapdoor"
+    "ornamental:amethyst_trapdoor",
+    "ornamental:copper_trapdoor",
+    "ornamental:exposed_copper_trapdoor",
+    "ornamental:weathered_copper_trapdoor",
+    "ornamental:oxidized_copper_trapdoor"
   ]
 }

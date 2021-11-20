@@ -125,6 +125,10 @@ public class OrnamentalMod {
         renderBlock(ModBlocks.ice_trapdoor, RenderType.translucent());
         renderBlock(ModBlocks.packed_ice_trapdoor, RenderType.cutout());
         renderBlock(ModBlocks.blue_ice_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.copper_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.exposed_copper_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.weathered_copper_trapdoor, RenderType.cutout());
+        renderBlock(ModBlocks.oxidized_copper_trapdoor, RenderType.cutout());
 
         renderBlock(ModBlocks.grass_fence_gate, RenderType.cutoutMipped());
         renderBlock(ModBlocks.path_fence_gate, RenderType.cutoutMipped());
@@ -152,6 +156,10 @@ public class OrnamentalMod {
         renderBlock(ModBlocks.ice_door, RenderType.translucent());
         renderBlock(ModBlocks.packed_ice_door, RenderType.cutout());
         renderBlock(ModBlocks.blue_ice_door, RenderType.cutout());
+        renderBlock(ModBlocks.copper_door, RenderType.cutout());
+        renderBlock(ModBlocks.exposed_copper_door, RenderType.cutout());
+        renderBlock(ModBlocks.weathered_copper_door, RenderType.cutout());
+        renderBlock(ModBlocks.oxidized_copper_door, RenderType.cutout());
 
         renderBlock(ModBlocks.grass_pole, RenderType.cutoutMipped());
         renderBlock(ModBlocks.path_pole, RenderType.cutoutMipped());

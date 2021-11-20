@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCopperBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:exposed_copper"
+          }
+        },
+        "result": {
+          "item": "ornamental:exposed_copper_stairs",
+          "count": 8
+        }
+      }
+    }
+  ]
+}
