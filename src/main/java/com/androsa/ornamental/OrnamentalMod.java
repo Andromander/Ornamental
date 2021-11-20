@@ -64,7 +64,7 @@ public class OrnamentalMod {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> OrnamentalMod::registerRenders);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
-        //DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::registerClientParticles);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::registerParticles);
     }
 
     @SubscribeEvent

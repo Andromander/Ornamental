@@ -8,6 +8,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +17,6 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, OrnamentalMod.MODID);
@@ -27,8 +28,8 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> CHARGE_SPARK = PARTICLE_TYPE.register("charge_spark", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> AMETHYST_CAST = PARTICLE_TYPE.register("amethyst_cast", () -> new SimpleParticleType(false));
 
-    @SubscribeEvent
-    public static void registerParticles(ParticleFactoryRegisterEvent event) {
+    @OnlyIn(Dist.CLIENT)
+    public static void registerParticles() {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
 
         engine.register(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
