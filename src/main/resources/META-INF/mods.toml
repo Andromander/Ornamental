@@ -6,9 +6,9 @@ license="GNU Lesser General Public v3"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="ornamental" #mandatory
-version="4.5" #mandatory
+version="4.6" #mandatory
 displayName="Ornamental" #mandatory
-updateJSONURL="https://raw.githubusercontent.com/Andromander/Ornamental/1.16.x/update.json" #optional
+updateJSONURL="https://raw.githubusercontent.com/Andromander/Ornamental/1.17.x/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ornamental" #optional
 #logoFile="" #optional
 credits="Androsa, or AlphaLeaf, your choice." #optional
