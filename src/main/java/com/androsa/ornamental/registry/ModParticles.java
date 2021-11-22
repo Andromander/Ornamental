@@ -17,6 +17,7 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, OrnamentalMod.MODID);
@@ -29,13 +30,19 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> AMETHYST_CAST = PARTICLE_TYPE.register("amethyst_cast", () -> new SimpleParticleType(false));
 
     @OnlyIn(Dist.CLIENT)
-    public static void registerParticles() {
+    public static void fuckYou() {
         ParticleEngine engine = Minecraft.getInstance().particleEngine;
 
         engine.register(ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
         engine.register(ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
         engine.register(ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
         engine.register(ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(ParticleFactoryRegisterEvent event) {
+        ParticleEngine engine = Minecraft.getInstance().particleEngine;
+
         engine.register(CHARGE_SPARK.get(), ChargeSparkParticle.ChargeSparkFactory::new);
         engine.register(AMETHYST_CAST.get(), CastingParticle.AmethystFactory::new);
     }
