@@ -16,7 +16,7 @@ version = project.mc_version + "-" + project.mod_version
 group = project.mod_group
 archivesBaseName = project.archives_base_name
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Need this here so eclipse task generates correctly.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Need this here so eclipse task generates correctly.
 
 minecraft {
     mappings channel: project.forge_channel, version: project.forge_mappings
