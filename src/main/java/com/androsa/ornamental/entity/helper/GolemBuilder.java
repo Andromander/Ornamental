@@ -11,9 +11,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -80,7 +80,7 @@ public class GolemBuilder {
         for(int k = 0; k < type.getHeight(); ++k) {
             BlockInWorld info = pattern.getBlock(0, k, 0);
             world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
-            world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
+            world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, info.getPos(), Block.getId(info.getState()));
         }
     }
 
@@ -89,7 +89,7 @@ public class GolemBuilder {
             for(int k = 0; k < type.getHeight(); ++k) {
                 BlockInWorld info = pattern.getBlock(j, k, 0);
                 world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
-                world.levelEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, info.getPos(), Block.getId(info.getState()));
+                world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, info.getPos(), Block.getId(info.getState()));
             }
         }
     }

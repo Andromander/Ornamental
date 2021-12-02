@@ -26,9 +26,9 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -397,7 +397,7 @@ public class CopperGolem extends OrnamentalGolem {
                     double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
                     double z = target.getZ() - (this.parentEntity.getZ() + vec3.z * 2.0D);
 
-                    world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
+                    world.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, parentEntity.blockPosition(), 0);
                     ChargeBall chargeball = new ChargeBall(world, this.parentEntity, x, y, z);
                     chargeball.setPos(chargeball.getX() + vec3.x * 2.0D, this.parentEntity.getY(0.5D) + 0.5D, chargeball.getZ() + vec3.z * 2.0D);
                     world.addFreshEntity(chargeball);

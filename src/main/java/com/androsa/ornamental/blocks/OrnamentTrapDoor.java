@@ -127,7 +127,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             state = state.cycle(OPEN);
             world.setBlock(pos, state, 2);
             if (state.getValue(WATERLOGGED)) {
-                world.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+                world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
             }
 
             this.playSound(player, world, pos, state.getValue(OPEN));

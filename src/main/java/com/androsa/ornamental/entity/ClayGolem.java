@@ -21,8 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.Constants;
 
 public class ClayGolem extends OrnamentalGolem {
 
@@ -87,7 +87,7 @@ public class ClayGolem extends OrnamentalGolem {
                 this.discard();
             }
 
-            this.level.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, this.blockPosition(), 0);
+            this.level.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, this.blockPosition(), 0);
         }
         super.aiStep();
     }

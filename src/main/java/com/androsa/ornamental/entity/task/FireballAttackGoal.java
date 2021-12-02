@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.block.LevelEvent;
 
 //VanillaCopy of GhastEntity.FireballAttackGoal, modified for Quartz Golem
 public class FireballAttackGoal extends Goal {
@@ -38,7 +38,7 @@ public class FireballAttackGoal extends Goal {
                 double x = target.getX() - this.parentEntity.getX();
                 double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
                 double z = target.getZ() - this.parentEntity.getZ();
-                world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
+                world.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, parentEntity.blockPosition(), 0);
                 SmallFireball fireball = new SmallFireball(world, this.parentEntity, x, y, z);
                 fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
                 world.addFreshEntity(fireball);

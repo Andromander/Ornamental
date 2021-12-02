@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.block.LevelEvent;
 
 import java.util.EnumSet;
 
@@ -42,7 +42,7 @@ public class ExplodingFireballAttackGoal extends Goal {
                 double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
                 double z = target.getZ() - this.parentEntity.getZ();
 
-                world.levelEvent(null, Constants.WorldEvents.BLAZE_SHOOT_SOUND, parentEntity.blockPosition(), 0);
+                world.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, parentEntity.blockPosition(), 0);
                 LargeFireball fireball = new LargeFireball(world, this.parentEntity, x, y, z, 2);
                 fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
                 world.addFreshEntity(fireball);
