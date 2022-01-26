@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -59,7 +60,7 @@ public class OrnamentBuilder {
     public boolean isSolid = true;
     public boolean breakableCull = false;
     public PushReaction pushReaction = material.getPushReaction();
-    public List<SoundEvent> projectileHitSounds = null;
+    public List<SoundEvent> projectileHitSounds = new ArrayList<>();
 
     /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
     public boolean hasConfig = false;
