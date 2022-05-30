@@ -188,7 +188,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(result.get())
+        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(result.get(), 2)
                 .requires(ingredient);
 
         internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_saddle_door_from_door");
