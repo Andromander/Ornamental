@@ -23,6 +23,10 @@ public class OrnamentTallBlockItem extends DoubleHighBlockItem {
 
     @Override
     public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
+        if (index > builder.burnTime.length || index < 0) {
+            // The index is outside the burnTime array bounds. This is because the number is negative or greater than the size of the array. This is a developer error.
+            return 0;
+        }
         return builder.burnTime[index];
     }
 
