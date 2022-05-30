@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -167,18 +168,20 @@ public class OrnamentBuilder {
     /**
      * Setters for a block's burn time (measured by ticks). This is applied to the block's item. Defaults to all 0 (does not burn)
      * For default behaviour, set value to -1. Any other value above 0, 1 second = 20 ticks
-     * @param door Door burn time
-     * @param fence Fence burn time
-     * @param gate Fence Gate burn time
-     * @param slab Slab burn time
-     * @param stairs Stairs burn time
-     * @param trap Trap Door burn time
-     * @param pole Pole burn time
-     * @param beam Beam burn time
-	 * @param wall Wall burn time
+     *
+     * Indexes are as follows:
+     * 0 = Door
+     * 1 = Fence
+     * 2 = Fence Gate
+     * 3 = Slab
+     * 4 = Stairs
+     * 5 = Trap Door
+     * 6 = Pole
+     * 7 = Beam
+     * 8 = Wall
      */
-    public OrnamentBuilder burnTime(int door, int fence, int gate, int slab, int stairs, int trap, int pole, int beam, int wall) {
-        this.burnTime = new int[]{door, fence, gate, slab, stairs, trap, pole, beam, wall};
+    public OrnamentBuilder burnTime(int... times) {
+        this.burnTime = Arrays.stream(times).toArray();
         return this;
     }
 
