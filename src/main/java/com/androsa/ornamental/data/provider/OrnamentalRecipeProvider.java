@@ -4,10 +4,7 @@ import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.conditions.ConfigCondition;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
@@ -33,61 +30,31 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void stairs(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentStair> result, Block ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 8)
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_stairs"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_stairs"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_stairs");
     }
 
     public void slab(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
                 .pattern("###")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_slab"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_slab"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_slab");
     }
 
     public void slabOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-		OrnamentBuilder builder = result.get().getBuilder();
-
 		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
 				.pattern(" / ")
 				.pattern("###")
 				.define('/', ItemTags.SLABS)
-				.define('#', ingredient)
-				.unlockedBy("has_" + builder.name, has(ingredient));
+				.define('#', ingredient);
 
-		if (builder.hasConfig) {
-			ConditionalRecipe.builder()
-					.addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-					.addRecipe(recipe::save)
-					.build(consumer, loc(builder.name + "_slab"));
-		} else {
-			recipe.save(consumer, loc(builder.name + "_slab"));
-		}
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_slab");
 	}
 
     public void fence(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
@@ -95,23 +62,13 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void fence(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 3)
                 .pattern("#/#")
                 .pattern("#/#")
                 .define('#', bigItem)
-                .define('/', smallItem)
-                .unlockedBy("has_" + builder.name, has(bigItem));
+                .define('/', smallItem);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_fence"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_fence"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), bigItem, "_fence");
     }
 
     public void trapdoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -119,22 +76,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void trapdoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
                 .pattern("##")
                 .pattern("##")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_trapdoor"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_trapdoor"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_trapdoor");
     }
 
     public void trapdoorWide(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -142,22 +89,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void trapdoorWide(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
                 .pattern("###")
                 .pattern("###")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_trapdoor"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_trapdoor"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_trapdoor");
     }
 
     public void fencegate(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, Supplier<? extends OrnamentSlab> smallItem) {
@@ -165,23 +102,13 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void fencegate(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
                 .pattern("/#/")
                 .pattern("/#/")
                 .define('#', bigItem)
-                .define('/', smallItem)
-                .unlockedBy("has_" + builder.name, has(bigItem));
+                .define('/', smallItem);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_fence_gate"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_fence_gate"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), bigItem, "_fence_gate");
     }
 
     public void door(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -189,23 +116,13 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void door(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
                 .pattern("##")
                 .pattern("##")
                 .pattern("##")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_door"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_door"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_door");
     }
 
     public void pole(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -213,23 +130,13 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void pole(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
                 .pattern("#")
                 .pattern("#")
                 .pattern("#")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_pole"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_pole"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_pole");
     }
 
     public void beam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, Supplier<? extends OrnamentSlab> ingredient) {
@@ -237,70 +144,30 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void beam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
                 .pattern("###")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_beam"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_beam"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_beam");
     }
 
     public void convertPoleBeam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
-        OrnamentBuilder polebuilder = pole.get().getBuilder();
-        OrnamentBuilder beambuilder = beam.get().getBuilder();
-
         ShapelessRecipeBuilder polerecipe = ShapelessRecipeBuilder.shapeless(beam.get())
-                .requires(pole.get())
-                .unlockedBy("has_" + polebuilder.name, has(pole.get()));
+                .requires(pole.get());
         ShapelessRecipeBuilder beamrecipe = ShapelessRecipeBuilder.shapeless(pole.get())
-                .requires(beam.get())
-                .unlockedBy("has_" + beambuilder.name, has(beam.get()));
+                .requires(beam.get());
 
-        if (polebuilder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(polebuilder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(polerecipe::save)
-                    .build(consumer, loc(polebuilder.name + "_pole_to_beam"));
-        } else {
-            polerecipe.save(consumer, loc(polebuilder.name + "_pole_to_beam"));
-        }
-
-        if (beambuilder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(beambuilder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(beamrecipe::save)
-                    .build(consumer, loc(beambuilder.name + "_beam_to_pole"));
-        } else {
-            beamrecipe.save(consumer, loc(beambuilder.name + "_beam_to_pole"));
-        }
+        internalRecipeBuild(consumer, polerecipe, beam.get(), pole.get(), "_pole_to_beam");
+        internalRecipeBuild(consumer, beamrecipe, pole.get(), beam.get(), "_beam_to_pole");
     }
 
     public void wall(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
                 .pattern("###")
                 .pattern("###")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_wall"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_wall"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_wall");
     }
 
     public void saddleDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentTrapDoor> ingredient) {
@@ -308,22 +175,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void saddleDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 2)
                 .pattern("#")
                 .pattern("#")
-                .define('#', ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .define('#', ingredient);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_saddle_door"));
-        } else {
-            recipe.save(consumer, loc(builder.name + "_saddle_door"));
-        }
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_saddle_door");
     }
 
     public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentDoor> ingredient) {
@@ -331,19 +188,24 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        OrnamentBuilder builder = result.get().getBuilder();
-
         ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(result.get())
-                .requires(ingredient)
-                .unlockedBy("has_" + builder.name, has(ingredient));
+                .requires(ingredient);
+
+        internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_saddle_door_from_door");
+    }
+
+    private void internalRecipeBuild(Consumer<FinishedRecipe> consumer, RecipeBuilder recipe, OrnamentalBlock result, ItemLike criteria, String name) {
+        OrnamentBuilder builder = result.getBuilder();
+        recipe = recipe.unlockedBy("has_" + builder.name, has(criteria));
+        ResourceLocation location = loc(builder.name + name);
 
         if (builder.hasConfig) {
             ConditionalRecipe.builder()
                     .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
                     .addRecipe(recipe::save)
-                    .build(consumer, loc(builder.name + "_saddle_door_from_door"));
+                    .build(consumer, location);
         } else {
-            recipe.save(consumer, loc(builder.name + "_saddle_door_from_door"));
+            recipe.save(consumer, location);
         }
     }
 }
