@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBlueIceBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:blue_ice_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:blue_ice_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

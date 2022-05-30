@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showEmeraldBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:emerald_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:emerald_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

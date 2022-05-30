@@ -1,12 +1,15 @@
 package com.androsa.ornamental.data;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
+import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
 
@@ -293,5 +296,63 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         wall(consumer, ModBlocks.exposed_copper_wall, Blocks.EXPOSED_COPPER);
         wall(consumer, ModBlocks.weathered_copper_wall, Blocks.WEATHERED_COPPER);
         wall(consumer, ModBlocks.oxidized_copper_wall, Blocks.OXIDIZED_COPPER);
+
+        saddleDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_TRAPDOOR);
+        saddleDoor(consumer, ModBlocks.gold_saddle_door, ModBlocks.gold_trapdoor);
+        saddleDoor(consumer, ModBlocks.diamond_saddle_door, ModBlocks.diamond_trapdoor);
+        saddleDoor(consumer, ModBlocks.emerald_saddle_door, ModBlocks.emerald_trapdoor);
+        saddleDoor(consumer, ModBlocks.lapis_saddle_door, ModBlocks.lapis_trapdoor);
+        saddleDoor(consumer, ModBlocks.obsidian_saddle_door, ModBlocks.obsidian_trapdoor);
+        saddleDoor(consumer, ModBlocks.coal_saddle_door, ModBlocks.coal_trapdoor);
+        saddleDoor(consumer, ModBlocks.redstone_saddle_door, ModBlocks.redstone_trapdoor);
+        saddleDoor(consumer, ModBlocks.clay_saddle_door, ModBlocks.clay_trapdoor);
+        saddleDoor(consumer, ModBlocks.dirt_saddle_door, ModBlocks.dirt_trapdoor);
+        saddleDoor(consumer, ModBlocks.grass_saddle_door, ModBlocks.grass_trapdoor);
+        saddleDoor(consumer, ModBlocks.hay_saddle_door, ModBlocks.hay_trapdoor);
+        saddleDoor(consumer, ModBlocks.path_saddle_door, ModBlocks.path_trapdoor);
+        saddleDoor(consumer, ModBlocks.brick_saddle_door, ModBlocks.brick_trapdoor);
+        saddleDoor(consumer, ModBlocks.quartz_saddle_door, ModBlocks.quartz_trapdoor);
+        saddleDoor(consumer, ModBlocks.bone_saddle_door, ModBlocks.bone_trapdoor);
+        saddleDoor(consumer, ModBlocks.nether_brick_saddle_door, ModBlocks.nether_brick_trapdoor);
+        saddleDoor(consumer, ModBlocks.red_nether_brick_saddle_door, ModBlocks.red_nether_brick_trapdoor);
+        saddleDoor(consumer, ModBlocks.snow_saddle_door, ModBlocks.snow_trapdoor);
+        saddleDoor(consumer, ModBlocks.ice_saddle_door, ModBlocks.ice_trapdoor);
+        saddleDoor(consumer, ModBlocks.packed_ice_saddle_door, ModBlocks.packed_ice_trapdoor);
+        saddleDoor(consumer, ModBlocks.blue_ice_saddle_door, ModBlocks.blue_ice_trapdoor);
+        saddleDoor(consumer, ModBlocks.netherite_saddle_door, ModBlocks.netherite_trapdoor);
+        saddleDoor(consumer, ModBlocks.amethyst_saddle_door, ModBlocks.amethyst_trapdoor);
+        saddleDoor(consumer, ModBlocks.copper_saddle_door, ModBlocks.copper_trapdoor);
+        saddleDoor(consumer, ModBlocks.exposed_copper_saddle_door, ModBlocks.exposed_copper_trapdoor);
+        saddleDoor(consumer, ModBlocks.weathered_copper_saddle_door, ModBlocks.weathered_copper_trapdoor);
+        saddleDoor(consumer, ModBlocks.oxidized_copper_saddle_door, ModBlocks.oxidized_copper_trapdoor);
+
+        saddleDoorFromDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_DOOR);
+        saddleDoorFromDoor(consumer, ModBlocks.gold_saddle_door, ModBlocks.gold_door);
+        saddleDoorFromDoor(consumer, ModBlocks.diamond_saddle_door, ModBlocks.diamond_door);
+        saddleDoorFromDoor(consumer, ModBlocks.emerald_saddle_door, ModBlocks.emerald_door);
+        saddleDoorFromDoor(consumer, ModBlocks.lapis_saddle_door, ModBlocks.lapis_door);
+        saddleDoorFromDoor(consumer, ModBlocks.obsidian_saddle_door, ModBlocks.obsidian_door);
+        saddleDoorFromDoor(consumer, ModBlocks.coal_saddle_door, ModBlocks.coal_door);
+        saddleDoorFromDoor(consumer, ModBlocks.redstone_saddle_door, ModBlocks.redstone_door);
+        saddleDoorFromDoor(consumer, ModBlocks.clay_saddle_door, ModBlocks.clay_door);
+        saddleDoorFromDoor(consumer, ModBlocks.dirt_saddle_door, ModBlocks.dirt_door);
+        saddleDoorFromDoor(consumer, ModBlocks.grass_saddle_door, ModBlocks.grass_door);
+        saddleDoorFromDoor(consumer, ModBlocks.hay_saddle_door, ModBlocks.hay_door);
+        saddleDoorFromDoor(consumer, ModBlocks.path_saddle_door, ModBlocks.path_door);
+        saddleDoorFromDoor(consumer, ModBlocks.brick_saddle_door, ModBlocks.brick_door);
+        saddleDoorFromDoor(consumer, ModBlocks.quartz_saddle_door, ModBlocks.quartz_door);
+        saddleDoorFromDoor(consumer, ModBlocks.bone_saddle_door, ModBlocks.bone_door);
+        saddleDoorFromDoor(consumer, ModBlocks.nether_brick_saddle_door, ModBlocks.nether_brick_door);
+        saddleDoorFromDoor(consumer, ModBlocks.red_nether_brick_saddle_door, ModBlocks.red_nether_brick_door);
+        saddleDoorFromDoor(consumer, ModBlocks.snow_saddle_door, ModBlocks.snow_door);
+        saddleDoorFromDoor(consumer, ModBlocks.ice_saddle_door, ModBlocks.ice_door);
+        saddleDoorFromDoor(consumer, ModBlocks.packed_ice_saddle_door, ModBlocks.packed_ice_door);
+        saddleDoorFromDoor(consumer, ModBlocks.blue_ice_saddle_door, ModBlocks.blue_ice_door);
+        saddleDoorFromDoor(consumer, ModBlocks.netherite_saddle_door, ModBlocks.netherite_door);
+        saddleDoorFromDoor(consumer, ModBlocks.amethyst_saddle_door, ModBlocks.amethyst_door);
+        saddleDoorFromDoor(consumer, ModBlocks.copper_saddle_door, ModBlocks.copper_door);
+        saddleDoorFromDoor(consumer, ModBlocks.exposed_copper_saddle_door, ModBlocks.exposed_copper_door);
+        saddleDoorFromDoor(consumer, ModBlocks.weathered_copper_saddle_door, ModBlocks.weathered_copper_door);
+        saddleDoorFromDoor(consumer, ModBlocks.oxidized_copper_saddle_door, ModBlocks.oxidized_copper_door);
     }
 }

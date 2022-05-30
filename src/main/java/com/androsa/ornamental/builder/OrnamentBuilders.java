@@ -57,7 +57,7 @@ public class OrnamentBuilders {
             .properties(Material.STONE, MaterialColor.COLOR_BLACK)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
-            .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000, 12000)
+            .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000, 12000, 5250)
             .canOpen()
             .config(() -> OrnamentalConfig.showCoalBlocks);
 

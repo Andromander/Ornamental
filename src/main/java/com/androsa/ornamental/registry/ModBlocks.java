@@ -280,6 +280,36 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentWall> weathered_copper_wall = registerWall(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentWall> oxidized_copper_wall = registerWall(OrnamentBuilders.OXIDIZED_COPPER);
 
+    public static final RegistryObject<OrnamentSaddleDoor> iron_saddle_door = registerSaddleDoor(OrnamentBuilders.IRON);
+    public static final RegistryObject<OrnamentSaddleDoor> gold_saddle_door = registerSaddleDoor(OrnamentBuilders.GOLD);
+    public static final RegistryObject<OrnamentSaddleDoor> diamond_saddle_door = registerSaddleDoor(OrnamentBuilders.DIAMOND);
+    public static final RegistryObject<OrnamentSaddleDoor> emerald_saddle_door = registerSaddleDoor(OrnamentBuilders.EMERALD);
+    public static final RegistryObject<OrnamentSaddleDoor> lapis_saddle_door = registerSaddleDoor(OrnamentBuilders.LAPIS);
+    public static final RegistryObject<OrnamentSaddleDoor> obsidian_saddle_door = registerSaddleDoor(OrnamentBuilders.OBSIDIAN);
+    public static final RegistryObject<OrnamentSaddleDoor> coal_saddle_door = registerSaddleDoor(OrnamentBuilders.COAL);
+    public static final RegistryObject<OrnamentSaddleDoor> redstone_saddle_door = registerSaddleDoor(OrnamentBuilders.REDSTONE);
+    public static final RegistryObject<OrnamentSaddleDoor> missingno_saddle_door = registerSaddleDoor(OrnamentBuilders.MISSINGNO);
+    public static final RegistryObject<OrnamentSaddleDoor> clay_saddle_door = registerSaddleDoor(OrnamentBuilders.CLAY);
+    public static final RegistryObject<OrnamentSaddleDoor> dirt_saddle_door = registerSaddleDoor(OrnamentBuilders.DIRT);
+    public static final RegistryObject<OrnamentSaddleDoor> grass_saddle_door = registerSaddleDoor(OrnamentBuilders.GRASS);
+    public static final RegistryObject<OrnamentSaddleDoor> hay_saddle_door = registerSaddleDoor(OrnamentBuilders.HAY);
+    public static final RegistryObject<OrnamentSaddleDoor> path_saddle_door = registerSaddleDoor(OrnamentBuilders.PATH);
+    public static final RegistryObject<OrnamentSaddleDoor> brick_saddle_door = registerSaddleDoor(OrnamentBuilders.BRICK);
+    public static final RegistryObject<OrnamentSaddleDoor> quartz_saddle_door = registerSaddleDoor(OrnamentBuilders.QUARTZ);
+    public static final RegistryObject<OrnamentSaddleDoor> bone_saddle_door = registerSaddleDoor(OrnamentBuilders.BONE);
+    public static final RegistryObject<OrnamentSaddleDoor> nether_brick_saddle_door = registerSaddleDoor(OrnamentBuilders.NETHER_BRICK);
+    public static final RegistryObject<OrnamentSaddleDoor> red_nether_brick_saddle_door = registerSaddleDoor(OrnamentBuilders.RED_NETHER_BRICK);
+    public static final RegistryObject<OrnamentSaddleDoor> snow_saddle_door = registerSaddleDoor(OrnamentBuilders.SNOW);
+    public static final RegistryObject<OrnamentSaddleDoor> ice_saddle_door = registerSaddleDoor(OrnamentBuilders.ICE);
+    public static final RegistryObject<OrnamentSaddleDoor> packed_ice_saddle_door = registerSaddleDoor(OrnamentBuilders.PACKED_ICE);
+    public static final RegistryObject<OrnamentSaddleDoor> blue_ice_saddle_door = registerSaddleDoor(OrnamentBuilders.BLUE_ICE);
+    public static final RegistryObject<OrnamentSaddleDoor> netherite_saddle_door = registerSaddleDoor(OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentSaddleDoor> amethyst_saddle_door = registerSaddleDoor(OrnamentBuilders.AMETHYST);
+    public static final RegistryObject<OrnamentSaddleDoor> copper_saddle_door = registerSaddleDoor(OrnamentBuilders.COPPER);
+    public static final RegistryObject<OrnamentSaddleDoor> exposed_copper_saddle_door = registerSaddleDoor(OrnamentBuilders.EXPOSED_COPPER);
+    public static final RegistryObject<OrnamentSaddleDoor> weathered_copper_saddle_door = registerSaddleDoor(OrnamentBuilders.WEATHERED_COPPER);
+    public static final RegistryObject<OrnamentSaddleDoor> oxidized_copper_saddle_door = registerSaddleDoor(OrnamentBuilders.OXIDIZED_COPPER);
+
     private static RegistryObject<OrnamentStair> registerStairs(OrnamentBuilder builder) {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
@@ -342,6 +372,13 @@ public class ModBlocks {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_wall", () -> new OrnamentWall(props, builder), item ->
+                registerBlockItem(item, CreativeModeTab.TAB_DECORATIONS, builder, 8));
+    }
+
+    private static RegistryObject<OrnamentSaddleDoor> registerSaddleDoor(OrnamentBuilder builder) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder).noOcclusion();
+
+        return registerBlock(builder.name + "_saddle_door", () -> new OrnamentSaddleDoor(props, builder), item ->
                 registerBlockItem(item, CreativeModeTab.TAB_DECORATIONS, builder, 8));
     }
 

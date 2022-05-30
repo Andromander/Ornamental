@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showRedstoneBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:redstone_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:redstone_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

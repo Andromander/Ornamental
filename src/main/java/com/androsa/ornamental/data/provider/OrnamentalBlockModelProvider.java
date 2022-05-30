@@ -127,4 +127,14 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("side", side)
                 .texture("end", end);
     }
+
+    public BlockModelBuilder saddleDoor(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "saddle_door")
+                .texture("texture", texture);
+    }
+
+    public BlockModelBuilder saddleDoorHinge(String name, ResourceLocation texture) {
+        return withExistingParent(name, ORNAMENT_MODELS + "saddle_door")
+                .texture("texture", texture);
+    }
 }

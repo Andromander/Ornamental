@@ -172,6 +172,34 @@ public class OrnamentalMod {
         renderBlock(ModBlocks.grass_wall, RenderType.cutoutMipped());
         renderBlock(ModBlocks.path_wall, RenderType.cutoutMipped());
         renderBlock(ModBlocks.ice_wall, RenderType.translucent());
+
+        renderBlock(ModBlocks.iron_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.gold_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.diamond_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.emerald_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.lapis_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.obsidian_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.coal_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.redstone_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.missingno_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.clay_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.dirt_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.grass_saddle_door, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.hay_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.path_saddle_door, RenderType.cutoutMipped());
+        renderBlock(ModBlocks.brick_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.quartz_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.bone_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.nether_brick_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.red_nether_brick_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.snow_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.ice_saddle_door, RenderType.translucent());
+        renderBlock(ModBlocks.packed_ice_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.blue_ice_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.copper_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.exposed_copper_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.weathered_copper_saddle_door, RenderType.cutout());
+        renderBlock(ModBlocks.oxidized_copper_saddle_door, RenderType.cutout());
     }
 
     private static void renderBlock(Supplier<? extends Block> block, RenderType render) {

@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showNetherBrickBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:nether_brick_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:nether_brick_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

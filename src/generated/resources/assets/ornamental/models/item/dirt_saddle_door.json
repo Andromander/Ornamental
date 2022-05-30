@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/saddle_door_inventory",
+  "textures": {
+    "texture": "minecraft:block/dirt"
+  }
+}

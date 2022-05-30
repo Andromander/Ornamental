@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showCoalBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "ornamental:coal_door"
+          }
+        ],
+        "result": {
+          "item": "ornamental:coal_saddle_door"
+        }
+      }
+    }
+  ]
+}

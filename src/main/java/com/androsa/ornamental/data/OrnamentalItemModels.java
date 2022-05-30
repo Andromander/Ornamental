@@ -257,5 +257,33 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemWall(ModBlocks.exposed_copper_wall, "exposed_copper");
         blockItemWall(ModBlocks.weathered_copper_wall, "weathered_copper");
         blockItemWall(ModBlocks.oxidized_copper_wall, "oxidized_copper");
+
+        blockItemSaddleDoorV(ModBlocks.iron_saddle_door, "iron_trapdoor");
+        blockItemSaddleDoor(ModBlocks.gold_saddle_door, "gold");
+        blockItemSaddleDoor(ModBlocks.diamond_saddle_door, "diamond");
+        blockItemSaddleDoor(ModBlocks.emerald_saddle_door, "emerald");
+        blockItemSaddleDoor(ModBlocks.lapis_saddle_door, "lapis");
+        blockItemSaddleDoor(ModBlocks.obsidian_saddle_door, "obsidian");
+        blockItemSaddleDoor(ModBlocks.coal_saddle_door, "coal");
+        blockItemSaddleDoor(ModBlocks.redstone_saddle_door, "redstone");
+        blockItemSaddleDoorM(ModBlocks.missingno_saddle_door);
+        blockItemSaddleDoor(ModBlocks.clay_saddle_door, "clay");
+        blockItemSaddleDoorV(ModBlocks.dirt_saddle_door, "dirt");
+        blockItemSaddleDoor(ModBlocks.hay_saddle_door, "hay");
+        blockItemSaddleDoorV(ModBlocks.brick_saddle_door, "bricks");
+        blockItemSaddleDoor(ModBlocks.quartz_saddle_door, "quartz");
+        blockItemSaddleDoor(ModBlocks.bone_saddle_door, "bone");
+        blockItemSaddleDoor(ModBlocks.nether_brick_saddle_door, "nether_brick");
+        blockItemSaddleDoor(ModBlocks.red_nether_brick_saddle_door, "red_nether_brick");
+        blockItemSaddleDoor(ModBlocks.snow_saddle_door, "snow");
+        blockItemSaddleDoor(ModBlocks.ice_saddle_door, "ice");
+        blockItemSaddleDoor(ModBlocks.packed_ice_saddle_door, "packed_ice");
+        blockItemSaddleDoor(ModBlocks.blue_ice_saddle_door, "blue_ice");
+        blockItemSaddleDoor(ModBlocks.netherite_saddle_door, "netherite");
+        blockItemSaddleDoor(ModBlocks.amethyst_saddle_door, "amethyst");
+        blockItemSaddleDoor(ModBlocks.copper_saddle_door, "copper");
+        blockItemSaddleDoor(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
+        blockItemSaddleDoor(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
+        blockItemSaddleDoor(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
     }
 }

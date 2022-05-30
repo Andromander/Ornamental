@@ -2,11 +2,13 @@ package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
+import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
 import com.androsa.ornamental.blocks.PoleType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -248,6 +250,41 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         wallBlock(block.get(), wallpost, wallside, walltall);
     }
 
+    public void saddleDoorBasic(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
+        saddleDoorBlock(block, locOrnament(name + "_trapdoor"));
+    }
+
+    public void saddleDoorMissing(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
+        saddleDoorBlock(block, locOrnament(name));
+    }
+
+    public void saddleDoorVanilla(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
+        saddleDoorBlock(block, locVanilla(name));
+    }
+
+    public void saddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, ResourceLocation texture) {
+        String name = block.getId().toString();
+        ModelFile bottomLeft = models().saddleDoor(name, texture);
+        ModelFile bottomRight = models().saddleDoorHinge(name + "_hinge", texture);
+
+        getVariantBuilder(block.get()).forAllStatesExcept(state -> {
+            int yRot = ((int) state.getValue(OrnamentSaddleDoor.FACING).toYRot()) + 90;
+            boolean rh = state.getValue(OrnamentSaddleDoor.HINGE) == DoorHingeSide.RIGHT;
+            boolean open = state.getValue(OrnamentSaddleDoor.OPEN);
+            boolean right = rh ^ open;
+            if (open) {
+                yRot += 90;
+            }
+            if (rh && open) {
+                yRot += 180;
+            }
+            yRot %= 360;
+            return ConfiguredModel.builder().modelFile(right ? bottomRight : bottomLeft)
+                    .rotationY(yRot)
+                    .build();
+        }, OrnamentSaddleDoor.POWERED);
+    }
+
     public void poleBlock(Supplier<? extends OrnamentPole> block, ModelFile corner, ModelFile half, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {
@@ -256,13 +293,13 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
                     ModelFile model;
                     int yRot;
 
-                    switch (shape) {
-                        case HALF: model = half; break;
-                        case CROSS: model = cross; break;
-                        case FILL: model = fill; break;
-                        case BLOCK: model = full; break;
-                        default: model = corner; break;
-                    }
+                    model = switch (shape) {
+                        case HALF -> half;
+                        case CROSS -> cross;
+                        case FILL -> fill;
+                        case BLOCK -> full;
+                        default -> corner;
+                    };
                     if (type == PoleType.TR_CORNER || type == PoleType.R_HALF || type == PoleType.TR_BL || type == PoleType.TR_FILL) {
                         yRot = 90;
                     } else if (type == PoleType.BR_CORNER || type == PoleType.B_HALF || type == PoleType.BR_FILL) {

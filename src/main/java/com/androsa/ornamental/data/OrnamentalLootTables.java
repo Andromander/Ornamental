@@ -305,6 +305,36 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.exposed_copper_wall);
             dropSelf(ModBlocks.weathered_copper_wall);
             dropSelf(ModBlocks.oxidized_copper_wall);
+
+            dropSelf(ModBlocks.iron_saddle_door);
+            dropSelf(ModBlocks.gold_saddle_door);
+            dropSelf(ModBlocks.diamond_saddle_door);
+            dropSelf(ModBlocks.emerald_saddle_door);
+            dropSelf(ModBlocks.lapis_saddle_door);
+            dropSelf(ModBlocks.obsidian_saddle_door);
+            dropSelf(ModBlocks.coal_saddle_door);
+            dropSelf(ModBlocks.redstone_saddle_door);
+            dropSelf(ModBlocks.missingno_saddle_door);
+            dropSelf(ModBlocks.clay_saddle_door);
+            dropSelf(ModBlocks.dirt_saddle_door);
+            dropSelf(ModBlocks.grass_saddle_door);
+            dropSelf(ModBlocks.hay_saddle_door);
+            dropSelf(ModBlocks.path_saddle_door);
+            dropSelf(ModBlocks.brick_saddle_door);
+            dropSelf(ModBlocks.quartz_saddle_door);
+            dropSelf(ModBlocks.bone_saddle_door);
+            dropSelf(ModBlocks.nether_brick_saddle_door);
+            dropSelf(ModBlocks.red_nether_brick_saddle_door);
+            dropSelf(ModBlocks.snow_saddle_door);
+            dropSelf(ModBlocks.ice_saddle_door);
+            dropSelf(ModBlocks.packed_ice_saddle_door);
+            dropSelf(ModBlocks.blue_ice_saddle_door);
+            dropSelf(ModBlocks.netherite_saddle_door);
+            dropSelf(ModBlocks.amethyst_saddle_door);
+            dropSelf(ModBlocks.copper_saddle_door);
+            dropSelf(ModBlocks.exposed_copper_saddle_door);
+            dropSelf(ModBlocks.weathered_copper_saddle_door);
+            dropSelf(ModBlocks.oxidized_copper_saddle_door);
         }
 
         @Override

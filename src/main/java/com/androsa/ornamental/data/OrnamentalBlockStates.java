@@ -246,5 +246,33 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.exposed_copper_wall, "exposed_copper");
         wallBasic(ModBlocks.weathered_copper_wall, "weathered_copper");
         wallBasic(ModBlocks.oxidized_copper_wall, "oxidized_copper");
+
+        saddleDoorVanilla(ModBlocks.iron_saddle_door, "iron_trapdoor");
+        saddleDoorBasic(ModBlocks.gold_saddle_door, "gold");
+        saddleDoorBasic(ModBlocks.diamond_saddle_door, "diamond");
+        saddleDoorBasic(ModBlocks.emerald_saddle_door, "emerald");
+        saddleDoorBasic(ModBlocks.lapis_saddle_door, "lapis");
+        saddleDoorBasic(ModBlocks.obsidian_saddle_door, "obsidian");
+        saddleDoorBasic(ModBlocks.coal_saddle_door, "coal");
+        saddleDoorBasic(ModBlocks.redstone_saddle_door, "redstone");
+        saddleDoorMissing(ModBlocks.missingno_saddle_door, "missingno");
+        saddleDoorBasic(ModBlocks.clay_saddle_door, "clay");
+        saddleDoorVanilla(ModBlocks.dirt_saddle_door, "dirt");
+        saddleDoorBasic(ModBlocks.hay_saddle_door, "hay");
+        saddleDoorVanilla(ModBlocks.brick_saddle_door, "bricks");
+        saddleDoorBasic(ModBlocks.quartz_saddle_door, "quartz");
+        saddleDoorBasic(ModBlocks.bone_saddle_door, "bone");
+        saddleDoorBasic(ModBlocks.nether_brick_saddle_door, "nether_brick");
+        saddleDoorBasic(ModBlocks.red_nether_brick_saddle_door, "red_nether_brick");
+        saddleDoorBasic(ModBlocks.snow_saddle_door, "snow");
+        saddleDoorBasic(ModBlocks.ice_saddle_door, "ice");
+        saddleDoorBasic(ModBlocks.packed_ice_saddle_door, "packed_ice");
+        saddleDoorBasic(ModBlocks.blue_ice_saddle_door, "blue_ice");
+        saddleDoorBasic(ModBlocks.netherite_saddle_door, "netherite");
+        saddleDoorBasic(ModBlocks.amethyst_saddle_door, "amethyst");
+        saddleDoorBasic(ModBlocks.copper_saddle_door, "copper");
+        saddleDoorBasic(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
+        saddleDoorBasic(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
+        saddleDoorBasic(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
     }
 }

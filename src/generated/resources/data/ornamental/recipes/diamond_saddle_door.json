@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showDiamondBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:diamond_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:diamond_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

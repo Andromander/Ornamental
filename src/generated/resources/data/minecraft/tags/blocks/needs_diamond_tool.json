@@ -10,6 +10,7 @@
     "ornamental:obsidian_pole",
     "ornamental:obsidian_beam",
     "ornamental:obsidian_wall",
+    "ornamental:obsidian_saddle_door",
     "ornamental:netherite_stairs",
     "ornamental:netherite_slab",
     "ornamental:netherite_fence",
@@ -18,6 +19,7 @@
     "ornamental:netherite_door",
     "ornamental:netherite_pole",
     "ornamental:netherite_beam",
-    "ornamental:netherite_wall"
+    "ornamental:netherite_wall",
+    "ornamental:netherite_saddle_door"
   ]
 }

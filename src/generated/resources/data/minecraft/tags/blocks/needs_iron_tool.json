@@ -10,6 +10,7 @@
     "ornamental:gold_pole",
     "ornamental:gold_beam",
     "ornamental:gold_wall",
+    "ornamental:gold_saddle_door",
     "ornamental:diamond_stairs",
     "ornamental:diamond_slab",
     "ornamental:diamond_fence",
@@ -19,6 +20,7 @@
     "ornamental:diamond_pole",
     "ornamental:diamond_beam",
     "ornamental:diamond_wall",
+    "ornamental:diamond_saddle_door",
     "ornamental:emerald_stairs",
     "ornamental:emerald_slab",
     "ornamental:emerald_fence",
@@ -28,6 +30,7 @@
     "ornamental:emerald_pole",
     "ornamental:emerald_beam",
     "ornamental:emerald_wall",
+    "ornamental:emerald_saddle_door",
     "ornamental:missingno_stairs",
     "ornamental:missingno_slab",
     "ornamental:missingno_fence",
@@ -36,6 +39,7 @@
     "ornamental:missingno_door",
     "ornamental:missingno_pole",
     "ornamental:missingno_beam",
-    "ornamental:missingno_wall"
+    "ornamental:missingno_wall",
+    "ornamental:missingno_saddle_door"
   ]
 }

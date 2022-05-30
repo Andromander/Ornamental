@@ -8,6 +8,7 @@
     "ornamental:iron_pole",
     "ornamental:iron_beam",
     "ornamental:iron_wall",
+    "ornamental:iron_saddle_door",
     "ornamental:lapis_stairs",
     "ornamental:lapis_slab",
     "ornamental:lapis_fence",
@@ -17,6 +18,7 @@
     "ornamental:lapis_pole",
     "ornamental:lapis_beam",
     "ornamental:lapis_wall",
+    "ornamental:lapis_saddle_door",
     "ornamental:amethyst_stairs",
     "ornamental:amethyst_slab",
     "ornamental:amethyst_fence",
@@ -26,6 +28,7 @@
     "ornamental:amethyst_pole",
     "ornamental:amethyst_beam",
     "ornamental:amethyst_wall",
+    "ornamental:amethyst_saddle_door",
     "ornamental:copper_stairs",
     "ornamental:copper_slab",
     "ornamental:copper_fence",
@@ -35,6 +38,7 @@
     "ornamental:copper_pole",
     "ornamental:copper_beam",
     "ornamental:copper_wall",
+    "ornamental:copper_saddle_door",
     "ornamental:exposed_copper_stairs",
     "ornamental:exposed_copper_slab",
     "ornamental:exposed_copper_fence",
@@ -44,6 +48,7 @@
     "ornamental:exposed_copper_pole",
     "ornamental:exposed_copper_beam",
     "ornamental:exposed_copper_wall",
+    "ornamental:exposed_copper_saddle_door",
     "ornamental:weathered_copper_stairs",
     "ornamental:weathered_copper_slab",
     "ornamental:weathered_copper_fence",
@@ -53,6 +58,7 @@
     "ornamental:weathered_copper_pole",
     "ornamental:weathered_copper_beam",
     "ornamental:weathered_copper_wall",
+    "ornamental:weathered_copper_saddle_door",
     "ornamental:oxidized_copper_stairs",
     "ornamental:oxidized_copper_slab",
     "ornamental:oxidized_copper_fence",
@@ -61,6 +67,7 @@
     "ornamental:oxidized_copper_door",
     "ornamental:oxidized_copper_pole",
     "ornamental:oxidized_copper_beam",
-    "ornamental:oxidized_copper_wall"
+    "ornamental:oxidized_copper_wall",
+    "ornamental:oxidized_copper_saddle_door"
   ]
 }

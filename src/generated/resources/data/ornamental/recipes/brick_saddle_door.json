@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showBrickBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:brick_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:brick_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

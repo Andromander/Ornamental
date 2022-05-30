@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showGrassBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:grass_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:grass_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

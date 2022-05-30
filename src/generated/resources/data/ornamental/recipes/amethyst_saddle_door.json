@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showAmethystBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:amethyst_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:amethyst_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

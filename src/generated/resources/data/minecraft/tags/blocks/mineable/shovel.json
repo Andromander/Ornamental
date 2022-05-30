@@ -10,6 +10,7 @@
     "ornamental:clay_pole",
     "ornamental:clay_beam",
     "ornamental:clay_wall",
+    "ornamental:clay_saddle_door",
     "ornamental:dirt_stairs",
     "ornamental:dirt_slab",
     "ornamental:dirt_fence",
@@ -19,6 +20,7 @@
     "ornamental:dirt_pole",
     "ornamental:dirt_beam",
     "ornamental:dirt_wall",
+    "ornamental:dirt_saddle_door",
     "ornamental:grass_stairs",
     "ornamental:grass_slab",
     "ornamental:grass_fence",
@@ -28,6 +30,7 @@
     "ornamental:grass_pole",
     "ornamental:grass_beam",
     "ornamental:grass_wall",
+    "ornamental:grass_saddle_door",
     "ornamental:dirt_path_stairs",
     "ornamental:dirt_path_slab",
     "ornamental:dirt_path_fence",
@@ -37,6 +40,7 @@
     "ornamental:dirt_path_pole",
     "ornamental:dirt_path_beam",
     "ornamental:dirt_path_wall",
+    "ornamental:dirt_path_saddle_door",
     "ornamental:snow_stairs",
     "ornamental:snow_slab",
     "ornamental:snow_fence",
@@ -45,6 +49,7 @@
     "ornamental:snow_door",
     "ornamental:snow_pole",
     "ornamental:snow_beam",
-    "ornamental:snow_wall"
+    "ornamental:snow_wall",
+    "ornamental:snow_saddle_door"
   ]
 }

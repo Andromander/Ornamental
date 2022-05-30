@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showHayBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:hay_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:hay_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

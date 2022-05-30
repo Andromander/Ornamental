@@ -1,0 +1,6 @@
+{
+  "parent": "ornamental:block/util/saddle_door",
+  "textures": {
+    "texture": "minecraft:block/bricks"
+  }
+}

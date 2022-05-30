@@ -302,4 +302,48 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
             recipe.save(consumer, loc(builder.name + "_wall"));
         }
     }
+
+    public void saddleDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentTrapDoor> ingredient) {
+        saddleDoor(consumer, result, ingredient.get());
+    }
+
+    public void saddleDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
+        OrnamentBuilder builder = result.get().getBuilder();
+
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 2)
+                .pattern("#")
+                .pattern("#")
+                .define('#', ingredient)
+                .unlockedBy("has_" + builder.name, has(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::save)
+                    .build(consumer, loc(builder.name + "_saddle_door"));
+        } else {
+            recipe.save(consumer, loc(builder.name + "_saddle_door"));
+        }
+    }
+
+    public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentDoor> ingredient) {
+        saddleDoorFromDoor(consumer, result, ingredient.get());
+    }
+
+    public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
+        OrnamentBuilder builder = result.get().getBuilder();
+
+        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(result.get())
+                .requires(ingredient)
+                .unlockedBy("has_" + builder.name, has(ingredient));
+
+        if (builder.hasConfig) {
+            ConditionalRecipe.builder()
+                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
+                    .addRecipe(recipe::save)
+                    .build(consumer, loc(builder.name + "_saddle_door_from_door"));
+        } else {
+            recipe.save(consumer, loc(builder.name + "_saddle_door_from_door"));
+        }
+    }
 }

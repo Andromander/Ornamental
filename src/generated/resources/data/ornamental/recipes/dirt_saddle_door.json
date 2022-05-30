@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showDirtBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:dirt_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:dirt_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

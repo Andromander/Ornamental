@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "config": "showIceBlocks",
+          "type": "ornamental:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "ornamental:ice_trapdoor"
+          }
+        },
+        "result": {
+          "item": "ornamental:ice_saddle_door",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

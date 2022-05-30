@@ -3,6 +3,7 @@ package com.androsa.ornamental.data.provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -15,7 +16,7 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
         super(generator, modid, helper);
     }
 
-    protected void addToTag(Tag.Named<Block> tag, Set<Supplier<? extends Block>> set) {
+    protected void addToTag(TagKey<Block> tag, Set<Supplier<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
             tag(tag).add(block.get());
         }

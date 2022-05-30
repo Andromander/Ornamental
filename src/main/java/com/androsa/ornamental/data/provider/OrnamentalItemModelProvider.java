@@ -104,4 +104,19 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
         withExistingParent(blockName(block), mcLoc("block/wall_inventory"))
                 .texture("wall", modLoc("block/missingno"));
     }
+
+    public void blockItemSaddleDoor(Supplier<? extends Block> block, String name) {
+        withExistingParent(blockName(block), ornamentLoc("block/util/saddle_door_inventory"))
+                .texture("texture", modLoc("block/" + name + "_trapdoor"));
+    }
+
+    public void blockItemSaddleDoorV(Supplier<? extends Block> block, String name) {
+        withExistingParent(blockName(block), ornamentLoc("block/util/saddle_door_inventory"))
+                .texture("texture", mcLoc("block/" + name));
+    }
+
+    public void blockItemSaddleDoorM(Supplier<? extends Block> block) {
+        withExistingParent(blockName(block), ornamentLoc("block/util/saddle_door_inventory"))
+                .texture("texture", modLoc("block/missingno"));
+    }
 }
