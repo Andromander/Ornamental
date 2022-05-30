@@ -45,6 +45,9 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.iron_slab, ModBlocks.gold_slab, ModBlocks.diamond_slab, ModBlocks.emerald_slab, ModBlocks.lapis_slab, ModBlocks.obsidian_slab, ModBlocks.coal_slab, ModBlocks.redstone_slab,
             ModBlocks.missingno_slab, ModBlocks.clay_slab, ModBlocks.dirt_slab, ModBlocks.grass_slab, ModBlocks.hay_slab, ModBlocks.path_slab, ModBlocks.bone_slab, ModBlocks.snow_slab, ModBlocks.ice_slab,
             ModBlocks.packed_ice_slab, ModBlocks.blue_ice_slab, ModBlocks.netherite_slab, ModBlocks.amethyst_slab, ModBlocks.copper_slab, ModBlocks.exposed_copper_slab, ModBlocks.weathered_copper_slab, ModBlocks.exposed_copper_slab);
+    private static final ImmutableSet<Supplier<? extends Block>> SNOW = ImmutableSet.of(
+            ModBlocks.snow_stairs, ModBlocks.snow_slab, ModBlocks.snow_fence, ModBlocks.snow_trapdoor, ModBlocks.snow_fence_gate,
+            ModBlocks.snow_door, ModBlocks.snow_pole, ModBlocks.snow_beam, ModBlocks.snow_wall, ModBlocks.snow_saddle_door);
     private static final ImmutableSet<Supplier<? extends Block>> STAIRS = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.gold_stairs, ModBlocks.diamond_stairs, ModBlocks.emerald_stairs, ModBlocks.lapis_stairs, ModBlocks.obsidian_stairs, ModBlocks.coal_stairs, ModBlocks.redstone_stairs,
             ModBlocks.missingno_stairs, ModBlocks.clay_stairs, ModBlocks.dirt_stairs, ModBlocks.grass_stairs, ModBlocks.hay_stairs, ModBlocks.path_stairs, ModBlocks.bone_stairs, ModBlocks.snow_stairs,
@@ -124,6 +127,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(Tags.Blocks.FENCE_GATES, FENCE_GATES);
         addToTag(BlockTags.GUARDED_BY_PIGLINS, PIGLIN_GUARDED);
         addToTag(BlockTags.SLABS, SLABS);
+        addToTag(BlockTags.SNOW, SNOW);
         addToTag(BlockTags.STAIRS, STAIRS);
         addToTag(BlockTags.TRAPDOORS, TRAPDOORS);
         addToTag(BlockTags.WALLS, WALLS);

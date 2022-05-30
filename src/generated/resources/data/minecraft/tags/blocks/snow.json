@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "ornamental:snow_stairs",
+    "ornamental:snow_slab",
+    "ornamental:snow_fence",
+    "ornamental:snow_trapdoor",
+    "ornamental:snow_fence_gate",
+    "ornamental:snow_door",
+    "ornamental:snow_pole",
+    "ornamental:snow_beam",
+    "ornamental:snow_wall",
+    "ornamental:snow_saddle_door"
+  ]
+}
