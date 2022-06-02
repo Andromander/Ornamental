@@ -49,10 +49,10 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
     protected static final VoxelShape[] PATH_SLAB_BOTTOM_SHAPES = makeShapes(PATH_AABB_SLAB_BOTTOM, PATH_NWU_CORNER, PATH_NEU_CORNER, PATH_SWU_CORNER, PATH_SEU_CORNER);
     private static final int[] metaInt = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
-    private OrnamentBuilder builder;
+    private final OrnamentBuilder builder;
 
-    public OrnamentStair(Properties props, OrnamentBuilder builder) {
-        super(() -> new Block(props).defaultBlockState(), props);
+    public OrnamentStair(Supplier<BlockState> state, Properties props, OrnamentBuilder builder) {
+        super(state, props);
         this.builder = builder;
     }
 

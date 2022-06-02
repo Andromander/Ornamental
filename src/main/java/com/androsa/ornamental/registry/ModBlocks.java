@@ -10,6 +10,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,31 +25,31 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OrnamentalMod.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OrnamentalMod.MODID);
 
-    public static final RegistryObject<OrnamentStair> iron_stairs = registerStairs(OrnamentBuilders.IRON);
-    public static final RegistryObject<OrnamentStair> gold_stairs = registerStairs(OrnamentBuilders.GOLD);
-    public static final RegistryObject<OrnamentStair> diamond_stairs = registerStairs(OrnamentBuilders.DIAMOND);
-    public static final RegistryObject<OrnamentStair> emerald_stairs = registerStairs(OrnamentBuilders.EMERALD);
-    public static final RegistryObject<OrnamentStair> lapis_stairs = registerStairs(OrnamentBuilders.LAPIS);
-    public static final RegistryObject<OrnamentStair> obsidian_stairs = registerStairs(OrnamentBuilders.OBSIDIAN);
-    public static final RegistryObject<OrnamentStair> coal_stairs = registerStairs(OrnamentBuilders.COAL);
-    public static final RegistryObject<OrnamentStair> redstone_stairs = registerStairs(OrnamentBuilders.REDSTONE);
-    public static final RegistryObject<OrnamentStair> missingno_stairs = registerStairs(OrnamentBuilders.MISSINGNO);
-    public static final RegistryObject<OrnamentStair> clay_stairs = registerStairs(OrnamentBuilders.CLAY);
-    public static final RegistryObject<OrnamentStair> dirt_stairs = registerStairs(OrnamentBuilders.DIRT);
-    public static final RegistryObject<OrnamentStair> grass_stairs = registerStairs(OrnamentBuilders.GRASS);
-    public static final RegistryObject<OrnamentStair> hay_stairs = registerStairs(OrnamentBuilders.HAY);
-    public static final RegistryObject<OrnamentStair> path_stairs = registerStairs(OrnamentBuilders.PATH);
-    public static final RegistryObject<OrnamentStair> bone_stairs = registerStairs(OrnamentBuilders.BONE);
-    public static final RegistryObject<OrnamentStair> snow_stairs = registerStairs(OrnamentBuilders.SNOW);
-    public static final RegistryObject<OrnamentStair> ice_stairs = registerStairs(OrnamentBuilders.ICE);
-    public static final RegistryObject<OrnamentStair> packed_ice_stairs = registerStairs(OrnamentBuilders.PACKED_ICE);
-    public static final RegistryObject<OrnamentStair> blue_ice_stairs = registerStairs(OrnamentBuilders.BLUE_ICE);
-    public static final RegistryObject<OrnamentStair> netherite_stairs = registerStairs(OrnamentBuilders.NETHERITE);
-    public static final RegistryObject<OrnamentStair> amethyst_stairs = registerStairs(OrnamentBuilders.AMETHYST);
-    public static final RegistryObject<OrnamentStair> copper_stairs = registerStairs(OrnamentBuilders.COPPER);
-    public static final RegistryObject<OrnamentStair> exposed_copper_stairs = registerStairs(OrnamentBuilders.EXPOSED_COPPER);
-    public static final RegistryObject<OrnamentStair> weathered_copper_stairs = registerStairs(OrnamentBuilders.WEATHERED_COPPER);
-    public static final RegistryObject<OrnamentStair> oxidized_copper_stairs = registerStairs(OrnamentBuilders.OXIDIZED_COPPER);
+    public static final RegistryObject<OrnamentStair> iron_stairs = registerStairs(Blocks.IRON_BLOCK, OrnamentBuilders.IRON);
+    public static final RegistryObject<OrnamentStair> gold_stairs = registerStairs(Blocks.GOLD_BLOCK, OrnamentBuilders.GOLD);
+    public static final RegistryObject<OrnamentStair> diamond_stairs = registerStairs(Blocks.DIAMOND_BLOCK, OrnamentBuilders.DIAMOND);
+    public static final RegistryObject<OrnamentStair> emerald_stairs = registerStairs(Blocks.EMERALD_BLOCK, OrnamentBuilders.EMERALD);
+    public static final RegistryObject<OrnamentStair> lapis_stairs = registerStairs(Blocks.LAPIS_BLOCK, OrnamentBuilders.LAPIS);
+    public static final RegistryObject<OrnamentStair> obsidian_stairs = registerStairs(Blocks.OBSIDIAN, OrnamentBuilders.OBSIDIAN);
+    public static final RegistryObject<OrnamentStair> coal_stairs = registerStairs(Blocks.COAL_BLOCK, OrnamentBuilders.COAL);
+    public static final RegistryObject<OrnamentStair> redstone_stairs = registerStairs(Blocks.REDSTONE_BLOCK, OrnamentBuilders.REDSTONE);
+    public static final RegistryObject<OrnamentStair> missingno_stairs = registerStairs(Blocks.IRON_BLOCK, OrnamentBuilders.MISSINGNO);
+    public static final RegistryObject<OrnamentStair> clay_stairs = registerStairs(Blocks.CLAY, OrnamentBuilders.CLAY);
+    public static final RegistryObject<OrnamentStair> dirt_stairs = registerStairs(Blocks.DIRT, OrnamentBuilders.DIRT);
+    public static final RegistryObject<OrnamentStair> grass_stairs = registerStairs(Blocks.GRASS, OrnamentBuilders.GRASS);
+    public static final RegistryObject<OrnamentStair> hay_stairs = registerStairs(Blocks.HAY_BLOCK, OrnamentBuilders.HAY);
+    public static final RegistryObject<OrnamentStair> path_stairs = registerStairs(Blocks.DIRT_PATH, OrnamentBuilders.PATH);
+    public static final RegistryObject<OrnamentStair> bone_stairs = registerStairs(Blocks.BONE_BLOCK, OrnamentBuilders.BONE);
+    public static final RegistryObject<OrnamentStair> snow_stairs = registerStairs(Blocks.SNOW_BLOCK, OrnamentBuilders.SNOW);
+    public static final RegistryObject<OrnamentStair> ice_stairs = registerStairs(Blocks.ICE, OrnamentBuilders.ICE);
+    public static final RegistryObject<OrnamentStair> packed_ice_stairs = registerStairs(Blocks.PACKED_ICE, OrnamentBuilders.PACKED_ICE);
+    public static final RegistryObject<OrnamentStair> blue_ice_stairs = registerStairs(Blocks.BLUE_ICE, OrnamentBuilders.BLUE_ICE);
+    public static final RegistryObject<OrnamentStair> netherite_stairs = registerStairs(Blocks.NETHERITE_BLOCK, OrnamentBuilders.NETHERITE);
+    public static final RegistryObject<OrnamentStair> amethyst_stairs = registerStairs(Blocks.AMETHYST_BLOCK, OrnamentBuilders.AMETHYST);
+    public static final RegistryObject<OrnamentStair> copper_stairs = registerStairs(Blocks.COPPER_BLOCK, OrnamentBuilders.COPPER);
+    public static final RegistryObject<OrnamentStair> exposed_copper_stairs = registerStairs(Blocks.EXPOSED_COPPER, OrnamentBuilders.EXPOSED_COPPER);
+    public static final RegistryObject<OrnamentStair> weathered_copper_stairs = registerStairs(Blocks.WEATHERED_COPPER, OrnamentBuilders.WEATHERED_COPPER);
+    public static final RegistryObject<OrnamentStair> oxidized_copper_stairs = registerStairs(Blocks.OXIDIZED_COPPER, OrnamentBuilders.OXIDIZED_COPPER);
 
     public static final RegistryObject<OrnamentSlab> iron_slab = registerSlab(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentSlab> gold_slab = registerSlab(OrnamentBuilders.GOLD);
@@ -310,10 +311,10 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSaddleDoor> weathered_copper_saddle_door = registerSaddleDoor(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentSaddleDoor> oxidized_copper_saddle_door = registerSaddleDoor(OrnamentBuilders.OXIDIZED_COPPER);
 
-    private static RegistryObject<OrnamentStair> registerStairs(OrnamentBuilder builder) {
+    private static RegistryObject<OrnamentStair> registerStairs(Block base, OrnamentBuilder builder) {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
-        return registerBlock(builder.name + "_stairs", () -> new OrnamentStair(props, builder), item ->
+        return registerBlock(builder.name + "_stairs", () -> new OrnamentStair(base::defaultBlockState, props, builder), item ->
                 registerBlockItem(item, CreativeModeTab.TAB_BUILDING_BLOCKS, builder, 4));
     }
 
