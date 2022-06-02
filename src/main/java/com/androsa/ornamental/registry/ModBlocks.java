@@ -380,7 +380,7 @@ public class ModBlocks {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder).noOcclusion();
 
         return registerBlock(builder.name + "_saddle_door", () -> new OrnamentSaddleDoor(props, builder), item ->
-                registerBlockItem(item, CreativeModeTab.TAB_REDSTONE, builder, 8));
+                registerBlockItem(item, CreativeModeTab.TAB_REDSTONE, builder, 9));
     }
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
