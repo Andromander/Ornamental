@@ -54,7 +54,8 @@
   },
   "1.18.2": {
     "4.8": "Ornamental has now been ported to 1.18.2! Not just a flat port this time, got a new batch of ornaments to play with.\n • Added Saddle Doors. These blocks behave similarly to Doors and Trapdoors. They stand like a Trapdoor placed vertically, and they are placed like Doors, but you can stack as many Saddle Doors on top of each other as you can. Available in all ornament materials. You can craft these by breaking a door down into two halves, or with two Trapdoors lined vertically.\n • Small change to OrnamentBuilder: burnTime now accepts an array of ints instead of several int parameters. Should not cause any breaking changes. Any ornament that attempts to get an invalid burnTime index will now return a burn time of 0 (will not burn), so make sure you update these indices when new ornaments get added.\n • All Snow ornaments are now in the Snow tag. Place these onto Dirt or Grass and they will give them a snowy top.\n • Fixed recipe conflict with Lightning Rod and Copper Poles.\n • Fixed crash when shooting a block with an arrow if they don't emit a sound on impact (any ornament that was not Amethyst).",
-    "4.8.1": " • Fixed Stairs causing a crash when placed.\n • Fix Saddle Doors using the wrong burn time.\n • Fix Dirt Path Saddle Doors not being named properly."
+    "4.8.1": " • Fixed Stairs causing a crash when placed.\n • Fix Saddle Doors using the wrong burn time.\n • Fix Dirt Path Saddle Doors not being named properly.",
+    "4.8.2": " • Fixed a potential crash with burn times not being checked properly."
   },
 
   "promos": {
