@@ -1,5 +1,6 @@
 package com.androsa.ornamental.items;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.BlockItem;
@@ -40,8 +41,8 @@ public class OrnamentBlockItem extends BlockItem {
 
     @Override
     public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
-        if (index > builder.burnTime.length || index < 0) {
-            // The index is outside the burnTime array bounds. This is because the number is negative or greater than the size of the array. This is a developer error.
+        if (index >= builder.burnTime.length || index < 0) {
+            OrnamentalMod.LOGGER.debug("Index is out of Burn Time array! Index: {}, Array Length: {}, Builder: {}", index, builder.burnTime.length, builder.name);
             return 0;
         }
         return builder.burnTime[index];
