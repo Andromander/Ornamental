@@ -15,20 +15,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +35,6 @@ import java.util.function.Supplier;
 public class OrnamentalMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
-    public static OrnamentalConfig config;
 
     public OrnamentalMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -49,10 +44,6 @@ public class OrnamentalMod {
         ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-        final Pair<OrnamentalConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(OrnamentalConfig::new);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, specPair.getRight());
-        config = specPair.getLeft();
     }
 
     public static DamageSource shocked(Entity source, Entity target) {

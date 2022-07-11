@@ -1,7 +1,6 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.data.conditions.ConfigCondition;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -12,12 +11,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.
@@ -62,10 +59,6 @@ public class OrnamentBuilder {
     public boolean breakableCull = false;
     public PushReaction pushReaction = material.getPushReaction();
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
-
-    /** This should only be altered by {@link OrnamentBuilder#config(Supplier)}. CHANGING THIS WITHOUT AN ENTRY WILL CAUSE A CRASH */
-    public boolean hasConfig = false;
-    public Supplier<ForgeConfigSpec.BooleanValue> booleanValue = null;
 
     /**
      * Create a template material for an Ornament block
@@ -320,19 +313,6 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder projectileHitSound(List<SoundEvent> sounds) {
         this.projectileHitSounds = sounds;
-        return this;
-    }
-
-    /**
-     * Sets the config value of a block. Used for showing/hiding blocks by material, as well as crafting and harvesting.
-     * If left unused, all config checks will be ignored.
-     * Adding a config value will also add it to a ConfigCondition.
-     * @param entry The supplied BooleanValue for the block to use.
-     */
-    public OrnamentBuilder config(Supplier<ForgeConfigSpec.BooleanValue> entry) {
-        this.booleanValue = entry;
-        this.hasConfig = true;
-        ConfigCondition.putValue(this, entry);
         return this;
     }
 }

@@ -42,7 +42,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
 import java.util.Optional;
@@ -474,20 +473,6 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
 		}
 		return false;
 	}
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
-
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                return val.get() && super.canHarvestBlock(state, world, pos, player);
-            }
-        }
-        return super.canHarvestBlock(state, world, pos, player);
-    }
 
     @Override
     @Deprecated

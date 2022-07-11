@@ -28,7 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
@@ -158,20 +157,6 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
                 .setValue(SHAPE, state.getValue(SHAPE))
                 .setValue(HALF, state.getValue(HALF))
                 .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
-    }
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
-
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                return val.get() && super.canHarvestBlock(state, world, pos, player);
-            }
-        }
-        return super.canHarvestBlock(state, world, pos, player);
     }
 
     @Override

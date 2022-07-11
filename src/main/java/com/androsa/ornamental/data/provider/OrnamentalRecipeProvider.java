@@ -2,7 +2,6 @@ package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.blocks.*;
-import com.androsa.ornamental.data.conditions.ConfigCondition;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +9,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -199,13 +197,6 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         recipe = recipe.unlockedBy("has_" + builder.name, has(criteria));
         ResourceLocation location = loc(builder.name + name);
 
-        if (builder.hasConfig) {
-            ConditionalRecipe.builder()
-                    .addCondition(new ConfigCondition(builder.booleanValue.get().getPath().get(0)))
-                    .addRecipe(recipe::save)
-                    .build(consumer, location);
-        } else {
-            recipe.save(consumer, location);
-        }
+        recipe.save(consumer, location);
     }
 }

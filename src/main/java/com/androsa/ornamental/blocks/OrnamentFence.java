@@ -25,7 +25,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.function.Supplier;
 
@@ -118,20 +117,6 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
                 .setValue(EAST, state.getValue(EAST))
                 .setValue(WEST, state.getValue(WEST))
                 .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
-    }
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
-
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                return val.get() && super.canHarvestBlock(state, world, pos, player);
-            }
-        }
-        return super.canHarvestBlock(state, world, pos, player);
     }
 
     @Override

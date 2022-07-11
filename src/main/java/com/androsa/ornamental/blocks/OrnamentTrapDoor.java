@@ -29,7 +29,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -171,20 +170,6 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             int j = this.material == Material.METAL ? 1036 : 1013;
             worldIn.levelEvent(player, j, pos, 0);
         }
-    }
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
-
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                return val.get() && super.canHarvestBlock(state, world, pos, player);
-            }
-        }
-        return super.canHarvestBlock(state, world, pos, player);
     }
 
     @Override

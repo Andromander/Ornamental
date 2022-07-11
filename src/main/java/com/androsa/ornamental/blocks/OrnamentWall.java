@@ -31,7 +31,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -215,20 +214,6 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
             }
         }
         return super.skipRendering(state, otherState, direction);
-    }
-
-    @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (builder.hasConfig) {
-            ForgeConfigSpec.BooleanValue val = builder.booleanValue.get();
-
-            if (val == null) {
-                throw new NullPointerException(builder.name + " expected a config value but found null.");
-            } else {
-                return val.get() && super.canHarvestBlock(state, world, pos, player);
-            }
-        }
-        return super.canHarvestBlock(state, world, pos, player);
     }
 
     @Override
