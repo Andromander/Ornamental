@@ -2,7 +2,6 @@ package com.androsa.ornamental.data.provider;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.data.ExistingFileHelper;

@@ -10,9 +10,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.data.EmptyModelData;
+import net.minecraftforge.client.model.data.ModelData;
 
 public class GrassFlowerLayer<T extends GrassGolem, M extends DirtGolemModel<T>> extends RenderLayer<T, M> {
 
@@ -29,7 +27,7 @@ public class GrassFlowerLayer<T extends GrassGolem, M extends DirtGolemModel<T>>
             stack.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.POPPY.defaultBlockState(), stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), EmptyModelData.INSTANCE);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.POPPY.defaultBlockState(), stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
             stack.popPose();
         }
     }

@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -33,7 +34,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class OrnamentWall extends WallBlock implements OrnamentalBlock {
@@ -233,7 +233,7 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {

@@ -9,6 +9,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -16,7 +17,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
 
 public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
 
@@ -60,87 +60,87 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         return new ResourceLocation(getModID(), "block/" + name);
     }
 
-    public void stairsBasic(Supplier<? extends StairBlock> block, String name) {
+    public void stairsBasic(RegistryObject<? extends StairBlock> block, String name) {
         stairsBlock(block.get(), locVanilla(name));
     }
 
-    public void stairsMissing(Supplier<? extends StairBlock> block) {
+    public void stairsMissing(RegistryObject<? extends StairBlock> block) {
         stairsBlock(block.get(), locOrnament("missingno"));
     }
 
-    public void stairsColumn(Supplier<? extends StairBlock> block, String side, String end) {
+    public void stairsColumn(RegistryObject<? extends StairBlock> block, String side, String end) {
         stairsBlock(block.get(), locVanilla(side), locVanilla(end), locVanilla(end));
     }
 
-    public void slabBasic(Supplier<? extends SlabBlock> block, String name) {
+    public void slabBasic(RegistryObject<? extends SlabBlock> block, String name) {
         slabBlock(block.get(), locVanilla(name), locVanilla(name));
     }
 
-    public void slabMissing(Supplier<? extends SlabBlock> block) {
+    public void slabMissing(RegistryObject<? extends SlabBlock> block) {
         slabBlock(block.get(), locOrnament("missingno"), locOrnament("missingno"));
     }
 
-    public void slabModel(Supplier<? extends SlabBlock> block, String model, String name) {
+    public void slabModel(RegistryObject<? extends SlabBlock> block, String model, String name) {
         slabBlock(block.get(), locVanilla(model), locVanilla(name));
     }
 
-    public void slabColumn(Supplier<? extends SlabBlock> block, String blockname, String side, String end) {
+    public void slabColumn(RegistryObject<? extends SlabBlock> block, String blockname, String side, String end) {
         slabBlock(block.get(), locVanilla(blockname), locVanilla(side), locVanilla(end), locVanilla(end));
     }
 
-    public void fenceBasic(Supplier<? extends FenceBlock> block, String name) {
+    public void fenceBasic(RegistryObject<? extends FenceBlock> block, String name) {
         fenceBlock(block.get(), locVanilla(name));
     }
 
-    public void fenceMissing(Supplier<? extends FenceBlock> block) {
+    public void fenceMissing(RegistryObject<? extends FenceBlock> block) {
         fenceBlock(block.get(), locOrnament("missingno"));
     }
 
-    public void fenceColumn(Supplier<? extends FenceBlock> block, String side, String top) {
-        String baseName = block.get().getRegistryName().toString();
+    public void fenceColumn(RegistryObject<? extends FenceBlock> block, String side, String top) {
+        String baseName = block.getId().toString();
         fourWayBlock(block.get(),
                 models().fencePostColumn(baseName + "_post", locVanilla(side), locVanilla(top)),
                 models().fenceSide(baseName + "_side", locVanilla(side)));
     }
 
-    public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name) {
+    public void trapdoorBasic(RegistryObject<? extends TrapDoorBlock> block, String name) {
         trapdoorBlock(block.get(), locOrnament(name + "_trapdoor"), true);
     }
 
-    public void trapdoorMissing(Supplier<? extends TrapDoorBlock> block) {
+    public void trapdoorMissing(RegistryObject<? extends TrapDoorBlock> block) {
         trapdoorBlock(block.get(), locOrnament("missingno"), false);
     }
 
-    public void trapdoorVanilla(Supplier<? extends TrapDoorBlock> block, String name) {
+    public void trapdoorVanilla(RegistryObject<? extends TrapDoorBlock> block, String name) {
         trapdoorBlock(block.get(), locVanilla(name), false);
     }
 
-    public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, String name) {
+    public void fenceGateBasic(RegistryObject<? extends FenceGateBlock> block, String name) {
         fenceGateBlock(block.get(), locVanilla(name));
     }
 
-    public void fenceGateMissing(Supplier<? extends FenceGateBlock> block) {
+    public void fenceGateMissing(RegistryObject<? extends FenceGateBlock> block) {
         fenceGateBlock(block.get(), locOrnament("missingno"));
     }
 
-    public void fenceGateColumn(Supplier<? extends FenceGateBlock> block, String side, String top) {
-        ModelFile gate =         models().fenceGateColumn(block.get().getRegistryName().toString(), locVanilla(side), locVanilla(top));
-        ModelFile gateOpen =     models().fenceGateOpenColumn(block.get().getRegistryName().toString() + "_open", locVanilla(side), locVanilla(top));
-        ModelFile gateWall =     models().fenceGateWallColumn(block.get().getRegistryName().toString() + "_wall", locVanilla(side), locVanilla(top));
-        ModelFile gateWallOpen = models().fenceGateWallOpenColumn(block.get().getRegistryName().toString() + "_wall_open", locVanilla(side), locVanilla(top));
+    public void fenceGateColumn(RegistryObject<? extends FenceGateBlock> block, String side, String top) {
+        ModelFile gate =         models().fenceGateColumn(block.getId().toString(), locVanilla(side), locVanilla(top));
+        ModelFile gateOpen =     models().fenceGateOpenColumn(block.getId().toString() + "_open", locVanilla(side), locVanilla(top));
+        ModelFile gateWall =     models().fenceGateWallColumn(block.getId().toString() + "_wall", locVanilla(side), locVanilla(top));
+        ModelFile gateWallOpen = models().fenceGateWallOpenColumn(block.getId().toString() + "_wall_open", locVanilla(side), locVanilla(top));
 
         fenceGateBlock(block.get(), gate, gateOpen, gateWall, gateWallOpen);
     }
 
-    public void doorBasic(Supplier<? extends DoorBlock> block, String name) {
+    public void doorBasic(RegistryObject<? extends DoorBlock> block, String name) {
         doorBlock(block.get(), locOrnament(name + "_door_bottom"), locOrnament(name + "_door_top"));
     }
 
-    public void doorMissing(Supplier<? extends DoorBlock> block) {
+    public void doorMissing(RegistryObject<? extends DoorBlock> block) {
         doorBlock(block.get(), locOrnament("missingno"), locOrnament("missingno"));
     }
 
-    public void doorBasicVanilla(Supplier<? extends DoorBlock> block, String name) {
+    public void doorBasicVanilla(RegistryObject<? extends DoorBlock> block, String name) {
         doorBlock(block.get(), locVanilla(name), locVanilla(name));
     }
 
@@ -233,11 +233,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         beamBlock(block, corner, top, bottom, side, cross, fill, full);
     }
 
-    public void wallBasic(Supplier<? extends WallBlock> block, String name) {
+    public void wallBasic(RegistryObject<? extends WallBlock> block, String name) {
         wallBlock(block.get(), locVanilla(name));
     }
 
-    public void wallMissing(Supplier<? extends WallBlock> block, String name) {
+    public void wallMissing(RegistryObject<? extends WallBlock> block, String name) {
         wallBlock(block.get(), locOrnament(name));
     }
 
@@ -285,7 +285,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         }, OrnamentSaddleDoor.POWERED);
     }
 
-    public void poleBlock(Supplier<? extends OrnamentPole> block, ModelFile corner, ModelFile half, ModelFile cross, ModelFile fill, ModelFile full) {
+    public void poleBlock(RegistryObject<? extends OrnamentPole> block, ModelFile corner, ModelFile half, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {
                     PoleType type = state.getValue(OrnamentPole.TYPE);
@@ -318,7 +318,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
                 }, OrnamentPole.WATERLOGGED);
     }
 
-    public void beamBlock(Supplier<? extends OrnamentBeam> block, ModelFile corner, ModelFile topslab, ModelFile bottomslab, ModelFile halfpole, ModelFile cross, ModelFile fill, ModelFile full) {
+    public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile corner, ModelFile topslab, ModelFile bottomslab, ModelFile halfpole, ModelFile cross, ModelFile fill, ModelFile full) {
         getVariantBuilder(block.get())
                 .forAllStatesExcept(state -> {
                     PoleType type = state.getValue(OrnamentBeam.TYPE);

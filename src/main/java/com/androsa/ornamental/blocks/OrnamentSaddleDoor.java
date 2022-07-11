@@ -210,7 +210,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         if (!this.defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
             if (flag != state.getValue(OPEN)) {
                 level.levelEvent(null, state.getValue(OPEN) ? getOpenSound() : getCloseSound(), pos, 0);
-                level.gameEvent(flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+                level.gameEvent(null, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
             }
 
             level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);

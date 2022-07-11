@@ -28,7 +28,7 @@ public class ConfigCondition implements ICondition {
     }
 
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         for (Supplier<ForgeConfigSpec.BooleanValue> type : configMap.values()) {
             if (this.getConfigName(type).equals(config)) {
                 return type.get().get();

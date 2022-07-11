@@ -12,15 +12,12 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -29,6 +26,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,12 +63,13 @@ public class OrnamentalMod {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> OrnamentalMod::registerRenders);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ModParticles::fuckYou);
     }
 
     @SubscribeEvent
-    public static void registerSerializer(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        CraftingHelper.register(new ConfigCondition.Serializer());
+    public static void registerSerializer(RegisterEvent event) {
+        if (event.getRegistryKey() == ForgeRegistries.Keys.RECIPE_SERIALIZERS) {
+            CraftingHelper.register(new ConfigCondition.Serializer());
+        }
     }
 
     public void gatherData(GatherDataEvent event) {
@@ -78,14 +78,14 @@ public class OrnamentalMod {
         BlockTagsProvider blockTags = new OrnamentalBlockTags(generator, helper);
 
         if (event.includeClient()) {
-            generator.addProvider(new OrnamentalBlockStates(generator, helper));
-            generator.addProvider(new OrnamentalItemModels(generator, helper));
+            generator.addProvider(true, new OrnamentalBlockStates(generator, helper));
+            generator.addProvider(true, new OrnamentalItemModels(generator, helper));
         }
         if (event.includeServer()) {
-            generator.addProvider(new OrnamentalLootTables(generator));
-            generator.addProvider(new OrnamentalRecipes(generator));
-            generator.addProvider(blockTags);
-            generator.addProvider(new OrnamentalItemTags(generator, blockTags, helper));
+            generator.addProvider(true, new OrnamentalLootTables(generator));
+            generator.addProvider(true, new OrnamentalRecipes(generator));
+            generator.addProvider(true, blockTags);
+            generator.addProvider(true, new OrnamentalItemTags(generator, blockTags, helper));
         }
     }
 

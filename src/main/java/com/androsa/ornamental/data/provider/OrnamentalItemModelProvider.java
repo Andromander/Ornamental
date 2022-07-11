@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
@@ -20,7 +21,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public String blockName(Supplier<? extends Block> block) {
-        return block.get().asItem().getRegistryName().getPath();
+        return ForgeRegistries.ITEMS.getKey(block.get().asItem()).getPath();
     }
 
     public void blockItem(Supplier<? extends Block> block) {

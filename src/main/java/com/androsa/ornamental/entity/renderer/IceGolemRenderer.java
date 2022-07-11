@@ -10,8 +10,11 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGolemModel<T>> {
+
+    private String entityName;
 
     public IceGolemRenderer(EntityRendererProvider.Context manager, ModelLayerLocation model) {
         super(manager, new SnowGolemModel<>(manager.bakeLayer(model)), 0.5F);
@@ -20,6 +23,9 @@ public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGol
 
     @Override
     public ResourceLocation getTextureLocation(T entity) {
-        return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entity.getType().getRegistryName().getPath() + ".png");
+        if (entityName == null) {
+            entityName = ForgeRegistries.ENTITIES.getRegistryName().getPath();
+        }
+        return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
 }

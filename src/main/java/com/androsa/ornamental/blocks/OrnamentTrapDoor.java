@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -31,7 +32,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
@@ -61,17 +61,12 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             if (!state.getValue(OPEN)) {
                 return state.getValue(HALF) == Half.TOP ? PATH_TOP_AABB : PATH_BOTTOM_AABB;
             } else {
-                switch(state.getValue(FACING)) {
-                    case NORTH:
-                    default:
-                        return PATH_NORTH_OPEN_AABB;
-                    case SOUTH:
-                        return PATH_SOUTH_OPEN_AABB;
-                    case WEST:
-                        return PATH_WEST_OPEN_AABB;
-                    case EAST:
-                        return PATH_EAST_OPEN_AABB;
-                }
+                return switch (state.getValue(FACING)) {
+                    case SOUTH -> PATH_SOUTH_OPEN_AABB;
+                    case WEST -> PATH_WEST_OPEN_AABB;
+                    case EAST -> PATH_EAST_OPEN_AABB;
+                    default -> PATH_NORTH_OPEN_AABB;
+                };
             }
         } else {
             return super.getShape(state, worldIn, pos, context);
@@ -194,7 +189,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {

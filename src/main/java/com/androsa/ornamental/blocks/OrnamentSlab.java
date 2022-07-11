@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,7 +31,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
@@ -55,14 +55,11 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
             SlabType slabtype = state.getValue(TYPE);
-            switch(slabtype) {
-                case DOUBLE:
-                    return PATH_FULL_SHAPE;
-                case TOP:
-                    return PATH_TOP_SHAPE;
-                default:
-                    return PATH_BOTTOM_SHAPE;
-            }
+            return switch (slabtype) {
+                case DOUBLE -> PATH_FULL_SHAPE;
+                case TOP -> PATH_TOP_SHAPE;
+                default -> PATH_BOTTOM_SHAPE;
+            };
         }
         return super.getShape(state, worldIn, pos, context);
     }
@@ -136,10 +133,7 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
     @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
-            if (otherState.getBlock() instanceof OrnamentSlab && state.getBlock() instanceof OrnamentSlab) {
-                OrnamentSlab slab = (OrnamentSlab) state.getBlock();
-                OrnamentSlab otherSlab = (OrnamentSlab) otherState.getBlock();
-
+            if (otherState.getBlock() instanceof OrnamentSlab otherSlab && state.getBlock() instanceof OrnamentSlab slab) {
                 if (otherSlab.getBuilder() == slab.getBuilder() && otherState.getValue(TYPE) == SlabType.DOUBLE && state.getValue(TYPE) == SlabType.DOUBLE) {
                     return true;
                 }
@@ -164,7 +158,7 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {

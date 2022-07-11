@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,7 +31,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
@@ -60,29 +60,19 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
             boolean flag1 = state.getValue(HINGE) == DoorHingeSide.RIGHT;
 
             if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-                switch(direction) {
-                    case EAST:
-                    default:
-                        return flag ? PATH_EAST_AABB_TOP : (flag1 ? PATH_NORTH_AABB_TOP : PATH_SOUTH_AABB_TOP);
-                    case SOUTH:
-                        return flag ? PATH_SOUTH_AABB_TOP : (flag1 ? PATH_EAST_AABB_TOP : PATH_WEST_AABB_TOP);
-                    case WEST:
-                        return flag ? PATH_WEST_AABB_TOP : (flag1 ? PATH_SOUTH_AABB_TOP : PATH_NORTH_AABB_TOP);
-                    case NORTH:
-                        return flag ? PATH_NORTH_AABB_TOP : (flag1 ? PATH_WEST_AABB_TOP : PATH_EAST_AABB_TOP);
-                }
+                return switch (direction) {
+                    case SOUTH -> flag ? PATH_SOUTH_AABB_TOP : (flag1 ? PATH_EAST_AABB_TOP : PATH_WEST_AABB_TOP);
+                    case WEST -> flag ? PATH_WEST_AABB_TOP : (flag1 ? PATH_SOUTH_AABB_TOP : PATH_NORTH_AABB_TOP);
+                    case NORTH -> flag ? PATH_NORTH_AABB_TOP : (flag1 ? PATH_WEST_AABB_TOP : PATH_EAST_AABB_TOP);
+                    default -> flag ? PATH_EAST_AABB_TOP : (flag1 ? PATH_NORTH_AABB_TOP : PATH_SOUTH_AABB_TOP);
+                };
             } else {
-                switch(direction) {
-                    case EAST:
-                    default:
-                        return flag ? EAST_AABB : (flag1 ? NORTH_AABB : SOUTH_AABB);
-                    case SOUTH:
-                        return flag ? SOUTH_AABB : (flag1 ? EAST_AABB : WEST_AABB);
-                    case WEST:
-                        return flag ? WEST_AABB : (flag1 ? SOUTH_AABB : NORTH_AABB);
-                    case NORTH:
-                        return flag ? NORTH_AABB : (flag1 ? WEST_AABB : EAST_AABB);
-                }
+                return switch (direction) {
+                    case SOUTH -> flag ? SOUTH_AABB : (flag1 ? EAST_AABB : WEST_AABB);
+                    case WEST -> flag ? WEST_AABB : (flag1 ? SOUTH_AABB : NORTH_AABB);
+                    case NORTH -> flag ? NORTH_AABB : (flag1 ? WEST_AABB : EAST_AABB);
+                    default -> flag ? EAST_AABB : (flag1 ? NORTH_AABB : SOUTH_AABB);
+                };
             }
         }
         return super.getShape(state, worldIn, pos, context);
@@ -198,7 +188,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {

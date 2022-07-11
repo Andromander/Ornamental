@@ -1,15 +1,14 @@
 package com.androsa.ornamental.registry;
 
 import com.androsa.ornamental.OrnamentalMod;
-import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.MissingMappingsEvent;
 
 @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class RemapHandler {
@@ -23,72 +22,34 @@ public class RemapHandler {
      */
 
     /**
-     * Remap blocks from "nifty" to "ornamental"
+     * Remap objects from "nifty" to "ornamental"
      * Remap Grass Path to Dirt Path
      */
     @SubscribeEvent
-    public static void remapBlocks(RegistryEvent.MissingMappings<Block> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
-            if (mapping.key.getNamespace().equals("nifty")) {
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
-                mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
-            }
-            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
-                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
-                mapping.remap(ForgeRegistries.BLOCKS.getValue(remap));
+    public static void remap(MissingMappingsEvent event) {
+        remap(event, ForgeRegistries.Keys.BLOCKS, ForgeRegistries.BLOCKS, true);
+        remap(event, ForgeRegistries.Keys.ITEMS, ForgeRegistries.ITEMS, true);
+        remap(event, ForgeRegistries.Keys.ENTITY_TYPES, ForgeRegistries.ENTITIES, true);
+        remap(event, ForgeRegistries.Keys.PARTICLE_TYPES, ForgeRegistries.PARTICLE_TYPES, false);
+    }
+
+    private static <T> void remap(MissingMappingsEvent event, ResourceKey<Registry<T>> regkey, IForgeRegistry<T> registry, boolean path) {
+        if (event.getKey() == regkey) {
+            for (MissingMappingsEvent.Mapping<T> mapping : event.getAllMappings(regkey)) {
+                ResourceLocation key = mapping.getKey();
+
+                if (key.getNamespace().equals("nifty"))
+                    remap(mapping, registry, mapping.getKey().getPath());
+
+                if (path)
+                    if (key.getNamespace().equals(OrnamentalMod.MODID) && key.getPath().contains("grass_path"))
+                        remap(mapping, registry, mapping.getKey().getPath().replace("grass", "dirt")); //we already know the context is "grass_path"
             }
         }
     }
 
-    /**
-     * Remap items from "nifty" to "ornamental"
-     * Remap Grass Path to Dirt Path
-     */
-    @SubscribeEvent
-    public static void remapItems(RegistryEvent.MissingMappings<Item> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
-            if (mapping.key.getNamespace().equals("nifty")) {
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
-                mapping.remap(ForgeRegistries.ITEMS.getValue(remap));
-            }
-            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
-                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
-                mapping.remap(ForgeRegistries.ITEMS.getValue(remap));
-            }
-        }
-    }
-
-    /**
-     * Remap particles from "nifty" to "ornamental"
-     */
-    @SubscribeEvent
-    public static void remapParticles(RegistryEvent.MissingMappings<ParticleType<?>> event) {
-        for (RegistryEvent.MissingMappings.Mapping<ParticleType<?>> mapping : event.getAllMappings()) {
-            if (mapping.key.getNamespace().equals("nifty")) {
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
-                mapping.remap(ForgeRegistries.PARTICLE_TYPES.getValue(remap));
-            }
-        }
-    }
-
-    /**
-     * Remap entities from "nifty" to "ornamental"
-     * Remap Grass Path Golem to Dirt Path Golem
-     */
-    @SubscribeEvent
-    public static void remapEntities(RegistryEvent.MissingMappings<EntityType<?>> event) {
-        for (RegistryEvent.MissingMappings.Mapping<EntityType<?>> mapping : event.getAllMappings()) {
-            if (mapping.key.getNamespace().equals("nifty")) {
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, mapping.key.getPath());
-                mapping.remap(ForgeRegistries.ENTITIES.getValue(remap));
-            }
-            if (mapping.key.getNamespace().equals(OrnamentalMod.MODID) && mapping.key.getPath().contains("grass_path")) {
-                String newname = mapping.key.getPath().replace("grass_path", "dirt_path");
-                ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, newname);
-                mapping.remap(ForgeRegistries.ENTITIES.getValue(remap));
-            }
-        }
+    private static <T> void remap(MissingMappingsEvent.Mapping<T> mapping, IForgeRegistry<T> registry, String path) {
+        ResourceLocation remap = new ResourceLocation(OrnamentalMod.MODID, path);
+        mapping.remap(registry.getValue(remap));
     }
 }
