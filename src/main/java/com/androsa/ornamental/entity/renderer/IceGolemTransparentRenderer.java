@@ -3,7 +3,7 @@ package com.androsa.ornamental.entity.renderer;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.IceGolem;
 import com.androsa.ornamental.entity.renderer.layer.IceGolemHeadLayer;
-import com.androsa.ornamental.registry.EntityRendering;
+import com.androsa.ornamental.registry.ModelLocations;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.SnowGolemModel;
@@ -23,7 +23,7 @@ public class IceGolemTransparentRenderer<T extends IceGolem> extends IceGolemRen
     public static final ResourceLocation texGolem = new ResourceLocation(OrnamentalMod.MODID, "textures/entity/ice_golem.png");
 
     public IceGolemTransparentRenderer(EntityRendererProvider.Context manager) {
-        super(manager, EntityRendering.ICE_GOLEM);
+        super(manager, ModelLocations.ICE_GOLEM);
         this.addLayer(new IceGolemHeadLayer<>(this));
         this.addLayer(new IceGolemLayer<>(this));
     }
