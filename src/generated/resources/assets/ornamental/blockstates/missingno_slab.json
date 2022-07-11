@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/missingno_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/missingno_slab"
     },
     "type=double": {
       "model": "ornamental:block/missingno"
+    },
+    "type=top": {
+      "model": "ornamental:block/missingno_slab_top"
     }
   }
 }

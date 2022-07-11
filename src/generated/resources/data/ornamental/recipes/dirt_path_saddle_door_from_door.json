@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showPathBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showPathBlocks"
         }
       ],
       "recipe": {
@@ -16,6 +16,7 @@
           }
         ],
         "result": {
+          "count": 2,
           "item": "ornamental:dirt_path_saddle_door"
         }
       }

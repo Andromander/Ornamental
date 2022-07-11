@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showGoldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGoldBlocks"
         }
       ],
       "recipe": {

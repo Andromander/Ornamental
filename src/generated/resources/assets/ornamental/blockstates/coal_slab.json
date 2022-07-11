@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/coal_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/coal_slab"
     },
     "type=double": {
       "model": "minecraft:block/coal_block"
+    },
+    "type=top": {
+      "model": "ornamental:block/coal_slab_top"
     }
   }
 }

@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showDirtBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showDirtBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:dirt_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:dirt_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:dirt_pole"
         }
       }
     }

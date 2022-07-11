@@ -1,140 +1,140 @@
 {
   "variants": {
-    "axis=x,type=topleft_corner": {
-      "model": "ornamental:block/clay_beam_corner"
-    },
-    "axis=z,type=topleft_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "y": 270,
-      "uvlock": true
-    },
-    "axis=x,type=topright_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "y": 180,
-      "uvlock": true
-    },
-    "axis=z,type=topright_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "y": 90,
-      "uvlock": true
-    },
-    "axis=x,type=bottomleft_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "x": 180,
-      "y": 180,
-      "uvlock": true
-    },
-    "axis=z,type=bottomleft_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "x": 180,
-      "y": 90,
-      "uvlock": true
-    },
-    "axis=x,type=bottomright_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "x": 180,
-      "uvlock": true
-    },
-    "axis=z,type=bottomright_corner": {
-      "model": "ornamental:block/clay_beam_corner",
-      "x": 180,
-      "y": 270,
-      "uvlock": true
-    },
-    "axis=x,type=top_half": {
-      "model": "ornamental:block/clay_slab_top"
-    },
-    "axis=z,type=top_half": {
-      "model": "ornamental:block/clay_slab_top"
-    },
-    "axis=x,type=left_half": {
-      "model": "ornamental:block/clay_pole_half"
-    },
-    "axis=z,type=left_half": {
-      "model": "ornamental:block/clay_pole_half",
-      "y": 270,
-      "uvlock": true
-    },
-    "axis=x,type=right_half": {
-      "model": "ornamental:block/clay_pole_half",
-      "y": 180,
-      "uvlock": true
-    },
-    "axis=z,type=right_half": {
-      "model": "ornamental:block/clay_pole_half",
-      "y": 90,
-      "uvlock": true
-    },
     "axis=x,type=bottom_half": {
       "model": "ornamental:block/clay_slab"
     },
-    "axis=z,type=bottom_half": {
-      "model": "ornamental:block/clay_slab"
-    },
-    "axis=x,type=topleft_bottomright": {
-      "model": "ornamental:block/clay_beam_cross"
-    },
-    "axis=z,type=topleft_bottomright": {
-      "model": "ornamental:block/clay_beam_cross",
-      "y": 270,
-      "uvlock": true
-    },
-    "axis=x,type=topright_bottomleft": {
-      "model": "ornamental:block/clay_beam_cross",
-      "y": 180,
-      "uvlock": true
-    },
-    "axis=z,type=topright_bottomleft": {
-      "model": "ornamental:block/clay_beam_cross",
-      "y": 90,
-      "uvlock": true
-    },
-    "axis=x,type=topleft_fill": {
-      "model": "ornamental:block/clay_stairs",
+    "axis=x,type=bottomleft_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
       "x": 180,
-      "y": 270,
-      "uvlock": true
-    },
-    "axis=z,type=topleft_fill": {
-      "model": "ornamental:block/clay_stairs",
-      "x": 180,
-      "y": 180,
-      "uvlock": true
-    },
-    "axis=x,type=topright_fill": {
-      "model": "ornamental:block/clay_stairs",
-      "x": 180,
-      "y": 90,
-      "uvlock": true
-    },
-    "axis=z,type=topright_fill": {
-      "model": "ornamental:block/clay_stairs",
-      "x": 180,
-      "uvlock": true
+      "y": 180
     },
     "axis=x,type=bottomleft_fill": {
       "model": "ornamental:block/clay_stairs",
-      "y": 270,
-      "uvlock": true
+      "uvlock": true,
+      "y": 270
     },
-    "axis=z,type=bottomleft_fill": {
-      "model": "ornamental:block/clay_stairs",
-      "y": 180,
-      "uvlock": true
+    "axis=x,type=bottomright_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "x": 180
     },
     "axis=x,type=bottomright_fill": {
       "model": "ornamental:block/clay_stairs",
-      "y": 90,
-      "uvlock": true
-    },
-    "axis=z,type=bottomright_fill": {
-      "model": "ornamental:block/clay_stairs"
+      "uvlock": true,
+      "y": 90
     },
     "axis=x,type=full": {
       "model": "minecraft:block/clay"
     },
+    "axis=x,type=left_half": {
+      "model": "ornamental:block/clay_pole_half"
+    },
+    "axis=x,type=right_half": {
+      "model": "ornamental:block/clay_pole_half",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=top_half": {
+      "model": "ornamental:block/clay_slab_top"
+    },
+    "axis=x,type=topleft_bottomright": {
+      "model": "ornamental:block/clay_beam_cross"
+    },
+    "axis=x,type=topleft_corner": {
+      "model": "ornamental:block/clay_beam_corner"
+    },
+    "axis=x,type=topleft_fill": {
+      "model": "ornamental:block/clay_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "axis=x,type=topright_bottomleft": {
+      "model": "ornamental:block/clay_beam_cross",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=topright_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=topright_fill": {
+      "model": "ornamental:block/clay_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "axis=z,type=bottom_half": {
+      "model": "ornamental:block/clay_slab"
+    },
+    "axis=z,type=bottomleft_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "axis=z,type=bottomleft_fill": {
+      "model": "ornamental:block/clay_stairs",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=z,type=bottomright_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "axis=z,type=bottomright_fill": {
+      "model": "ornamental:block/clay_stairs"
+    },
     "axis=z,type=full": {
       "model": "minecraft:block/clay"
+    },
+    "axis=z,type=left_half": {
+      "model": "ornamental:block/clay_pole_half",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=right_half": {
+      "model": "ornamental:block/clay_pole_half",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=top_half": {
+      "model": "ornamental:block/clay_slab_top"
+    },
+    "axis=z,type=topleft_bottomright": {
+      "model": "ornamental:block/clay_beam_cross",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=topleft_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=topleft_fill": {
+      "model": "ornamental:block/clay_stairs",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "axis=z,type=topright_bottomleft": {
+      "model": "ornamental:block/clay_beam_cross",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=topright_corner": {
+      "model": "ornamental:block/clay_beam_corner",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=topright_fill": {
+      "model": "ornamental:block/clay_stairs",
+      "uvlock": true,
+      "x": 180
     }
   }
 }

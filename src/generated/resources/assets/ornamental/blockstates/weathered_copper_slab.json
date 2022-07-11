@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/weathered_copper_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/weathered_copper_slab"
     },
     "type=double": {
       "model": "minecraft:block/weathered_copper"
+    },
+    "type=top": {
+      "model": "ornamental:block/weathered_copper_slab_top"
     }
   }
 }

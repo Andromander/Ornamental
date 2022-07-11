@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showClayBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showClayBlocks"
         }
       ],
       "recipe": {

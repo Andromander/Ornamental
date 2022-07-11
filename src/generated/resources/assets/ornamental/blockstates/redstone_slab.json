@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/redstone_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/redstone_slab"
     },
     "type=double": {
       "model": "minecraft:block/redstone_block"
+    },
+    "type=top": {
+      "model": "ornamental:block/redstone_slab_top"
     }
   }
 }

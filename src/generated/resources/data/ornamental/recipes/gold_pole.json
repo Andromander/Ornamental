@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showGoldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGoldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:gold_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:gold_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:gold_pole"
         }
       }
     }

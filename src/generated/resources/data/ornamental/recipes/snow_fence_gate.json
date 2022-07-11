@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showSnowBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showSnowBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:snow_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:snowball"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:snow_fence_gate"
         }

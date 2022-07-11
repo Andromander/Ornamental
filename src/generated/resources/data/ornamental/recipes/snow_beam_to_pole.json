@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showSnowBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showSnowBlocks"
         }
       ],
       "recipe": {

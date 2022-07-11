@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showIronBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showIronBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:iron_block"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "ornamental:iron_stairs",
-          "count": 8
+          "count": 8,
+          "item": "ornamental:iron_stairs"
         }
       }
     }

@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showSnowBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showSnowBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:snow_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:snow_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:snow_saddle_door"
         }
       }
     }

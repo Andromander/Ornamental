@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBrickBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:brick_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:brick_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:brick_saddle_door"
         }
       }
     }

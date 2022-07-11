@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showRedNetherBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showRedNetherBrickBlocks"
         }
       ],
       "recipe": {
@@ -16,6 +16,7 @@
           }
         ],
         "result": {
+          "count": 2,
           "item": "ornamental:red_nether_brick_saddle_door"
         }
       }

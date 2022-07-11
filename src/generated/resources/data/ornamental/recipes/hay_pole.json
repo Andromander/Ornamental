@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showHayBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showHayBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:hay_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:hay_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:hay_pole"
         }
       }
     }

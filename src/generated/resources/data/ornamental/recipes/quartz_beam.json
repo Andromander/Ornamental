@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showQuartzBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showQuartzBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:quartz_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:quartz_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:quartz_beam"
         }
       }
     }

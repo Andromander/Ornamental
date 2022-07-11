@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showDiamondBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showDiamondBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:diamond_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:diamond_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:diamond_beam"
         }
       }
     }

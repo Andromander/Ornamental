@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showNetherBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showNetherBrickBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:nether_brick_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:nether_brick_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:nether_brick_beam"
         }
       }
     }

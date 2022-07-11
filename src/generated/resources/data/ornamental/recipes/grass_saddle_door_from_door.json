@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showGrassBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGrassBlocks"
         }
       ],
       "recipe": {
@@ -16,6 +16,7 @@
           }
         ],
         "result": {
+          "count": 2,
           "item": "ornamental:grass_saddle_door"
         }
       }

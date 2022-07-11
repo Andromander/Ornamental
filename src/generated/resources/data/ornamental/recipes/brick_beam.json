@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBrickBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:brick_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:brick_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:brick_beam"
         }
       }
     }

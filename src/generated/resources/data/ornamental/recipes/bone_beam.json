@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showBoneBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBoneBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:bone_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:bone_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:bone_beam"
         }
       }
     }

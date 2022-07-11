@@ -4,21 +4,21 @@
     {
       "conditions": [
         {
-          "config": "showNetherBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showNetherBrickBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:nether_brick"
           }
         },
+        "pattern": [
+          "###",
+          "###"
+        ],
         "result": {
           "item": "ornamental:nether_brick_trapdoor"
         }

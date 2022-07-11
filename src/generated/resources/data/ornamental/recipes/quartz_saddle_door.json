@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showQuartzBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showQuartzBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:quartz_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:quartz_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:quartz_saddle_door"
         }
       }
     }

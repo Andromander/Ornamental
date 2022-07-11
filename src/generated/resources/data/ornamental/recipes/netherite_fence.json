@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showNetheriteBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showNetheriteBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#/#",
-          "#/#"
-        ],
         "key": {
           "#": {
             "item": "minecraft:netherite_block"
@@ -22,9 +18,13 @@
             "item": "minecraft:netherite_ingot"
           }
         },
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
         "result": {
-          "item": "ornamental:netherite_fence",
-          "count": 3
+          "count": 3,
+          "item": "ornamental:netherite_fence"
         }
       }
     }

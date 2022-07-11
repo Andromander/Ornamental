@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showGoldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGoldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:gold_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:gold_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:gold_saddle_door"
         }
       }
     }

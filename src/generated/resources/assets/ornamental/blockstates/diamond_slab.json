@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/diamond_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/diamond_slab"
     },
     "type=double": {
       "model": "minecraft:block/diamond_block"
+    },
+    "type=top": {
+      "model": "ornamental:block/diamond_slab_top"
     }
   }
 }

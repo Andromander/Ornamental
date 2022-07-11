@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "config": "showGoldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGoldBlocks"
         }
       ],
       "recipe": {
@@ -16,6 +16,7 @@
           }
         ],
         "result": {
+          "count": 2,
           "item": "ornamental:gold_saddle_door"
         }
       }

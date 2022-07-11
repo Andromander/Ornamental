@@ -1,7 +1,7 @@
 {
   "parent": "ornamental:block/util/pole_corner_column",
   "textures": {
-    "side": "minecraft:block/bone_block_side",
-    "end": "minecraft:block/bone_block_top"
+    "end": "minecraft:block/bone_block_top",
+    "side": "minecraft:block/bone_block_side"
   }
 }

@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showPathBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showPathBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#/#",
-          "#/#"
-        ],
         "key": {
           "#": {
             "item": "minecraft:dirt_path"
@@ -22,9 +18,13 @@
             "item": "ornamental:dirt_path_slab"
           }
         },
+        "pattern": [
+          "#/#",
+          "#/#"
+        ],
         "result": {
-          "item": "ornamental:dirt_path_fence",
-          "count": 3
+          "count": 3,
+          "item": "ornamental:dirt_path_fence"
         }
       }
     }

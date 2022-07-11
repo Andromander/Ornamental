@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showClayBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showClayBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:clay_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:clay_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:clay_beam"
         }
       }
     }

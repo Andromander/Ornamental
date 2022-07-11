@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:ice_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:ice_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:ice_beam"
         }
       }
     }

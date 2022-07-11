@@ -4,22 +4,22 @@
     {
       "conditions": [
         {
-          "config": "showPackedIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showPackedIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "##",
-          "##",
-          "##"
-        ],
         "key": {
           "#": {
             "item": "ornamental:packed_ice_slab"
           }
         },
+        "pattern": [
+          "##",
+          "##",
+          "##"
+        ],
         "result": {
           "item": "ornamental:packed_ice_door"
         }

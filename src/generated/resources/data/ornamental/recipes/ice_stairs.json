@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:ice"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "ornamental:ice_stairs",
-          "count": 8
+          "count": 8,
+          "item": "ornamental:ice_stairs"
         }
       }
     }

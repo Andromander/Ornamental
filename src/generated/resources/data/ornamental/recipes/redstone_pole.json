@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showRedstoneBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showRedstoneBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:redstone_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:redstone_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:redstone_pole"
         }
       }
     }

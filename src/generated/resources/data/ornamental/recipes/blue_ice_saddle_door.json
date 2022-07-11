@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showBlueIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBlueIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:blue_ice_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:blue_ice_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:blue_ice_saddle_door"
         }
       }
     }

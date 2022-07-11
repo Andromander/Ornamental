@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showEmeraldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showEmeraldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:emerald_block"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:emerald_slab",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:emerald_slab"
         }
       }
     }

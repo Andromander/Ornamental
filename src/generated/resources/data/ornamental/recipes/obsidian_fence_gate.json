@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showObsidianBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showObsidianBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:obsidian"
@@ -22,6 +18,10 @@
             "item": "ornamental:obsidian_slab"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:obsidian_fence_gate"
         }

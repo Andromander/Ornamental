@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showGrassBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGrassBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:grass_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:grass_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:grass_beam"
         }
       }
     }

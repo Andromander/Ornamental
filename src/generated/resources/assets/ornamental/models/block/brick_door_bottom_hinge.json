@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_rh",
-  "textures": {
-    "bottom": "minecraft:block/bricks",
-    "top": "minecraft:block/bricks"
-  }
-}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "ornamental:block/amethyst_door_bottom",
+    "top": "ornamental:block/amethyst_door_top"
+  }
+}

@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showSnowBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showSnowBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:snow_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:snow_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:snow_pole"
         }
       }
     }

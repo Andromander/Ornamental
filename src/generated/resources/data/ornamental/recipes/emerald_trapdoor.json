@@ -4,21 +4,21 @@
     {
       "conditions": [
         {
-          "config": "showEmeraldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showEmeraldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "##",
-          "##"
-        ],
         "key": {
           "#": {
             "item": "minecraft:emerald"
           }
         },
+        "pattern": [
+          "##",
+          "##"
+        ],
         "result": {
           "item": "ornamental:emerald_trapdoor"
         }

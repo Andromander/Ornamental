@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showDiamondBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showDiamondBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:diamond_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:diamond"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:diamond_fence_gate"
         }

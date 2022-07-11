@@ -4,22 +4,22 @@
     {
       "conditions": [
         {
-          "config": "showRedNetherBrickBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showRedNetherBrickBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "##",
-          "##",
-          "##"
-        ],
         "key": {
           "#": {
             "item": "minecraft:nether_wart"
           }
         },
+        "pattern": [
+          "##",
+          "##",
+          "##"
+        ],
         "result": {
           "item": "ornamental:red_nether_brick_door"
         }

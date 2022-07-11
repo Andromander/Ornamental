@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showBlueIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBlueIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:blue_ice"
@@ -22,6 +18,10 @@
             "item": "ornamental:blue_ice_slab"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:blue_ice_fence_gate"
         }

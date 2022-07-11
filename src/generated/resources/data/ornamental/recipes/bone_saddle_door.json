@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showBoneBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBoneBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:bone_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:bone_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:bone_saddle_door"
         }
       }
     }

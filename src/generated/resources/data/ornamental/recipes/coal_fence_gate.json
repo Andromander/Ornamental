@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showCoalBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showCoalBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:coal_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:coal"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:coal_fence_gate"
         }

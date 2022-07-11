@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showNetheriteBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showNetheriteBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:netherite_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:netherite_pole",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:netherite_pole"
         }
       }
     }

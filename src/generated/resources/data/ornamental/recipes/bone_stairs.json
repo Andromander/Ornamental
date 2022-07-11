@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showBoneBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showBoneBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:bone_block"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "ornamental:bone_stairs",
-          "count": 8
+          "count": 8,
+          "item": "ornamental:bone_stairs"
         }
       }
     }

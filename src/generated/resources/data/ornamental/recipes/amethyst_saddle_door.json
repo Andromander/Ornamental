@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showAmethystBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showAmethystBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "ornamental:amethyst_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:amethyst_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:amethyst_saddle_door"
         }
       }
     }

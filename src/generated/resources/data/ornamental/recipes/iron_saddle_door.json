@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "config": "showIronBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showIronBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "minecraft:iron_trapdoor"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "ornamental:iron_saddle_door",
-          "count": 2
+          "count": 2,
+          "item": "ornamental:iron_saddle_door"
         }
       }
     }

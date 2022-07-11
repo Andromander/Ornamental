@@ -1,69 +1,69 @@
 {
   "variants": {
-    "type=topleft_corner": {
-      "model": "ornamental:block/bone_pole_corner"
-    },
-    "type=topright_corner": {
-      "model": "ornamental:block/bone_pole_corner",
-      "y": 90,
-      "uvlock": true
+    "type=bottom_half": {
+      "model": "ornamental:block/bone_pole_half",
+      "uvlock": true,
+      "y": 180
     },
     "type=bottomleft_corner": {
       "model": "ornamental:block/bone_pole_corner",
-      "y": 270,
-      "uvlock": true
+      "uvlock": true,
+      "y": 270
+    },
+    "type=bottomleft_fill": {
+      "model": "ornamental:block/bone_pole_fill",
+      "uvlock": true,
+      "y": 270
     },
     "type=bottomright_corner": {
       "model": "ornamental:block/bone_pole_corner",
-      "y": 180,
-      "uvlock": true
+      "uvlock": true,
+      "y": 180
+    },
+    "type=bottomright_fill": {
+      "model": "ornamental:block/bone_pole_fill",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=full": {
+      "model": "minecraft:block/bone_block"
+    },
+    "type=left_half": {
+      "model": "ornamental:block/bone_pole_half",
+      "uvlock": true,
+      "y": 270
+    },
+    "type=right_half": {
+      "model": "ornamental:block/bone_pole_half",
+      "uvlock": true,
+      "y": 90
     },
     "type=top_half": {
       "model": "ornamental:block/bone_pole_half"
     },
-    "type=left_half": {
-      "model": "ornamental:block/bone_pole_half",
-      "y": 270,
-      "uvlock": true
-    },
-    "type=right_half": {
-      "model": "ornamental:block/bone_pole_half",
-      "y": 90,
-      "uvlock": true
-    },
-    "type=bottom_half": {
-      "model": "ornamental:block/bone_pole_half",
-      "y": 180,
-      "uvlock": true
-    },
     "type=topleft_bottomright": {
       "model": "ornamental:block/bone_pole_cross"
     },
-    "type=topright_bottomleft": {
-      "model": "ornamental:block/bone_pole_cross",
-      "y": 90,
-      "uvlock": true
+    "type=topleft_corner": {
+      "model": "ornamental:block/bone_pole_corner"
     },
     "type=topleft_fill": {
       "model": "ornamental:block/bone_pole_fill"
     },
+    "type=topright_bottomleft": {
+      "model": "ornamental:block/bone_pole_cross",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=topright_corner": {
+      "model": "ornamental:block/bone_pole_corner",
+      "uvlock": true,
+      "y": 90
+    },
     "type=topright_fill": {
       "model": "ornamental:block/bone_pole_fill",
-      "y": 90,
-      "uvlock": true
-    },
-    "type=bottomleft_fill": {
-      "model": "ornamental:block/bone_pole_fill",
-      "y": 270,
-      "uvlock": true
-    },
-    "type=bottomright_fill": {
-      "model": "ornamental:block/bone_pole_fill",
-      "y": 180,
-      "uvlock": true
-    },
-    "type=full": {
-      "model": "minecraft:block/bone_block"
+      "uvlock": true,
+      "y": 90
     }
   }
 }

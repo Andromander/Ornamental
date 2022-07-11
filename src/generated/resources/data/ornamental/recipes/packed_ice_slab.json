@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showPackedIceBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showPackedIceBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:packed_ice"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:packed_ice_slab",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:packed_ice_slab"
         }
       }
     }

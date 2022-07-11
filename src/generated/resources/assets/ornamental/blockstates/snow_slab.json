@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "ornamental:block/snow_slab_top"
-    },
     "type=bottom": {
       "model": "ornamental:block/snow_slab"
     },
     "type=double": {
       "model": "minecraft:block/snow_block"
+    },
+    "type=top": {
+      "model": "ornamental:block/snow_slab_top"
     }
   }
 }

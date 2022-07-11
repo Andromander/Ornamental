@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showCopperBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showCopperBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:weathered_copper"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "ornamental:weathered_copper_stairs",
-          "count": 8
+          "count": 8,
+          "item": "ornamental:weathered_copper_stairs"
         }
       }
     }

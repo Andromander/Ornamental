@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "config": "showCopperBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showCopperBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "ornamental:weathered_copper_slab"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "ornamental:weathered_copper_beam",
-          "count": 6
+          "count": 6,
+          "item": "ornamental:weathered_copper_beam"
         }
       }
     }

@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showLapisBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showLapisBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:lapis_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:lapis_lazuli"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:lapis_fence_gate"
         }

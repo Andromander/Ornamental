@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showGoldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showGoldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:gold_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:gold_ingot"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:gold_fence_gate"
         }

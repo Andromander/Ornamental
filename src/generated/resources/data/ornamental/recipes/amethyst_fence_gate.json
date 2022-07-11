@@ -4,16 +4,12 @@
     {
       "conditions": [
         {
-          "config": "showAmethystBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showAmethystBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
         "key": {
           "#": {
             "item": "minecraft:amethyst_block"
@@ -22,6 +18,10 @@
             "item": "minecraft:amethyst_shard"
           }
         },
+        "pattern": [
+          "/#/",
+          "/#/"
+        ],
         "result": {
           "item": "ornamental:amethyst_fence_gate"
         }

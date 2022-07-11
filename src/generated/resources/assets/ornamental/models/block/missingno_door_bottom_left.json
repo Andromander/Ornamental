@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "ornamental:block/missingno",
+    "top": "ornamental:block/missingno"
+  }
+}

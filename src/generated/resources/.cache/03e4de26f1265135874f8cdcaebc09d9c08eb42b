@@ -1,0 +1,11 @@
+// 1.19	2022-07-10T10:21:54.0861421	Tags for minecraft:item
+e68e460155b15dff36e3d2b590abe3147ee33b57 data/forge/tags/items/fences.json
+1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/items/fences/nether_brick.json
+00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/forge/tags/items/fence_gates.json
+2be3a7967b531cb8eddd5237641ba4569abdb576 data/minecraft/tags/items/doors.json
+e68e460155b15dff36e3d2b590abe3147ee33b57 data/minecraft/tags/items/fences.json
+b96769646a5bfa38feadc8b5f568ff260ece20dc data/minecraft/tags/items/piglin_loved.json
+8651b41c93eb8b95e741cdafa05c34e71364108b data/minecraft/tags/items/slabs.json
+be6a3424f5b1ff277d98600b79b4d662d200fa19 data/minecraft/tags/items/stairs.json
+cc55d7628e765625cff62eac1ffbb9732df771ea data/minecraft/tags/items/trapdoors.json
+a322dc4900d6929660d071e30da499bee47cd1d5 data/minecraft/tags/items/walls.json

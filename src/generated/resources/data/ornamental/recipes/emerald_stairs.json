@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "config": "showEmeraldBlocks",
-          "type": "ornamental:config"
+          "type": "ornamental:config",
+          "config": "showEmeraldBlocks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:emerald_block"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "ornamental:emerald_stairs",
-          "count": 8
+          "count": 8,
+          "item": "ornamental:emerald_stairs"
         }
       }
     }
