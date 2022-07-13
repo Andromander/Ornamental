@@ -21,7 +21,7 @@ public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends Abstract
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         if (entityName == null) {
-            entityName = ForgeRegistries.ENTITIES.getRegistryName().getPath();
+            entityName = ForgeRegistries.ENTITY_TYPES.getRegistryName().getPath();
         }
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }

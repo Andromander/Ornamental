@@ -29,7 +29,7 @@ public class RemapHandler {
     public static void remap(MissingMappingsEvent event) {
         remap(event, ForgeRegistries.Keys.BLOCKS, ForgeRegistries.BLOCKS, true);
         remap(event, ForgeRegistries.Keys.ITEMS, ForgeRegistries.ITEMS, true);
-        remap(event, ForgeRegistries.Keys.ENTITY_TYPES, ForgeRegistries.ENTITIES, true);
+        remap(event, ForgeRegistries.Keys.ENTITY_TYPES, ForgeRegistries.ENTITY_TYPES, true);
         remap(event, ForgeRegistries.Keys.PARTICLE_TYPES, ForgeRegistries.PARTICLE_TYPES, false);
     }
 

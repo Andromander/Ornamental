@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -25,7 +25,7 @@ public class GolemBuilder {
     @SubscribeEvent
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().getBlock() instanceof CarvedPumpkinBlock) {
-            ServerLevel world = ((ServerLevelAccessor)event.getWorld()).getLevel();
+            ServerLevel world = ((ServerLevelAccessor)event.getLevel()).getLevel();
             BlockPos pos = event.getPos();
 
             checkPatternLarge(PatternType.GOLD, world, pos, 1, 2);
