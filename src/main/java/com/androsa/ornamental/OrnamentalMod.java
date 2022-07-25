@@ -1,34 +1,23 @@
 package com.androsa.ornamental;
 
 import com.androsa.ornamental.data.*;
-import com.androsa.ornamental.data.conditions.ConfigCondition;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.Supplier;
 
 @Mod(OrnamentalMod.MODID)
 @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -53,13 +42,6 @@ public class OrnamentalMod {
     private void clientSetup(final FMLClientSetupEvent event) {
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerBlockColors);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColourHandler::registerItemColors);
-    }
-
-    @SubscribeEvent
-    public static void registerSerializer(RegisterEvent event) {
-        if (event.getRegistryKey() == ForgeRegistries.Keys.RECIPE_SERIALIZERS) {
-            CraftingHelper.register(new ConfigCondition.Serializer());
-        }
     }
 
     public void gatherData(GatherDataEvent event) {
