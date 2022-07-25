@@ -1,31 +1,18 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showEmeraldBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:emerald_block"
-          },
-          "/": {
-            "item": "minecraft:emerald"
-          }
-        },
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
-        "result": {
-          "item": "ornamental:emerald_fence_gate"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:emerald_block"
+    },
+    "/": {
+      "item": "minecraft:emerald"
     }
-  ]
+  },
+  "pattern": [
+    "/#/",
+    "/#/"
+  ],
+  "result": {
+    "item": "ornamental:emerald_fence_gate"
+  }
 }

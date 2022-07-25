@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCopperBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:exposed_copper"
-          }
-        },
-        "pattern": [
-          "###"
-        ],
-        "result": {
-          "count": 6,
-          "item": "ornamental:exposed_copper_slab"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:exposed_copper"
     }
-  ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ornamental:exposed_copper_slab"
+  }
 }

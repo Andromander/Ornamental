@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate_open",
+  "parent": "ornamental:block/util/fence_gate_open_column",
   "textures": {
-    "texture": "minecraft:block/snow"
+    "end": "minecraft:block/snow",
+    "side": "minecraft:block/snow"
   }
 }

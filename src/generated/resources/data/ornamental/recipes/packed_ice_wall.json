@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showPackedIceBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:packed_ice"
-          }
-        },
-        "pattern": [
-          "###",
-          "###"
-        ],
-        "result": {
-          "item": "ornamental:packed_ice_wall"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:packed_ice"
     }
-  ]
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "ornamental:packed_ice_wall"
+  }
 }

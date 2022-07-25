@@ -1,25 +1,12 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showQuartzBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:quartz_door"
-          }
-        ],
-        "result": {
-          "count": 2,
-          "item": "ornamental:quartz_saddle_door"
-        }
-      }
+      "item": "ornamental:quartz_door"
     }
-  ]
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:quartz_saddle_door"
+  }
 }

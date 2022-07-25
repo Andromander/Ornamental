@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showGrassBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "ornamental:grass_slab"
-          }
-        },
-        "pattern": [
-          "###",
-          "###"
-        ],
-        "result": {
-          "item": "ornamental:grass_trapdoor"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "ornamental:grass_slab"
     }
-  ]
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "ornamental:grass_trapdoor"
+  }
 }

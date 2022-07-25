@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/beam_corner",
+  "parent": "ornamental:block/util/beam_corner_column",
   "textures": {
-    "texture": "minecraft:block/bricks"
+    "end": "minecraft:block/bricks",
+    "side": "minecraft:block/bricks"
   }
 }

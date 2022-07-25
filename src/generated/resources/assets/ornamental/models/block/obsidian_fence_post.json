@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/fence_post",
+  "parent": "ornamental:block/util/fence_post_column",
   "textures": {
-    "texture": "minecraft:block/obsidian"
+    "end": "minecraft:block/obsidian",
+    "side": "minecraft:block/obsidian"
   }
 }

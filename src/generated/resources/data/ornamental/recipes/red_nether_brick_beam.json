@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showRedNetherBrickBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:red_nether_brick_slab"
-          }
-        },
-        "pattern": [
-          "###"
-        ],
-        "result": {
-          "count": 6,
-          "item": "ornamental:red_nether_brick_beam"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:red_nether_brick_slab"
     }
-  ]
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ornamental:red_nether_brick_beam"
+  }
 }

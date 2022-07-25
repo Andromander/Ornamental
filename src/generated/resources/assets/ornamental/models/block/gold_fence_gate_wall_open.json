@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate_wall_open",
+  "parent": "ornamental:block/util/fence_gate_wall_open_column",
   "textures": {
-    "texture": "minecraft:block/gold_block"
+    "end": "minecraft:block/gold_block",
+    "side": "minecraft:block/gold_block"
   }
 }

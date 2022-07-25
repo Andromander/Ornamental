@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "ornamental:block/path/path_slab" },
-    "type=top":    { "model": "ornamental:block/path/path_slab_top" },
-    "type=double": { "model": "block/dirt_path" }
-  }
-}

@@ -1,31 +1,18 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCopperBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:copper_block"
-          },
-          "/": {
-            "item": "minecraft:copper_ingot"
-          }
-        },
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
-        "result": {
-          "item": "ornamental:copper_fence_gate"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_block"
+    },
+    "/": {
+      "item": "minecraft:copper_ingot"
     }
-  ]
+  },
+  "pattern": [
+    "/#/",
+    "/#/"
+  ],
+  "result": {
+    "item": "ornamental:copper_fence_gate"
+  }
 }

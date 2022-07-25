@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showNetheriteBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:netherite_block"
-          }
-        },
-        "pattern": [
-          "###",
-          "###"
-        ],
-        "result": {
-          "item": "ornamental:netherite_wall"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_block"
     }
-  ]
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "ornamental:netherite_wall"
+  }
 }

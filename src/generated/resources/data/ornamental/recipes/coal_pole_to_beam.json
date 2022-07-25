@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCoalBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:coal_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:coal_beam"
-        }
-      }
+      "item": "ornamental:coal_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:coal_beam"
+  }
 }

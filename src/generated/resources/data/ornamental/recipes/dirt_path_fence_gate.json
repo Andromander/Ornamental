@@ -1,31 +1,18 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showPathBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:dirt_path"
-          },
-          "/": {
-            "item": "ornamental:dirt_path_slab"
-          }
-        },
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
-        "result": {
-          "item": "ornamental:dirt_path_fence_gate"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:dirt_path"
+    },
+    "/": {
+      "item": "ornamental:dirt_path_slab"
     }
-  ]
+  },
+  "pattern": [
+    "/#/",
+    "/#/"
+  ],
+  "result": {
+    "item": "ornamental:dirt_path_fence_gate"
+  }
 }

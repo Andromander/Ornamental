@@ -1,0 +1,140 @@
+{
+  "variants": {
+    "axis=x,type=bottom_half": {
+      "model": "ornamental:block/path/dirt_path_slab"
+    },
+    "axis=x,type=bottomleft_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "axis=x,type=bottomleft_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_bottom_straight",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=x,type=bottomright_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_bottom",
+      "uvlock": true,
+      "x": 180
+    },
+    "axis=x,type=bottomright_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_bottom_straight",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=x,type=full": {
+      "model": "minecraft:block/dirt_path"
+    },
+    "axis=x,type=left_half": {
+      "model": "ornamental:block/path/dirt_path_slab_vertical"
+    },
+    "axis=x,type=right_half": {
+      "model": "ornamental:block/path/dirt_path_slab_vertical",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=top_half": {
+      "model": "ornamental:block/path/dirt_path_slab_top"
+    },
+    "axis=x,type=topleft_bottomright": {
+      "model": "ornamental:block/path/dirt_path_beam_cross"
+    },
+    "axis=x,type=topleft_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_top"
+    },
+    "axis=x,type=topleft_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_top_straight",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "axis=x,type=topright_bottomleft": {
+      "model": "ornamental:block/path/dirt_path_beam_cross",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=topright_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_top",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=x,type=topright_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_top_straight",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "axis=z,type=bottom_half": {
+      "model": "ornamental:block/path/dirt_path_slab"
+    },
+    "axis=z,type=bottomleft_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "axis=z,type=bottomleft_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_bottom_straight",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=z,type=bottomright_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "axis=z,type=bottomright_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_bottom_straight"
+    },
+    "axis=z,type=full": {
+      "model": "minecraft:block/dirt_path"
+    },
+    "axis=z,type=left_half": {
+      "model": "ornamental:block/path/dirt_path_slab_vertical",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=right_half": {
+      "model": "ornamental:block/path/dirt_path_slab_vertical",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=top_half": {
+      "model": "ornamental:block/path/dirt_path_slab_top"
+    },
+    "axis=z,type=topleft_bottomright": {
+      "model": "ornamental:block/path/dirt_path_beam_cross",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=topleft_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_top",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=z,type=topleft_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_top_straight",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "axis=z,type=topright_bottomleft": {
+      "model": "ornamental:block/path/dirt_path_beam_cross",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=topright_corner": {
+      "model": "ornamental:block/path/dirt_path_beam_corner_top",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,type=topright_fill": {
+      "model": "ornamental:block/path/dirt_path_stairs_top_straight",
+      "uvlock": true,
+      "x": 180
+    }
+  }
+}

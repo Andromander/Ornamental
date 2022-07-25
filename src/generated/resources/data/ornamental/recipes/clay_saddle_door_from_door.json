@@ -1,25 +1,12 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showClayBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:clay_door"
-          }
-        ],
-        "result": {
-          "count": 2,
-          "item": "ornamental:clay_saddle_door"
-        }
-      }
+      "item": "ornamental:clay_door"
     }
-  ]
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:clay_saddle_door"
+  }
 }

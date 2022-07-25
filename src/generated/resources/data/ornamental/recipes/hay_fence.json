@@ -1,32 +1,19 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showHayBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:hay_block"
-          },
-          "/": {
-            "item": "minecraft:wheat"
-          }
-        },
-        "pattern": [
-          "#/#",
-          "#/#"
-        ],
-        "result": {
-          "count": 3,
-          "item": "ornamental:hay_fence"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:hay_block"
+    },
+    "/": {
+      "item": "minecraft:wheat"
     }
-  ]
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "ornamental:hay_fence"
+  }
 }

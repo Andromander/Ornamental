@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/pole_corner",
+  "parent": "ornamental:block/util/pole_corner_column",
   "textures": {
-    "texture": "minecraft:block/snow"
+    "end": "minecraft:block/snow",
+    "side": "minecraft:block/snow"
   }
 }

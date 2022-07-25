@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showDiamondBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:diamond_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:diamond_beam"
-        }
-      }
+      "item": "ornamental:diamond_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:diamond_beam"
+  }
 }

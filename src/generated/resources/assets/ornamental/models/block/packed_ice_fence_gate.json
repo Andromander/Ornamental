@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate",
+  "parent": "ornamental:block/util/fence_gate_column",
   "textures": {
-    "texture": "minecraft:block/packed_ice"
+    "end": "minecraft:block/packed_ice",
+    "side": "minecraft:block/packed_ice"
   }
 }

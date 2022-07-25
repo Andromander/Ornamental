@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:translucent",
   "textures": {
     "wall": "minecraft:block/ice",
     "particle": "#wall"

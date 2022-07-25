@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showClayBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:clay_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:clay_beam"
-        }
-      }
+      "item": "ornamental:clay_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:clay_beam"
+  }
 }

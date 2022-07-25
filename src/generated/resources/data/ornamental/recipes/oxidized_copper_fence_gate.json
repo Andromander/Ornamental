@@ -1,31 +1,18 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCopperBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:oxidized_copper"
-          },
-          "/": {
-            "item": "ornamental:oxidized_copper_slab"
-          }
-        },
-        "pattern": [
-          "/#/",
-          "/#/"
-        ],
-        "result": {
-          "item": "ornamental:oxidized_copper_fence_gate"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:oxidized_copper"
+    },
+    "/": {
+      "item": "ornamental:oxidized_copper_slab"
     }
-  ]
+  },
+  "pattern": [
+    "/#/",
+    "/#/"
+  ],
+  "result": {
+    "item": "ornamental:oxidized_copper_fence_gate"
+  }
 }

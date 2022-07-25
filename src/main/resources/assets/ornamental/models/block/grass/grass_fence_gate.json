@@ -1,5 +1,6 @@
 {
   "parent": "block/block",
+  "render_type": "minecraft:cutout_mipped",
   "display": {
     "gui": {
       "rotation": [ 30, 45, 0 ],

@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/slab_vertical",
+  "parent": "ornamental:block/util/slab_vertical_column",
   "textures": {
-    "texture": "minecraft:block/nether_bricks"
+    "end": "minecraft:block/nether_bricks",
+    "side": "minecraft:block/nether_bricks"
   }
 }

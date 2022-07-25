@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showBoneBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:bone_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:bone_beam"
-        }
-      }
+      "item": "ornamental:bone_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:bone_beam"
+  }
 }

@@ -1,32 +1,19 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showSnowBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:snow_block"
-          },
-          "/": {
-            "tag": "minecraft:slabs"
-          }
-        },
-        "pattern": [
-          " / ",
-          "###"
-        ],
-        "result": {
-          "count": 6,
-          "item": "ornamental:snow_slab"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:snow_block"
+    },
+    "/": {
+      "tag": "minecraft:slabs"
     }
-  ]
+  },
+  "pattern": [
+    " / ",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ornamental:snow_slab"
+  }
 }

@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_bottom_right",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/nether_brick_door_bottom",
     "top": "ornamental:block/nether_brick_door_top"

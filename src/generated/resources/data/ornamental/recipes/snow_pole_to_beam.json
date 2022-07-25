@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showSnowBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:snow_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:snow_beam"
-        }
-      }
+      "item": "ornamental:snow_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:snow_beam"
+  }
 }

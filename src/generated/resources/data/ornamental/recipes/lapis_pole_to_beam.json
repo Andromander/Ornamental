@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showLapisBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:lapis_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:lapis_beam"
-        }
-      }
+      "item": "ornamental:lapis_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:lapis_beam"
+  }
 }

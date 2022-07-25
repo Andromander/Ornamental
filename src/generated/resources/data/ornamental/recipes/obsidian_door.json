@@ -1,29 +1,16 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showObsidianBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "ornamental:obsidian_slab"
-          }
-        },
-        "pattern": [
-          "##",
-          "##",
-          "##"
-        ],
-        "result": {
-          "item": "ornamental:obsidian_door"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "ornamental:obsidian_slab"
     }
-  ]
+  },
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "ornamental:obsidian_door"
+  }
 }

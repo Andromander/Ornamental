@@ -1,30 +1,17 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showGoldBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "ornamental:gold_slab"
-          }
-        },
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
-        "result": {
-          "count": 6,
-          "item": "ornamental:gold_pole"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "ornamental:gold_slab"
     }
-  ]
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ornamental:gold_pole"
+  }
 }

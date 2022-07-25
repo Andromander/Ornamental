@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_top_left",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "minecraft:block/dirt",
     "top": "minecraft:block/dirt"

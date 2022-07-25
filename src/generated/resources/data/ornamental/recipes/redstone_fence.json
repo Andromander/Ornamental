@@ -1,32 +1,19 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showRedstoneBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:redstone_block"
-          },
-          "/": {
-            "item": "minecraft:redstone"
-          }
-        },
-        "pattern": [
-          "#/#",
-          "#/#"
-        ],
-        "result": {
-          "count": 3,
-          "item": "ornamental:redstone_fence"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_block"
+    },
+    "/": {
+      "item": "minecraft:redstone"
     }
-  ]
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "ornamental:redstone_fence"
+  }
 }

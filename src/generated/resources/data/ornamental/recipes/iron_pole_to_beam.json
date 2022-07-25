@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showIronBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:iron_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:iron_beam"
-        }
-      }
+      "item": "ornamental:iron_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:iron_beam"
+  }
 }

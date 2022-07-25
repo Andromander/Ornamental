@@ -1,28 +1,15 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showLapisBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:lapis_lazuli"
-          }
-        },
-        "pattern": [
-          "##",
-          "##"
-        ],
-        "result": {
-          "item": "ornamental:lapis_trapdoor"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:lapis_lazuli"
     }
-  ]
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "ornamental:lapis_trapdoor"
+  }
 }

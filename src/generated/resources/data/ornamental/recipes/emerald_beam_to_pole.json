@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showEmeraldBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:emerald_beam"
-          }
-        ],
-        "result": {
-          "item": "ornamental:emerald_pole"
-        }
-      }
+      "item": "ornamental:emerald_beam"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:emerald_pole"
+  }
 }

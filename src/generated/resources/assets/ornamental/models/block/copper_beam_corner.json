@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/beam_corner",
+  "parent": "ornamental:block/util/beam_corner_column",
   "textures": {
-    "texture": "minecraft:block/copper_block"
+    "end": "minecraft:block/copper_block",
+    "side": "minecraft:block/copper_block"
   }
 }

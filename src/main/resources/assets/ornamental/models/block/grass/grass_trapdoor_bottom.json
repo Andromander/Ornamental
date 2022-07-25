@@ -1,5 +1,6 @@
 {
   "parent": "block/thin_block",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "particle": "block/dirt",
     "bottom": "block/dirt",

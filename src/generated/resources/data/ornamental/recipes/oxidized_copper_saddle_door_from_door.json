@@ -1,25 +1,12 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCopperBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:oxidized_copper_door"
-          }
-        ],
-        "result": {
-          "count": 2,
-          "item": "ornamental:oxidized_copper_saddle_door"
-        }
-      }
+      "item": "ornamental:oxidized_copper_door"
     }
-  ]
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:oxidized_copper_saddle_door"
+  }
 }

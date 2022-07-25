@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/beam_cross",
+  "parent": "ornamental:block/util/beam_cross_column",
   "textures": {
-    "texture": "minecraft:block/red_nether_bricks"
+    "end": "minecraft:block/red_nether_bricks",
+    "side": "minecraft:block/red_nether_bricks"
   }
 }

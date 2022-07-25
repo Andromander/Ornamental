@@ -1,32 +1,19 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showBoneBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:bone_block"
-          },
-          "/": {
-            "item": "minecraft:bone_meal"
-          }
-        },
-        "pattern": [
-          "#/#",
-          "#/#"
-        ],
-        "result": {
-          "count": 3,
-          "item": "ornamental:bone_fence"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:bone_block"
+    },
+    "/": {
+      "item": "minecraft:bone_meal"
     }
-  ]
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "ornamental:bone_fence"
+  }
 }

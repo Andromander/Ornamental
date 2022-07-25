@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/pole_cross",
+  "parent": "ornamental:block/util/pole_cross_column",
   "textures": {
-    "texture": "minecraft:block/exposed_copper"
+    "end": "minecraft:block/exposed_copper",
+    "side": "minecraft:block/exposed_copper"
   }
 }

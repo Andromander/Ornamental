@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/stairs_straight_side",
+  "parent": "ornamental:block/util/stairs_straight_side_column",
   "textures": {
-    "texture": "minecraft:block/iron_block"
+    "end": "minecraft:block/iron_block",
+    "side": "minecraft:block/iron_block"
   }
 }

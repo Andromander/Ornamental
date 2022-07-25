@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate_wall",
+  "parent": "ornamental:block/util/fence_gate_wall_column",
   "textures": {
-    "texture": "minecraft:block/diamond_block"
+    "end": "minecraft:block/diamond_block",
+    "side": "minecraft:block/diamond_block"
   }
 }

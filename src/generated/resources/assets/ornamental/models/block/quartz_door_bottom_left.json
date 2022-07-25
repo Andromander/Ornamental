@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_bottom_left",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/quartz_door_bottom",
     "top": "ornamental:block/quartz_door_top"

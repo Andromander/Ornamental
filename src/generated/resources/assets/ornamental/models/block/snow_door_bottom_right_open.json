@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_bottom_right_open",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/snow_door_bottom",
     "top": "ornamental:block/snow_door_top"

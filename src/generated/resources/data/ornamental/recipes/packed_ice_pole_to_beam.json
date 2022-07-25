@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showPackedIceBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:packed_ice_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:packed_ice_beam"
-        }
-      }
+      "item": "ornamental:packed_ice_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:packed_ice_beam"
+  }
 }

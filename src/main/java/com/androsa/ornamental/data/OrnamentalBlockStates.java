@@ -1,10 +1,21 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.blocks.OrnamentBeam;
+import com.androsa.ornamental.blocks.OrnamentPole;
+import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
+import com.androsa.ornamental.blocks.PoleType;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
@@ -25,9 +36,12 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsMissing(ModBlocks.missingno_stairs);
         stairsBasic(ModBlocks.clay_stairs, "clay");
         stairsBasic(ModBlocks.dirt_stairs, "dirt");
+        hexamodelStairsBlock(ModBlocks.grass_stairs, "grass");
         stairsColumn(ModBlocks.hay_stairs, "hay_block_side", "hay_block_top");
+        hexamodelStairsBlock(ModBlocks.path_stairs, "path");
         stairsColumn(ModBlocks.bone_stairs, "bone_block_side", "bone_block_top");
         stairsBasic(ModBlocks.snow_stairs, "snow");
+        modelStairsBlock(ModBlocks.ice_stairs, "ice");
         stairsBasic(ModBlocks.packed_ice_stairs, "packed_ice");
         stairsBasic(ModBlocks.blue_ice_stairs, "blue_ice");
         stairsBasic(ModBlocks.netherite_stairs, "netherite_block");
@@ -48,10 +62,12 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabMissing(ModBlocks.missingno_slab);
         slabBasic(ModBlocks.clay_slab, "clay");
         slabBasic(ModBlocks.dirt_slab, "dirt");
+        modelSlabBlock(ModBlocks.grass_slab, "grass_block", "grass");
         slabColumn(ModBlocks.hay_slab, "hay_block", "hay_block_side", "hay_block_top");
+        modelSlabBlock(ModBlocks.path_slab, "dirt_path", "path");
         slabColumn(ModBlocks.bone_slab, "bone_block", "bone_block_side", "bone_block_top");
         slabModel(ModBlocks.snow_slab, "snow_block", "snow");
-        slabBasic(ModBlocks.ice_slab, "ice");
+        slabBasic(ModBlocks.ice_slab, "ice", TRANSLUCENT);
         slabBasic(ModBlocks.packed_ice_slab, "packed_ice");
         slabBasic(ModBlocks.blue_ice_slab, "blue_ice");
         slabBasic(ModBlocks.netherite_slab, "netherite_block");
@@ -72,12 +88,15 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceMissing(ModBlocks.missingno_fence);
         fenceBasic(ModBlocks.clay_fence, "clay");
         fenceBasic(ModBlocks.dirt_fence, "dirt");
+        modelFenceBlock(ModBlocks.grass_fence, "grass");
         fenceColumn(ModBlocks.hay_fence, "hay_block_side", "hay_block_top");
+        modelFenceBlock(ModBlocks.path_fence, "path");
         fenceBasic(ModBlocks.brick_fence, "bricks");
         fenceColumn(ModBlocks.quartz_fence, "quartz_block_side", "quartz_block_top");
         fenceColumn(ModBlocks.bone_fence, "bone_block_side", "bone_block_top");
         fenceBasic(ModBlocks.red_nether_brick_fence, "red_nether_bricks");
         fenceBasic(ModBlocks.snow_fence, "snow");
+        modelFenceBlock(ModBlocks.ice_fence, "ice");
         fenceBasic(ModBlocks.packed_ice_fence, "packed_ice");
         fenceBasic(ModBlocks.blue_ice_fence, "blue_ice");
         fenceBasic(ModBlocks.netherite_fence, "netherite_block");
@@ -97,14 +116,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorMissing(ModBlocks.missingno_trapdoor);
         trapdoorBasic(ModBlocks.clay_trapdoor, "clay");
         trapdoorVanilla(ModBlocks.dirt_trapdoor, "dirt");
+        modelTrapdoorBlock(ModBlocks.grass_trapdoor, "grass");
         trapdoorBasic(ModBlocks.hay_trapdoor, "hay");
+        modelTrapdoorBlock(ModBlocks.path_trapdoor, "path");
         trapdoorVanilla(ModBlocks.brick_trapdoor, "bricks");
         trapdoorBasic(ModBlocks.quartz_trapdoor, "quartz");
         trapdoorBasic(ModBlocks.bone_trapdoor, "bone");
         trapdoorBasic(ModBlocks.nether_brick_trapdoor, "nether_brick");
         trapdoorBasic(ModBlocks.red_nether_brick_trapdoor, "red_nether_brick");
         trapdoorBasic(ModBlocks.snow_trapdoor, "snow");
-        trapdoorBasic(ModBlocks.ice_trapdoor, "ice");
+        trapdoorBasic(ModBlocks.ice_trapdoor, "ice", TRANSLUCENT);
         trapdoorBasic(ModBlocks.packed_ice_trapdoor, "packed_ice");
         trapdoorBasic(ModBlocks.blue_ice_trapdoor, "blue_ice");
         trapdoorBasic(ModBlocks.netherite_trapdoor, "netherite");
@@ -125,14 +146,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateMissing(ModBlocks.missingno_fence_gate);
         fenceGateBasic(ModBlocks.clay_fence_gate, "clay");
         fenceGateBasic(ModBlocks.dirt_fence_gate, "dirt");
+        modelFenceGateBlock(ModBlocks.grass_fence_gate, "grass");
         fenceGateColumn(ModBlocks.hay_fence_gate, "hay_block_side", "hay_block_top");
+        modelFenceGateBlock(ModBlocks.path_fence_gate, "path");
         fenceGateBasic(ModBlocks.brick_fence_gate, "bricks");
         fenceGateColumn(ModBlocks.quartz_fence_gate, "quartz_block_side", "quartz_block_top");
         fenceGateColumn(ModBlocks.bone_fence_gate, "bone_block_side", "bone_block_top");
         fenceGateBasic(ModBlocks.nether_brick_fence_gate, "nether_bricks");
         fenceGateBasic(ModBlocks.red_nether_brick_fence_gate, "red_nether_bricks");
         fenceGateBasic(ModBlocks.snow_fence_gate, "snow");
-        fenceGateBasic(ModBlocks.ice_fence_gate, "ice");
+        fenceGateBasic(ModBlocks.ice_fence_gate, "ice", TRANSLUCENT);
         fenceGateBasic(ModBlocks.packed_ice_fence_gate, "packed_ice");
         fenceGateBasic(ModBlocks.blue_ice_fence_gate, "blue_ice");
         fenceGateBasic(ModBlocks.netherite_fence_gate, "netherite_block");
@@ -152,14 +175,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorMissing(ModBlocks.missingno_door);
         doorBasic(ModBlocks.clay_door, "clay");
         doorBasicVanilla(ModBlocks.dirt_door, "dirt");
+        halfDirtDoorBlock(ModBlocks.grass_door, "grass");
         doorBasic(ModBlocks.hay_door, "hay");
+        halfDirtDoorBlock(ModBlocks.path_door, "path");
         doorBasicVanilla(ModBlocks.brick_door, "bricks");
         doorBasic(ModBlocks.quartz_door, "quartz");
         doorBasic(ModBlocks.bone_door, "bone");
         doorBasic(ModBlocks.nether_brick_door, "nether_brick");
         doorBasic(ModBlocks.red_nether_brick_door, "red_nether_brick");
         doorBasic(ModBlocks.snow_door, "snow");
-        doorBasic(ModBlocks.ice_door, "ice");
+        doorBasic(ModBlocks.ice_door, "ice", TRANSLUCENT);
         doorBasic(ModBlocks.packed_ice_door, "packed_ice");
         doorBasic(ModBlocks.blue_ice_door, "blue_ice");
         doorBasic(ModBlocks.netherite_door, "netherite");
@@ -180,13 +205,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleMissing(ModBlocks.missingno_pole, "missingno");
         poleBasic(ModBlocks.clay_pole, "clay");
         poleBasic(ModBlocks.dirt_pole, "dirt");
-        poleColumn(ModBlocks.hay_pole, "hay_block");
+        modelPoleBlock(ModBlocks.grass_pole, "grass_block", "grass", true);
+        poleColumn(ModBlocks.hay_pole, "hay_block", "hay_block_side", "hay_block_top");
+        modelPoleBlock(ModBlocks.path_pole, "dirt_path", "path", true);
         poleBasic(ModBlocks.brick_pole, "bricks");
-        poleColumn(ModBlocks.quartz_pole, "quartz_block");
-        poleColumn(ModBlocks.bone_pole, "bone_block");
+        poleColumn(ModBlocks.quartz_pole, "quartz_block", "quartz_block_side", "quartz_block_top");
+        poleColumn(ModBlocks.bone_pole, "bone_block", "bone_block_side", "bone_block_top");
         poleBasic(ModBlocks.nether_brick_pole, "nether_bricks");
         poleBasic(ModBlocks.red_nether_brick_pole, "red_nether_bricks");
-        poleBasic(ModBlocks.snow_pole, "snow", "snow_block");
+        poleBasic(ModBlocks.snow_pole, "snow", "snow_block", SOLID);
+        modelPoleBlock(ModBlocks.ice_pole, "ice", "ice", false);
         poleBasic(ModBlocks.packed_ice_pole, "packed_ice");
         poleBasic(ModBlocks.blue_ice_pole, "blue_ice");
         poleBasic(ModBlocks.netherite_pole, "netherite_block");
@@ -196,32 +224,35 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.weathered_copper_pole, "weathered_copper");
         poleBasic(ModBlocks.oxidized_copper_pole, "oxidized_copper");
 
-        beamBasic(ModBlocks.iron_beam, "iron", "iron_block", false, false);
-        beamBasic(ModBlocks.gold_beam, "gold", "gold_block", false, false);
-        beamBasic(ModBlocks.diamond_beam, "diamond", "diamond_block", false, false);
-        beamBasic(ModBlocks.emerald_beam, "emerald", "emerald_block", false, false);
-        beamBasic(ModBlocks.lapis_beam, "lapis", "lapis_block", false, false);
-        beamBasic(ModBlocks.obsidian_beam, "obsidian", "obsidian", false, false);
-        beamBasic(ModBlocks.coal_beam, "coal", "coal_block", false, false);
-        beamBasic(ModBlocks.redstone_beam, "redstone", "redstone_block", false, false);
+        beamBasic(ModBlocks.iron_beam, "iron_block", false, false);
+        beamBasic(ModBlocks.gold_beam, "gold_block", false, false);
+        beamBasic(ModBlocks.diamond_beam, "diamond_block", false, false);
+        beamBasic(ModBlocks.emerald_beam, "emerald_block", false, false);
+        beamBasic(ModBlocks.lapis_beam, "lapis_block", false, false);
+        beamBasic(ModBlocks.obsidian_beam, "obsidian", false, false);
+        beamBasic(ModBlocks.coal_beam, "coal_block", false, false);
+        beamBasic(ModBlocks.redstone_beam, "redstone_block", false, false);
         beamMissing(ModBlocks.missingno_beam, "missingno");
-        beamBasic(ModBlocks.clay_beam, "clay", "clay", false, false);
-        beamBasic(ModBlocks.dirt_beam, "dirt", "dirt", false, false);
-        beamColumn(ModBlocks.hay_beam, "hay", "hay_block", false, false);
-        beamBasic(ModBlocks.brick_beam, "brick", "bricks", true, true);
-        beamColumn(ModBlocks.quartz_beam, "quartz", "quartz_block", true, true);
-        beamColumn(ModBlocks.bone_beam, "bone", "bone_block", false, false);
-        beamBasic(ModBlocks.nether_brick_beam, "nether_brick", "nether_bricks", true, true);
-        beamBasic(ModBlocks.red_nether_brick_beam, "red_nether_brick", "red_nether_bricks", true, true);
-        beamBasic(ModBlocks.snow_beam, "snow", "snow", "snow_block", false, false);
-        beamBasic(ModBlocks.packed_ice_beam, "packed_ice", "packed_ice", false, false);
-        beamBasic(ModBlocks.blue_ice_beam, "blue_ice", "blue_ice", false, false);
-        beamBasic(ModBlocks.netherite_beam, "netherite", "netherite_block", false, false);
-        beamBasic(ModBlocks.amethyst_beam, "amethyst", "amethyst_block", false, false);
-        beamBasic(ModBlocks.copper_beam, "copper", "copper_block", false, false);
-        beamBasic(ModBlocks.exposed_copper_beam, "exposed_copper", "exposed_copper", false, false);
-        beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper", "weathered_copper", false, false);
-        beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper", "oxidized_copper", false, false);
+        beamBasic(ModBlocks.clay_beam, "clay", false, false);
+        beamBasic(ModBlocks.dirt_beam, "dirt", false, false);
+        nonamodelBeamBlock(ModBlocks.grass_beam, "grass_block", "grass");
+        beamColumn(ModBlocks.hay_beam, "hay_block", "hay_block_top", "hay_block_side", false, false);
+        nonamodelBeamBlock(ModBlocks.path_beam, "dirt_path", "path");
+        beamBasic(ModBlocks.brick_beam, "bricks", true, true);
+        beamColumn(ModBlocks.quartz_beam, "quartz_block", "quartz_block_top", "quartz_block_side", true, true);
+        beamColumn(ModBlocks.bone_beam, "bone_block", "bone_block_top", "bone_block_side", false, false);
+        beamBasic(ModBlocks.nether_brick_beam, "nether_bricks", true, true);
+        beamBasic(ModBlocks.red_nether_brick_beam, "red_nether_bricks", true, true);
+        beamBasic(ModBlocks.snow_beam, "snow", "snow_block", false, false, SOLID);
+        modelBeamBlock(ModBlocks.ice_beam, "ice", "ice", true);
+        beamBasic(ModBlocks.packed_ice_beam, "packed_ice", false, false);
+        beamBasic(ModBlocks.blue_ice_beam, "blue_ice", false, false);
+        beamBasic(ModBlocks.netherite_beam, "netherite_block", false, false);
+        beamBasic(ModBlocks.amethyst_beam, "amethyst_block", false, false);
+        beamBasic(ModBlocks.copper_beam, "copper_block", false, false);
+        beamBasic(ModBlocks.exposed_copper_beam, "exposed_copper", false, false);
+        beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper", false, false);
+        beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper", false, false);
 
         wallBasic(ModBlocks.iron_wall, "iron_block");
         wallBasic(ModBlocks.gold_wall, "gold_block");
@@ -234,7 +265,9 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallMissing(ModBlocks.missingno_wall, "missingno");
         wallBasic(ModBlocks.clay_wall, "clay");
         wallBasic(ModBlocks.dirt_wall, "dirt");
+        modelWallBlock(ModBlocks.grass_wall, "grass");
         wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top");
+        modelWallBlock(ModBlocks.path_wall, "path");
         wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top");
         wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top");
         wallBasic(ModBlocks.snow_wall, "snow");
@@ -258,14 +291,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorMissing(ModBlocks.missingno_saddle_door, "missingno");
         saddleDoorBasic(ModBlocks.clay_saddle_door, "clay");
         saddleDoorVanilla(ModBlocks.dirt_saddle_door, "dirt");
+        modelSaddleDoorBlock(ModBlocks.grass_saddle_door, "grass");
         saddleDoorBasic(ModBlocks.hay_saddle_door, "hay");
+        modelSaddleDoorBlock(ModBlocks.path_saddle_door, "path");
         saddleDoorVanilla(ModBlocks.brick_saddle_door, "bricks");
         saddleDoorBasic(ModBlocks.quartz_saddle_door, "quartz");
         saddleDoorBasic(ModBlocks.bone_saddle_door, "bone");
         saddleDoorBasic(ModBlocks.nether_brick_saddle_door, "nether_brick");
         saddleDoorBasic(ModBlocks.red_nether_brick_saddle_door, "red_nether_brick");
         saddleDoorBasic(ModBlocks.snow_saddle_door, "snow");
-        saddleDoorBasic(ModBlocks.ice_saddle_door, "ice");
+        saddleDoorBasic(ModBlocks.ice_saddle_door, "ice", TRANSLUCENT);
         saddleDoorBasic(ModBlocks.packed_ice_saddle_door, "packed_ice");
         saddleDoorBasic(ModBlocks.blue_ice_saddle_door, "blue_ice");
         saddleDoorBasic(ModBlocks.netherite_saddle_door, "netherite");
@@ -274,5 +309,213 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
         saddleDoorBasic(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
         saddleDoorBasic(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
+    }
+
+    public void modelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile stairs = models().getExistingFile(locOrnament(dir));
+        ModelFile innerstairs = models().getExistingFile(locOrnament(dir + "_inner"));
+        ModelFile outerstairs = models().getExistingFile(locOrnament(dir + "_outer"));
+
+        stairsBlock(block.get(), stairs, innerstairs, outerstairs);
+    }
+
+    public void hexamodelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile bottomstraight = models().getExistingFile(locOrnament(dir + "_bottom_straight"));
+        ModelFile topstraight = models().getExistingFile(locOrnament(dir + "_top_straight"));
+        ModelFile bottominner = models().getExistingFile(locOrnament(dir + "_bottom_inner"));
+        ModelFile topinner = models().getExistingFile(locOrnament(dir + "_top_inner"));
+        ModelFile bottomouter = models().getExistingFile(locOrnament(dir + "_bottom_outer"));
+        ModelFile topouter = models().getExistingFile(locOrnament(dir + "_top_outer"));
+        stairsBlock(block.get(), bottomstraight, topstraight, bottominner, topinner, bottomouter, topouter);
+    }
+
+    public void modelSlabBlock(RegistryObject<? extends SlabBlock> block, String full, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile slab = models().getExistingFile(locOrnament(dir));
+        ModelFile slabtop = models().getExistingFile(locOrnament(dir + "_top"));
+        ModelFile fullblock = models().getExistingFile(locVanilla(full));
+
+        slabBlock(block.get(), slab, slabtop, fullblock);
+    }
+
+    public void modelFenceBlock(RegistryObject<? extends FenceBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile post = models().getExistingFile(locOrnament(dir + "_post"));
+        ModelFile side = models().getExistingFile(locOrnament(dir + "_side"));
+
+        fourWayBlock(block.get(), post, side);
+    }
+
+    public void modelTrapdoorBlock(RegistryObject<? extends TrapDoorBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile bottom = models().getExistingFile(locOrnament(dir + "_bottom"));
+        ModelFile top = models().getExistingFile(locOrnament(dir + "_top"));
+        ModelFile open = models().getExistingFile(locOrnament(dir + "_open"));
+
+        trapdoorBlock(block.get(), bottom, top, open, true);
+    }
+
+    public void modelFenceGateBlock(RegistryObject<? extends FenceGateBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile gate = models().getExistingFile(locOrnament(dir));
+        ModelFile open = models().getExistingFile(locOrnament(dir + "_open"));
+        ModelFile wall = models().getExistingFile(locOrnament(dir + "_wall"));
+        ModelFile wallopen = models().getExistingFile(locOrnament(dir + "_wall_open"));
+
+        fenceGateBlock(block.get(), gate, open, wall, wallopen);
+    }
+
+    public void halfDirtDoorBlock(RegistryObject<? extends DoorBlock> block, String path) {
+        String dirt = ModBlocks.dirt_door.getId().getPath();
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile bottomleft = models().getExistingFile(locOrnament(dirt + "_bottom_left"));
+        ModelFile bottomleftopen = models().getExistingFile(locOrnament(dirt + "_bottom_left_open"));
+        ModelFile bottomright = models().getExistingFile(locOrnament(dirt + "_bottom_right"));
+        ModelFile bottomrightopen = models().getExistingFile(locOrnament(dirt + "_bottom_right_open"));
+        ModelFile topleft = models().getExistingFile(locOrnament(dir + "_top_left"));
+        ModelFile topleftopen = models().getExistingFile(locOrnament(dir + "_top_left_open"));
+        ModelFile topright = models().getExistingFile(locOrnament(dir + "_top_right"));
+        ModelFile toprightopen = models().getExistingFile(locOrnament(dir + "_top_right_open"));
+        doorBlock(block.get(), bottomleft, bottomleftopen, bottomright, bottomrightopen, topleft, topleftopen, topright, toprightopen);
+    }
+
+    public void modelPoleBlock(RegistryObject<? extends OrnamentPole> block, String full, String path, boolean slab) {
+        String dir = path + "/" + block.getId().getPath();
+        String name = path + "/" + block.get().getBuilder().name;
+        ModelFile corner = models().getExistingFile(locOrnament(dir + "_corner"));
+        ModelFile half = models().getExistingFile(locOrnament(slab ? name + "_slab_vertical" : dir + "_half"));
+        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
+        ModelFile fill = models().getExistingFile(locOrnament(name + "_stairs_straight_side"));
+        ModelFile fullblock = models().getExistingFile(locVanilla(full));
+
+        poleBlock(block, corner, half, cross, fill, fullblock);
+    }
+
+    public void modelBeamBlock(RegistryObject<? extends OrnamentBeam> block, String fullblock, String path, boolean gen) {
+        String dir = path + "/" + block.getId().getPath();
+        String nameonly = block.get().getBuilder().name;
+        String name = path + "/" + nameonly;
+        ModelFile corner = models().getExistingFile(locOrnament(dir + "_corner"));
+        ModelFile topslab = models().getExistingFile(locOrnament(gen ? nameonly + "_slab_top" : name + "_slab_top"));
+        ModelFile bottomslab = models().getExistingFile(locOrnament(gen ? nameonly + "_slab" : name + "_slab"));
+        ModelFile sideslab = models().getExistingFile(locOrnament(name + "_pole_half"));
+        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
+        ModelFile fill = models().getExistingFile(locOrnament(name + "_stairs"));
+        ModelFile full = models().getExistingFile(locVanilla(fullblock));
+
+        beamBlock(block, corner, topslab, bottomslab, sideslab, cross, fill, full);
+    }
+
+    public void nonamodelBeamBlock(RegistryObject<? extends OrnamentBeam> block, String full, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        String name = path + "/" + block.get().getBuilder().name;
+        ModelFile topcorner = models().getExistingFile(locOrnament(dir + "_corner_top"));
+        ModelFile bottomcorner = models().getExistingFile(locOrnament(dir + "_corner_bottom"));
+        ModelFile topslab = models().getExistingFile(locOrnament(name + "_slab_top"));
+        ModelFile bottomslab = models().getExistingFile(locOrnament(name + "_slab"));
+        ModelFile sideslab = models().getExistingFile(locOrnament(name + "_slab_vertical"));
+        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
+        ModelFile topfill = models().getExistingFile(locOrnament(name + "_stairs_top_straight"));
+        ModelFile bottomfill = models().getExistingFile(locOrnament(name + "_stairs_bottom_straight"));
+        ModelFile fullblock = models().getExistingFile(locVanilla(full));
+
+        beamBlock(block, bottomcorner, topcorner, topslab, bottomslab, sideslab, cross, bottomfill, topfill, fullblock);
+    }
+
+    public void modelWallBlock(RegistryObject<? extends WallBlock> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile post = models().getExistingFile(locOrnament(dir + "_post"));
+        ModelFile side = models().getExistingFile(locOrnament(dir + "_side"));
+        ModelFile tall = models().getExistingFile(locOrnament(dir + "_side_tall"));
+
+        wallBlock(block.get(), post, side, tall);
+    }
+
+    public void modelSaddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, String path) {
+        String dir = path + "/" + block.getId().getPath();
+        ModelFile left = models().getExistingFile(locOrnament(dir));
+        ModelFile right = models().getExistingFile(locOrnament(dir + "_hinge"));
+
+        saddleDoorBlock(block, left, right);
+    }
+
+    public void stairsBlock(StairBlock block, ModelFile bs, ModelFile ts, ModelFile bi, ModelFile ti, ModelFile bo, ModelFile to) {
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> {
+                    Direction facing = state.getValue(StairBlock.FACING);
+                    Half half = state.getValue(StairBlock.HALF);
+                    StairsShape shape = state.getValue(StairBlock.SHAPE);
+                    int yRot = (int) facing.getClockWise().toYRot(); // Stairs model is rotated 90 degrees clockwise for some reason
+                    if (shape == StairsShape.INNER_LEFT || shape == StairsShape.OUTER_LEFT) {
+                        yRot += 270; // Left facing stairs are rotated 90 degrees clockwise
+                    }
+                    if (shape != StairsShape.STRAIGHT && half == Half.TOP) {
+                        yRot += 90; // Top stairs are rotated 90 degrees clockwise
+                    }
+                    yRot %= 360;
+                    boolean uvlock = yRot != 0 || half == Half.TOP; // Don't set uvlock for states that have no rotation
+                    ModelFile model = bs;
+                    switch (shape) {
+                        case STRAIGHT -> model = half == Half.TOP ? ts : bs;
+                        case INNER_LEFT, INNER_RIGHT -> model = half == Half.TOP ? ti : bi;
+                        case OUTER_LEFT, OUTER_RIGHT -> model = half == Half.TOP ? to : bo;
+                    }
+                    return ConfiguredModel.builder()
+                            .modelFile(model)
+                            .rotationX(half == Half.BOTTOM ? 0 : 180)
+                            .rotationY(yRot)
+                            .uvLock(uvlock)
+                            .build();
+                }, StairBlock.WATERLOGGED);
+    }
+
+    public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile bcorner, ModelFile tcorner, ModelFile topslab, ModelFile bottomslab, ModelFile halfpole, ModelFile cross, ModelFile bfill, ModelFile tfill, ModelFile full) {
+        getVariantBuilder(block.get())
+                .forAllStatesExcept(state -> {
+                    PoleType type = state.getValue(OrnamentBeam.TYPE);
+                    Direction.Axis axis = state.getValue(OrnamentBeam.HORIZONTAL_AXIS);
+                    PoleType.Shape shape = type.getShape();
+                    ModelFile model;
+                    int xRot, yRot;
+
+                    switch (shape) {
+                        case HALF:
+                            if (type == PoleType.T_HALF) model = topslab;
+                            else if (type == PoleType.B_HALF) model = bottomslab;
+                            else model = halfpole;
+                            break;
+                        case CROSS: model = cross; break;
+                        case FILL: model = type == PoleType.TL_FILL || type == PoleType.TR_FILL ? tfill : bfill; break;
+                        case BLOCK: model = full; break;
+                        default: model = type == PoleType.TL_CORNER || type == PoleType.TR_CORNER ? tcorner : bcorner; break;
+                    }
+                    if (type == PoleType.BL_CORNER || type == PoleType.BR_CORNER || type == PoleType.TL_FILL || type == PoleType.TR_FILL) {
+                        xRot = 180;
+                    } else {
+                        xRot = 0;
+                    }
+                    if (type == PoleType.TL_CORNER || type == PoleType.BR_CORNER || type == PoleType.L_HALF || type == PoleType.TL_BR) {
+                        yRot = 270;
+                    } else if (type == PoleType.TR_CORNER || type == PoleType.BL_CORNER || type == PoleType.R_HALF || type == PoleType.TR_BL) {
+                        yRot = 90;
+                    } else if (type == PoleType.TL_FILL || type == PoleType.BL_FILL) {
+                        yRot = 180;
+                    } else {
+                        yRot = 0;
+                    }
+                    if (type != PoleType.T_HALF && type != PoleType.B_HALF && type != PoleType.FULL) {
+                        yRot = axis == Direction.Axis.X ? yRot + 90 : yRot;
+                    }
+                    yRot = yRot == 360 ? 0 : yRot;
+                    boolean uvlock = yRot != 0 || xRot != 0; // Don't set uvlock for states that have no rotation
+                    return ConfiguredModel.builder()
+                            .modelFile(model)
+                            .rotationY(yRot)
+                            .rotationX(xRot)
+                            .uvLock(uvlock)
+                            .build();
+                }, OrnamentBeam.WATERLOGGED);
     }
 }

@@ -1,0 +1,69 @@
+{
+  "variants": {
+    "type=bottom_half": {
+      "model": "ornamental:block/ice/ice_pole_half",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=bottomleft_corner": {
+      "model": "ornamental:block/ice/ice_pole_corner",
+      "uvlock": true,
+      "y": 270
+    },
+    "type=bottomleft_fill": {
+      "model": "ornamental:block/ice/ice_stairs_straight_side",
+      "uvlock": true,
+      "y": 270
+    },
+    "type=bottomright_corner": {
+      "model": "ornamental:block/ice/ice_pole_corner",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=bottomright_fill": {
+      "model": "ornamental:block/ice/ice_stairs_straight_side",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=full": {
+      "model": "minecraft:block/ice"
+    },
+    "type=left_half": {
+      "model": "ornamental:block/ice/ice_pole_half",
+      "uvlock": true,
+      "y": 270
+    },
+    "type=right_half": {
+      "model": "ornamental:block/ice/ice_pole_half",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=top_half": {
+      "model": "ornamental:block/ice/ice_pole_half"
+    },
+    "type=topleft_bottomright": {
+      "model": "ornamental:block/ice/ice_pole_cross"
+    },
+    "type=topleft_corner": {
+      "model": "ornamental:block/ice/ice_pole_corner"
+    },
+    "type=topleft_fill": {
+      "model": "ornamental:block/ice/ice_stairs_straight_side"
+    },
+    "type=topright_bottomleft": {
+      "model": "ornamental:block/ice/ice_pole_cross",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=topright_corner": {
+      "model": "ornamental:block/ice/ice_pole_corner",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=topright_fill": {
+      "model": "ornamental:block/ice/ice_stairs_straight_side",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

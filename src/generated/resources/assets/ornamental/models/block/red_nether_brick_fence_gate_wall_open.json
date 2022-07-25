@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate_wall_open",
+  "parent": "ornamental:block/util/fence_gate_wall_open_column",
   "textures": {
-    "texture": "minecraft:block/red_nether_bricks"
+    "end": "minecraft:block/red_nether_bricks",
+    "side": "minecraft:block/red_nether_bricks"
   }
 }

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/fence_post",
+  "parent": "ornamental:block/util/fence_post_column",
   "textures": {
-    "texture": "minecraft:block/snow"
+    "end": "minecraft:block/snow",
+    "side": "minecraft:block/snow"
   }
 }

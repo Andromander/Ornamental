@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_fence_gate",
+  "parent": "ornamental:block/util/fence_gate_column",
   "textures": {
-    "texture": "minecraft:block/weathered_copper"
+    "end": "minecraft:block/weathered_copper",
+    "side": "minecraft:block/weathered_copper"
   }
 }

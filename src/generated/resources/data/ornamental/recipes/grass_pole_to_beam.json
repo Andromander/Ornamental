@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showGrassBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:grass_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:grass_beam"
-        }
-      }
+      "item": "ornamental:grass_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:grass_beam"
+  }
 }

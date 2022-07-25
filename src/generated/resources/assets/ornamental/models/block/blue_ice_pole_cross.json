@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/pole_cross",
+  "parent": "ornamental:block/util/pole_cross_column",
   "textures": {
-    "texture": "minecraft:block/blue_ice"
+    "end": "minecraft:block/blue_ice",
+    "side": "minecraft:block/blue_ice"
   }
 }

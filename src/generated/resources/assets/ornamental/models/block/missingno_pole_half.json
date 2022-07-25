@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/slab_vertical",
+  "parent": "ornamental:block/util/slab_vertical_column",
   "textures": {
-    "texture": "ornamental:block/missingno"
+    "end": "ornamental:block/missingno",
+    "side": "ornamental:block/missingno"
   }
 }

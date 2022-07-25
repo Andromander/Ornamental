@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/slab_vertical",
+  "parent": "ornamental:block/util/slab_vertical_column",
   "textures": {
-    "texture": "minecraft:block/amethyst_block"
+    "end": "minecraft:block/amethyst_block",
+    "side": "minecraft:block/amethyst_block"
   }
 }

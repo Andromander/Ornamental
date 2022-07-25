@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showGoldBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:gold_beam"
-          }
-        ],
-        "result": {
-          "item": "ornamental:gold_pole"
-        }
-      }
+      "item": "ornamental:gold_beam"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:gold_pole"
+  }
 }

@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showRedstoneBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:redstone_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:redstone_beam"
-        }
-      }
+      "item": "ornamental:redstone_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:redstone_beam"
+  }
 }

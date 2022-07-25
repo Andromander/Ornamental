@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/pole_corner",
+  "parent": "ornamental:block/util/pole_corner_column",
   "textures": {
-    "texture": "minecraft:block/clay"
+    "end": "minecraft:block/clay",
+    "side": "minecraft:block/clay"
   }
 }

@@ -1,29 +1,16 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showClayBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:clay"
-          }
-        },
-        "pattern": [
-          "##",
-          "##",
-          "##"
-        ],
-        "result": {
-          "item": "ornamental:clay_door"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:clay"
     }
-  ]
+  },
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "ornamental:clay_door"
+  }
 }

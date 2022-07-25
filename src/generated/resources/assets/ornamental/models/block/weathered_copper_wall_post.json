@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_wall_post",
+  "parent": "ornamental:block/util/wall_post_column",
   "textures": {
-    "wall": "minecraft:block/weathered_copper"
+    "end": "minecraft:block/weathered_copper",
+    "side": "minecraft:block/weathered_copper"
   }
 }

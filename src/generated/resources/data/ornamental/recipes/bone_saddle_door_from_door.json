@@ -1,25 +1,12 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showBoneBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:bone_door"
-          }
-        ],
-        "result": {
-          "count": 2,
-          "item": "ornamental:bone_saddle_door"
-        }
-      }
+      "item": "ornamental:bone_door"
     }
-  ]
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:bone_saddle_door"
+  }
 }

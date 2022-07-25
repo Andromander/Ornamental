@@ -1,0 +1,31 @@
+{
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "block/dirt",
+    "bottom": "block/dirt",
+    "top": "block/dirt_path_top",
+    "side": "block/dirt_path_side"
+  },
+  "elements": [{
+    "from": [ 8, 8, 0 ],
+    "to": [ 16, 16, 16 ],
+    "faces": {
+      "up":    { "texture": "#bottom", "cullface": "up" },
+      "north": { "texture": "#bottom", "cullface": "north" },
+      "south": { "texture": "#bottom", "cullface": "south" },
+      "west":  { "texture": "#bottom" },
+      "east":  { "texture": "#bottom", "cullface": "east" }
+    }
+  }, {
+    "from": [ 0, 1, 0 ],
+    "to": [ 16, 8, 16 ],
+    "faces": {
+      "down":  { "texture": "#top" },
+      "up":    { "texture": "#bottom" },
+      "north": { "texture": "#side", "cullface": "north" },
+      "south": { "texture": "#side", "cullface": "south" },
+      "west":  { "texture": "#side", "cullface": "west" },
+      "east":  { "texture": "#side", "cullface": "east" }
+    }
+  }]
+}

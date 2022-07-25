@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/pole_cross",
+  "parent": "ornamental:block/util/pole_cross_column",
   "textures": {
-    "texture": "minecraft:block/netherite_block"
+    "end": "minecraft:block/netherite_block",
+    "side": "minecraft:block/netherite_block"
   }
 }

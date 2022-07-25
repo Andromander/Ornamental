@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showAmethystBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:amethyst_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:amethyst_beam"
-        }
-      }
+      "item": "ornamental:amethyst_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:amethyst_beam"
+  }
 }

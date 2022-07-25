@@ -1,30 +1,17 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showClayBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "ornamental:clay_slab"
-          }
-        },
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
-        "result": {
-          "count": 6,
-          "item": "ornamental:clay_pole"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "ornamental:clay_slab"
     }
-  ]
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ornamental:clay_pole"
+  }
 }

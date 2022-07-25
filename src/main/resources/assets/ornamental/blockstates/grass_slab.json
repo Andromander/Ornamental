@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "ornamental:block/grass/grass_slab" },
-    "type=top":    { "model": "ornamental:block/grass/grass_slab_top" },
-    "type=double": { "model": "block/grass_block" }
-  }
-}

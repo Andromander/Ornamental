@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_wall_side",
+  "parent": "ornamental:block/util/wall_side_column",
   "textures": {
-    "wall": "minecraft:block/diamond_block"
+    "end": "minecraft:block/diamond_block",
+    "side": "minecraft:block/diamond_block"
   }
 }

@@ -1,29 +1,16 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
-    {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showSnowBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "key": {
-          "#": {
-            "item": "minecraft:snowball"
-          }
-        },
-        "pattern": [
-          "##",
-          "##",
-          "##"
-        ],
-        "result": {
-          "item": "ornamental:snow_door"
-        }
-      }
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:snowball"
     }
-  ]
+  },
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "ornamental:snow_door"
+  }
 }

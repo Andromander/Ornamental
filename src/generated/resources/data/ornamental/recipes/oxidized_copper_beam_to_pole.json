@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showCopperBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:oxidized_copper_beam"
-          }
-        ],
-        "result": {
-          "item": "ornamental:oxidized_copper_pole"
-        }
-      }
+      "item": "ornamental:oxidized_copper_beam"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:oxidized_copper_pole"
+  }
 }

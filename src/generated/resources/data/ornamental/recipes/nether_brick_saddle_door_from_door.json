@@ -1,25 +1,12 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showNetherBrickBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:nether_brick_door"
-          }
-        ],
-        "result": {
-          "count": 2,
-          "item": "ornamental:nether_brick_saddle_door"
-        }
-      }
+      "item": "ornamental:nether_brick_door"
     }
-  ]
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:nether_brick_saddle_door"
+  }
 }

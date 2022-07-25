@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showNetherBrickBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:nether_brick_pole"
-          }
-        ],
-        "result": {
-          "item": "ornamental:nether_brick_beam"
-        }
-      }
+      "item": "ornamental:nether_brick_pole"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:nether_brick_beam"
+  }
 }

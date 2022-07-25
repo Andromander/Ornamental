@@ -1,24 +1,11 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "conditions": [
-        {
-          "type": "ornamental:config",
-          "config": "showDirtBlocks"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "ornamental:dirt_beam"
-          }
-        ],
-        "result": {
-          "item": "ornamental:dirt_pole"
-        }
-      }
+      "item": "ornamental:dirt_beam"
     }
-  ]
+  ],
+  "result": {
+    "item": "ornamental:dirt_pole"
+  }
 }

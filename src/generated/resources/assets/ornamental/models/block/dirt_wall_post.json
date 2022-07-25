@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_wall_post",
+  "parent": "ornamental:block/util/wall_post_column",
   "textures": {
-    "wall": "minecraft:block/dirt"
+    "end": "minecraft:block/dirt",
+    "side": "minecraft:block/dirt"
   }
 }

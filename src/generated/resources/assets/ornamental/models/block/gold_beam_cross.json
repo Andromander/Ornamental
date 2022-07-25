@@ -1,6 +1,7 @@
 {
-  "parent": "ornamental:block/util/beam_cross",
+  "parent": "ornamental:block/util/beam_cross_column",
   "textures": {
-    "texture": "minecraft:block/gold_block"
+    "end": "minecraft:block/gold_block",
+    "side": "minecraft:block/gold_block"
   }
 }

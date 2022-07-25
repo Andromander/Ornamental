@@ -1,5 +1,6 @@
 {
   "parent": "ornamental:block/util/slab_vertical",
+  "render_type": "minecraft:translucent",
   "textures": {
     "texture": "minecraft:block/ice"
   }

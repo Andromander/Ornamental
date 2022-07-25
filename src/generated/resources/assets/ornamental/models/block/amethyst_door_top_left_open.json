@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/door_top_left_open",
+  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/amethyst_door_bottom",
     "top": "ornamental:block/amethyst_door_top"

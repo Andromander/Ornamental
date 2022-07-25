@@ -1,5 +1,6 @@
 {
   "parent": "ornamental:block/util/beam_corner",
+  "render_type": "minecraft:translucent",
   "textures": {
     "texture": "minecraft:block/ice"
   }
