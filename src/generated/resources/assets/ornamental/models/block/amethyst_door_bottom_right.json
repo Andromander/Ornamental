@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/door_bottom_right",
+  "parent": "ornamental:block/util/door_bottom_right",
   "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/amethyst_door_bottom",
-    "top": "ornamental:block/amethyst_door_top"
+    "side": "ornamental:block/amethyst_door_bottom"
   }
 }

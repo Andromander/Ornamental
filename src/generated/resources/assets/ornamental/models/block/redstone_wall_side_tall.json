@@ -1,7 +1,8 @@
 {
-  "parent": "ornamental:block/util/wall_side_tall_column",
+  "parent": "ornamental:block/util/wall_side_tall",
   "textures": {
-    "end": "minecraft:block/redstone_block",
-    "side": "minecraft:block/redstone_block"
+    "bottom": "minecraft:block/redstone_block",
+    "side": "minecraft:block/redstone_block",
+    "top": "minecraft:block/redstone_block"
   }
 }

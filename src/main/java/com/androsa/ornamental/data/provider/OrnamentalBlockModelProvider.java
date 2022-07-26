@@ -13,98 +13,178 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
         super(generator, modid, helper);
     }
 
-    public BlockModelBuilder fencePostColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "fence_post_column")
-                .texture("end", end)
-                .texture("side", side);
-    }
-
-    public BlockModelBuilder fenceGateColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "fence_gate_column")
-                .texture("end", end)
-                .texture("side", side);
-    }
-
-    public BlockModelBuilder fenceGateOpenColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "fence_gate_open_column")
-                .texture("end", end)
-                .texture("side", side);
-    }
-
-    public BlockModelBuilder fenceGateWallColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "fence_gate_wall_column")
-                .texture("end", end)
-                .texture("side", side);
-    }
-
-    public BlockModelBuilder fenceGateWallOpenColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "fence_gate_wall_open_column")
-                .texture("end", end)
-                .texture("side", side);
-    }
-
-    public BlockModelBuilder poleCornerColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "pole_corner_column")
+    public BlockModelBuilder fencePost(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "fence_post")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder slabVerticalColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "slab_vertical_column")
+    public BlockModelBuilder fenceGate(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "fence_gate")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder poleCrossColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "pole_cross_column")
+    public BlockModelBuilder fenceGateOpen(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "fence_gate_open")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder stairsStraightSideColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "stairs_straight_side_column")
+    public BlockModelBuilder fenceGateWall(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "fence_gate_wall")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder beamCornerColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "beam_corner_column")
+    public BlockModelBuilder fenceGateWallOpen(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "fence_gate_wall_open")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder beamCrossColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "beam_cross_column")
+    public BlockModelBuilder doorBottomLeftO(String name, ResourceLocation side, ResourceLocation bottom) {
+        return parent(name, "door_bottom_left")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder wallPostColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "wall_post_column")
+    public BlockModelBuilder doorBottomLeftOpenO(String name, ResourceLocation side, ResourceLocation bottom) {
+        return parent(name, "door_bottom_left_open")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder wallSideColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "wall_side_column")
+    public BlockModelBuilder doorBottomRightO(String name, ResourceLocation side, ResourceLocation bottom) {
+        return parent(name, "door_bottom_right")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder wallSideTallColumn(String name, ResourceLocation side, ResourceLocation end) {
-        return parent(name, "wall_side_tall_column")
+    public BlockModelBuilder doorBottomRightOpenO(String name, ResourceLocation side, ResourceLocation bottom) {
+        return parent(name, "door_bottom_right_open")
                 .texture("side", side)
-                .texture("end", end);
+                .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder saddleDoor(String name, ResourceLocation texture) {
-        return parent(name, "saddle_door")
-                .texture("texture", texture);
+    public BlockModelBuilder doorTopLeftO(String name, ResourceLocation side, ResourceLocation top) {
+        return parent(name, "door_top_left")
+                .texture("side", side)
+                .texture("top", top);
     }
 
-    public BlockModelBuilder saddleDoorHinge(String name, ResourceLocation texture) {
-        return parent(name, "saddle_door")
-                .texture("texture", texture);
+    public BlockModelBuilder doorTopLeftOpenO(String name, ResourceLocation side, ResourceLocation top) {
+        return parent(name, "door_top_left_open")
+                .texture("side", side)
+                .texture("top", top);
+    }
+
+    public BlockModelBuilder doorTopRightO(String name, ResourceLocation side, ResourceLocation top) {
+        return parent(name, "door_top_right")
+                .texture("side", side)
+                .texture("top", top);
+    }
+
+    public BlockModelBuilder doorTopRightOpenO(String name, ResourceLocation side, ResourceLocation top) {
+        return parent(name, "door_top_right_open")
+                .texture("side", side)
+                .texture("top", top);
+    }
+
+    public BlockModelBuilder poleCorner(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "pole_corner")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder slabVertical(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "slab_vertical")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder poleCross(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "pole_cross")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder stairsStraightSide(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "stairs_straight_side")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder beamCorner(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_corner")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder beamCross(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_cross")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder wallPost(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "wall_post")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder wallSide(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "wall_side")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder wallSideTall(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "wall_side_tall")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder saddleDoorLeft(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "saddle_door_left")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder saddleDoorLeftOpen(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "saddle_door_left_open")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder saddleDoorRight(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "saddle_door_right")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder saddleDoorRightOpen(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "saddle_door_right_open")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
     }
 
     private BlockModelBuilder parent(String name, String parent) {

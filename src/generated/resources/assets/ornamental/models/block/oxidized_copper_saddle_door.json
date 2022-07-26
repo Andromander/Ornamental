@@ -1,7 +1,0 @@
-{
-  "parent": "ornamental:block/util/saddle_door",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "texture": "ornamental:block/oxidized_copper_trapdoor"
-  }
-}

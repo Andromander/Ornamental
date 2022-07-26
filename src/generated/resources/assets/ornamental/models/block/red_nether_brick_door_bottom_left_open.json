@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/door_bottom_left_open",
+  "parent": "ornamental:block/util/door_bottom_left_open",
   "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/red_nether_brick_door_bottom",
-    "top": "ornamental:block/red_nether_brick_door_top"
+    "side": "ornamental:block/red_nether_brick_door_bottom"
   }
 }

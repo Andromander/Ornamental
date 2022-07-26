@@ -1,7 +1,8 @@
 {
-  "parent": "ornamental:block/util/beam_cross_column",
+  "parent": "ornamental:block/util/beam_cross",
   "textures": {
-    "end": "minecraft:block/diamond_block",
-    "side": "minecraft:block/diamond_block"
+    "bottom": "minecraft:block/diamond_block",
+    "side": "minecraft:block/diamond_block",
+    "top": "minecraft:block/diamond_block"
   }
 }

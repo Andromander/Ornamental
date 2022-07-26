@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/saddle_door_left",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "ornamental:block/exposed_copper_trapdoor",
+    "side": "ornamental:block/exposed_copper_trapdoor",
+    "top": "ornamental:block/exposed_copper_trapdoor"
+  }
+}

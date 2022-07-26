@@ -1,7 +1,0 @@
-{
-  "parent": "ornamental:block/util/saddle_door",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "texture": "ornamental:block/ice_trapdoor"
-  }
-}

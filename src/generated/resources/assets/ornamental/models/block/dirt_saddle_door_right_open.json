@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/saddle_door_right_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "minecraft:block/dirt",
+    "side": "minecraft:block/dirt",
+    "top": "minecraft:block/dirt"
+  }
+}

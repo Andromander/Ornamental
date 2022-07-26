@@ -1,7 +1,8 @@
 {
-  "parent": "ornamental:block/util/fence_gate_wall_column",
+  "parent": "ornamental:block/util/fence_gate_wall",
   "textures": {
-    "end": "minecraft:block/amethyst_block",
-    "side": "minecraft:block/amethyst_block"
+    "bottom": "minecraft:block/amethyst_block",
+    "side": "minecraft:block/amethyst_block",
+    "top": "minecraft:block/amethyst_block"
   }
 }

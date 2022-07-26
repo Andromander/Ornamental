@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/door_bottom_left",
+  "parent": "ornamental:block/util/door_bottom_left",
   "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "minecraft:block/dirt",
-    "top": "minecraft:block/dirt"
+    "side": "minecraft:block/dirt"
   }
 }

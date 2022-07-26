@@ -118,7 +118,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void slab(RegistryObject<? extends SlabBlock> block, ResourceLocation model, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        String baseName = block.getId().toString();
+        String baseName = block.getId().getPath();
         ModelFile doubleSlab = models().getExistingFile(model);
         ModelFile slab, slabTop;
         if (type == SOLID) {
@@ -145,23 +145,22 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceBasic(RegistryObject<? extends FenceBlock> block, ResourceLocation name, ResourceLocation type) {
-        fence(block, name, name, type);
+        fence(block, name, name, name, type);
     }
 
     public void fenceColumn(RegistryObject<? extends FenceBlock> block, String side, String top) {
-        fence(block, locVanilla(side), locVanilla(top), SOLID);
+        fence(block, locVanilla(side), locVanilla(top), locVanilla(top), SOLID);
     }
 
-    //TODO: top-bottom model, make this the central generator
-    public void fence(RegistryObject<? extends FenceBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation type) {
-        String baseName = block.getId().toString();
+    public void fence(RegistryObject<? extends FenceBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
+        String baseName = block.getId().getPath();
         if (type == SOLID) {
             fourWayBlock(block.get(),
-                    models().fencePostColumn(baseName + "_post", side, top),
+                    models().fencePost(baseName + "_post", side, top, bottom),
                     models().fenceSide(baseName + "_side", side));
         } else {
             fourWayBlock(block.get(),
-                    models().fencePostColumn(baseName + "_post", side, top).renderType(type),
+                    models().fencePost(baseName + "_post", side, top, bottom).renderType(type),
                     models().fenceSide(baseName + "_side", side).renderType(type));
         }
     }
@@ -205,27 +204,26 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceGateBasic(RegistryObject<? extends FenceGateBlock> block, ResourceLocation name, ResourceLocation type) {
-        fenceGate(block, name, name, type);
+        fenceGate(block, name, name, name, type);
     }
 
     public void fenceGateColumn(RegistryObject<? extends FenceGateBlock> block, String side, String top) {
-        fenceGate(block, locVanilla(side), locVanilla(top), SOLID);
+        fenceGate(block, locVanilla(side), locVanilla(top), locVanilla(top), SOLID);
     }
 
-    //TODO: top-bottom model
-    public void fenceGate(RegistryObject<? extends FenceGateBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation type) {
-        String baseName = block.getId().toString();
+    public void fenceGate(RegistryObject<? extends FenceGateBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
+        String baseName = block.getId().getPath();
         ModelFile gate, gateOpen, gateWall, gateWallOpen;
         if (type == SOLID) {
-            gate =         models().fenceGateColumn(baseName, side, top);
-            gateOpen =     models().fenceGateOpenColumn(baseName + "_open", side, top);
-            gateWall =     models().fenceGateWallColumn(baseName + "_wall", side, top);
-            gateWallOpen = models().fenceGateWallOpenColumn(baseName + "_wall_open", side, top);
+            gate =         models().fenceGate(baseName, side, top, bottom);
+            gateOpen =     models().fenceGateOpen(baseName + "_open", side, top, bottom);
+            gateWall =     models().fenceGateWall(baseName + "_wall", side, top, bottom);
+            gateWallOpen = models().fenceGateWallOpen(baseName + "_wall_open", side, top, bottom);
         } else {
-            gate =         models().fenceGateColumn(baseName, side, top).renderType(type);
-            gateOpen =     models().fenceGateOpenColumn(baseName + "_open", side, top).renderType(type);
-            gateWall =     models().fenceGateWallColumn(baseName + "_wall", side, top).renderType(type);
-            gateWallOpen = models().fenceGateWallOpenColumn(baseName + "_wall_open", side, top).renderType(type);
+            gate =         models().fenceGate(baseName, side, top, bottom).renderType(type);
+            gateOpen =     models().fenceGateOpen(baseName + "_open", side, top, bottom).renderType(type);
+            gateWall =     models().fenceGateWall(baseName + "_wall", side, top, bottom).renderType(type);
+            gateWallOpen = models().fenceGateWallOpen(baseName + "_wall_open", side, top, bottom).renderType(type);
         }
 
         fenceGateBlock(block.get(), gate, gateOpen, gateWall, gateWallOpen);
@@ -237,24 +235,42 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void doorBasic(RegistryObject<? extends DoorBlock> block, String name, ResourceLocation type) {
-        door(block, locOrnament(name + "_door_bottom"), locOrnament(name + "_door_top"), type);
+        door(block, locOrnament(name + "_door_bottom"), locOrnament(name + "_door_bottom"), locOrnament(name + "_door_top"), locOrnament(name + "_door_top"), type);
     }
 
     public void doorMissing(RegistryObject<? extends DoorBlock> block) {
-        door(block, locOrnament("missingno"), locOrnament("missingno"), CUTOUT);
+        door(block, locOrnament("missingno"), locOrnament("missingno"), locOrnament("missingno"), locOrnament("missingno"), CUTOUT);
     }
 
     public void doorBasicVanilla(RegistryObject<? extends DoorBlock> block, String name) {
-        door(block, locVanilla(name), locVanilla(name), CUTOUT);
+        door(block, locVanilla(name), locVanilla(name), locVanilla(name), locVanilla(name), CUTOUT);
     }
 
-    //TODO: top-bottom model
-    public void door(RegistryObject<? extends DoorBlock> block, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+    public void door(RegistryObject<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
+        String baseName = block.getId().getPath();
+        ModelFile bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen;
+
         if (type == SOLID) {
-            doorBlock(block.get(), bottom, top);
+            bottomLeft = models().doorBottomLeftO(baseName + "_bottom_left", bottomside, bottom);
+            bottomLeftOpen = models().doorBottomLeftOpenO(baseName + "_bottom_left_open", bottomside, bottom);
+            bottomRight = models().doorBottomRightO(baseName + "_bottom_right", bottomside, bottom);
+            bottomRightOpen = models().doorBottomRightOpenO(baseName + "_bottom_right_open", bottomside, bottom);
+            topLeft = models().doorTopLeftO(baseName + "_top_left", topside, top);
+            topLeftOpen = models().doorTopLeftOpenO(baseName + "_top_left_open", topside, top);
+            topRight = models().doorTopRightO(baseName + "_top_right", topside, top);
+            topRightOpen = models().doorTopRightOpenO(baseName + "_top_right_open", topside, top);
         } else {
-            doorBlockWithRenderType(block.get(), bottom, top, type);
+            bottomLeft = models().doorBottomLeftO(baseName + "_bottom_left", bottomside, bottom).renderType(type);
+            bottomLeftOpen = models().doorBottomLeftOpenO(baseName + "_bottom_left_open", bottomside, bottom).renderType(type);
+            bottomRight = models().doorBottomRightO(baseName + "_bottom_right", bottomside, bottom).renderType(type);
+            bottomRightOpen = models().doorBottomRightOpenO(baseName + "_bottom_right_open", bottomside, bottom).renderType(type);
+            topLeft = models().doorTopLeftO(baseName + "_top_left", topside, top).renderType(type);
+            topLeftOpen = models().doorTopLeftOpenO(baseName + "_top_left_open", topside, top).renderType(type);
+            topRight = models().doorTopRightO(baseName + "_top_right", topside, top).renderType(type);
+            topRightOpen = models().doorTopRightOpenO(baseName + "_top_right_open", topside, top).renderType(type);
         }
+
+        doorBlock(block.get(), bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen);
     }
 
     /* Poles */
@@ -271,7 +287,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void poleBasic(RegistryObject<? extends OrnamentPole> block, ResourceLocation name, ResourceLocation fullblock, ResourceLocation type) {
-        pole(block, fullblock, name, name, type);
+        pole(block, fullblock, name, name, name, type);
     }
 
     public void poleMissing(RegistryObject<? extends OrnamentPole> block, String name) {
@@ -279,24 +295,23 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void poleColumn(RegistryObject<? extends OrnamentPole> block, String name, String side, String top) {
-        pole(block, locVanilla(name), locVanilla(top), locVanilla(side), SOLID);
+        pole(block, locVanilla(name), locVanilla(top), locVanilla(top), locVanilla(side), SOLID);
     }
 
-    //TODO: top-bottom model
-    public void pole(RegistryObject<? extends OrnamentPole> block, ResourceLocation fullblock, ResourceLocation top, ResourceLocation side, ResourceLocation type) {
-        String baseName = block.getId().toString();
+    public void pole(RegistryObject<? extends OrnamentPole> block, ResourceLocation fullblock, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
+        String baseName = block.getId().getPath();
         ModelFile corner, half, cross, fill;
         ModelFile full   = models().getExistingFile(fullblock);
         if (type == SOLID) {
-            corner = models().poleCornerColumn(baseName + "_corner", side, top);
-            half   = models().slabVerticalColumn(baseName + "_half", side, top);
-            cross  = models().poleCrossColumn(baseName + "_cross", side, top);
-            fill   = models().stairsStraightSideColumn(baseName + "_fill", side, top);
+            corner = models().poleCorner(baseName + "_corner", side, top, bottom);
+            half   = models().slabVertical(baseName + "_half", side, top, bottom);
+            cross  = models().poleCross(baseName + "_cross", side, top, bottom);
+            fill   = models().stairsStraightSide(baseName + "_fill", side, top, bottom);
         } else {
-            corner = models().poleCornerColumn(baseName + "_corner", side, top).renderType(type);
-            half   = models().slabVerticalColumn(baseName + "_half", side, top).renderType(type);
-            cross  = models().poleCrossColumn(baseName + "_cross", side, top).renderType(type);
-            fill   = models().stairsStraightSideColumn(baseName + "_fill", side, top).renderType(type);
+            corner = models().poleCorner(baseName + "_corner", side, top, bottom).renderType(type);
+            half   = models().slabVertical(baseName + "_half", side, top, bottom).renderType(type);
+            cross  = models().poleCross(baseName + "_cross", side, top, bottom).renderType(type);
+            fill   = models().stairsStraightSide(baseName + "_fill", side, top, bottom).renderType(type);
         }
 
         poleBlock(block, corner, half, cross, fill, full);
@@ -320,7 +335,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         ResourceLocation topslabloc = vslab ? locVanilla(nametop) : locOrnament(nametop);
         ResourceLocation bottomslabloc = vslab ? locVanilla(namebottom) : locOrnament(namebottom);
 
-        beam(block, locVanilla(fullblock), stairsloc, topslabloc, bottomslabloc, locOrnament(base + "_pole_half"), locVanilla(name), locVanilla(name), type);
+        beam(block, locVanilla(fullblock), stairsloc, topslabloc, bottomslabloc, locOrnament(base + "_pole_half"), locVanilla(name), locVanilla(name), locVanilla(name), type);
     }
 
     public void beamColumn(RegistryObject<? extends OrnamentBeam> block, String name, String top, String side, boolean vstairs, boolean vslab) {
@@ -333,14 +348,14 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         ResourceLocation topslabloc = vslab ? locVanilla(nametop) : locOrnament(nametop);
         ResourceLocation bottomslabloc = vslab ? locVanilla(namebottom) : locOrnament(namebottom);
 
-        beam(block, locVanilla(name), stairsloc, topslabloc, bottomslabloc, locOrnament(base + "_pole_half"), locVanilla(top), locVanilla(side), SOLID);
+        beam(block, locVanilla(name), stairsloc, topslabloc, bottomslabloc, locOrnament(base + "_pole_half"), locVanilla(top), locVanilla(top), locVanilla(side), SOLID);
     }
 
     public void beamMissing(RegistryObject<? extends OrnamentBeam> block, String name) {
-        beam(block, locOrnament(name), locOrnament(name + "_stairs"), locOrnament(name + "_slab_top"), locOrnament(name + "_slab"), locOrnament(name + "_pole_half"), locOrnament(name), locOrnament(name), SOLID);
+        beam(block, locOrnament(name), locOrnament(name + "_stairs"), locOrnament(name + "_slab_top"), locOrnament(name + "_slab"), locOrnament(name + "_pole_half"), locOrnament(name), locOrnament(name), locOrnament(name), SOLID);
     }
 
-    public void beam(RegistryObject<? extends OrnamentBeam> block, ResourceLocation fullblock, ResourceLocation stairs, ResourceLocation tophalf, ResourceLocation bottomhalf, ResourceLocation polehalf, ResourceLocation top, ResourceLocation side, ResourceLocation type) {
+    public void beam(RegistryObject<? extends OrnamentBeam> block, ResourceLocation fullblock, ResourceLocation stairs, ResourceLocation tophalf, ResourceLocation bottomhalf, ResourceLocation polehalf, ResourceLocation end, ResourceLocation top, ResourceLocation side, ResourceLocation type) {
         ModelFile corner, cross;
         ModelFile topslab = models().getExistingFile(tophalf);
         ModelFile bottom = models().getExistingFile(bottomhalf);
@@ -349,11 +364,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         ModelFile full   = models().getExistingFile(fullblock);
 
         if (type == SOLID) {
-            corner = models().beamCornerColumn(block.getId().toString() + "_corner", side, top);
-            cross  = models().beamCrossColumn(block.getId().toString() + "_cross", side, top);
+            corner = models().beamCorner(block.getId().getPath() + "_corner", side, top, end);
+            cross  = models().beamCross(block.getId().getPath() + "_cross", side, top, end);
         } else {
-            corner = models().beamCornerColumn(block.getId().toString() + "_corner", side, top).renderType(type);
-            cross  = models().beamCrossColumn(block.getId().toString() + "_cross", side, top).renderType(type);
+            corner = models().beamCorner(block.getId().getPath() + "_corner", side, top, end).renderType(type);
+            cross  = models().beamCross(block.getId().getPath() + "_cross", side, top, end).renderType(type);
         }
 
         beamBlock(block, corner, topslab, bottom, sideslab, cross, fill, full);
@@ -368,7 +383,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void wallBasic(RegistryObject<? extends WallBlock> block, ResourceLocation name, ResourceLocation type) {
-        wall(block, name, name, type);
+        wall(block, name, name, name, type);
     }
 
     public void wallMissing(RegistryObject<? extends WallBlock> block, String name) {
@@ -376,22 +391,21 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void wallColumn(RegistryObject<? extends WallBlock> block, String side, String end) {
-        wall(block, locVanilla(side), locVanilla(end), SOLID);
+        wall(block, locVanilla(side), locVanilla(end), locVanilla(end), SOLID);
     }
 
-    //TODO: top-bottom model
-    public void wall(RegistryObject<? extends WallBlock> block, ResourceLocation side, ResourceLocation end, ResourceLocation type) {
-        String basename = block.getId().toString();
+    public void wall(RegistryObject<? extends WallBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
+        String basename = block.getId().getPath();
         ModelFile wallpost, wallside, walltall;
 
         if (type == SOLID) {
-            wallpost = models().wallPostColumn(basename + "_post", side, end);
-            wallside = models().wallSideColumn(basename + "_side", side, end);
-            walltall = models().wallSideTallColumn(basename + "_side_tall", side, end);
+            wallpost = models().wallPost(basename + "_post", side, top, bottom);
+            wallside = models().wallSide(basename + "_side", side, top, bottom);
+            walltall = models().wallSideTall(basename + "_side_tall", side, top, bottom);
         } else {
-            wallpost = models().wallPostColumn(basename + "_post", side, end).renderType(type);
-            wallside = models().wallSideColumn(basename + "_side", side, end).renderType(type);
-            walltall = models().wallSideTallColumn(basename + "_side_tall", side, end).renderType(type);
+            wallpost = models().wallPost(basename + "_post", side, top, bottom).renderType(type);
+            wallside = models().wallSide(basename + "_side", side, top, bottom).renderType(type);
+            walltall = models().wallSideTall(basename + "_side_tall", side, top, bottom).renderType(type);
         }
 
         wallBlock(block.get(), wallpost, wallside, walltall);
@@ -402,38 +416,40 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void saddleDoorBasic(RegistryObject<? extends OrnamentSaddleDoor> block, String name, ResourceLocation type) {
-        saddleDoor(block, locOrnament(name + "_trapdoor"), type);
+        saddleDoor(block, locOrnament(name + "_trapdoor"), locOrnament(name + "_trapdoor"), locOrnament(name + "_trapdoor"), type);
     }
 
     public void saddleDoorMissing(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locOrnament(name), CUTOUT);
+        saddleDoor(block, locOrnament(name), locOrnament(name), locOrnament(name), CUTOUT);
     }
 
     public void saddleDoorVanilla(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locVanilla(name), CUTOUT);
+        saddleDoor(block, locVanilla(name), locVanilla(name), locVanilla(name), CUTOUT);
     }
 
-    public void saddleDoor(RegistryObject<? extends OrnamentSaddleDoor> block, ResourceLocation texture, ResourceLocation type) {
-        String name = block.getId().toString();
-        ModelFile bottomLeft, bottomRight;
+    public void saddleDoor(RegistryObject<? extends OrnamentSaddleDoor> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+        String name = block.getId().getPath();
+        ModelFile left, leftOpen, right, rightOpen;
 
         if (type == SOLID) {
-            bottomLeft = models().saddleDoor(name, texture);
-            bottomRight = models().saddleDoorHinge(name + "_hinge", texture);
+            left = models().saddleDoorLeft(name + "_left", side, top, bottom);
+            leftOpen = models().saddleDoorLeftOpen(name + "_left_open", side, top, bottom);
+            right = models().saddleDoorRight(name + "_right", side, top, bottom);
+            rightOpen = models().saddleDoorRightOpen(name + "_right_open", side, top, bottom);
         } else {
-             bottomLeft = models().saddleDoor(name, texture).renderType(type);
-             bottomRight = models().saddleDoorHinge(name + "_hinge", texture).renderType(type);
+            left = models().saddleDoorLeft(name + "_left", side, top, bottom).renderType(type);
+            leftOpen = models().saddleDoorLeftOpen(name + "_left_open", side, top, bottom).renderType(type);
+            right = models().saddleDoorRight(name + "_right", side, top, bottom).renderType(type);
+            rightOpen = models().saddleDoorRightOpen(name + "_right_open", side, top, bottom).renderType(type);
         }
-        saddleDoorBlock(block, bottomLeft, bottomRight);
+        saddleDoorBlock(block, left, leftOpen, right, rightOpen);
     }
 
-    //TODO: left, left open, right, right open
-    public void saddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, ModelFile left, ModelFile right) {
+    public void saddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, ModelFile left, ModelFile leftOpen, ModelFile right, ModelFile rightOpen) {
         getVariantBuilder(block.get()).forAllStatesExcept(state -> {
             int yRot = ((int) state.getValue(OrnamentSaddleDoor.FACING).toYRot()) + 90;
             boolean rh = state.getValue(OrnamentSaddleDoor.HINGE) == DoorHingeSide.RIGHT;
             boolean open = state.getValue(OrnamentSaddleDoor.OPEN);
-            boolean r = rh ^ open;
             if (open) {
                 yRot += 90;
             }
@@ -441,7 +457,20 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
                 yRot += 180;
             }
             yRot %= 360;
-            return ConfiguredModel.builder().modelFile(r ? right : left)
+
+            ModelFile model = null;
+            if (rh && open) {
+                model = rightOpen;
+            } else if (!rh && open) {
+                model = leftOpen;
+            }
+            if (rh && !open) {
+                model = right;
+            } else if (!rh && !open) {
+                model = left;
+            }
+
+            return ConfiguredModel.builder().modelFile(model)
                     .rotationY(yRot)
                     .build();
         }, OrnamentSaddleDoor.POWERED);

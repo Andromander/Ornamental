@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/door_top_right_open",
+  "parent": "ornamental:block/util/door_top_right_open",
   "render_type": "minecraft:cutout",
   "textures": {
-    "bottom": "ornamental:block/redstone_door_bottom",
+    "side": "ornamental:block/redstone_door_top",
     "top": "ornamental:block/redstone_door_top"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/saddle_door_right",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "ornamental:block/missingno",
+    "side": "ornamental:block/missingno",
+    "top": "ornamental:block/missingno"
+  }
+}

@@ -1,8 +1,9 @@
 {
-  "parent": "ornamental:block/util/fence_gate_wall_column",
+  "parent": "ornamental:block/util/fence_gate_wall",
   "render_type": "minecraft:translucent",
   "textures": {
-    "end": "minecraft:block/ice",
-    "side": "minecraft:block/ice"
+    "bottom": "minecraft:block/ice",
+    "side": "minecraft:block/ice",
+    "top": "minecraft:block/ice"
   }
 }

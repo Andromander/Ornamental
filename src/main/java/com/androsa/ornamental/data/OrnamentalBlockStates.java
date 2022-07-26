@@ -435,10 +435,12 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
     public void modelSaddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile left = models().getExistingFile(locOrnament(dir));
-        ModelFile right = models().getExistingFile(locOrnament(dir + "_hinge"));
+        ModelFile left = models().getExistingFile(locOrnament(dir + "_left"));
+        ModelFile leftOpen = models().getExistingFile(locOrnament(dir + "_left_open"));
+        ModelFile right = models().getExistingFile(locOrnament(dir + "_right"));
+        ModelFile rightOpen = models().getExistingFile(locOrnament(dir + "_right_open"));
 
-        saddleDoorBlock(block, left, right);
+        saddleDoorBlock(block, left, leftOpen, right, rightOpen);
     }
 
     public void stairsBlock(StairBlock block, ModelFile bs, ModelFile ts, ModelFile bi, ModelFile ti, ModelFile bo, ModelFile to) {
