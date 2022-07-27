@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/fence_inventory",
+  "parent": "ornamental:block/util/fence_inventory",
   "textures": {
-    "texture": "minecraft:block/bricks"
+    "bottom": "minecraft:block/bricks",
+    "side": "minecraft:block/bricks",
+    "top": "minecraft:block/bricks"
   }
 }

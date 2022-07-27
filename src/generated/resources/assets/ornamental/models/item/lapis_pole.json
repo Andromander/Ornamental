@@ -1,7 +1,8 @@
 {
   "parent": "ornamental:block/util/pole_inventory",
   "textures": {
-    "end": "minecraft:block/lapis_block",
-    "side": "minecraft:block/lapis_block"
+    "bottom": "minecraft:block/lapis_block",
+    "side": "minecraft:block/lapis_block",
+    "top": "minecraft:block/lapis_block"
   }
 }

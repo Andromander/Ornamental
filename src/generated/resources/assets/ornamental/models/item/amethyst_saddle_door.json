@@ -1,6 +1,8 @@
 {
   "parent": "ornamental:block/util/saddle_door_inventory",
   "textures": {
-    "texture": "ornamental:block/amethyst_trapdoor"
+    "bottom": "ornamental:block/amethyst_trapdoor",
+    "side": "ornamental:block/amethyst_trapdoor",
+    "top": "ornamental:block/amethyst_trapdoor"
   }
 }

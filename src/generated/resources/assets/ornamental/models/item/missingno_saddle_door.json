@@ -1,6 +1,8 @@
 {
   "parent": "ornamental:block/util/saddle_door_inventory",
   "textures": {
-    "texture": "ornamental:block/missingno"
+    "bottom": "ornamental:block/missingno",
+    "side": "ornamental:block/missingno",
+    "top": "ornamental:block/missingno"
   }
 }

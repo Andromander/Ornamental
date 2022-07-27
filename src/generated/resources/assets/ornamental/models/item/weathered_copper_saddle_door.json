@@ -1,6 +1,8 @@
 {
   "parent": "ornamental:block/util/saddle_door_inventory",
   "textures": {
-    "texture": "ornamental:block/weathered_copper_trapdoor"
+    "bottom": "ornamental:block/weathered_copper_trapdoor",
+    "side": "ornamental:block/weathered_copper_trapdoor",
+    "top": "ornamental:block/weathered_copper_trapdoor"
   }
 }

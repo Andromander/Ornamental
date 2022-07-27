@@ -1,6 +1,8 @@
 {
   "parent": "ornamental:block/util/saddle_door_inventory",
   "textures": {
-    "texture": "ornamental:block/packed_ice_trapdoor"
+    "bottom": "ornamental:block/packed_ice_trapdoor",
+    "side": "ornamental:block/packed_ice_trapdoor",
+    "top": "ornamental:block/packed_ice_trapdoor"
   }
 }
