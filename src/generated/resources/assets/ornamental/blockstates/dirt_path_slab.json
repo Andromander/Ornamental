@@ -4,7 +4,7 @@
       "model": "ornamental:block/path/dirt_path_slab"
     },
     "type=double": {
-      "model": "minecraft:block/dirt_path"
+      "model": "ornamental:block/dirt_path"
     },
     "type=top": {
       "model": "ornamental:block/path/dirt_path_slab_top"

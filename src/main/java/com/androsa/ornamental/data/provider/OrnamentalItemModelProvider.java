@@ -8,9 +8,12 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
+
+    public static final ResourceLocation TRANSLUCENT = new ResourceLocation("translucent");
 
     public OrnamentalItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
         super(generator, modid, helper);
@@ -62,26 +65,31 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemPole(Supplier<? extends Block> block, String name) {
+        blockItemPole(block, name, Optional.empty());
+    }
+
+    public void blockItemPole(Supplier<? extends Block> block, String name, Optional<ResourceLocation> type) {
         ResourceLocation tex = mcLoc("block/" + name);
-        blockItemPole(block, tex, tex, tex);
+        blockItemPole(block, tex, tex, tex, type);
     }
 
     public void blockItemPole(Supplier<? extends Block> block, String end, String side) {
         ResourceLocation sideloc = mcLoc("block/" + side);
         ResourceLocation toploc = mcLoc("block/" + end);
-        blockItemPole(block, toploc, toploc, sideloc);
+        blockItemPole(block, toploc, toploc, sideloc, Optional.empty());
     }
 
-    public void blockItemPole(Supplier<? extends Block> block, ResourceLocation top, ResourceLocation bottom, ResourceLocation side) {
-        existingParent(block, modLoc("block/util/pole_inventory"))
+    public void blockItemPole(Supplier<? extends Block> block, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, Optional<ResourceLocation> type) {
+        ItemModelBuilder builder = existingParent(block, modLoc("block/util/pole_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
+        type.ifPresent(builder::renderType);
     }
 
     public void blockItemPoleMissing(Supplier<? extends Block> block) {
         ResourceLocation tex = modLoc("block/missingno");
-        blockItemPole(block, tex, tex, tex);
+        blockItemPole(block, tex, tex, tex, Optional.empty());
     }
 
     public void blockItemBeam(Supplier<? extends Block> block, String name) {

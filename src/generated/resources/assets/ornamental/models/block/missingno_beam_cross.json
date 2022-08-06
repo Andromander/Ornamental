@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/beam_cross",
-  "textures": {
-    "bottom": "ornamental:block/missingno",
-    "side": "ornamental:block/missingno",
-    "top": "ornamental:block/missingno"
-  }
-}

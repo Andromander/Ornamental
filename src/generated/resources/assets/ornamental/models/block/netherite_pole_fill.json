@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/stairs_straight_side",
-  "textures": {
-    "bottom": "minecraft:block/netherite_block",
-    "side": "minecraft:block/netherite_block",
-    "top": "minecraft:block/netherite_block"
-  }
-}

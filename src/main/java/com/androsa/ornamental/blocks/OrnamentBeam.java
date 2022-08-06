@@ -1,8 +1,8 @@
 package com.androsa.ornamental.blocks;
 
-import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModBlocks;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,6 +36,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -43,8 +44,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, OrnamentalBlock {
@@ -65,26 +65,37 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     protected static final VoxelShape BR_SHAPE_Z_PATH = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
     protected static final VoxelShape TL_SHAPE_Z_PATH = Block.box(0.0D, 8.0D, 0.0D, 8.0F, 15.0D, 16.0D);
     protected static final VoxelShape TR_SHAPE_Z_PATH = Block.box(8.0D, 8.0D, 0.0D, 16.0D, 15.0D, 16.0D);
-    private static VoxelShape[] BEAM_SHAPES_X = new VoxelShape[]{ TL_SHAPE_X, TR_SHAPE_X, BL_SHAPE_X, BR_SHAPE_X };
-    private static VoxelShape[] BEAM_SHAPES_Z = new VoxelShape[]{ TL_SHAPE_Z, TR_SHAPE_Z, BL_SHAPE_Z, BR_SHAPE_Z };
-    private static VoxelShape[] BEAM_SHAPES_X_PATH = new VoxelShape[]{ TL_SHAPE_X_PATH, TR_SHAPE_X_PATH, BL_SHAPE_X_PATH, BR_SHAPE_X_PATH };
-    private static VoxelShape[] BEAM_SHAPES_Z_PATH = new VoxelShape[]{ TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH, BL_SHAPE_Z_PATH, BR_SHAPE_Z_PATH };
 
-    public static final EnumProperty<PoleType> TYPE = EnumProperty.create("type", PoleType.class);
+    public static final BooleanProperty TOP_LEFT = BooleanProperty.create("top_left");
+    public static final BooleanProperty TOP_RIGHT = BooleanProperty.create("top_right");
+    public static final BooleanProperty BOTTOM_LEFT = BooleanProperty.create("bottom_left");
+    public static final BooleanProperty BOTTOM_RIGHT = BooleanProperty.create("bottom_right");
     public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+    public static final BooleanProperty[] CORNERS = new BooleanProperty[]{ TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT };
+    private static final Map<BooleanProperty, VoxelShape> BEAM_SHAPES_X = ImmutableMap.of(TOP_LEFT, TL_SHAPE_X, TOP_RIGHT, TR_SHAPE_X, BOTTOM_LEFT, BL_SHAPE_X, BOTTOM_RIGHT, BR_SHAPE_X);
+    private static final Map<BooleanProperty, VoxelShape> BEAM_SHAPES_Z = ImmutableMap.of(TOP_LEFT, TL_SHAPE_Z, TOP_RIGHT, TR_SHAPE_Z, BOTTOM_LEFT, BL_SHAPE_Z, BOTTOM_RIGHT, BR_SHAPE_Z);
+    private static final Map<BooleanProperty, VoxelShape> BEAM_SHAPES_X_PATH = ImmutableMap.of(TOP_LEFT, TL_SHAPE_X_PATH, TOP_RIGHT, TR_SHAPE_X_PATH, BOTTOM_LEFT, BL_SHAPE_X_PATH, BOTTOM_RIGHT, BR_SHAPE_X_PATH);
+    private static final Map<BooleanProperty, VoxelShape> BEAM_SHAPES_Z_PATH = ImmutableMap.of(TOP_LEFT, TL_SHAPE_Z_PATH, TOP_RIGHT, TR_SHAPE_Z_PATH, BOTTOM_LEFT, BL_SHAPE_Z_PATH, BOTTOM_RIGHT, BR_SHAPE_Z_PATH);
 
     private final OrnamentBuilder builder;
 
     public OrnamentBeam(Properties props, OrnamentBuilder builder) {
         super(props);
         this.builder = builder;
-        this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, PoleType.BL_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.X).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(TOP_LEFT, false)
+                .setValue(TOP_RIGHT, false)
+                .setValue(BOTTOM_LEFT, false)
+                .setValue(BOTTOM_RIGHT, false)
+                .setValue(HORIZONTAL_AXIS, Direction.Axis.X)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TYPE, HORIZONTAL_AXIS, WATERLOGGED);
+        builder.add(TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, HORIZONTAL_AXIS, WATERLOGGED);
     }
 
     @Override
@@ -96,44 +107,31 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     @Deprecated
     public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         List<VoxelShape> shapes = Lists.newArrayList();
-        PoleType type = state.getValue(TYPE);
         Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
-        boolean[] corners = type.getCorners();
 
-        if (builder.pathShape) {
-            if (type == PoleType.L_HALF)
-                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH);
-            else if (type == PoleType.R_HALF)
-                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, TR_SHAPE_Z_PATH);
-            else if (type == PoleType.TL_FILL)
-                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
-            else if (type == PoleType.TR_FILL)
-                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, TL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, TL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
-            else if (type == PoleType.BL_FILL)
-                return axis == Direction.Axis.X ? Shapes.or(BL_SHAPE_X, BR_SHAPE_X_PATH, TL_SHAPE_X_PATH) : Shapes.or(BL_SHAPE_Z, BR_SHAPE_Z_PATH, TL_SHAPE_Z_PATH);
-            else if (type == PoleType.BR_FILL)
-                return axis == Direction.Axis.X ? Shapes.or(BR_SHAPE_X, BL_SHAPE_X_PATH, TR_SHAPE_X_PATH) : Shapes.or(BR_SHAPE_Z, BL_SHAPE_Z_PATH, TR_SHAPE_Z_PATH);
-            else if (type == PoleType.FULL)
-                return OrnamentSlab.PATH_FULL_SHAPE;
-            else {
-                for (int i = 0; i < corners.length; i++) {
-                    if (corners[i]) {
-                        if (state.getValue(HORIZONTAL_AXIS) == Direction.Axis.X) {
-                            shapes.add(BEAM_SHAPES_X_PATH[i]);
+        for (BooleanProperty property : CORNERS) {
+            if (state.getValue(property)) {
+                if (builder.pathShape) {
+                    if (property == BOTTOM_LEFT) {
+                        if (state.getValue(TOP_LEFT)) {
+                            shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X.get(property) : BEAM_SHAPES_Z.get(property));
                         } else {
-                            shapes.add(BEAM_SHAPES_Z_PATH[i]);
+                            shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X_PATH.get(property) : BEAM_SHAPES_Z_PATH.get(property));
                         }
-                    }
-                }
-            }
-        } else {
-            for (int i = 0; i < corners.length; i++) {
-                if (corners[i]) {
-                    if (state.getValue(HORIZONTAL_AXIS) == Direction.Axis.X) {
-                        shapes.add(BEAM_SHAPES_X[i]);
                     } else {
-                        shapes.add(BEAM_SHAPES_Z[i]);
+                        shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X_PATH.get(property) : BEAM_SHAPES_Z_PATH.get(property));
                     }
+                    if (property == BOTTOM_RIGHT) {
+                        if (state.getValue(TOP_RIGHT)) {
+                            shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X.get(property) : BEAM_SHAPES_Z.get(property));
+                        } else {
+                            shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X_PATH.get(property) : BEAM_SHAPES_Z_PATH.get(property));
+                        }
+                    } else {
+                        shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X_PATH.get(property) : BEAM_SHAPES_Z_PATH.get(property));
+                    }
+                } else {
+                    shapes.add(axis == Direction.Axis.X ? BEAM_SHAPES_X.get(property) : BEAM_SHAPES_Z.get(property));
                 }
             }
         }
@@ -141,19 +139,25 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
         Optional<VoxelShape> optional = shapes.stream().reduce(Shapes::or);
 
         if (optional.isEmpty()) {
-            OrnamentalMod.LOGGER.error("Ornament Pole had no shapes! Resorting to full cube");
+            //So the block can be interacted with still.
             return Shapes.block();
         }
         return optional.get();
     }
 
+    public boolean isFull(BlockState state) {
+        if (state.getBlock() instanceof OrnamentBeam) {
+            return state.getValue(TOP_LEFT) && state.getValue(TOP_RIGHT) && state.getValue(BOTTOM_LEFT) && state.getValue(BOTTOM_RIGHT);
+        }
+        return false;
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         /*
-         * 1. Check 3 corner blocks so we can become Full and remove Waterlogged
-         * 2. Check 2 corner blocks so we can determine what 3 corner block it becomes, checking look context
-         * 3. Check 1 corner blocks so we can determine what 2 corner block it becomes, checking look context
-         * 4. Check look context to determine which corner we place.
+         * 1. Check the XZ and Axis of the block being placed.
+         * 2. For specific cases, check Direction to override default XZ behaviour.
+         * 3. Check for waterlogging
          */
 
         BlockPos pos = context.getClickedPos();
@@ -166,188 +170,148 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
         boolean filled = fluidstate.getType() == Fluids.WATER;
         Direction direction = context.getClickedFace();
         Direction.Axis facing = context.getHorizontalDirection().getAxis();
-        Direction.Axis axis = direction.getAxis();
-
 
         //Are we placing inside a Beam?
         if (state.is(this)) {
             Direction.Axis stateAxis = state.getValue(HORIZONTAL_AXIS);
 
-            switch (state.getValue(TYPE)) {
-                case TL_FILL:
-                case TR_FILL:
-                case BL_FILL:
-                case BR_FILL:
-                    return state.setValue(TYPE, PoleType.FULL).setValue(WATERLOGGED, false);
-                case TL_CORNER:
-                    if (((!z && stateAxis == Direction.Axis.X) || (!x && stateAxis == Direction.Axis.Z)) && !y) {
-                        return state.setValue(TYPE, PoleType.T_HALF).setValue(WATERLOGGED, filled);
-                    } else if ((z && stateAxis == Direction.Axis.X) || (x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.L_HALF).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.TL_BR).setValue(WATERLOGGED, filled);
+            if (((x && stateAxis == Direction.Axis.Z) || (z && stateAxis == Direction.Axis.X)) && y) {
+                if (state.getValue(BOTTOM_LEFT)) {
+                    if (direction == Direction.UP) {
+                        return setState(state, TOP_LEFT, filled);
                     }
-                case TR_CORNER:
-                    if ((((z || direction == Direction.NORTH) && stateAxis == Direction.Axis.X) || ((x || direction == Direction.WEST) && stateAxis == Direction.Axis.Z)) && !y) {
-                        return state.setValue(TYPE, PoleType.T_HALF).setValue(WATERLOGGED, filled);
-                    } else if ((!z && stateAxis == Direction.Axis.X) || (!x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.R_HALF).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.TR_BL).setValue(WATERLOGGED, filled);
+                }
+                return setState(state, BOTTOM_LEFT, filled);
+            }
+
+            if (((!x && stateAxis == Direction.Axis.Z) || (!z && stateAxis == Direction.Axis.X)) && y) {
+                if (state.getValue(BOTTOM_RIGHT)) {
+                    if ((direction == Direction.NORTH && stateAxis == Direction.Axis.X) || (direction == Direction.WEST && stateAxis == Direction.Axis.Z)) {
+                        return setState(state, BOTTOM_LEFT, filled);
                     }
-                case BL_CORNER:
-                    if (((!z && stateAxis == Direction.Axis.X) || (!x && stateAxis == Direction.Axis.Z)) && y) {
-                        return state.setValue(TYPE, PoleType.B_HALF).setValue(WATERLOGGED, filled);
-                    } else if ((z && stateAxis == Direction.Axis.X) || (x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.L_HALF).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.TR_BL).setValue(WATERLOGGED, filled);
+                    if (direction == Direction.UP) {
+                        return setState(state, TOP_RIGHT, filled);
                     }
-                case BR_CORNER:
-                    if ((((z || direction == Direction.NORTH) && stateAxis == Direction.Axis.X) || ((x || direction == Direction.WEST) && stateAxis == Direction.Axis.Z)) && y) {
-                        return state.setValue(TYPE, PoleType.B_HALF).setValue(WATERLOGGED, filled);
-                    } else if ((!z && stateAxis == Direction.Axis.X) || (!x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.R_HALF).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.TL_BR).setValue(WATERLOGGED, filled);
+                }
+                return setState(state, BOTTOM_RIGHT, filled);
+            }
+
+            if (((x && stateAxis == Direction.Axis.Z) || (z && stateAxis == Direction.Axis.X)) && !y) {
+                if (state.getValue(TOP_LEFT)) {
+                    if (direction == Direction.DOWN) {
+                        return setState(state, BOTTOM_LEFT, filled);
                     }
-                case T_HALF:
-                    if ((z && stateAxis == Direction.Axis.X) || (x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
+                }
+                return setState(state, TOP_LEFT, filled);
+            }
+
+            if (((!x && stateAxis == Direction.Axis.Z) || (!z && stateAxis == Direction.Axis.X)) && !y) {
+                if (state.getValue(TOP_RIGHT)) {
+                    if ((direction == Direction.NORTH && stateAxis == Direction.Axis.X) || (direction == Direction.WEST && stateAxis == Direction.Axis.Z)) {
+                        return setState(state, TOP_LEFT, filled);
                     }
-                case L_HALF:
-                    if (!y) {
-                        return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
+                    if (direction == Direction.DOWN) {
+                        return setState(state, BOTTOM_RIGHT, filled);
                     }
-                case R_HALF:
-                    if (!y) {
-                        return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
-                    }
-                case B_HALF:
-                    if ((z && stateAxis == Direction.Axis.X) || (x && stateAxis == Direction.Axis.Z)) {
-                        return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
-                    } else {
-                        return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
-                    }
-                case TR_BL:
-                    if (stateAxis == Direction.Axis.X) {
-                        if ((axis.isVertical() || axis == Direction.Axis.X || direction == Direction.SOUTH) && z && (!y || direction == Direction.UP) || direction == Direction.NORTH && !y) {
-                            return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
-                        } else {
-                            return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
-                        }
-                    } else {
-                        if ((axis.isVertical() || axis == Direction.Axis.Z || direction == Direction.EAST) && x && (!y || direction == Direction.UP) || direction == Direction.WEST && !y) {
-                            return state.setValue(TYPE, PoleType.TL_FILL).setValue(WATERLOGGED, filled);
-                        } else {
-                            return state.setValue(TYPE, PoleType.BR_FILL).setValue(WATERLOGGED, filled);
-                        }
-                    }
-                case TL_BR:
-                    if (stateAxis == Direction.Axis.X) {
-                        if ((axis.isVertical() || axis == Direction.Axis.X || direction == Direction.SOUTH) && !z && (!y || direction == Direction.UP) || direction == Direction.NORTH && !y) {
-                            return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
-                        } else {
-                            return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
-                        }
-                    } else {
-                        if ((axis.isVertical() || axis == Direction.Axis.Z || direction == Direction.EAST) && !x && (!y || direction == Direction.UP) || direction == Direction.WEST && !y) {
-                            return state.setValue(TYPE, PoleType.TR_FILL).setValue(WATERLOGGED, filled);
-                        } else {
-                            return state.setValue(TYPE, PoleType.BL_FILL).setValue(WATERLOGGED, filled);
-                        }
-                    }
-                default:
-                    //fallback. Just go full
-                    OrnamentalMod.LOGGER.error("Ornamental Pole failed to place properly. State: " + state);
-                    return state.setValue(TYPE, PoleType.FULL).setValue(WATERLOGGED, false);
+                }
+                return setState(state, TOP_RIGHT, filled);
             }
         } else {
             if (facing == Direction.Axis.X) {
-                if (x && y) return defaultBlockState().setValue(TYPE, PoleType.BL_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.Z).setValue(WATERLOGGED, filled);
-                else if (!x && y) return defaultBlockState().setValue(TYPE, PoleType.BR_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.Z).setValue(WATERLOGGED, filled);
-                else if (x && !y) return defaultBlockState().setValue(TYPE, PoleType.TL_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.Z).setValue(WATERLOGGED, filled);
-                else return defaultBlockState().setValue(TYPE, PoleType.TR_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.Z).setValue(WATERLOGGED, filled);
+                if (x && y) return setState(defaultBlockState(), BOTTOM_LEFT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.Z);
+                if (!x && y) return setState(defaultBlockState(), BOTTOM_RIGHT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.Z);
+                if (x && !y) return setState(defaultBlockState(), TOP_LEFT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.Z);
+                if (!x && !y) return setState(defaultBlockState(), TOP_RIGHT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.Z);
             } else {
-                if (z && y) return defaultBlockState().setValue(TYPE, PoleType.BL_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.X).setValue(WATERLOGGED, filled);
-                else if (!z && y) return defaultBlockState().setValue(TYPE, PoleType.BR_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.X).setValue(WATERLOGGED, filled);
-                else if (z && !y) return defaultBlockState().setValue(TYPE, PoleType.TL_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.X).setValue(WATERLOGGED, filled);
-                else return defaultBlockState().setValue(TYPE, PoleType.TR_CORNER).setValue(HORIZONTAL_AXIS, Direction.Axis.X).setValue(WATERLOGGED, filled);
+                if (z && y) return setState(defaultBlockState(), BOTTOM_LEFT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.X);
+                if (!z && y) return setState(defaultBlockState(), BOTTOM_RIGHT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.X);
+                if (z && !y) return setState(defaultBlockState(), TOP_LEFT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.X);
+                if (!z && !y) return setState(defaultBlockState(), TOP_RIGHT, filled).setValue(HORIZONTAL_AXIS, Direction.Axis.X);
             }
         }
+
+        return state;
+    }
+
+    private BlockState setState(BlockState state, BooleanProperty corner, boolean isFilled) {
+        BlockState blockstate = state.setValue(corner, true);
+        if (isFull(blockstate)) {
+            isFilled = false;
+        }
+        return blockstate.setValue(WATERLOGGED, isFilled);
     }
 
     @Override
     @Deprecated
     public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         ItemStack stack = context.getItemInHand();
-        PoleType type = state.getValue(TYPE);
         Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
 
         //Only Full shapes are non-replaceable.
-        if (type != PoleType.FULL && stack.getItem() == this.asItem()) {
+        if (!isFull(state) && stack.getItem() == this.asItem()) {
             if (context.replacingClickedOnBlock()) {
                 //All true: TL. Z true: TR. X true: BL. No true: BR.
                 boolean x = context.getClickLocation().x - (double)context.getClickedPos().getX() < 0.5D;
-                boolean y = context.getClickLocation().y - (double)context.getClickedPos().getY() < 0.5D;
                 boolean z = context.getClickLocation().z - (double)context.getClickedPos().getZ() < 0.5D;
+                boolean h = axis == Direction.Axis.X ? z : x;
+                boolean y = context.getClickLocation().y - (double)context.getClickedPos().getY() < 0.5D;
                 Direction direction = context.getClickedFace();
 
-                switch (type) {
-                    case TL_CORNER:
-                        if (axis == Direction.Axis.X)
-                            return !(z && !y) || direction == Direction.DOWN;
-                        else return !(x && !y) || direction == Direction.DOWN;
-                    case TR_CORNER:
-                        if (axis == Direction.Axis.X)
-                            return !(!z && !y) || direction == Direction.NORTH || direction == Direction.DOWN;
-                        else return !(!x && !y) || direction == Direction.WEST || direction == Direction.DOWN;
-                    case BL_CORNER:
-                        if (axis == Direction.Axis.X)
-                            return !(z && y) || direction == Direction.UP;
-                        else return !(x && y) || direction == Direction.UP;
-                    case BR_CORNER:
-                        if (axis == Direction.Axis.X)
-                            return !(!z && y) || direction == Direction.NORTH || direction == Direction.UP;
-                        else return !(!x && y) || direction == Direction.WEST || direction == Direction.UP;
-                    case TL_FILL:
-                        return axis == Direction.Axis.X ? (y || direction == Direction.DOWN) && !z : (y || direction == Direction.DOWN) && !x;
-                    case TR_FILL:
-                        return axis == Direction.Axis.X ? (y || direction == Direction.DOWN) && (z || direction == Direction.NORTH) : (y || direction == Direction.DOWN) && (x || direction == Direction.WEST);
-                    case BL_FILL:
-                        return axis == Direction.Axis.X ? (!y || direction == Direction.UP) && !z : (!y || direction == Direction.UP) && !x;
-                    case BR_FILL:
-                        return axis == Direction.Axis.X ? (!y || direction == Direction.UP) && (z || direction == Direction.NORTH) : (!y || direction == Direction.UP) && (x || direction == Direction.WEST);
-                    case T_HALF:
-                        return y;
-                    case B_HALF:
-                        return !y || direction == Direction.UP;
-                    case L_HALF:
-                        return axis == Direction.Axis.X ? !z : !x;
-                    case R_HALF:
-                        return axis == Direction.Axis.X ? z || direction == Direction.NORTH : x || direction == Direction.WEST;
-                    case TL_BR:
-                        if (axis == Direction.Axis.X)
-                            return (y && z || (!y || direction == Direction.UP) && !z) || direction == Direction.NORTH && !z || direction == Direction.DOWN && !y;
-                        else return (y && x || (!y || direction == Direction.UP) && !x) || direction == Direction.WEST && !x || direction == Direction.DOWN && !y;
-                    case TR_BL:
-                        if (axis == Direction.Axis.X)
-                            return ((!y || direction == Direction.UP) && z || y && !z) || direction == Direction.NORTH && !z || direction == Direction.DOWN && !y;
-                            else return ((!y || direction == Direction.UP) && x || y && !x) || direction == Direction.WEST && !x || direction == Direction.DOWN && !y;
-                    default:
-                        return false; //Full is the only one left
+                if (h && y) {
+                    if (direction == Direction.UP) {
+                        return !state.getValue(TOP_LEFT);
+                    }
+                    return !state.getValue(BOTTOM_LEFT);
+                }
+
+                if (!h && y) {
+                    if ((direction == Direction.NORTH && !z) || (direction == Direction.WEST && !x)) {
+                        return !state.getValue(BOTTOM_LEFT);
+                    }
+                    if (direction == Direction.UP) {
+                        return !state.getValue(TOP_RIGHT);
+                    }
+                    return !state.getValue(BOTTOM_RIGHT);
+                }
+
+                if (h && !y) {
+                    if (direction == Direction.DOWN) {
+                        return !state.getValue(BOTTOM_LEFT);
+                    }
+                    return !state.getValue(TOP_LEFT);
+                }
+
+                if (!h && !y) {
+                    if ((direction == Direction.NORTH && !z) || (direction == Direction.WEST && !x)) {
+                        return !state.getValue(TOP_LEFT);
+                    }
+                    if (direction == Direction.DOWN) {
+                        return !state.getValue(BOTTOM_RIGHT);
+                    }
+                    return !state.getValue(TOP_RIGHT);
                 }
             } else {
                 return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        int corners = (int) Arrays.stream(CORNERS).filter(state::getValue).count();
+
+        if (corners <= 0) {
+            return Collections.emptyList();
         } else {
-            return false;
+            List<ItemStack> list = Lists.newArrayList();
+
+            for (int i = 0; i < corners; i++) {
+                list.addAll(super.getDrops(state, builder));
+            }
+
+            return list;
         }
     }
 
@@ -366,12 +330,14 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     @Deprecated
     public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
         if (builder.hasPower) {
-            switch (state.getValue(TYPE).getShape()) {
-                case CORNER: return 4;
-                case HALF: return 8;
-                case FILL: return 12;
-                case BLOCK: return 15;
-            }
+            int corners = (int) Arrays.stream(CORNERS).filter(state::getValue).count();
+            return switch (corners) {
+                case 1 -> 4;
+                case 2 -> 8;
+                case 3 -> 12;
+                case 4 -> 15;
+                default -> super.getSignal(state, world, pos, direction);
+            };
         }
         return super.getSignal(state, world, pos, direction);
     }
@@ -384,12 +350,12 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
 
     @Override
     public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return state.getValue(TYPE) != PoleType.FULL && SimpleWaterloggedBlock.super.placeLiquid(worldIn, pos, state, fluidStateIn);
+        return !isFull(state) && SimpleWaterloggedBlock.super.placeLiquid(worldIn, pos, state, fluidStateIn);
     }
 
     @Override
     public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return state.getValue(TYPE) != PoleType.FULL && SimpleWaterloggedBlock.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
+        return !isFull(state) && SimpleWaterloggedBlock.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
     }
 
     @Override
@@ -443,7 +409,10 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentBeam> block) {
         BlockState state = world.getBlockState(pos);
         world.setBlockAndUpdate(pos, block.get().defaultBlockState()
-                .setValue(TYPE, state.getValue(TYPE))
+                .setValue(TOP_LEFT, state.getValue(TOP_LEFT))
+                .setValue(TOP_RIGHT, state.getValue(TOP_RIGHT))
+                .setValue(BOTTOM_LEFT, state.getValue(BOTTOM_LEFT))
+                .setValue(BOTTOM_RIGHT, state.getValue(BOTTOM_RIGHT))
                 .setValue(HORIZONTAL_AXIS, state.getValue(HORIZONTAL_AXIS))
                 .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
@@ -453,11 +422,8 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
-            if (otherState.getBlock() instanceof OrnamentBeam && state.getBlock() instanceof OrnamentBeam) {
-                OrnamentBeam pole = (OrnamentBeam) state.getBlock();
-                OrnamentBeam otherPole = (OrnamentBeam) otherState.getBlock();
-
-                if (otherPole.getBuilder() == pole.getBuilder() && otherState.getValue(TYPE) == PoleType.FULL && state.getValue(TYPE) == PoleType.FULL) {
+            if (otherState.getBlock() instanceof OrnamentBeam otherBeam && state.getBlock() instanceof OrnamentBeam beam) {
+                if (otherBeam.getBuilder() == beam.getBuilder() && isFull(otherState) && isFull(state)) {
                     return true;
                 }
             }

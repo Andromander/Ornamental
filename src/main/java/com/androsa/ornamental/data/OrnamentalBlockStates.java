@@ -3,7 +3,6 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
 import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
-import com.androsa.ornamental.blocks.PoleType;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
@@ -14,6 +13,7 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -205,16 +205,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleMissing(ModBlocks.missingno_pole, "missingno");
         poleBasic(ModBlocks.clay_pole, "clay");
         poleBasic(ModBlocks.dirt_pole, "dirt");
-        modelPoleBlock(ModBlocks.grass_pole, "grass_block", "grass", true);
+        modelPoleBlock(ModBlocks.grass_pole, "grass", "grass_block");
         poleColumn(ModBlocks.hay_pole, "hay_block", "hay_block_side", "hay_block_top");
-        modelPoleBlock(ModBlocks.path_pole, "dirt_path", "path", true);
+        modelPoleBlock(ModBlocks.path_pole, "path", "dirt_path");
         poleBasic(ModBlocks.brick_pole, "bricks");
         poleColumn(ModBlocks.quartz_pole, "quartz_block", "quartz_block_side", "quartz_block_top");
         poleColumn(ModBlocks.bone_pole, "bone_block", "bone_block_side", "bone_block_top");
         poleBasic(ModBlocks.nether_brick_pole, "nether_bricks");
         poleBasic(ModBlocks.red_nether_brick_pole, "red_nether_bricks");
-        poleBasic(ModBlocks.snow_pole, "snow", "snow_block", SOLID);
-        modelPoleBlock(ModBlocks.ice_pole, "ice", "ice", false);
+        poleBasic(ModBlocks.snow_pole, "snow_block", "snow", SOLID);
+        poleBasic(ModBlocks.ice_pole, "ice", TRANSLUCENT);
         poleBasic(ModBlocks.packed_ice_pole, "packed_ice");
         poleBasic(ModBlocks.blue_ice_pole, "blue_ice");
         poleBasic(ModBlocks.netherite_pole, "netherite_block");
@@ -224,35 +224,35 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.weathered_copper_pole, "weathered_copper");
         poleBasic(ModBlocks.oxidized_copper_pole, "oxidized_copper");
 
-        beamBasic(ModBlocks.iron_beam, "iron_block", false, false);
-        beamBasic(ModBlocks.gold_beam, "gold_block", false, false);
-        beamBasic(ModBlocks.diamond_beam, "diamond_block", false, false);
-        beamBasic(ModBlocks.emerald_beam, "emerald_block", false, false);
-        beamBasic(ModBlocks.lapis_beam, "lapis_block", false, false);
-        beamBasic(ModBlocks.obsidian_beam, "obsidian", false, false);
-        beamBasic(ModBlocks.coal_beam, "coal_block", false, false);
-        beamBasic(ModBlocks.redstone_beam, "redstone_block", false, false);
+        beamBasic(ModBlocks.iron_beam, "iron_block");
+        beamBasic(ModBlocks.gold_beam, "gold_block");
+        beamBasic(ModBlocks.diamond_beam, "diamond_block");
+        beamBasic(ModBlocks.emerald_beam, "emerald_block");
+        beamBasic(ModBlocks.lapis_beam, "lapis_block");
+        beamBasic(ModBlocks.obsidian_beam, "obsidian");
+        beamBasic(ModBlocks.coal_beam, "coal_block");
+        beamBasic(ModBlocks.redstone_beam, "redstone_block");
         beamMissing(ModBlocks.missingno_beam, "missingno");
-        beamBasic(ModBlocks.clay_beam, "clay", false, false);
-        beamBasic(ModBlocks.dirt_beam, "dirt", false, false);
-        nonamodelBeamBlock(ModBlocks.grass_beam, "grass_block", "grass");
-        beamColumn(ModBlocks.hay_beam, "hay_block", "hay_block_top", "hay_block_side", false, false);
-        nonamodelBeamBlock(ModBlocks.path_beam, "dirt_path", "path");
-        beamBasic(ModBlocks.brick_beam, "bricks", true, true);
-        beamColumn(ModBlocks.quartz_beam, "quartz_block", "quartz_block_top", "quartz_block_side", true, true);
-        beamColumn(ModBlocks.bone_beam, "bone_block", "bone_block_top", "bone_block_side", false, false);
-        beamBasic(ModBlocks.nether_brick_beam, "nether_bricks", true, true);
-        beamBasic(ModBlocks.red_nether_brick_beam, "red_nether_bricks", true, true);
-        beamBasic(ModBlocks.snow_beam, "snow", "snow_block", false, false, SOLID);
-        modelBeamBlock(ModBlocks.ice_beam, "ice", "ice", true);
-        beamBasic(ModBlocks.packed_ice_beam, "packed_ice", false, false);
-        beamBasic(ModBlocks.blue_ice_beam, "blue_ice", false, false);
-        beamBasic(ModBlocks.netherite_beam, "netherite_block", false, false);
-        beamBasic(ModBlocks.amethyst_beam, "amethyst_block", false, false);
-        beamBasic(ModBlocks.copper_beam, "copper_block", false, false);
-        beamBasic(ModBlocks.exposed_copper_beam, "exposed_copper", false, false);
-        beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper", false, false);
-        beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper", false, false);
+        beamBasic(ModBlocks.clay_beam, "clay");
+        beamBasic(ModBlocks.dirt_beam, "dirt");
+        halfDirtBeamBlock(ModBlocks.grass_beam, "grass_block", "grass", true);
+        beamColumn(ModBlocks.hay_beam, "hay_block", "hay_block_top", "hay_block_side");
+        halfDirtBeamBlock(ModBlocks.path_beam, "dirt_path", "path", false);
+        beamBasic(ModBlocks.brick_beam, "bricks");
+        beamColumn(ModBlocks.quartz_beam, "quartz_block", "quartz_block_top", "quartz_block_side");
+        beamColumn(ModBlocks.bone_beam, "bone_block", "bone_block_top", "bone_block_side");
+        beamBasic(ModBlocks.nether_brick_beam, "nether_bricks");
+        beamBasic(ModBlocks.red_nether_brick_beam, "red_nether_bricks");
+        beamBasic(ModBlocks.snow_beam, "snow", "snow_block", SOLID);
+        beamBasic(ModBlocks.ice_beam, "ice", TRANSLUCENT);
+        beamBasic(ModBlocks.packed_ice_beam, "packed_ice");
+        beamBasic(ModBlocks.blue_ice_beam, "blue_ice");
+        beamBasic(ModBlocks.netherite_beam, "netherite_block");
+        beamBasic(ModBlocks.amethyst_beam, "amethyst_block");
+        beamBasic(ModBlocks.copper_beam, "copper_block");
+        beamBasic(ModBlocks.exposed_copper_beam, "exposed_copper");
+        beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper");
+        beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper");
 
         wallBasic(ModBlocks.iron_wall, "iron_block");
         wallBasic(ModBlocks.gold_wall, "gold_block");
@@ -335,7 +335,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         String dir = path + "/" + block.getId().getPath();
         ModelFile slab = models().getExistingFile(locOrnament(dir));
         ModelFile slabtop = models().getExistingFile(locOrnament(dir + "_top"));
-        ModelFile fullblock = models().getExistingFile(locVanilla(full));
+        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT_MIPPED);
 
         slabBlock(block.get(), slab, slabtop, fullblock);
     }
@@ -378,50 +378,34 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         ModelFile topleftopen = models().getExistingFile(locOrnament(dir + "_top_left_open"));
         ModelFile topright = models().getExistingFile(locOrnament(dir + "_top_right"));
         ModelFile toprightopen = models().getExistingFile(locOrnament(dir + "_top_right_open"));
+
         doorBlock(block.get(), bottomleft, bottomleftopen, bottomright, bottomrightopen, topleft, topleftopen, topright, toprightopen);
     }
 
-    public void modelPoleBlock(RegistryObject<? extends OrnamentPole> block, String full, String path, boolean slab) {
+    public void modelPoleBlock(RegistryObject<? extends OrnamentPole> block, String path, String full) {
         String dir = path + "/" + block.getId().getPath();
-        String name = path + "/" + block.get().getBuilder().name;
+        ModelFile whole = models().getExistingFile(locOrnament(dir + "_whole"));
+        ModelFile horizon = models().getExistingFile(locOrnament(dir + "_horizontal"));
+        ModelFile vertical = models().getExistingFile(locOrnament(dir + "_vertical"));
         ModelFile corner = models().getExistingFile(locOrnament(dir + "_corner"));
-        ModelFile half = models().getExistingFile(locOrnament(slab ? name + "_slab_vertical" : dir + "_half"));
-        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
-        ModelFile fill = models().getExistingFile(locOrnament(name + "_stairs_straight_side"));
-        ModelFile fullblock = models().getExistingFile(locVanilla(full));
+        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT_MIPPED);
 
-        poleBlock(block, corner, half, cross, fill, fullblock);
+        poleBlock(block, whole, horizon, vertical, corner, fullblock);
     }
 
-    public void modelBeamBlock(RegistryObject<? extends OrnamentBeam> block, String fullblock, String path, boolean gen) {
-        String dir = path + "/" + block.getId().getPath();
-        String nameonly = block.get().getBuilder().name;
-        String name = path + "/" + nameonly;
-        ModelFile corner = models().getExistingFile(locOrnament(dir + "_corner"));
-        ModelFile topslab = models().getExistingFile(locOrnament(gen ? nameonly + "_slab_top" : name + "_slab_top"));
-        ModelFile bottomslab = models().getExistingFile(locOrnament(gen ? nameonly + "_slab" : name + "_slab"));
-        ModelFile sideslab = models().getExistingFile(locOrnament(name + "_pole_half"));
-        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
-        ModelFile fill = models().getExistingFile(locOrnament(name + "_stairs"));
-        ModelFile full = models().getExistingFile(locVanilla(fullblock));
+    public void halfDirtBeamBlock(RegistryObject<? extends OrnamentBeam> block, String full, String path, boolean noface) {
+        String name = path + "/" + block.getId().getPath();
+        ModelFile wholetop = models().getExistingFile(locOrnament(name + "_whole_top"));
+        ModelFile wholebottom = models().getExistingFile(locOrnament(name + "_whole_bottom"));
+        ModelFile horizontop = models().getExistingFile(locOrnament(name + "_horizontal_top"));
+        ModelFile horizonbottom = models().getExistingFile(locOrnament(name + "_horizontal_bottom"));
+        ModelFile verticaltop = models().getExistingFile(locOrnament(name + "_vertical"));
+        ModelFile verticalbottom = models().getExistingFile(locOrnament("dirt_pole_vertical"));
+        ModelFile cornertop = models().getExistingFile(locOrnament(name + "_corner"));
+        ModelFile cornerbottom = models().getExistingFile(locOrnament(noface ? "dirt_pole_corner" : "dirt_pole_whole"));
+        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT);
 
-        beamBlock(block, corner, topslab, bottomslab, sideslab, cross, fill, full);
-    }
-
-    public void nonamodelBeamBlock(RegistryObject<? extends OrnamentBeam> block, String full, String path) {
-        String dir = path + "/" + block.getId().getPath();
-        String name = path + "/" + block.get().getBuilder().name;
-        ModelFile topcorner = models().getExistingFile(locOrnament(dir + "_corner_top"));
-        ModelFile bottomcorner = models().getExistingFile(locOrnament(dir + "_corner_bottom"));
-        ModelFile topslab = models().getExistingFile(locOrnament(name + "_slab_top"));
-        ModelFile bottomslab = models().getExistingFile(locOrnament(name + "_slab"));
-        ModelFile sideslab = models().getExistingFile(locOrnament(name + "_slab_vertical"));
-        ModelFile cross = models().getExistingFile(locOrnament(dir + "_cross"));
-        ModelFile topfill = models().getExistingFile(locOrnament(name + "_stairs_top_straight"));
-        ModelFile bottomfill = models().getExistingFile(locOrnament(name + "_stairs_bottom_straight"));
-        ModelFile fullblock = models().getExistingFile(locVanilla(full));
-
-        beamBlock(block, bottomcorner, topcorner, topslab, bottomslab, sideslab, cross, bottomfill, topfill, fullblock);
+        beamBlock(block, wholetop, wholebottom, horizontop, horizonbottom, verticaltop, verticalbottom, cornertop, cornerbottom, fullblock);
     }
 
     public void modelWallBlock(RegistryObject<? extends WallBlock> block, String path) {
@@ -473,51 +457,47 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
                 }, StairBlock.WATERLOGGED);
     }
 
-    public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile bcorner, ModelFile tcorner, ModelFile topslab, ModelFile bottomslab, ModelFile halfpole, ModelFile cross, ModelFile bfill, ModelFile tfill, ModelFile full) {
-        getVariantBuilder(block.get())
-                .forAllStatesExcept(state -> {
-                    PoleType type = state.getValue(OrnamentBeam.TYPE);
-                    Direction.Axis axis = state.getValue(OrnamentBeam.HORIZONTAL_AXIS);
-                    PoleType.Shape shape = type.getShape();
-                    ModelFile model;
-                    int xRot, yRot;
+    public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile wt, ModelFile wb, ModelFile ht, ModelFile hb, ModelFile vt, ModelFile vb, ModelFile ct, ModelFile cb, ModelFile fullblock) {
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
+        beamModelWhole(builder, wt, 0, 0, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, wt, 0, 270, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, wt, 0, 180, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, wt, 0, 90, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, wb, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, ht, 0, 0, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, ht, 0, 270, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, ht, 0, 180, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, ht, 0, 90, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, hb, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, hb, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, hb, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, hb, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vt, 0, 0, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vt, 0, 270, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vt, 0, 180, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, vt, 0, 90, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, vb, 90, 90, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, vb, 90, 0, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, vb, 90, 270, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, vb, 90, 180, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelCorner(builder, ct, 0, 0, Direction.Axis.X, true, true, true, false);
+        beamModelCorner(builder, ct, 0, 270, Direction.Axis.Z, true, true, true, false);
+        beamModelCorner(builder, ct, 0, 180, Direction.Axis.X, true, true, false, true);
+        beamModelCorner(builder, ct, 0, 90, Direction.Axis.Z, true, true, false, true);
+        beamModelCorner(builder, cb, 90, 270, Direction.Axis.X, false, true, true, true);
+        beamModelCorner(builder, cb, 90, 180, Direction.Axis.Z, false, true, true, true);
+        beamModelCorner(builder, cb, 90, 90, Direction.Axis.X, true, false, true, true);
+        beamModelCorner(builder, cb, 90, 0, Direction.Axis.Z, true, false, true, true);
 
-                    switch (shape) {
-                        case HALF:
-                            if (type == PoleType.T_HALF) model = topslab;
-                            else if (type == PoleType.B_HALF) model = bottomslab;
-                            else model = halfpole;
-                            break;
-                        case CROSS: model = cross; break;
-                        case FILL: model = type == PoleType.TL_FILL || type == PoleType.TR_FILL ? tfill : bfill; break;
-                        case BLOCK: model = full; break;
-                        default: model = type == PoleType.TL_CORNER || type == PoleType.TR_CORNER ? tcorner : bcorner; break;
-                    }
-                    if (type == PoleType.BL_CORNER || type == PoleType.BR_CORNER || type == PoleType.TL_FILL || type == PoleType.TR_FILL) {
-                        xRot = 180;
-                    } else {
-                        xRot = 0;
-                    }
-                    if (type == PoleType.TL_CORNER || type == PoleType.BR_CORNER || type == PoleType.L_HALF || type == PoleType.TL_BR) {
-                        yRot = 270;
-                    } else if (type == PoleType.TR_CORNER || type == PoleType.BL_CORNER || type == PoleType.R_HALF || type == PoleType.TR_BL) {
-                        yRot = 90;
-                    } else if (type == PoleType.TL_FILL || type == PoleType.BL_FILL) {
-                        yRot = 180;
-                    } else {
-                        yRot = 0;
-                    }
-                    if (type != PoleType.T_HALF && type != PoleType.B_HALF && type != PoleType.FULL) {
-                        yRot = axis == Direction.Axis.X ? yRot + 90 : yRot;
-                    }
-                    yRot = yRot == 360 ? 0 : yRot;
-                    boolean uvlock = yRot != 0 || xRot != 0; // Don't set uvlock for states that have no rotation
-                    return ConfiguredModel.builder()
-                            .modelFile(model)
-                            .rotationY(yRot)
-                            .rotationX(xRot)
-                            .uvLock(uvlock)
-                            .build();
-                }, OrnamentBeam.WATERLOGGED);
+        builder.part()
+                .modelFile(fullblock)
+                .addModel()
+                .condition(OrnamentPole.TOP_LEFT, true)
+                .condition(OrnamentPole.TOP_RIGHT, true)
+                .condition(OrnamentPole.BOTTOM_LEFT, true)
+                .condition(OrnamentPole.BOTTOM_RIGHT, true);
     }
 }

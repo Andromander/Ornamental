@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/beam_corner",
-  "textures": {
-    "bottom": "minecraft:block/emerald_block",
-    "side": "minecraft:block/emerald_block",
-    "top": "minecraft:block/emerald_block"
-  }
-}

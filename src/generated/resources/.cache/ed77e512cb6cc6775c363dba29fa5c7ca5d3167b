@@ -1,4 +1,4 @@
-// 1.19	2022-07-27T23:15:35.3878095	Ornamental Item Models
+// 1.19.1	2022-08-06T23:22:34.1847381	Ornamental Item Models
 1373c54937d1e50cd97b0ba886d821ab56583b1f assets/ornamental/models/item/amethyst_beam.json
 2998a3b80379d12867c0fc789e2acbf0eda5a742 assets/ornamental/models/item/amethyst_door.json
 59d8f49ca423203c32265bb8e7f2b795f2fd3075 assets/ornamental/models/item/amethyst_fence.json
@@ -87,6 +87,7 @@ eae3b9504afc8159d898cbe47d13352ef4f6a329 assets/ornamental/models/item/dirt_path
 5863d7a7f2c81f50499fd51cf6d19dfb669956b9 assets/ornamental/models/item/dirt_path_pole.json
 e9468d80f6ab12654f6c0b84c58600de61b36499 assets/ornamental/models/item/dirt_path_saddle_door.json
 6161afe4910030d3230d2d6c68845341265589e3 assets/ornamental/models/item/dirt_path_slab.json
+99cd04b01bcb64e684d6e582c074cf9b9564a8b7 assets/ornamental/models/item/dirt_path_stairs.json
 9907f5dc290d0ff3e367cfb0a2df436dbe9cef1e assets/ornamental/models/item/dirt_path_trapdoor.json
 dafd69304d350412da91237af54de8c1e334dffa assets/ornamental/models/item/dirt_path_wall.json
 d22759244a35fc283f2738229b48f300b50545f8 assets/ornamental/models/item/dirt_pole.json
@@ -132,6 +133,7 @@ b465949d76b08abd88699f23451e0957695bb41e assets/ornamental/models/item/grass_bea
 8edda245f66e4ece43df1bfb92f5ab17f443426a assets/ornamental/models/item/grass_pole.json
 72278b5c43c24897c5c76d954bc21d7a80696490 assets/ornamental/models/item/grass_saddle_door.json
 4bd54e8e3625a353160ffce4cc6a2ef417ca4edb assets/ornamental/models/item/grass_slab.json
+724bffb9ad598bfb004426b9e22058ce2185495b assets/ornamental/models/item/grass_stairs.json
 c2337d7caa77b8d350132118c530a073fac75c80 assets/ornamental/models/item/grass_trapdoor.json
 d5caddb80c2341b4de1708ca06ec4113c0412019 assets/ornamental/models/item/grass_wall.json
 cf5f2609242d6722b7143a1fc3299d99311a5fa8 assets/ornamental/models/item/hay_beam.json
@@ -148,7 +150,7 @@ f6f47c8eecc538babefea09f783c069a5be29ee6 assets/ornamental/models/item/ice_beam.
 9637a94221de154241adcbe625d4f2bb198ee911 assets/ornamental/models/item/ice_door.json
 0de4bdae3785bf6b101d6a48f56d446d524ff641 assets/ornamental/models/item/ice_fence.json
 36c0e51498cb85c8a363793e32f6f5e899a2a70f assets/ornamental/models/item/ice_fence_gate.json
-32fc648bb4c9016094aae23c80e3673f8d9d4365 assets/ornamental/models/item/ice_pole.json
+427eebc9e8ef36c1cadf9459e411d735f8cb7329 assets/ornamental/models/item/ice_pole.json
 cbc1e2efd3dbe01de66de06c60c2b73ddbcc9f5b assets/ornamental/models/item/ice_saddle_door.json
 8100add5b4588966c3ba7ddd446d047116d056d4 assets/ornamental/models/item/ice_slab.json
 d49047c382ecb332f3361952908e3577bd4b248e assets/ornamental/models/item/ice_stairs.json

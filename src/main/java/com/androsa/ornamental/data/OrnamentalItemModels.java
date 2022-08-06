@@ -6,6 +6,8 @@ import com.androsa.ornamental.data.provider.OrnamentalItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.Optional;
+
 public class OrnamentalItemModels extends OrnamentalItemModelProvider {
 
     public OrnamentalItemModels(DataGenerator generator, ExistingFileHelper helper) {
@@ -30,9 +32,9 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.missingno_stairs);
         blockItem(ModBlocks.clay_stairs);
         blockItem(ModBlocks.dirt_stairs);
-        existingParent(ModBlocks.grass_slab, modLoc("block/grass/grass_stairs_bottom_straight"));
+        existingParent(ModBlocks.grass_stairs, modLoc("block/grass/grass_stairs_bottom_straight"));
         blockItem(ModBlocks.hay_stairs);
-        existingParent(ModBlocks.path_slab, modLoc("block/path/dirt_path_stairs_bottom_straight"));
+        existingParent(ModBlocks.path_stairs, modLoc("block/path/dirt_path_stairs_bottom_straight"));
         blockItem(ModBlocks.bone_stairs);
         blockItem(ModBlocks.snow_stairs);
         existingParent(ModBlocks.ice_stairs, modLoc("block/ice/ice_stairs"));
@@ -208,7 +210,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemPole(ModBlocks.nether_brick_pole, "nether_bricks");
         blockItemPole(ModBlocks.red_nether_brick_pole, "red_nether_bricks");
         blockItemPole(ModBlocks.snow_pole, "snow");
-        blockItemPole(ModBlocks.ice_pole, "ice");
+        blockItemPole(ModBlocks.ice_pole, "ice", Optional.of(TRANSLUCENT));
         blockItemPole(ModBlocks.packed_ice_pole, "packed_ice");
         blockItemPole(ModBlocks.blue_ice_pole, "blue_ice");
         blockItemPole(ModBlocks.netherite_pole, "netherite_block");

@@ -1,69 +1,203 @@
 {
-  "variants": {
-    "type=bottom_half": {
-      "model": "ornamental:block/grass/grass_slab_vertical",
-      "uvlock": true,
-      "y": 180
+  "multipart": [
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_whole"
+      },
+      "when": {
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "false"
+      }
     },
-    "type=bottomleft_corner": {
-      "model": "ornamental:block/grass/grass_pole_corner",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_whole",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "false",
+        "top_left": "false",
+        "top_right": "true"
+      }
     },
-    "type=bottomleft_fill": {
-      "model": "ornamental:block/grass/grass_stairs_straight_side",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_whole",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
     },
-    "type=bottomright_corner": {
-      "model": "ornamental:block/grass/grass_pole_corner",
-      "uvlock": true,
-      "y": 180
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_whole",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "false"
+      }
     },
-    "type=bottomright_fill": {
-      "model": "ornamental:block/grass/grass_stairs_straight_side",
-      "uvlock": true,
-      "y": 180
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_horizontal"
+      },
+      "when": {
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
     },
-    "type=full": {
-      "model": "minecraft:block/grass_block"
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_horizontal",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
     },
-    "type=left_half": {
-      "model": "ornamental:block/grass/grass_slab_vertical",
-      "uvlock": true,
-      "y": 270
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_horizontal",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
     },
-    "type=right_half": {
-      "model": "ornamental:block/grass/grass_slab_vertical",
-      "uvlock": true,
-      "y": 90
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_horizontal",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true"
+      }
     },
-    "type=top_half": {
-      "model": "ornamental:block/grass/grass_slab_vertical"
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_vertical"
+      },
+      "when": {
+        "bottom_left": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
     },
-    "type=topleft_bottomright": {
-      "model": "ornamental:block/grass/grass_pole_cross"
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_vertical",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
     },
-    "type=topleft_corner": {
-      "model": "ornamental:block/grass/grass_pole_corner"
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_vertical",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "true"
+      }
     },
-    "type=topleft_fill": {
-      "model": "ornamental:block/grass/grass_stairs_straight_side"
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_vertical",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false"
+      }
     },
-    "type=topright_bottomleft": {
-      "model": "ornamental:block/grass/grass_pole_cross",
-      "uvlock": true,
-      "y": 90
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_corner"
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
     },
-    "type=topright_corner": {
-      "model": "ornamental:block/grass/grass_pole_corner",
-      "uvlock": true,
-      "y": 90
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_corner",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
     },
-    "type=topright_fill": {
-      "model": "ornamental:block/grass/grass_stairs_straight_side",
-      "uvlock": true,
-      "y": 90
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_corner",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/grass/grass_pole_corner",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/grass_block"
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
     }
-  }
+  ]
 }

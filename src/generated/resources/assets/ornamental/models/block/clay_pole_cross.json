@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/pole_cross",
-  "textures": {
-    "bottom": "minecraft:block/clay",
-    "side": "minecraft:block/clay",
-    "top": "minecraft:block/clay"
-  }
-}

@@ -96,29 +96,29 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("top", top);
     }
 
+    public BlockModelBuilder poleWhole(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "pole_whole")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder poleHorizon(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "pole_horizontal")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder poleVertical(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "pole_vertical")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
     public BlockModelBuilder poleCorner(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
         return parent(name, "pole_corner")
-                .texture("side", side)
-                .texture("top", top)
-                .texture("bottom", bottom);
-    }
-
-    public BlockModelBuilder slabVertical(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        return parent(name, "slab_vertical")
-                .texture("side", side)
-                .texture("top", top)
-                .texture("bottom", bottom);
-    }
-
-    public BlockModelBuilder poleCross(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        return parent(name, "pole_cross")
-                .texture("side", side)
-                .texture("top", top)
-                .texture("bottom", bottom);
-    }
-
-    public BlockModelBuilder stairsStraightSide(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        return parent(name, "stairs_straight_side")
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
@@ -185,6 +185,10 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder forceRenderType(String name, ResourceLocation parent, ResourceLocation renderType) {
+        return withExistingParent(name, parent).renderType(renderType);
     }
 
     private BlockModelBuilder parent(String name, String parent) {

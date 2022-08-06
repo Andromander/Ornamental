@@ -4,7 +4,7 @@
       "model": "ornamental:block/ice_slab"
     },
     "type=double": {
-      "model": "minecraft:block/ice"
+      "model": "ornamental:block/ice"
     },
     "type=top": {
       "model": "ornamental:block/ice_slab_top"
