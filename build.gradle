@@ -16,6 +16,10 @@ version = project.artifactor_minecraft_version + "-" + project.artifactor_mod_ve
 group = project.mod_group
 archivesBaseName = project.archives_base_name
 
+if (hasProperty("CIVersion")) {
+    version += "-" + CIVersion
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Need this here so eclipse task generates correctly.
 
 minecraft {
