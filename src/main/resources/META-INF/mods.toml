@@ -1,14 +1,14 @@
 modLoader="javafml" #mandatory
-loaderVersion="[40,)" #mandatory
+loaderVersion="[41.1,)" #mandatory
 issueTrackerURL="https://github.com/Andromander/Ornamental/issues" #optional
 license="GNU Lesser General Public v3"
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="ornamental" #mandatory
-version="4.8.2" #mandatory
+version="4.9" #mandatory
 displayName="Ornamental" #mandatory
-updateJSONURL="https://raw.githubusercontent.com/Andromander/Ornamental/1.18.x/update.json" #optional
+updateJSONURL="https://raw.githubusercontent.com/Andromander/Ornamental/1.19.x/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ornamental" #optional
 #logoFile="" #optional
 credits="Androsa, or AlphaLeaf, your choice." #optional
@@ -22,12 +22,12 @@ This mod provides decorative blocks of usually absurd materials.
 [[dependencies.ornamental]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
-    versionRange="[40,)" #mandatory
+    versionRange="[41.1,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.ornamental]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,]"
+    versionRange="[1.19,]"
     ordering="NONE"
     side="BOTH"

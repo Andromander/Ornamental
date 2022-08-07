@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = project.mc_version + "-" + project.mod_version
+version = project.artifactor_mc_version + "-" + project.artifactor_mod_version
 group = project.mod_group
 archivesBaseName = project.archives_base_name
 
@@ -84,21 +84,68 @@ repositories {
 }
 
 dependencies {
-//    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+//    compileOnly fg.deobf("mezz.jei:jei-${artifactor_mc_version}-forge-api:${jei_version}")
+//    runtimeOnly fg.deobf("mezz.jei:jei-${artifactor_mc_version}-forge:${jei_version}")
 
-    minecraft "net.minecraftforge:forge:${project.mc_version}-${project.forge_version}"
+    minecraft "net.minecraftforge:forge:${project.artifactor_mc_version}-${project.artifactor_forge_version}"
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
-        attributes(["Specification-Title": "ornamental",
+        attributes(["Specification-Title": "Ornamental",
                     "Specification-Vendor": "Androsa",
-                    "Specification-Version": "1", // We are version 1 of the modlauncher specification
+                    "Specification-Version": "${version}",
                     "Implementation-Title": project.name,
                     "Implementation-Version": "${version}",
                     "Implementation-Vendor" :"Androsa",
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
     }
+}
+
+def secrets = new Properties()
+def secretsFile = file('secrets.properties')
+if (secretsFile.exists()) {
+    secretsFile.withInputStream {
+        stream -> secrets.load(stream)
+    }
+    fileTree("secrets").matching {
+        include "**/*.properties"
+    }.each {
+        File file ->
+            file.withInputStream {
+                stream -> secrets.load(stream)
+            }
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+def mavenUser = hasProperty("CIMUser") ? CIMUser : secrets.getProperty("maven_username")
+def mavenToken = hasProperty("CIMToken") ? CIMToken : secrets.getProperty("maven_password")
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            afterEvaluate {
+                artifact project.jar
+                artifact project.sourceJar
+            }
+            setGroupId 'androsa'
+            setArtifactId project.mod_id
+        }
+    }
+    repositories {
+        maven {
+            url "https://maven.tamaized.com/releases"
+            credentials {
+                username mavenUser
+                password mavenToken
+            }
+        }
+    }
+}
+
+task sourceJar(type: Jar, dependsOn: 'classes') {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
