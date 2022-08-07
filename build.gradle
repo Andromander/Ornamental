@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = project.artifactor_mc_version + "-" + project.artifactor_mod_version
+version = project.artifactor_minecraft_version + "-" + project.artifactor_mod_version
 group = project.mod_group
 archivesBaseName = project.archives_base_name
 
@@ -84,10 +84,10 @@ repositories {
 }
 
 dependencies {
-//    compileOnly fg.deobf("mezz.jei:jei-${artifactor_mc_version}-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${artifactor_mc_version}-forge:${jei_version}")
+//    compileOnly fg.deobf("mezz.jei:jei-${artifactor_minecraft_version}-forge-api:${jei_version}")
+//    runtimeOnly fg.deobf("mezz.jei:jei-${artifactor_minecraft_version}-forge:${jei_version}")
 
-    minecraft "net.minecraftforge:forge:${project.artifactor_mc_version}-${project.artifactor_forge_version}"
+    minecraft "net.minecraftforge:forge:${project.artifactor_minecraft_version}-${project.artifactor_forge_version}"
 }
 
 jar {
