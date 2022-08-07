@@ -57,6 +57,9 @@
     "4.8.1": " • Fixed Stairs causing a crash when placed.\n • Fix Saddle Doors using the wrong burn time.\n • Fix Dirt Path Saddle Doors not being named properly.",
     "4.8.2": " • Fixed a potential crash with burn times not being checked properly."
   },
+  "1.19": {
+    "4.9.4": "Ornamental has now been ported to 1.19! This version also works with 1.19.1 and 1.19.2, maybe other future 1.19.x versions if they make more fixes.\n • Poles and Beams have been rewritten. There should be no visible change in how they function, however some bugs may still be present. Old worlds with Poles and Beams will not be corrupted, however they will not be visible in the world. Proceed with caution.\n • Ornamental now has a maven. For those that wish to create an addon, instructions will soon be detailed on how to set up Ornamental in your workspace via maven.\n • As part of a recent Forge update, a block's RenderType is now determined by models. Texture pack creators, go ham.\n • Cleaned up block and item model generation. This should now be more streamlined and modular for addon creators.\n • Removed the config file. The only options that existed were disabling features, but this only hid the item from inventories, made items uncraftable, and stopped Golems from forming. As these can be configured with other mods or datapacks, and due to config loading time issues, this configuration feature has been removed."
+  },
 
   "promos": {
     "1.12.2-latest": "1.5",
@@ -82,6 +85,8 @@
     "1.18-latest": "4.7",
     "1.18-recommended": "4.7",
     "1.18.2-latest": "4.8.1",
-    "1.18.2-recommended": "4.8.1"
+    "1.18.2-recommended": "4.8.1",
+    "1.19-latest": "4.8.1",
+    "1.19-recommended": "4.8.1"
   }
 }
