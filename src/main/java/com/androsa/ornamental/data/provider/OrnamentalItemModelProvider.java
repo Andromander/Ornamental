@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data.provider;
 
+import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -17,6 +18,10 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
 
     public OrnamentalItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
         super(generator, modid, helper);
+    }
+
+    public ResourceLocation ornamentLoc(String path) {
+        return new ResourceLocation(OrnamentalMod.MODID, path);
     }
 
     public String blockName(Supplier<? extends Block> block) {
@@ -49,7 +54,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemFence(Supplier<? extends Block> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        existingParent(block, modLoc("block/util/fence_inventory"))
+        existingParent(block, ornamentLoc("block/util/fence_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
@@ -80,7 +85,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemPole(Supplier<? extends Block> block, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, Optional<ResourceLocation> type) {
-        ItemModelBuilder builder = existingParent(block, modLoc("block/util/pole_inventory"))
+        ItemModelBuilder builder = existingParent(block, ornamentLoc("block/util/pole_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
@@ -104,7 +109,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemBeam(Supplier<? extends Block> block, ResourceLocation top, ResourceLocation bottom, ResourceLocation side) {
-        existingParent(block, modLoc("block/util/beam_inventory"))
+        existingParent(block, ornamentLoc("block/util/beam_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
@@ -127,7 +132,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemWall(Supplier<? extends Block> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        existingParent(block, modLoc("block/util/wall_inventory"))
+        existingParent(block, ornamentLoc("block/util/wall_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
@@ -154,7 +159,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public void blockItemSaddleDoor(Supplier<? extends Block> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        existingParent(block, modLoc("block/util/saddle_door_inventory"))
+        existingParent(block, ornamentLoc("block/util/saddle_door_inventory"))
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
