@@ -1,12 +1,12 @@
 modLoader="javafml" #mandatory
-loaderVersion="[41.1,)" #mandatory
+loaderVersion="[41,)" #mandatory
 issueTrackerURL="https://github.com/Andromander/Ornamental/issues" #optional
 license="GNU Lesser General Public v3"
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 modId="ornamental" #mandatory
-version="4.9" #mandatory
+version="${file.jarVersion}" #mandatory
 displayName="Ornamental" #mandatory
 updateJSONURL="https://raw.githubusercontent.com/Andromander/Ornamental/1.19.x/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ornamental" #optional
