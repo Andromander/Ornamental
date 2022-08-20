@@ -303,20 +303,20 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void pole(RegistryObject<? extends OrnamentPole> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        String baseName = block.get().getBuilder().name;
+        String name = block.getId().getPath();
         ModelFile whole, horizon, vertical, corner, fullblock;
 
         if (type == SOLID) {
-            whole = models().poleWhole(baseName + "_pole_whole", side, top, bottom);
-            horizon = models().poleHorizon(baseName + "_pole_horizontal", side, top, bottom);
-            vertical = models().poleVertical(baseName + "_pole_vertical", side, top, bottom);
-            corner = models().poleCorner(baseName + "_pole_corner", side, top, bottom);
+            whole = models().poleWhole(name + "_whole", side, top, bottom);
+            horizon = models().poleHorizon(name + "_horizontal", side, top, bottom);
+            vertical = models().poleVertical(name + "_vertical", side, top, bottom);
+            corner = models().poleCorner(name + "_corner", side, top, bottom);
             fullblock = models().getExistingFile(full);
         } else {
-            whole = models().poleWhole(baseName + "_pole_whole", side, top, bottom).renderType(type);
-            horizon = models().poleHorizon(baseName + "_pole_horizontal", side, top, bottom).renderType(type);
-            vertical = models().poleVertical(baseName + "_pole_vertical", side, top, bottom).renderType(type);
-            corner = models().poleCorner(baseName + "_pole_corner", side, top, bottom).renderType(type);
+            whole = models().poleWhole(name + "_whole", side, top, bottom).renderType(type);
+            horizon = models().poleHorizon(name + "_horizontal", side, top, bottom).renderType(type);
+            vertical = models().poleVertical(name + "_vertical", side, top, bottom).renderType(type);
+            corner = models().poleCorner(name + "_corner", side, top, bottom).renderType(type);
             fullblock = models().forceRenderType(full.getPath(), full, type);
         }
 
