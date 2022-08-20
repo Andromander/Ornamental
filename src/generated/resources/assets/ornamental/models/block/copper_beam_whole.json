@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/beam_whole",
+  "textures": {
+    "bottom": "minecraft:block/copper_block",
+    "side": "minecraft:block/copper_block",
+    "top": "minecraft:block/copper_block"
+  }
+}

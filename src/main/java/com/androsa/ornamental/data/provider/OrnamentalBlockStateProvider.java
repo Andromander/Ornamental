@@ -344,20 +344,20 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void beam(RegistryObject<? extends OrnamentBeam> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        String baseName = block.get().getBuilder().name;
+        String name = block.getId().getPath();
         ModelFile whole, horizon, vertical, corner, fullblock;
 
         if (type == SOLID) {
-            whole = models().poleWhole(baseName + "_pole_whole", side, top, bottom);
-            horizon = models().poleHorizon(baseName + "_pole_horizontal", side, top, bottom);
-            vertical = models().poleVertical(baseName + "_pole_vertical", side, top, bottom);
-            corner = models().poleCorner(baseName + "_pole_corner", side, top, bottom);
+            whole = models().beamWhole(name + "_whole", side, top, bottom);
+            horizon = models().beamHorizontal(name + "_horizontal", side, top, bottom);
+            vertical = models().beamVertical(name + "_vertical", side, top, bottom);
+            corner = models().beamCorner(name + "_corner", side, top, bottom);
             fullblock = models().getExistingFile(full);
         } else {
-            whole = models().poleWhole(baseName + "_pole_whole", side, top, bottom).renderType(type);
-            horizon = models().poleHorizon(baseName + "_pole_horizontal", side, top, bottom).renderType(type);
-            vertical = models().poleVertical(baseName + "_pole_vertical", side, top, bottom).renderType(type);
-            corner = models().poleCorner(baseName + "_pole_corner", side, top, bottom).renderType(type);
+            whole = models().beamWhole(name + "_whole", side, top, bottom).renderType(type);
+            horizon = models().beamHorizontal(name + "_horizontal", side, top, bottom).renderType(type);
+            vertical = models().beamVertical(name + "_vertical", side, top, bottom).renderType(type);
+            corner = models().beamCorner(name + "_corner", side, top, bottom).renderType(type);
             fullblock = models().forceRenderType(full.getPath(), full, type);
         }
 
@@ -527,38 +527,38 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
 
     public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile whole, ModelFile horizon, ModelFile vertical, ModelFile corner, ModelFile fullblock) {
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
-        beamModelWhole(builder, whole, 270, 90, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 270, 0, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 270, 270, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 270, 180, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 90, 90, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 90, 0, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 90, 270, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 90, 180, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 270, 90, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 270, 0, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 270, 270, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, horizon, 270, 180, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, horizon, 90, 90, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, horizon, 90, 0, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, horizon, 90, 270, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, horizon, 90, 180, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 270, 90, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 270, 0, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 270, 270, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, vertical, 270, 180, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, vertical, 90, 90, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, vertical, 90, 0, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, vertical, 90, 270, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, vertical, 90, 180, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelCorner(builder, corner, 270, 90, Direction.Axis.X, true, true, true, false);
-        beamModelCorner(builder, corner, 270, 0, Direction.Axis.Z, true, true, true, false);
-        beamModelCorner(builder, corner, 270, 270, Direction.Axis.X, true, true, false, true);
-        beamModelCorner(builder, corner, 270, 180, Direction.Axis.Z, true, true, false, true);
-        beamModelCorner(builder, corner, 90, 270, Direction.Axis.X, false, true, true, true);
-        beamModelCorner(builder, corner, 90, 180, Direction.Axis.Z, false, true, true, true);
-        beamModelCorner(builder, corner, 90, 90, Direction.Axis.X, true, false, true, true);
-        beamModelCorner(builder, corner, 90, 0, Direction.Axis.Z, true, false, true, true);
+        beamModelWhole(builder, whole, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, horizon, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, horizon, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, horizon, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, horizon, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, horizon, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vertical, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vertical, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        beamModelLength(builder, vertical, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, vertical, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        beamModelLength(builder, vertical, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, vertical, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        beamModelLength(builder, vertical, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelLength(builder, vertical, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        beamModelCorner(builder, corner, 180, 180, Direction.Axis.X, true, true, true, false);
+        beamModelCorner(builder, corner, 180, 90, Direction.Axis.Z, true, true, true, false);
+        beamModelCorner(builder, corner, 180, 0, Direction.Axis.X, true, true, false, true);
+        beamModelCorner(builder, corner, 180, 270, Direction.Axis.Z, true, true, false, true);
+        beamModelCorner(builder, corner, 0, 180, Direction.Axis.X, false, true, true, true);
+        beamModelCorner(builder, corner, 0, 90, Direction.Axis.Z, false, true, true, true);
+        beamModelCorner(builder, corner, 0, 0, Direction.Axis.X, true, false, true, true);
+        beamModelCorner(builder, corner, 0, 270, Direction.Axis.Z, true, false, true, true);
 
         builder.part()
                 .modelFile(fullblock)

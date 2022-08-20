@@ -1,0 +1,18 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 8, 8 ],
+      "faces": {
+        "down":  { "texture": "#bottom", "cullface": "down" },
+        "north": { "texture": "#side", "cullface": "north" },
+        "west":  { "texture": "#side", "cullface": "west" },
+        "east":  { "texture": "#side", "cullface": "east" }
+      }
+    }
+  ]
+}

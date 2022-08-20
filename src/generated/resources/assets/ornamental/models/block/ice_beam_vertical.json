@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_vertical",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "minecraft:block/ice",
+    "side": "minecraft:block/ice",
+    "top": "minecraft:block/ice"
+  }
+}

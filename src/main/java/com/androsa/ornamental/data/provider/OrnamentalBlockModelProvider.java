@@ -124,15 +124,29 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder beamCorner(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        return parent(name, "beam_corner")
+    public BlockModelBuilder beamWhole(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_whole")
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
     }
 
-    public BlockModelBuilder beamCross(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        return parent(name, "beam_cross")
+    public BlockModelBuilder beamHorizontal(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_horizontal")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder beamVertical(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_vertical")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder beamCorner(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "beam_corner")
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
