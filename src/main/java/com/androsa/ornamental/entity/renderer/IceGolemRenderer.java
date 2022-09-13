@@ -24,7 +24,7 @@ public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGol
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         if (entityName == null) {
-            entityName = ForgeRegistries.ENTITY_TYPES.getRegistryName().getPath();
+            entityName = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getPath();
         }
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
