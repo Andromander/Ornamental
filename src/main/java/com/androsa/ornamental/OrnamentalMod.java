@@ -6,9 +6,13 @@ import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -24,6 +28,8 @@ import org.apache.logging.log4j.Logger;
 public class OrnamentalMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
+
+    public static final TagKey<Block> GRASS_GOLEM_FLOWER_PLANTABLE = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "grass_golem_flower_plantable"));
 
     public OrnamentalMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);

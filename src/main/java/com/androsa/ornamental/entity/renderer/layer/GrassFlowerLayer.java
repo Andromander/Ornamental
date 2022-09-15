@@ -20,14 +20,14 @@ public class GrassFlowerLayer<T extends GrassGolem, M extends DirtGolemModel<T>>
 
     @Override
     public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
-        if (!entity.isInvisible() && entity.hasPoppy()) {
+        if (!entity.isInvisible() && entity.getFlower() != null) {
             stack.pushPose();
             this.getParentModel().getHead().translateAndRotate(stack);
             stack.translate(0.0D, -0.43D, -0.05D);
             stack.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.POPPY.defaultBlockState(), stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.getFlower(), stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
             stack.popPose();
         }
     }

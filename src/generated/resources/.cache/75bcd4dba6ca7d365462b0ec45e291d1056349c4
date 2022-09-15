@@ -1,4 +1,4 @@
-// 1.19.1	2022-08-02T13:03:12.3480754	Tags for minecraft:block
+// 1.19.1	2022-09-14T23:24:42.2793444	Tags for minecraft:block
 e68e460155b15dff36e3d2b590abe3147ee33b57 data/forge/tags/blocks/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/blocks/fences/nether_brick.json
 00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/forge/tags/blocks/fence_gates.json
@@ -19,3 +19,4 @@ c48c1d71c4cefde36ee5f72e0c00d445e336e578 data/minecraft/tags/blocks/snow.json
 be6a3424f5b1ff277d98600b79b4d662d200fa19 data/minecraft/tags/blocks/stairs.json
 cc55d7628e765625cff62eac1ffbb9732df771ea data/minecraft/tags/blocks/trapdoors.json
 a322dc4900d6929660d071e30da499bee47cd1d5 data/minecraft/tags/blocks/walls.json
+5ada63323e7c618396492fa76dfed21cda818478 data/ornamental/tags/blocks/grass_golem_flower_plantable.json

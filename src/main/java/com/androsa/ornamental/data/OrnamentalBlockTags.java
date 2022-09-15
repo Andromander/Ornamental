@@ -140,5 +140,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(BlockTags.NEEDS_DIAMOND_TOOL, DIAMOND_REQUIRED);
 
         tag(Tags.Blocks.FENCES_NETHER_BRICK).add(ModBlocks.red_nether_brick_fence.get());
+
+        tag(OrnamentalMod.GRASS_GOLEM_FLOWER_PLANTABLE).addTag(BlockTags.SMALL_FLOWERS);
     }
 }

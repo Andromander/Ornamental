@@ -1,8 +1,10 @@
 package com.androsa.ornamental.entity;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -28,12 +30,13 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
 
 public class GrassGolem extends DirtGolem {
 
-    protected static final EntityDataAccessor<Boolean> HAS_POPPY = SynchedEntityData.defineId(GrassGolem.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Optional<BlockState>> HAS_FLOWER = SynchedEntityData.defineId(GrassGolem.class, EntityDataSerializers.BLOCK_STATE);
 
     public GrassGolem(EntityType<? extends GrassGolem> entity, Level world) {
         super(entity, world);
@@ -61,27 +64,37 @@ public class GrassGolem extends DirtGolem {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(HAS_POPPY, false);
+        this.entityData.define(HAS_FLOWER, Optional.empty());
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putBoolean("has_poppy", this.hasPoppy());
+        BlockState state = this.getFlower();
+        if (state != null) {
+            nbt.put("flower", NbtUtils.writeBlockState(state));
+        }
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
-        this.setPoppy(nbt.getBoolean("has_poppy"));
+        BlockState state = null;
+        if (nbt.contains("flower", 10)) {
+            state = NbtUtils.readBlockState(nbt.getCompound("flower"));
+            if (state.isAir()) {
+                state = null;
+            }
+        }
+        this.setFlower(state);
     }
 
-    public boolean hasPoppy() {
-        return this.entityData.get(HAS_POPPY);
+    public BlockState getFlower() {
+        return this.entityData.get(HAS_FLOWER).orElse(null);
     }
 
-    public void setPoppy(boolean flag) {
-        this.entityData.set(HAS_POPPY, flag);
+    public void setFlower(BlockState state) {
+        this.entityData.set(HAS_FLOWER, Optional.ofNullable(state));
     }
 
     @Override
@@ -99,10 +112,12 @@ public class GrassGolem extends DirtGolem {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
-        if (itemstack.is(Items.POPPY) && !this.hasPoppy()) {
-            setPoppy(true);
-            if (!player.getAbilities().instabuild) {
-                itemstack.shrink(1);
+        if (item instanceof BlockItem blockitem) {
+            if (blockitem.getBlock().defaultBlockState().is(OrnamentalMod.GRASS_GOLEM_FLOWER_PLANTABLE) && this.getFlower() == null) {
+                this.setFlower(blockitem.getBlock().defaultBlockState());
+                if (!player.getAbilities().instabuild) {
+                    itemstack.shrink(1);
+                }
             }
         } else if (item instanceof ShovelItem) {
             PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level);
@@ -127,16 +142,17 @@ public class GrassGolem extends DirtGolem {
     }
 
     @Override
-    protected void dropAllDeathLoot(DamageSource source) {
-        super.dropAllDeathLoot(source);
-        if (hasPoppy()) {
-            spawnAtLocation(new ItemStack(Blocks.POPPY), 1);
+    protected void dropCustomDeathLoot(DamageSource source, int lootlevel, boolean playerhurt) {
+        super.dropCustomDeathLoot(source, lootlevel, playerhurt);
+        BlockState state = this.getFlower();
+        if (state != null) {
+            this.spawnAtLocation(state.getBlock());
         }
     }
 
     private void addFreshEntity(Mob entity) {
-        if (this.hasPoppy()) {
-            this.spawnAtLocation(new ItemStack(Items.POPPY));
+        if (this.getFlower() != null) {
+            this.spawnAtLocation(new ItemStack(this.getFlower().getBlock().asItem()));
         }
 
         if (!this.level.isClientSide()) {
@@ -156,6 +172,11 @@ public class GrassGolem extends DirtGolem {
             this.level.addFreshEntity(entity);
             this.discard();
         }
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return super.requiresCustomPersistence() || this.getFlower() != null;
     }
 
     @Override
