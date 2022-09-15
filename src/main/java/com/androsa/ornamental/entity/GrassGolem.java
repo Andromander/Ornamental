@@ -1,7 +1,7 @@
 package com.androsa.ornamental.entity;
 
-import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModEntities;
+import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -113,7 +113,7 @@ public class GrassGolem extends DirtGolem {
         Item item = itemstack.getItem();
 
         if (item instanceof BlockItem blockitem) {
-            if (blockitem.getBlock().defaultBlockState().is(OrnamentalMod.GRASS_GOLEM_FLOWER_PLANTABLE) && this.getFlower() == null) {
+            if (blockitem.getBlock().defaultBlockState().is(ModTags.Blocks.GRASS_GOLEM_FLOWER_PLANTABLE) && this.getFlower() == null) {
                 this.setFlower(blockitem.getBlock().defaultBlockState());
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);

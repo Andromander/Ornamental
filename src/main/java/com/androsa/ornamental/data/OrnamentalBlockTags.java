@@ -3,6 +3,7 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalBlockTagProvider;
+import com.androsa.ornamental.registry.ModTags;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
@@ -141,6 +142,6 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
 
         tag(Tags.Blocks.FENCES_NETHER_BRICK).add(ModBlocks.red_nether_brick_fence.get());
 
-        tag(OrnamentalMod.GRASS_GOLEM_FLOWER_PLANTABLE).addTag(BlockTags.SMALL_FLOWERS);
+        tag(ModTags.Blocks.GRASS_GOLEM_FLOWER_PLANTABLE).addTag(BlockTags.SMALL_FLOWERS);
     }
 }

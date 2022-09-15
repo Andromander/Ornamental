@@ -29,8 +29,6 @@ public class OrnamentalMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
 
-    public static final TagKey<Block> GRASS_GOLEM_FLOWER_PLANTABLE = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "grass_golem_flower_plantable"));
-
     public OrnamentalMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
