@@ -1,0 +1,33 @@
+{
+  "values": [
+    "ornamental:iron_beam",
+    "ornamental:gold_beam",
+    "ornamental:diamond_beam",
+    "ornamental:emerald_beam",
+    "ornamental:lapis_beam",
+    "ornamental:obsidian_beam",
+    "ornamental:coal_beam",
+    "ornamental:redstone_beam",
+    "ornamental:missingno_beam",
+    "ornamental:clay_beam",
+    "ornamental:dirt_beam",
+    "ornamental:grass_beam",
+    "ornamental:hay_beam",
+    "ornamental:dirt_path_beam",
+    "ornamental:brick_beam",
+    "ornamental:quartz_beam",
+    "ornamental:bone_beam",
+    "ornamental:nether_brick_beam",
+    "ornamental:red_nether_brick_beam",
+    "ornamental:snow_beam",
+    "ornamental:ice_beam",
+    "ornamental:packed_ice_beam",
+    "ornamental:blue_ice_beam",
+    "ornamental:netherite_beam",
+    "ornamental:amethyst_beam",
+    "ornamental:copper_beam",
+    "ornamental:exposed_copper_beam",
+    "ornamental:weathered_copper_beam",
+    "ornamental:oxidized_copper_beam"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "values": [
+    "ornamental:iron_saddle_door",
+    "ornamental:gold_saddle_door",
+    "ornamental:diamond_saddle_door",
+    "ornamental:emerald_saddle_door",
+    "ornamental:lapis_saddle_door",
+    "ornamental:obsidian_saddle_door",
+    "ornamental:coal_saddle_door",
+    "ornamental:redstone_saddle_door",
+    "ornamental:missingno_saddle_door",
+    "ornamental:clay_saddle_door",
+    "ornamental:dirt_saddle_door",
+    "ornamental:grass_saddle_door",
+    "ornamental:hay_saddle_door",
+    "ornamental:dirt_path_saddle_door",
+    "ornamental:brick_saddle_door",
+    "ornamental:quartz_saddle_door",
+    "ornamental:bone_saddle_door",
+    "ornamental:nether_brick_saddle_door",
+    "ornamental:red_nether_brick_saddle_door",
+    "ornamental:snow_saddle_door",
+    "ornamental:ice_saddle_door",
+    "ornamental:packed_ice_saddle_door",
+    "ornamental:blue_ice_saddle_door",
+    "ornamental:netherite_saddle_door",
+    "ornamental:amethyst_saddle_door",
+    "ornamental:copper_saddle_door",
+    "ornamental:exposed_copper_saddle_door",
+    "ornamental:weathered_copper_saddle_door",
+    "ornamental:oxidized_copper_saddle_door"
+  ]
+}

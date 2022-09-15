@@ -1,4 +1,4 @@
-// 1.19.1	2022-08-02T13:03:12.3420699	Tags for minecraft:item
+// 1.19.1	2022-09-15T21:40:25.0236704	Tags for minecraft:item
 e68e460155b15dff36e3d2b590abe3147ee33b57 data/forge/tags/items/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/items/fences/nether_brick.json
 00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/forge/tags/items/fence_gates.json
@@ -9,3 +9,6 @@ b96769646a5bfa38feadc8b5f568ff260ece20dc data/minecraft/tags/items/piglin_loved.
 be6a3424f5b1ff277d98600b79b4d662d200fa19 data/minecraft/tags/items/stairs.json
 cc55d7628e765625cff62eac1ffbb9732df771ea data/minecraft/tags/items/trapdoors.json
 a322dc4900d6929660d071e30da499bee47cd1d5 data/minecraft/tags/items/walls.json
+264268da3f5c93344938adca7ad084ae636ab632 data/ornamental/tags/items/beams.json
+33aa3bb64995e89bed8cd9439c96cb85d04a96ab data/ornamental/tags/items/poles.json
+df8da7c2872bccaba94dc6fe2019697affde7c03 data/ornamental/tags/items/saddle_doors.json

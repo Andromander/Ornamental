@@ -1,0 +1,33 @@
+{
+  "values": [
+    "ornamental:iron_pole",
+    "ornamental:gold_pole",
+    "ornamental:diamond_pole",
+    "ornamental:emerald_pole",
+    "ornamental:lapis_pole",
+    "ornamental:obsidian_pole",
+    "ornamental:coal_pole",
+    "ornamental:redstone_pole",
+    "ornamental:missingno_pole",
+    "ornamental:clay_pole",
+    "ornamental:dirt_pole",
+    "ornamental:grass_pole",
+    "ornamental:hay_pole",
+    "ornamental:dirt_path_pole",
+    "ornamental:brick_pole",
+    "ornamental:quartz_pole",
+    "ornamental:bone_pole",
+    "ornamental:nether_brick_pole",
+    "ornamental:red_nether_brick_pole",
+    "ornamental:snow_pole",
+    "ornamental:ice_pole",
+    "ornamental:packed_ice_pole",
+    "ornamental:blue_ice_pole",
+    "ornamental:netherite_pole",
+    "ornamental:amethyst_pole",
+    "ornamental:copper_pole",
+    "ornamental:exposed_copper_pole",
+    "ornamental:weathered_copper_pole",
+    "ornamental:oxidized_copper_pole"
+  ]
+}

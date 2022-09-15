@@ -17,6 +17,12 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
 
     private static final ImmutableSet<Supplier<? extends Block>> BEACON_BASES = ImmutableSet.of(
             ModBlocks.iron_stairs, ModBlocks.gold_stairs, ModBlocks.diamond_stairs, ModBlocks.emerald_stairs, ModBlocks.netherite_stairs);
+    private static final ImmutableSet<Supplier<? extends Block>> BEAMS = ImmutableSet.of(
+            ModBlocks.iron_beam, ModBlocks.gold_beam, ModBlocks.diamond_beam, ModBlocks.emerald_beam, ModBlocks.lapis_beam, ModBlocks.obsidian_beam, ModBlocks.coal_beam,
+            ModBlocks.redstone_beam, ModBlocks.missingno_beam, ModBlocks.clay_beam, ModBlocks.dirt_beam, ModBlocks.grass_beam, ModBlocks.hay_beam, ModBlocks.path_beam,
+            ModBlocks.brick_beam, ModBlocks.quartz_beam, ModBlocks.bone_beam, ModBlocks.nether_brick_beam, ModBlocks.red_nether_brick_beam, ModBlocks.snow_beam, ModBlocks.ice_beam,
+            ModBlocks.packed_ice_beam, ModBlocks.blue_ice_beam, ModBlocks.netherite_beam, ModBlocks.amethyst_beam, ModBlocks.copper_beam, ModBlocks.exposed_copper_beam,
+            ModBlocks.weathered_copper_beam, ModBlocks.oxidized_copper_beam);
     private static final ImmutableSet<Supplier<? extends Block>> CRYSTAL_SOUNDS = ImmutableSet.of(
             ModBlocks.amethyst_stairs, ModBlocks.amethyst_slab, ModBlocks.amethyst_fence, ModBlocks.amethyst_trapdoor, ModBlocks.amethyst_fence_gate,
             ModBlocks.amethyst_door, ModBlocks.amethyst_pole, ModBlocks.amethyst_beam, ModBlocks.amethyst_wall, ModBlocks.amethyst_saddle_door);
@@ -42,6 +48,19 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     private static final ImmutableSet<Supplier<? extends Block>> PIGLIN_GUARDED = ImmutableSet.of(
             ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate,
             ModBlocks.gold_door, ModBlocks.gold_pole, ModBlocks.gold_beam, ModBlocks.gold_wall, ModBlocks.gold_saddle_door);
+    private static final ImmutableSet<Supplier<? extends Block>> POLES = ImmutableSet.of(
+            ModBlocks.iron_pole, ModBlocks.gold_pole, ModBlocks.diamond_pole, ModBlocks.emerald_pole, ModBlocks.lapis_pole, ModBlocks.obsidian_pole, ModBlocks.coal_pole,
+            ModBlocks.redstone_pole, ModBlocks.missingno_pole, ModBlocks.clay_pole, ModBlocks.dirt_pole, ModBlocks.grass_pole, ModBlocks.hay_pole, ModBlocks.path_pole,
+            ModBlocks.brick_pole, ModBlocks.quartz_pole, ModBlocks.bone_pole, ModBlocks.nether_brick_pole, ModBlocks.red_nether_brick_pole, ModBlocks.snow_pole, ModBlocks.ice_pole,
+            ModBlocks.packed_ice_pole, ModBlocks.blue_ice_pole, ModBlocks.netherite_pole, ModBlocks.amethyst_pole, ModBlocks.copper_pole, ModBlocks.exposed_copper_pole,
+            ModBlocks.weathered_copper_pole, ModBlocks.oxidized_copper_pole);
+    private static final ImmutableSet<Supplier<? extends Block>> SADDLE_DOORS = ImmutableSet.of(
+            ModBlocks.iron_saddle_door, ModBlocks.gold_saddle_door, ModBlocks.diamond_saddle_door, ModBlocks.emerald_saddle_door, ModBlocks.lapis_saddle_door,
+            ModBlocks.obsidian_saddle_door, ModBlocks.coal_saddle_door, ModBlocks.redstone_saddle_door, ModBlocks.missingno_saddle_door, ModBlocks.clay_saddle_door,
+            ModBlocks.dirt_saddle_door, ModBlocks.grass_saddle_door, ModBlocks.hay_saddle_door, ModBlocks.path_saddle_door, ModBlocks.brick_saddle_door, ModBlocks.quartz_saddle_door,
+            ModBlocks.bone_saddle_door, ModBlocks.nether_brick_saddle_door, ModBlocks.red_nether_brick_saddle_door, ModBlocks.snow_saddle_door, ModBlocks.ice_saddle_door,
+            ModBlocks.packed_ice_saddle_door, ModBlocks.blue_ice_saddle_door, ModBlocks.netherite_saddle_door, ModBlocks.amethyst_saddle_door, ModBlocks.copper_saddle_door,
+            ModBlocks.exposed_copper_saddle_door, ModBlocks.weathered_copper_saddle_door, ModBlocks.oxidized_copper_saddle_door);
     private static final ImmutableSet<Supplier<? extends Block>> SLABS = ImmutableSet.of(
             ModBlocks.iron_slab, ModBlocks.gold_slab, ModBlocks.diamond_slab, ModBlocks.emerald_slab, ModBlocks.lapis_slab, ModBlocks.obsidian_slab, ModBlocks.coal_slab, ModBlocks.redstone_slab,
             ModBlocks.missingno_slab, ModBlocks.clay_slab, ModBlocks.dirt_slab, ModBlocks.grass_slab, ModBlocks.hay_slab, ModBlocks.path_slab, ModBlocks.bone_slab, ModBlocks.snow_slab, ModBlocks.ice_slab,
@@ -119,6 +138,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     @Override
     protected void addTags() {
         addToTag(BlockTags.BEACON_BASE_BLOCKS, BEACON_BASES);
+        addToTag(ModTags.Blocks.BEAMS, BEAMS);
         addToTag(BlockTags.CRYSTAL_SOUND_BLOCKS, CRYSTAL_SOUNDS);
         addToTag(BlockTags.DOORS, DOORS);
         addToTag(BlockTags.DRAGON_IMMUNE, DRAGON_IMMUNE);
@@ -127,6 +147,8 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(BlockTags.FENCE_GATES, FENCE_GATES);
         addToTag(Tags.Blocks.FENCE_GATES, FENCE_GATES);
         addToTag(BlockTags.GUARDED_BY_PIGLINS, PIGLIN_GUARDED);
+        addToTag(ModTags.Blocks.POLES, POLES);
+        addToTag(ModTags.Blocks.SADDLE_DOORS, SADDLE_DOORS);
         addToTag(BlockTags.SLABS, SLABS);
         addToTag(BlockTags.SNOW, SNOW);
         addToTag(BlockTags.STAIRS, STAIRS);

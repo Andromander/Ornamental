@@ -3,6 +3,7 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
+import com.androsa.ornamental.registry.ModTags;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -25,10 +26,13 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
     @Override
     protected void addTags() {
+        copy(ModTags.Blocks.BEAMS, ModTags.Items.BEAMS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);
         copy(Tags.Blocks.FENCES, Tags.Items.FENCES);
         copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
+        copy(ModTags.Blocks.POLES, ModTags.Items.POLES);
+        copy(ModTags.Blocks.SADDLE_DOORS, ModTags.Items.SADDLE_DOORS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
         copy(BlockTags.TRAPDOORS, ItemTags.TRAPDOORS);
