@@ -59,7 +59,8 @@
   },
   "1.19": {
     "4.9.4": "Ornamental has now been ported to 1.19! This version also works with 1.19.1 and 1.19.2, maybe other future 1.19.x versions if they make more fixes.\n • Poles and Beams have been rewritten. There should be no visible change in how they function, however some bugs may still be present. Old worlds with Poles and Beams will not be corrupted, however they will not be visible in the world. Proceed with caution.\n • Ornamental now has a maven. For those that wish to create an addon, instructions will soon be detailed on how to set up Ornamental in your workspace via maven.\n • As part of a recent Forge update, a block's RenderType is now determined by models. Texture pack creators, go ham.\n • Cleaned up block and item model generation. This should now be more streamlined and modular for addon creators.\n • Removed the config file. The only options that existed were disabling features, but this only hid the item from inventories, made items uncraftable, and stopped Golems from forming. As these can be configured with other mods or datapacks, and due to config loading time issues, this configuration feature has been removed.",
-    "4.9.8": "Just a few fixed and changes.\n • Fixed an issue with the game not loading on 1.19.\n • Fixed certain Beams not looking correct. This is evidence with blocks such as the Hay Beam where the top is on the side and vice-versa.\n • Mod version is now properly displayed in the mod menu.\n • Quality of life change for addons: fixed item data generation looking in the wrong place in some cases, such as looking for the Fence inventory model provided by Ornamental."
+    "4.9.8": "Just a few fixed and changes.\n • Fixed an issue with the game not loading on 1.19.\n • Fixed certain Beams not looking correct. This is evidence with blocks such as the Hay Beam where the top is on the side and vice-versa.\n • Mod version is now properly displayed in the mod menu.\n • Quality of life change for addons: fixed item data generation looking in the wrong place in some cases, such as looking for the Fence inventory model provided by Ornamental.",
+    "4.9.13": "• Grass Golems now accept all kinds of Small Flowers. This can be controlled with a tag, so now you can plant any plants you want onto your little grassy companion.\n • Created Tags for Poles, Beams, and Saddle Doors. These can be used for datapack purposes, or if a recipe needs to be a little different to prevent recipe conflicts.\n • Fixed Golems having missing textures."
   },
 
   "promos": {
@@ -87,7 +88,7 @@
     "1.18-recommended": "4.7",
     "1.18.2-latest": "4.8.1",
     "1.18.2-recommended": "4.8.1",
-    "1.19-latest": "4.9.8",
-    "1.19-recommended": "4.9.8"
+    "1.19-latest": "4.9.13",
+    "1.19-recommended": "4.9.13"
   }
 }
