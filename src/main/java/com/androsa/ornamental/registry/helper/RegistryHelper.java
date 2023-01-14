@@ -1,4 +1,4 @@
-package com.androsa.ornamental.registry;
+package com.androsa.ornamental.registry.helper;
 
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;

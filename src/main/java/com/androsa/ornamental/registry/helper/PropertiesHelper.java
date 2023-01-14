@@ -1,7 +1,6 @@
-package com.androsa.ornamental.registry;
+package com.androsa.ornamental.registry.helper;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 

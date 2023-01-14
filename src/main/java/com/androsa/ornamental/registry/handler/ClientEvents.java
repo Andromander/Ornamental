@@ -1,4 +1,4 @@
-package com.androsa.ornamental.registry;
+package com.androsa.ornamental.registry.handler;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.model.*;
@@ -6,6 +6,9 @@ import com.androsa.ornamental.entity.renderer.*;
 import com.androsa.ornamental.particle.CastingParticle;
 import com.androsa.ornamental.particle.ChargeSparkParticle;
 import com.androsa.ornamental.particle.OrnamentalBreakingParticle;
+import com.androsa.ornamental.registry.ModEntities;
+import com.androsa.ornamental.registry.ModParticles;
+import com.androsa.ornamental.registry.ModelLocations;
 import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;

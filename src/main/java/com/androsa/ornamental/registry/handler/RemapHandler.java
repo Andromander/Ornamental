@@ -1,4 +1,4 @@
-package com.androsa.ornamental.registry;
+package com.androsa.ornamental.registry.handler;
 
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.core.Registry;

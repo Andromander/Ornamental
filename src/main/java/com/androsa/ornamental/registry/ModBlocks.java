@@ -3,6 +3,7 @@ package com.androsa.ornamental.registry;
 import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.blocks.*;
+import com.androsa.ornamental.registry.helper.RegistryHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
