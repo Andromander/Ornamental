@@ -5,13 +5,13 @@ import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -31,7 +31,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level.isClientSide) {
-            this.level.explode(null, getX(), getY(), getZ(), 1, Explosion.BlockInteraction.NONE);
+            this.level.explode(null, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.NONE);
             this.discard();
         }
     }
@@ -70,7 +70,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

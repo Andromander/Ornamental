@@ -3,6 +3,7 @@ package com.androsa.ornamental.entity;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -81,7 +82,7 @@ public class GrassGolem extends DirtGolem {
         super.readAdditionalSaveData(nbt);
         BlockState state = null;
         if (nbt.contains("flower", 10)) {
-            state = NbtUtils.readBlockState(nbt.getCompound("flower"));
+            state = NbtUtils.readBlockState(this.level.holderLookup(Registries.BLOCK), nbt.getCompound("flower"));
             if (state.isAir()) {
                 state = null;
             }

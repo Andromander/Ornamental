@@ -5,8 +5,6 @@ import com.androsa.ornamental.entity.projectile.NetherBrick;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -75,6 +73,11 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.STONE_STEP, 1.0F, 1.0F);
+    }
+
+    @Override
+    public float getStepHeight() {
+        return super.getStepHeight();
     }
 
     @Override

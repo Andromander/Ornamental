@@ -5,27 +5,30 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
 import com.androsa.ornamental.registry.ModTags;
 import com.google.common.collect.ImmutableSet;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
-    private ImmutableSet<Supplier<? extends Block>> piglin_loved = ImmutableSet.of(
+    private final ImmutableSet<Supplier<? extends Block>> piglin_loved = ImmutableSet.of(
             ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door, ModBlocks.gold_pole, ModBlocks.gold_beam, ModBlocks.gold_wall, ModBlocks.gold_saddle_door);
 
-    public OrnamentalItemTags(DataGenerator generator, BlockTagsProvider blockTags, ExistingFileHelper helper) {
-        super(generator, OrnamentalMod.MODID, helper, blockTags);
+    public OrnamentalItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, BlockTagsProvider blockTags, ExistingFileHelper helper) {
+        super(output, provider, OrnamentalMod.MODID, helper, blockTags);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         copy(ModTags.Blocks.BEAMS, ModTags.Items.BEAMS);
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.FENCES, ItemTags.FENCES);

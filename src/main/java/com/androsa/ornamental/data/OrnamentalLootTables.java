@@ -4,52 +4,47 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.data.provider.GolemLootTableProvider;
 import com.androsa.ornamental.data.provider.OrnamentLootTableProvider;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OrnamentalLootTables extends LootTableProvider {
 
-    public OrnamentalLootTables(DataGenerator generator) {
-        super(generator);
-    }
-
-    @Override
-    public String getName() {
-        return "Ornamental Loot Tables";
-    }
-
-    @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return ImmutableList.of(Pair.of(BlockTables::new, LootContextParamSets.BLOCK), Pair.of(EntityTables::new, LootContextParamSets.ENTITY));
+    public OrnamentalLootTables(PackOutput output) {
+        super(output, Set.of(), List.of(
+                new SubProviderEntry(BlockTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(EntityTables::new, LootContextParamSets.ENTITY)
+        ));
     }
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> tableMap, ValidationContext tracker) { }
 
     public static class BlockTables extends OrnamentLootTableProvider {
+
+        protected BlockTables() {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        }
+
         @Override
-        protected void addTables() {
+        protected void generate() {
             dropSelf(ModBlocks.iron_stairs);
             dropSelf(ModBlocks.gold_stairs);
             dropSelf(ModBlocks.diamond_stairs);
@@ -371,8 +366,12 @@ public class OrnamentalLootTables extends LootTableProvider {
                 ModEntities.COPPER_GOLEM.get()
         );
 
+        protected EntityTables() {
+            super(FeatureFlags.REGISTRY.allFlags());
+        }
+
         @Override
-        protected void addTables() {
+        public void generate() {
             add(ModEntities.GOLD_GOLEM, flowerGolemTable(Blocks.DANDELION, Items.GOLD_INGOT));
             add(ModEntities.DIAMOND_GOLEM, flowerGolemTable(Blocks.BLUE_ORCHID, Items.DIAMOND));
             add(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.ALLIUM));
@@ -399,13 +398,13 @@ public class OrnamentalLootTables extends LootTableProvider {
         }
 
         @Override
-        protected Iterable<EntityType<?>> getKnownEntities() {
-            return ModEntities.ENTITIES.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        protected Stream<EntityType<?>> getKnownEntityTypes() {
+            return ModEntities.ENTITIES.getEntries().stream().map(Supplier::get);
         }
 
         @Override
-        protected boolean isNonLiving(EntityType<?> type) {
-            return !ALLOWED_ENTITIES.contains(type) && type.getCategory() == MobCategory.MISC;
+        protected boolean canHaveLootTable(EntityType<?> type) {
+            return ALLOWED_ENTITIES.contains(type) || type.getCategory() != MobCategory.MISC;
         }
     }
 }

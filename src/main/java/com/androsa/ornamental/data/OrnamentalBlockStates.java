@@ -7,7 +7,7 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -19,8 +19,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
-    public OrnamentalBlockStates(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, OrnamentalMod.MODID, helper);
+    public OrnamentalBlockStates(PackOutput output, ExistingFileHelper helper) {
+        super(output, OrnamentalMod.MODID, helper);
     }
 
     @Override

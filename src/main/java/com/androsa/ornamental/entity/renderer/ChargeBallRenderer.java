@@ -4,9 +4,7 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.projectile.ChargeBall;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -14,6 +12,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> {
     private static final ResourceLocation LOCATION = new ResourceLocation(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
@@ -33,7 +33,7 @@ public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> 
         stack.pushPose();
         stack.scale(1.0F, 1.0F, 1.0F);
         stack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        stack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+        stack.mulPose(Axis.YP.rotationDegrees(180.0F));
         PoseStack.Pose lastpose = stack.last();
         Matrix4f pose = lastpose.pose();
         Matrix3f normal = lastpose.normal();

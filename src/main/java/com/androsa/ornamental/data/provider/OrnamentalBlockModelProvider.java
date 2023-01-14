@@ -1,7 +1,7 @@
 package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.OrnamentalMod;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -9,8 +9,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
 
-    public OrnamentalBlockModelProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
-        super(generator, modid, helper);
+    public OrnamentalBlockModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+        super(output, modid, helper);
     }
 
     public BlockModelBuilder fencePost(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {

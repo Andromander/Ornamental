@@ -45,7 +45,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentTrapDoor(Properties props, OrnamentBuilder builder) {
-        super(props);
+        super(props, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN); //placeholders, these are provided with an OrnamentBuilder
         this.builder = builder;
     }
 

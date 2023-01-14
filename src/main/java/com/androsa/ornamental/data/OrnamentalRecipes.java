@@ -1,26 +1,23 @@
 package com.androsa.ornamental.data;
 
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
-import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
 
 public class OrnamentalRecipes extends OrnamentalRecipeProvider {
 
-    public OrnamentalRecipes(DataGenerator generator) {
-        super(generator, OrnamentalMod.MODID);
+    public OrnamentalRecipes(PackOutput output) {
+        super(output, OrnamentalMod.MODID);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         stairs(consumer, ModBlocks.iron_stairs, Blocks.IRON_BLOCK);
         stairs(consumer, ModBlocks.gold_stairs, Blocks.GOLD_BLOCK);
         stairs(consumer, ModBlocks.diamond_stairs, Blocks.DIAMOND_BLOCK);

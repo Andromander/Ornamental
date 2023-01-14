@@ -2,8 +2,6 @@ package com.androsa.ornamental.entity.model;
 
 import com.androsa.ornamental.entity.FlowerGolem;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public abstract class FlowerGolemModel<T extends FlowerGolem> extends AbstractGolemModel<T> {
 

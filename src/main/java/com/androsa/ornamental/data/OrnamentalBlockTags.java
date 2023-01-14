@@ -5,12 +5,15 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalBlockTagProvider;
 import com.androsa.ornamental.registry.ModTags;
 import com.google.common.collect.ImmutableSet;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
@@ -131,12 +134,12 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
             ModBlocks.obsidian_stairs, ModBlocks.obsidian_slab, ModBlocks.obsidian_fence, ModBlocks.obsidian_trapdoor, ModBlocks.obsidian_fence_gate, ModBlocks.obsidian_door, ModBlocks.obsidian_pole, ModBlocks.obsidian_beam, ModBlocks.obsidian_wall, ModBlocks.obsidian_saddle_door,
             ModBlocks.netherite_stairs, ModBlocks.netherite_slab, ModBlocks.netherite_fence, ModBlocks.netherite_trapdoor, ModBlocks.netherite_fence_gate, ModBlocks.netherite_door, ModBlocks.netherite_pole, ModBlocks.netherite_beam, ModBlocks.netherite_wall, ModBlocks.netherite_saddle_door);
 
-    public OrnamentalBlockTags(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, OrnamentalMod.MODID, helper);
+    public OrnamentalBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
+        super(output, provider, OrnamentalMod.MODID, helper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         addToTag(BlockTags.BEACON_BASE_BLOCKS, BEACON_BASES);
         addToTag(ModTags.Blocks.BEAMS, BEAMS);
         addToTag(BlockTags.CRYSTAL_SOUND_BLOCKS, CRYSTAL_SOUNDS);

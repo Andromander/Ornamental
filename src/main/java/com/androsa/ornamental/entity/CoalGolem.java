@@ -89,9 +89,8 @@ public class CoalGolem extends OrnamentalGolem {
 
     private void explode() {
         if (!this.level.isClientSide) {
-            Explosion.BlockInteraction mode = ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, mode);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
     }

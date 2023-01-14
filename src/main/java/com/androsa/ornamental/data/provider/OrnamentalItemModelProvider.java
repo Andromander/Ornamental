@@ -1,7 +1,7 @@
 package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.OrnamentalMod;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -16,8 +16,8 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
 
     public static final ResourceLocation TRANSLUCENT = new ResourceLocation("translucent");
 
-    public OrnamentalItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
-        super(generator, modid, helper);
+    public OrnamentalItemModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+        super(output, modid, helper);
     }
 
     public ResourceLocation ornamentLoc(String path) {

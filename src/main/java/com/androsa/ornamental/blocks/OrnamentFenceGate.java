@@ -46,7 +46,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     private final OrnamentBuilder builder;
 
     public OrnamentFenceGate(Properties props, OrnamentBuilder builder) {
-        super(props);
+        super(props, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN); //placeholders, these are provided with an OrnamentBuilder
         this.builder = builder;
     }
 

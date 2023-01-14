@@ -28,27 +28,27 @@ public class GolemBuilder {
             ServerLevel world = ((ServerLevelAccessor)event.getLevel()).getLevel();
             BlockPos pos = event.getPos();
 
-            checkPatternLarge(PatternType.GOLD, world, pos, 1, 2);
-            checkPatternLarge(PatternType.DIAMOND, world, pos, 1, 1);
-            checkPatternLarge(PatternType.EMERALD, world, pos, 1, 2);
-            checkPatternLarge(PatternType.LAPIS, world, pos, 1, 2);
-            checkPatternLarge(PatternType.OBSIDIAN, world, pos, 1, 3);
-            checkPatternSmall(PatternType.COAL, world, pos, 2);
-            checkPatternLarge(PatternType.REDSTONE, world, pos, 1, 2);
-            checkPatternSmall(PatternType.CLAY, world, pos, 2);
-            checkPatternSmall(PatternType.DIRT, world, pos, 1);
-            checkPatternLarge(PatternType.HAY, world, pos, 2, 3);
-            checkPatternSmall(PatternType.BRICK, world, pos, 2);
-            checkPatternLarge(PatternType.QUARTZ, world, pos, 1, 2);
-            checkPatternLarge(PatternType.BONE, world, pos, 1, 3);
-            checkPatternSmall(PatternType.NETHER_BRICK, world, pos, 2);
-            checkPatternSmall(PatternType.RED_NETHER_BRICK, world, pos, 2);
-            checkPatternSmall(PatternType.ICE, world, pos, 2);
-            checkPatternSmall(PatternType.PACKED_ICE, world, pos, 2);
-            checkPatternSmall(PatternType.BLUE_ICE, world, pos, 2);
-            checkPatternLarge(PatternType.NETHERITE, world, pos, 1, 2);
-            checkPatternLarge(PatternType.COPPER, world, pos, 1, 3);
-            checkPatternLarge(PatternType.AMETHYST, world, pos, 1, 2);
+            checkPattern(PatternType.GOLD, world, pos, 1, 2);
+            checkPattern(PatternType.DIAMOND, world, pos, 1, 1);
+            checkPattern(PatternType.EMERALD, world, pos, 1, 2);
+            checkPattern(PatternType.LAPIS, world, pos, 1, 2);
+            checkPattern(PatternType.OBSIDIAN, world, pos, 1, 3);
+            checkPattern(PatternType.COAL, world, pos, 2);
+            checkPattern(PatternType.REDSTONE, world, pos, 1, 2);
+            checkPattern(PatternType.CLAY, world, pos, 2);
+            checkPattern(PatternType.DIRT, world, pos, 1);
+            checkPattern(PatternType.HAY, world, pos, 2, 3);
+            checkPattern(PatternType.BRICK, world, pos, 2);
+            checkPattern(PatternType.QUARTZ, world, pos, 1, 2);
+            checkPattern(PatternType.BONE, world, pos, 1, 3);
+            checkPattern(PatternType.NETHER_BRICK, world, pos, 2);
+            checkPattern(PatternType.RED_NETHER_BRICK, world, pos, 2);
+            checkPattern(PatternType.ICE, world, pos, 2);
+            checkPattern(PatternType.PACKED_ICE, world, pos, 2);
+            checkPattern(PatternType.BLUE_ICE, world, pos, 2);
+            checkPattern(PatternType.NETHERITE, world, pos, 1, 2);
+            checkPattern(PatternType.COPPER, world, pos, 1, 3);
+            checkPattern(PatternType.AMETHYST, world, pos, 1, 2);
         }
     }
 
@@ -64,6 +64,19 @@ public class GolemBuilder {
 
     //For Golems with a width and height
     private static void checkPatternLarge(PatternType type, Level world, BlockPos pos, int x, int y) {
+        BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
+        if (pattern != null) {
+            setAirLarge(type, pattern, world);
+            addGolem(type, world, pattern, x, y);
+            notifyLarge(type, pattern, world);
+        }
+    }
+
+    private static void checkPattern(PatternType type, Level world, BlockPos pos, int y) {
+        checkPattern(type, world, pos, 0, y);
+    }
+
+    private static void checkPattern(PatternType type, Level world, BlockPos pos, int x, int y) {
         BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
         if (pattern != null) {
             setAirLarge(type, pattern, world);

@@ -3,7 +3,7 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.registry.ModTags;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -20,8 +20,8 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
 
     private final String modID;
 
-    public OrnamentalRecipeProvider(DataGenerator generator, String modid) {
-        super(generator);
+    public OrnamentalRecipeProvider(PackOutput output, String modid) {
+        super(output);
         this.modID = modid;
     }
 
@@ -30,7 +30,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void stairs(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentStair> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 8)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8)
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
@@ -43,7 +43,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Stair recipe is conflicting with another, this is almost guaranteed to work
      */
     public void stairsOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentStair> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 8)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8)
                 .pattern("# /")
                 .pattern("## ")
                 .pattern("###")
@@ -54,7 +54,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void slab(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
                 .pattern("###")
                 .define('#', ingredient);
 
@@ -65,7 +65,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Slab recipe is conflicting with another, this is almost guaranteed to work
      */
     public void slabOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
 				.pattern(" / ")
 				.pattern("###")
 				.define('/', ItemTags.SLABS)
@@ -79,7 +79,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void fence(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 3)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 3)
                 .pattern("#/#")
                 .pattern("#/#")
                 .define('#', bigItem)
@@ -92,7 +92,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Fence recipe is conflicting with another, this is almost guaranteed to work
      */
     public void fenceOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 3)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 3)
                 .pattern(" * ")
                 .pattern("#/#")
                 .pattern("#/#")
@@ -108,7 +108,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void trapdoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern("##")
                 .pattern("##")
                 .define('#', ingredient);
@@ -120,7 +120,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Trapdoor recipe is conflicting with another, this is almost guaranteed to work
      */
     public void trapdoorOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern(" /")
                 .pattern("##")
                 .pattern("##")
@@ -135,7 +135,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void trapdoorWide(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern("###")
                 .pattern("###")
                 .define('#', ingredient);
@@ -147,7 +147,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a wide Trapdoor recipe is conflicting with another, this is almost guaranteed to work
      */
     public void trapdoorWideOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern(" / ")
                 .pattern("###")
                 .pattern("###")
@@ -162,7 +162,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void fencegate(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern("/#/")
                 .pattern("/#/")
                 .define('#', bigItem)
@@ -175,7 +175,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Fence Gate recipe is conflicting with another, this is almost guaranteed to work
      */
     public void fencegateOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern(" * ")
                 .pattern("/#/")
                 .pattern("/#/")
@@ -191,7 +191,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void door(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern("##")
                 .pattern("##")
                 .pattern("##")
@@ -204,7 +204,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Door recipe is conflicting with another, this is almost guaranteed to work
      */
     public void doorOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
                 .pattern("## ")
                 .pattern("##/")
                 .pattern("## ")
@@ -219,7 +219,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void pole(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
                 .pattern("#")
                 .pattern("#")
                 .pattern("#")
@@ -232,7 +232,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
      */
     public void poleOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
                 .pattern("# ")
                 .pattern("#/")
                 .pattern("# ")
@@ -247,7 +247,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void beam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
                 .pattern("###")
                 .define('#', ingredient);
 
@@ -258,7 +258,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
      */
     public void beamOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 6)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
                 .pattern(" / ")
                 .pattern("###")
                 .define('/', ModTags.Items.BEAMS)
@@ -268,9 +268,9 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void convertPoleBeam(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
-        ShapelessRecipeBuilder polerecipe = ShapelessRecipeBuilder.shapeless(beam.get())
+        ShapelessRecipeBuilder polerecipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, beam.get())
                 .requires(pole.get());
-        ShapelessRecipeBuilder beamrecipe = ShapelessRecipeBuilder.shapeless(pole.get())
+        ShapelessRecipeBuilder beamrecipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, pole.get())
                 .requires(beam.get());
 
         internalRecipeBuild(consumer, polerecipe, beam.get(), pole.get(), "_pole_to_beam");
@@ -278,7 +278,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void wall(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get())
                 .pattern("###")
                 .pattern("###")
                 .define('#', ingredient);
@@ -290,7 +290,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Wall recipe is conflicting with another, this is almost guaranteed to work
      */
     public void wallOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get())
                 .pattern(" / ")
                 .pattern("###")
                 .pattern("###")
@@ -305,7 +305,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void saddleDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 2)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get(), 2)
                 .pattern("#")
                 .pattern("#")
                 .define('#', ingredient);
@@ -317,7 +317,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
      */
     public void saddleDoorOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(result.get(), 2)
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get(), 2)
                 .pattern(" / ")
                 .pattern("#")
                 .pattern("#")
@@ -332,7 +332,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void saddleDoorFromDoor(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(result.get(), 2)
+        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, result.get(), 2)
                 .requires(ingredient);
 
         internalRecipeBuild(consumer, recipe, result.get(), ingredient, "_saddle_door_from_door");

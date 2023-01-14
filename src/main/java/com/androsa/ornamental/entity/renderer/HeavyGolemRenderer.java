@@ -3,10 +3,8 @@ package com.androsa.ornamental.entity.renderer;
 import com.androsa.ornamental.entity.OrnamentalGolem;
 import com.androsa.ornamental.entity.model.AbstractGolemModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class HeavyGolemRenderer<T extends OrnamentalGolem, M extends AbstractGolemModel<T>> extends AbstractGolemRenderer<T,M> {
 
@@ -20,7 +18,7 @@ public class HeavyGolemRenderer<T extends OrnamentalGolem, M extends AbstractGol
         if (!((double)entity.animationSpeed < 0.01D)) {
             float f1 = entity.animationPosition - entity.animationSpeed * (1.0F - partialTicks) + 6.0F;
             float f2 = (Math.abs(f1 % 13.0F - 6.5F) - 3.25F) / 3.25F;
-            stack.mulPose(Vector3f.ZP.rotationDegrees(6.5F * f2));
+            stack.mulPose(Axis.ZP.rotationDegrees(6.5F * f2));
         }
     }
 }

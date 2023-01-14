@@ -42,7 +42,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentDoor(Properties props, OrnamentBuilder builder) {
-        super(props);
+        super(props, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN); //placeholders, these are provided with an OrnamentBuilder
         this.builder = builder;
     }
 

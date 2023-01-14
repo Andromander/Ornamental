@@ -3,8 +3,6 @@ package com.androsa.ornamental.entity.model;
 import com.androsa.ornamental.entity.OrnamentalGolem;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * Abstract class holding basic parts: Head, Torso, Body, 2 Arms, and 2 Legs. These are only fields

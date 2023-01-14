@@ -3,7 +3,7 @@ package com.androsa.ornamental.entity.renderer.layer;
 import com.androsa.ornamental.entity.FlowerGolem;
 import com.androsa.ornamental.entity.model.FlowerGolemModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +28,7 @@ public class GolemFlowerLayer<T extends FlowerGolem, M extends FlowerGolemModel<
             stack.translate(pos[0], pos[1], pos[2]);
             stack.translate(0.5D, 0.5D, 0.5D);
             stack.scale(0.5F, 0.5F, 0.5F);
-            stack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
+            stack.mulPose(Axis.XP.rotationDegrees(-90.0F));
             stack.translate(-0.5D, -0.5D, -0.5D);
             Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.getFlower(), stack, buffer, i, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
             stack.popPose();

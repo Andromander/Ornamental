@@ -1,7 +1,8 @@
 package com.androsa.ornamental.data.provider;
 
-import net.minecraft.data.loot.EntityLoot;
+import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -13,7 +14,11 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.Supplier;
 
-public class GolemLootTableProvider extends EntityLoot {
+public abstract class GolemLootTableProvider extends EntityLootSubProvider {
+
+    protected GolemLootTableProvider(FeatureFlagSet feature) {
+        super(feature);
+    }
 
     public void add(Supplier<? extends EntityType<?>> entity, LootTable.Builder table) {
         super.add(entity.get(), table);

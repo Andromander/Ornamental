@@ -32,9 +32,8 @@ public class PropertiesHelper {
      * @param builder the material being used for that item or the item's block.
      * @param group the ItemGroup the item should appear in.
      */
-    public static Item.Properties createProps(OrnamentBuilder builder, CreativeModeTab group) {
-        Item.Properties props = new Item.Properties()
-                .tab(group);
+    public static Item.Properties createItem(OrnamentBuilder builder) {
+        Item.Properties props = new Item.Properties();
         if (builder.fireproof) props.fireResistant();
 
         return props;

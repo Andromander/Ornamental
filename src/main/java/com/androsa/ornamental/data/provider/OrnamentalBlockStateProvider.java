@@ -4,7 +4,7 @@ import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
 import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,11 +29,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     public static final ResourceLocation CUTOUT = new ResourceLocation("cutout");
     public static final ResourceLocation CUTOUT_MIPPED = new ResourceLocation("cutout_mipped");
 
-    public OrnamentalBlockStateProvider(DataGenerator generator, String modid, ExistingFileHelper helper) {
-        super(generator, modid, helper);
+    public OrnamentalBlockStateProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+        super(output, modid, helper);
         modID = modid;
 
-        blockModels = new OrnamentalBlockModelProvider(generator, modid, helper) {
+        blockModels = new OrnamentalBlockModelProvider(output, modid, helper) {
             @Override
             protected void registerModels() { }
 
