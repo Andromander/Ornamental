@@ -30,7 +30,6 @@ public class PropertiesHelper {
     /**
      * Helper for creating Properties for Items.
      * @param builder the material being used for that item or the item's block.
-     * @param group the ItemGroup the item should appear in.
      */
     public static Item.Properties createItem(OrnamentBuilder builder) {
         Item.Properties props = new Item.Properties();
