@@ -4,6 +4,7 @@ import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.items.OrnamentBlockItem;
 import com.androsa.ornamental.items.OrnamentTallBlockItem;
+import com.androsa.ornamental.registry.handler.CreativeTabHandler;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -142,7 +144,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_stairs", stairsObject(base, props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_BUILDING_BLOCKS,*/ builder, 4));
+                registerBlockItem(item, builder, 4), CreativeTabHandler.STAIR_ORNAMENTS);
     }
 
     /**
@@ -154,7 +156,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_slab", slabObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_BUILDING_BLOCKS,*/ builder, 3));
+                registerBlockItem(item, builder, 3), CreativeTabHandler.SLAB_ORNAMENTS);
     }
 
     /**
@@ -166,7 +168,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_fence", fenceObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_DECORATIONS,*/ builder, 1));
+                registerBlockItem(item, builder, 1), CreativeTabHandler.FENCE_ORNAMENTS);
     }
 
     /**
@@ -180,7 +182,7 @@ public class RegistryHelper {
                 .isValidSpawn((state, reader, pos, type) -> false);
 
         return registerBlock(builder.name + "_trapdoor", trapdoorObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_REDSTONE,*/ builder, 5));
+                registerBlockItem(item, builder, 5), CreativeTabHandler.TRAPDOOR_ORNAMENTS);
     }
 
     /**
@@ -192,7 +194,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_fence_gate", fencegateObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_REDSTONE,*/ builder, 2));
+                registerBlockItem(item, builder, 2), CreativeTabHandler.FENCE_GATE_ORNAMENTS);
     }
 
     /**
@@ -204,7 +206,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder).noOcclusion();
 
         return registerBlock(builder.name + "_door", doorObject(props, builder), item ->
-                registerBlockItemDoor(item, builder, 0));
+                registerBlockItemDoor(item, builder, 0), CreativeTabHandler.DOOR_ORNAMENTS);
     }
 
     /**
@@ -216,7 +218,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_pole", poleObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_BUILDING_BLOCKS,*/ builder, 6));
+                registerBlockItem(item, builder, 6), CreativeTabHandler.POLE_ORNAMENTS);
     }
 
     /**
@@ -228,7 +230,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_beam", beamObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_BUILDING_BLOCKS,*/ builder, 7));
+                registerBlockItem(item, builder, 7), CreativeTabHandler.BEAM_ORNAMENTS);
     }
 
     /**
@@ -240,7 +242,7 @@ public class RegistryHelper {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
 
         return registerBlock(builder.name + "_wall", wallObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_DECORATIONS,*/ builder, 8));
+                registerBlockItem(item, builder, 8), CreativeTabHandler.WALL_ORNAMENTS);
     }
 
     /**
@@ -253,15 +255,16 @@ public class RegistryHelper {
                 .noOcclusion();
 
         return registerBlock(builder.name + "_saddle_door", saddledoorObject(props, builder), item ->
-                registerBlockItem(item, /*CreativeModeTab.TAB_REDSTONE,*/ builder, 9));
+                registerBlockItem(item, builder, 9), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS);
     }
 
     /**
      * INTERNAL USE
      */
-    private <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item) {
+    private <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<Block>> tab) {
         RegistryObject<T> reg = blockRegistry.register(name, block);
         itemRegistry.register(name, item.apply(reg));
+        tab.add((RegistryObject<Block>) reg);
         return reg;
     }
 
@@ -270,6 +273,6 @@ public class RegistryHelper {
     }
 
     private static <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
-        return () -> new OrnamentTallBlockItem(block.get(), PropertiesHelper.createItem(ornament/*, CreativeModeTab.TAB_REDSTONE*/), ornament, fuelindex);
+        return () -> new OrnamentTallBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
     }
 }
