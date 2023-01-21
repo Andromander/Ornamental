@@ -1,6 +1,7 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.google.common.collect.Lists;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +61,7 @@ public class OrnamentBuilder {
     public boolean breakableCull = false;
     public PushReaction pushReaction = material.getPushReaction();
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
+    public List<List<RegistryObject<? extends Block>>> blockTags = new ArrayList<>();
 
     /**
      * Create a template material for an Ornament block
@@ -309,10 +312,20 @@ public class OrnamentBuilder {
 
     /**
      * Sets the sounds the ornament will make when hit by a projectile.
-     * @param sounds The SoundEvents that play when the ornament is hit by a projectile
+     * @param sounds The SoundEvents that play when the ornament is hit by a projectile.
      */
     public OrnamentBuilder projectileHitSound(List<SoundEvent> sounds) {
         this.projectileHitSounds = sounds;
+        return this;
+    }
+
+    /**
+     * Data generation only. This will put all ornaments of a material into an array to generate into Block Tags.
+     * For ornament-based tags, this is handled via registration.
+     * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
+     */
+    public OrnamentBuilder addBlockTags(List<List<RegistryObject<? extends Block>>> tags) {
+        this.blockTags = Lists.newArrayList(tags);
         return this;
     }
 }

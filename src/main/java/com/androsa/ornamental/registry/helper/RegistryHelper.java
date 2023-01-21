@@ -2,9 +2,11 @@ package com.androsa.ornamental.registry.helper;
 
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.androsa.ornamental.data.OrnamentalBlockTags;
 import com.androsa.ornamental.items.OrnamentBlockItem;
 import com.androsa.ornamental.items.OrnamentTallBlockItem;
 import com.androsa.ornamental.registry.handler.CreativeTabHandler;
+import com.google.common.collect.Lists;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -141,10 +144,22 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentStair
      */
     public <T extends OrnamentStair> RegistryObject<T> stairs(Block base, OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return stairs(base, builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_stairs", stairsObject(base, props, builder), item ->
-                registerBlockItem(item, builder, 4), CreativeTabHandler.STAIR_ORNAMENTS);
+    /**
+     * Register an OrnamentStair with an individual tag
+     * @param base The base block. All Stair blocks require this.
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentStair
+     */
+    public <T extends OrnamentStair> RegistryObject<T> stairs(Block base, OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.STAIRS));
+
+        return registerBlock(builder, "_stairs", stairsObject(base, props, builder), item ->
+                registerBlockItem(item, builder, 4), CreativeTabHandler.STAIR_ORNAMENTS, blocktags);
     }
 
     /**
@@ -153,10 +168,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentSlab
      */
     public <T extends OrnamentSlab> RegistryObject<T> slab(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return slab(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_slab", slabObject(props, builder), item ->
-                registerBlockItem(item, builder, 3), CreativeTabHandler.SLAB_ORNAMENTS);
+    /**
+     * Register an OrnamentSlab with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentSlab
+     */
+    public <T extends OrnamentSlab> RegistryObject<T> slab(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.SLABS));
+
+        return registerBlock(builder, "_slab", slabObject(props, builder), item ->
+                registerBlockItem(item, builder, 3), CreativeTabHandler.SLAB_ORNAMENTS, blocktags);
     }
 
     /**
@@ -165,10 +191,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentFence
      */
     public <T extends OrnamentFence> RegistryObject<T> fence(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return fence(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_fence", fenceObject(props, builder), item ->
-                registerBlockItem(item, builder, 1), CreativeTabHandler.FENCE_ORNAMENTS);
+    /**
+     * Register an OrnamentFence with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentFence
+     */
+    public <T extends OrnamentFence> RegistryObject<T> fence(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.FENCES));
+
+        return registerBlock(builder, "_fence", fenceObject(props, builder), item ->
+                registerBlockItem(item, builder, 1), CreativeTabHandler.FENCE_ORNAMENTS, blocktags);
     }
 
     /**
@@ -177,12 +214,23 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentTrapDoor
      */
     public RegistryObject<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder) {
+        return trapdoor(builder, Lists.newArrayList());
+    }
+
+    /**
+     * Register an OrnamentTrapDoor with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentTrapDoor
+     */
+    public RegistryObject<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder)
                 .noOcclusion()
                 .isValidSpawn((state, reader, pos, type) -> false);
+        blocktags.addAll(array(OrnamentalBlockTags.TRAPDOORS));
 
-        return registerBlock(builder.name + "_trapdoor", trapdoorObject(props, builder), item ->
-                registerBlockItem(item, builder, 5), CreativeTabHandler.TRAPDOOR_ORNAMENTS);
+        return registerBlock(builder, "_trapdoor", trapdoorObject(props, builder), item ->
+                registerBlockItem(item, builder, 5), CreativeTabHandler.TRAPDOOR_ORNAMENTS, blocktags);
     }
 
     /**
@@ -191,10 +239,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentFenceGate
      */
     public RegistryObject<OrnamentFenceGate> fencegate(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return fencegate(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_fence_gate", fencegateObject(props, builder), item ->
-                registerBlockItem(item, builder, 2), CreativeTabHandler.FENCE_GATE_ORNAMENTS);
+    /**
+     * Register an OrnamentFenceGate with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentFenceGate
+     */
+    public RegistryObject<OrnamentFenceGate> fencegate(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.FENCE_GATES));
+
+        return registerBlock(builder, "_fence_gate", fencegateObject(props, builder), item ->
+                registerBlockItem(item, builder, 2), CreativeTabHandler.FENCE_GATE_ORNAMENTS, blocktags);
     }
 
     /**
@@ -203,10 +262,22 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentDoor
      */
     public RegistryObject<OrnamentDoor> door(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder).noOcclusion();
+        return door(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_door", doorObject(props, builder), item ->
-                registerBlockItemDoor(item, builder, 0), CreativeTabHandler.DOOR_ORNAMENTS);
+    /**
+     * Register an OrnamentDoor with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentDoor
+     */
+    public RegistryObject<OrnamentDoor> door(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder)
+                .noOcclusion();
+        blocktags.addAll(array(OrnamentalBlockTags.DOORS));
+
+        return registerBlock(builder, "_door", doorObject(props, builder), item ->
+                registerBlockItemDoor(item, builder, 0), CreativeTabHandler.DOOR_ORNAMENTS, blocktags);
     }
 
     /**
@@ -215,10 +286,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentPole
      */
     public RegistryObject<OrnamentPole> pole(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return pole(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_pole", poleObject(props, builder), item ->
-                registerBlockItem(item, builder, 6), CreativeTabHandler.POLE_ORNAMENTS);
+    /**
+     * Register an OrnamentPole with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentPole
+     */
+    public RegistryObject<OrnamentPole> pole(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.POLES));
+
+        return registerBlock(builder, "_pole", poleObject(props, builder), item ->
+                registerBlockItem(item, builder, 6), CreativeTabHandler.POLE_ORNAMENTS, blocktags);
     }
 
     /**
@@ -227,10 +309,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentBeam
      */
     public RegistryObject<OrnamentBeam> beam(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return beam(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_beam", beamObject(props, builder), item ->
-                registerBlockItem(item, builder, 7), CreativeTabHandler.BEAM_ORNAMENTS);
+    /**
+     * Register an OrnamentBeam with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentBeam
+     */
+    public RegistryObject<OrnamentBeam> beam(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.BEAMS));
+
+        return registerBlock(builder, "_beam", beamObject(props, builder), item ->
+                registerBlockItem(item, builder, 7), CreativeTabHandler.BEAM_ORNAMENTS, blocktags);
     }
 
     /**
@@ -239,10 +332,21 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentWall
      */
     public RegistryObject<OrnamentWall> wall(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        return wall(builder, Lists.newArrayList());
+    }
 
-        return registerBlock(builder.name + "_wall", wallObject(props, builder), item ->
-                registerBlockItem(item, builder, 8), CreativeTabHandler.WALL_ORNAMENTS);
+    /**
+     * Register an OrnamentWall with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentWall
+     */
+    public RegistryObject<OrnamentWall> wall(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        BlockBehaviour.Properties props = PropertiesHelper.createProps(builder);
+        blocktags.addAll(array(OrnamentalBlockTags.WALLS));
+
+        return registerBlock(builder, "_wall", wallObject(props, builder), item ->
+                registerBlockItem(item, builder, 8), CreativeTabHandler.WALL_ORNAMENTS, blocktags);
     }
 
     /**
@@ -251,20 +355,38 @@ public class RegistryHelper {
      * @return RegistryObject for an OrnamentSaddleDoor
      */
     public RegistryObject<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder) {
+        return saddledoor(builder, Lists.newArrayList());
+    }
+
+    /**
+     * Register an OrnamentSaddleDoor with an individual tag
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @return RegistryObject for an OrnamentSaddleDoor
+     */
+    public RegistryObject<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
         BlockBehaviour.Properties props = PropertiesHelper.createProps(builder)
                 .noOcclusion();
+        blocktags.addAll(array(OrnamentalBlockTags.SADDLE_DOORS));
 
-        return registerBlock(builder.name + "_saddle_door", saddledoorObject(props, builder), item ->
-                registerBlockItem(item, builder, 9), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS);
+        return registerBlock(builder, "_saddle_door", saddledoorObject(props, builder), item ->
+                registerBlockItem(item, builder, 9), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS, blocktags);
     }
 
     /**
      * INTERNAL USE
      */
-    private <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<Block>> tab) {
+    private <T extends Block> RegistryObject<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<Block>> tab, ArrayList<List<RegistryObject<? extends Block>>> blocktags) {
+        String name = builder.name + suffix;
         RegistryObject<T> reg = blockRegistry.register(name, block);
         itemRegistry.register(name, item.apply(reg));
         tab.add((RegistryObject<Block>) reg);
+
+        blocktags.addAll(builder.blockTags);
+        for (List<RegistryObject<? extends Block>> tag : blocktags) {
+            tag.add(reg);
+        }
+
         return reg;
     }
 
@@ -274,5 +396,10 @@ public class RegistryHelper {
 
     private static <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
         return () -> new OrnamentTallBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
+    }
+
+    @SafeVarargs
+    public final ArrayList<List<RegistryObject<? extends Block>>> array(List<RegistryObject<? extends Block>>... lists) {
+        return Lists.newArrayList(lists);
     }
 }

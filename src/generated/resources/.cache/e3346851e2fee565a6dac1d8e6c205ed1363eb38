@@ -1,4 +1,4 @@
-// 1.19.1	2022-09-15T21:40:25.0256718	Tags for minecraft:block
+// 1.19.3	2023-01-20T10:35:05.8537317	Tags for minecraft:block mod id ornamental
 e68e460155b15dff36e3d2b590abe3147ee33b57 data/forge/tags/blocks/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/blocks/fences/nether_brick.json
 00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/forge/tags/blocks/fence_gates.json
@@ -9,12 +9,12 @@ ea63f456bc7eb6f10adae7a102066dd34996b700 data/minecraft/tags/blocks/dragon_immun
 e68e460155b15dff36e3d2b590abe3147ee33b57 data/minecraft/tags/blocks/fences.json
 00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/minecraft/tags/blocks/fence_gates.json
 b96769646a5bfa38feadc8b5f568ff260ece20dc data/minecraft/tags/blocks/guarded_by_piglins.json
-10b05eede5efe67494970f4eb8542fde2ab4b0da data/minecraft/tags/blocks/mineable/pickaxe.json
-e96985a6469bb3d7b8fbe114f0470288bcdbe436 data/minecraft/tags/blocks/mineable/shovel.json
-c2de16004d9a51224658f84b3dd6d9d194a1fbe4 data/minecraft/tags/blocks/needs_diamond_tool.json
-2dbd76d9e9742c4e62be608acfd4b978ca0f10ea data/minecraft/tags/blocks/needs_iron_tool.json
-1f18466bb9b1d9086bffdc42b367183485be1495 data/minecraft/tags/blocks/needs_stone_tool.json
-8651b41c93eb8b95e741cdafa05c34e71364108b data/minecraft/tags/blocks/slabs.json
+0f49bade594bf3c8e2c9c515c7d29fc8481d123d data/minecraft/tags/blocks/mineable/pickaxe.json
+8f779c2d64d933eceb220f8a7f736e02f4757649 data/minecraft/tags/blocks/mineable/shovel.json
+bfd1701a3d30980a3bac531ca5e384bf04da8eb7 data/minecraft/tags/blocks/needs_diamond_tool.json
+16bec878bf09fe0fe1bf284773e8629b6e6ba51a data/minecraft/tags/blocks/needs_iron_tool.json
+4e4e5f6afac5e5c6959aaaccc8fa3a8b8e221573 data/minecraft/tags/blocks/needs_stone_tool.json
+78a6d52399ed8c49bce952f2262e7f73961d81fc data/minecraft/tags/blocks/slabs.json
 c48c1d71c4cefde36ee5f72e0c00d445e336e578 data/minecraft/tags/blocks/snow.json
 be6a3424f5b1ff277d98600b79b4d662d200fa19 data/minecraft/tags/blocks/stairs.json
 cc55d7628e765625cff62eac1ffbb9732df771ea data/minecraft/tags/blocks/trapdoors.json

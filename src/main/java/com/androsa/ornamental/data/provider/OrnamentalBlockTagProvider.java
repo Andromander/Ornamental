@@ -6,8 +6,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -17,7 +18,7 @@ public abstract class OrnamentalBlockTagProvider extends BlockTagsProvider {
         super(output, provider, modid, helper);
     }
 
-    protected void addToTag(TagKey<Block> tag, Set<Supplier<? extends Block>> set) {
+    protected void addToTag(TagKey<Block> tag, List<RegistryObject<? extends Block>> set) {
         for (Supplier<? extends Block> block : set) {
             tag(tag).add(block.get());
         }
