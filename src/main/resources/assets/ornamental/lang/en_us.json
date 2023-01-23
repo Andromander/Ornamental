@@ -318,5 +318,16 @@
   "entity.ornamental.charge_ball": "Charge Ball",
 
   "death.attack.ornamental.shocked": "%1$s was zapped",
-  "death.attack.ornamental.shocked.player": "%1$s was zapped whilst escaping %2$s"
+  "death.attack.ornamental.shocked.player": "%1$s was zapped whilst escaping %2$s",
+
+  "ornamental.tab.stair_ornaments": "Stair Ornaments",
+  "ornamental.tab.slab_ornaments": "Slab Ornaments",
+  "ornamental.tab.fence_ornaments": "Fence Ornaments",
+  "ornamental.tab.trapdoor_ornaments": "Trapdoor Ornaments",
+  "ornamental.tab.fence_gate_ornaments": "Fence Gate Ornaments",
+  "ornamental.tab.door_ornaments": "Door Ornaments",
+  "ornamental.tab.pole_ornaments": "Pole Ornaments",
+  "ornamental.tab.beam_ornaments": "Beam Ornaments",
+  "ornamental.tab.wall_ornaments": "Wall Ornaments",
+  "ornamental.tab.saddle_door_ornaments": "Saddle Door Ornaments"
 }
