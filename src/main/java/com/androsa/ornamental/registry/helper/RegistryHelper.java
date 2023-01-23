@@ -575,10 +575,24 @@ public class RegistryHelper {
         return reg;
     }
 
+    /**
+     * The BlockItem for an ornament. This handles all single-block ornaments, such as Stair or Slab.
+     * @param block The Block ornament.
+     * @param ornament The OrnamentBuilder.
+     * @param fuelindex The fuel index for the {@link OrnamentBuilder#burnTime}. See {@link OrnamentBuilder#burnTime(int...)} for block to index.
+     * @return The BlockItem for the ornament.
+     */
     protected <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
         return () -> new OrnamentBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
     }
 
+    /**
+     * The TallBlockItem for an ornament. This handles all ornaments that are 2 blocks tall, such as Door.
+     * @param block The Block ornament.
+     * @param ornament The OrnamentBuilder.
+     * @param fuelindex The fuel index for the {@link OrnamentBuilder#burnTime}. See {@link OrnamentBuilder#burnTime(int...)} for block to index.
+     * @return  The BlockItem for the ornament. Note that while the return value is any BlockItem, it is recommended for only handling blocks intended to be 2 blocks tall.
+     */
     protected <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
         return () -> new OrnamentTallBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
     }
