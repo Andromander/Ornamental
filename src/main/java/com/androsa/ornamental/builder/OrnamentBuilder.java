@@ -62,6 +62,7 @@ public class OrnamentBuilder {
     public PushReaction pushReaction = material.getPushReaction();
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
     public List<List<RegistryObject<? extends Block>>> blockTags = new ArrayList<>();
+    public List<List<RegistryObject<? extends Block>>> itemTags = new ArrayList<>();
 
     /**
      * Create a template material for an Ornament block
@@ -326,6 +327,16 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder addBlockTags(List<List<RegistryObject<? extends Block>>> tags) {
         this.blockTags = Lists.newArrayList(tags);
+        return this;
+    }
+
+    /**
+     * Data generation only. This will put all ornamenta of a material into an array to generate into Item Tags.
+     * For ornament-based tags, this is handled via registration.
+     * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
+     */
+    public OrnamentBuilder addItemTags(List<List<RegistryObject<? extends Block>>> tags) {
+        this.itemTags = Lists.newArrayList(tags);
         return this;
     }
 }

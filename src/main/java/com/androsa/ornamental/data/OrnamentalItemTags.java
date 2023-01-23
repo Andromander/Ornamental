@@ -1,27 +1,35 @@
 package com.androsa.ornamental.data;
 
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
 import com.androsa.ornamental.registry.ModTags;
-import com.google.common.collect.ImmutableSet;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.compress.utils.Lists;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
 
 public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
-    private final ImmutableSet<Supplier<? extends Block>> piglin_loved = ImmutableSet.of(
-            ModBlocks.gold_stairs, ModBlocks.gold_slab, ModBlocks.gold_fence, ModBlocks.gold_trapdoor, ModBlocks.gold_fence_gate, ModBlocks.gold_door, ModBlocks.gold_pole, ModBlocks.gold_beam, ModBlocks.gold_wall, ModBlocks.gold_saddle_door);
+    public static final List<RegistryObject<? extends Block>> BEAMS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> DOORS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> FENCES = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> FENCE_GATES = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> NETHER_BRICK_FENCES = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> PIGLIN_LOVED = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> POLES = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> SADDLE_DOORS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> SLABS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> STAIRS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> TRAPDOORS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> WALLS = Lists.newArrayList();
 
     public OrnamentalItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, BlockTagsProvider blockTags, ExistingFileHelper helper) {
         super(output, provider, OrnamentalMod.MODID, helper, blockTags);
@@ -29,19 +37,18 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        copy(ModTags.Blocks.BEAMS, ModTags.Items.BEAMS);
-        copy(BlockTags.DOORS, ItemTags.DOORS);
-        copy(BlockTags.FENCES, ItemTags.FENCES);
-        copy(Tags.Blocks.FENCES, Tags.Items.FENCES);
-        copy(Tags.Blocks.FENCE_GATES, Tags.Items.FENCE_GATES);
-        copy(ModTags.Blocks.POLES, ModTags.Items.POLES);
-        copy(ModTags.Blocks.SADDLE_DOORS, ModTags.Items.SADDLE_DOORS);
-        copy(BlockTags.SLABS, ItemTags.SLABS);
-        copy(BlockTags.STAIRS, ItemTags.STAIRS);
-        copy(BlockTags.TRAPDOORS, ItemTags.TRAPDOORS);
-        copy(Tags.Blocks.FENCES_NETHER_BRICK, Tags.Items.FENCES_NETHER_BRICK);
-        copy(BlockTags.WALLS, ItemTags.WALLS);
-
-        piglinLoveTag(piglin_loved);
+        addToTag(ModTags.Items.BEAMS, BEAMS);
+        addToTag(ItemTags.DOORS, DOORS);
+        addToTag(ItemTags.FENCES, FENCES);
+        addToTag(Tags.Items.FENCES, FENCES);
+        addToTag(Tags.Items.FENCE_GATES, FENCE_GATES);
+        addToTag(Tags.Items.FENCES_NETHER_BRICK, NETHER_BRICK_FENCES);
+        addToTag(ItemTags.PIGLIN_LOVED, PIGLIN_LOVED);
+        addToTag(ModTags.Items.POLES, POLES);
+        addToTag(ModTags.Items.SADDLE_DOORS, SADDLE_DOORS);
+        addToTag(ItemTags.SLABS, SLABS);
+        addToTag(ItemTags.STAIRS, STAIRS);
+        addToTag(ItemTags.TRAPDOORS, TRAPDOORS);
+        addToTag(ItemTags.WALLS, WALLS);
     }
 }

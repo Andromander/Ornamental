@@ -1,6 +1,7 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.data.OrnamentalBlockTags;
+import com.androsa.ornamental.data.OrnamentalItemTags;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -27,7 +28,8 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
-            .addBlockTags(List.of(OrnamentalBlockTags.PIGLIN_GUARDED, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
+            .addBlockTags(List.of(OrnamentalBlockTags.PIGLIN_GUARDED, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED))
+            .addItemTags(List.of(OrnamentalItemTags.PIGLIN_LOVED));
 
     public static final OrnamentBuilder DIAMOND = new OrnamentBuilder("diamond")
             .properties(Material.METAL, MaterialColor.DIAMOND)

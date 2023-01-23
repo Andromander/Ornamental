@@ -4,6 +4,7 @@ import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.OrnamentalBlockTags;
+import com.androsa.ornamental.data.OrnamentalItemTags;
 import com.androsa.ornamental.registry.helper.RegistryHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.compress.utils.Lists;
 
 public class ModBlocks {
 
@@ -18,10 +20,10 @@ public class ModBlocks {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OrnamentalMod.MODID);
     private static final RegistryHelper HELPER = new RegistryHelper(BLOCKS, ITEMS);
 
-    public static final RegistryObject<OrnamentStair> iron_stairs = HELPER.stairs(Blocks.IRON_BLOCK, OrnamentBuilders.IRON, HELPER.array(OrnamentalBlockTags.BEACON_BASES));
-    public static final RegistryObject<OrnamentStair> gold_stairs = HELPER.stairs(Blocks.GOLD_BLOCK, OrnamentBuilders.GOLD, HELPER.array(OrnamentalBlockTags.BEACON_BASES));
-    public static final RegistryObject<OrnamentStair> diamond_stairs = HELPER.stairs(Blocks.DIAMOND_BLOCK, OrnamentBuilders.DIAMOND, HELPER.array(OrnamentalBlockTags.BEACON_BASES));
-    public static final RegistryObject<OrnamentStair> emerald_stairs = HELPER.stairs(Blocks.EMERALD_BLOCK, OrnamentBuilders.EMERALD, HELPER.array(OrnamentalBlockTags.BEACON_BASES));
+    public static final RegistryObject<OrnamentStair> iron_stairs = HELPER.stairs(Blocks.IRON_BLOCK, OrnamentBuilders.IRON, HELPER.array(OrnamentalBlockTags.BEACON_BASES), Lists.newArrayList());
+    public static final RegistryObject<OrnamentStair> gold_stairs = HELPER.stairs(Blocks.GOLD_BLOCK, OrnamentBuilders.GOLD, HELPER.array(OrnamentalBlockTags.BEACON_BASES), Lists.newArrayList());
+    public static final RegistryObject<OrnamentStair> diamond_stairs = HELPER.stairs(Blocks.DIAMOND_BLOCK, OrnamentBuilders.DIAMOND, HELPER.array(OrnamentalBlockTags.BEACON_BASES), Lists.newArrayList());
+    public static final RegistryObject<OrnamentStair> emerald_stairs = HELPER.stairs(Blocks.EMERALD_BLOCK, OrnamentBuilders.EMERALD, HELPER.array(OrnamentalBlockTags.BEACON_BASES), Lists.newArrayList());
     public static final RegistryObject<OrnamentStair> lapis_stairs = HELPER.stairs(Blocks.LAPIS_BLOCK, OrnamentBuilders.LAPIS);
     public static final RegistryObject<OrnamentStair> obsidian_stairs = HELPER.stairs(Blocks.OBSIDIAN, OrnamentBuilders.OBSIDIAN);
     public static final RegistryObject<OrnamentStair> coal_stairs = HELPER.stairs(Blocks.COAL_BLOCK, OrnamentBuilders.COAL);
@@ -37,7 +39,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentStair> ice_stairs = HELPER.stairs(Blocks.ICE, OrnamentBuilders.ICE);
     public static final RegistryObject<OrnamentStair> packed_ice_stairs = HELPER.stairs(Blocks.PACKED_ICE, OrnamentBuilders.PACKED_ICE);
     public static final RegistryObject<OrnamentStair> blue_ice_stairs = HELPER.stairs(Blocks.BLUE_ICE, OrnamentBuilders.BLUE_ICE);
-    public static final RegistryObject<OrnamentStair> netherite_stairs = HELPER.stairs(Blocks.NETHERITE_BLOCK, OrnamentBuilders.NETHERITE, HELPER.array(OrnamentalBlockTags.BEACON_BASES));
+    public static final RegistryObject<OrnamentStair> netherite_stairs = HELPER.stairs(Blocks.NETHERITE_BLOCK, OrnamentBuilders.NETHERITE, HELPER.array(OrnamentalBlockTags.BEACON_BASES), Lists.newArrayList());
     public static final RegistryObject<OrnamentStair> amethyst_stairs = HELPER.stairs(Blocks.AMETHYST_BLOCK, OrnamentBuilders.AMETHYST);
     public static final RegistryObject<OrnamentStair> copper_stairs = HELPER.stairs(Blocks.COPPER_BLOCK, OrnamentBuilders.COPPER);
     public static final RegistryObject<OrnamentStair> exposed_copper_stairs = HELPER.stairs(Blocks.EXPOSED_COPPER, OrnamentBuilders.EXPOSED_COPPER);
@@ -87,7 +89,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentFence> brick_fence = HELPER.fence(OrnamentBuilders.BRICK);
     public static final RegistryObject<OrnamentFence> quartz_fence = HELPER.fence(OrnamentBuilders.QUARTZ);
     public static final RegistryObject<OrnamentFence> bone_fence = HELPER.fence(OrnamentBuilders.BONE);
-    public static final RegistryObject<OrnamentFence> red_nether_brick_fence = HELPER.fence(OrnamentBuilders.RED_NETHER_BRICK, HELPER.array(OrnamentalBlockTags.NETHER_BRICK_FENCE));
+    public static final RegistryObject<OrnamentFence> red_nether_brick_fence = HELPER.fence(OrnamentBuilders.RED_NETHER_BRICK, HELPER.array(OrnamentalBlockTags.NETHER_BRICK_FENCE), HELPER.array(OrnamentalItemTags.NETHER_BRICK_FENCES));
     public static final RegistryObject<OrnamentFence> snow_fence = HELPER.fence(OrnamentBuilders.SNOW);
     public static final RegistryObject<OrnamentFence> ice_fence = HELPER.fence(OrnamentBuilders.ICE);
     public static final RegistryObject<OrnamentFence> packed_ice_fence = HELPER.fence(OrnamentBuilders.PACKED_ICE);
