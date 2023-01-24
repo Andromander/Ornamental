@@ -6,19 +6,53 @@ import com.androsa.ornamental.entity.renderer.*;
 import com.androsa.ornamental.particle.CastingParticle;
 import com.androsa.ornamental.particle.ChargeSparkParticle;
 import com.androsa.ornamental.particle.OrnamentalBreakingParticle;
+import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import com.androsa.ornamental.registry.ModelLocations;
 import net.minecraft.client.model.SnowGolemModel;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.GrassColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void blockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.get(0.5D, 1.0D),
+                ModBlocks.grass_fence.get(),
+                ModBlocks.grass_fence_gate.get(),
+                ModBlocks.grass_slab.get(),
+                ModBlocks.grass_stairs.get(),
+                ModBlocks.grass_trapdoor.get(),
+                ModBlocks.grass_door.get(),
+                ModBlocks.grass_pole.get(),
+                ModBlocks.grass_beam.get(),
+                ModBlocks.grass_wall.get(),
+                ModBlocks.grass_saddle_door.get());
+    }
+
+    @SubscribeEvent
+    public static void itemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, index) -> event.getBlockColors().getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, index),
+                ModBlocks.grass_fence.get(),
+                ModBlocks.grass_fence_gate.get(),
+                ModBlocks.grass_slab.get(),
+                ModBlocks.grass_stairs.get(),
+                ModBlocks.grass_trapdoor.get(),
+                ModBlocks.grass_pole.get(),
+                ModBlocks.grass_beam.get(),
+                ModBlocks.grass_wall.get(),
+                ModBlocks.grass_saddle_door.get());
+    }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
