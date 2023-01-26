@@ -134,7 +134,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     private InteractionResult performNormally(BlockState state, Level worldIn, BlockPos pos, Player player) {
-        if (!builder.hasPower) {
+        if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
             if (state.getValue(OPEN)) {
