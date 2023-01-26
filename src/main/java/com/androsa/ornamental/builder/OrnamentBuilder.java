@@ -3,6 +3,7 @@ package com.androsa.ornamental.builder;
 import com.androsa.ornamental.OrnamentalMod;
 import com.google.common.collect.Lists;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -44,6 +45,10 @@ public class OrnamentBuilder {
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
     public boolean canOpen = false;
+    public SoundEvent[] trapdoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
+    public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
+    public SoundEvent[] doorSounds = new SoundEvent[]{SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE};
+    public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
     public boolean hasPower = false;
     public boolean doesTick = false;
     public boolean requiresTool = false;
@@ -188,6 +193,46 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder canOpen() {
         this.canOpen = true;
+        return this;
+    }
+
+    /**
+     * Sets the sounds for opening and closing a Trapdoor.
+     * @param open The open sound.
+     * @param close The close sound;
+     */
+    public OrnamentBuilder trapdoorSounds(SoundEvent open, SoundEvent close) {
+        this.trapdoorSounds = new SoundEvent[]{ open, close };
+        return this;
+    }
+
+    /**
+     * Sets the sounds for opening and closing a Fence Gate.
+     * @param open The open sound.
+     * @param close The close sound;
+     */
+    public OrnamentBuilder fencegateSounds(SoundEvent open, SoundEvent close) {
+        this.fencegateSounds = new SoundEvent[]{ open, close };
+        return this;
+    }
+
+    /**
+     * Sets the sounds for opening and closing a Door.
+     * @param open The open sound.
+     * @param close The close sound;
+     */
+    public OrnamentBuilder doorSounds(SoundEvent open, SoundEvent close) {
+        this.doorSounds = new SoundEvent[]{ open, close };
+        return this;
+    }
+
+    /**
+     * Sets the sounds for opening and closing a Saddle Door.
+     * @param open The open sound.
+     * @param close The close sound;
+     */
+    public OrnamentBuilder saddledoorSounds(SoundEvent open, SoundEvent close) {
+        this.saddledoorSounds = new SoundEvent[]{ open, close };
         return this;
     }
 

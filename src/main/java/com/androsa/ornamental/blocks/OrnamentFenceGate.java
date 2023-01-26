@@ -46,7 +46,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     private final OrnamentBuilder builder;
 
     public OrnamentFenceGate(Properties props, OrnamentBuilder builder) {
-        super(props, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN); //placeholders, these are provided with an OrnamentBuilder
+        super(props, builder.fencegateSounds[1], builder.fencegateSounds[0]);
         this.builder = builder;
     }
 
@@ -130,28 +130,10 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
             }
         }
 
-        return this.performNormally(state, worldIn, pos, player);
-    }
-
-    private InteractionResult performNormally(BlockState state, Level worldIn, BlockPos pos, Player player) {
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
-            if (state.getValue(OPEN)) {
-                state = state.setValue(OPEN, Boolean.FALSE);
-                worldIn.setBlock(pos, state, 10);
-            } else {
-                Direction enumfacing = player.getDirection();
-                if (state.getValue(FACING) == enumfacing.getOpposite()) {
-                    state = state.setValue(FACING, enumfacing);
-                }
-
-                state = state.setValue(OPEN, Boolean.TRUE);
-                worldIn.setBlock(pos, state, 10);
-            }
-
-            worldIn.levelEvent(player, state.getValue(OPEN) ? 1008 : 1014, pos, 0);
-            return InteractionResult.SUCCESS;
+            return super.use(state, worldIn, pos, player, hand, result);
         }
     }
 

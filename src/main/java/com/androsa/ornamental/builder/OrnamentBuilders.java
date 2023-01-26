@@ -21,6 +21,9 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder GOLD = new OrnamentBuilder("gold")
@@ -28,6 +31,9 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PIGLIN_GUARDED, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED))
             .addItemTags(List.of(OrnamentalItemTags.PIGLIN_LOVED));
 
@@ -36,6 +42,9 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
 
     public static final OrnamentBuilder EMERALD = new OrnamentBuilder("emerald")
@@ -43,12 +52,18 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
 
     public static final OrnamentBuilder LAPIS = new OrnamentBuilder("lapis")
             .properties(Material.METAL, MaterialColor.LAPIS)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder OBSIDIAN = new OrnamentBuilder("obsidian")
@@ -71,6 +86,9 @@ public class OrnamentBuilders {
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
             .hasPower()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder MISSINGNO = new OrnamentBuilder("missingno")
@@ -78,6 +96,8 @@ public class OrnamentBuilders {
             .sound(SoundType.METAL)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
 
     public static final OrnamentBuilder CLAY = new OrnamentBuilder("clay")
@@ -194,6 +214,9 @@ public class OrnamentBuilders {
             .sound(SoundType.NETHERITE_BLOCK)
             .hardnessAndResistance(50.0F, 1200.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .isFireproof()
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.DIAMOND_REQUIRED));
 
@@ -202,6 +225,9 @@ public class OrnamentBuilders {
             .sound(SoundType.COPPER)
             .hardnessAndResistance(3.0F, 6.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder EXPOSED_COPPER = new OrnamentBuilder("exposed_copper")
@@ -209,6 +235,9 @@ public class OrnamentBuilders {
             .sound(SoundType.COPPER)
             .hardnessAndResistance(3.0F, 6.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder WEATHERED_COPPER = new OrnamentBuilder("weathered_copper")
@@ -216,6 +245,9 @@ public class OrnamentBuilders {
             .sound(SoundType.COPPER)
             .hardnessAndResistance(3.0F, 6.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder OXIDIZED_COPPER = new OrnamentBuilder("oxidized_copper")
@@ -223,6 +255,9 @@ public class OrnamentBuilders {
             .sound(SoundType.COPPER)
             .hardnessAndResistance(3.0F, 6.0F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder AMETHYST = new OrnamentBuilder("amethyst")
@@ -230,6 +265,9 @@ public class OrnamentBuilders {
             .sound(SoundType.AMETHYST)
             .hardnessAndResistance(1.5F)
             .requiresTool()
+            .trapdoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .doorSounds(SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE)
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .projectileHitSound(ImmutableList.of(SoundEvents.AMETHYST_BLOCK_HIT, SoundEvents.AMETHYST_BLOCK_CHIME))
             .addBlockTags(List.of(OrnamentalBlockTags.CRYSTAL_SOUNDS, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 }

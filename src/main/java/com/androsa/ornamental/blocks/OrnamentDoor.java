@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -42,7 +43,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentDoor(Properties props, OrnamentBuilder builder) {
-        super(props, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN); //placeholders, these are provided with an OrnamentBuilder
+        super(props, builder.doorSounds[1], builder.doorSounds[0]);
         this.builder = builder;
     }
 
@@ -122,17 +123,14 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
             }
         }
 
-        return this.performNormally(state, worldIn, pos, player);
-    }
-
-    private InteractionResult performNormally(BlockState state, Level worldIn, BlockPos pos, Player player) {
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
             state = state.cycle(OPEN);
             worldIn.setBlock(pos, state, 10);
-            worldIn.levelEvent(player, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
-            return InteractionResult.SUCCESS;
+            worldIn.playSound(player, pos, state.getValue(OPEN) ? builder.doorSounds[0] : builder.doorSounds[1], SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
+            worldIn.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+            return InteractionResult.sidedSuccess(worldIn.isClientSide());
         }
     }
 
@@ -161,14 +159,6 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 35);
         world.setBlockAndUpdate(nearPos, block.get().defaultBlockState().setValue(FACING, blockstate.getValue(FACING)).setValue(OPEN, blockstate.getValue(OPEN)).setValue(HINGE, blockstate.getValue(HINGE)).setValue(POWERED, blockstate.getValue(POWERED)).setValue(HALF, half));
         world.setBlockAndUpdate(selectPos, block.get().defaultBlockState().setValue(FACING, blockstate.getValue(FACING)).setValue(OPEN, blockstate.getValue(OPEN)).setValue(HINGE, blockstate.getValue(HINGE)).setValue(POWERED, blockstate.getValue(POWERED)).setValue(HALF, blockstate.getValue(HALF)));
-    }
-
-    private int getCloseSound() {
-        return this.material == Material.METAL || this.material == Material.STONE ? 1011 : 1012;
-    }
-
-    private int getOpenSound() {
-        return this.material == Material.METAL || this.material == Material.STONE ? 1005 : 1006;
     }
 
     @Override

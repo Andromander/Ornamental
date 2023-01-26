@@ -30,7 +30,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
@@ -45,7 +44,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentTrapDoor(Properties props, OrnamentBuilder builder) {
-        super(props, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN); //placeholders, these are provided with an OrnamentBuilder
+        super(props, builder.trapdoorSounds[1], builder.trapdoorSounds[0]);
         this.builder = builder;
     }
 
@@ -111,24 +110,19 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             }
         }
 
-        return this.performNormally(state, worldIn, pos, player);
-    }
-
-    private InteractionResult performNormally(BlockState state, Level world, BlockPos pos, Player player) {
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
             state = state.cycle(OPEN);
-            world.setBlock(pos, state, 2);
+            worldIn.setBlock(pos, state, 2);
             if (state.getValue(WATERLOGGED)) {
-                world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+                worldIn.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
             }
 
-            this.playSound(player, world, pos, state.getValue(OPEN));
-            return InteractionResult.SUCCESS;
+            this.playSound(player, worldIn, pos, state.getValue(OPEN));
+            return InteractionResult.sidedSuccess(worldIn.isClientSide());
         }
     }
-
     private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentTrapDoor> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         this.setBlock(worldIn, pos, newblock);
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -158,17 +152,6 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
                 worldIn.setBlock(pos, state, 2);
                 this.playSound(null, worldIn, pos, state.getValue(OPEN));
             }
-        }
-    }
-
-    @Override
-    protected void playSound(@Nullable Player player, Level worldIn, BlockPos pos, boolean state) {
-        if (state) {
-            int i = this.material == Material.METAL ? 1037 : 1007;
-            worldIn.levelEvent(player, i, pos, 0);
-        } else {
-            int j = this.material == Material.METAL ? 1036 : 1013;
-            worldIn.levelEvent(player, j, pos, 0);
         }
     }
 

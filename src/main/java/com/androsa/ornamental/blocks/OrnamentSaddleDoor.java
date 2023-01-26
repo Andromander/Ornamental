@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -47,10 +46,14 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     private static final VoxelShape PATH_EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, 3.0D, 15.0D, 16.0D);
 
     private final OrnamentBuilder builder;
+    private final SoundEvent closeSound;
+    private final SoundEvent openSound;
 
     public OrnamentSaddleDoor(Properties props, OrnamentBuilder builder) {
         super(props);
         this.builder = builder;
+        this.closeSound = builder.saddledoorSounds[1];
+        this.openSound = builder.saddledoorSounds[0];
 
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(HINGE, DoorHingeSide.LEFT).setValue(POWERED, false));
     }
@@ -98,14 +101,6 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         };
     }
 
-    private int getCloseSound() {
-        return this.material == Material.METAL || this.material == Material.STONE ? 1011 : 1012;
-    }
-
-    private int getOpenSound() {
-        return this.material == Material.METAL || this.material == Material.STONE ? 1005 : 1006;
-    }
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
@@ -131,12 +126,12 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         boolean flag1 = blockstate2.is(this);
         if ((!flag || flag1) && i <= 0) {
             if ((!flag1 || flag) && i >= 0) {
-                int j = direction.getStepX();
-                int k = direction.getStepZ();
+                int dirX = direction.getStepX();
+                int dirZ = direction.getStepZ();
                 Vec3 vec3 = context.getClickLocation();
-                double d0 = vec3.x - (double)blockpos.getX();
-                double d1 = vec3.z - (double)blockpos.getZ();
-                return (j >= 0 || !(d1 < 0.5D)) && (j <= 0 || !(d1 > 0.5D)) && (k >= 0 || !(d0 > 0.5D)) && (k <= 0 || !(d0 < 0.5D)) ? DoorHingeSide.LEFT : DoorHingeSide.RIGHT;
+                double x = vec3.x - (double)blockpos.getX();
+                double z = vec3.z - (double)blockpos.getZ();
+                return (dirX >= 0 || !(z < 0.5D)) && (dirX <= 0 || !(z > 0.5D)) && (dirZ >= 0 || !(x > 0.5D)) && (dirZ <= 0 || !(x < 0.5D)) ? DoorHingeSide.LEFT : DoorHingeSide.RIGHT;
             } else {
                 return DoorHingeSide.LEFT;
             }
@@ -167,18 +162,14 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
             }
         }
 
-        return this.performNormally(state, worldIn, pos, player);
-    }
-
-    private InteractionResult performNormally(BlockState state, Level world, BlockPos pos, Player player) {
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
             state = state.cycle(OPEN);
-            world.setBlock(pos, state, 10);
-            world.levelEvent(player, state.getValue(OPEN) ? getOpenSound() : getCloseSound(), pos, 0);
-            world.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-            return InteractionResult.sidedSuccess(world.isClientSide());
+            worldIn.setBlock(pos, state, 10);
+            worldIn.playSound(player, pos, state.getValue(OPEN) ? this.openSound : this.closeSound, SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
+            worldIn.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+            return InteractionResult.sidedSuccess(worldIn.isClientSide());
         }
     }
 
@@ -209,7 +200,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         boolean flag = level.hasNeighborSignal(pos);
         if (!this.defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
             if (flag != state.getValue(OPEN)) {
-                level.levelEvent(null, state.getValue(OPEN) ? getOpenSound() : getCloseSound(), pos, 0);
+                level.playSound(null, pos, state.getValue(OPEN) ? this.openSound : this.closeSound, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
                 level.gameEvent(null, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
             }
 
