@@ -261,7 +261,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(stairItemTags());
 
         return registerBlock(builder, "_stairs", () -> factory.create(base::defaultBlockState, props, builder), item ->
-                registerBlockItem(item, builder, 4), CreativeTabHandler.STAIR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 4, OrnamentBlockItem::new), CreativeTabHandler.STAIR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -278,7 +278,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(slabItemTags());
 
         return registerBlock(builder, "_slab", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 3), CreativeTabHandler.SLAB_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 3, OrnamentBlockItem::new), CreativeTabHandler.SLAB_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -295,7 +295,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(fenceItemTags());
 
         return registerBlock(builder, "_fence", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 1), CreativeTabHandler.FENCE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 1, OrnamentBlockItem::new), CreativeTabHandler.FENCE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -312,7 +312,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(trapdoorItemTags());
 
         return registerBlock(builder, "_trapdoor", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 5), CreativeTabHandler.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 5, OrnamentBlockItem::new), CreativeTabHandler.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -329,7 +329,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(fencegateItemTags());
 
         return registerBlock(builder, "_fence_gate", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 2), CreativeTabHandler.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 2, OrnamentBlockItem::new), CreativeTabHandler.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -346,7 +346,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(doorItemTags());
 
         return registerBlock(builder, "_door", () -> factory.create(props, builder), item ->
-                registerBlockItemDoor(item, builder, 0), CreativeTabHandler.DOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), CreativeTabHandler.DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -363,7 +363,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(poleItemTags());
 
         return registerBlock(builder, "_pole", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 6), CreativeTabHandler.POLE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 6, OrnamentBlockItem::new), CreativeTabHandler.POLE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -380,7 +380,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(beamItemTags());
 
         return registerBlock(builder, "_beam", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 7), CreativeTabHandler.BEAM_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 7, OrnamentBlockItem::new), CreativeTabHandler.BEAM_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -397,7 +397,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(wallItemTags());
 
         return registerBlock(builder, "_wall", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 8), CreativeTabHandler.WALL_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 8, OrnamentBlockItem::new), CreativeTabHandler.WALL_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -414,7 +414,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(saddledoorItemTags());
 
         return registerBlock(builder, "_saddle_door", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 9), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 9, OrnamentBlockItem::new), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -439,25 +439,15 @@ public abstract class MasterRegistryHelper {
     }
 
     /**
-     * The BlockItem for an ornament. This handles all single-block ornaments, such as Stair or Slab.
+     * The BlockItem for an ornament, o long as the BlockItem follows {@link ItemFactory#create(Block, Item.Properties, OrnamentBuilder, int)}.
      * @param block The Block ornament.
-     * @param ornament The OrnamentBuilder.
+     * @param builder The OrnamentBuilder.
      * @param fuelindex The fuel index for the {@link OrnamentBuilder#burnTime}. See {@link OrnamentBuilder#burnTime(int...)} for block to index.
+     * @param factory The BlockItem.
      * @return The BlockItem for the ornament.
      */
-    protected <T extends Block> Supplier<BlockItem> registerBlockItem(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
-        return () -> new OrnamentBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
-    }
-
-    /**
-     * The TallBlockItem for an ornament. This handles all ornaments that are 2 blocks tall, such as Door.
-     * @param block The Block ornament.
-     * @param ornament The OrnamentBuilder.
-     * @param fuelindex The fuel index for the {@link OrnamentBuilder#burnTime}. See {@link OrnamentBuilder#burnTime(int...)} for block to index.
-     * @return  The BlockItem for the ornament. Note that while the return value is any BlockItem, it is recommended for only handling blocks intended to be 2 blocks tall.
-     */
-    protected <T extends Block> Supplier<BlockItem> registerBlockItemDoor(final RegistryObject<T> block, OrnamentBuilder ornament, int fuelindex) {
-        return () -> new OrnamentTallBlockItem(block.get(), PropertiesHelper.createItem(ornament), ornament, fuelindex);
+    protected <T extends Block, I extends BlockItem> Supplier<BlockItem> registerBlockItem(RegistryObject<T> block, OrnamentBuilder builder, int fuelindex, ItemFactory<I> factory) {
+        return () -> factory.create(block.get(), PropertiesHelper.createItem(builder), builder, fuelindex);
     }
 
     @SafeVarargs
@@ -478,5 +468,10 @@ public abstract class MasterRegistryHelper {
         }
 
         T create(Supplier<BlockState> base, BlockBehaviour.Properties props, OrnamentBuilder builder);
+    }
+
+    @FunctionalInterface
+    public interface ItemFactory<T extends BlockItem> {
+        T create(Block block, Item.Properties props, OrnamentBuilder builder, int index);
     }
 }
