@@ -20,16 +20,16 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CreativeTabHandler {
 
-    public static final List<RegistryObject<Block>> STAIR_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> SLAB_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> FENCE_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> TRAPDOOR_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> FENCE_GATE_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> DOOR_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> POLE_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> BEAM_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> WALL_ORNAMENTS = Lists.newArrayList();
-    public static final List<RegistryObject<Block>> SADDLE_DOOR_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> STAIR_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> SLAB_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> FENCE_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> TRAPDOOR_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> FENCE_GATE_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> DOOR_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> POLE_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> BEAM_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> WALL_ORNAMENTS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> SADDLE_DOOR_ORNAMENTS = Lists.newArrayList();
 
     @SubscribeEvent
     public static void addContent(CreativeModeTabEvent.Register event) {
@@ -45,19 +45,19 @@ public class CreativeTabHandler {
         createTab(event, "saddle_door_ornaments", () -> new ItemStack(ModBlocks.diamond_saddle_door.get()), List.of(), List.of(wallOrnaments), SADDLE_DOOR_ORNAMENTS);
     }
 
-    private static CreativeModeTab createTab(CreativeModeTabEvent.Register evt, String name, Supplier<ItemStack> icon, List<Object> before, List<Object> after, List<RegistryObject<Block>> list) {
+    private static CreativeModeTab createTab(CreativeModeTabEvent.Register evt, String name, Supplier<ItemStack> icon, List<Object> before, List<Object> after, List<RegistryObject<? extends Block>> list) {
         if (before != null && after != null) {
             return evt.registerCreativeModeTab(new ResourceLocation(OrnamentalMod.MODID, name), before, after, buildTab(name, icon, list));
         }
         return evt.registerCreativeModeTab(new ResourceLocation(OrnamentalMod.MODID, name), buildTab(name, icon, list));
     }
 
-    private static Consumer<CreativeModeTab.Builder> buildTab(String name, Supplier<ItemStack> icon, List<RegistryObject<Block>> list) {
+    private static Consumer<CreativeModeTab.Builder> buildTab(String name, Supplier<ItemStack> icon, List<RegistryObject<? extends Block>> list) {
         return builder -> builder
                 .title(Component.translatable("ornamental.tab." + name))
                 .icon(icon)
                 .displayItems((flag, output, operator) -> {
-                    for (RegistryObject<Block> block : list) {
+                    for (RegistryObject<? extends Block> block : list) {
                         output.accept(block.get());
                     }
                 });

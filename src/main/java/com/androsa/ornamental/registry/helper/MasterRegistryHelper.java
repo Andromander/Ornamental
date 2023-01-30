@@ -420,11 +420,11 @@ public abstract class MasterRegistryHelper {
     /**
      * INTERNAL USE
      */
-    private <T extends Block> RegistryObject<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<Block>> tab, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    private <T extends Block> RegistryObject<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<? extends Block>> tab, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
         String name = builder.name + suffix;
         RegistryObject<T> reg = blockRegistry.register(name, block);
         itemRegistry.register(name, item.apply(reg));
-        tab.add((RegistryObject<Block>) reg);
+        tab.add(reg);
 
         blocktags.addAll(builder.blockTags);
         for (List<RegistryObject<? extends Block>> tag : blocktags) {
