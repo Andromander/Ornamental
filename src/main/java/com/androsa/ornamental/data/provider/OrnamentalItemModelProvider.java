@@ -3,11 +3,13 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -163,6 +165,10 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
                 .texture("side", side)
                 .texture("top", top)
                 .texture("bottom", bottom);
+    }
+
+    public void eggItem(RegistryObject<? extends Item> item) {
+        withExistingParent(item.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     public ItemModelBuilder existingParent(Supplier<? extends Block> block, ResourceLocation parent) {

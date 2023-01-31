@@ -3,8 +3,11 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemModelProvider;
+import com.androsa.ornamental.registry.handler.CreativeTabHandler;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Optional;
 
@@ -306,5 +309,9 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
         blockItemSaddleDoor(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
         blockItemSaddleDoor(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
+
+        for (RegistryObject<? extends Item> item : CreativeTabHandler.SPAWN_EGGS) {
+            eggItem(item);
+        }
     }
 }
