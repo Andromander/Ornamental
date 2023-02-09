@@ -255,7 +255,7 @@ public abstract class MasterRegistryHelper {
      * @param factory The block class required to create an OrnamentStair object.
      * @return RegistryObject for an OrnamentStair.
      */
-    public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(Supplier<Block> base, O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, StairFactory<T, O> factory) {
+    public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(Supplier<? extends Block> base, O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, StairFactory<T, O> factory) {
         BlockBehaviour.Properties props = stairProperties(builder);
         blocktags.addAll(stairBlockTags());
         itemtags.addAll(stairItemTags());
