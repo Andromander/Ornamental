@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class RegistryHelper extends MasterRegistryHelper {
 
@@ -120,14 +121,14 @@ public class RegistryHelper extends MasterRegistryHelper {
     }
 
     /**
-     * Examples of creating template methods of {@link MasterRegistryHelper#stairs(Block, OrnamentBuilder, ArrayList, ArrayList, StairFactory)}.
+     * Examples of creating template methods of {@link MasterRegistryHelper#stairs(Supplier, OrnamentBuilder, ArrayList, ArrayList, StairFactory)}.
      */
     public RegistryObject<OrnamentStair> stairs(Block base, OrnamentBuilder builder) {
         return stairs(base, builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
     public RegistryObject<OrnamentStair> stairs(Block base, OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
-        return stairs(base, builder, blocktags, itemtags, OrnamentStair::new);
+        return stairs(() -> base, builder, blocktags, itemtags, OrnamentStair::new);
     }
 
     /**
