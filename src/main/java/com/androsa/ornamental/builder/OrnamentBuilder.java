@@ -77,6 +77,10 @@ public class OrnamentBuilder {
         this.name = name;
     }
 
+    public OrnamentBuilder getBuilder() {
+        return this;
+    }
+
     /**
      * Setter for block's properties. Will take the block's Material to determine MaterialColor
      * @param material The Material of the block
