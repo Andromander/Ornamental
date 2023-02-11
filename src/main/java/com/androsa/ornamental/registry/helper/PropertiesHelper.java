@@ -14,14 +14,15 @@ public class PropertiesHelper {
      * @param builder the material being used for that block.
      */
     public static BlockBehaviour.Properties createProps(OrnamentBuilder builder) {
-        BlockBehaviour.Properties props = BlockBehaviour.Properties.of(builder.material, builder.color)
-                .strength(builder.hardness, builder.resistance)
-                .sound(builder.sound)
-                .friction(builder.slipperiness);
-        if (builder.doesTick) props.randomTicks();
-        if (!builder.isSolid) props.noOcclusion();
-        if (builder.requiresTool) props.requiresCorrectToolForDrops();
-        if (builder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
+        OrnamentBuilder getbuilder = builder.getBuilder();
+        BlockBehaviour.Properties props = BlockBehaviour.Properties.of(getbuilder.material, getbuilder.color)
+                .strength(getbuilder.hardness, getbuilder.resistance)
+                .sound(getbuilder.sound)
+                .friction(getbuilder.slipperiness);
+        if (getbuilder.doesTick) props.randomTicks();
+        if (!getbuilder.isSolid) props.noOcclusion();
+        if (getbuilder.requiresTool) props.requiresCorrectToolForDrops();
+        if (getbuilder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
 
         return props;
     }
