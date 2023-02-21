@@ -22,12 +22,12 @@ import java.util.List;
 /**
  * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.<br>
  * This is to save on copy-pasting values, while also only requiring certain values if they require altering.<br>
- * If any method is not used, a default value will be assigned. No important value is left null, the only requirement is a name for the material.<br>
+ * If any method is not used, a default value will be assigned. No important value is left null, the only requirement is a name for the material.<br><br>
  *
  * HOW TO USE:<br>
  * 1. Create a new OrnamentBuilder, supplying a String for the name.<br>
  * 2. Follow the documentation provided by each method and call each appropriate one where required.<br>
- * 3. Once sufficiently created, pass through an Ornament block appropriately.<br>
+ * 3. Once sufficiently created, pass through an Ornament block appropriately.<br><br>
  *
  * Registration of the blocks can be done however you please.<br>
  * Field "name" can be used in conjunction with a block suffix to quickly create a registry name for ease of registration.<br>
