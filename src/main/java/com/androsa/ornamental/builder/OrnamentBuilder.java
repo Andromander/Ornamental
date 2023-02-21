@@ -20,18 +20,18 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.
- * This is to save on copy-pasting values, while also only requiring certain values if they require altering.
- * If any method is not used, a default value will be assigned. No important value is left null, the only requirement is a name for the material.
+ * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.<br>
+ * This is to save on copy-pasting values, while also only requiring certain values if they require altering.<br>
+ * If any method is not used, a default value will be assigned. No important value is left null, the only requirement is a name for the material.<br>
  *
- * HOW TO USE:
- * 1. Create a new OrnamentBuilder, supplying a String for the name.
- * 2. Follow the documentation provided by each method and call each appropriate one where required.
- * 3. Once sufficiently created, pass through an Ornament block appropriately.
+ * HOW TO USE:<br>
+ * 1. Create a new OrnamentBuilder, supplying a String for the name.<br>
+ * 2. Follow the documentation provided by each method and call each appropriate one where required.<br>
+ * 3. Once sufficiently created, pass through an Ornament block appropriately.<br>
  *
- * Registration of the blocks can be done however you please.
- * Field "name" can be used in conjunction with a block suffix to quickly create a registry name for ease of registration.
- * This class can be extended to add custom setters for use in other mods for compatibility.
+ * Registration of the blocks can be done however you please.<br>
+ * Field "name" can be used in conjunction with a block suffix to quickly create a registry name for ease of registration.<br>
+ * This class can be extended to add custom setters for use in other mods for compatibility.<br>
  */
 public class OrnamentBuilder {
 
@@ -77,6 +77,9 @@ public class OrnamentBuilder {
         this.name = name;
     }
 
+    /**
+     * When extending OrnamentBuilder, access to the OrnamentBuilder properties will be lost. This method can be used to get access to properties here.
+     */
     public OrnamentBuilder getBuilder() {
         return this;
     }
@@ -380,7 +383,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Data generation only. This will put all ornamenta of a material into an array to generate into Item Tags.
+     * Data generation only. This will put all ornaments of a material into an array to generate into Item Tags.
      * For ornament-based tags, this is handled via registration.
      * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
      */
