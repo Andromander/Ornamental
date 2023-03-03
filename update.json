@@ -65,7 +65,8 @@
   "1.19.3": {
     "4.10.24": "Ornamental has now been ported to 1.19.3! Plenty of rewriting has been done for further ease of use for addons.\n • Ornamental has been moved to new Creative Tabs. This should make it much easier to find the blocks you want.\n • Improved registry handling. For addon creators, this means you can create a helper to use or modify existing methods, as well as more streamlined tag data generation.",
     "4.10.26": "Fixed an issue with Trapdoors, Fence Gates, Doors, and Saddle Doors not making any sound when opened. Additionally, added properties to OrnamentBuilder for open and close sounds for these blocks.",
-    "4.10.39": "• Added ja_jp translation, courtesy of tomodachi94.\n • Add Spawn Eggs for all the Golems.\n • Rewrote RegistryHelper, the new class to extend is MasterRegistryHelper for custom use and fixes possible bugs and compile errors. Check the documentation for more info."
+    "4.10.39": "• Added ja_jp translation, courtesy of tomodachi94.\n • Add Spawn Eggs for all the Golems.\n • Rewrote RegistryHelper, the new class to extend is MasterRegistryHelper for custom use and fixes possible bugs and compile errors. Check the documentation for more info.",
+    "4.10.41": "Fixed a crash on startup."
   },
 
   "promos": {
@@ -95,7 +96,7 @@
     "1.18.2-recommended": "4.8.1",
     "1.19-latest": "4.9.13",
     "1.19-recommended": "4.9.13",
-    "1.19.3-latest": "4.10.39",
-    "1.19.3-recommended": "4.10.39"
+    "1.19.3-latest": "4.10.41",
+    "1.19.3-recommended": "4.10.41"
   }
 }
