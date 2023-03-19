@@ -50,8 +50,8 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
 
     private final OrnamentBuilder builder;
 
-    public OrnamentStair(Supplier<BlockState> state, Properties props, OrnamentBuilder builder) {
-        super(state, props);
+    public OrnamentStair(Properties props, OrnamentBuilder builder) {
+        super(() -> builder.baseBlock.get().defaultBlockState(), props);
         this.builder = builder;
     }
 

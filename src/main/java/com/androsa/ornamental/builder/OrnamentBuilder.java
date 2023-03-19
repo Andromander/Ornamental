@@ -19,6 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.<br>
@@ -45,6 +46,7 @@ public class OrnamentBuilder {
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
     public boolean canOpen = false;
+    public Supplier<? extends Block> baseBlock = () -> Blocks.AIR;
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
     public BlockSetType blockSetType = BlockSetType.OAK;
@@ -190,6 +192,15 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder canOpen() {
         this.canOpen = true;
+        return this;
+    }
+
+    /**
+     * Sets a base block for an OrnamentStair. Not necessary to set if no OrnamentStair is getting registered, but is highly advised.
+     * @param block The Supplier of a Block to provide.
+     */
+    public OrnamentBuilder stairBaseBlock(Supplier<Block> block) {
+        this.baseBlock = block;
         return this;
     }
 

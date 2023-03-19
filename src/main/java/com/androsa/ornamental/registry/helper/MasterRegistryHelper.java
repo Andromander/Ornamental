@@ -9,9 +9,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -248,19 +246,18 @@ public abstract class MasterRegistryHelper {
 
     /**
      * For registering an OrnamentStair. This method contains everything required for registration.
-     * @param base The base block. All Stair blocks require this.
      * @param builder OrnamentBuilder.
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentStair object.
      * @return RegistryObject for an OrnamentStair.
      */
-    public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(Supplier<? extends Block> base, O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, StairFactory<T, O> factory) {
+    public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = stairProperties(builder);
         blocktags.addAll(stairBlockTags());
         itemtags.addAll(stairItemTags());
 
-        return registerBlock(builder, "_stairs", () -> factory.create(() -> base.get().defaultBlockState(), props, builder), item ->
+        return registerBlock(builder, "_stairs", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 4, OrnamentBlockItem::new), CreativeTabHandler.STAIR_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -458,16 +455,6 @@ public abstract class MasterRegistryHelper {
     @FunctionalInterface
     public interface BlockFactory<T extends OrnamentalBlock, O extends OrnamentBuilder> {
         T create(BlockBehaviour.Properties props, O builder);
-    }
-
-    @FunctionalInterface
-    public interface StairFactory<T extends OrnamentStair, O extends OrnamentBuilder> extends BlockFactory<T, O> {
-        @Override
-        default T create(BlockBehaviour.Properties props, O builder) {
-            return create(Blocks.AIR::defaultBlockState, props, builder);
-        }
-
-        T create(Supplier<BlockState> base, BlockBehaviour.Properties props, O builder);
     }
 
     @FunctionalInterface
