@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public abstract class OrnamentalItemTagProvider extends ItemTagsProvider {
 
     public OrnamentalItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid, ExistingFileHelper helper, BlockTagsProvider blockTags) {
-        super(output, provider, blockTags, modid, helper);
+        super(output, provider, blockTags.contentsGetter(), modid, helper);
     }
 
     protected void addToTag(TagKey<Item> tag, List<RegistryObject<? extends Block>> list) {

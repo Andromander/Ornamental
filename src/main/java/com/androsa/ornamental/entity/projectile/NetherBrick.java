@@ -14,6 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 public class NetherBrick extends Brick {
 
     public NetherBrick(EntityType<? extends ThrowableItemProjectile> type, Level world) {
@@ -31,6 +33,7 @@ public class NetherBrick extends Brick {
     }
 
     @Override
+    @Nonnull
     protected Item getDefaultItem() {
         return Items.NETHER_BRICK;
     }

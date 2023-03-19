@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -38,17 +39,15 @@ public class OrnamentBuilder {
     public final String name;
     public Material material = Material.STONE;
     public MaterialColor color = material.getColor();
-    public SoundType sound = SoundType.STONE;
     public float hardness = 0.0F;
     public float resistance = 0.0F;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
     public boolean canOpen = false;
-    public SoundEvent[] trapdoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
-    public SoundEvent[] doorSounds = new SoundEvent[]{SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
+    public BlockSetType blockSetType = BlockSetType.OAK;
     public boolean hasPower = false;
     public boolean doesTick = false;
     public boolean requiresTool = false;
@@ -102,15 +101,6 @@ public class OrnamentBuilder {
     public OrnamentBuilder properties(Material material, MaterialColor color) {
         this.material = material;
         this.color = color;
-        return this;
-    }
-
-    /**
-     * Setter for the block's sound. Will default to SoundType.STONE if unused.
-     * @param sound The SoundType of the block
-     */
-    public OrnamentBuilder sound(SoundType sound) {
-        this.sound = sound;
         return this;
     }
 
@@ -204,19 +194,9 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the sounds for opening and closing a Trapdoor.
-     * @param open The open sound.
-     * @param close The close sound;
-     */
-    public OrnamentBuilder trapdoorSounds(SoundEvent open, SoundEvent close) {
-        this.trapdoorSounds = new SoundEvent[]{ open, close };
-        return this;
-    }
-
-    /**
      * Sets the sounds for opening and closing a Fence Gate.
      * @param open The open sound.
-     * @param close The close sound;
+     * @param close The close sound.
      */
     public OrnamentBuilder fencegateSounds(SoundEvent open, SoundEvent close) {
         this.fencegateSounds = new SoundEvent[]{ open, close };
@@ -224,22 +204,60 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the sounds for opening and closing a Door.
+     * Sets the sounds for opening and closing a Saddle Door.
      * @param open The open sound.
-     * @param close The close sound;
+     * @param close The close sound.
      */
-    public OrnamentBuilder doorSounds(SoundEvent open, SoundEvent close) {
-        this.doorSounds = new SoundEvent[]{ open, close };
+    public OrnamentBuilder saddledoorSounds(SoundEvent open, SoundEvent close) {
+        this.saddledoorSounds = new SoundEvent[]{ open, close };
         return this;
     }
 
     /**
-     * Sets the sounds for opening and closing a Saddle Door.
-     * @param open The open sound.
-     * @param close The close sound;
+     * Sets a BlockSetType with the OrnamentBuilder name. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
+     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
+     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
+     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
+     * @param sound The sound the block makes.
+     * @param closedoor The close sound of a Door.
+     * @param opendoor The open sound of a Door.
+     * @param closetrap The close sound of a Trapdoor.
+     * @param opentrap The open sound of a Trapdoor.
+     * @param plateoff The off sound of a Pressure Plate.
+     * @param plateon The on sound of a Pressure Plate.
+     * @param buttonoff The off sound of a Button.
+     * @param buttonon The on sound of a Button.
      */
-    public OrnamentBuilder saddledoorSounds(SoundEvent open, SoundEvent close) {
-        this.saddledoorSounds = new SoundEvent[]{ open, close };
+    public OrnamentBuilder blockSetType(SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
+        return this.blockSetType(name, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
+    }
+
+    /**
+     * Sets a BlockSetType with a custom name. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
+     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
+     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
+     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
+     * @param name The name for the BlockSetType.
+     * @param sound The sound the block makes.
+     * @param closedoor The close sound of a Door.
+     * @param opendoor The open sound of a Door.
+     * @param closetrap The close sound of a Trapdoor.
+     * @param opentrap The open sound of a Trapdoor.
+     * @param plateoff The off sound of a Pressure Plate.
+     * @param plateon The on sound of a Pressure Plate.
+     * @param buttonoff The off sound of a Button.
+     * @param buttonon The on sound of a Button.
+     */
+    public OrnamentBuilder blockSetType(String name, SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
+        return this.blockSetType(new BlockSetType(name, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon));
+    }
+
+    /**
+     * Sets a BlockSetType.
+     * @param type the BlockSetType itself. Can be used if one has already been defined.
+     */
+    public OrnamentBuilder blockSetType(BlockSetType type) {
+        this.blockSetType = type;
         return this;
     }
 

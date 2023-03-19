@@ -5,6 +5,7 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -56,7 +57,7 @@ public class ObsidianGolem extends OrnamentalGolem {
 
     @Override
     public boolean hurt(DamageSource source, float multiplier) {
-        float modifier = source.isExplosion() ? 0.3F : multiplier;
+        float modifier = source.is(DamageTypeTags.IS_EXPLOSION) ? 0.3F : multiplier;
         return super.hurt(source, modifier);
     }
 

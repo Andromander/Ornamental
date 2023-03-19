@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:nether_brick_trapdoor"
-  }
+  },
+  "show_notification": true
 }

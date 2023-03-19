@@ -52,26 +52,6 @@ public class GolemBuilder {
         }
     }
 
-    //For Golems with only a height
-    private static void checkPatternSmall(PatternType type, Level world, BlockPos pos, int y) {
-        BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
-        if (pattern != null) {
-            setAirSmall(type, pattern, world);
-            addGolem(type, world, pattern, 0, y);
-            notifySmall(type, pattern, world);
-        }
-    }
-
-    //For Golems with a width and height
-    private static void checkPatternLarge(PatternType type, Level world, BlockPos pos, int x, int y) {
-        BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
-        if (pattern != null) {
-            setAirLarge(type, pattern, world);
-            addGolem(type, world, pattern, x, y);
-            notifyLarge(type, pattern, world);
-        }
-    }
-
     private static void checkPattern(PatternType type, Level world, BlockPos pos, int y) {
         checkPattern(type, world, pos, 0, y);
     }
@@ -79,21 +59,13 @@ public class GolemBuilder {
     private static void checkPattern(PatternType type, Level world, BlockPos pos, int x, int y) {
         BlockPattern.BlockPatternMatch pattern = type.getMatch(world, pos);
         if (pattern != null) {
-            setAirLarge(type, pattern, world);
+            setAir(type, pattern, world);
             addGolem(type, world, pattern, x, y);
-            notifyLarge(type, pattern, world);
+            notify(type, pattern, world);
         }
     }
 
-    private static void setAirSmall(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
-        for(int k = 0; k < type.getHeight(); ++k) {
-            BlockInWorld info = pattern.getBlock(0, k, 0);
-            world.setBlock(info.getPos(), Blocks.AIR.defaultBlockState(), 2);
-            world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, info.getPos(), Block.getId(info.getState()));
-        }
-    }
-
-    private static void setAirLarge(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
+    private static void setAir(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int j = 0; j < type.getWidth(); ++j) {
             for(int k = 0; k < type.getHeight(); ++k) {
                 BlockInWorld info = pattern.getBlock(j, k, 0);
@@ -114,14 +86,7 @@ public class GolemBuilder {
         }
     }
 
-    private static void notifySmall(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
-        for(int j1 = 0; j1 < type.getHeight(); ++j1) {
-            BlockInWorld cachedblockinfo1 = pattern.getBlock(0, j1, 0);
-            world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
-        }
-    }
-
-    private static void notifyLarge(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
+    private static void notify(PatternType type, BlockPattern.BlockPatternMatch pattern, Level world) {
         for(int i1 = 0; i1 < type.getWidth(); ++i1) {
             for(int j1 = 0; j1 < type.getHeight(); ++j1) {
                 BlockInWorld cachedblockinfo1 = pattern.getBlock(i1, j1, 0);

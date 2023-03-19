@@ -14,5 +14,6 @@
   "result": {
     "count": 8,
     "item": "ornamental:coal_stairs"
-  }
+  },
+  "show_notification": true
 }

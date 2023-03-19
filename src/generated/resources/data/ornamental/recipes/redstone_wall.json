@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:redstone_wall"
-  }
+  },
+  "show_notification": true
 }

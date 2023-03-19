@@ -81,7 +81,7 @@ public class GoldGolem extends FlowerGolem {
         this.level.broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
-        boolean flag = target.hurt(DamageSource.mobAttack(this), multiplier);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
             this.doEnchantDamageEffects(this, target);

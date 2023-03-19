@@ -23,6 +23,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
+
 public class PackedIce extends ThrowableItemProjectile {
 
     public PackedIce(EntityType<? extends ThrowableItemProjectile> type, Level world) {
@@ -34,6 +36,7 @@ public class PackedIce extends ThrowableItemProjectile {
     }
 
     @Override
+    @Nonnull
     protected Item getDefaultItem() {
         return Items.SNOWBALL;
     }
@@ -70,7 +73,7 @@ public class PackedIce extends ThrowableItemProjectile {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         int i = entity instanceof Blaze ? 5 : 2;
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float)i);
         if (entity instanceof LivingEntity) {
             ((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, getAmplifier()));
         }
@@ -81,6 +84,7 @@ public class PackedIce extends ThrowableItemProjectile {
     }
 
     @Override
+    @Nonnull
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

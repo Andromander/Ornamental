@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:netherite_wall"
-  }
+  },
+  "show_notification": true
 }

@@ -269,7 +269,7 @@ public class CopperGolem extends OrnamentalGolem {
         }
         if (isCharged())
             multiplier *= 2.0F;
-        boolean flag = target.hurt(DamageSource.mobAttack(this), multiplier);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
 
         if (flag) {
             double x = isCharged() ? Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) : 0.0D;

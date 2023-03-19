@@ -1,9 +1,10 @@
 package com.androsa.ornamental.entity.projectile;
 
-import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
+import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.util.Mth;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
+
+import javax.annotation.Nonnull;
 
 public class ChargeBall extends AbstractHurtingProjectile {
 
@@ -42,7 +45,8 @@ public class ChargeBall extends AbstractHurtingProjectile {
         if (!this.level.isClientSide) {
             Entity target = result.getEntity();
             Entity owner = getOwner();
-            target.hurt(OrnamentalMod.shocked(this, owner), 5.0F);
+            DamageSource source = new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ModTags.DamageTypes.SHOCKED), this, owner);
+            target.hurt(source, 5.0F);
             if (target instanceof LivingEntity) {
                 ((LivingEntity) target).knockback(0.8F, Mth.sin(this.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(this.getYRot() * ((float)Math.PI / 180F)));
             }
@@ -60,6 +64,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
     }
 
     @Override
+    @Nonnull
     protected ParticleOptions getTrailParticle() {
         return ModParticles.CHARGE_SPARK.get();
     }
@@ -70,6 +75,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
     }
 
     @Override
+    @Nonnull
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

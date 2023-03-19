@@ -62,7 +62,7 @@ public class CreativeTabHandler {
             return builder -> builder
                     .title(Component.translatable("ornamental.tab." + name))
                     .icon(icon)
-                    .displayItems((flag, output, operator) -> {
+                    .displayItems((parameters, output) -> {
                         for (RegistryObject<? extends Block> block : list) {
                             output.accept(block.get());
                         }

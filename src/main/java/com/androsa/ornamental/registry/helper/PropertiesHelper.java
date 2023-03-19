@@ -17,7 +17,7 @@ public class PropertiesHelper {
         OrnamentBuilder getbuilder = builder.getBuilder();
         BlockBehaviour.Properties props = BlockBehaviour.Properties.of(getbuilder.material, getbuilder.color)
                 .strength(getbuilder.hardness, getbuilder.resistance)
-                .sound(getbuilder.sound)
+                .sound(getbuilder.blockSetType.soundType())
                 .friction(getbuilder.slipperiness);
         if (getbuilder.doesTick) props.randomTicks();
         if (!getbuilder.isSolid) props.noOcclusion();

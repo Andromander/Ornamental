@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:red_nether_brick_door"
-  }
+  },
+  "show_notification": true
 }

@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:brick_trapdoor"
-  }
+  },
+  "show_notification": true
 }

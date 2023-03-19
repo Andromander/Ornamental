@@ -11,7 +11,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -26,11 +25,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
@@ -43,7 +42,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentDoor(Properties props, OrnamentBuilder builder) {
-        super(props, builder.doorSounds[1], builder.doorSounds[0]);
+        super(props, builder.blockSetType);
         this.builder = builder;
     }
 
@@ -53,6 +52,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
             Direction direction = state.getValue(FACING);
@@ -80,7 +80,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
 
     @Override
     public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, DamageSource.FALL);
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
     @Override
@@ -102,6 +102,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
@@ -128,7 +129,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
         } else {
             state = state.cycle(OPEN);
             worldIn.setBlock(pos, state, 10);
-            worldIn.playSound(player, pos, state.getValue(OPEN) ? builder.doorSounds[0] : builder.doorSounds[1], SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
+            worldIn.playSound(player, pos, state.getValue(OPEN) ? builder.blockSetType.doorOpen() : builder.blockSetType.doorClose(), SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
             worldIn.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
             return InteractionResult.sidedSuccess(worldIn.isClientSide());
         }

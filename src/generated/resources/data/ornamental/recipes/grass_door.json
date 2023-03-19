@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:grass_door"
-  }
+  },
+  "show_notification": true
 }

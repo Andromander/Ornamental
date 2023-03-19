@@ -12,5 +12,6 @@
   "result": {
     "count": 6,
     "item": "ornamental:gold_slab"
-  }
+  },
+  "show_notification": true
 }

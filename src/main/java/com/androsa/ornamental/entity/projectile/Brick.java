@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +19,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
+
+import javax.annotation.Nonnull;
 
 public class Brick extends ThrowableItemProjectile {
 
@@ -50,6 +51,7 @@ public class Brick extends ThrowableItemProjectile {
     }
 
     @Override
+    @Nonnull
     protected Item getDefaultItem() {
         return Items.BRICK;
     }
@@ -67,7 +69,7 @@ public class Brick extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), damage());
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage());
     }
 
     protected float damage() {
@@ -75,6 +77,7 @@ public class Brick extends ThrowableItemProjectile {
     }
 
     @Override
+    @Nonnull
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

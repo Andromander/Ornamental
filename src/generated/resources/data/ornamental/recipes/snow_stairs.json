@@ -14,5 +14,6 @@
   "result": {
     "count": 8,
     "item": "ornamental:snow_stairs"
-  }
+  },
+  "show_notification": true
 }

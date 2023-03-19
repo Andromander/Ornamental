@@ -14,5 +14,6 @@
   "result": {
     "count": 6,
     "item": "ornamental:dirt_pole"
-  }
+  },
+  "show_notification": true
 }

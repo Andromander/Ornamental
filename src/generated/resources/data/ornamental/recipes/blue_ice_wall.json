@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:blue_ice_wall"
-  }
+  },
+  "show_notification": true
 }

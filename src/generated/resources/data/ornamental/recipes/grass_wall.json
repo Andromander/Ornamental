@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:grass_wall"
-  }
+  },
+  "show_notification": true
 }

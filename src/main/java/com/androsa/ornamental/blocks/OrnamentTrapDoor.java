@@ -11,7 +11,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -30,6 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
@@ -44,7 +44,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentTrapDoor(Properties props, OrnamentBuilder builder) {
-        super(props, builder.trapdoorSounds[1], builder.trapdoorSounds[0]);
+        super(props, builder.blockSetType);
         this.builder = builder;
     }
 
@@ -54,6 +54,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
             if (!state.getValue(OPEN)) {
@@ -73,7 +74,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
 
     @Override
     public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, DamageSource.FALL);
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
     @Override
@@ -89,6 +90,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
@@ -189,6 +191,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
         return builder.pushReaction;

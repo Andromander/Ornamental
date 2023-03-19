@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:bone_wall"
-  }
+  },
+  "show_notification": true
 }

@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:obsidian_wall"
-  }
+  },
+  "show_notification": true
 }

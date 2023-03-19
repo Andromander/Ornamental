@@ -14,5 +14,6 @@
   "result": {
     "count": 8,
     "item": "ornamental:weathered_copper_stairs"
-  }
+  },
+  "show_notification": true
 }

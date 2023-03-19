@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:diamond_wall"
-  }
+  },
+  "show_notification": true
 }

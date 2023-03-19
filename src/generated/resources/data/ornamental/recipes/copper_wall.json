@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:copper_wall"
-  }
+  },
+  "show_notification": true
 }

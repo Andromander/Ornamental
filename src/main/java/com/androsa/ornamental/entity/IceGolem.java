@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -81,8 +82,8 @@ public class IceGolem extends AbstractGolem implements IForgeShearable {
             int j = Mth.floor(this.getY());
             int k = Mth.floor(this.getZ());
 
-            if (this.level.getBiome(new BlockPos(i, 0, k)).value().shouldSnowGolemBurn(new BlockPos(i, j, k))) {
-                this.hurt(DamageSource.ON_FIRE, 1.0F);
+            if (this.level.getBiome(new BlockPos(i, 0, k)).is(BiomeTags.SNOW_GOLEM_MELTS)) {
+                this.hurt(this.damageSources().onFire(), 1.0F);
             }
         }
     }

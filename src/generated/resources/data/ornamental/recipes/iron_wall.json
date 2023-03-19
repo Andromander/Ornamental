@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:iron_wall"
-  }
+  },
+  "show_notification": true
 }

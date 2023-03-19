@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:hay_door"
-  }
+  },
+  "show_notification": true
 }

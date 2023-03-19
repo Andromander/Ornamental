@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -126,7 +127,7 @@ public class NetheriteGolem extends OrnamentalGolem {
         this.level.broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
-        boolean flag = target.hurt(DamageSource.mobAttack(this), multiplier);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
             this.doEnchantDamageEffects(this, target);
@@ -186,6 +187,6 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     @Override
     public boolean hurt(DamageSource source, float multiplier) {
-        return source != DamageSource.WITHER && !source.isExplosion() && !source.isFire() && super.hurt(source, multiplier);
+        return source != this.damageSources().wither() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE) && super.hurt(source, multiplier);
     }
 }

@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:quartz_wall"
-  }
+  },
+  "show_notification": true
 }

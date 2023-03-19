@@ -37,7 +37,7 @@ import java.util.Optional;
 
 public class GrassGolem extends DirtGolem {
 
-    protected static final EntityDataAccessor<Optional<BlockState>> HAS_FLOWER = SynchedEntityData.defineId(GrassGolem.class, EntityDataSerializers.BLOCK_STATE);
+    protected static final EntityDataAccessor<Optional<BlockState>> HAS_FLOWER = SynchedEntityData.defineId(GrassGolem.class, EntityDataSerializers.OPTIONAL_BLOCK_STATE);
 
     public GrassGolem(EntityType<? extends GrassGolem> entity, Level world) {
         super(entity, world);

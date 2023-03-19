@@ -56,7 +56,7 @@ public class ClayGolem extends OrnamentalGolem {
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
         this.level.broadcastEntityEvent(this, (byte)4);
-        boolean flag = target.hurt(DamageSource.mobAttack(this), 0.0F);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
             this.doEnchantDamageEffects(this, target);

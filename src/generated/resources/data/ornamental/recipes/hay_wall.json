@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:hay_wall"
-  }
+  },
+  "show_notification": true
 }

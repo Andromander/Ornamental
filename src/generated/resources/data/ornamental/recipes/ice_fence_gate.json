@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "ornamental:ice_fence_gate"
-  }
+  },
+  "show_notification": true
 }

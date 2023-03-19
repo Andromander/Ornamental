@@ -14,7 +14,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -44,6 +43,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -104,6 +104,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public VoxelShape getShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         List<VoxelShape> shapes = Lists.newArrayList();
@@ -298,6 +299,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         int corners = (int) Arrays.stream(CORNERS).filter(state::getValue).count();
@@ -317,7 +319,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float distance) {
-        entity.causeFallDamage(distance, builder.fallMultiplier, DamageSource.FALL);
+        entity.causeFallDamage(distance, builder.fallMultiplier, world.damageSources().fall());
     }
 
     @Override
@@ -343,6 +345,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
@@ -359,6 +362,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
@@ -369,6 +373,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
@@ -474,6 +479,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
         return builder.pushReaction;

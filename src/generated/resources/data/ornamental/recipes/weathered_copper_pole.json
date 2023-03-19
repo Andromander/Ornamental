@@ -14,5 +14,6 @@
   "result": {
     "count": 6,
     "item": "ornamental:weathered_copper_pole"
-  }
+  },
+  "show_notification": true
 }

@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:obsidian_door"
-  }
+  },
+  "show_notification": true
 }

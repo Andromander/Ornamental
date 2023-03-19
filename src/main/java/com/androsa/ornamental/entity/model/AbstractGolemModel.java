@@ -4,6 +4,8 @@ import com.androsa.ornamental.entity.OrnamentalGolem;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 
+import javax.annotation.Nonnull;
+
 /**
  * Abstract class holding basic parts: Head, Torso, Body, 2 Arms, and 2 Legs. These are only fields
  * Not all fields are required. Special cases can ignore certain fields
@@ -33,6 +35,7 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
     }
 
     @Override
+    @Nonnull
     public ModelPart root() {
         return this.root;
     }

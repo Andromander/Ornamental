@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -32,6 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -95,29 +95,29 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
     }
 
     private static VoxelShape applyWallShape(VoxelShape base, WallSide wallheight, VoxelShape lowshape, VoxelShape tallshape) {
-        switch (wallheight) {
-            case TALL:
-                return Shapes.or(base, tallshape);
-            case LOW:
-                return Shapes.or(base, lowshape);
-            default:
-                return base;
-        }
+        return switch (wallheight) {
+            case TALL -> Shapes.or(base, tallshape);
+            case LOW -> Shapes.or(base, lowshape);
+            default -> base;
+        };
     }
     //End WallBlock vanillacopy
 
     @Override
+    @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return builder.pathShape ? this.shapeByIndex.get(state) : super.getShape(state, worldIn, pos, context);
     }
 
+    @Override
+    @Nonnull
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return builder.pathShape ? this.collisionShapeByIndex.get(state) : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
     public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, DamageSource.FALL);
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
     @Override
@@ -133,6 +133,7 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
@@ -250,6 +251,7 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
         return builder.pushReaction;

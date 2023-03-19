@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:redstone_trapdoor"
-  }
+  },
+  "show_notification": true
 }

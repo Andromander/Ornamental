@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:coal_wall"
-  }
+  },
+  "show_notification": true
 }

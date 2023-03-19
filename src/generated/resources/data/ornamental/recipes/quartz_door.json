@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:quartz_door"
-  }
+  },
+  "show_notification": true
 }

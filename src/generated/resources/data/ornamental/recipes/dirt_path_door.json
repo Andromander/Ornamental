@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "ornamental:dirt_path_door"
-  }
+  },
+  "show_notification": true
 }

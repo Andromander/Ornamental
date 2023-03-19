@@ -7,9 +7,6 @@ import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -35,10 +32,6 @@ public class OrnamentalMod {
         ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static DamageSource shocked(Entity source, Entity target) {
-        return new IndirectEntityDamageSource("ornamental.shocked", source, target).bypassArmor();
-    }
-
     public void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
@@ -46,15 +39,11 @@ public class OrnamentalMod {
         ExistingFileHelper helper = event.getExistingFileHelper();
         BlockTagsProvider blockTags = new OrnamentalBlockTags(output, provider, helper);
 
-        if (event.includeClient()) {
-            generator.addProvider(true, new OrnamentalBlockStates(output, helper));
-            generator.addProvider(true, new OrnamentalItemModels(output, helper));
-        }
-        if (event.includeServer()) {
-            generator.addProvider(true, new OrnamentalLootTables(output));
-            generator.addProvider(true, new OrnamentalRecipes(output));
-            generator.addProvider(true, blockTags);
-            generator.addProvider(true, new OrnamentalItemTags(output, provider, blockTags, helper));
-        }
+        generator.addProvider(event.includeClient(), new OrnamentalBlockStates(output, helper));
+        generator.addProvider(event.includeClient(), new OrnamentalItemModels(output, helper));
+        generator.addProvider(event.includeServer(), new OrnamentalLootTables(output));
+        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output));
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new OrnamentalItemTags(output, provider, blockTags, helper));
     }
 }

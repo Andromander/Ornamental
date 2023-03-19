@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "ornamental:nether_brick_fence_gate"
-  }
+  },
+  "show_notification": true
 }

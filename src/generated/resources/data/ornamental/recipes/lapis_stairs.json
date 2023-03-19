@@ -14,5 +14,6 @@
   "result": {
     "count": 8,
     "item": "ornamental:lapis_stairs"
-  }
+  },
+  "show_notification": true
 }

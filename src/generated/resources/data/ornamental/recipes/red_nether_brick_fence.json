@@ -16,5 +16,6 @@
   "result": {
     "count": 3,
     "item": "ornamental:red_nether_brick_fence"
-  }
+  },
+  "show_notification": true
 }

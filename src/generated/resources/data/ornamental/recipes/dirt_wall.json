@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:dirt_wall"
-  }
+  },
+  "show_notification": true
 }

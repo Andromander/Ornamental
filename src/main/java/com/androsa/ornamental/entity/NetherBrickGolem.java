@@ -2,6 +2,7 @@ package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.entity.projectile.NetherBrick;
+import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -86,7 +87,7 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
 
     @Override
     public boolean hurt(DamageSource source, float multiplier) {
-        float modifier = source.isMagic() ? 0.5F : multiplier;
+        float modifier = source.is(ModTags.DamageTypes.NETHER_BRICK_GOLEM_RESIST) ? 0.5F : multiplier;
         return super.hurt(source, modifier);
     }
 

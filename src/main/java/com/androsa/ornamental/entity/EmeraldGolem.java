@@ -80,7 +80,7 @@ public class EmeraldGolem extends FlowerGolem {
         this.level.broadcastEntityEvent(this, (byte)4);
         float attack = this.getAttackDamage();
         float mul = attack > 0.0F ? attack / 2.0F + (float)this.random.nextInt((int)attack) : 0.0F;
-        boolean flag = target.hurt(DamageSource.mobAttack(this), mul);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), mul);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
             this.doEnchantDamageEffects(this, target);

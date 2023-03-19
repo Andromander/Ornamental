@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "ornamental:snow_trapdoor"
-  }
+  },
+  "show_notification": true
 }

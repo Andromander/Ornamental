@@ -135,7 +135,7 @@ public class AmethystGolem extends OrnamentalGolem {
     }
 
     public void castAttack(Entity target) {
-        target.hurt(DamageSource.MAGIC, 4.0F);
+        target.hurt(this.damageSources().magic(), 4.0F);
     }
 
     @Override

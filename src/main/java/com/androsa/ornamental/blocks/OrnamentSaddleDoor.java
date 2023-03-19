@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -28,6 +29,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
@@ -64,6 +66,8 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
+    @Deprecated
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         Direction direction = state.getValue(FACING);
         boolean closed = !state.getValue(OPEN);
@@ -87,6 +91,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor accessor, BlockPos pos, BlockPos neighborpos) {
         return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighbor, accessor, pos, neighborpos);
@@ -141,6 +146,8 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
+    @Nonnull
+    @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
@@ -217,18 +224,26 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float dist) {
+        entity.causeFallDamage(dist, builder.fallMultiplier, level.damageSources().fall());
+    }
+
+    @Override
+    @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public BlockState mirror(BlockState state, Mirror mirror) {
         return mirror == Mirror.NONE ? state : state.rotate(mirror.getRotation(state.getValue(FACING))).cycle(HINGE);

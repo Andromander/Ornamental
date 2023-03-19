@@ -11,7 +11,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -21,13 +20,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock {
@@ -46,8 +49,16 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     private final OrnamentBuilder builder;
 
     public OrnamentFenceGate(Properties props, OrnamentBuilder builder) {
-        super(props, builder.fencegateSounds[1], builder.fencegateSounds[0]);
+        super(props, WoodType.OAK); //Dummy value TODO
         this.builder = builder;
+    }
+
+    //Necessary evil TODO Delete if patched
+    @Override
+    @Nonnull
+    @Deprecated
+    public SoundType getSoundType(BlockState state) {
+        return this.builder.blockSetType.soundType();
     }
 
     @Override
@@ -56,6 +67,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
             if (state.getValue(IN_WALL)) {
@@ -68,6 +80,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    @Nonnull
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
             if (state.getValue(OPEN)) {
@@ -80,6 +93,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    @Nonnull
     public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
         if (builder.pathShape) {
             if (state.getValue(IN_WALL)) {
@@ -93,7 +107,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
 
     @Override
     public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, DamageSource.FALL);
+        entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
     @Override
@@ -109,6 +123,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    @Nonnull
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
@@ -133,7 +148,24 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
-            return super.use(state, worldIn, pos, player, hand, result);
+            //TODO: Removed if patched
+            if (state.getValue(OPEN)) {
+                state = state.setValue(OPEN, Boolean.FALSE);
+                worldIn.setBlock(pos, state, 10);
+            } else {
+                Direction direction = player.getDirection();
+                if (state.getValue(FACING) == direction.getOpposite()) {
+                    state = state.setValue(FACING, direction);
+                }
+
+                state = state.setValue(OPEN, Boolean.TRUE);
+                worldIn.setBlock(pos, state, 10);
+            }
+
+            boolean flag = state.getValue(OPEN);
+            worldIn.playSound(player, pos, flag ? this.builder.fencegateSounds[0] : this.builder.fencegateSounds[1], SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
+            worldIn.gameEvent(player, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+            return InteractionResult.sidedSuccess(worldIn.isClientSide);
         }
     }
 
@@ -156,6 +188,21 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
                 .setValue(OPEN, state.getValue(OPEN))
                 .setValue(POWERED, state.getValue(POWERED))
                 .setValue(IN_WALL, state.getValue(IN_WALL)));
+    }
+
+    //TODO Remove if sounds are patched
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborpos, boolean piston) {
+        if (!level.isClientSide) {
+            boolean flag = level.hasNeighborSignal(pos);
+            if (state.getValue(POWERED) != flag) {
+                level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
+                if (state.getValue(OPEN) != flag) {
+                    level.playSound(null, pos, flag ? this.builder.fencegateSounds[0] : this.builder.fencegateSounds[1], SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+                    level.gameEvent(null, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+                }
+            }
+        }
     }
 
     @Override
@@ -192,6 +239,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
         return builder.pushReaction;

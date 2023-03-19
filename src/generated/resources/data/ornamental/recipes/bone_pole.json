@@ -14,5 +14,6 @@
   "result": {
     "count": 6,
     "item": "ornamental:bone_pole"
-  }
+  },
+  "show_notification": true
 }
