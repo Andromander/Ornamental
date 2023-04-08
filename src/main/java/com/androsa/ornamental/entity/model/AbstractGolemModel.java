@@ -18,6 +18,7 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
     public ModelPart legR;
     public ModelPart armL;
     public ModelPart armR;
+    private boolean hasArms = false;
     private final boolean useTimer;
 
     public AbstractGolemModel(ModelPart root, boolean hasArms, boolean hasLegs, boolean useTimer) {
@@ -26,6 +27,7 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
         if (hasArms) {
             this.armL = root.getChild("arm_left");
             this.armR = root.getChild("arm_right");
+            this.hasArms = true;
         }
         if (hasLegs) {
             this.legL = root.getChild("leg_left");
@@ -52,12 +54,14 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
 
     @Override
     public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        int attack = entity.getAttackTimer();
-        if (attack > 0 && useTimer) {
-            this.armR.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
-            this.armL.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
-        } else {
-            swingArms(limbSwing, limbSwingAmount);
+        if (hasArms) {
+            int attack = entity.getAttackTimer();
+            if (attack > 0 && useTimer) {
+                this.armR.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
+                this.armL.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
+            } else {
+                swingArms(limbSwing, limbSwingAmount);
+            }
         }
     }
 
