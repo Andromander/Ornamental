@@ -229,6 +229,26 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
+    @Deprecated
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+        super.randomTick(state, worldIn, pos, random);
+        if (builder.canMelt) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+                this.turnIntoWater(worldIn, pos);
+            }
+        }
+    }
+
+    protected void turnIntoWater(Level world, BlockPos pos) {
+        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+            world.removeBlock(pos, false);
+        } else {
+            world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
+            world.neighborChanged(pos, builder.meltResult, pos);
+        }
+    }
+
+    @Override
     @Nonnull
     @Deprecated
     public PushReaction getPistonPushReaction(BlockState state) {
