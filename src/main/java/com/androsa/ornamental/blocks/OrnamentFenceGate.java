@@ -162,10 +162,6 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
-        }
-    }
-
-    @Override
     @Deprecated
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
