@@ -18,12 +18,8 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -49,16 +45,8 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     private final OrnamentBuilder builder;
 
     public OrnamentFenceGate(Properties props, OrnamentBuilder builder) {
-        super(props, WoodType.OAK); //Dummy value TODO
+        super(props, builder.fencegateSounds[0], builder.fencegateSounds[1]);
         this.builder = builder;
-    }
-
-    //Necessary evil TODO Delete if patched
-    @Override
-    @Nonnull
-    @Deprecated
-    public SoundType getSoundType(BlockState state) {
-        return this.builder.blockSetType.soundType();
     }
 
     @Override
@@ -148,24 +136,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
         if (!builder.canOpen) {
             return InteractionResult.PASS;
         } else {
-            //TODO: Removed if patched
-            if (state.getValue(OPEN)) {
-                state = state.setValue(OPEN, Boolean.FALSE);
-                worldIn.setBlock(pos, state, 10);
-            } else {
-                Direction direction = player.getDirection();
-                if (state.getValue(FACING) == direction.getOpposite()) {
-                    state = state.setValue(FACING, direction);
-                }
-
-                state = state.setValue(OPEN, Boolean.TRUE);
-                worldIn.setBlock(pos, state, 10);
-            }
-
-            boolean flag = state.getValue(OPEN);
-            worldIn.playSound(player, pos, flag ? this.builder.fencegateSounds[0] : this.builder.fencegateSounds[1], SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
-            worldIn.gameEvent(player, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-            return InteractionResult.sidedSuccess(worldIn.isClientSide);
+            return super.use(state, worldIn, pos, player, hand, result);
         }
     }
 
@@ -190,18 +161,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
                 .setValue(IN_WALL, state.getValue(IN_WALL)));
     }
 
-    //TODO Remove if sounds are patched
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborpos, boolean piston) {
-        if (!level.isClientSide) {
-            boolean flag = level.hasNeighborSignal(pos);
-            if (state.getValue(POWERED) != flag) {
-                level.setBlock(pos, state.setValue(POWERED, flag).setValue(OPEN, flag), 2);
-                if (state.getValue(OPEN) != flag) {
-                    level.playSound(null, pos, flag ? this.builder.fencegateSounds[0] : this.builder.fencegateSounds[1], SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
-                    level.gameEvent(null, flag ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-                }
-            }
         }
     }
 
