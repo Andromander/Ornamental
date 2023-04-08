@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class LapisGolemModel<T extends LapisGolem> extends AbstractGolemModel<T> {
 
     public LapisGolemModel(ModelPart root) {
-        super(root, true, true, false);
+        super(root, true, true, true, false);
     }
 
     public static LayerDefinition createBodyLayer() {

@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
 
     public BoneGolemModel(ModelPart root) {
-        super(root, true, true, false);
+        super(root, true, true, true, false);
     }
 
     public static LayerDefinition createBodyLayer() {

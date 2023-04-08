@@ -22,7 +22,7 @@ public class AmethystGolemModel<T extends AmethystGolem> extends AbstractGolemMo
     private boolean reset = true;
 
     public AmethystGolemModel(ModelPart root) {
-        super(root, true, true, false);
+        super(root, true, true, true, false);
 
         this.jaw = this.head.getChild("jaw");
         this.fingerLL = this.armL.getChild("left_finger_left");

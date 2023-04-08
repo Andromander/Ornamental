@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelPart;
 public abstract class FlowerGolemModel<T extends FlowerGolem> extends AbstractGolemModel<T> {
 
     public FlowerGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
     }
 
     @Override

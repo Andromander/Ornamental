@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class ObsidianGolemModel<T extends ObsidianGolem> extends AbstractGolemModel<T> {
 
     public ObsidianGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
     }
 
     public static LayerDefinition createBodyLayer() {

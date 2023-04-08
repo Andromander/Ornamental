@@ -21,9 +21,11 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
     private boolean hasArms = false;
     private final boolean useTimer;
 
-    public AbstractGolemModel(ModelPart root, boolean hasArms, boolean hasLegs, boolean useTimer) {
+    public AbstractGolemModel(ModelPart root, boolean hasHead, boolean hasArms, boolean hasLegs, boolean useTimer) {
         this.root = root;
-        this.head = root.getChild("head");
+        if (hasHead) {
+            this.head = root.getChild("head");
+        }
         if (hasArms) {
             this.armL = root.getChild("arm_left");
             this.armR = root.getChild("arm_right");

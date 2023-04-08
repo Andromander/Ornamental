@@ -31,7 +31,7 @@ public class CopperGolemModel<T extends CopperGolem> extends AbstractGolemModel<
     public ModelPart legbladeR;
 
     public CopperGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
 
         this.antennaL = this.head.getChild("antenna_left");
         this.antennaR = this.head.getChild("antenna_right");

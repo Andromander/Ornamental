@@ -22,7 +22,7 @@ public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemMo
     public ModelPart legR3;
 
     public RedstoneGolemModel(ModelPart root) {
-        super(root, false, false, false);
+        super(root, true, false, false, false);
 
         this.legL1 = root.getChild("leg_left1");
         this.legL2 = root.getChild("leg_left2");

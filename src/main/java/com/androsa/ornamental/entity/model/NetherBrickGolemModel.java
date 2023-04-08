@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class NetherBrickGolemModel<T extends OrnamentalGolem> extends AbstractGolemModel<T> {
 
     public NetherBrickGolemModel(ModelPart root) {
-        super(root, true, true, false);
+        super(root, true, true, true, false);
     }
 
     public static LayerDefinition createBodyLayer() {

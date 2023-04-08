@@ -17,7 +17,7 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
     public ModelPart legB;
 
     public NetheriteGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
 
         this.legB = root.getChild("leg_back");
     }

@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class DirtGolemModel<T extends DirtGolem> extends AbstractGolemModel<T> {
 
     public DirtGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
     }
 
     public static LayerDefinition createBodyLayer() {

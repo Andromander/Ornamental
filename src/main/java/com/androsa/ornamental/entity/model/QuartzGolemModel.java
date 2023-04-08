@@ -19,7 +19,7 @@ public class QuartzGolemModel<T extends QuartzGolem> extends AbstractGolemModel<
     public ModelPart tail3;
 
     public QuartzGolemModel(ModelPart root) {
-        super(root, true, false, false);
+        super(root, true, true, false, false);
 
         ModelPart torso = root.getChild("torso");
         ModelPart body = torso.getChild("body");

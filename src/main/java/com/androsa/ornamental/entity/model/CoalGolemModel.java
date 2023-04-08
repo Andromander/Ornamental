@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class CoalGolemModel<T extends CoalGolem> extends AbstractGolemModel<T> {
 
     public CoalGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
     }
 
     public static LayerDefinition createBodyLayer() {

@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 public class ClayGolemModel<T extends OrnamentalGolem> extends AbstractGolemModel<T> {
 
     public ClayGolemModel(ModelPart root) {
-        super(root, true, true, true);
+        super(root, true, true, true, true);
     }
 
     public static LayerDefinition createBodyLayer() {
