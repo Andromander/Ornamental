@@ -38,6 +38,8 @@ public class ClientEvents {
                 ModBlocks.grass_beam.get(),
                 ModBlocks.grass_wall.get(),
                 ModBlocks.grass_saddle_door.get());
+        event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1,
+                ModBlocks.fake_bubble_column.get());
     }
 
     @SubscribeEvent
@@ -79,6 +81,7 @@ public class ClientEvents {
         event.registerLayerDefinition(ModelLocations.NETHERITE_GOLEM, NetheriteGolemModel::createBodyLayer);
         event.registerLayerDefinition(ModelLocations.COPPER_GOLEM, CopperGolemModel::createBodyLayer);
         event.registerLayerDefinition(ModelLocations.AMETHYST_GOLEM, AmethystGolemModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLocations.MAGMA_GOLEM, MagmaGolemModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -106,6 +109,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(m.bakeLayer(ModelLocations.NETHERITE_GOLEM)), 1.0F));
         event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), m -> new CopperGolemRenderer<>(m, new CopperGolemModel<>(m.bakeLayer(ModelLocations.COPPER_GOLEM)), 1.0F));
         event.registerEntityRenderer(ModEntities.AMETHYST_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new AmethystGolemModel<>(m.bakeLayer(ModelLocations.AMETHYST_GOLEM)), 1.0F));
+        event.registerEntityRenderer(ModEntities.MAGMA_GOLEM.get(), m -> new MagmaGolemRenderer<>(m, new MagmaGolemModel<>(m.bakeLayer(ModelLocations.MAGMA_GOLEM)), 0.5F));
 
         event.registerEntityRenderer(ModEntities.LAPIS_BULLET.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.REDSTONE_BULLET.get(), ThrownItemRenderer::new);

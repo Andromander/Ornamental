@@ -24,6 +24,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     public static final List<RegistryObject<? extends Block>> DRAGON_IMMUNE = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> FENCES = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> FENCE_GATES = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> INFINIBURN_OVERWORLD = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> NETHER_BRICK_FENCE = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> PIGLIN_GUARDED = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> POLES = Lists.newArrayList();
@@ -57,6 +58,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(BlockTags.FENCE_GATES, FENCE_GATES);
         addToTag(Tags.Blocks.FENCE_GATES, FENCE_GATES);
         addToTag(BlockTags.GUARDED_BY_PIGLINS, PIGLIN_GUARDED);
+        addToTag(BlockTags.INFINIBURN_OVERWORLD, INFINIBURN_OVERWORLD);
         addToTag(Tags.Blocks.FENCES_NETHER_BRICK, NETHER_BRICK_FENCE);
         addToTag(ModTags.Blocks.POLES, POLES);
         addToTag(ModTags.Blocks.SADDLE_DOORS, SADDLE_DOORS);

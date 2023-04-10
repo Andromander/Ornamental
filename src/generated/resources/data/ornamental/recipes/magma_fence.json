@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:magma_block"
+    },
+    "/": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "ornamental:magma_fence"
+  },
+  "show_notification": true
+}

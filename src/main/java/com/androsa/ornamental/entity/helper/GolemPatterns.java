@@ -35,6 +35,7 @@ public class GolemPatterns {
     private static BlockPattern netheriteGolem;
     private static BlockPattern copperGolem;
     private static BlockPattern amethystGolem;
+    private static BlockPattern magmaGolem;
 
     private static final Predicate<BlockState> IS_PUMPKIN = (state) ->
             state != null && (state.is(Blocks.CARVED_PUMPKIN ) || state.is(Blocks.JACK_O_LANTERN));
@@ -198,6 +199,13 @@ public class GolemPatterns {
             amethystGolem = buildPatternTB(Blocks.AMETHYST_BLOCK).build();
         }
         return amethystGolem;
+    }
+
+    public static BlockPattern getMagmaPattern() {
+        if (magmaGolem == null) {
+            magmaGolem = buildPatternTN(Blocks.MAGMA_BLOCK).build();
+        }
+        return magmaGolem;
     }
 
     //TB: Tall Built, see Iron Golem

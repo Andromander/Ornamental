@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:magma_beam"
+    }
+  ],
+  "result": {
+    "item": "ornamental:magma_pole"
+  }
+}

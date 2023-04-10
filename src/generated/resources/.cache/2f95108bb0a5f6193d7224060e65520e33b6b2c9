@@ -1,14 +1,14 @@
-// 1.19.4	2023-03-18T23:39:26.2584069	Tags for minecraft:item mod id ornamental
-e68e460155b15dff36e3d2b590abe3147ee33b57 data/forge/tags/items/fences.json
+// 1.19.4	2023-04-08T21:44:08.2808007	Tags for minecraft:item mod id ornamental
+f7300d33c3361580686fcc476d878959cd29cfef data/forge/tags/items/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/items/fences/nether_brick.json
-00ee35f0fb9b4980e15ac0dd529f1ba38599b958 data/forge/tags/items/fence_gates.json
-2be3a7967b531cb8eddd5237641ba4569abdb576 data/minecraft/tags/items/doors.json
-e68e460155b15dff36e3d2b590abe3147ee33b57 data/minecraft/tags/items/fences.json
+39ac105d94d6883486b47196fa1b11a97fb03d6c data/forge/tags/items/fence_gates.json
+139fd51aab515055123447c120ececc13260c392 data/minecraft/tags/items/doors.json
+f7300d33c3361580686fcc476d878959cd29cfef data/minecraft/tags/items/fences.json
 b96769646a5bfa38feadc8b5f568ff260ece20dc data/minecraft/tags/items/piglin_loved.json
-78a6d52399ed8c49bce952f2262e7f73961d81fc data/minecraft/tags/items/slabs.json
-be6a3424f5b1ff277d98600b79b4d662d200fa19 data/minecraft/tags/items/stairs.json
-cc55d7628e765625cff62eac1ffbb9732df771ea data/minecraft/tags/items/trapdoors.json
-a322dc4900d6929660d071e30da499bee47cd1d5 data/minecraft/tags/items/walls.json
-264268da3f5c93344938adca7ad084ae636ab632 data/ornamental/tags/items/beams.json
-33aa3bb64995e89bed8cd9439c96cb85d04a96ab data/ornamental/tags/items/poles.json
-df8da7c2872bccaba94dc6fe2019697affde7c03 data/ornamental/tags/items/saddle_doors.json
+5638886c3c7b8b4a176c7a0ebbf6ffdde6597588 data/minecraft/tags/items/slabs.json
+dde5456bfeae5312f3b22f1a13251dca9cdea1ae data/minecraft/tags/items/stairs.json
+e680a384d843d1dc6097be60b13b1fd264dfee39 data/minecraft/tags/items/trapdoors.json
+10fd88ac1f197ee8f6f217c936da7b6b151a0faa data/minecraft/tags/items/walls.json
+1cc3aba24335cf93452f65fedadb67ae24bc550b data/ornamental/tags/items/beams.json
+6dc74274b5c425c72ecbe2a07454a9c4b4bf21cb data/ornamental/tags/items/poles.json
+eda9db0dc345d4b6bd991376f42d7257201eaad1 data/ornamental/tags/items/saddle_doors.json

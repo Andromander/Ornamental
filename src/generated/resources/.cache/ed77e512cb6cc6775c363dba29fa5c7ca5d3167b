@@ -1,4 +1,4 @@
-// 1.19.4	2023-03-18T23:39:26.2674148	Ornamental Item Models
+// 1.19.4	2023-04-08T22:52:22.446405	Ornamental Item Models
 1373c54937d1e50cd97b0ba886d821ab56583b1f assets/ornamental/models/item/amethyst_beam.json
 2998a3b80379d12867c0fc789e2acbf0eda5a742 assets/ornamental/models/item/amethyst_door.json
 59d8f49ca423203c32265bb8e7f2b795f2fd3075 assets/ornamental/models/item/amethyst_fence.json
@@ -190,6 +190,17 @@ e438581d0c377ca9a9e3a169134e01d32167cb6a assets/ornamental/models/item/lapis_sla
 8d094b6552f05a05a9fd52d68cb92fa3771ffc33 assets/ornamental/models/item/lapis_stairs.json
 79edcf8e0613d4b0512d0bb9920c2a7b9a62b7a8 assets/ornamental/models/item/lapis_trapdoor.json
 18da64f755c5c5bbe4a678e197329913fc364484 assets/ornamental/models/item/lapis_wall.json
+ef9da43729e30f9d19dbaf03049c625c730e03d9 assets/ornamental/models/item/magma_beam.json
+ef74582fefd1b1cc9f865f79375dd1c8dd3ae271 assets/ornamental/models/item/magma_door.json
+39e3549078ed207d6593d146bea078de56e3d35f assets/ornamental/models/item/magma_fence.json
+a875a8a14b9b2444f790d82a8e516d9e4be499d5 assets/ornamental/models/item/magma_fence_gate.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ornamental/models/item/magma_golem_spawn_egg.json
+c12e67e6d5fd21c4bbae1652b40616fb1f23d750 assets/ornamental/models/item/magma_pole.json
+83a7ea0ac0d221f0d1881ebabddd88a0ce03593b assets/ornamental/models/item/magma_saddle_door.json
+060fd003f7d66ba53931d322df7cf0bacbcfcd16 assets/ornamental/models/item/magma_slab.json
+951a33bba9d67be9642535ebecac8a1adcfb7811 assets/ornamental/models/item/magma_stairs.json
+9946614529d60c750737d4e6db7f3c342f392344 assets/ornamental/models/item/magma_trapdoor.json
+d9ceda67aa846b8e75431b11439db62f3d74583d assets/ornamental/models/item/magma_wall.json
 3ff8819283972c6870878e89355127136fa56ea5 assets/ornamental/models/item/missingno_beam.json
 89595631d81ab00bcc7090dd9dea03245a2f7436 assets/ornamental/models/item/missingno_door.json
 e33e7cd1bd6e6c637aa77c47f47981711efd959f assets/ornamental/models/item/missingno_fence.json

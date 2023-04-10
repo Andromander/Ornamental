@@ -6,6 +6,8 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -282,4 +284,19 @@ public class OrnamentBuilders {
             .blockSetType(SoundType.AMETHYST, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
             .projectileHitSound(ImmutableList.of(SoundEvents.AMETHYST_BLOCK_HIT, SoundEvents.AMETHYST_BLOCK_CHIME))
             .addBlockTags(List.of(OrnamentalBlockTags.CRYSTAL_SOUNDS, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
+
+    public static final OrnamentBuilder MAGMA = new OrnamentBuilder("magma")
+            .properties(Material.STONE, MaterialColor.NETHER)
+            .hardnessAndResistance(0.5F)
+            .lightLevel(3)
+            .requiresTool()
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .blockSetType(SoundType.STONE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .ticks()
+            .doPostProcessing()
+            .doEmissiveRendering()
+            .setCanEntitySpawn((state, reader, pos, type) -> type.fireImmune())
+            .floorHazard(((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living)), (level -> level.damageSources().hotFloor()), 1.0F)
+            .bubbleUnderwater(20, true, true)
+            .addBlockTags(List.of(OrnamentalBlockTags.INFINIBURN_OVERWORLD, OrnamentalBlockTags.PICKAXE_TOOL));
 }

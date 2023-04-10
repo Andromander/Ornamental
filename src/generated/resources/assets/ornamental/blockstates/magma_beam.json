@@ -1,0 +1,443 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "x": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_right": "false",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_right": "false",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole"
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_whole",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "x": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal"
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_horizontal",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "x": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical"
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_vertical",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "x": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner"
+      },
+      "when": {
+        "axis": "x",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_beam_corner",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "axis": "z",
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/magma_block"
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    }
+  ]
+}

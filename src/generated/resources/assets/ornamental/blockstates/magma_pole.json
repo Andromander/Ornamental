@@ -1,0 +1,203 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_whole"
+      },
+      "when": {
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_whole",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "false",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_whole",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_whole",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_horizontal"
+      },
+      "when": {
+        "bottom_left": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_horizontal",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_horizontal",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_horizontal",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_vertical"
+      },
+      "when": {
+        "bottom_left": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_vertical",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_vertical",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_vertical",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_corner"
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "false",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_corner",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "bottom_left": "false",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_corner",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "false",
+        "top_right": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/magma_pole_corner",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/magma_block"
+      },
+      "when": {
+        "bottom_left": "true",
+        "bottom_right": "true",
+        "top_left": "true",
+        "top_right": "true"
+      }
+    }
+  ]
+}

@@ -49,6 +49,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.exposed_copper_stairs);
         blockItem(ModBlocks.weathered_copper_stairs);
         blockItem(ModBlocks.oxidized_copper_stairs);
+        blockItem(ModBlocks.magma_stairs);
 
         blockItem(ModBlocks.iron_slab);
         blockItem(ModBlocks.gold_slab);
@@ -75,6 +76,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.exposed_copper_slab);
         blockItem(ModBlocks.weathered_copper_slab);
         blockItem(ModBlocks.oxidized_copper_slab);
+        blockItem(ModBlocks.magma_slab);
 
         blockItemFence(ModBlocks.iron_fence, "iron_block");
         blockItemFence(ModBlocks.gold_fence, "gold_block");
@@ -104,6 +106,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemFence(ModBlocks.exposed_copper_fence, "exposed_copper");
         blockItemFence(ModBlocks.weathered_copper_fence, "weathered_copper");
         blockItemFence(ModBlocks.oxidized_copper_fence, "oxidized_copper");
+        blockItemFence(ModBlocks.magma_fence, "magma");
 
         blockItemTrapdoor(ModBlocks.gold_trapdoor);
         blockItemTrapdoor(ModBlocks.diamond_trapdoor);
@@ -133,6 +136,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemTrapdoor(ModBlocks.exposed_copper_trapdoor);
         blockItemTrapdoor(ModBlocks.weathered_copper_trapdoor);
         blockItemTrapdoor(ModBlocks.oxidized_copper_trapdoor);
+        blockItemTrapdoor(ModBlocks.magma_trapdoor);
 
         blockItem(ModBlocks.iron_fence_gate);
         blockItem(ModBlocks.gold_fence_gate);
@@ -163,6 +167,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.exposed_copper_fence_gate);
         blockItem(ModBlocks.weathered_copper_fence_gate);
         blockItem(ModBlocks.oxidized_copper_fence_gate);
+        blockItem(ModBlocks.magma_fence_gate);
 
         blockItemModel(ModBlocks.gold_door);
         blockItemModel(ModBlocks.diamond_door);
@@ -192,6 +197,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemModel(ModBlocks.exposed_copper_door);
         blockItemModel(ModBlocks.weathered_copper_door);
         blockItemModel(ModBlocks.oxidized_copper_door);
+        blockItemModel(ModBlocks.magma_door);
 
         blockItemPole(ModBlocks.iron_pole, "iron_block");
         blockItemPole(ModBlocks.gold_pole, "gold_block");
@@ -222,6 +228,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemPole(ModBlocks.exposed_copper_pole, "exposed_copper");
         blockItemPole(ModBlocks.weathered_copper_pole, "weathered_copper");
         blockItemPole(ModBlocks.oxidized_copper_pole, "oxidized_copper");
+        blockItemPole(ModBlocks.magma_pole, "magma");
 
         blockItemBeam(ModBlocks.iron_beam, "iron_block");
         blockItemBeam(ModBlocks.gold_beam, "gold_block");
@@ -252,6 +259,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemBeam(ModBlocks.exposed_copper_beam, "exposed_copper");
         blockItemBeam(ModBlocks.weathered_copper_beam, "weathered_copper");
         blockItemBeam(ModBlocks.oxidized_copper_beam, "oxidized_copper");
+        blockItemBeam(ModBlocks.magma_beam, "magma");
 
         blockItemWall(ModBlocks.iron_wall, "iron_block");
         blockItemWall(ModBlocks.gold_wall, "gold_block");
@@ -279,6 +287,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemWall(ModBlocks.exposed_copper_wall, "exposed_copper");
         blockItemWall(ModBlocks.weathered_copper_wall, "weathered_copper");
         blockItemWall(ModBlocks.oxidized_copper_wall, "oxidized_copper");
+        blockItemWall(ModBlocks.magma_wall, "magma");
 
         blockItemSaddleDoorV(ModBlocks.iron_saddle_door, "iron_trapdoor");
         blockItemSaddleDoor(ModBlocks.gold_saddle_door, "gold");
@@ -309,6 +318,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
         blockItemSaddleDoor(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
         blockItemSaddleDoor(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
+        blockItemSaddleDoor(ModBlocks.magma_saddle_door, "magma");
 
         for (RegistryObject<? extends Item> item : CreativeTabHandler.SPAWN_EGGS) {
             eggItem(item);

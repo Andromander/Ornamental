@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/door_top_left",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "side": "ornamental:block/magma_door_top",
+    "top": "ornamental:block/magma_door_top"
+  }
+}

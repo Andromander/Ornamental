@@ -1,4 +1,4 @@
-// 1.19.4	2023-03-18T23:39:26.2694168	Loot Tables
+// 1.19.4	2023-04-08T21:44:08.2918106	Loot Tables
 825ef6e1dd21362f300cac2ecca2450fdfd0cf0c data/ornamental/loot_tables/blocks/amethyst_beam.json
 c737d0b23ff46393e483cad93aa06a855996c823 data/ornamental/loot_tables/blocks/amethyst_door.json
 1ba8931b31fc30b3adf9cfb7ac467ff54852316d data/ornamental/loot_tables/blocks/amethyst_fence.json
@@ -174,6 +174,16 @@ f94b749bbabe855516ba8d27fe7dee90d3c38ca5 data/ornamental/loot_tables/blocks/lapi
 9187070bef9f546b396d14a7577205bcc531f5b9 data/ornamental/loot_tables/blocks/lapis_stairs.json
 7668ed9a70570ad5cb515cfd6f28a0d539ae4ee9 data/ornamental/loot_tables/blocks/lapis_trapdoor.json
 88b384e64e931417de5666120f989376bf164bee data/ornamental/loot_tables/blocks/lapis_wall.json
+e83191b87cb1af4ac74f303e3b6c534c8e7720af data/ornamental/loot_tables/blocks/magma_beam.json
+9b453753b9113516056cd003d2c52ad568426781 data/ornamental/loot_tables/blocks/magma_door.json
+68e9a3db6315c2bf59d89bc22142cb0e49fa87e2 data/ornamental/loot_tables/blocks/magma_fence.json
+786f0a002a1d17c19b031a08a6596c370f9908b5 data/ornamental/loot_tables/blocks/magma_fence_gate.json
+925251d5ac3e787559ebf581a5f78adad284c22b data/ornamental/loot_tables/blocks/magma_pole.json
+a69bdd2ef9c24d1e10f75a201a227ce9bff56edd data/ornamental/loot_tables/blocks/magma_saddle_door.json
+d00ac2a41cbadc1a6e397f7c7c37afac652fd96f data/ornamental/loot_tables/blocks/magma_slab.json
+dff4c94217e798bf82c4e0bd1418cbc2fba3b4a4 data/ornamental/loot_tables/blocks/magma_stairs.json
+97c888be068631eb816af1bb33c98f768eeb0d26 data/ornamental/loot_tables/blocks/magma_trapdoor.json
+4bf74e864efdc8c46026a2ff214a391f53889a00 data/ornamental/loot_tables/blocks/magma_wall.json
 2ead34250a7aeb4e6ae5a5657a532e1206237210 data/ornamental/loot_tables/blocks/missingno_beam.json
 000c0625daeef3b2e7a5f735ed088acf013b9063 data/ornamental/loot_tables/blocks/missingno_door.json
 881118b41e6fbda193f34a7c6aeadd302ddbe401 data/ornamental/loot_tables/blocks/missingno_fence.json
@@ -291,6 +301,7 @@ fe27c67b464a3ed2957e2dca55a59323e256e622 data/ornamental/loot_tables/entities/go
 0dad6b8798e1d9fbf7db7d57f2bd6fd3f5f81741 data/ornamental/loot_tables/entities/hay_golem.json
 14ce43f4c5b422a79cb4c70f1f66de32c0268995 data/ornamental/loot_tables/entities/ice_golem.json
 7102156662c3a2abfdfafa621890e94d3fbb2384 data/ornamental/loot_tables/entities/lapis_golem.json
+69706ee19cc74faa8d09248291b6ffab70aaee2d data/ornamental/loot_tables/entities/magma_golem.json
 50b3b5ec19d2621f64cf8f9afa134b5a14088776 data/ornamental/loot_tables/entities/netherite_golem.json
 e34ca4cd8a8880bd96f0e179d004248176d54853 data/ornamental/loot_tables/entities/nether_brick_golem.json
 277f230f19cabc8f5781ce700722bb1827341891 data/ornamental/loot_tables/entities/obsidian_golem.json

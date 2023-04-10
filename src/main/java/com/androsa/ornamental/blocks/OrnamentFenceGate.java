@@ -4,6 +4,7 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -94,6 +96,17 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     }
 
     @Override
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (builder.hazardPredicate != null && builder.damagePredicate != null) {
+            if (builder.hazardPredicate.test(level, pos, state, entity)) {
+                entity.hurt(builder.damagePredicate.apply(level), builder.damageAmount);
+            }
+        } else {
+            super.stepOn(level, pos, state, entity);
+        }
+    }
+
+    @Override
     public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
         entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
@@ -108,6 +121,17 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     @Deprecated
     public int getSignal(BlockState blockState, BlockGetter blockReader, BlockPos pos, Direction side) {
         return builder.hasPower ? 3 : 0;
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState facing, LevelAccessor level, BlockPos currentPos, BlockPos nearPos) {
+        if (builder.createBubbles) {
+            if (direction == Direction.UP && facing.is(Blocks.WATER)) {
+                level.scheduleTick(currentPos, this, builder.tickSchedule);
+            }
+        }
+
+        return super.updateShape(state, direction, facing, level, currentPos, nearPos);
     }
 
     @Override
@@ -163,11 +187,27 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
 
     @Override
     @Deprecated
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (builder.createBubbles) {
+            CustomBubbleColumnBlock.updateColumn(level, pos.above(), state);
+        }
+    }
+
+    @Override
+    @Deprecated
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
+            }
+        }
+
+        if (builder.extinguishes) {
+            BlockPos above = pos.above();
+            if (worldIn.getFluidState(pos).canExtinguish(worldIn, pos)) {
+                worldIn.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (worldIn.random.nextFloat() - worldIn.random.nextFloat()) * 0.8F);
+                worldIn.sendParticles(ParticleTypes.LARGE_SMOKE, above.getX() + 0.5D, above.getY() + 0.25D, above.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
             }
         }
     }
@@ -178,6 +218,14 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
+        }
+    }
+
+    @Override
+    @Deprecated
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState nearstate, boolean moving) {
+        if (builder.createBubbles) {
+            level.scheduleTick(pos, this, builder.tickSchedule);
         }
     }
 

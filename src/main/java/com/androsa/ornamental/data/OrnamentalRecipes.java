@@ -42,6 +42,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         stairs(consumer, ModBlocks.exposed_copper_stairs, Blocks.EXPOSED_COPPER);
         stairs(consumer, ModBlocks.weathered_copper_stairs, Blocks.WEATHERED_COPPER);
         stairs(consumer, ModBlocks.oxidized_copper_stairs, Blocks.OXIDIZED_COPPER);
+        stairs(consumer, ModBlocks.magma_stairs, Blocks.MAGMA_BLOCK);
 
         slab(consumer, ModBlocks.iron_slab, Blocks.IRON_BLOCK);
         slab(consumer, ModBlocks.gold_slab, Blocks.GOLD_BLOCK);
@@ -67,6 +68,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         slab(consumer, ModBlocks.exposed_copper_slab, Blocks.EXPOSED_COPPER);
         slab(consumer, ModBlocks.weathered_copper_slab, Blocks.WEATHERED_COPPER);
         slab(consumer, ModBlocks.oxidized_copper_slab, Blocks.OXIDIZED_COPPER);
+        slab(consumer, ModBlocks.magma_slab, Blocks.MAGMA_BLOCK);
 
         fence(consumer, ModBlocks.iron_fence, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fence(consumer, ModBlocks.gold_fence, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -95,6 +97,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fence(consumer, ModBlocks.exposed_copper_fence, Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab);
         fence(consumer, ModBlocks.weathered_copper_fence, Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab);
         fence(consumer, ModBlocks.oxidized_copper_fence, Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab);
+        fence(consumer, ModBlocks.magma_fence, Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM);
 
         trapdoor(consumer, ModBlocks.gold_trapdoor, Items.GOLD_INGOT);
         trapdoor(consumer, ModBlocks.diamond_trapdoor, Items.DIAMOND);
@@ -123,6 +126,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         trapdoor(consumer, ModBlocks.exposed_copper_trapdoor, ModBlocks.exposed_copper_slab);
         trapdoor(consumer, ModBlocks.weathered_copper_trapdoor, ModBlocks.weathered_copper_slab);
         trapdoor(consumer, ModBlocks.oxidized_copper_trapdoor, ModBlocks.oxidized_copper_slab);
+        trapdoorWide(consumer, ModBlocks.magma_trapdoor, Items.MAGMA_CREAM);
 
         fencegate(consumer, ModBlocks.iron_fence_gate, Blocks.IRON_BLOCK, Items.IRON_INGOT);
         fencegate(consumer, ModBlocks.gold_fence_gate, Blocks.GOLD_BLOCK, Items.GOLD_INGOT);
@@ -152,6 +156,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         fencegate(consumer, ModBlocks.exposed_copper_fence_gate, Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab);
         fencegate(consumer, ModBlocks.weathered_copper_fence_gate, Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab);
         fencegate(consumer, ModBlocks.oxidized_copper_fence_gate, Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab);
+        fencegate(consumer, ModBlocks.magma_fence_gate, Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM);
 
         door(consumer, ModBlocks.gold_door, Items.GOLD_INGOT);
         door(consumer, ModBlocks.diamond_door, Items.DIAMOND);
@@ -180,6 +185,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         door(consumer, ModBlocks.exposed_copper_door, ModBlocks.exposed_copper_slab);
         door(consumer, ModBlocks.weathered_copper_door, ModBlocks.weathered_copper_slab);
         door(consumer, ModBlocks.oxidized_copper_door, ModBlocks.oxidized_copper_slab);
+        door(consumer, ModBlocks.magma_door, Items.MAGMA_CREAM);
 
         pole(consumer, ModBlocks.iron_pole, ModBlocks.iron_slab);
         pole(consumer, ModBlocks.gold_pole, ModBlocks.gold_slab);
@@ -209,6 +215,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         pole(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_slab);
         pole(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_slab);
         pole(consumer, ModBlocks.oxidized_copper_pole, ModBlocks.oxidized_copper_slab);
+        pole(consumer, ModBlocks.magma_pole, Items.MAGMA_CREAM);
 
         beam(consumer, ModBlocks.iron_beam, ModBlocks.iron_slab);
         beam(consumer, ModBlocks.gold_beam, ModBlocks.gold_slab);
@@ -238,6 +245,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         beam(consumer, ModBlocks.exposed_copper_beam, ModBlocks.exposed_copper_slab);
         beam(consumer, ModBlocks.weathered_copper_beam, ModBlocks.weathered_copper_slab);
         beam(consumer, ModBlocks.oxidized_copper_beam, ModBlocks.oxidized_copper_slab);
+        beam(consumer, ModBlocks.magma_beam, Items.MAGMA_CREAM);
 
         convertPoleBeam(consumer, ModBlocks.iron_pole, ModBlocks.iron_beam);
         convertPoleBeam(consumer, ModBlocks.gold_pole, ModBlocks.gold_beam);
@@ -267,6 +275,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         convertPoleBeam(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_beam);
         convertPoleBeam(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_beam);
         convertPoleBeam(consumer, ModBlocks.oxidized_copper_pole, ModBlocks.oxidized_copper_beam);
+        convertPoleBeam(consumer, ModBlocks.magma_pole, ModBlocks.magma_beam);
 
         wall(consumer, ModBlocks.iron_wall, Blocks.IRON_BLOCK);
         wall(consumer, ModBlocks.gold_wall, Blocks.GOLD_BLOCK);
@@ -293,6 +302,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         wall(consumer, ModBlocks.exposed_copper_wall, Blocks.EXPOSED_COPPER);
         wall(consumer, ModBlocks.weathered_copper_wall, Blocks.WEATHERED_COPPER);
         wall(consumer, ModBlocks.oxidized_copper_wall, Blocks.OXIDIZED_COPPER);
+        wall(consumer, ModBlocks.magma_wall, Blocks.MAGMA_BLOCK);
 
         saddleDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_TRAPDOOR);
         saddleDoor(consumer, ModBlocks.gold_saddle_door, ModBlocks.gold_trapdoor);
@@ -322,6 +332,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         saddleDoor(consumer, ModBlocks.exposed_copper_saddle_door, ModBlocks.exposed_copper_trapdoor);
         saddleDoor(consumer, ModBlocks.weathered_copper_saddle_door, ModBlocks.weathered_copper_trapdoor);
         saddleDoor(consumer, ModBlocks.oxidized_copper_saddle_door, ModBlocks.oxidized_copper_trapdoor);
+        saddleDoor(consumer, ModBlocks.magma_saddle_door, ModBlocks.magma_trapdoor);
 
         saddleDoorFromDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_DOOR);
         saddleDoorFromDoor(consumer, ModBlocks.gold_saddle_door, ModBlocks.gold_door);
@@ -351,5 +362,6 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         saddleDoorFromDoor(consumer, ModBlocks.exposed_copper_saddle_door, ModBlocks.exposed_copper_door);
         saddleDoorFromDoor(consumer, ModBlocks.weathered_copper_saddle_door, ModBlocks.weathered_copper_door);
         saddleDoorFromDoor(consumer, ModBlocks.oxidized_copper_saddle_door, ModBlocks.oxidized_copper_door);
+        saddleDoorFromDoor(consumer, ModBlocks.magma_saddle_door, ModBlocks.magma_door);
     }
 }

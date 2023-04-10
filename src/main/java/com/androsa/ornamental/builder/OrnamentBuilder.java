@@ -42,6 +42,7 @@ public class OrnamentBuilder {
     public MaterialColor color = material.getColor();
     public float hardness = 0.0F;
     public float resistance = 0.0F;
+    public int light = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
@@ -65,8 +66,17 @@ public class OrnamentBuilder {
     public boolean canVaporise = false;
     public boolean isSolid = true;
     public boolean breakableCull = false;
+    public boolean postProcess = false;
+    public boolean emissiveRender = false;
     public PushReaction pushReaction = material.getPushReaction();
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
+    public FloorHazardPredicate hazardPredicate = null;
+    public HazardDamagePredicate damagePredicate = null;
+    public float damageAmount = 0.0F;
+    public boolean createBubbles = false;
+    public boolean extinguishes = false;
+    public boolean bubbleDragDown = false;
+    public int tickSchedule = 0;
     public List<List<RegistryObject<? extends Block>>> blockTags = new ArrayList<>();
     public List<List<RegistryObject<? extends Block>>> itemTags = new ArrayList<>();
 
@@ -136,6 +146,15 @@ public class OrnamentBuilder {
     public OrnamentBuilder hardnessAndResistance(float hard, float resist) {
         this.hardness = hard;
         this.resistance = resist;
+        return this;
+    }
+
+    /**
+     * Setter for the block's light level.
+     * @param level the light level to emit.
+     */
+    public OrnamentBuilder lightLevel(int level) {
+        this.light = level;
         return this;
     }
 
@@ -268,7 +287,7 @@ public class OrnamentBuilder {
      * @param type the BlockSetType itself. Can be used if one has already been defined.
      */
     public OrnamentBuilder blockSetType(BlockSetType type) {
-        this.blockSetType = type;
+        this.blockSetType = BlockSetType.register(type);
         return this;
     }
 
@@ -383,6 +402,22 @@ public class OrnamentBuilder {
     }
 
     /**
+     * Sets if the block should be marked for post-processing. Though it is only for worldgen, consider pack creators when setting this value.
+     */
+    public OrnamentBuilder doPostProcessing() {
+        this.postProcess = true;
+        return this;
+    }
+
+    /**
+     * Sets if the block has emissive rendering.
+     */
+    public OrnamentBuilder doEmissiveRendering() {
+        this.emissiveRender = true;
+        return this;
+    }
+
+    /**
      * Sets an overriding PushReaction for a block if the block normally checks based on Material. Will check the Material's reaction by default.
      * Some blocks may not follow this, ie. Doors always have PushReaction.DESTROY.
      * @param reaction The push reaction this material should use.
@@ -398,6 +433,33 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder projectileHitSound(List<SoundEvent> sounds) {
         this.projectileHitSounds = sounds;
+        return this;
+    }
+
+    /**
+     * Sets a floor hazard for the ornaments when an entity steps on them.
+     * @param test The predicate to check if an entity should take damage for stepping on the ornament.
+     * @param apply The predicate to apply damage to the entity. Provided as a functional interface due to how DamageSources are stored by Level.
+     * @param amount The amount of damage to deal.
+     */
+    public OrnamentBuilder floorHazard(FloorHazardPredicate test, HazardDamagePredicate apply, float amount) {
+        this.hazardPredicate = test;
+        this.damagePredicate = apply;
+        this.damageAmount = amount;
+        return this;
+    }
+
+    /**
+     * Sets the block to emit bubble columns when underwater. Optionally, emit smoke and emit extinguish noises.
+     * @param tick the amount of ticks to schedule an update.
+     * @param extinguish if the block emits smoke and extnguish noises. THIS REQUIRES THE BLOCK TO RANDOMLY TICK.
+     * @param dragdown if the bubble column pulls down entities.
+     */
+    public OrnamentBuilder bubbleUnderwater(int tick, boolean extinguish, boolean dragdown) {
+        this.createBubbles = true;
+        this.extinguishes = extinguish;
+        this.bubbleDragDown = dragdown;
+        this.tickSchedule = tick;
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data;
 
+import com.androsa.ornamental.blocks.CustomBubbleColumnBlock;
 import com.androsa.ornamental.blocks.OrnamentBeam;
 import com.androsa.ornamental.blocks.OrnamentPole;
 import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
@@ -8,6 +9,7 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -50,6 +52,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBasic(ModBlocks.exposed_copper_stairs, "exposed_copper");
         stairsBasic(ModBlocks.weathered_copper_stairs, "weathered_copper");
         stairsBasic(ModBlocks.oxidized_copper_stairs, "oxidized_copper");
+        stairsBasic(ModBlocks.magma_stairs, "magma");
 
         slabBasic(ModBlocks.iron_slab, "iron_block");
         slabBasic(ModBlocks.gold_slab, "gold_block");
@@ -76,6 +79,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.exposed_copper_slab, "exposed_copper");
         slabBasic(ModBlocks.weathered_copper_slab, "weathered_copper");
         slabBasic(ModBlocks.oxidized_copper_slab, "oxidized_copper");
+        slabModel(ModBlocks.magma_slab, "magma_block", "magma");
 
         fenceBasic(ModBlocks.iron_fence, "iron_block");
         fenceBasic(ModBlocks.gold_fence, "gold_block");
@@ -105,6 +109,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceBasic(ModBlocks.exposed_copper_fence, "exposed_copper");
         fenceBasic(ModBlocks.weathered_copper_fence, "weathered_copper");
         fenceBasic(ModBlocks.oxidized_copper_fence, "oxidized_copper");
+        fenceBasic(ModBlocks.magma_fence, "magma");
 
         trapdoorBasic(ModBlocks.gold_trapdoor, "gold");
         trapdoorBasic(ModBlocks.diamond_trapdoor, "diamond");
@@ -134,6 +139,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.exposed_copper_trapdoor, "exposed_copper");
         trapdoorBasic(ModBlocks.weathered_copper_trapdoor, "weathered_copper");
         trapdoorBasic(ModBlocks.oxidized_copper_trapdoor, "oxidized_copper");
+        trapdoorBasic(ModBlocks.magma_trapdoor, "magma");
 
         fenceGateBasic(ModBlocks.iron_fence_gate, "iron_block");
         fenceGateBasic(ModBlocks.gold_fence_gate, "gold_block");
@@ -164,6 +170,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBasic(ModBlocks.exposed_copper_fence_gate, "exposed_copper");
         fenceGateBasic(ModBlocks.weathered_copper_fence_gate, "weathered_copper");
         fenceGateBasic(ModBlocks.oxidized_copper_fence_gate, "oxidized_copper");
+        fenceGateBasic(ModBlocks.magma_fence_gate, "magma");
 
         doorBasic(ModBlocks.gold_door, "gold");
         doorBasic(ModBlocks.diamond_door, "diamond");
@@ -193,6 +200,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.exposed_copper_door, "exposed_copper");
         doorBasic(ModBlocks.weathered_copper_door, "weathered_copper");
         doorBasic(ModBlocks.oxidized_copper_door, "oxidized_copper");
+        doorBasic(ModBlocks.magma_door, "magma");
 
         poleBasic(ModBlocks.iron_pole, "iron_block");
         poleBasic(ModBlocks.gold_pole, "gold_block");
@@ -223,6 +231,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.exposed_copper_pole, "exposed_copper");
         poleBasic(ModBlocks.weathered_copper_pole, "weathered_copper");
         poleBasic(ModBlocks.oxidized_copper_pole, "oxidized_copper");
+        poleBasic(ModBlocks.magma_pole, "magma_block", "magma", SOLID);
 
         beamBasic(ModBlocks.iron_beam, "iron_block");
         beamBasic(ModBlocks.gold_beam, "gold_block");
@@ -253,6 +262,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.exposed_copper_beam, "exposed_copper");
         beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper");
         beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper");
+        beamBasic(ModBlocks.magma_beam, "magma", "magma_block", SOLID);
 
         wallBasic(ModBlocks.iron_wall, "iron_block");
         wallBasic(ModBlocks.gold_wall, "gold_block");
@@ -279,6 +289,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.exposed_copper_wall, "exposed_copper");
         wallBasic(ModBlocks.weathered_copper_wall, "weathered_copper");
         wallBasic(ModBlocks.oxidized_copper_wall, "oxidized_copper");
+        wallBasic(ModBlocks.magma_wall, "magma");
 
         saddleDoorVanilla(ModBlocks.iron_saddle_door, "iron_trapdoor");
         saddleDoorBasic(ModBlocks.gold_saddle_door, "gold");
@@ -309,6 +320,9 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
         saddleDoorBasic(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
         saddleDoorBasic(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
+        saddleDoorBasic(ModBlocks.magma_saddle_door, "magma");
+
+        fakeBubbleColumn();
     }
 
     public void modelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
@@ -499,5 +513,9 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
                 .condition(OrnamentPole.TOP_RIGHT, true)
                 .condition(OrnamentPole.BOTTOM_LEFT, true)
                 .condition(OrnamentPole.BOTTOM_RIGHT, true);
+    }
+
+    public void fakeBubbleColumn() {
+        getVariantBuilder(ModBlocks.fake_bubble_column.get()).forAllStatesExcept((state) -> ConfiguredModel.builder().modelFile(models().getExistingFile(modLoc("block/water"))).build(), CustomBubbleColumnBlock.DRAG_DOWN);
     }
 }

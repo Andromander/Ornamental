@@ -1,0 +1,7 @@
+{
+    "render_type": "minecraft:translucent",
+    "textures": {
+        "particle": "block/water_still"
+    }
+}
+

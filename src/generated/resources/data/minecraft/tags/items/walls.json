@@ -25,6 +25,7 @@
     "ornamental:copper_wall",
     "ornamental:exposed_copper_wall",
     "ornamental:weathered_copper_wall",
-    "ornamental:oxidized_copper_wall"
+    "ornamental:oxidized_copper_wall",
+    "ornamental:magma_wall"
   ]
 }

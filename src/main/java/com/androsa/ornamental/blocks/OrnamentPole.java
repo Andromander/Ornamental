@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -252,6 +254,17 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (builder.hazardPredicate != null && builder.damagePredicate != null) {
+            if (builder.hazardPredicate.test(level, pos, state, entity)) {
+                entity.hurt(builder.damagePredicate.apply(level), builder.damageAmount);
+            }
+        } else {
+            super.stepOn(level, pos, state, entity);
+        }
+    }
+
+    @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float distance) {
         entity.causeFallDamage(distance, builder.fallMultiplier, world.damageSources().fall());
     }
@@ -301,6 +314,12 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+        }
+
+        if (builder.createBubbles) {
+            if (facing == Direction.UP && facingState.is(Blocks.WATER)) {
+                worldIn.scheduleTick(currentPos, this, builder.tickSchedule);
+            }
         }
 
         return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
@@ -380,11 +399,27 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
 
     @Override
     @Deprecated
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (builder.createBubbles) {
+            CustomBubbleColumnBlock.updateColumn(level, pos.above(), state);
+        }
+    }
+
+    @Override
+    @Deprecated
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
             if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
                 this.turnIntoWater(worldIn, pos);
+            }
+        }
+
+        if (builder.extinguishes) {
+            BlockPos above = pos.above();
+            if (worldIn.getFluidState(pos).canExtinguish(worldIn, pos)) {
+                worldIn.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (worldIn.random.nextFloat() - worldIn.random.nextFloat()) * 0.8F);
+                worldIn.sendParticles(ParticleTypes.LARGE_SMOKE, above.getX() + 0.5D, above.getY() + 0.25D, above.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
             }
         }
     }
@@ -395,6 +430,14 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
             world.neighborChanged(pos, builder.meltResult, pos);
+        }
+    }
+
+    @Override
+    @Deprecated
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState nearstate, boolean moving) {
+        if (builder.createBubbles) {
+            level.scheduleTick(pos, this, builder.tickSchedule);
         }
     }
 

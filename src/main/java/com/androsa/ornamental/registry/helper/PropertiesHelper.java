@@ -19,8 +19,11 @@ public class PropertiesHelper {
                 .strength(getbuilder.hardness, getbuilder.resistance)
                 .sound(getbuilder.blockSetType.soundType())
                 .friction(getbuilder.slipperiness);
+        if (getbuilder.light > 0) props.lightLevel((state) -> getbuilder.light);
         if (getbuilder.doesTick) props.randomTicks();
         if (!getbuilder.isSolid) props.noOcclusion();
+        if (getbuilder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
+        if (getbuilder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
         if (getbuilder.requiresTool) props.requiresCorrectToolForDrops();
         if (getbuilder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
 

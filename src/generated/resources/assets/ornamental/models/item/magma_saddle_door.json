@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/saddle_door_inventory",
+  "textures": {
+    "bottom": "ornamental:block/magma_trapdoor",
+    "side": "ornamental:block/magma_trapdoor",
+    "top": "ornamental:block/magma_trapdoor"
+  }
+}
