@@ -216,7 +216,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         pole(consumer, ModBlocks.packed_ice_pole, ModBlocks.packed_ice_slab);
         pole(consumer, ModBlocks.blue_ice_pole, ModBlocks.blue_ice_slab);
         pole(consumer, ModBlocks.netherite_pole, ModBlocks.netherite_slab);
-        pole(consumer, ModBlocks.amethyst_pole, Items.AMETHYST_SHARD);
+        pole(consumer, ModBlocks.amethyst_pole, ModBlocks.amethyst_slab);
         pole(consumer, ModBlocks.copper_pole, ModBlocks.copper_slab);
         pole(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_slab);
         pole(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_slab);
@@ -247,7 +247,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         beam(consumer, ModBlocks.packed_ice_beam, ModBlocks.packed_ice_slab);
         beam(consumer, ModBlocks.blue_ice_beam, ModBlocks.blue_ice_slab);
         beam(consumer, ModBlocks.netherite_beam, ModBlocks.netherite_slab);
-        beam(consumer, ModBlocks.amethyst_beam, Items.AMETHYST_SHARD);
+        beam(consumer, ModBlocks.amethyst_beam, ModBlocks.amethyst_slab);
         beam(consumer, ModBlocks.copper_beam, ModBlocks.copper_slab);
         beam(consumer, ModBlocks.exposed_copper_beam, ModBlocks.exposed_copper_slab);
         beam(consumer, ModBlocks.weathered_copper_beam, ModBlocks.weathered_copper_slab);
