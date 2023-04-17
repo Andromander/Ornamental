@@ -1,4 +1,4 @@
-// 1.19.4	2023-04-08T22:52:22.446405	Ornamental Item Models
+// 1.19.4	2023-04-17T15:46:27.9915133	Ornamental Item Models
 1373c54937d1e50cd97b0ba886d821ab56583b1f assets/ornamental/models/item/amethyst_beam.json
 2998a3b80379d12867c0fc789e2acbf0eda5a742 assets/ornamental/models/item/amethyst_door.json
 59d8f49ca423203c32265bb8e7f2b795f2fd3075 assets/ornamental/models/item/amethyst_fence.json
@@ -40,6 +40,17 @@ df00f41212be9879e2f68627379e0e241fe46a15 assets/ornamental/models/item/brick_fen
 84c1acd5feca1855d2bea7d7d5371cf172ebaf5e assets/ornamental/models/item/brick_pole.json
 6ee83b9bcaf127629ecb17112d44937fcef7951b assets/ornamental/models/item/brick_saddle_door.json
 09726af70b1946e8dc28af995010c403ccfd3ef5 assets/ornamental/models/item/brick_trapdoor.json
+4ff02679cccfd7710473076c43111452fab8743c assets/ornamental/models/item/calcite_beam.json
+c50b4999c42555d2990daac8199aa2c93a3cf7d0 assets/ornamental/models/item/calcite_door.json
+37f796b7fb3ac7d7d34a40b765edfe0de495f09d assets/ornamental/models/item/calcite_fence.json
+6b8c44b8ca7393c50d39be839eaec2657b0f508b assets/ornamental/models/item/calcite_fence_gate.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ornamental/models/item/calcite_golem_spawn_egg.json
+1dc69092e1e7a63616ef5a03d72d3fa19560484b assets/ornamental/models/item/calcite_pole.json
+d747d190f2e95147325975402fd12acbb00cb2b7 assets/ornamental/models/item/calcite_saddle_door.json
+9b18dd9a3e048e3223ad9eb025ef286d59aa3e1a assets/ornamental/models/item/calcite_slab.json
+81e65f69f5981d99483b74545f2c9ca00f3de88c assets/ornamental/models/item/calcite_stairs.json
+b6f91a02d4c828e0969324efde20543bd2a02574 assets/ornamental/models/item/calcite_trapdoor.json
+a825e7c6af3276bbcb8d4611d5976407059896a1 assets/ornamental/models/item/calcite_wall.json
 347d152c98488c2cb677123758a0986834590b47 assets/ornamental/models/item/clay_beam.json
 4c67788963ff9f592ffcca2ce25e8c7f1624590e assets/ornamental/models/item/clay_door.json
 adb60ffcc16e845ddea020283225cf607992b880 assets/ornamental/models/item/clay_fence.json

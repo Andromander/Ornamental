@@ -33,6 +33,7 @@ public class ModelLocations {
     public static final ModelLayerLocation COPPER_GOLEM = makeEntity("copper_golem");
     public static final ModelLayerLocation AMETHYST_GOLEM = makeEntity("amethyst_golem");
     public static final ModelLayerLocation MAGMA_GOLEM = makeEntity("magma_golem");
+    public static final ModelLayerLocation CALCITE_GOLEM = makeEntity("calcite_golem");
 
     private static ModelLayerLocation makeEntity(String name) {
         return modelLocation(name, "main");

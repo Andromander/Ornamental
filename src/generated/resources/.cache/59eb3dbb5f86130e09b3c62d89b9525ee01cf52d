@@ -1,4 +1,4 @@
-// 1.19.4	2023-04-08T21:44:08.2918106	Loot Tables
+// 1.19.4	2023-04-17T15:46:27.993515	Loot Tables
 825ef6e1dd21362f300cac2ecca2450fdfd0cf0c data/ornamental/loot_tables/blocks/amethyst_beam.json
 c737d0b23ff46393e483cad93aa06a855996c823 data/ornamental/loot_tables/blocks/amethyst_door.json
 1ba8931b31fc30b3adf9cfb7ac467ff54852316d data/ornamental/loot_tables/blocks/amethyst_fence.json
@@ -36,6 +36,16 @@ e64055083c44c2fbb11404c18569d02ae9e68971 data/ornamental/loot_tables/blocks/bric
 0871e41d5ef6969931e2012d6961b96c74698d9d data/ornamental/loot_tables/blocks/brick_pole.json
 c2f65eae1764cbc4b5e66adfb5e05b44a88b534b data/ornamental/loot_tables/blocks/brick_saddle_door.json
 0380379abdbd71e3d0aff3987ac5311e5296c95f data/ornamental/loot_tables/blocks/brick_trapdoor.json
+e44131565b29475d39aa4120b5a025a790876172 data/ornamental/loot_tables/blocks/calcite_beam.json
+8d545d28907497b405792df335e40fc7aeb1ded7 data/ornamental/loot_tables/blocks/calcite_door.json
+dfe4ae4264211600b6794f904e64621ee5115a5c data/ornamental/loot_tables/blocks/calcite_fence.json
+e9e83f9bb31f83e8587a73c2df543a0e4f9f81d5 data/ornamental/loot_tables/blocks/calcite_fence_gate.json
+f61a95011e0f2297ba804b12341bd102f6df2593 data/ornamental/loot_tables/blocks/calcite_pole.json
+4df13658e936de8bf77c7001f5a7ebaaff275da5 data/ornamental/loot_tables/blocks/calcite_saddle_door.json
+da2bd89eab506f22eb5ec9c123a60f8072d4f4fd data/ornamental/loot_tables/blocks/calcite_slab.json
+8b1b25d4f482852dd1f6a225d5439dff00a925c3 data/ornamental/loot_tables/blocks/calcite_stairs.json
+7aae3834f8095f35399f331ada62d562454d0d4d data/ornamental/loot_tables/blocks/calcite_trapdoor.json
+40fcfde34d63893edaf2c67bffd3c5fec763ccd2 data/ornamental/loot_tables/blocks/calcite_wall.json
 183fb542d5e3949dc0e828ed6ad15228124d5911 data/ornamental/loot_tables/blocks/clay_beam.json
 886a2e677c3024743f294fe84a71d910f2bbbcd9 data/ornamental/loot_tables/blocks/clay_door.json
 a8ba6c4ebc59c78cdbb511a8f840f63a5aafddf7 data/ornamental/loot_tables/blocks/clay_fence.json
@@ -289,6 +299,7 @@ b8f7e13975ff13c2a48663636b48eba609d895a5 data/ornamental/loot_tables/blocks/weat
 049d8ed541822266318713076f593ba4aeb2898d data/ornamental/loot_tables/entities/blue_ice_golem.json
 420f0187fbd1c03ca2b4a54d371d20e81cba1bcc data/ornamental/loot_tables/entities/bone_golem.json
 7ec9f487b937b4d238753dcb2f6934c125287b43 data/ornamental/loot_tables/entities/brick_golem.json
+e9cfa461c5904cc6385b3619b31554ad56418ce2 data/ornamental/loot_tables/entities/calcite_golem.json
 b255c3a6666579daa83af632276c091c3f0ac2d5 data/ornamental/loot_tables/entities/clay_golem.json
 592be50be73f0e3e8beb5dc49159974b8e5a28ba data/ornamental/loot_tables/entities/coal_golem.json
 ed8a77131bf9656c44bbbeb25790d19e1d169bbe data/ornamental/loot_tables/entities/copper_golem.json

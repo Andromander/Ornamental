@@ -47,6 +47,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentStair> weathered_copper_stairs = HELPER.stairs(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentStair> oxidized_copper_stairs = HELPER.stairs(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentStair> magma_stairs = HELPER.stairs(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentStair> calcite_stairs = HELPER.stairs(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentSlab> iron_slab = HELPER.slab(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentSlab> gold_slab = HELPER.slab(OrnamentBuilders.GOLD);
@@ -74,6 +75,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSlab> weathered_copper_slab = HELPER.slab(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentSlab> oxidized_copper_slab = HELPER.slab(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentSlab> magma_slab = HELPER.slab(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentSlab> calcite_slab = HELPER.slab(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentFence> iron_fence = HELPER.fence(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentFence> gold_fence = HELPER.fence(OrnamentBuilders.GOLD);
@@ -104,6 +106,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentFence> weathered_copper_fence = HELPER.fence(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentFence> oxidized_copper_fence = HELPER.fence(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentFence> magma_fence = HELPER.fence(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentFence> calcite_fence = HELPER.fence(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentTrapDoor> gold_trapdoor = HELPER.trapdoor(OrnamentBuilders.GOLD);
     public static final RegistryObject<OrnamentTrapDoor> diamond_trapdoor = HELPER.trapdoor(OrnamentBuilders.DIAMOND);
@@ -134,6 +137,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentTrapDoor> weathered_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentTrapDoor> oxidized_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentTrapDoor> magma_trapdoor = HELPER.trapdoor(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentTrapDoor> calcite_trapdoor = HELPER.trapdoor(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentFenceGate> iron_fence_gate = HELPER.fencegate(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentFenceGate> gold_fence_gate = HELPER.fencegate(OrnamentBuilders.GOLD);
@@ -165,6 +169,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentFenceGate> weathered_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentFenceGate> oxidized_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentFenceGate> magma_fence_gate = HELPER.fencegate(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentFenceGate> calcite_fence_gate = HELPER.fencegate(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentDoor> gold_door = HELPER.door(OrnamentBuilders.GOLD);
     public static final RegistryObject<OrnamentDoor> diamond_door = HELPER.door(OrnamentBuilders.DIAMOND);
@@ -195,6 +200,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentDoor> weathered_copper_door = HELPER.door(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentDoor> oxidized_copper_door = HELPER.door(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentDoor> magma_door = HELPER.door(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentDoor> calcite_door = HELPER.door(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentPole> iron_pole = HELPER.pole(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentPole> gold_pole = HELPER.pole(OrnamentBuilders.GOLD);
@@ -226,6 +232,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentPole> weathered_copper_pole = HELPER.pole(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentPole> oxidized_copper_pole = HELPER.pole(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentPole> magma_pole = HELPER.pole(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentPole> calcite_pole = HELPER.pole(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentBeam> iron_beam = HELPER.beam(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentBeam> gold_beam = HELPER.beam(OrnamentBuilders.GOLD);
@@ -257,6 +264,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentBeam> weathered_copper_beam = HELPER.beam(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentBeam> oxidized_copper_beam = HELPER.beam(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentBeam> magma_beam = HELPER.beam(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentBeam> calcite_beam = HELPER.beam(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentWall> iron_wall = HELPER.wall(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentWall> gold_wall = HELPER.wall(OrnamentBuilders.GOLD);
@@ -285,6 +293,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentWall> weathered_copper_wall = HELPER.wall(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentWall> oxidized_copper_wall = HELPER.wall(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentWall> magma_wall = HELPER.wall(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentWall> calcite_wall = HELPER.wall(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<OrnamentSaddleDoor> iron_saddle_door = HELPER.saddledoor(OrnamentBuilders.IRON);
     public static final RegistryObject<OrnamentSaddleDoor> gold_saddle_door = HELPER.saddledoor(OrnamentBuilders.GOLD);
@@ -316,6 +325,7 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSaddleDoor> weathered_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.WEATHERED_COPPER);
     public static final RegistryObject<OrnamentSaddleDoor> oxidized_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.OXIDIZED_COPPER);
     public static final RegistryObject<OrnamentSaddleDoor> magma_saddle_door = HELPER.saddledoor(OrnamentBuilders.MAGMA);
+    public static final RegistryObject<OrnamentSaddleDoor> calcite_saddle_door = HELPER.saddledoor(OrnamentBuilders.CALCITE);
 
     public static final RegistryObject<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.of(Material.BUBBLE_COLUMN).noOcclusion().noLootTable()));
 }

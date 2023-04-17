@@ -32,7 +32,8 @@ public enum PatternType {
     NETHERITE        (ModEntities.NETHERITE_GOLEM, GolemPatterns.getNetheritePattern()),
     COPPER           (ModEntities.COPPER_GOLEM, GolemPatterns.getCopperPattern()),
     AMETHYST         (ModEntities.AMETHYST_GOLEM, GolemPatterns.getAmethystPattern()),
-    MAGMA            (ModEntities.MAGMA_GOLEM, GolemPatterns.getMagmaPattern());
+    MAGMA            (ModEntities.MAGMA_GOLEM, GolemPatterns.getMagmaPattern()),
+    CALCITE          (ModEntities.CALCITE_GOLEM, GolemPatterns.getCalcitePattern());
 
     private final Supplier<? extends EntityType<? extends AbstractGolem>> supplierEntity;
     private final BlockPattern blockPattern;

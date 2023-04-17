@@ -299,4 +299,13 @@ public class OrnamentBuilders {
             .floorHazard(((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living)), (level -> level.damageSources().hotFloor()), 1.0F)
             .bubbleUnderwater(20, true, true)
             .addBlockTags(List.of(OrnamentalBlockTags.INFINIBURN_OVERWORLD, OrnamentalBlockTags.PICKAXE_TOOL));
+
+    public static final OrnamentBuilder CALCITE = new OrnamentBuilder("calcite")
+            .properties(Material.STONE, MaterialColor.TERRACOTTA_WHITE)
+            .hardnessAndResistance(0.75F)
+            .requiresTool()
+            .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
+            .blockSetType(SoundType.CALCITE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
+
 }

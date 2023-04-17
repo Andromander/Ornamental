@@ -25,6 +25,7 @@
     "ornamental:exposed_copper_slab",
     "ornamental:weathered_copper_slab",
     "ornamental:oxidized_copper_slab",
-    "ornamental:magma_slab"
+    "ornamental:magma_slab",
+    "ornamental:calcite_slab"
   ]
 }

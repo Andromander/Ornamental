@@ -53,6 +53,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBasic(ModBlocks.weathered_copper_stairs, "weathered_copper");
         stairsBasic(ModBlocks.oxidized_copper_stairs, "oxidized_copper");
         stairsBasic(ModBlocks.magma_stairs, "magma");
+        stairsBasic(ModBlocks.calcite_stairs, "calcite");
 
         slabBasic(ModBlocks.iron_slab, "iron_block");
         slabBasic(ModBlocks.gold_slab, "gold_block");
@@ -80,6 +81,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.weathered_copper_slab, "weathered_copper");
         slabBasic(ModBlocks.oxidized_copper_slab, "oxidized_copper");
         slabModel(ModBlocks.magma_slab, "magma_block", "magma");
+        slabBasic(ModBlocks.calcite_slab, "calcite");
 
         fenceBasic(ModBlocks.iron_fence, "iron_block");
         fenceBasic(ModBlocks.gold_fence, "gold_block");
@@ -110,6 +112,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceBasic(ModBlocks.weathered_copper_fence, "weathered_copper");
         fenceBasic(ModBlocks.oxidized_copper_fence, "oxidized_copper");
         fenceBasic(ModBlocks.magma_fence, "magma");
+        fenceBasic(ModBlocks.calcite_fence, "calcite");
 
         trapdoorBasic(ModBlocks.gold_trapdoor, "gold");
         trapdoorBasic(ModBlocks.diamond_trapdoor, "diamond");
@@ -140,6 +143,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.weathered_copper_trapdoor, "weathered_copper");
         trapdoorBasic(ModBlocks.oxidized_copper_trapdoor, "oxidized_copper");
         trapdoorBasic(ModBlocks.magma_trapdoor, "magma");
+        trapdoorBasic(ModBlocks.calcite_trapdoor, "calcite");
 
         fenceGateBasic(ModBlocks.iron_fence_gate, "iron_block");
         fenceGateBasic(ModBlocks.gold_fence_gate, "gold_block");
@@ -171,6 +175,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBasic(ModBlocks.weathered_copper_fence_gate, "weathered_copper");
         fenceGateBasic(ModBlocks.oxidized_copper_fence_gate, "oxidized_copper");
         fenceGateBasic(ModBlocks.magma_fence_gate, "magma");
+        fenceGateBasic(ModBlocks.calcite_fence_gate, "calcite");
 
         doorBasic(ModBlocks.gold_door, "gold");
         doorBasic(ModBlocks.diamond_door, "diamond");
@@ -201,6 +206,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.weathered_copper_door, "weathered_copper");
         doorBasic(ModBlocks.oxidized_copper_door, "oxidized_copper");
         doorBasic(ModBlocks.magma_door, "magma");
+        doorBasic(ModBlocks.calcite_door, "calcite");
 
         poleBasic(ModBlocks.iron_pole, "iron_block");
         poleBasic(ModBlocks.gold_pole, "gold_block");
@@ -232,6 +238,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.weathered_copper_pole, "weathered_copper");
         poleBasic(ModBlocks.oxidized_copper_pole, "oxidized_copper");
         poleBasic(ModBlocks.magma_pole, "magma_block", "magma", SOLID);
+        poleBasic(ModBlocks.calcite_pole, "calcite");
 
         beamBasic(ModBlocks.iron_beam, "iron_block");
         beamBasic(ModBlocks.gold_beam, "gold_block");
@@ -263,6 +270,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.weathered_copper_beam, "weathered_copper");
         beamBasic(ModBlocks.oxidized_copper_beam, "oxidized_copper");
         beamBasic(ModBlocks.magma_beam, "magma", "magma_block", SOLID);
+        beamBasic(ModBlocks.calcite_beam, "calcite");
 
         wallBasic(ModBlocks.iron_wall, "iron_block");
         wallBasic(ModBlocks.gold_wall, "gold_block");
@@ -290,6 +298,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.weathered_copper_wall, "weathered_copper");
         wallBasic(ModBlocks.oxidized_copper_wall, "oxidized_copper");
         wallBasic(ModBlocks.magma_wall, "magma");
+        wallBasic(ModBlocks.calcite_wall, "calcite");
 
         saddleDoorVanilla(ModBlocks.iron_saddle_door, "iron_trapdoor");
         saddleDoorBasic(ModBlocks.gold_saddle_door, "gold");
@@ -321,6 +330,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
         saddleDoorBasic(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
         saddleDoorBasic(ModBlocks.magma_saddle_door, "magma");
+        saddleDoorBasic(ModBlocks.calcite_saddle_door, "calcite");
 
         fakeBubbleColumn();
     }

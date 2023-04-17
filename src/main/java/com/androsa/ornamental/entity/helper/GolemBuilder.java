@@ -50,6 +50,7 @@ public class GolemBuilder {
             checkPattern(PatternType.COPPER, world, pos, 1, 3);
             checkPattern(PatternType.AMETHYST, world, pos, 1, 2);
             checkPattern(PatternType.MAGMA, world, pos, 2);
+            checkPattern(PatternType.CALCITE, world, pos, 2, 3);
         }
     }
 

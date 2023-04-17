@@ -82,6 +82,7 @@ public class ClientEvents {
         event.registerLayerDefinition(ModelLocations.COPPER_GOLEM, CopperGolemModel::createBodyLayer);
         event.registerLayerDefinition(ModelLocations.AMETHYST_GOLEM, AmethystGolemModel::createBodyLayer);
         event.registerLayerDefinition(ModelLocations.MAGMA_GOLEM, MagmaGolemModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLocations.CALCITE_GOLEM, CalciteGolemModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -110,6 +111,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), m -> new CopperGolemRenderer<>(m, new CopperGolemModel<>(m.bakeLayer(ModelLocations.COPPER_GOLEM)), 1.0F));
         event.registerEntityRenderer(ModEntities.AMETHYST_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new AmethystGolemModel<>(m.bakeLayer(ModelLocations.AMETHYST_GOLEM)), 1.0F));
         event.registerEntityRenderer(ModEntities.MAGMA_GOLEM.get(), m -> new MagmaGolemRenderer<>(m, new MagmaGolemModel<>(m.bakeLayer(ModelLocations.MAGMA_GOLEM)), 0.5F));
+        event.registerEntityRenderer(ModEntities.CALCITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new CalciteGolemModel<>(m.bakeLayer(ModelLocations.CALCITE_GOLEM)), 0.5F));
 
         event.registerEntityRenderer(ModEntities.LAPIS_BULLET.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.REDSTONE_BULLET.get(), ThrownItemRenderer::new);

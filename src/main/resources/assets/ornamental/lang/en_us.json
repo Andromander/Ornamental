@@ -25,6 +25,7 @@
   "block.ornamental.weathered_copper_stairs": "Weathered Copper Stairs",
   "block.ornamental.oxidized_copper_stairs": "Oxidized Copper Stairs",
   "block.ornamental.magma_stairs": "Magma Stairs",
+  "block.ornamental.calcite_stairs": "Calcite Stairs",
 
   "block.ornamental.iron_slab": "Iron Slab",
   "block.ornamental.gold_slab": "Gold Slab",
@@ -52,6 +53,7 @@
   "block.ornamental.weathered_copper_slab": "Weathered Copper Slab",
   "block.ornamental.oxidized_copper_slab": "Oxidized Copper Slab",
   "block.ornamental.magma_slab": "Magma Slab",
+  "block.ornamental.calcite_slab": "Calcite Slab",
 
   "block.ornamental.iron_fence": "Iron Fence",
   "block.ornamental.gold_fence": "Gold Fence",
@@ -82,6 +84,7 @@
   "block.ornamental.weathered_copper_fence": "Weathered Copper Fence",
   "block.ornamental.oxidized_copper_fence": "Oxidized Copper Fence",
   "block.ornamental.magma_fence": "Magma Fence",
+  "block.ornamental.calcite_fence": "Calcite Fence",
 
   "block.ornamental.gold_trapdoor": "Gold Trapdoor",
   "block.ornamental.diamond_trapdoor": "Diamond Trapdoor",
@@ -112,6 +115,7 @@
   "block.ornamental.weathered_copper_trapdoor": "Weathered Copper Trapdoor",
   "block.ornamental.oxidized_copper_trapdoor": "Oxidized Copper Trapdoor",
   "block.ornamental.magma_trapdoor": "Magma Trapdoor",
+  "block.ornamental.calcite_trapdoor": "Calcite Trapdoor",
 
   "block.ornamental.iron_fence_gate": "Iron Fence Gate",
   "block.ornamental.gold_fence_gate": "Gold Fence Gate",
@@ -143,6 +147,7 @@
   "block.ornamental.weathered_copper_fence_gate": "Weathered Copper Fence Gate",
   "block.ornamental.oxidized_copper_fence_gate": "Oxidized Copper Fence Gate",
   "block.ornamental.magma_fence_gate": "Magma Fence Gate",
+  "block.ornamental.calcite_fence_gate": "Calcite Fence Gate",
 
   "block.ornamental.gold_door": "Gold Door",
   "block.ornamental.diamond_door": "Diamond Door",
@@ -173,6 +178,7 @@
   "block.ornamental.weathered_copper_door": "Weathered Copper Door",
   "block.ornamental.oxidized_copper_door": "Oxidized Copper Door",
   "block.ornamental.magma_door": "Magma Door",
+  "block.ornamental.calcite_door": "Calcite Door",
 
   "block.ornamental.iron_pole": "Iron Pole",
   "block.ornamental.gold_pole": "Gold Pole",
@@ -204,6 +210,7 @@
   "block.ornamental.weathered_copper_pole": "Weathered Copper Pole",
   "block.ornamental.oxidized_copper_pole": "Oxidized Copper Pole",
   "block.ornamental.magma_pole": "Magma Pole",
+  "block.ornamental.calcite_pole": "Calcite Pole",
 
   "block.ornamental.iron_beam": "Iron Beam",
   "block.ornamental.gold_beam": "Gold Beam",
@@ -235,6 +242,7 @@
   "block.ornamental.weathered_copper_beam": "Weathered Copper Beam",
   "block.ornamental.oxidized_copper_beam": "Oxidized Copper Beam",
   "block.ornamental.magma_beam": "Magma Beam",
+  "block.ornamental.calcite_beam": "Calcite Beam",
 
   "block.ornamental.iron_wall": "Iron Wall",
   "block.ornamental.gold_wall": "Gold Wall",
@@ -263,6 +271,7 @@
   "block.ornamental.weathered_copper_wall": "Weathered Copper Wall",
   "block.ornamental.oxidized_copper_wall": "Oxidized Copper Wall",
   "block.ornamental.magma_wall": "Magma Wall",
+  "block.ornamental.calcite_wall": "Calcite Wall",
 
   "block.ornamental.iron_saddle_door": "Iron Saddle Door",
   "block.ornamental.gold_saddle_door": "Gold Saddle Door",
@@ -294,6 +303,7 @@
   "block.ornamental.weathered_copper_saddle_door": "Weathered Copper Saddle Door",
   "block.ornamental.oxidized_copper_saddle_door": "Oxidised Copper Saddle Door",
   "block.ornamental.magma_saddle_door": "Magma Saddle Door",
+  "block.ornamental.calcite_saddle_door": "Calcite Saddle Door",
 
   "block.ornamental.fake_bubble_column": "Fake Bubble Column",
 
@@ -321,6 +331,7 @@
   "entity.ornamental.amethyst_golem": "Amethyst Golem",
   "entity.ornamental.copper_golem": "Copper Golem",
   "entity.ornamental.magma_golem": "Magma Golem",
+  "entity.ornamental.magma_golem": "Calcite Golem",
 
   "entity.ornamental.lapis_bullet": "Lapis Bullet",
   "entity.ornamental.redstone_bullet": "Redstone Bullet",
@@ -367,5 +378,6 @@
   "item.ornamental.netherite_golem_spawn_egg": "Netherite Golem Spawn Egg",
   "item.ornamental.amethyst_golem_spawn_egg": "Amethyst Golem Spawn Egg",
   "item.ornamental.copper_golem_spawn_egg": "Copper Golem Spawn Egg",
-  "item.ornamental.magma_golem_spawn_egg": "Magma Golem Spawn Egg"
+  "item.ornamental.magma_golem_spawn_egg": "Magma Golem Spawn Egg",
+  "item.ornamental.calcite_golem_spawn_egg": "Calcite Golem Spawn Egg"
 }

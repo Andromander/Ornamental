@@ -49,6 +49,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<CopperGolem>> COPPER_GOLEM = makeEntity("copper", CopperGolem::new, 1.5F, 3.5F, false, 14056283, 5434879);
     public static final RegistryObject<EntityType<AmethystGolem>> AMETHYST_GOLEM = makeEntity("amethyst", AmethystGolem::new, 1.0F, 2.8F, false, 4472921, 13144304);
     public static final RegistryObject<EntityType<MagmaGolem>> MAGMA_GOLEM = makeEntity("magma", MagmaGolem::new, 0.9F, 2.5F, true, 16024866, 6629416);
+    public static final RegistryObject<EntityType<CalciteGolem>> CALCITE_GOLEM = makeEntity("calcite", CalciteGolem::new, 1.0F, 3.0F, false, 15791604, 9473182);
 
     public static final RegistryObject<EntityType<LapisBullet>> LAPIS_BULLET = makeProjectile("lapis_bullet", LapisBullet::new, 0.25F, 0.25F, 4, 10);
     public static final RegistryObject<EntityType<RedstoneBullet>> REDSTONE_BULLET = makeProjectile("redstone_bullet", RedstoneBullet::new, 0.25F, 0.25F, 4, 10);
@@ -112,5 +113,6 @@ public class ModEntities {
         event.put(COPPER_GOLEM.get(), CopperGolem.registerAttributes().build());
         event.put(AMETHYST_GOLEM.get(), AmethystGolem.registerAttributes().build());
         event.put(MAGMA_GOLEM.get(), MagmaGolem.registerAttributes().build());
+        event.put(CALCITE_GOLEM.get(), CalciteGolem.registerAttributes().build());
     }
 }
