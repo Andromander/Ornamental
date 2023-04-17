@@ -221,7 +221,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         pole(consumer, ModBlocks.exposed_copper_pole, ModBlocks.exposed_copper_slab);
         pole(consumer, ModBlocks.weathered_copper_pole, ModBlocks.weathered_copper_slab);
         pole(consumer, ModBlocks.oxidized_copper_pole, ModBlocks.oxidized_copper_slab);
-        pole(consumer, ModBlocks.magma_pole, Items.MAGMA_CREAM);
+        pole(consumer, ModBlocks.magma_pole, ModBlocks.magma_slab);
         pole(consumer, ModBlocks.calcite_pole, ModBlocks.calcite_slab);
 
         beam(consumer, ModBlocks.iron_beam, ModBlocks.iron_slab);
@@ -252,7 +252,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
         beam(consumer, ModBlocks.exposed_copper_beam, ModBlocks.exposed_copper_slab);
         beam(consumer, ModBlocks.weathered_copper_beam, ModBlocks.weathered_copper_slab);
         beam(consumer, ModBlocks.oxidized_copper_beam, ModBlocks.oxidized_copper_slab);
-        beam(consumer, ModBlocks.magma_beam, Items.MAGMA_CREAM);
+        beam(consumer, ModBlocks.magma_beam, ModBlocks.magma_slab);
         beam(consumer, ModBlocks.calcite_beam, ModBlocks.calcite_slab);
 
         convertPoleBeam(consumer, ModBlocks.iron_pole, ModBlocks.iron_beam);
