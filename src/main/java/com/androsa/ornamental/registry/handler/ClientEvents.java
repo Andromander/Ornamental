@@ -124,12 +124,12 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.register(ModParticles.ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
-        event.register(ModParticles.ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
-        event.register(ModParticles.ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
-        event.register(ModParticles.ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
+        event.registerSpecial(ModParticles.ITEM_LAPIS.get(), new OrnamentalBreakingParticle.LapisFactory());
+        event.registerSpecial(ModParticles.ITEM_REDSTONE.get(), new OrnamentalBreakingParticle.RedstoneFactory());
+        event.registerSpecial(ModParticles.ITEM_BRICK.get(), new OrnamentalBreakingParticle.BrickFactory());
+        event.registerSpecial(ModParticles.ITEM_NETHER_BRICK.get(), new OrnamentalBreakingParticle.NetherBrickFactory());
 
-        event.register(ModParticles.CHARGE_SPARK.get(), ChargeSparkParticle.ChargeSparkFactory::new);
-        event.register(ModParticles.AMETHYST_CAST.get(), CastingParticle.AmethystFactory::new);
+        event.registerSpriteSet(ModParticles.CHARGE_SPARK.get(), ChargeSparkParticle.ChargeSparkFactory::new);
+        event.registerSpriteSet(ModParticles.AMETHYST_CAST.get(), CastingParticle.AmethystFactory::new);
     }
 }

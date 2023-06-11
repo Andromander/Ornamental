@@ -2,6 +2,7 @@ package com.androsa.ornamental;
 
 import com.androsa.ornamental.data.*;
 import com.androsa.ornamental.registry.ModBlocks;
+import com.androsa.ornamental.registry.ModCreativeTabs;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.core.HolderLookup;
@@ -28,6 +29,7 @@ public class OrnamentalMod {
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModCreativeTabs.CREATIVE_TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
     }

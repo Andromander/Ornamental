@@ -4,7 +4,7 @@ import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.items.OrnamentBlockItem;
 import com.androsa.ornamental.items.OrnamentTallBlockItem;
-import com.androsa.ornamental.registry.handler.CreativeTabHandler;
+import com.androsa.ornamental.registry.ModCreativeTabs;
 import com.google.common.collect.Lists;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -259,7 +259,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(stairItemTags());
 
         return registerBlock(builder, "_stairs", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 4, OrnamentBlockItem::new), CreativeTabHandler.STAIR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 4, OrnamentBlockItem::new), ModCreativeTabs.STAIR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(slabItemTags());
 
         return registerBlock(builder, "_slab", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 3, OrnamentBlockItem::new), CreativeTabHandler.SLAB_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 3, OrnamentBlockItem::new), ModCreativeTabs.SLAB_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -293,7 +293,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(fenceItemTags());
 
         return registerBlock(builder, "_fence", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 1, OrnamentBlockItem::new), CreativeTabHandler.FENCE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 1, OrnamentBlockItem::new), ModCreativeTabs.FENCE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -310,7 +310,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(trapdoorItemTags());
 
         return registerBlock(builder, "_trapdoor", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 5, OrnamentBlockItem::new), CreativeTabHandler.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 5, OrnamentBlockItem::new), ModCreativeTabs.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -327,7 +327,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(fencegateItemTags());
 
         return registerBlock(builder, "_fence_gate", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 2, OrnamentBlockItem::new), CreativeTabHandler.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 2, OrnamentBlockItem::new), ModCreativeTabs.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -344,7 +344,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(doorItemTags());
 
         return registerBlock(builder, "_door", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), CreativeTabHandler.DOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), ModCreativeTabs.DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -361,7 +361,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(poleItemTags());
 
         return registerBlock(builder, "_pole", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 6, OrnamentBlockItem::new), CreativeTabHandler.POLE_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 6, OrnamentBlockItem::new), ModCreativeTabs.POLE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -378,7 +378,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(beamItemTags());
 
         return registerBlock(builder, "_beam", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 7, OrnamentBlockItem::new), CreativeTabHandler.BEAM_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 7, OrnamentBlockItem::new), ModCreativeTabs.BEAM_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -395,7 +395,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(wallItemTags());
 
         return registerBlock(builder, "_wall", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 8, OrnamentBlockItem::new), CreativeTabHandler.WALL_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 8, OrnamentBlockItem::new), ModCreativeTabs.WALL_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -412,7 +412,7 @@ public abstract class MasterRegistryHelper {
         itemtags.addAll(saddledoorItemTags());
 
         return registerBlock(builder, "_saddle_door", () -> factory.create(props, builder), item ->
-                registerBlockItem(item, builder, 9, OrnamentBlockItem::new), CreativeTabHandler.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
+                registerBlockItem(item, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**

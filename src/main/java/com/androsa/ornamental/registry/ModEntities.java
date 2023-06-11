@@ -3,7 +3,6 @@ package com.androsa.ornamental.registry;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.*;
 import com.androsa.ornamental.entity.projectile.*;
-import com.androsa.ornamental.registry.handler.CreativeTabHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -69,7 +68,7 @@ public class ModEntities {
         if (fireRes) builder.fireImmune();
         RegistryObject<EntityType<T>> reg = ENTITIES.register(regname, () -> builder.build(regname));
         RegistryObject<Item> item = ModBlocks.ITEMS.register(regname + "_spawn_egg", spawnegg.apply(reg));
-        CreativeTabHandler.SPAWN_EGGS.add(item);
+        ModCreativeTabs.SPAWN_EGGS.add(item);
         return reg;
     }
 

@@ -3,7 +3,7 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.data.provider.OrnamentalItemModelProvider;
-import com.androsa.ornamental.registry.handler.CreativeTabHandler;
+import com.androsa.ornamental.registry.ModCreativeTabs;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -330,7 +330,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.magma_saddle_door, "magma");
         blockItemSaddleDoor(ModBlocks.calcite_saddle_door, "calcite");
 
-        for (RegistryObject<? extends Item> item : CreativeTabHandler.SPAWN_EGGS) {
+        for (RegistryObject<? extends Item> item : ModCreativeTabs.SPAWN_EGGS) {
             eggItem(item);
         }
     }

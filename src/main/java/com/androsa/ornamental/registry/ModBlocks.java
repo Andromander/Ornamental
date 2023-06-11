@@ -8,8 +8,8 @@ import com.androsa.ornamental.data.OrnamentalItemTags;
 import com.androsa.ornamental.registry.helper.RegistryHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -327,5 +327,5 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSaddleDoor> magma_saddle_door = HELPER.saddledoor(OrnamentBuilders.MAGMA);
     public static final RegistryObject<OrnamentSaddleDoor> calcite_saddle_door = HELPER.saddledoor(OrnamentBuilders.CALCITE);
 
-    public static final RegistryObject<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.of(Material.BUBBLE_COLUMN).noOcclusion().noLootTable()));
+    public static final RegistryObject<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.copy(Blocks.BUBBLE_COLUMN)));
 }
