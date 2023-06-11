@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:weathered_copper_pole"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

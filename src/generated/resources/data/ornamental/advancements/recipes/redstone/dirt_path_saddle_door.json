@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:dirt_path_saddle_door"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

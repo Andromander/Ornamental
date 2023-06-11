@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:clay_beam"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

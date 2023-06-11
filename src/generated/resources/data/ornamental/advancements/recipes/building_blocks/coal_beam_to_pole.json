@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:coal_beam_to_pole"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

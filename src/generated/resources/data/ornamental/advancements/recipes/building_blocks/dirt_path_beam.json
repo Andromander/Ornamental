@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:dirt_path_beam"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

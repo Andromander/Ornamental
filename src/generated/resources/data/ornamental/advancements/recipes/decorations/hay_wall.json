@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:hay_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

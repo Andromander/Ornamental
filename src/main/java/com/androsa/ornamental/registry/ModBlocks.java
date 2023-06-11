@@ -327,5 +327,5 @@ public class ModBlocks {
     public static final RegistryObject<OrnamentSaddleDoor> magma_saddle_door = HELPER.saddledoor(OrnamentBuilders.MAGMA);
     public static final RegistryObject<OrnamentSaddleDoor> calcite_saddle_door = HELPER.saddledoor(OrnamentBuilders.CALCITE);
 
-    public static final RegistryObject<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.copy(Blocks.BUBBLE_COLUMN)));
+    public static final RegistryObject<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.copy(Blocks.BUBBLE_COLUMN).noLootTable()));
 }

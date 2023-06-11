@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:blue_ice_stairs"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:diamond_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

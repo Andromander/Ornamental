@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:copper_fence_gate"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

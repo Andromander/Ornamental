@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:gold_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

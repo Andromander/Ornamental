@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:exposed_copper_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:redstone_slab"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

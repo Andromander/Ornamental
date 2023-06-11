@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:diamond_fence"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

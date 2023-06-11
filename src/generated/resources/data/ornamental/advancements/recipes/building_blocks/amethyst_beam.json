@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:amethyst_beam"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

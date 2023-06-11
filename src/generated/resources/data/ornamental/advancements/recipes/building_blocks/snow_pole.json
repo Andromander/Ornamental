@@ -30,5 +30,6 @@
     "recipes": [
       "ornamental:snow_pole"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
