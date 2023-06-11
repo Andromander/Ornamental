@@ -47,7 +47,7 @@ public class HayGolem extends OrnamentalGolem {
     public void aiStep() {
         super.aiStep();
 
-        if (!ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+        if (!ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
             return;
         }
 
@@ -59,8 +59,8 @@ public class HayGolem extends OrnamentalGolem {
                 int y = Mth.floor(this.getY());
                 int z = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(x, y, z);
-                if (this.level.isEmptyBlock(blockpos) && blockstate.canSurvive(this.level, blockpos)) {
-                    this.level.setBlockAndUpdate(blockpos, blockstate);
+                if (this.level().isEmptyBlock(blockpos) && blockstate.canSurvive(this.level(), blockpos)) {
+                    this.level().setBlockAndUpdate(blockpos, blockstate);
                 }
             }
         }

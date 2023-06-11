@@ -139,7 +139,7 @@ public class CalciteGolem extends OrnamentalGolem {
 
     @Override
     public boolean hasLineOfSight(Entity target) {
-        if (target.level != this.level) {
+        if (target.level() != this.level()) {
             return false;
         } else {
             Vec3 vec3 = new Vec3(this.getX(), this.getEyeY(), this.getZ());
@@ -153,16 +153,16 @@ public class CalciteGolem extends OrnamentalGolem {
         super.aiStep();
 
         if (this.isResonating()) {
-            if (this.level.getGameTime() % 3 == 0) {
+            if (this.level().getGameTime() % 3 == 0) {
                 this.playSound(SoundEvents.AMETHYST_CLUSTER_FALL, 5.0F, 10.0F);
             }
         }
 
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.getChargeState() == 1) {
                 for(int i = 0; i < 2; ++i) {
-                    this.level.addParticle(ParticleTypes.CRIT, this.getX() + (random.nextFloat() - 0.5F), this.getY(0.65F) + (random.nextFloat() - 0.5F), this.getZ() + (random.nextFloat() - 0.5F), 0.0D, 0.0D, 0.0D);
-                    this.level.addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX(), this.getY(0.65F), this.getZ(), 0.0D, 0.0D, 0.0D);
+                    this.level().addParticle(ParticleTypes.CRIT, this.getX() + (random.nextFloat() - 0.5F), this.getY(0.65F) + (random.nextFloat() - 0.5F), this.getZ() + (random.nextFloat() - 0.5F), 0.0D, 0.0D, 0.0D);
+                    this.level().addParticle(ParticleTypes.ELECTRIC_SPARK, this.getX(), this.getY(0.65F), this.getZ(), 0.0D, 0.0D, 0.0D);
                 }
             }
         }
@@ -202,7 +202,7 @@ public class CalciteGolem extends OrnamentalGolem {
 
         if (source.is(DamageTypes.MOB_ATTACK) && source.getEntity() instanceof Warden) {
             amount *= 0.5F;
-            source.getEntity().hurt(this.level.damageSources().mobAttack(this), amount);
+            source.getEntity().hurt(this.level().damageSources().mobAttack(this), amount);
             if (this.getChargeState() == 1) {
                 amount *= 0.5F;
             }

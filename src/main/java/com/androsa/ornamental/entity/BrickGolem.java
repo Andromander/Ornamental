@@ -78,7 +78,7 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity entity, float multiplier) {
-        Brick brick = new Brick(ModEntities.THROWN_BRICK.get(), this.level, this);
+        Brick brick = new Brick(ModEntities.THROWN_BRICK.get(), this.level(), this);
         double eye = entity.getEyeY() - (double)1.1F;
         double x = entity.getX() - this.getX();
         double y = eye - brick.getY();
@@ -87,7 +87,7 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
 
         brick.shoot(x, y + f, z, 1.6F, 12.0F);
         this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level.addFreshEntity(brick);
+        this.level().addFreshEntity(brick);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class RandomFlyGoal extends Goal {
 
         for(int i = 0; i < 3; ++i) {
             BlockPos blockpos1 = pos.offset(parentEntity.getRandom().nextInt(15) - 7, parentEntity.getRandom().nextInt(11) - 5, parentEntity.getRandom().nextInt(15) - 7);
-            if (parentEntity.level.isEmptyBlock(blockpos1)) {
+            if (parentEntity.level().isEmptyBlock(blockpos1)) {
                 parentEntity.getMoveControl().setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                 if (parentEntity.getTarget() == null) {
                     parentEntity.getLookControl().setLookAt((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);

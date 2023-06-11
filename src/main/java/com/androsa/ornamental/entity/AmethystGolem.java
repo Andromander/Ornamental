@@ -127,7 +127,7 @@ public class AmethystGolem extends OrnamentalGolem {
                 velY *= velocity;
                 velZ *= velocity;
 
-                level.addParticle(ModParticles.AMETHYST_CAST.get(), posX, posY, posZ, velX, velY, velZ);
+                level().addParticle(ModParticles.AMETHYST_CAST.get(), posX, posY, posZ, velX, velY, velZ);
             }
 
             this.playSound(SoundEvents.AMETHYST_CLUSTER_BREAK, 1.0F, 1.0F);
@@ -232,7 +232,7 @@ public class AmethystGolem extends OrnamentalGolem {
             Vec3 lookVec = this.caster.getViewVector(1.0F);
             Vec3 destVec = srcVec.add(lookVec.x * range, lookVec.y * range, lookVec.z * range);
             float var9 = 3.0F;
-            List<Entity> possibleList = this.caster.level.getEntities(this.caster, this.caster.getBoundingBox().move(lookVec.x * offset, lookVec.y * offset, lookVec.z * offset).inflate(var9));
+            List<Entity> possibleList = this.caster.level().getEntities(this.caster, this.caster.getBoundingBox().move(lookVec.x * offset, lookVec.y * offset, lookVec.z * offset).inflate(var9));
             double hitDist = 0;
 
             for (Entity possibleEntity : possibleList) {

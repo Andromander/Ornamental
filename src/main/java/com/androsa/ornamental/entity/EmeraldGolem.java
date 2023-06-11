@@ -63,9 +63,9 @@ public class EmeraldGolem extends FlowerGolem {
             int y = Mth.floor(this.getY() - (double)0.2F);
             int z = Mth.floor(this.getZ());
             BlockPos pos = new BlockPos(x, y, z);
-            BlockState blockstate = this.level.getBlockState(pos);
+            BlockState blockstate = this.level().getBlockState(pos);
             if (!blockstate.isAir()) {
-                this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
+                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
@@ -77,7 +77,7 @@ public class EmeraldGolem extends FlowerGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float attack = this.getAttackDamage();
         float mul = attack > 0.0F ? attack / 2.0F + (float)this.random.nextInt((int)attack) : 0.0F;
         boolean flag = target.hurt(this.damageSources().mobAttack(this), mul);

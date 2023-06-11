@@ -234,7 +234,7 @@ public class CopperGolem extends OrnamentalGolem {
         if (getChargeTimer() > 0) {
             if (this.isCharged()) {
                 for (int i = 0; i < 5; i++) {
-                    level.addParticle(ModParticles.CHARGE_SPARK.get(), this.getRandomX(0.5F), this.getRandomY(), this.getRandomZ(0.5F), 0.0D, 0.0D, 0.0D);
+                    level().addParticle(ModParticles.CHARGE_SPARK.get(), this.getRandomX(0.5F), this.getRandomY(), this.getRandomZ(0.5F), 0.0D, 0.0D, 0.0D);
                 }
                 setChargeTimer(getChargeTimer() - 1);
             }
@@ -258,7 +258,7 @@ public class CopperGolem extends OrnamentalGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float damage = (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         switch (getErosion()) {
@@ -289,25 +289,25 @@ public class CopperGolem extends OrnamentalGolem {
         if (itemstack.getItem() instanceof AxeItem) {
             if (isWaxed()) {
                 setWaxed(false);
-                this.level.playSound(player, blockPosition(), SoundEvents.AXE_WAX_OFF, getSoundSource(), 1.0F, 1.0F);
-                return InteractionResult.sidedSuccess(this.level.isClientSide());
+                this.level().playSound(player, blockPosition(), SoundEvents.AXE_WAX_OFF, getSoundSource(), 1.0F, 1.0F);
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
             } else if (getErosion() > 0) {
                 setErosionTimer(1200);
                 setErosion(getErosion() - 1);
-                this.level.playSound(player, blockPosition(), SoundEvents.AXE_SCRAPE, getSoundSource(), 1.0F, 1.0F);
+                this.level().playSound(player, blockPosition(), SoundEvents.AXE_SCRAPE, getSoundSource(), 1.0F, 1.0F);
                 itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
-                return InteractionResult.sidedSuccess(this.level.isClientSide());
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
         } else if (itemstack.is(Items.HONEYCOMB)) {
             if (!isWaxed()) {
                 setWaxed(true);
-                if (this.level.isClientSide()) {
-                    this.level.playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.HONEYCOMB_WAX_ON, getSoundSource(), 1.0F, 1.0F, false);
+                if (this.level().isClientSide()) {
+                    this.level().playLocalSound(this.getX() + 0.5D, this.getY() + 0.5D, this.getZ() + 0.5D, SoundEvents.HONEYCOMB_WAX_ON, getSoundSource(), 1.0F, 1.0F, false);
                 }
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
-                return InteractionResult.sidedSuccess(this.level.isClientSide());
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
         } else {
             return super.repairGolem(player, hand);
@@ -388,7 +388,7 @@ public class CopperGolem extends OrnamentalGolem {
             LivingEntity target = this.parentEntity.getTarget();
             this.parentEntity.getLookControl().setLookAt(target, 10.0F, (float)this.parentEntity.getMaxHeadXRot());
             if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.hasLineOfSight(target)) {
-                Level world = this.parentEntity.level;
+                Level world = this.parentEntity.level();
                 ++this.attackTimer;
 
                 if (this.attackTimer == 20) {

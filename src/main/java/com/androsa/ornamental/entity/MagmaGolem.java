@@ -156,14 +156,14 @@ public class MagmaGolem extends OrnamentalGolem {
             }
         }
 
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.getState() == 0) {
                 for(int i = 0; i < 1; ++i) {
-                    this.level.addParticle(ParticleTypes.SMALL_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                    this.level().addParticle(ParticleTypes.SMALL_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
                 }
             } else if (this.getState() == 1) {
                 for(int i = 0; i < 2; ++i) {
-                    this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                    this.level().addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
                 }
             }
         }
@@ -178,7 +178,7 @@ public class MagmaGolem extends OrnamentalGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         boolean flag = target.hurt(this.damageSources().mobAttack(this), 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));

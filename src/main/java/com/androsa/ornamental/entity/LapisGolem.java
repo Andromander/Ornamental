@@ -71,11 +71,7 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
 
     @Override
     public void setTarget(@Nullable LivingEntity target) {
-        if (target == null) {
-            setTargeting(false);
-        } else {
-            setTargeting(true);
-        }
+        this.setTargeting(target != null);
         super.setTarget(target);
     }
 
@@ -101,7 +97,7 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity entity, float multiplier) {
-        LapisBullet bullet = new LapisBullet(this.level, this);
+        LapisBullet bullet = new LapisBullet(this.level(), this);
         double eye = entity.getEyeY() - (double)1.1F;
         double x = entity.getX() - this.getX();
         double y = eye - bullet.getY();
@@ -110,7 +106,7 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
 
         bullet.shoot(x, y + f, z, 1.6F, 12.0F);
         this.playSound(SoundEvents.CROSSBOW_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level.addFreshEntity(bullet);
+        this.level().addFreshEntity(bullet);
     }
 
     @Override

@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class DirtGolem extends OrnamentalGolem {
 
@@ -71,10 +72,10 @@ public class DirtGolem extends OrnamentalGolem {
         ItemStack itemstack = player.getItemInHand(hand);
         if (itemstack.is(Items.BONE_MEAL)) {
 
-            if (!this.level.isClientSide()) {
-                GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level);
+            if (!this.level().isClientSide()) {
+                GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
                 grass.copyPosition(this);
-                grass.finalizeSpawn((ServerLevel)this.level, this.level.getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                ForgeEventFactory.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());
@@ -86,7 +87,7 @@ public class DirtGolem extends OrnamentalGolem {
                 }
 
                 grass.setInvulnerable(this.isInvulnerable());
-                this.level.addFreshEntity(grass);
+                this.level().addFreshEntity(grass);
             }
 
             if (!player.getAbilities().instabuild) {
@@ -94,7 +95,7 @@ public class DirtGolem extends OrnamentalGolem {
             }
 
             this.discard();
-            this.level.playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         } else {
             return this.repairGolem(player, hand);

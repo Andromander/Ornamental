@@ -68,7 +68,7 @@ public class CoalGolem extends OrnamentalGolem {
             this.explode();
         }
 
-        if (!ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+        if (!ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
             return;
         }
 
@@ -80,17 +80,17 @@ public class CoalGolem extends OrnamentalGolem {
                 int y = Mth.floor(this.getY());
                 int z = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
                 BlockPos blockpos = new BlockPos(x, y, z);
-                if (this.level.isEmptyBlock(blockpos) && blockstate.canSurvive(this.level, blockpos)) {
-                    this.level.setBlockAndUpdate(blockpos, blockstate);
+                if (this.level().isEmptyBlock(blockpos) && blockstate.canSurvive(this.level(), blockpos)) {
+                    this.level().setBlockAndUpdate(blockpos, blockstate);
                 }
             }
         }
     }
 
     private void explode() {
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
     }

@@ -94,17 +94,17 @@ public class QuartzGolem extends OrnamentalGolem {
         } else {
             BlockPos ground = BlockPos.containing(this.getX(), this.getY() - 1.0D, this.getZ());
             float f = 0.91F;
-            if (this.onGround) {
-                f = this.level.getBlockState(ground).getFriction(this.level, ground, this) * 0.91F;
+            if (this.onGround()) {
+                f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
             }
 
             float f1 = 0.16277137F / (f * f * f);
             f = 0.91F;
-            if (this.onGround) {
-                f = this.level.getBlockState(ground).getFriction(this.level, ground, this) * 0.91F;
+            if (this.onGround()) {
+                f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
             }
 
-            this.moveRelative(this.onGround ? 0.1F * f1 : 0.02F, motion);
+            this.moveRelative(this.onGround() ? 0.1F * f1 : 0.02F, motion);
             this.move(MoverType.SELF, this.getDeltaMovement());
             this.setDeltaMovement(this.getDeltaMovement().scale(f));
         }
@@ -140,9 +140,9 @@ public class QuartzGolem extends OrnamentalGolem {
 
     @Override
     public void aiStep() {
-        if (this.level.isClientSide && isTargeting()) {
+        if (this.level().isClientSide && isTargeting()) {
             for(int i = 0; i < 2; ++i) {
-                this.level.addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
             }
         }
 

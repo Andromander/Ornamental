@@ -33,8 +33,8 @@ public class ChargeBall extends AbstractHurtingProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level.isClientSide) {
-            this.level.explode(null, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.NONE);
+        if (!this.level().isClientSide) {
+            this.level().explode(null, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.NONE);
             this.discard();
         }
     }
@@ -42,10 +42,10 @@ public class ChargeBall extends AbstractHurtingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity target = result.getEntity();
             Entity owner = getOwner();
-            DamageSource source = new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ModTags.DamageTypes.SHOCKED), this, owner);
+            DamageSource source = new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ModTags.DamageTypes.SHOCKED), this, owner);
             target.hurt(source, 5.0F);
             if (target instanceof LivingEntity) {
                 ((LivingEntity) target).knockback(0.8F, Mth.sin(this.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(this.getYRot() * ((float)Math.PI / 180F)));

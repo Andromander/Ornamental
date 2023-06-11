@@ -59,14 +59,14 @@ public class EchoAttackGoal extends Goal {
                 this.target.playSound(SoundEvents.WARDEN_SONIC_BOOM, 1.0F, 1.5F);
                 Vec3 explosion = new Vec3(target.getX(), target.getY(), target.getZ());
                 Vec3 direction = target.position().subtract(explosion).normalize();
-                this.target.hurt(golem.level.damageSources().magic(), 100.0F);
+                this.target.hurt(golem.level().damageSources().magic(), 100.0F);
                 this.target.setDeltaMovement(direction.x(), direction.y() + 0.2F, direction.z());
             }
 
             if (explodeTime < 20) {
-                if (!golem.level.isClientSide()) {
+                if (!golem.level().isClientSide()) {
                     for (int i = 0; i < 10; i++) {
-                        ((ServerLevel)golem.level).sendParticles(ParticleTypes.ELECTRIC_SPARK, target.getRandomX(1.0D), target.getRandomY(), target.getRandomZ(1.0D), 5, (target.getRandom().nextDouble()) - 0.5D, target.getRandom().nextDouble() * 0.5D, (target.getRandom().nextDouble()) - 0.5D, 0.5D);
+                        ((ServerLevel)golem.level()).sendParticles(ParticleTypes.ELECTRIC_SPARK, target.getRandomX(1.0D), target.getRandomY(), target.getRandomZ(1.0D), 5, (target.getRandom().nextDouble()) - 0.5D, target.getRandom().nextDouble() * 0.5D, (target.getRandom().nextDouble()) - 0.5D, 0.5D);
                     }
                 }
             }

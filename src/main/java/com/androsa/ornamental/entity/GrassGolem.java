@@ -32,6 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.Optional;
 
@@ -82,7 +83,7 @@ public class GrassGolem extends DirtGolem {
         super.readAdditionalSaveData(nbt);
         BlockState state = null;
         if (nbt.contains("flower", 10)) {
-            state = NbtUtils.readBlockState(this.level.holderLookup(Registries.BLOCK), nbt.getCompound("flower"));
+            state = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), nbt.getCompound("flower"));
             if (state.isAir()) {
                 state = null;
             }
@@ -121,15 +122,15 @@ public class GrassGolem extends DirtGolem {
                 }
             }
         } else if (item instanceof ShovelItem) {
-            PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level);
+            PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level());
             addFreshEntity(path);
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
-            this.level.playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else if (item instanceof HoeItem) {
-            DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level);
+            DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level());
             addFreshEntity(dirt);
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
-            this.level.playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else {
             return this.repairGolem(player, hand);
         }
@@ -156,9 +157,9 @@ public class GrassGolem extends DirtGolem {
             this.spawnAtLocation(new ItemStack(this.getFlower().getBlock().asItem()));
         }
 
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             entity.copyPosition(this);
-            entity.finalizeSpawn((ServerLevel)this.level, this.level.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null, null);
+            ForgeEventFactory.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());
@@ -170,7 +171,7 @@ public class GrassGolem extends DirtGolem {
             }
 
             entity.setInvulnerable(this.isInvulnerable());
-            this.level.addFreshEntity(entity);
+            this.level().addFreshEntity(entity);
             this.discard();
         }
     }

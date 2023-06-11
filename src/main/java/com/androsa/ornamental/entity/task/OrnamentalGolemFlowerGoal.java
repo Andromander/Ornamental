@@ -24,12 +24,12 @@ public class OrnamentalGolemFlowerGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.golem.level.isDay()) {
+        if (!this.golem.level().isDay()) {
             return false;
         } else if (this.golem.getRandom().nextInt(8000) != 0) {
             return false;
         } else {
-            this.villager = this.golem.level.getNearestEntity(Villager.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
+            this.villager = this.golem.level().getNearestEntity(Villager.class, IS_FRIENDLY, this.golem, this.golem.getX(), this.golem.getY(), this.golem.getZ(), this.golem.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
             return this.villager != null;
         }
     }

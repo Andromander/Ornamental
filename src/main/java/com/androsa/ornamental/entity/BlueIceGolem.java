@@ -37,7 +37,7 @@ public class BlueIceGolem extends IceGolem implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity entity, float multiplier) {
-        BlueIce projectile = new BlueIce(ModEntities.BLUE_ICEBALL.get(), this.level, this);
+        BlueIce projectile = new BlueIce(ModEntities.BLUE_ICEBALL.get(), this.level(), this);
         double d0 = entity.getEyeY() - (double)1.1F;
         double d1 = entity.getX() - this.getX();
         double d2 = d0 - projectile.getY();
@@ -45,6 +45,6 @@ public class BlueIceGolem extends IceGolem implements RangedAttackMob {
         double f = Math.sqrt(d1 * d1 + d3 * d3) * 0.2F;
         projectile.shoot(d1, d2 + f, d3, 1.6F, 12.0F);
         this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level.addFreshEntity(projectile);
+        this.level().addFreshEntity(projectile);
     }
 }

@@ -26,10 +26,10 @@ public abstract class FlowerGolem extends OrnamentalGolem {
     public void setHoldingFlower(boolean holding) {
         if (holding) {
             this.holdFlowerTimer = 400;
-            this.level.broadcastEntityEvent(this, (byte)11);
+            this.level().broadcastEntityEvent(this, (byte)11);
         } else {
             this.holdFlowerTimer = 0;
-            this.level.broadcastEntityEvent(this, (byte)34);
+            this.level().broadcastEntityEvent(this, (byte)34);
         }
     }
 

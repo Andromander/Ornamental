@@ -80,9 +80,9 @@ public class ObsidianGolem extends OrnamentalGolem {
             int y = Mth.floor(this.getY() - (double)0.2F);
             int z = Mth.floor(this.getZ());
             BlockPos pos = new BlockPos(x, y, z);
-            BlockState blockstate = this.level.getBlockState(pos);
+            BlockState blockstate = this.level().getBlockState(pos);
             if (!blockstate.isAir()) {
-                this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos),
+                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos),
                         this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),
                         this.getY() + 0.1D,
                         this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),

@@ -55,7 +55,7 @@ public class DiamondGolem extends FlowerGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float mul = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         boolean flag = target.hurt(damageSources().mobAttack(this), mul);

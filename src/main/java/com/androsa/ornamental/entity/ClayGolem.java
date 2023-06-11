@@ -23,6 +23,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class ClayGolem extends OrnamentalGolem {
 
@@ -55,7 +56,7 @@ public class ClayGolem extends OrnamentalGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         boolean flag = target.hurt(this.damageSources().mobAttack(this), 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
@@ -68,10 +69,10 @@ public class ClayGolem extends OrnamentalGolem {
     @Override
     public void aiStep() {
         if (this.isOnFire()) {
-            if (!this.level.isClientSide()) {
-                BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level);
+            if (!this.level().isClientSide()) {
+                BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level());
                 brick.copyPosition(this);
-                brick.finalizeSpawn((ServerLevel)this.level, this.level.getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                ForgeEventFactory.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null, null);
                 brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());
@@ -83,11 +84,11 @@ public class ClayGolem extends OrnamentalGolem {
                 }
 
                 brick.setInvulnerable(this.isInvulnerable());
-                this.level.addFreshEntity(brick);
+                this.level().addFreshEntity(brick);
                 this.discard();
             }
 
-            this.level.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, this.blockPosition(), 0);
+            this.level().levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, this.blockPosition(), 0);
         }
         super.aiStep();
     }

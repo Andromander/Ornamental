@@ -6,9 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
-import net.minecraft.world.level.block.state.predicate.BlockMaterialPredicate;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraft.world.level.material.Material;
 
 import java.util.function.Predicate;
 
@@ -239,7 +237,7 @@ public class GolemPatterns {
     private static BlockPatternBuilder buildPattern(Block block) {
         return BlockPatternBuilder.start()
                 .where('^', BlockInWorld.hasState(IS_PUMPKIN))
-                .where('~', BlockInWorld.hasState(BlockMaterialPredicate.forMaterial(Material.AIR)))
+                .where('~', worldblock -> worldblock.getState().isAir())
                 .where('#', BlockInWorld.hasState(BlockStatePredicate.forBlock(block)));
     }
 }

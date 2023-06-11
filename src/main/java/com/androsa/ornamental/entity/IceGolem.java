@@ -77,12 +77,8 @@ public class IceGolem extends AbstractGolem implements IForgeShearable {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide) {
-            int i = Mth.floor(this.getX());
-            int j = Mth.floor(this.getY());
-            int k = Mth.floor(this.getZ());
-
-            if (this.level.getBiome(new BlockPos(i, 0, k)).is(BiomeTags.SNOW_GOLEM_MELTS)) {
+        if (!this.level().isClientSide) {
+            if (this.level().getBiome(this.blockPosition()).is(BiomeTags.SNOW_GOLEM_MELTS)) {
                 this.hurt(this.damageSources().onFire(), 1.0F);
             }
         }

@@ -60,9 +60,9 @@ public class GoldGolem extends FlowerGolem {
             int y = Mth.floor(this.getY() - (double)0.2F);
             int z = Mth.floor(this.getZ());
             BlockPos pos = new BlockPos(x, y, z);
-            BlockState blockstate = this.level.getBlockState(pos);
+            BlockState blockstate = this.level().getBlockState(pos);
             if (!blockstate.isAir()) {
-                this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos),
+                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos),
                         this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),
                         this.getY() + 0.1D,
                         this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(),
@@ -78,7 +78,7 @@ public class GoldGolem extends FlowerGolem {
     @Override
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);

@@ -31,7 +31,7 @@ public class FireballAttackGoal extends Goal {
         LivingEntity target = this.parentEntity.getTarget();
         this.parentEntity.getLookControl().setLookAt(target, 10.0F, (float)this.parentEntity.getMaxHeadXRot());
         if (target.distanceToSqr(this.parentEntity) < 4096.0D && this.parentEntity.hasLineOfSight(target)) {
-            Level world = this.parentEntity.level;
+            Level world = this.parentEntity.level();
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {

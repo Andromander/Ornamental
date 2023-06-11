@@ -64,7 +64,7 @@ public class RedstoneGolem extends OrnamentalGolem implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity entity, float multiplier) {
-        RedstoneBullet bullet = new RedstoneBullet(this.level, this);
+        RedstoneBullet bullet = new RedstoneBullet(this.level(), this);
         double eye = entity.getEyeY() - (double)1.1F;
         double x = entity.getX() - this.getX();
         double y = eye - bullet.getY();
@@ -73,7 +73,7 @@ public class RedstoneGolem extends OrnamentalGolem implements RangedAttackMob {
 
         bullet.shoot(x, y + f, z, 1.6F, 12.0F);
         this.playSound(SoundEvents.FIREWORK_ROCKET_LAUNCH, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level.addFreshEntity(bullet);
+        this.level().addFreshEntity(bullet);
     }
 
     @Override

@@ -124,7 +124,7 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
