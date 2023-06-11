@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WallSide;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -284,12 +283,5 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
                 }
             }
         }
-    }
-
-    @Override
-    @Nonnull
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.pushReaction;
     }
 }

@@ -26,8 +26,6 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -171,7 +169,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
         }
 
         if (!state.getValue(OPEN)) {
-            if (material == Material.CLAY || material == Material.LEAVES || material == Material.WOOL || material == Material.DIRT || material == Material.GRASS) {
+            if (builder.fallThrough) {
                 state = state.cycle(OPEN);
                 worldIn.setBlock(pos, state, 2);
                 this.playSound(null, worldIn, pos, state.getValue(OPEN));
@@ -234,12 +232,5 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
                 }
             }
         }
-    }
-
-    @Override
-    @Nonnull
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.pushReaction;
     }
 }

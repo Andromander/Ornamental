@@ -2,17 +2,18 @@ package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.google.common.collect.Lists;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -38,19 +39,19 @@ import java.util.function.Supplier;
 public class OrnamentBuilder {
 
     public final String name;
-    public Material material = Material.STONE;
-    public MaterialColor color = material.getColor();
+    public MapColor color = MapColor.NONE;
     public float hardness = 0.0F;
     public float resistance = 0.0F;
     public int light = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
-    public boolean canOpen = false;
     public Supplier<? extends Block> baseBlock = () -> Blocks.AIR;
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
     public BlockSetType blockSetType = BlockSetType.OAK;
+    public boolean canOpen = blockSetType.canOpenByHand();
+    public boolean fallThrough = false;
     public boolean hasPower = false;
     public boolean doesTick = false;
     public boolean requiresTool = false;
@@ -68,7 +69,7 @@ public class OrnamentBuilder {
     public boolean breakableCull = false;
     public boolean postProcess = false;
     public boolean emissiveRender = false;
-    public PushReaction pushReaction = material.getPushReaction();
+    public PushReaction pushReaction = PushReaction.NORMAL;
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
     public FloorHazardPredicate hazardPredicate = null;
     public HazardDamagePredicate damagePredicate = null;
@@ -96,22 +97,10 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for block's properties. Will take the block's Material to determine MaterialColor
-     * @param material The Material of the block
+     * Setter for the block's MapColor.
+     * @param color The MapColor of the block
      */
-    public OrnamentBuilder properties(Material material) {
-        this.material = material;
-        this.color = material.getColor();
-        return this;
-    }
-
-    /**
-     * Setter for the block's properties.
-     * @param material The Material of the block
-     * @param color The MaterialColor of the block
-     */
-    public OrnamentBuilder properties(Material material, MaterialColor color) {
-        this.material = material;
+    public OrnamentBuilder mapColor(MapColor color) {
         this.color = color;
         return this;
     }
@@ -208,9 +197,20 @@ public class OrnamentBuilder {
 
     /**
      * Sets the block to be opened by hand. Used in blocks with an open/close state. Redstone power still applies if false.
+     * Note: BlockSetType sets this value, but in the event the desired behaviour is incorrect, this may be used.
+     * Author's Note: This is actually because Mojang has set Stone and Polished Blackstone's boolean value to false, which contradicts what Ornamental has set, as well as {@link net.minecraft.world.level.block.DoorBlock#isWoodenDoor(Level, BlockPos)}.
+     * It is very likely if a Stone door is added, this method will be removed.
      */
     public OrnamentBuilder canOpen() {
         this.canOpen = true;
+        return this;
+    }
+
+    /**
+     * Sets the block to open if walked on. Used in blocks with an open/close state and can open underneath players, such as Trapdoors.
+     */
+    public OrnamentBuilder canFallThrough() {
+        this.fallThrough = true;
         return this;
     }
 
@@ -248,18 +248,21 @@ public class OrnamentBuilder {
      * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
      * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
      * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
-     * @param sound The sound the block makes.
-     * @param closedoor The close sound of a Door.
-     * @param opendoor The open sound of a Door.
-     * @param closetrap The close sound of a Trapdoor.
-     * @param opentrap The open sound of a Trapdoor.
-     * @param plateoff The off sound of a Pressure Plate.
-     * @param plateon The on sound of a Pressure Plate.
-     * @param buttonoff The off sound of a Button.
-     * @param buttonon The on sound of a Button.
+     * See {@link OrnamentBuilder#blockSetType(String, boolean, SoundType, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent)} for full parameter breakdown.
      */
     public OrnamentBuilder blockSetType(SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
-        return this.blockSetType(name, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
+        return this.blockSetType(name, false, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
+    }
+
+    /**
+     * Sets a BlockSetType with the OrnamentBuilder name and allows opening by hand. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
+     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
+     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
+     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
+     * See {@link OrnamentBuilder#blockSetType(String, boolean, SoundType, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent)} for full parameter breakdown.
+     */
+    public OrnamentBuilder blockSetTypeByHand(SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
+        return this.blockSetType(name, true, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
     }
 
     /**
@@ -268,6 +271,7 @@ public class OrnamentBuilder {
      * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
      * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
      * @param name The name for the BlockSetType.
+     * @param hand If the block can be opened by hand.
      * @param sound The sound the block makes.
      * @param closedoor The close sound of a Door.
      * @param opendoor The open sound of a Door.
@@ -278,8 +282,8 @@ public class OrnamentBuilder {
      * @param buttonoff The off sound of a Button.
      * @param buttonon The on sound of a Button.
      */
-    public OrnamentBuilder blockSetType(String name, SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
-        return this.blockSetType(new BlockSetType(name, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon));
+    public OrnamentBuilder blockSetType(String name, boolean hand, SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
+        return this.blockSetType(new BlockSetType(name, hand, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon));
     }
 
     /**
@@ -375,8 +379,8 @@ public class OrnamentBuilder {
     public OrnamentBuilder canMelt(Block melt, boolean vaporise) {
         this.canMelt = true;
         this.meltResult = melt;
-        if (!meltResult.defaultBlockState().getMaterial().isLiquid()) {
-            OrnamentalMod.LOGGER.warn("Supplied melt result for {} was not a liquid, was {}! Defaulting to Water.", name, melt.defaultBlockState().getMaterial());
+        if (!meltResult.defaultBlockState().liquid()) {
+            OrnamentalMod.LOGGER.warn("Supplied melt result for {} was not a liquid, was {}! Defaulting to Water.", name, melt.defaultBlockState().liquid());
             meltResult = Blocks.WATER;
         }
         this.canVaporise = vaporise;
@@ -418,7 +422,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets an overriding PushReaction for a block if the block normally checks based on Material. Will check the Material's reaction by default.
+     * Sets a PushReaction for a block.
      * Some blocks may not follow this, ie. Doors always have PushReaction.DESTROY.
      * @param reaction The push reaction this material should use.
      */

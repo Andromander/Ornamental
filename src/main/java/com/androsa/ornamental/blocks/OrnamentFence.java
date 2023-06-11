@@ -23,7 +23,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -202,12 +201,5 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
                 }
             }
         }
-    }
-
-    @Override
-    @Nonnull
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.pushReaction;
     }
 }

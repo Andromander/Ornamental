@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -287,13 +286,6 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         if (builder.createBubbles) {
             level.scheduleTick(pos, this, builder.tickSchedule);
         }
-    }
-
-    @Override
-    @Nonnull
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.DESTROY;
     }
 
     @Override

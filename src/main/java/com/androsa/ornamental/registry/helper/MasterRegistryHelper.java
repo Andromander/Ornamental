@@ -10,6 +10,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -85,7 +86,7 @@ public abstract class MasterRegistryHelper {
      * @return Properties for the OrnamentDoor.
      */
     protected BlockBehaviour.Properties doorProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder).noOcclusion();
+        return PropertiesHelper.createProps(builder).noOcclusion().pushReaction(PushReaction.DESTROY);
     }
 
     /**

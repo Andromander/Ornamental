@@ -15,10 +15,12 @@ public class PropertiesHelper {
      */
     public static BlockBehaviour.Properties createProps(OrnamentBuilder builder) {
         OrnamentBuilder getbuilder = builder.getBuilder();
-        BlockBehaviour.Properties props = BlockBehaviour.Properties.of(getbuilder.material, getbuilder.color)
+        BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
+                .mapColor(getbuilder.color)
                 .strength(getbuilder.hardness, getbuilder.resistance)
                 .sound(getbuilder.blockSetType.soundType())
-                .friction(getbuilder.slipperiness);
+                .friction(getbuilder.slipperiness)
+                .pushReaction(getbuilder.pushReaction);
         if (getbuilder.light > 0) props.lightLevel((state) -> getbuilder.light);
         if (getbuilder.doesTick) props.randomTicks();
         if (!getbuilder.isSolid) props.noOcclusion();

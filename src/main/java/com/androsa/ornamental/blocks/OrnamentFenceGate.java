@@ -22,7 +22,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -240,12 +239,5 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
                 }
             }
         }
-    }
-
-    @Override
-    @Nonnull
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.pushReaction;
     }
 }

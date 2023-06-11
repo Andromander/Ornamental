@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -220,11 +219,5 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
                 }
             }
         }
-    }
-
-    @Override
-    @Deprecated
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return builder.pushReaction;
     }
 }
