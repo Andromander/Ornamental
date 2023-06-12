@@ -82,8 +82,8 @@ public class OrnamentBuilder {
     public List<List<RegistryObject<? extends Block>>> itemTags = new ArrayList<>();
 
     /**
-     * Create a template material for an Ornament block
-     * @param name The name to supply through registration. Used for ease of naming
+     * Create a template material for an Ornament block.
+     * @param name The name to supply through registration. Used for ease of naming.
      */
     public OrnamentBuilder(String name) {
         this.name = name;
@@ -97,8 +97,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's MapColor.
-     * @param color The MapColor of the block
+     * Setter for the block's MapColor. Used to set {@link BlockBehaviour.Properties#mapColor(MapColor)}.
+     * @param color The MapColor of the block.
      */
     public OrnamentBuilder mapColor(MapColor color) {
         this.color = color;
@@ -106,8 +106,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's hardness. Will leave the block's resistance to 0.0F.
-     * For setting hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float)} or {@link OrnamentBuilder#hardnessAndResistance(float, float)}
+     * Setter for the block's hardness. Will leave the block's resistance to 0.0F. Used to set {@link BlockBehaviour.Properties#strength(float, float)}.
+     * For setting hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float)} or {@link OrnamentBuilder#hardnessAndResistance(float, float)}.
      * @param amount The block's hardness.
      */
     public OrnamentBuilder hardness(float amount) {
@@ -116,8 +116,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's hardness and resistance. Both values will match.
-     * For setting separate hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float, float)}
+     * Setter for the block's hardness and resistance. Both values will match. Used to set {@link BlockBehaviour.Properties#strength(float, float)}.
+     * For setting separate hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float, float)}.
      * @param amount The block's hardness and resistance
      */
     public OrnamentBuilder hardnessAndResistance(float amount) {
@@ -127,10 +127,10 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's hardness and resistance.
-     * For ease of use, to set matching hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float)}
-     * @param hard The block's hardness
-     * @param resist The block's resistance
+     * Setter for the block's hardness and resistance. Used to set {@link BlockBehaviour.Properties#strength(float, float)}.
+     * For ease of use, to set matching hardness and resistance, use {@link OrnamentBuilder#hardnessAndResistance(float)}.
+     * @param hard The block's hardness.
+     * @param resist The block's resistance.
      */
     public OrnamentBuilder hardnessAndResistance(float hard, float resist) {
         this.hardness = hard;
@@ -139,7 +139,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the block's light level.
+     * Setter for the block's light level. Used to set {@link BlockBehaviour.Properties#lightLevel(ToIntFunction)}.
      * @param level the light level to emit.
      */
     public OrnamentBuilder lightLevel(int level) {
@@ -148,7 +148,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for whether a block needs the correct tool to be harvested. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}
+     * Setter for whether a block needs the correct tool to be harvested. Used to enable {@link BlockBehaviour.Properties#requiresCorrectToolForDrops()}.
      */
     public OrnamentBuilder requiresTool() {
         this.requiresTool = true;
@@ -156,8 +156,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the damage multiplier when taking fall damage on the block. Defaults to 1.0F (standard handling)
-     * @param amount The damage multiplier
+     * Setter for the damage multiplier when taking fall damage on the block. Defaults to 1.0F (standard handling).
+     * @param amount The damage multiplier.
      */
     public OrnamentBuilder fall(float amount) {
         this.fallMultiplier = amount;
@@ -165,9 +165,9 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setter for the slipperiness of a block when moving on top of it. Defaults to 0.6F (average movement)
+     * Setter for the slipperiness of a block when moving on top of it. Defaults to 0.6F (average movement). Used to set {@link BlockBehaviour.Properties#friction(float)}.
      * NOTE: On blocks like lower half Slabs, slipperiness is undetected. This is how vanilla behaves.
-     * @param amount The amount of slip
+     * @param amount The amount of slip.
      */
     public OrnamentBuilder slip(float amount) {
         this.slipperiness = amount;
@@ -175,8 +175,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Setters for a block's burn time (measured by ticks). This is applied to the block's item. Defaults to all 0 (does not burn)
-     * For default behaviour, set value to -1. Any other value above 0, 1 second = 20 ticks
+     * Setters for a block's burn time, measured in ticks. This is applied to the block's item. Defaults to all 0 (does not burn).
+     * For default behaviour, set value to -1. Any other value above 0, 20 ticks = 1 second.
      *
      * Indexes are as follows:
      * 0 = Door
@@ -266,8 +266,9 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets a BlockSetType with a custom name. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
+     * Sets a BlockSetType from scratch. This is used to handle SoundType, opening by hand, Door opening and closing, and Trapdoor Opening and closing.
      * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
+     * Opening the door by hand may be overridden with {@link OrnamentBuilder#canOpen()} should behaviour contradict logic.
      * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
      * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
      * @param name The name for the BlockSetType.
@@ -287,8 +288,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets a BlockSetType.
-     * @param type the BlockSetType itself. Can be used if one has already been defined.
+     * Sets a BlockSetType with a preset one.
+     * @param type the BlockSetType.
      */
     public OrnamentBuilder blockSetType(BlockSetType type) {
         this.blockSetType = BlockSetType.register(type);
@@ -304,7 +305,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block to tick randomly. Used to enable {@link BlockBehaviour.Properties#randomTicks()}
+     * Sets the block to tick randomly. Used to enable {@link BlockBehaviour.Properties#randomTicks()}.
      */
     public OrnamentBuilder ticks() {
         this.doesTick = true;
@@ -312,7 +313,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block's item to resist being destroyed in fire or lava. Used to enable {@link Item.Properties#fireResistant()}
+     * Sets the block's item to resist being destroyed in fire or lava. Used to enable {@link Item.Properties#fireResistant()}.
      */
     public OrnamentBuilder isFireproof() {
         this.fireproof = true;
@@ -320,7 +321,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the entity spawn logic on the block. Used in {@link BlockBehaviour.Properties#isValidSpawn(BlockBehaviour.StateArgumentPredicate)}
+     * Sets the entity spawn logic on the block. Used in {@link BlockBehaviour.Properties#isValidSpawn(BlockBehaviour.StateArgumentPredicate)}.
      * If left null (unused), will default to regular placement logic.
      * @param predicate The spawn predicate to test. If true, an entity can spawn on it.
      */
@@ -406,7 +407,8 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block should be marked for post-processing. Though it is only for worldgen, consider pack creators when setting this value.
+     * Sets if the block should be marked for post-processing. Used in {@link BlockBehaviour.Properties#hasPostProcess(BlockBehaviour.StatePredicate)}.
+     * Note that this property only takes effect for world generation, however should be considered anyway.
      */
     public OrnamentBuilder doPostProcessing() {
         this.postProcess = true;
@@ -414,7 +416,7 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block has emissive rendering.
+     * Sets if the block has emissive rendering. Used to enable {@link BlockBehaviour.Properties#emissiveRendering(BlockBehaviour.StatePredicate)}.
      */
     public OrnamentBuilder doEmissiveRendering() {
         this.emissiveRender = true;
@@ -422,11 +424,11 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets a PushReaction for a block.
+     * Sets a PushReaction for a block. Used to enable {@link BlockBehaviour.Properties#pushReaction(PushReaction)}.
      * Some blocks may not follow this, ie. Doors always have PushReaction.DESTROY.
      * @param reaction The push reaction this material should use.
      */
-    public OrnamentBuilder pushReactOverride(PushReaction reaction) {
+    public OrnamentBuilder pushReact(PushReaction reaction) {
         this.pushReaction = reaction;
         return this;
     }
@@ -455,8 +457,9 @@ public class OrnamentBuilder {
 
     /**
      * Sets the block to emit bubble columns when underwater. Optionally, emit smoke and emit extinguish noises.
+     * Note that the bubble column created is not a BubbleColumnBlock but a fake copy of one. Don't blame me, the logic is hard-coded.
      * @param tick the amount of ticks to schedule an update.
-     * @param extinguish if the block emits smoke and extnguish noises. THIS REQUIRES THE BLOCK TO RANDOMLY TICK.
+     * @param extinguish if the block emits smoke and extinguish noises. If true, the OrnamentBuilder must enable {@link OrnamentBuilder#ticks()}.
      * @param dragdown if the bubble column pulls down entities.
      */
     public OrnamentBuilder bubbleUnderwater(int tick, boolean extinguish, boolean dragdown) {
