@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 /**
  * OrnamentBuilder is a system designed to create "templates" of materials for the various decoration blocks.<br>
@@ -69,6 +71,7 @@ public class OrnamentBuilder {
     public boolean breakableCull = false;
     public boolean postProcess = false;
     public boolean emissiveRender = false;
+    public NoteBlockInstrument instrument = NoteBlockInstrument.HARP;
     public PushReaction pushReaction = PushReaction.NORMAL;
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
     public FloorHazardPredicate hazardPredicate = null;
@@ -424,7 +427,16 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets a PushReaction for a block. Used to enable {@link BlockBehaviour.Properties#pushReaction(PushReaction)}.
+     * Sets a NoteBlockInstrument for a block. Used to set {@link BlockBehaviour.Properties#instrument(NoteBlockInstrument)}.
+     * @param instrument The sound the block will make when a NoteBlock is struck.
+     */
+    public OrnamentBuilder instrument(NoteBlockInstrument instrument) {
+        this.instrument = instrument;
+        return this;
+    }
+
+    /**
+     * Sets a PushReaction for a block. Used to set {@link BlockBehaviour.Properties#pushReaction(PushReaction)}.
      * Some blocks may not follow this, ie. Doors always have PushReaction.DESTROY.
      * @param reaction The push reaction this material should use.
      */

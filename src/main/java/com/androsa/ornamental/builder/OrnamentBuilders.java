@@ -11,6 +11,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class OrnamentBuilders {
             .stairBaseBlock(() -> Blocks.IRON_BLOCK)
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(BlockSetType.IRON)
+            .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED));
 
     public static final OrnamentBuilder GOLD = new OrnamentBuilder("gold")
@@ -33,6 +35,7 @@ public class OrnamentBuilders {
             .stairBaseBlock(() -> Blocks.GOLD_BLOCK)
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(BlockSetType.GOLD)
+            .instrument(NoteBlockInstrument.BELL)
             .addBlockTags(List.of(OrnamentalBlockTags.PIGLIN_GUARDED, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED))
             .addItemTags(List.of(OrnamentalItemTags.PIGLIN_LOVED));
 
@@ -52,6 +55,7 @@ public class OrnamentBuilders {
             .stairBaseBlock(() -> Blocks.EMERALD_BLOCK)
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(SoundType.METAL, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BIT)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
 
     public static final OrnamentBuilder LAPIS = new OrnamentBuilder("lapis")
@@ -69,6 +73,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.OBSIDIAN)
             .blockSetType(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.DRAGON_IMMUNE, OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.DIAMOND_REQUIRED));
 
     public static final OrnamentBuilder COAL = new OrnamentBuilder("coal")
@@ -78,6 +83,7 @@ public class OrnamentBuilders {
             .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000, 12000, 5250)
             .stairBaseBlock(() -> Blocks.COAL_BLOCK)
             .blockSetTypeByHand(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder REDSTONE = new OrnamentBuilder("redstone")
@@ -96,6 +102,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.IRON_BLOCK)
             .blockSetType(SoundType.METAL, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.IRON_REQUIRED));
 
     public static final OrnamentBuilder CLAY = new OrnamentBuilder("clay")
@@ -104,6 +111,7 @@ public class OrnamentBuilders {
             .canFallThrough()
             .stairBaseBlock(() -> Blocks.CLAY)
             .blockSetTypeByHand(SoundType.GRAVEL, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.FLUTE)
             .addBlockTags(List.of(OrnamentalBlockTags.SHOVEL_TOOL));
 
     public static final OrnamentBuilder DIRT = new OrnamentBuilder("dirt")
@@ -131,6 +139,7 @@ public class OrnamentBuilders {
             .fall(0.2F)
             .canFallThrough()
             .stairBaseBlock(() -> Blocks.HAY_BLOCK)
+            .instrument(NoteBlockInstrument.BANJO)
             .blockSetTypeByHand(SoundType.GRASS, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON);
 
     public static final OrnamentBuilder PATH = new OrnamentBuilder("dirt_path")
@@ -149,6 +158,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.BRICKS)
             .blockSetType(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder QUARTZ = new OrnamentBuilder("quartz")
@@ -157,6 +167,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.QUARTZ_BLOCK)
             .blockSetType(SoundType.STONE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder BONE = new OrnamentBuilder("bone")
@@ -165,6 +176,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.BONE_BLOCK)
             .blockSetTypeByHand(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.XYLOPHONE)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder NETHER_BRICK = new OrnamentBuilder("nether_brick")
@@ -173,6 +185,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.NETHER_BRICKS)
             .blockSetType(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder RED_NETHER_BRICK = new OrnamentBuilder("red_nether_brick")
@@ -181,6 +194,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .stairBaseBlock(() -> Blocks.RED_NETHER_BRICKS)
             .blockSetType(SoundType.STONE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder SNOW = new OrnamentBuilder("snow")
@@ -212,6 +226,7 @@ public class OrnamentBuilders {
             .slip(0.98F)
             .stairBaseBlock(() -> Blocks.PACKED_ICE)
             .blockSetTypeByHand(SoundType.GLASS, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.CHIME)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
     public static final OrnamentBuilder BLUE_ICE = new OrnamentBuilder("blue_ice")
@@ -285,6 +300,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(SoundType.STONE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .ticks()
             .doPostProcessing()
             .doEmissiveRendering()
@@ -299,5 +315,6 @@ public class OrnamentBuilders {
             .requiresTool()
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(SoundType.CALCITE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
+            .instrument(NoteBlockInstrument.BASEDRUM)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 }
