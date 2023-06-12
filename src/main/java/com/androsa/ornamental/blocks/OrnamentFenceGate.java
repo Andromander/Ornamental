@@ -100,9 +100,9 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
             if (builder.floorHazard.predicate().test(level, pos, state, entity)) {
                 entity.hurt(builder.floorHazard.damage().apply(level), builder.floorHazard.amount());
             }
-        } else {
-            super.stepOn(level, pos, state, entity);
         }
+
+        super.stepOn(level, pos, state, entity);
     }
 
     @Override

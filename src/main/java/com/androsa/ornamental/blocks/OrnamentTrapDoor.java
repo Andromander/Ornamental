@@ -146,8 +146,6 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             if (builder.floorHazard.predicate().test(worldIn, pos, state, entityIn)) {
                 entityIn.hurt(builder.floorHazard.damage().apply(worldIn), builder.floorHazard.amount());
             }
-        } else {
-            super.stepOn(worldIn, pos, state, entityIn);
         }
 
         if (!state.getValue(OPEN)) {
@@ -157,6 +155,8 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
                 this.playSound(null, worldIn, pos, state.getValue(OPEN));
             }
         }
+
+        super.stepOn(worldIn, pos, state, entityIn);
     }
 
     @Override
