@@ -48,7 +48,7 @@ public class ModCreativeTabs {
 
     private static RegistryObject<CreativeModeTab> createTab(DeferredRegister<CreativeModeTab> reg, String name, Supplier<ItemStack> icon, RegistryObject<CreativeModeTab> after, List<RegistryObject<? extends Block>> list) {
         CreativeModeTab.Builder tab = buildTab(name, icon, list);
-        if (after != null) tab.withTabsAfter(after.getId());
+        if (after != null) tab.withTabsBefore(after.getId());
         return reg.register(name, tab::build);
     }
 
