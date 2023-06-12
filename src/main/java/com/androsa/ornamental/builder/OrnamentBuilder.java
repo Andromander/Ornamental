@@ -200,8 +200,8 @@ public class OrnamentBuilder {
      * Author's Note: This is actually because Mojang has set Stone and Polished Blackstone's boolean value to false, which contradicts what Ornamental has set, as well as {@link net.minecraft.world.level.block.DoorBlock#isWoodenDoor(Level, BlockPos)}.
      * It is very likely if a Stone door is added, this method will be removed.
      */
-    public OrnamentBuilder canOpen() {
-        this.canOpen = true;
+    public OrnamentBuilder canOpen(boolean flag) {
+        this.canOpen = flag;
         return this;
     }
 
