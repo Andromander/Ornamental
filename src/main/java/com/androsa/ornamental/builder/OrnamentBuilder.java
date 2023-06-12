@@ -323,11 +323,7 @@ public class OrnamentBuilder {
 
     /**
      * Sets a block's ability to convert into other blocks. Multiple predicates are allowed for different conversions.
-     *
-     * This Map is constructed of three parts:
-     * BlockConvertPredicate: This is what checks for the right condition to convert the block.
-     * List: A list of blocks to target if the conditions are met. The order of blocks should be Stair, Slab, Fence, Trapdoor, Fence Gate, Door, Pole, Beam, Wall, Saddle Door. Must be a Supplier.
-     * SoundEvent: The sound the blocks will make when converting.
+     * For more information, see {@link BlockConverter#BlockConverter(BlockConverter.BlockConvertPredicate, Supplier, SoundEvent)}.
      * @param predicates The predicates the block can check by.
      */
     public OrnamentBuilder setConversionPredicates(List<BlockConverter> predicates) {
