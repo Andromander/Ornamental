@@ -62,6 +62,26 @@ public class ObsidianGolem extends OrnamentalGolem {
     }
 
     @Override
+    public boolean doHurtTarget(Entity target) {
+        this.attackTimer = 10;
+        this.level().broadcastEntityEvent(this, (byte)4);
+        float damage = this.getAttackDamage();
+        float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
+        if (flag) {
+            target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
+            this.doEnchantDamageEffects(this, target);
+        }
+
+        this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        return flag;
+    }
+
+    private float getAttackDamage() {
+        return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+    }
+
+    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.IRON_GOLEM_HURT;
     }
