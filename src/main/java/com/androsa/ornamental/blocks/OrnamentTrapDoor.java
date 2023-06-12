@@ -142,9 +142,9 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
 
     @Override
     public void stepOn(Level worldIn, BlockPos pos, BlockState state, Entity entityIn) {
-        if (builder.hazardPredicate != null && builder.damagePredicate != null) {
-            if (builder.hazardPredicate.test(worldIn, pos, state, entityIn)) {
-                entityIn.hurt(builder.damagePredicate.apply(worldIn), builder.damageAmount);
+        if (builder.floorHazard != null) {
+            if (builder.floorHazard.predicate().test(worldIn, pos, state, entityIn)) {
+                entityIn.hurt(builder.floorHazard.damage().apply(worldIn), builder.floorHazard.amount());
             }
         } else {
             super.stepOn(worldIn, pos, state, entityIn);

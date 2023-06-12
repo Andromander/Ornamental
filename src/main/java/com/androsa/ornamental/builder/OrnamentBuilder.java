@@ -72,9 +72,7 @@ public class OrnamentBuilder {
     public PushReaction pushReaction = PushReaction.NORMAL;
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
     public List<BlockConverter> convertPredicates = null;
-    public FloorHazardPredicate hazardPredicate = null;
-    public HazardDamagePredicate damagePredicate = null;
-    public float damageAmount = 0.0F;
+    public FloorHazard floorHazard = null;
     public boolean createBubbles = false;
     public boolean extinguishes = false;
     public boolean bubbleDragDown = false;
@@ -443,14 +441,11 @@ public class OrnamentBuilder {
 
     /**
      * Sets a floor hazard for the ornaments when an entity steps on them.
-     * @param test The predicate to check if an entity should take damage for stepping on the ornament.
-     * @param apply The predicate to apply damage to the entity. Provided as a functional interface due to how DamageSources are stored by Level.
-     * @param amount The amount of damage to deal.
+     * For more information, see {@link FloorHazard#FloorHazard(FloorHazard.FloorHazardPredicate, FloorHazard.HazardDamagePredicate, float)}.
+     * @param hazard the FloorHazard to check and apply against.
      */
-    public OrnamentBuilder floorHazard(FloorHazardPredicate test, HazardDamagePredicate apply, float amount) {
-        this.hazardPredicate = test;
-        this.damagePredicate = apply;
-        this.damageAmount = amount;
+    public OrnamentBuilder floorHazard(FloorHazard hazard) {
+        this.floorHazard = hazard;
         return this;
     }
 
