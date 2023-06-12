@@ -1,7 +1,7 @@
 package com.androsa.ornamental.blocks;
 
+import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import com.androsa.ornamental.registry.ModBlocks;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -148,30 +148,20 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
 
-        if (!itemstack.isEmpty()) {
-            if (builder.mealGrass && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_wall, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeDirt && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_wall, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
-            }
-            if (builder.shovelPath && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_wall, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeGrass && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_wall, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
+        if (builder.convertPredicates != null) {
+            for (BlockConverter converter : builder.convertPredicates) {
+                if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
+                    return changeBlock(itemstack, converter.list().get().get(8), converter.sound(), worldIn, pos, player, hand);
+                }
             }
         }
 
         return super.use(state, worldIn, pos, player, hand, result);
     }
 
-    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentWall> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
-        this.setBlock(worldIn, pos, newblock);
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+        worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
@@ -180,17 +170,6 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return InteractionResult.SUCCESS;
-    }
-
-    private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentWall> block) {
-        BlockState state = world.getBlockState(pos);
-        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
-                .setValue(UP, state.getValue(UP))
-                .setValue(NORTH_WALL, state.getValue(NORTH_WALL))
-                .setValue(SOUTH_WALL, state.getValue(SOUTH_WALL))
-                .setValue(EAST_WALL, state.getValue(EAST_WALL))
-                .setValue(WEST_WALL, state.getValue(WEST_WALL))
-                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override

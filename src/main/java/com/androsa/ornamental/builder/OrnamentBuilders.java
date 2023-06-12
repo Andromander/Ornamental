@@ -2,11 +2,15 @@ package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.data.OrnamentalBlockTags;
 import com.androsa.ornamental.data.OrnamentalItemTags;
+import com.androsa.ornamental.registry.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -121,7 +125,11 @@ public class OrnamentBuilders {
             .canFallThrough()
             .stairBaseBlock(() -> Blocks.DIRT)
             .blockSetTypeByHand(SoundType.GRAVEL, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)
-            .boneMealToGrass()
+            .setConversionPredicates(ImmutableList.of(
+                    new BlockConverter(
+                            (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() == Items.BONE_MEAL,
+                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door),
+                            SoundEvents.GRASS_BREAK)))
             .addBlockTags(List.of(OrnamentalBlockTags.SHOVEL_TOOL));
 
     public static final OrnamentBuilder GRASS = new OrnamentBuilder("grass")
@@ -130,8 +138,15 @@ public class OrnamentBuilders {
             .canFallThrough()
             .stairBaseBlock(() -> Blocks.GRASS)
             .blockSetTypeByHand(SoundType.GRASS, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)
-            .hoeToDirt()
-            .shovelToPath()
+            .setConversionPredicates(ImmutableList.of(
+                    new BlockConverter(
+                            (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof HoeItem,
+                            () -> List.of(ModBlocks.dirt_stairs, ModBlocks.dirt_slab, ModBlocks.dirt_fence, ModBlocks.dirt_trapdoor, ModBlocks.dirt_fence_gate, ModBlocks.dirt_door, ModBlocks.dirt_pole, ModBlocks.dirt_beam, ModBlocks.dirt_wall, ModBlocks.dirt_saddle_door),
+                            SoundEvents.GRAVEL_BREAK),
+                    new BlockConverter(
+                            (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof ShovelItem,
+                            () -> List.of(ModBlocks.path_stairs, ModBlocks.path_slab, ModBlocks.path_fence, ModBlocks.path_trapdoor, ModBlocks.path_fence_gate, ModBlocks.path_door, ModBlocks.path_pole, ModBlocks.path_beam, ModBlocks.path_wall, ModBlocks.path_saddle_door),
+                            SoundEvents.SHOVEL_FLATTEN)))
             .addBlockTags(List.of(OrnamentalBlockTags.SHOVEL_TOOL));
 
     public static final OrnamentBuilder HAY = new OrnamentBuilder("hay")
@@ -149,7 +164,11 @@ public class OrnamentBuilders {
             .canFallThrough()
             .stairBaseBlock(() -> Blocks.DIRT_PATH)
             .blockSetTypeByHand(SoundType.GRASS, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)
-            .hoeToGrass()
+            .setConversionPredicates(ImmutableList.of(
+                    new BlockConverter(
+                            (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof HoeItem,
+                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door),
+                            SoundEvents.GRASS_BREAK)))
             .usePathShapes()
             .addBlockTags(List.of(OrnamentalBlockTags.SHOVEL_TOOL));
 

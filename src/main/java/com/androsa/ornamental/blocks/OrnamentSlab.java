@@ -1,6 +1,6 @@
 package com.androsa.ornamental.blocks;
 
-import com.androsa.ornamental.registry.ModBlocks;
+import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -109,30 +109,20 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
 
-        if (!itemstack.isEmpty()) {
-            if (builder.mealGrass && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeDirt && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_slab, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
-            }
-            if (builder.shovelPath && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_slab, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeGrass && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_slab, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
+        if (builder.convertPredicates != null) {
+            for (BlockConverter converter : builder.convertPredicates) {
+                if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
+                    return changeBlock(itemstack, converter.list().get().get(1), converter.sound(), worldIn, pos, player, hand);
+                }
             }
         }
 
         return super.use(state, worldIn, pos, player, hand, result);
     }
 
-    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentSlab> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
-        this.setBlock(worldIn, pos, newblock);
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+        worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
@@ -141,13 +131,6 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return InteractionResult.SUCCESS;
-    }
-
-    private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentSlab> block) {
-        BlockState state = world.getBlockState(pos);
-        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
-                .setValue(TYPE, state.getValue(TYPE))
-                .setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
     }
 
     @Override

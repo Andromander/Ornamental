@@ -60,11 +60,7 @@ public class OrnamentBuilder {
     public boolean fireproof = false;
     public BlockBehaviour.StatePredicate conductsRedstone = null;
     public BlockBehaviour.StateArgumentPredicate<EntityType<?>> entitySpawnPredicate = null;
-    public boolean mealGrass = false;
-    public boolean hoeDirt = false;
-    public boolean shovelPath = false;
     public boolean pathShape = false;
-    public boolean hoeGrass = false;
     public boolean canMelt = false;
     public Block meltResult = Blocks.WATER;
     public boolean canVaporise = false;
@@ -75,6 +71,7 @@ public class OrnamentBuilder {
     public NoteBlockInstrument instrument = NoteBlockInstrument.HARP;
     public PushReaction pushReaction = PushReaction.NORMAL;
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
+    public List<BlockConverter> convertPredicates = null;
     public FloorHazardPredicate hazardPredicate = null;
     public HazardDamagePredicate damagePredicate = null;
     public float damageAmount = 0.0F;
@@ -325,7 +322,21 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if a block can conduct Redstone. Usedin {@link BlockBehaviour.Properties#isRedstoneConductor(BlockBehaviour.StatePredicate)}.
+     * Sets a block's ability to convert into other blocks. Multiple predicates are allowed for different conversions.
+     *
+     * This Map is constructed of three parts:
+     * BlockConvertPredicate: This is what checks for the right condition to convert the block.
+     * List: A list of blocks to target if the conditions are met. The order of blocks should be Stair, Slab, Fence, Trapdoor, Fence Gate, Door, Pole, Beam, Wall, Saddle Door. Must be a Supplier.
+     * SoundEvent: The sound the blocks will make when converting.
+     * @param predicates The predicates the block can check by.
+     */
+    public OrnamentBuilder setConversionPredicates(List<BlockConverter> predicates) {
+        this.convertPredicates = predicates;
+        return this;
+    }
+
+    /**
+     * Sets if a block can conduct Redstone. Used in {@link BlockBehaviour.Properties#isRedstoneConductor(BlockBehaviour.StatePredicate)}.
      * If left null, default behaviour is assigned. Note that default behaviour checks for whether a block has a full collision shape.
      * Most blocks in Ornamental make use of non-full shapes, however do note states that allow this such as Double Slab, Full Poles, and Full Beams.
      * @param predicate The state predicate to test. If true, the block can conduct redstone.
@@ -346,42 +357,10 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block can become Grass with Bone Meal. If set, the block will become the respective Grass block when Bone Meal is used on it.
-     */
-    public OrnamentBuilder boneMealToGrass() {
-        this.mealGrass = true;
-        return this;
-    }
-
-    /**
-     * Sets if the block can become Dirt with a Hoe. If set, the block will become the respective Dirt block when a Hoe is used on it.
-     */
-    public OrnamentBuilder hoeToDirt() {
-        this.hoeDirt = true;
-        return this;
-    }
-
-    /**
-     * Sets if the block can become Path with a Shovel. If set, the block will become the respective Path block when a Shovel is used on it.
-     */
-    public OrnamentBuilder shovelToPath() {
-        this.shovelPath = true;
-        return this;
-    }
-
-    /**
      * Sets if the block's VoxelShape should be altered. If true, the height of the blocks will be lowered by 1.
      */
     public OrnamentBuilder usePathShapes() {
         this.pathShape = true;
-        return this;
-    }
-
-    /**
-     * Sets if the block can become Grass with a Hoe. If set, the block will become the respective Grass block when a Hoe is used.
-     */
-    public OrnamentBuilder hoeToGrass() {
-        this.hoeGrass = true;
         return this;
     }
 

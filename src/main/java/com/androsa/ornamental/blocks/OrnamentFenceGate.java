@@ -1,6 +1,6 @@
 package com.androsa.ornamental.blocks;
 
-import com.androsa.ornamental.registry.ModBlocks;
+import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -137,22 +137,12 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
     @Nonnull
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
 
-        if (!itemstack.isEmpty()) {
-            if (builder.mealGrass && item == Items.BONE_MEAL) {
-                return changeBlock(itemstack, ModBlocks.grass_fence_gate, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeDirt && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.dirt_fence_gate, SoundEvents.GRAVEL_BREAK, worldIn, pos, player, hand);
-            }
-            if (builder.shovelPath && item instanceof ShovelItem) {
-                return changeBlock(itemstack, ModBlocks.path_fence_gate, SoundEvents.SHOVEL_FLATTEN, worldIn, pos, player, hand);
-            }
-
-            if (builder.hoeGrass && item instanceof HoeItem) {
-                return changeBlock(itemstack, ModBlocks.grass_fence_gate, SoundEvents.GRASS_BREAK, worldIn, pos, player, hand);
+        if (builder.convertPredicates != null) {
+            for (BlockConverter converter : builder.convertPredicates) {
+                if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
+                    return changeBlock(itemstack, converter.list().get().get(4), converter.sound(), worldIn, pos, player, hand);
+                }
             }
         }
 
@@ -163,8 +153,8 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
         }
     }
 
-    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends OrnamentFenceGate> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
-        this.setBlock(worldIn, pos, newblock);
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+        worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
@@ -173,15 +163,6 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
             itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
         }
         return InteractionResult.SUCCESS;
-    }
-
-    private void setBlock(Level world, BlockPos pos, Supplier<? extends OrnamentFenceGate> block) {
-        BlockState state = world.getBlockState(pos);
-        world.setBlockAndUpdate(pos, block.get().defaultBlockState()
-                .setValue(FACING, state.getValue(FACING))
-                .setValue(OPEN, state.getValue(OPEN))
-                .setValue(POWERED, state.getValue(POWERED))
-                .setValue(IN_WALL, state.getValue(IN_WALL)));
     }
 
     @Override
