@@ -1,4 +1,4 @@
-// 1.20	2023-06-11T23:00:41.9567455	Tags for minecraft:block mod id ornamental
+// 1.20	2023-06-12T12:52:37.5010164	Tags for minecraft:block mod id ornamental
 543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/forge/tags/blocks/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/blocks/fences/nether_brick.json
 ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/forge/tags/blocks/fence_gates.json
@@ -19,6 +19,7 @@ bfd1701a3d30980a3bac531ca5e384bf04da8eb7 data/minecraft/tags/blocks/needs_diamon
 c48c1d71c4cefde36ee5f72e0c00d445e336e578 data/minecraft/tags/blocks/snow.json
 7003a4ae6b457fae7149f70cf6f1b7ed1a82a07a data/minecraft/tags/blocks/stairs.json
 2cf4a9abb8948129f29ea2de188bf09f1d78c14f data/minecraft/tags/blocks/trapdoors.json
+c5f689640d74eb79476b8b32fb8c3b6883647b18 data/minecraft/tags/blocks/vibration_resonators.json
 e8fb6c0a09f1dba07f4be0fb5e758314aa9fc7e8 data/minecraft/tags/blocks/walls.json
 c1a771094d62297192181e5a5779d56923c4f1cc data/ornamental/tags/blocks/beams.json
 5ada63323e7c618396492fa76dfed21cda818478 data/ornamental/tags/blocks/grass_golem_flower_plantable.json

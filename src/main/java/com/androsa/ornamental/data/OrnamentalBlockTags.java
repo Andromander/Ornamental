@@ -33,6 +33,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     public static final List<RegistryObject<? extends Block>> SNOW = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> STAIRS = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> TRAPDOORS = Lists.newArrayList();
+    public static final List<RegistryObject<? extends Block>> VIBRATIONS = Lists.newArrayList();
     public static final List<RegistryObject<? extends Block>> WALLS = Lists.newArrayList();
 
     public static final List<RegistryObject<? extends Block>> PICKAXE_TOOL = Lists.newArrayList();
@@ -66,6 +67,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(BlockTags.SNOW, SNOW);
         addToTag(BlockTags.STAIRS, STAIRS);
         addToTag(BlockTags.TRAPDOORS, TRAPDOORS);
+        addToTag(BlockTags.VIBRATION_RESONATORS, VIBRATIONS);
         addToTag(BlockTags.WALLS, WALLS);
 
         addToTag(BlockTags.MINEABLE_WITH_PICKAXE, PICKAXE_TOOL);
