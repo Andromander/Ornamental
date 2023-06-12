@@ -58,6 +58,7 @@ public class OrnamentBuilder {
     public boolean doesTick = false;
     public boolean requiresTool = false;
     public boolean fireproof = false;
+    public BlockBehaviour.StatePredicate conductsRedstone = null;
     public BlockBehaviour.StateArgumentPredicate<EntityType<?>> entitySpawnPredicate = null;
     public boolean mealGrass = false;
     public boolean hoeDirt = false;
@@ -320,6 +321,17 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder isFireproof() {
         this.fireproof = true;
+        return this;
+    }
+
+    /**
+     * Sets if a block can conduct Redstone. Usedin {@link BlockBehaviour.Properties#isRedstoneConductor(BlockBehaviour.StatePredicate)}.
+     * If left null, default behaviour is assigned. Note that default behaviour checks for whether a block has a full collision shape.
+     * Most blocks in Ornamental make use of non-full shapes, however do note states that allow this such as Double Slab, Full Poles, and Full Beams.
+     * @param predicate The state predicate to test. If true, the block can conduct redstone.
+     */
+    public OrnamentBuilder setRedstoneConduction(BlockBehaviour.StatePredicate predicate) {
+        this.conductsRedstone = predicate;
         return this;
     }
 

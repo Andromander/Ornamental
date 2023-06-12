@@ -27,7 +27,8 @@ public class PropertiesHelper {
         if (getbuilder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
         if (getbuilder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
         if (getbuilder.requiresTool) props.requiresCorrectToolForDrops();
-        if (getbuilder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
+        if (getbuilder.conductsRedstone != null) props.isRedstoneConductor(getbuilder.conductsRedstone);
+        if (getbuilder.entitySpawnPredicate != null) props.isValidSpawn(getbuilder.entitySpawnPredicate);
 
         return props;
     }

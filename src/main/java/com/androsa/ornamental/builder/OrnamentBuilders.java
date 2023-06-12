@@ -92,6 +92,7 @@ public class OrnamentBuilders {
             .requiresTool()
             .hasPower()
             .stairBaseBlock(() -> Blocks.REDSTONE_BLOCK)
+            .setRedstoneConduction((state, level, pos) -> false)
             .saddledoorSounds(SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE)
             .blockSetType(SoundType.METAL, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
@@ -217,6 +218,7 @@ public class OrnamentBuilders {
             .canMelt(Blocks.WATER, true)
             .notSolid()
             .doBreakableBlockCull()
+            .setRedstoneConduction((state, reader, pos) -> false)
             .setCanEntitySpawn((state, reader, pos, type) -> type == EntityType.POLAR_BEAR && state.isFaceSturdy(reader, pos, Direction.UP))
             .addBlockTags(List.of(OrnamentalBlockTags.PICKAXE_TOOL));
 
