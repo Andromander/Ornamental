@@ -11,6 +11,7 @@
     "###"
   ],
   "result": {
+    "count": 6,
     "item": "ornamental:dirt_path_wall"
   },
   "show_notification": true

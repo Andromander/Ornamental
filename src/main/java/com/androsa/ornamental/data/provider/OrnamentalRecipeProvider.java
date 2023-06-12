@@ -278,7 +278,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     public void wall(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6)
                 .pattern("###")
                 .pattern("###")
                 .define('#', ingredient);
@@ -290,7 +290,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * In the event a Wall recipe is conflicting with another, this is almost guaranteed to work
      */
     public void wallOverride(Consumer<FinishedRecipe> consumer, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get())
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6)
                 .pattern(" / ")
                 .pattern("###")
                 .pattern("###")

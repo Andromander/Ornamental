@@ -11,6 +11,7 @@
     "###"
   ],
   "result": {
+    "count": 6,
     "item": "ornamental:redstone_wall"
   },
   "show_notification": true
