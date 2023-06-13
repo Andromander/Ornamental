@@ -40,7 +40,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentStair.
      */
-    protected BlockBehaviour.Properties stairProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties stairProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -49,7 +49,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentSlab.
      */
-    protected BlockBehaviour.Properties slabProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties slabProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -58,7 +58,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentFence.
      */
-    protected BlockBehaviour.Properties fenceProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties fenceProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -67,7 +67,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentTrapDoor.
      */
-    protected BlockBehaviour.Properties trapdoorProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties trapdoorProperties(O builder) {
         return PropertiesHelper.createProps(builder).noOcclusion().isValidSpawn((state, reader, pos, type) -> false);
     }
 
@@ -76,7 +76,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentFenceGate.
      */
-    protected BlockBehaviour.Properties fencegateProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties fencegateProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -85,7 +85,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentDoor.
      */
-    protected BlockBehaviour.Properties doorProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties doorProperties(O builder) {
         return PropertiesHelper.createProps(builder).noOcclusion().pushReaction(PushReaction.DESTROY);
     }
 
@@ -94,7 +94,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentPole.
      */
-    protected BlockBehaviour.Properties poleProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties poleProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -103,7 +103,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the Ornamentbeam.
      */
-    protected BlockBehaviour.Properties beamProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties beamProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -112,7 +112,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentWall.
      */
-    protected BlockBehaviour.Properties wallProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties wallProperties(O builder) {
         return PropertiesHelper.createProps(builder);
     }
 
@@ -121,7 +121,7 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentSaddleDoor.
      */
-    protected BlockBehaviour.Properties saddledoorProperties(OrnamentBuilder builder) {
+    protected <O extends OrnamentBuilder> BlockBehaviour.Properties saddledoorProperties(O builder) {
         return PropertiesHelper.createProps(builder).noOcclusion();
     }
 
