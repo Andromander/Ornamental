@@ -267,7 +267,7 @@ public class OrnamentBuilder {
     /**
      * Sets a BlockSetType from scratch. This is used to handle SoundType, opening by hand, Door opening and closing, and Trapdoor Opening and closing.
      * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
-     * Opening the door by hand may be overridden with {@link OrnamentBuilder#canOpen()} should behaviour contradict logic.
+     * Opening the door by hand may be overridden with {@link OrnamentBuilder#canOpen(boolean)} should behaviour contradict logic.
      * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
      * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
      * @param name The name for the BlockSetType.

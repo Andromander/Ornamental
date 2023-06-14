@@ -126,124 +126,64 @@ public abstract class MasterRegistryHelper {
     }
 
     /**
-     * For creating a list of default Block Tags for an OrnamentStair.
-     * @return ArrayList of Block Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentStair.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> stairBlockTags();
+    protected abstract TagHelper stairTags();
 
     /**
-     * For creating a list of default Item Tags for an OrnamentStair.
-     * @return ArrayList of Item Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentSlab.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> stairItemTags();
+    protected abstract TagHelper slabTags();
 
     /**
-     * For creating a list of default Block Tags for an OrnamentSlab.
-     * @return ArrayList of Block Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentFence.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> slabBlockTags();
+    protected abstract TagHelper fenceTags();
 
     /**
-     * For creating a list of default Item Tags for an OrnamentSlab.
-     * @return ArrayList of Item Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentTrapDoor.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> slabItemTags();
+    protected abstract TagHelper trapdoorTags();
 
     /**
-     * For creating a list of default Block Tags for an OrnamentFence.
-     * @return ArrayList of Block Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentFenceGate.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> fenceBlockTags();
+    protected abstract TagHelper fencegateTags();
 
     /**
-     * For creating a list of default Item Tags for an OrnamentFence.
-     * @return ArrayList of Item Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentDoor.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> fenceItemTags();
+    protected abstract TagHelper doorTags();
 
     /**
-     * For creating a list of default Block Tags for an OrnamentTrapDoor.
-     * @return ArrayList of Block Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentPole.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> trapdoorBlockTags();
+    protected abstract TagHelper poleTags();
 
     /**
-     * For creating a list of default Item Tags for an OrnamentTrapDoor.
-     * @return ArrayList of Item Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentBeam.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> trapdoorItemTags();
+    protected abstract TagHelper beamTags();
 
     /**
-     * For creating a list of default Block Tags for an OrnamentFenceGate.
-     * @return ArrayList of Block Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentWall.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> fencegateBlockTags();
+    protected abstract TagHelper wallTags();
 
     /**
-     * For creating a list of default Item Tags for an OrnamentFenceGate.
-     * @return ArrayList of Item Tags.
+     * For creating lists of default Block and Item Tags for an OrnamentSaddleDoor.
+     * @return TagHelper containing Block and Item Tags.
      */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> fencegateItemTags();
-
-    /**
-     * For creating a list of default Block Tags for an OrnamentDoor.
-     * @return ArrayList of Block Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> doorBlockTags();
-
-    /**
-     * For creating a list of default Item Tags for an OrnamentDoor.
-     * @return ArrayList of Item Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> doorItemTags();
-
-    /**
-     * For creating a list of default Block Tags for an OrnamentPole.
-     * @return ArrayList of Block Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> poleBlockTags();
-
-    /**
-     * For creating a list of default Item Tags for an OrnamentPole.
-     * @return ArrayList of Item Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> poleItemTags();
-
-    /**
-     * For creating a list of default Block Tags for an OrnamentBeam.
-     * @return ArrayList of Block Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> beamBlockTags();
-
-    /**
-     * For creating a list of default Item Tags for an OrnamentBeam.
-     * @return ArrayList of Item Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> beamItemTags();
-
-    /**
-     * For creating a list of default Block Tags for an OrnamentWall.
-     * @return ArrayList of Block Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> wallBlockTags();
-
-    /**
-     * For creating a list of default Item Tags for an OrnamentWall.
-     * @return ArrayList of Item Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> wallItemTags();
-
-    /**
-     * For creating a list of default Block Tags for an OrnamentSaddleDoor.
-     * @return ArrayList of Block Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> saddledoorBlockTags();
-
-    /**
-     * For creating a list of default Item Tags for an OrnamentSaddleDoor.
-     * @return ArrayList of Item Tags.
-     */
-    protected abstract ArrayList<List<RegistryObject<? extends Block>>> saddledoorItemTags();
+    protected abstract TagHelper saddledoorTags();
 
     /**
      * For registering an OrnamentStair. This method contains everything required for registration.
@@ -255,8 +195,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = stairProperties(builder);
-        blocktags.addAll(stairBlockTags());
-        itemtags.addAll(stairItemTags());
+        blocktags.addAll(stairTags().blockTags());
+        itemtags.addAll(stairTags().itemTags());
 
         return registerBlock(builder, "_stairs", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 4, OrnamentBlockItem::new), ModCreativeTabs.STAIR_ORNAMENTS, blocktags, itemtags);
@@ -272,8 +212,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentSlab, O extends OrnamentBuilder> RegistryObject<T> slab(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = slabProperties(builder);
-        blocktags.addAll(slabBlockTags());
-        itemtags.addAll(slabItemTags());
+        blocktags.addAll(slabTags().blockTags());
+        itemtags.addAll(slabTags().itemTags());
 
         return registerBlock(builder, "_slab", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 3, OrnamentBlockItem::new), ModCreativeTabs.SLAB_ORNAMENTS, blocktags, itemtags);
@@ -289,8 +229,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentFence, O extends OrnamentBuilder> RegistryObject<T> fence(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = fenceProperties(builder);
-        blocktags.addAll(fenceBlockTags());
-        itemtags.addAll(fenceItemTags());
+        blocktags.addAll(fenceTags().blockTags());
+        itemtags.addAll(fenceTags().itemTags());
 
         return registerBlock(builder, "_fence", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 1, OrnamentBlockItem::new), ModCreativeTabs.FENCE_ORNAMENTS, blocktags, itemtags);
@@ -306,8 +246,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentTrapDoor, O extends OrnamentBuilder> RegistryObject<T> trapdoor(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = trapdoorProperties(builder);
-        blocktags.addAll(trapdoorBlockTags());
-        itemtags.addAll(trapdoorItemTags());
+        blocktags.addAll(trapdoorTags().blockTags());
+        itemtags.addAll(trapdoorTags().itemTags());
 
         return registerBlock(builder, "_trapdoor", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 5, OrnamentBlockItem::new), ModCreativeTabs.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
@@ -323,8 +263,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentFenceGate, O extends OrnamentBuilder> RegistryObject<T> fencegate(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = fencegateProperties(builder);
-        blocktags.addAll(fencegateBlockTags());
-        itemtags.addAll(fencegateItemTags());
+        blocktags.addAll(fencegateTags().blockTags());
+        itemtags.addAll(fencegateTags().itemTags());
 
         return registerBlock(builder, "_fence_gate", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 2, OrnamentBlockItem::new), ModCreativeTabs.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
@@ -340,8 +280,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentDoor, O extends OrnamentBuilder> RegistryObject<T> door(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = doorProperties(builder);
-        blocktags.addAll(doorBlockTags());
-        itemtags.addAll(doorItemTags());
+        blocktags.addAll(doorTags().blockTags());
+        itemtags.addAll(doorTags().itemTags());
 
         return registerBlock(builder, "_door", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), ModCreativeTabs.DOOR_ORNAMENTS, blocktags, itemtags);
@@ -357,8 +297,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentPole, O extends OrnamentBuilder> RegistryObject<T> pole(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = poleProperties(builder);
-        blocktags.addAll(poleBlockTags());
-        itemtags.addAll(poleItemTags());
+        blocktags.addAll(poleTags().blockTags());
+        itemtags.addAll(poleTags().itemTags());
 
         return registerBlock(builder, "_pole", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 6, OrnamentBlockItem::new), ModCreativeTabs.POLE_ORNAMENTS, blocktags, itemtags);
@@ -374,8 +314,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentBeam, O extends OrnamentBuilder> RegistryObject<T> beam(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = beamProperties(builder);
-        blocktags.addAll(beamBlockTags());
-        itemtags.addAll(beamItemTags());
+        blocktags.addAll(beamTags().blockTags());
+        itemtags.addAll(beamTags().itemTags());
 
         return registerBlock(builder, "_beam", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 7, OrnamentBlockItem::new), ModCreativeTabs.BEAM_ORNAMENTS, blocktags, itemtags);
@@ -391,8 +331,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentWall, O extends OrnamentBuilder> RegistryObject<T> wall(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = wallProperties(builder);
-        blocktags.addAll(wallBlockTags());
-        itemtags.addAll(wallItemTags());
+        blocktags.addAll(wallTags().blockTags());
+        itemtags.addAll(wallTags().itemTags());
 
         return registerBlock(builder, "_wall", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 8, OrnamentBlockItem::new), ModCreativeTabs.WALL_ORNAMENTS, blocktags, itemtags);
@@ -408,8 +348,8 @@ public abstract class MasterRegistryHelper {
      */
     public <T extends OrnamentSaddleDoor, O extends OrnamentBuilder> RegistryObject<T> saddledoor(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = saddledoorProperties(builder);
-        blocktags.addAll(saddledoorBlockTags());
-        itemtags.addAll(saddledoorItemTags());
+        blocktags.addAll(saddledoorTags().blockTags());
+        itemtags.addAll(saddledoorTags().itemTags());
 
         return registerBlock(builder, "_saddle_door", () -> factory.create(props, builder), item ->
                 registerBlockItem(item, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
@@ -462,4 +402,11 @@ public abstract class MasterRegistryHelper {
     public interface ItemFactory<T extends BlockItem> {
         T create(Block block, Item.Properties props, OrnamentBuilder builder, int index);
     }
+
+    /**
+     * For storing all Block and Item Tags. This just keeps everything together in one tidy space.
+     * @param blockTags The Block Tags to provide.
+     * @param itemTags the Item Tags to provide.
+     */
+    public record TagHelper(ArrayList<List<RegistryObject<? extends Block>>> blockTags, ArrayList<List<RegistryObject<? extends Block>>> itemTags) { }
 }

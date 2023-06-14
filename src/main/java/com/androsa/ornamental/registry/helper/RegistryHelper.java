@@ -20,103 +20,73 @@ public class RegistryHelper extends MasterRegistryHelper {
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> stairBlockTags() {
-        return array(OrnamentalBlockTags.STAIRS);
+    protected TagHelper stairTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.STAIRS),
+                this.array(OrnamentalItemTags.STAIRS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> stairItemTags() {
-        return array(OrnamentalItemTags.STAIRS);
+    protected TagHelper slabTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.SLABS),
+                this.array(OrnamentalItemTags.SLABS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> slabBlockTags() {
-        return array(OrnamentalBlockTags.SLABS);
+    protected TagHelper fenceTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.FENCES),
+                this.array(OrnamentalItemTags.FENCES));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> slabItemTags() {
-        return array(OrnamentalItemTags.SLABS);
+    protected TagHelper trapdoorTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.TRAPDOORS),
+                this.array(OrnamentalItemTags.TRAPDOORS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> fenceBlockTags() {
-        return array(OrnamentalBlockTags.FENCES);
+    protected TagHelper fencegateTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.FENCE_GATES),
+                this.array(OrnamentalItemTags.FENCE_GATES));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> fenceItemTags() {
-        return array(OrnamentalItemTags.FENCES);
+    protected TagHelper doorTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.DOORS),
+                this.array(OrnamentalItemTags.DOORS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> trapdoorBlockTags() {
-        return array(OrnamentalBlockTags.TRAPDOORS);
+    protected TagHelper poleTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.POLES),
+                this.array(OrnamentalItemTags.POLES));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> trapdoorItemTags() {
-        return array(OrnamentalItemTags.TRAPDOORS);
+    protected TagHelper beamTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.BEAMS),
+                this.array(OrnamentalItemTags.BEAMS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> fencegateBlockTags() {
-        return array(OrnamentalBlockTags.FENCE_GATES);
+    protected TagHelper wallTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.WALLS),
+                this.array(OrnamentalItemTags.WALLS));
     }
 
     @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> fencegateItemTags() {
-        return array(OrnamentalItemTags.FENCE_GATES);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> doorBlockTags() {
-        return array(OrnamentalBlockTags.DOORS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> doorItemTags() {
-        return array(OrnamentalItemTags.DOORS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> poleBlockTags() {
-        return array(OrnamentalBlockTags.POLES);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> poleItemTags() {
-        return array(OrnamentalItemTags.POLES);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> beamBlockTags() {
-        return array(OrnamentalBlockTags.BEAMS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> beamItemTags() {
-        return array(OrnamentalItemTags.BEAMS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> wallBlockTags() {
-        return array(OrnamentalBlockTags.WALLS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> wallItemTags() {
-        return array(OrnamentalItemTags.WALLS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> saddledoorBlockTags() {
-        return array(OrnamentalBlockTags.SADDLE_DOORS);
-    }
-
-    @Override
-    protected ArrayList<List<RegistryObject<? extends Block>>> saddledoorItemTags() {
-        return array(OrnamentalItemTags.SADDLE_DOORS);
+    protected TagHelper saddledoorTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.SADDLE_DOORS),
+                this.array(OrnamentalItemTags.SADDLE_DOORS));
     }
 
     /**
