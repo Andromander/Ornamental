@@ -364,11 +364,11 @@ public abstract class MasterRegistryHelper {
         itemRegistry.register(name, item.apply(reg));
         tab.add(reg);
 
-        blocktags.addAll(builder.getBuilder().blockTags);
+        blocktags.addAll(builder.blockTags);
         for (List<RegistryObject<? extends Block>> tag : blocktags) {
             tag.add(reg);
         }
-        itemtags.addAll(builder.getBuilder().itemTags);
+        itemtags.addAll(builder.itemTags);
         for (List<RegistryObject<? extends Block>> tag : itemtags) {
             tag.add(reg);
         }

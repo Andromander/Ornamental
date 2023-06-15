@@ -89,10 +89,50 @@ public class OrnamentBuilder {
     }
 
     /**
-     * When extending OrnamentBuilder, access to the OrnamentBuilder properties will be lost. This method can be used to get access to properties here.
+     * A Copy Constructor for OrnamentBuilder. This calls {@link OrnamentBuilder#OrnamentBuilder(String)}, but will also copy all field values over.
+     * In the event of extending OrnamentBuilder, use this to create properties for OrnamentBuilder.
+     * @param builder The pre-defined OrnamentBuilder to use.
      */
-    public OrnamentBuilder getBuilder() {
-        return this;
+    public OrnamentBuilder(OrnamentBuilder builder) {
+        this(builder.name);
+        this.color = builder.color;
+        this.hardness = builder.hardness;
+        this.resistance = builder.resistance;
+        this.light = builder.light;
+        this.fallMultiplier = builder.fallMultiplier;
+        this.slipperiness = builder.slipperiness;
+        this.burnTime = builder.burnTime;
+        this.baseBlock = builder.baseBlock;
+        this.fencegateSounds = builder.fencegateSounds;
+        this.saddledoorSounds = builder.saddledoorSounds;
+        this.blockSetType = builder.blockSetType;
+        this.canOpen = builder.canOpen;
+        this.fallThrough = builder.fallThrough;
+        this.hasPower = builder.hasPower;
+        this.doesTick = builder.doesTick;
+        this.requiresTool = builder.requiresTool;
+        this.fireproof = builder.fireproof;
+        this.conductsRedstone = builder.conductsRedstone;
+        this.entitySpawnPredicate = builder.entitySpawnPredicate;
+        this.pathShape = builder.pathShape;
+        this.canMelt = builder.canMelt;
+        this.meltResult = builder.meltResult;
+        this.canVaporise = builder.canVaporise;
+        this.isSolid = builder.isSolid;
+        this.breakableCull = builder.breakableCull;
+        this.postProcess = builder.postProcess;
+        this.emissiveRender = builder.emissiveRender;
+        this.instrument = builder.instrument;
+        this.pushReaction = builder.pushReaction;
+        this.projectileHitSounds = builder.projectileHitSounds;
+        this.convertPredicates = builder.convertPredicates;
+        this.floorHazard = builder.floorHazard;
+        this.createBubbles = builder.createBubbles;
+        this.extinguishes = builder.extinguishes;
+        this.bubbleDragDown = builder.bubbleDragDown;
+        this.tickSchedule = builder.tickSchedule;
+        this.blockTags = builder.blockTags;
+        this.itemTags = builder.itemTags;
     }
 
     /**

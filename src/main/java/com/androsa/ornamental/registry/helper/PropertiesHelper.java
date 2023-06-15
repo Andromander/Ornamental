@@ -14,21 +14,20 @@ public class PropertiesHelper {
      * @param builder the material being used for that block.
      */
     public static BlockBehaviour.Properties createProps(OrnamentBuilder builder) {
-        OrnamentBuilder getbuilder = builder.getBuilder();
         BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
-                .mapColor(getbuilder.color)
-                .strength(getbuilder.hardness, getbuilder.resistance)
-                .sound(getbuilder.blockSetType.soundType())
-                .friction(getbuilder.slipperiness)
-                .pushReaction(getbuilder.pushReaction);
-        if (getbuilder.light > 0) props.lightLevel((state) -> getbuilder.light);
-        if (getbuilder.doesTick) props.randomTicks();
-        if (!getbuilder.isSolid) props.noOcclusion();
-        if (getbuilder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
-        if (getbuilder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
-        if (getbuilder.requiresTool) props.requiresCorrectToolForDrops();
-        if (getbuilder.conductsRedstone != null) props.isRedstoneConductor(getbuilder.conductsRedstone);
-        if (getbuilder.entitySpawnPredicate != null) props.isValidSpawn(getbuilder.entitySpawnPredicate);
+                .mapColor(builder.color)
+                .strength(builder.hardness, builder.resistance)
+                .sound(builder.blockSetType.soundType())
+                .friction(builder.slipperiness)
+                .pushReaction(builder.pushReaction);
+        if (builder.light > 0) props.lightLevel((state) -> builder.light);
+        if (builder.doesTick) props.randomTicks();
+        if (!builder.isSolid) props.noOcclusion();
+        if (builder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
+        if (builder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
+        if (builder.requiresTool) props.requiresCorrectToolForDrops();
+        if (builder.conductsRedstone != null) props.isRedstoneConductor(builder.conductsRedstone);
+        if (builder.entitySpawnPredicate != null) props.isValidSpawn(builder.entitySpawnPredicate);
 
         return props;
     }
