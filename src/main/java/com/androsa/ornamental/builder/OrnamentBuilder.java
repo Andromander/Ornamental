@@ -1,6 +1,7 @@
 package com.androsa.ornamental.builder;
 
 import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.registry.helper.MasterRegistryHelper;
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -77,8 +78,7 @@ public class OrnamentBuilder {
     public boolean extinguishes = false;
     public boolean bubbleDragDown = false;
     public int tickSchedule = 0;
-    public List<List<RegistryObject<? extends Block>>> blockTags = new ArrayList<>();
-    public List<List<RegistryObject<? extends Block>>> itemTags = new ArrayList<>();
+    public MasterRegistryHelper.TagHelper tags = new MasterRegistryHelper.TagHelper(new ArrayList<>(), new ArrayList<>());
 
     /**
      * Create a template material for an Ornament block.
@@ -131,8 +131,7 @@ public class OrnamentBuilder {
         this.extinguishes = builder.extinguishes;
         this.bubbleDragDown = builder.bubbleDragDown;
         this.tickSchedule = builder.tickSchedule;
-        this.blockTags = builder.blockTags;
-        this.itemTags = builder.itemTags;
+        this.tags = builder.tags;
     }
 
     /**
@@ -509,9 +508,8 @@ public class OrnamentBuilder {
      * For ornament-based tags, this is handled via registration.
      * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
      */
-    public OrnamentBuilder addBlockTags(List<List<RegistryObject<? extends Block>>> tags) {
-        this.blockTags = Lists.newArrayList(tags);
-        return this;
+    public OrnamentBuilder addBlockTags(ArrayList<List<RegistryObject<? extends Block>>> tags) {
+        return this.addTags(tags, Lists.newArrayList());
     }
 
     /**
@@ -519,8 +517,18 @@ public class OrnamentBuilder {
      * For ornament-based tags, this is handled via registration.
      * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
      */
-    public OrnamentBuilder addItemTags(List<List<RegistryObject<? extends Block>>> tags) {
-        this.itemTags = Lists.newArrayList(tags);
+    public OrnamentBuilder addItemTags(ArrayList<List<RegistryObject<? extends Block>>> tags) {
+        return this.addTags(Lists.newArrayList(), tags);
+    }
+
+    /**
+     * Data generation only. This will put all ornaments of a material into arrays of Block and Item Tags.
+     * For ornament-based tags, this is handled via registration.
+     * @param blocks an ArrayList of Block Tags.
+     * @param items an ArrayList of Item Tags.
+     */
+    public OrnamentBuilder addTags(ArrayList<List<RegistryObject<? extends Block>>> blocks, ArrayList<List<RegistryObject<? extends Block>>> items) {
+        this.tags = new MasterRegistryHelper.TagHelper(blocks, items);
         return this;
     }
 }
