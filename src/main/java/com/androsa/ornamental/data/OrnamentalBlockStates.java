@@ -9,7 +9,6 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -22,7 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
     public OrnamentalBlockStates(PackOutput output, ExistingFileHelper helper) {
-        super(output, OrnamentalMod.MODID, helper);
+        super(output, OrnamentalMod.MODID, "minecraft", helper);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBasic(ModBlocks.obsidian_stairs, "obsidian");
         stairsBasic(ModBlocks.coal_stairs, "coal_block");
         stairsBasic(ModBlocks.redstone_stairs, "redstone_block");
-        stairsMissing(ModBlocks.missingno_stairs);
+        stairsBasic(ModBlocks.missingno_stairs, locMod("missingno"), SOLID);
         stairsBasic(ModBlocks.clay_stairs, "clay");
         stairsBasic(ModBlocks.dirt_stairs, "dirt");
         hexamodelStairsBlock(ModBlocks.grass_stairs, "grass");
@@ -63,7 +62,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.obsidian_slab, "obsidian");
         slabBasic(ModBlocks.coal_slab, "coal_block");
         slabBasic(ModBlocks.redstone_slab, "redstone_block");
-        slabMissing(ModBlocks.missingno_slab);
+        slabBasic(ModBlocks.missingno_slab, locMod("missingno"), SOLID);
         slabBasic(ModBlocks.clay_slab, "clay");
         slabBasic(ModBlocks.dirt_slab, "dirt");
         modelSlabBlock(ModBlocks.grass_slab, "grass_block", "grass");
@@ -91,7 +90,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceBasic(ModBlocks.obsidian_fence, "obsidian");
         fenceBasic(ModBlocks.coal_fence, "coal_block");
         fenceBasic(ModBlocks.redstone_fence, "redstone_block");
-        fenceMissing(ModBlocks.missingno_fence);
+        fenceBasic(ModBlocks.missingno_fence, locMod("missingno"), SOLID);
         fenceBasic(ModBlocks.clay_fence, "clay");
         fenceBasic(ModBlocks.dirt_fence, "dirt");
         modelFenceBlock(ModBlocks.grass_fence, "grass");
@@ -121,13 +120,13 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.obsidian_trapdoor, "obsidian");
         trapdoorBasic(ModBlocks.coal_trapdoor, "coal");
         trapdoorBasic(ModBlocks.redstone_trapdoor, "redstone");
-        trapdoorMissing(ModBlocks.missingno_trapdoor);
+        trapdoor(ModBlocks.missingno_trapdoor, locMod("missingno"), CUTOUT, false);
         trapdoorBasic(ModBlocks.clay_trapdoor, "clay");
-        trapdoorVanilla(ModBlocks.dirt_trapdoor, "dirt");
+        trapdoorParent(ModBlocks.dirt_trapdoor, "dirt");
         modelTrapdoorBlock(ModBlocks.grass_trapdoor, "grass");
         trapdoorBasic(ModBlocks.hay_trapdoor, "hay");
         modelTrapdoorBlock(ModBlocks.path_trapdoor, "path");
-        trapdoorVanilla(ModBlocks.brick_trapdoor, "bricks");
+        trapdoorParent(ModBlocks.brick_trapdoor, "bricks");
         trapdoorBasic(ModBlocks.quartz_trapdoor, "quartz");
         trapdoorBasic(ModBlocks.bone_trapdoor, "bone");
         trapdoorBasic(ModBlocks.nether_brick_trapdoor, "nether_brick");
@@ -153,7 +152,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBasic(ModBlocks.obsidian_fence_gate, "obsidian");
         fenceGateBasic(ModBlocks.coal_fence_gate, "coal_block");
         fenceGateBasic(ModBlocks.redstone_fence_gate, "redstone_block");
-        fenceGateMissing(ModBlocks.missingno_fence_gate);
+        fenceGateBasic(ModBlocks.missingno_fence_gate, locMod("missingno"), SOLID);
         fenceGateBasic(ModBlocks.clay_fence_gate, "clay");
         fenceGateBasic(ModBlocks.dirt_fence_gate, "dirt");
         modelFenceGateBlock(ModBlocks.grass_fence_gate, "grass");
@@ -184,13 +183,13 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.obsidian_door, "obsidian");
         doorBasic(ModBlocks.coal_door, "coal");
         doorBasic(ModBlocks.redstone_door, "redstone");
-        doorMissing(ModBlocks.missingno_door);
+        door(ModBlocks.missingno_door, locMod("missingno"), locMod("missingno"), locMod("missingno"), locMod("missingno"), CUTOUT);
         doorBasic(ModBlocks.clay_door, "clay");
-        doorBasicVanilla(ModBlocks.dirt_door, "dirt");
+        doorHidden(ModBlocks.dirt_door, "dirt");
         halfDirtDoorBlock(ModBlocks.grass_door, "grass");
         doorBasic(ModBlocks.hay_door, "hay");
         halfDirtDoorBlock(ModBlocks.path_door, "path");
-        doorBasicVanilla(ModBlocks.brick_door, "bricks");
+        doorHidden(ModBlocks.brick_door, "bricks");
         doorBasic(ModBlocks.quartz_door, "quartz");
         doorBasic(ModBlocks.bone_door, "bone");
         doorBasic(ModBlocks.nether_brick_door, "nether_brick");
@@ -216,7 +215,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.obsidian_pole, "obsidian");
         poleBasic(ModBlocks.coal_pole, "coal_block");
         poleBasic(ModBlocks.redstone_pole, "redstone_block");
-        poleMissing(ModBlocks.missingno_pole, "missingno");
+        poleBasic(ModBlocks.missingno_pole, locMod("missingno"), locMod("missingno"), SOLID);
         poleBasic(ModBlocks.clay_pole, "clay");
         poleBasic(ModBlocks.dirt_pole, "dirt");
         modelPoleBlock(ModBlocks.grass_pole, "grass", "grass_block");
@@ -248,7 +247,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.obsidian_beam, "obsidian");
         beamBasic(ModBlocks.coal_beam, "coal_block");
         beamBasic(ModBlocks.redstone_beam, "redstone_block");
-        beamMissing(ModBlocks.missingno_beam, "missingno");
+        beamBasic(ModBlocks.missingno_beam, locMod("missingno"), locMod("missingno"), SOLID);
         beamBasic(ModBlocks.clay_beam, "clay");
         beamBasic(ModBlocks.dirt_beam, "dirt");
         halfDirtBeamBlock(ModBlocks.grass_beam, "grass_block", "grass", true);
@@ -280,7 +279,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.obsidian_wall, "obsidian");
         wallBasic(ModBlocks.coal_wall, "coal_block");
         wallBasic(ModBlocks.redstone_wall, "redstone_block");
-        wallMissing(ModBlocks.missingno_wall, "missingno");
+        wallBasic(ModBlocks.missingno_wall, locMod("missingno"), SOLID);
         wallBasic(ModBlocks.clay_wall, "clay");
         wallBasic(ModBlocks.dirt_wall, "dirt");
         modelWallBlock(ModBlocks.grass_wall, "grass");
@@ -300,7 +299,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.magma_wall, "magma");
         wallBasic(ModBlocks.calcite_wall, "calcite");
 
-        saddleDoorVanilla(ModBlocks.iron_saddle_door, "iron_trapdoor");
+        saddleDoorHidden(ModBlocks.iron_saddle_door, "iron_trapdoor");
         saddleDoorBasic(ModBlocks.gold_saddle_door, "gold");
         saddleDoorBasic(ModBlocks.diamond_saddle_door, "diamond");
         saddleDoorBasic(ModBlocks.emerald_saddle_door, "emerald");
@@ -308,13 +307,13 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.obsidian_saddle_door, "obsidian");
         saddleDoorBasic(ModBlocks.coal_saddle_door, "coal");
         saddleDoorBasic(ModBlocks.redstone_saddle_door, "redstone");
-        saddleDoorMissing(ModBlocks.missingno_saddle_door, "missingno");
+        saddleDoor(ModBlocks.missingno_saddle_door, locMod("missingno"), locMod("missingno"), locMod("missingno"), CUTOUT);
         saddleDoorBasic(ModBlocks.clay_saddle_door, "clay");
-        saddleDoorVanilla(ModBlocks.dirt_saddle_door, "dirt");
+        saddleDoorHidden(ModBlocks.dirt_saddle_door, "dirt");
         modelSaddleDoorBlock(ModBlocks.grass_saddle_door, "grass");
         saddleDoorBasic(ModBlocks.hay_saddle_door, "hay");
         modelSaddleDoorBlock(ModBlocks.path_saddle_door, "path");
-        saddleDoorVanilla(ModBlocks.brick_saddle_door, "bricks");
+        saddleDoorHidden(ModBlocks.brick_saddle_door, "bricks");
         saddleDoorBasic(ModBlocks.quartz_saddle_door, "quartz");
         saddleDoorBasic(ModBlocks.bone_saddle_door, "bone");
         saddleDoorBasic(ModBlocks.nether_brick_saddle_door, "nether_brick");
@@ -337,56 +336,56 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
     public void modelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile stairs = models().getExistingFile(locOrnament(dir));
-        ModelFile innerstairs = models().getExistingFile(locOrnament(dir + "_inner"));
-        ModelFile outerstairs = models().getExistingFile(locOrnament(dir + "_outer"));
+        ModelFile stairs = models().getExistingFile(locMod(dir));
+        ModelFile innerstairs = models().getExistingFile(locMod(dir + "_inner"));
+        ModelFile outerstairs = models().getExistingFile(locMod(dir + "_outer"));
 
         stairsBlock(block.get(), stairs, innerstairs, outerstairs);
     }
 
     public void hexamodelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile bottomstraight = models().getExistingFile(locOrnament(dir + "_bottom_straight"));
-        ModelFile topstraight = models().getExistingFile(locOrnament(dir + "_top_straight"));
-        ModelFile bottominner = models().getExistingFile(locOrnament(dir + "_bottom_inner"));
-        ModelFile topinner = models().getExistingFile(locOrnament(dir + "_top_inner"));
-        ModelFile bottomouter = models().getExistingFile(locOrnament(dir + "_bottom_outer"));
-        ModelFile topouter = models().getExistingFile(locOrnament(dir + "_top_outer"));
+        ModelFile bottomstraight = models().getExistingFile(locMod(dir + "_bottom_straight"));
+        ModelFile topstraight = models().getExistingFile(locMod(dir + "_top_straight"));
+        ModelFile bottominner = models().getExistingFile(locMod(dir + "_bottom_inner"));
+        ModelFile topinner = models().getExistingFile(locMod(dir + "_top_inner"));
+        ModelFile bottomouter = models().getExistingFile(locMod(dir + "_bottom_outer"));
+        ModelFile topouter = models().getExistingFile(locMod(dir + "_top_outer"));
         stairsBlock(block.get(), bottomstraight, topstraight, bottominner, topinner, bottomouter, topouter);
     }
 
     public void modelSlabBlock(RegistryObject<? extends SlabBlock> block, String full, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile slab = models().getExistingFile(locOrnament(dir));
-        ModelFile slabtop = models().getExistingFile(locOrnament(dir + "_top"));
-        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT_MIPPED);
+        ModelFile slab = models().getExistingFile(locMod(dir));
+        ModelFile slabtop = models().getExistingFile(locMod(dir + "_top"));
+        ModelFile fullblock = models().forceRenderType(full, locParent(full), CUTOUT_MIPPED);
 
         slabBlock(block.get(), slab, slabtop, fullblock);
     }
 
     public void modelFenceBlock(RegistryObject<? extends FenceBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile post = models().getExistingFile(locOrnament(dir + "_post"));
-        ModelFile side = models().getExistingFile(locOrnament(dir + "_side"));
+        ModelFile post = models().getExistingFile(locMod(dir + "_post"));
+        ModelFile side = models().getExistingFile(locMod(dir + "_side"));
 
         fourWayBlock(block.get(), post, side);
     }
 
     public void modelTrapdoorBlock(RegistryObject<? extends TrapDoorBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile bottom = models().getExistingFile(locOrnament(dir + "_bottom"));
-        ModelFile top = models().getExistingFile(locOrnament(dir + "_top"));
-        ModelFile open = models().getExistingFile(locOrnament(dir + "_open"));
+        ModelFile bottom = models().getExistingFile(locMod(dir + "_bottom"));
+        ModelFile top = models().getExistingFile(locMod(dir + "_top"));
+        ModelFile open = models().getExistingFile(locMod(dir + "_open"));
 
         trapdoorBlock(block.get(), bottom, top, open, true);
     }
 
     public void modelFenceGateBlock(RegistryObject<? extends FenceGateBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile gate = models().getExistingFile(locOrnament(dir));
-        ModelFile open = models().getExistingFile(locOrnament(dir + "_open"));
-        ModelFile wall = models().getExistingFile(locOrnament(dir + "_wall"));
-        ModelFile wallopen = models().getExistingFile(locOrnament(dir + "_wall_open"));
+        ModelFile gate = models().getExistingFile(locMod(dir));
+        ModelFile open = models().getExistingFile(locMod(dir + "_open"));
+        ModelFile wall = models().getExistingFile(locMod(dir + "_wall"));
+        ModelFile wallopen = models().getExistingFile(locMod(dir + "_wall_open"));
 
         fenceGateBlock(block.get(), gate, open, wall, wallopen);
     }
@@ -394,59 +393,59 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     public void halfDirtDoorBlock(RegistryObject<? extends DoorBlock> block, String path) {
         String dirt = ModBlocks.dirt_door.getId().getPath();
         String dir = path + "/" + block.getId().getPath();
-        ModelFile bottomleft = models().getExistingFile(locOrnament(dirt + "_bottom_left"));
-        ModelFile bottomleftopen = models().getExistingFile(locOrnament(dirt + "_bottom_left_open"));
-        ModelFile bottomright = models().getExistingFile(locOrnament(dirt + "_bottom_right"));
-        ModelFile bottomrightopen = models().getExistingFile(locOrnament(dirt + "_bottom_right_open"));
-        ModelFile topleft = models().getExistingFile(locOrnament(dir + "_top_left"));
-        ModelFile topleftopen = models().getExistingFile(locOrnament(dir + "_top_left_open"));
-        ModelFile topright = models().getExistingFile(locOrnament(dir + "_top_right"));
-        ModelFile toprightopen = models().getExistingFile(locOrnament(dir + "_top_right_open"));
+        ModelFile bottomleft = models().getExistingFile(locMod(dirt + "_bottom_left"));
+        ModelFile bottomleftopen = models().getExistingFile(locMod(dirt + "_bottom_left_open"));
+        ModelFile bottomright = models().getExistingFile(locMod(dirt + "_bottom_right"));
+        ModelFile bottomrightopen = models().getExistingFile(locMod(dirt + "_bottom_right_open"));
+        ModelFile topleft = models().getExistingFile(locMod(dir + "_top_left"));
+        ModelFile topleftopen = models().getExistingFile(locMod(dir + "_top_left_open"));
+        ModelFile topright = models().getExistingFile(locMod(dir + "_top_right"));
+        ModelFile toprightopen = models().getExistingFile(locMod(dir + "_top_right_open"));
 
         doorBlock(block.get(), bottomleft, bottomleftopen, bottomright, bottomrightopen, topleft, topleftopen, topright, toprightopen);
     }
 
     public void modelPoleBlock(RegistryObject<? extends OrnamentPole> block, String path, String full) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile whole = models().getExistingFile(locOrnament(dir + "_whole"));
-        ModelFile horizon = models().getExistingFile(locOrnament(dir + "_horizontal"));
-        ModelFile vertical = models().getExistingFile(locOrnament(dir + "_vertical"));
-        ModelFile corner = models().getExistingFile(locOrnament(dir + "_corner"));
-        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT_MIPPED);
+        ModelFile whole = models().getExistingFile(locMod(dir + "_whole"));
+        ModelFile horizon = models().getExistingFile(locMod(dir + "_horizontal"));
+        ModelFile vertical = models().getExistingFile(locMod(dir + "_vertical"));
+        ModelFile corner = models().getExistingFile(locMod(dir + "_corner"));
+        ModelFile fullblock = models().forceRenderType(full, locParent(full), CUTOUT_MIPPED);
 
         poleBlock(block, whole, horizon, vertical, corner, fullblock);
     }
 
     public void halfDirtBeamBlock(RegistryObject<? extends OrnamentBeam> block, String full, String path, boolean noface) {
         String name = path + "/" + block.getId().getPath();
-        ModelFile wholetop = models().getExistingFile(locOrnament(name + "_whole_top"));
-        ModelFile wholebottom = models().getExistingFile(locOrnament(name + "_whole_bottom"));
-        ModelFile horizontop = models().getExistingFile(locOrnament(name + "_horizontal_top"));
-        ModelFile horizonbottom = models().getExistingFile(locOrnament(name + "_horizontal_bottom"));
-        ModelFile verticaltop = models().getExistingFile(locOrnament(name + "_vertical"));
-        ModelFile verticalbottom = models().getExistingFile(locOrnament("dirt_pole_vertical"));
-        ModelFile cornertop = models().getExistingFile(locOrnament(name + "_corner"));
-        ModelFile cornerbottom = models().getExistingFile(locOrnament(noface ? "dirt_pole_corner" : "dirt_pole_whole"));
-        ModelFile fullblock = models().forceRenderType(full, locVanilla(full), CUTOUT);
+        ModelFile wholetop = models().getExistingFile(locMod(name + "_whole_top"));
+        ModelFile wholebottom = models().getExistingFile(locMod(name + "_whole_bottom"));
+        ModelFile horizontop = models().getExistingFile(locMod(name + "_horizontal_top"));
+        ModelFile horizonbottom = models().getExistingFile(locMod(name + "_horizontal_bottom"));
+        ModelFile verticaltop = models().getExistingFile(locMod(name + "_vertical"));
+        ModelFile verticalbottom = models().getExistingFile(locMod("dirt_pole_vertical"));
+        ModelFile cornertop = models().getExistingFile(locMod(name + "_corner"));
+        ModelFile cornerbottom = models().getExistingFile(locMod(noface ? "dirt_pole_corner" : "dirt_pole_whole"));
+        ModelFile fullblock = models().forceRenderType(full, locParent(full), CUTOUT);
 
         beamBlock(block, wholetop, wholebottom, horizontop, horizonbottom, verticaltop, verticalbottom, cornertop, cornerbottom, fullblock);
     }
 
     public void modelWallBlock(RegistryObject<? extends WallBlock> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile post = models().getExistingFile(locOrnament(dir + "_post"));
-        ModelFile side = models().getExistingFile(locOrnament(dir + "_side"));
-        ModelFile tall = models().getExistingFile(locOrnament(dir + "_side_tall"));
+        ModelFile post = models().getExistingFile(locMod(dir + "_post"));
+        ModelFile side = models().getExistingFile(locMod(dir + "_side"));
+        ModelFile tall = models().getExistingFile(locMod(dir + "_side_tall"));
 
         wallBlock(block.get(), post, side, tall);
     }
 
     public void modelSaddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, String path) {
         String dir = path + "/" + block.getId().getPath();
-        ModelFile left = models().getExistingFile(locOrnament(dir + "_left"));
-        ModelFile leftOpen = models().getExistingFile(locOrnament(dir + "_left_open"));
-        ModelFile right = models().getExistingFile(locOrnament(dir + "_right"));
-        ModelFile rightOpen = models().getExistingFile(locOrnament(dir + "_right_open"));
+        ModelFile left = models().getExistingFile(locMod(dir + "_left"));
+        ModelFile leftOpen = models().getExistingFile(locMod(dir + "_left_open"));
+        ModelFile right = models().getExistingFile(locMod(dir + "_right"));
+        ModelFile rightOpen = models().getExistingFile(locMod(dir + "_right_open"));
 
         saddleDoorBlock(block, left, leftOpen, right, rightOpen);
     }

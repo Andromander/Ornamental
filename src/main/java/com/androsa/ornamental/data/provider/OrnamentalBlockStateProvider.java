@@ -22,16 +22,16 @@ import javax.annotation.Nonnull;
 public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
 
     private final OrnamentalBlockModelProvider blockModels;
-    private final String modID;
+    private final String parentID;
 
     public static final ResourceLocation SOLID = new ResourceLocation("solid");
     public static final ResourceLocation TRANSLUCENT = new ResourceLocation("translucent");
     public static final ResourceLocation CUTOUT = new ResourceLocation("cutout");
     public static final ResourceLocation CUTOUT_MIPPED = new ResourceLocation("cutout_mipped");
 
-    public OrnamentalBlockStateProvider(PackOutput output, String modid, ExistingFileHelper helper) {
+    public OrnamentalBlockStateProvider(PackOutput output, String modid, String parent, ExistingFileHelper helper) {
         super(output, modid, helper);
-        modID = modid;
+        parentID = parent;
 
         blockModels = new OrnamentalBlockModelProvider(output, modid, helper) {
             @Override
@@ -50,20 +50,20 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
         return "Ornamental Blockstates and Block Models";
     }
 
-    public String getModID() {
-        return modID;
+    public String parentLoc() {
+        return parentID;
     }
 
     public OrnamentalBlockModelProvider models() {
         return blockModels;
     }
 
-    protected ResourceLocation locVanilla(String name) {
-        return new ResourceLocation("block/" + name);
+    protected ResourceLocation locMod(String name) {
+        return modLoc("block/" + name);
     }
 
-    protected ResourceLocation locOrnament(String name) {
-        return new ResourceLocation(getModID(), "block/" + name);
+    protected ResourceLocation locParent(String name) {
+        return new ResourceLocation(parentLoc(), "block/" + name);
     }
 
     /* Stairs */
@@ -72,11 +72,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void stairsBasic(RegistryObject<? extends StairBlock> block, String name, ResourceLocation type) {
-        stairsBasic(block, locVanilla(name), type);
-    }
-
-    public void stairsMissing(RegistryObject<? extends StairBlock> block) {
-        stairsBasic(block, locOrnament("missingno"), SOLID);
+        stairsBasic(block, locParent(name), type);
     }
 
     public void stairsBasic(RegistryObject<? extends StairBlock> block, ResourceLocation name, ResourceLocation type) {
@@ -84,7 +80,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void stairsColumn(RegistryObject<? extends StairBlock> block, String side, String end) {
-        stairs(block, locVanilla(side), locVanilla(end), locVanilla(end), SOLID);
+        stairs(block, locParent(side), locParent(end), locParent(end), SOLID);
     }
 
     public void stairs(RegistryObject<? extends StairBlock> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
@@ -101,11 +97,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void slabBasic(RegistryObject<? extends SlabBlock> block, String name, ResourceLocation type) {
-        slabBasic(block, locVanilla(name), type);
-    }
-
-    public void slabMissing(RegistryObject<? extends SlabBlock> block) {
-        slabBasic(block, locOrnament("missingno"), SOLID);
+        slabBasic(block, locParent(name), type);
     }
 
     public void slabBasic(RegistryObject<? extends SlabBlock> block, ResourceLocation name, ResourceLocation type) {
@@ -113,11 +105,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void slabModel(RegistryObject<? extends SlabBlock> block, String model, String name) {
-        slab(block, locVanilla(model), locVanilla(name), locVanilla(name), locVanilla(name), SOLID);
+        slab(block, locParent(model), locParent(name), locParent(name), locParent(name), SOLID);
     }
 
     public void slabColumn(RegistryObject<? extends SlabBlock> block, String blockname, String side, String end) {
-        slab(block, locVanilla(blockname), locVanilla(side), locVanilla(end), locVanilla(end), SOLID);
+        slab(block, locParent(blockname), locParent(side), locParent(end), locParent(end), SOLID);
     }
 
     public void slab(RegistryObject<? extends SlabBlock> block, ResourceLocation model, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
@@ -141,11 +133,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceBasic(RegistryObject<? extends FenceBlock> block, String name, ResourceLocation type) {
-        fenceBasic(block, locVanilla(name), type);
-    }
-
-    public void fenceMissing(RegistryObject<? extends FenceBlock> block) {
-        fenceBasic(block, locOrnament("missingno"), SOLID);
+        fenceBasic(block, locParent(name), type);
     }
 
     public void fenceBasic(RegistryObject<? extends FenceBlock> block, ResourceLocation name, ResourceLocation type) {
@@ -153,7 +141,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceColumn(RegistryObject<? extends FenceBlock> block, String side, String top) {
-        fence(block, locVanilla(side), locVanilla(top), locVanilla(top), SOLID);
+        fence(block, locParent(side), locParent(top), locParent(top), SOLID);
     }
 
     public void fence(RegistryObject<? extends FenceBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
@@ -175,18 +163,14 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void trapdoorBasic(RegistryObject<? extends TrapDoorBlock> block, String name, ResourceLocation type) {
-        trapdoor(block, locOrnament(name + "_trapdoor"), type, true);
+        trapdoor(block, locMod(name + "_trapdoor"), type, true);
     }
 
-    public void trapdoorMissing(RegistryObject<? extends TrapDoorBlock> block) {
-        trapdoor(block, locOrnament("missingno"), CUTOUT, false);
+    public void trapdoorParent(RegistryObject<? extends TrapDoorBlock> block, String name) {
+        trapdoor(block, locParent(name), CUTOUT, false);
     }
 
-    public void trapdoorVanilla(RegistryObject<? extends TrapDoorBlock> block, String name) {
-        trapdoor(block, locVanilla(name), CUTOUT, false);
-    }
-
-    private void trapdoor(RegistryObject<? extends TrapDoorBlock> block, ResourceLocation texture, ResourceLocation type, boolean orientable) {
+    public void trapdoor(RegistryObject<? extends TrapDoorBlock> block, ResourceLocation texture, ResourceLocation type, boolean orientable) {
         if (type == SOLID) {
             trapdoorBlock(block.get(), texture, orientable);
         } else {
@@ -200,11 +184,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceGateBasic(RegistryObject<? extends FenceGateBlock> block, String name, ResourceLocation type) {
-        fenceGateBasic(block, locVanilla(name), type);
-    }
-
-    public void fenceGateMissing(RegistryObject<? extends FenceGateBlock> block) {
-        fenceGateBasic(block, locOrnament("missingno"), SOLID);
+        fenceGateBasic(block, locParent(name), type);
     }
 
     public void fenceGateBasic(RegistryObject<? extends FenceGateBlock> block, ResourceLocation name, ResourceLocation type) {
@@ -212,7 +192,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceGateColumn(RegistryObject<? extends FenceGateBlock> block, String side, String top) {
-        fenceGate(block, locVanilla(side), locVanilla(top), locVanilla(top), SOLID);
+        fenceGate(block, locParent(side), locParent(top), locParent(top), SOLID);
     }
 
     public void fenceGate(RegistryObject<? extends FenceGateBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
@@ -239,15 +219,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void doorBasic(RegistryObject<? extends DoorBlock> block, String name, ResourceLocation type) {
-        door(block, locOrnament(name + "_door_bottom"), locOrnament(name + "_door_bottom"), locOrnament(name + "_door_top"), locOrnament(name + "_door_top"), type);
+        door(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"), type);
     }
 
-    public void doorMissing(RegistryObject<? extends DoorBlock> block) {
-        door(block, locOrnament("missingno"), locOrnament("missingno"), locOrnament("missingno"), locOrnament("missingno"), CUTOUT);
-    }
-
-    public void doorBasicVanilla(RegistryObject<? extends DoorBlock> block, String name) {
-        door(block, locVanilla(name), locVanilla(name), locVanilla(name), locVanilla(name), CUTOUT);
+    public void doorHidden(RegistryObject<? extends DoorBlock> block, String name) {
+        door(block, locParent(name), locParent(name), locParent(name), locParent(name), CUTOUT);
     }
 
     public void door(RegistryObject<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
@@ -287,19 +263,15 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void poleBasic(RegistryObject<? extends OrnamentPole> block, String fullblock, String name, ResourceLocation type) {
-        poleBasic(block, locVanilla(fullblock), locVanilla(name), type);
+        poleBasic(block, locParent(fullblock), locParent(name), type);
     }
 
     public void poleBasic(RegistryObject<? extends OrnamentPole> block, ResourceLocation fullblock, ResourceLocation name, ResourceLocation type) {
         pole(block, fullblock, name, name, name, type);
     }
 
-    public void poleMissing(RegistryObject<? extends OrnamentPole> block, String name) {
-        poleBasic(block, locOrnament(name), locOrnament(name), SOLID);
-    }
-
     public void poleColumn(RegistryObject<? extends OrnamentPole> block, String fullblock, String side, String top) {
-        pole(block, locVanilla(fullblock), locVanilla(top), locVanilla(top), locVanilla(side), SOLID);
+        pole(block, locParent(fullblock), locParent(top), locParent(top), locParent(side), SOLID);
     }
 
     public void pole(RegistryObject<? extends OrnamentPole> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
@@ -332,15 +304,15 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void beamBasic(RegistryObject<? extends OrnamentBeam> block, String name, String fullblock, ResourceLocation type) {
-        beam(block, locVanilla(fullblock), locVanilla(name), locVanilla(name), locVanilla(name), type);
+        beamBasic(block, locParent(fullblock), locParent(name), type);
+    }
+
+    public void beamBasic(RegistryObject<? extends OrnamentBeam> block, ResourceLocation fullblock, ResourceLocation name, ResourceLocation type) {
+        beam(block, fullblock, name, name, name, type);
     }
 
     public void beamColumn(RegistryObject<? extends OrnamentBeam> block, String name, String top, String side) {
-        beam(block, locVanilla(name), locVanilla(top), locVanilla(top), locVanilla(side), SOLID);
-    }
-
-    public void beamMissing(RegistryObject<? extends OrnamentBeam> block, String name) {
-        beam(block, locOrnament(name), locOrnament(name), locOrnament(name), locOrnament(name), SOLID);
+        beam(block, locParent(name), locParent(top), locParent(top), locParent(side), SOLID);
     }
 
     public void beam(RegistryObject<? extends OrnamentBeam> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
@@ -369,19 +341,15 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void wallBasic(RegistryObject<? extends WallBlock> block, String name, ResourceLocation type) {
-        wallBasic(block, locVanilla(name), type);
+        wallBasic(block, locParent(name), type);
     }
 
     public void wallBasic(RegistryObject<? extends WallBlock> block, ResourceLocation name, ResourceLocation type) {
         wall(block, name, name, name, type);
     }
 
-    public void wallMissing(RegistryObject<? extends WallBlock> block, String name) {
-        wallBasic(block, locOrnament(name), SOLID);
-    }
-
     public void wallColumn(RegistryObject<? extends WallBlock> block, String side, String end) {
-        wall(block, locVanilla(side), locVanilla(end), locVanilla(end), SOLID);
+        wall(block, locParent(side), locParent(end), locParent(end), SOLID);
     }
 
     public void wall(RegistryObject<? extends WallBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
@@ -406,15 +374,11 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void saddleDoorBasic(RegistryObject<? extends OrnamentSaddleDoor> block, String name, ResourceLocation type) {
-        saddleDoor(block, locOrnament(name + "_trapdoor"), locOrnament(name + "_trapdoor"), locOrnament(name + "_trapdoor"), type);
+        saddleDoor(block, locMod(name + "_trapdoor"), locMod(name + "_trapdoor"), locMod(name + "_trapdoor"), type);
     }
 
-    public void saddleDoorMissing(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locOrnament(name), locOrnament(name), locOrnament(name), CUTOUT);
-    }
-
-    public void saddleDoorVanilla(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locVanilla(name), locVanilla(name), locVanilla(name), CUTOUT);
+    public void saddleDoorHidden(RegistryObject<? extends OrnamentSaddleDoor> block, String name) {
+        saddleDoor(block, locParent(name), locParent(name), locParent(name), CUTOUT);
     }
 
     public void saddleDoor(RegistryObject<? extends OrnamentSaddleDoor> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
