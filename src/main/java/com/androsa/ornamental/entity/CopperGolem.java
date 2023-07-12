@@ -46,6 +46,7 @@ public class CopperGolem extends OrnamentalGolem {
 
     public CopperGolem(EntityType<? extends CopperGolem> entity, Level level) {
         super(entity, level);
+        this.setMaxUpStep(1.5F);
         this.targetCreeper = false;
     }
 

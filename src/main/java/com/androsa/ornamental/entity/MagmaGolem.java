@@ -46,6 +46,7 @@ public class MagmaGolem extends OrnamentalGolem {
 
     public MagmaGolem(EntityType<MagmaGolem> type, Level level) {
         super(type, level);
+        this.setMaxUpStep(1.0F);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {

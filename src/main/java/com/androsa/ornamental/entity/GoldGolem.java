@@ -26,7 +26,7 @@ public class GoldGolem extends FlowerGolem {
 
     public GoldGolem(EntityType<? extends GoldGolem> entity, Level world) {
         super(entity, world);
-        this.maxUpStep = 1.5F;
+        this.setMaxUpStep(1.5F);
         this.targetCreeper = false;
     }
 

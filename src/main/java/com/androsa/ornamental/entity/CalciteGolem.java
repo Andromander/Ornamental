@@ -43,6 +43,7 @@ public class CalciteGolem extends OrnamentalGolem {
 
     public CalciteGolem(EntityType<? extends AbstractGolem> type, Level world) {
         super(type, world);
+        this.setMaxUpStep(1.0F);
     }
 
     @Override

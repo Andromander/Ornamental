@@ -31,7 +31,7 @@ public class CoalGolem extends OrnamentalGolem {
 
     public CoalGolem(EntityType<? extends CoalGolem> entity, Level world) {
         super(entity, world);
-        this.maxUpStep = 1.0F;
+        this.setMaxUpStep(1.0F);
         this.targetCreeper = false;
     }
 

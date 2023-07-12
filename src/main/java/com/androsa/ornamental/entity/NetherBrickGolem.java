@@ -28,7 +28,7 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
 
     public NetherBrickGolem(EntityType<? extends NetherBrickGolem> entity, Level world) {
         super(entity, world);
-        this.maxUpStep = 1.0F;
+        this.setMaxUpStep(1.0F);
         this.targetCreeper = true;
     }
 

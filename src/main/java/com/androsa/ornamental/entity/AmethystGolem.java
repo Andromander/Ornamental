@@ -37,6 +37,7 @@ public class AmethystGolem extends OrnamentalGolem {
 
     public AmethystGolem(EntityType<? extends AmethystGolem> entity, Level level) {
         super(entity, level);
+        this.setMaxUpStep(1.2F);
         this.targetCreeper = false;
     }
 

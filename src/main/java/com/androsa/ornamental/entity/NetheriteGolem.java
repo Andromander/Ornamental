@@ -36,6 +36,7 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     public NetheriteGolem(EntityType<? extends NetheriteGolem> entity, Level world) {
         super(entity, world);
+        this.setMaxUpStep(1.5F);
         this.targetCreeper = true;
     }
 

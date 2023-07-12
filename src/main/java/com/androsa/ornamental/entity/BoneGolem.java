@@ -36,7 +36,7 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
 
     public BoneGolem(EntityType<? extends BoneGolem> entity, Level world) {
         super(entity, world);
-        this.maxUpStep = 1.0F;
+        this.setMaxUpStep(1.5F);
         this.targetCreeper = true;
     }
 
