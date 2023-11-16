@@ -1,109 +1,9 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
-apply plugin: 'net.minecraftforge.gradle'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-
-version = project.artifactor_minecraft_version + "-" + project.artifactor_mod_version
-group = project.mod_group
-archivesBaseName = project.archives_base_name
-
-if (hasProperty("CIVersion")) {
-    version += "." + CIVersion
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Need this here so eclipse task generates correctly.
-
-minecraft {
-    mappings channel: project.forge_channel, version: project.forge_mappings
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    //accessTransformer = file('my_at.cfg')
-
-    // default run configurations.
-    // these can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            //property 'forge.logging.console.level', 'debug'
-
-            mods {
-                ornamental {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            //property 'forge.logging.console.level', 'debug'
-
-            mods {
-                ornamental {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            args '--mod', 'ornamental', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing', file('src/generated/resources/')
-
-            mods {
-                ornamental {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-}
-
-repositories {
-    maven {
-        name 'progwm\'s Maven' // JEI + Mantle + TCon
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-
-}
-
-dependencies {
-//    compileOnly fg.deobf("mezz.jei:jei-${artifactor_minecraft_version}-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${artifactor_minecraft_version}-forge:${jei_version}")
-
-    minecraft "net.minecraftforge:forge:${project.artifactor_minecraft_version}-${project.artifactor_forge_version}"
-}
-
-jar {
-    manifest {
-        attributes(["Specification-Title": "Ornamental",
-                    "Specification-Vendor": "Androsa",
-                    "Specification-Version": "${version}",
-                    "Implementation-Title": project.name,
-                    "Implementation-Version": "${version}",
-                    "Implementation-Vendor" :"Androsa",
-                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
-    }
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.5'
 }
 
 def secrets = new Properties()
@@ -122,7 +22,82 @@ if (secretsFile.exists()) {
     }
 }
 
-jar.finalizedBy('reobfJar')
+version = project.minecraft_version + "-" + project.mod_version
+group = project.mod_group
+
+if (hasProperty("CIVersion")) {
+    version += "." + CIVersion
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        name 'progwm\'s Maven' // JEI + Mantle + TCon
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+}
+
+base {
+    archivesName = project.archives_base_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Need this here so eclipse task generates correctly.
+
+runs {
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
+    //accessTransformer = file('my_at.cfg')
+
+    // default run configurations.
+    // these can be tweaked, removed, or duplicated as needed.
+
+    configureEach {
+        // Recommended logging data for a userdev environment
+        //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+        // Recommended logging level for the console
+        //property 'forge.logging.console.level', 'debug'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'forge.enabledGameTesetNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'forge.enabledGameTesetNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    data {
+        workingDirectory project.file('run-data')
+        programArguments.addAll '--mod', 'ornamental', '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', file('src/generated/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+dependencies {
+//    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+//    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    implementation "net.neoforged:neoforge:${project.neo_version}"
+}
+
+jar {
+    manifest {
+        attributes(["Specification-Title": "Ornamental",
+                    "Specification-Vendor": "Androsa",
+                    "Specification-Version": "${version}",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": "${version}",
+                    "Implementation-Vendor" :"Androsa",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
+    }
+}
 
 def mavenUser = hasProperty("CIMUser") ? CIMUser : secrets.getProperty("maven_username")
 def mavenToken = hasProperty("CIMToken") ? CIMToken : secrets.getProperty("maven_password")
@@ -149,7 +124,8 @@ publishing {
     }
 }
 
-task sourceJar(type: Jar, dependsOn: 'classes') {
+tasks.register('sourceJar', Jar) {
+    dependsOn 'classes'
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
