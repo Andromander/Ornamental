@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 
@@ -36,7 +37,6 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     public NetheriteGolem(EntityType<? extends NetheriteGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.5F);
         this.targetCreeper = true;
     }
 
@@ -57,7 +57,8 @@ public class NetheriteGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 180.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 20.0D);
+                .add(Attributes.ATTACK_DAMAGE, 20.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
     }
 
     @Override

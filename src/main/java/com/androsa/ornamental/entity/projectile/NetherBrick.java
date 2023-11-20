@@ -11,8 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +24,7 @@ public class NetherBrick extends Brick {
         super(type, world, entity);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Override
     protected ParticleOptions makeParticle() {
         ItemStack itemstack = this.getItemRaw();
         return itemstack.isEmpty() ? ModParticles.ITEM_NETHER_BRICK.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack);

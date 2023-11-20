@@ -8,13 +8,13 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 import com.google.common.collect.Lists;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -35,38 +35,84 @@ public class ModCreativeTabs {
     public static final List<RegistryObject<? extends Block>> SADDLE_DOOR_ORNAMENTS = Lists.newArrayList();
     public static final List<RegistryObject<? extends Item>> SPAWN_EGGS = Lists.newArrayList();
 
-    public static final RegistryObject<CreativeModeTab> STAIR_TAB = createTab(CREATIVE_TABS, "stair_ornaments", () -> new ItemStack(ModBlocks.diamond_stairs.get()), null, STAIR_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> SLAB_TAB = createTab(CREATIVE_TABS, "slab_ornaments", () -> new ItemStack(ModBlocks.diamond_slab.get()), STAIR_TAB, SLAB_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> FENCE_TAB = createTab(CREATIVE_TABS, "fence_ornaments", () -> new ItemStack(ModBlocks.diamond_fence.get()), SLAB_TAB, FENCE_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> TRAPDOOR_TAB = createTab(CREATIVE_TABS, "trapdoor_ornaments", () -> new ItemStack(ModBlocks.diamond_trapdoor.get()), FENCE_TAB, TRAPDOOR_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> FENCE_GATE_TAB = createTab(CREATIVE_TABS, "fence_gate_ornaments", () -> new ItemStack(ModBlocks.diamond_fence_gate.get()), TRAPDOOR_TAB, FENCE_GATE_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> DOOR_TAB = createTab(CREATIVE_TABS, "door_ornaments", () -> new ItemStack(ModBlocks.diamond_door.get()), FENCE_GATE_TAB, DOOR_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> POLE_TAB = createTab(CREATIVE_TABS, "pole_ornaments", () -> new ItemStack(ModBlocks.diamond_pole.get()), DOOR_TAB, POLE_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> BEAM_TAB = createTab(CREATIVE_TABS, "beam_ornaments", () -> new ItemStack(ModBlocks.diamond_beam.get()), POLE_TAB, BEAM_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> WALL_TAB = createTab(CREATIVE_TABS, "wall_ornaments", () -> new ItemStack(ModBlocks.diamond_wall.get()), BEAM_TAB, WALL_ORNAMENTS);
-    public static final RegistryObject<CreativeModeTab> SADDLE_DOOR_TAB = createTab(CREATIVE_TABS, "saddle_door_ornaments", () -> new ItemStack(ModBlocks.diamond_saddle_door.get()), WALL_TAB, SADDLE_DOOR_ORNAMENTS);
+    public static final RegistryObject<CreativeModeTab> STAIR_TAB = createTab(CREATIVE_TABS, "stair_ornaments", () -> new ItemStack(ModBlocks.diamond_stairs.get()), null);
+    public static final RegistryObject<CreativeModeTab> SLAB_TAB = createTab(CREATIVE_TABS, "slab_ornaments", () -> new ItemStack(ModBlocks.diamond_slab.get()), STAIR_TAB);
+    public static final RegistryObject<CreativeModeTab> FENCE_TAB = createTab(CREATIVE_TABS, "fence_ornaments", () -> new ItemStack(ModBlocks.diamond_fence.get()), SLAB_TAB);
+    public static final RegistryObject<CreativeModeTab> TRAPDOOR_TAB = createTab(CREATIVE_TABS, "trapdoor_ornaments", () -> new ItemStack(ModBlocks.diamond_trapdoor.get()), FENCE_TAB);
+    public static final RegistryObject<CreativeModeTab> FENCE_GATE_TAB = createTab(CREATIVE_TABS, "fence_gate_ornaments", () -> new ItemStack(ModBlocks.diamond_fence_gate.get()), TRAPDOOR_TAB);
+    public static final RegistryObject<CreativeModeTab> DOOR_TAB = createTab(CREATIVE_TABS, "door_ornaments", () -> new ItemStack(ModBlocks.diamond_door.get()), FENCE_GATE_TAB);
+    public static final RegistryObject<CreativeModeTab> POLE_TAB = createTab(CREATIVE_TABS, "pole_ornaments", () -> new ItemStack(ModBlocks.diamond_pole.get()), DOOR_TAB);
+    public static final RegistryObject<CreativeModeTab> BEAM_TAB = createTab(CREATIVE_TABS, "beam_ornaments", () -> new ItemStack(ModBlocks.diamond_beam.get()), POLE_TAB);
+    public static final RegistryObject<CreativeModeTab> WALL_TAB = createTab(CREATIVE_TABS, "wall_ornaments", () -> new ItemStack(ModBlocks.diamond_wall.get()), BEAM_TAB);
+    public static final RegistryObject<CreativeModeTab> SADDLE_DOOR_TAB = createTab(CREATIVE_TABS, "saddle_door_ornaments", () -> new ItemStack(ModBlocks.diamond_saddle_door.get()), WALL_TAB);
 
-    private static RegistryObject<CreativeModeTab> createTab(DeferredRegister<CreativeModeTab> reg, String name, Supplier<ItemStack> icon, RegistryObject<CreativeModeTab> after, List<RegistryObject<? extends Block>> list) {
-        CreativeModeTab.Builder tab = buildTab(name, icon, list);
+    private static RegistryObject<CreativeModeTab> createTab(DeferredRegister<CreativeModeTab> reg, String name, Supplier<ItemStack> icon, RegistryObject<CreativeModeTab> after) {
+        CreativeModeTab.Builder tab = buildTab(name, icon);
         if (after != null) tab.withTabsBefore(after.getId());
         return reg.register(name, tab::build);
     }
 
-    private static CreativeModeTab.Builder buildTab(String name, Supplier<ItemStack> icon, List<RegistryObject<? extends Block>> list) {
+    private static CreativeModeTab.Builder buildTab(String name, Supplier<ItemStack> icon) {
         return CreativeModeTab.builder()
                 .title(Component.translatable("ornamental.tab." + name))
-                .icon(icon)
-                .displayItems((parameters, output) -> {
-                    for (RegistryObject<? extends Block> block : list) {
-                        output.accept(block.get());
-                    }
-                });
+                .icon(icon);
     }
 
     @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class BuildContent {
         @SubscribeEvent
         public static void buildContent(BuildCreativeModeTabContentsEvent event) {
+            if (event.getTabKey() == STAIR_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : STAIR_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == SLAB_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : SLAB_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == FENCE_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : FENCE_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == TRAPDOOR_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : TRAPDOOR_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == FENCE_GATE_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : FENCE_GATE_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == DOOR_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : DOOR_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == POLE_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : POLE_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == BEAM_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : BEAM_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == WALL_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : WALL_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+            if (event.getTabKey() == SADDLE_DOOR_TAB.getKey()) {
+                for (RegistryObject<? extends Block> block : SADDLE_DOOR_ORNAMENTS) {
+                    event.accept(block);
+                }
+            }
+
             if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
                 for (RegistryObject<? extends Item> item : SPAWN_EGGS) {
                     event.accept(item);

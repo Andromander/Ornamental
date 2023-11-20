@@ -6,7 +6,7 @@ import com.androsa.ornamental.entity.model.AbstractGolemModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.ForgeRegistries;
 
 public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends AbstractGolemModel<T>> extends MobRenderer<T,M> {
 

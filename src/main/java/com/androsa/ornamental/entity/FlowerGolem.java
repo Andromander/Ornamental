@@ -4,8 +4,6 @@ import com.androsa.ornamental.entity.task.OrnamentalGolemFlowerGoal;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * Class for Golems that hold a flower
@@ -43,7 +41,6 @@ public abstract class FlowerGolem extends OrnamentalGolem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public void handleEntityEvent(byte data) {
         if (data == 11) {
             this.holdFlowerTimer = 400;
@@ -54,7 +51,6 @@ public abstract class FlowerGolem extends OrnamentalGolem {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getHoldFlowerTick() {
         return this.holdFlowerTimer;
     }

@@ -8,11 +8,11 @@ import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +44,7 @@ public class OrnamentalMod {
         generator.addProvider(event.includeClient(), new OrnamentalBlockStates(output, helper));
         generator.addProvider(event.includeClient(), new OrnamentalItemModels(output, helper));
         generator.addProvider(event.includeServer(), new OrnamentalLootTables(output));
-        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output));
+        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output, provider));
         generator.addProvider(event.includeServer(), blockTags);
         generator.addProvider(event.includeServer(), new OrnamentalItemTags(output, provider, blockTags, helper));
     }

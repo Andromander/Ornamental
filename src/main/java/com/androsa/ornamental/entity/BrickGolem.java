@@ -22,12 +22,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
 
     public BrickGolem(EntityType<? extends BrickGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.0F);
         this.targetCreeper = true;
     }
 
@@ -47,7 +47,8 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
     }
 
     @Override

@@ -18,12 +18,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class DiamondGolem extends FlowerGolem {
 
     public DiamondGolem(EntityType<? extends DiamondGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(0.5F);
         this.targetCreeper = false;
     }
 
@@ -45,7 +45,8 @@ public class DiamondGolem extends FlowerGolem {
                 .add(Attributes.MAX_HEALTH, 60.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.45D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 20.0D);
+                .add(Attributes.ATTACK_DAMAGE, 20.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 0.5F);
     }
 
     private float getAttackDamage() {

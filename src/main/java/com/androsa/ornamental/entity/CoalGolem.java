@@ -19,11 +19,11 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class CoalGolem extends OrnamentalGolem {
 
@@ -31,7 +31,6 @@ public class CoalGolem extends OrnamentalGolem {
 
     public CoalGolem(EntityType<? extends CoalGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.0F);
         this.targetCreeper = false;
     }
 
@@ -51,7 +50,8 @@ public class CoalGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CoalGolem extends OrnamentalGolem {
             this.explode();
         }
 
-        if (!ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
+        if (!EventHooks.getMobGriefingEvent(this.level(), this)) {
             return;
         }
 

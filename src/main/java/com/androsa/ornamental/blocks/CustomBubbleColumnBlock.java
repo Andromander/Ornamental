@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -156,7 +157,7 @@ public class CustomBubbleColumnBlock extends Block implements BucketPickup {
     }
 
     @Override
-    public ItemStack pickupBlock(LevelAccessor accessor, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(Player player, LevelAccessor accessor, BlockPos pos, BlockState state) {
         accessor.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
         return new ItemStack(Items.WATER_BUCKET);
     }

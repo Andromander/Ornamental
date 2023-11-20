@@ -32,6 +32,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 public class CalciteGolem extends OrnamentalGolem {
@@ -43,7 +44,6 @@ public class CalciteGolem extends OrnamentalGolem {
 
     public CalciteGolem(EntityType<? extends AbstractGolem> type, Level world) {
         super(type, world);
-        this.setMaxUpStep(1.0F);
     }
 
     @Override
@@ -123,7 +123,8 @@ public class CalciteGolem extends OrnamentalGolem {
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 70.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.6D);
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.2F);
     }
 
     @Override

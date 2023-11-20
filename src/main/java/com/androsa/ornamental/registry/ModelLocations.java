@@ -3,10 +3,7 @@ package com.androsa.ornamental.registry;
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelLocations {
 
     public static final ModelLayerLocation GOLD_GOLEM = makeEntity("gold_golem");

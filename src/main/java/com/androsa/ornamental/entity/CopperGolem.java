@@ -29,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -46,7 +47,6 @@ public class CopperGolem extends OrnamentalGolem {
 
     public CopperGolem(EntityType<? extends CopperGolem> entity, Level level) {
         super(entity, level);
-        this.setMaxUpStep(1.5F);
         this.targetCreeper = false;
     }
 
@@ -80,7 +80,8 @@ public class CopperGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 110.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D);
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
     }
 
     public int getErosion() {

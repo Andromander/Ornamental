@@ -21,12 +21,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class GoldGolem extends FlowerGolem {
 
     public GoldGolem(EntityType<? extends GoldGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.5F);
         this.targetCreeper = false;
     }
 
@@ -48,7 +48,8 @@ public class GoldGolem extends FlowerGolem {
                 .add(Attributes.MAX_HEALTH, 80.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
-                .add(Attributes.ATTACK_DAMAGE, 12.0D);
+                .add(Attributes.ATTACK_DAMAGE, 12.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
     }
 
     @Override

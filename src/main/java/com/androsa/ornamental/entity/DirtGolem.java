@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class DirtGolem extends OrnamentalGolem {
 
@@ -75,7 +75,7 @@ public class DirtGolem extends OrnamentalGolem {
             if (!this.level().isClientSide()) {
                 GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
                 grass.copyPosition(this);
-                ForgeEventFactory.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());

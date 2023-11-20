@@ -14,8 +14,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class IceGolemTransparentRenderer<T extends IceGolem> extends IceGolemRenderer<T> {
 
@@ -33,14 +31,13 @@ public class IceGolemTransparentRenderer<T extends IceGolem> extends IceGolemRen
         return texGolem;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    class IceGolemLayer<T extends IceGolem> extends RenderLayer<T, SnowGolemModel<T>> {
+    class IceGolemLayer<I extends IceGolem> extends RenderLayer<I, SnowGolemModel<I>> {
 
-        public IceGolemLayer(RenderLayerParent<T, SnowGolemModel<T>> renderer) {
+        public IceGolemLayer(RenderLayerParent<I, SnowGolemModel<I>> renderer) {
             super(renderer);
         }
 
-        public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
+        public void render(PoseStack stack, MultiBufferSource buffer, int light, I entity, float v1, float v2, float v3, float v4, float v5, float v6) {
             VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(texIce));
             IceGolemTransparentRenderer.this.model.renderToBuffer(stack, vertex, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }

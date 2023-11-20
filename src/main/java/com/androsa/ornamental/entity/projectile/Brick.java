@@ -16,9 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
@@ -32,14 +30,12 @@ public class Brick extends ThrowableItemProjectile {
         super(type, entity, world);
     }
 
-    @OnlyIn(Dist.CLIENT)
     protected ParticleOptions makeParticle() {
         ItemStack itemstack = this.getItemRaw();
         return itemstack.isEmpty() ? ModParticles.ITEM_BRICK.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack);
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public void handleEntityEvent(byte data) {
         if (data == 3) {
             ParticleOptions iparticledata = this.makeParticle();

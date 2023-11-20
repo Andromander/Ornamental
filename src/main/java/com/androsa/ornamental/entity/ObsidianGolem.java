@@ -20,12 +20,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class ObsidianGolem extends OrnamentalGolem {
 
     public ObsidianGolem(EntityType<? extends ObsidianGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.0F);
         this.targetCreeper = true;
     }
 
@@ -48,7 +48,8 @@ public class ObsidianGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 200.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
-                .add(Attributes.ATTACK_DAMAGE, 18.0D);
+                .add(Attributes.ATTACK_DAMAGE, 18.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
     }
 
     @Override

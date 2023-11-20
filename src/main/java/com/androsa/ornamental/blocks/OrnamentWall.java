@@ -28,8 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -174,7 +172,6 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentWall && state.getBlock() instanceof OrnamentWall) {

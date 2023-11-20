@@ -28,8 +28,6 @@ import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
@@ -135,7 +133,6 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentSlab otherSlab && state.getBlock() instanceof OrnamentSlab slab) {

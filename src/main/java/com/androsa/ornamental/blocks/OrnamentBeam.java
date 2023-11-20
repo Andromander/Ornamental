@@ -41,8 +41,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -369,8 +367,8 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
-    public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return !isFull(state) && SimpleWaterloggedBlock.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
+    public boolean canPlaceLiquid(Player player, BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+        return !isFull(state) && SimpleWaterloggedBlock.super.canPlaceLiquid(player, worldIn, pos, state, fluidIn);
     }
 
     @Override
@@ -421,7 +419,6 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
 
     @Override
     @Deprecated
-    @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentBeam otherBeam && state.getBlock() instanceof OrnamentBeam beam) {

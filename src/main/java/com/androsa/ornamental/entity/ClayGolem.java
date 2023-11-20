@@ -23,13 +23,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class ClayGolem extends OrnamentalGolem {
 
     public ClayGolem(EntityType<? extends ClayGolem> entity, Level world) {
         super(entity, world);
-        this.setMaxUpStep(1.0F);
         this.targetCreeper = false;
     }
 
@@ -50,7 +50,8 @@ public class ClayGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 0.0D);
+                .add(Attributes.ATTACK_DAMAGE, 0.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class ClayGolem extends OrnamentalGolem {
             if (!this.level().isClientSide()) {
                 BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level());
                 brick.copyPosition(this);
-                ForgeEventFactory.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                EventHooks.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null, null);
                 brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());

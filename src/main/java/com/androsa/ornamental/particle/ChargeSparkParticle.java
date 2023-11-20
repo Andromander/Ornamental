@@ -4,8 +4,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ChargeSparkParticle extends TextureSheetParticle {
     private final SpriteSet sprites;
@@ -43,7 +41,6 @@ public class ChargeSparkParticle extends TextureSheetParticle {
         this.setSpriteFromAge(this.sprites);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class ChargeSparkFactory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprite;
 

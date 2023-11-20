@@ -8,13 +8,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -62,7 +62,7 @@ public class ModEntities {
         return makeEntity(name, entity, item -> makeEgg(item, background, highlight), width, height, fireRes);
     }
 
-    private static <T extends Mob> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<RegistryObject<EntityType<T>>, Supplier<ForgeSpawnEggItem>> spawnegg, float width, float height, boolean fireRes) {
+    private static <T extends Mob> RegistryObject<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<RegistryObject<EntityType<T>>, Supplier<DeferredSpawnEggItem>> spawnegg, float width, float height, boolean fireRes) {
         String regname = name + "_golem";
         EntityType.Builder<T> builder = EntityType.Builder.of(entity, MobCategory.MISC).sized(width, height);
         if (fireRes) builder.fireImmune();
@@ -82,8 +82,8 @@ public class ModEntities {
         );
     }
 
-    private static Supplier<ForgeSpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, int back, int fore) {
-        return () -> new ForgeSpawnEggItem(entity, back, fore, new Item.Properties());
+    private static Supplier<DeferredSpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, int back, int fore) {
+        return () -> new DeferredSpawnEggItem(entity, back, fore, new Item.Properties());
     }
 
     @SubscribeEvent

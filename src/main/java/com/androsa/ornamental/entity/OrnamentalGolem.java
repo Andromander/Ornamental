@@ -17,8 +17,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class OrnamentalGolem extends AbstractGolem {
 
@@ -67,7 +65,6 @@ public class OrnamentalGolem extends AbstractGolem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public void handleEntityEvent(byte data) {
         if (data == 4) {
             this.attackTimer = 10;
@@ -77,7 +74,6 @@ public class OrnamentalGolem extends AbstractGolem {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getAttackTimer() {
         return this.attackTimer;
     }

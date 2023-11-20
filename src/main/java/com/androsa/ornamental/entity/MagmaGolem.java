@@ -31,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -46,14 +47,14 @@ public class MagmaGolem extends OrnamentalGolem {
 
     public MagmaGolem(EntityType<MagmaGolem> type, Level level) {
         super(type, level);
-        this.setMaxUpStep(1.0F);
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 90.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.55D)
-                .add(Attributes.ATTACK_DAMAGE, 12.0D);
+                .add(Attributes.ATTACK_DAMAGE, 12.0D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class MagmaGolem extends OrnamentalGolem {
         }
         if (state == 0 || state == 2) {
             if (instance.hasModifier(HEATED_SPEED_MODIFIER)) {
-                instance.removeModifier(HEATED_SPEED_MODIFIER);
+                instance.removeModifier(HEATED_SPEED_UUID);
             }
         } else {
             if (!instance.hasModifier(HEATED_SPEED_MODIFIER)) {
@@ -106,7 +107,7 @@ public class MagmaGolem extends OrnamentalGolem {
         }
         if (state == 0 || state == 1) {
             if (instance.hasModifier(COOLED_SPEED_MODIFIER)) {
-                instance.removeModifier(COOLED_SPEED_MODIFIER);
+                instance.removeModifier(COOLED_SPEED_UUID);
             }
         } else {
             if (!instance.hasModifier(COOLED_SPEED_MODIFIER)) {

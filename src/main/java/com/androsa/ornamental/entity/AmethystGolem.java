@@ -27,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -37,7 +38,6 @@ public class AmethystGolem extends OrnamentalGolem {
 
     public AmethystGolem(EntityType<? extends AmethystGolem> entity, Level level) {
         super(entity, level);
-        this.setMaxUpStep(1.2F);
         this.targetCreeper = false;
     }
 
@@ -56,7 +56,8 @@ public class AmethystGolem extends OrnamentalGolem {
     public static AttributeSupplier.Builder registerAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 60.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4D);
+                .add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.2F);
     }
 
     @Override

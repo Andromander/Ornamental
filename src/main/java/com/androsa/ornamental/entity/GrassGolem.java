@@ -32,7 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
 
@@ -159,7 +159,7 @@ public class GrassGolem extends DirtGolem {
 
         if (!this.level().isClientSide()) {
             entity.copyPosition(this);
-            ForgeEventFactory.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null, null);
+            EventHooks.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());

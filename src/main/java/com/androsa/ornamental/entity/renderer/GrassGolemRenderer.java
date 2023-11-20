@@ -4,8 +4,6 @@ import com.androsa.ornamental.entity.GrassGolem;
 import com.androsa.ornamental.entity.model.DirtGolemModel;
 import com.androsa.ornamental.entity.renderer.layer.GrassFlowerLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class GrassGolemRenderer<T extends GrassGolem, M extends DirtGolemModel<T>> extends AbstractGolemRenderer<T,M> {
 
