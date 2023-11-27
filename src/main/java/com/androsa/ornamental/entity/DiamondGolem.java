@@ -46,7 +46,7 @@ public class DiamondGolem extends FlowerGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.45D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, 20.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 0.5F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 0.5F);
     }
 
     private float getAttackDamage() {

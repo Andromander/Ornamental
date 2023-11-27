@@ -52,7 +52,7 @@ public class EmeraldGolem extends FlowerGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D)
                 .add(Attributes.ATTACK_DAMAGE, 13.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
     }
 
     @Override

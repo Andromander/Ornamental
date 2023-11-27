@@ -8,10 +8,10 @@ import com.google.common.collect.Lists;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class RegistryHelper extends MasterRegistryHelper {
 
@@ -92,110 +92,110 @@ public class RegistryHelper extends MasterRegistryHelper {
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#stairs(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentStair> stairs(OrnamentBuilder builder) {
+    public Supplier<OrnamentStair> stairs(OrnamentBuilder builder) {
         return stairs(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentStair> stairs(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentStair> stairs(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return stairs(builder, blocktags, itemtags, OrnamentStair::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#slab(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentSlab> slab(OrnamentBuilder builder) {
+    public Supplier<OrnamentSlab> slab(OrnamentBuilder builder) {
         return slab(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentSlab> slab(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentSlab> slab(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return slab(builder, blocktags, itemtags, OrnamentSlab::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#fence(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentFence> fence(OrnamentBuilder builder) {
+    public Supplier<OrnamentFence> fence(OrnamentBuilder builder) {
         return fence(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentFence> fence(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentFence> fence(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return fence(builder, blocktags, itemtags, OrnamentFence::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#trapdoor(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder) {
+    public Supplier<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder) {
         return trapdoor(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentTrapDoor> trapdoor(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return trapdoor(builder, blocktags, itemtags, OrnamentTrapDoor::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#fencegate(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentFenceGate> fencegate(OrnamentBuilder builder) {
+    public Supplier<OrnamentFenceGate> fencegate(OrnamentBuilder builder) {
         return fencegate(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentFenceGate> fencegate(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentFenceGate> fencegate(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return fencegate(builder, blocktags, itemtags, OrnamentFenceGate::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#door(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentDoor> door(OrnamentBuilder builder) {
+    public Supplier<OrnamentDoor> door(OrnamentBuilder builder) {
         return door(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentDoor> door(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentDoor> door(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return door(builder, blocktags, itemtags, OrnamentDoor::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#pole(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentPole> pole(OrnamentBuilder builder) {
+    public Supplier<OrnamentPole> pole(OrnamentBuilder builder) {
         return pole(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentPole> pole(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentPole> pole(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return pole(builder, blocktags, itemtags, OrnamentPole::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#beam(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentBeam> beam(OrnamentBuilder builder) {
+    public Supplier<OrnamentBeam> beam(OrnamentBuilder builder) {
         return beam(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentBeam> beam(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentBeam> beam(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return beam(builder, blocktags, itemtags, OrnamentBeam::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#wall(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentWall> wall(OrnamentBuilder builder) {
+    public Supplier<OrnamentWall> wall(OrnamentBuilder builder) {
         return wall(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentWall> wall(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentWall> wall(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return wall(builder, blocktags, itemtags, OrnamentWall::new);
     }
 
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#saddledoor(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
-    public RegistryObject<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder) {
+    public Supplier<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder) {
         return saddledoor(builder, Lists.newArrayList(), Lists.newArrayList());
     }
 
-    public RegistryObject<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    public Supplier<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return saddledoor(builder, blocktags, itemtags, OrnamentSaddleDoor::new);
     }
 }

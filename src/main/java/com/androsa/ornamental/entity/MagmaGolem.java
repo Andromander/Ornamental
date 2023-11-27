@@ -54,7 +54,7 @@ public class MagmaGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 90.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.55D)
                 .add(Attributes.ATTACK_DAMAGE, 12.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
     }
 
     @Override

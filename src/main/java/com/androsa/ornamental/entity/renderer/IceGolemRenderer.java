@@ -7,8 +7,8 @@ import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 
 public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGolemModel<T>> {
 
@@ -22,7 +22,7 @@ public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGol
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         if (entityName == null) {
-            entityName = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getPath();
+            entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).getPath();
         }
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }

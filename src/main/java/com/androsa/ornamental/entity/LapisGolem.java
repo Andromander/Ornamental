@@ -53,7 +53,7 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 70.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
     }
 
     @Override

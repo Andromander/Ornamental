@@ -57,7 +57,7 @@ public class AmethystGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 60.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.2F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.2F);
     }
 
     @Override

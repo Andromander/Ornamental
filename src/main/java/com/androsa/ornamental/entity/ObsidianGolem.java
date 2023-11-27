@@ -49,7 +49,7 @@ public class ObsidianGolem extends OrnamentalGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 18.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
     }
 
     @Override

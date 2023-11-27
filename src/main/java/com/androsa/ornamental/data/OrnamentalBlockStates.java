@@ -16,7 +16,8 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
 
@@ -334,8 +335,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fakeBubbleColumn();
     }
 
-    public void modelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelStairsBlock(Supplier<? extends StairBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile stairs = models().getExistingFile(locMod(dir));
         ModelFile innerstairs = models().getExistingFile(locMod(dir + "_inner"));
         ModelFile outerstairs = models().getExistingFile(locMod(dir + "_outer"));
@@ -343,8 +344,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBlock(block.get(), stairs, innerstairs, outerstairs);
     }
 
-    public void hexamodelStairsBlock(RegistryObject<? extends StairBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void hexamodelStairsBlock(Supplier<? extends StairBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile bottomstraight = models().getExistingFile(locMod(dir + "_bottom_straight"));
         ModelFile topstraight = models().getExistingFile(locMod(dir + "_top_straight"));
         ModelFile bottominner = models().getExistingFile(locMod(dir + "_bottom_inner"));
@@ -354,8 +355,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         stairsBlock(block.get(), bottomstraight, topstraight, bottominner, topinner, bottomouter, topouter);
     }
 
-    public void modelSlabBlock(RegistryObject<? extends SlabBlock> block, String full, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelSlabBlock(Supplier<? extends SlabBlock> block, String full, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile slab = models().getExistingFile(locMod(dir));
         ModelFile slabtop = models().getExistingFile(locMod(dir + "_top"));
         ModelFile fullblock = models().forceRenderType(full, locParent(full), CUTOUT_MIPPED);
@@ -363,16 +364,16 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBlock(block.get(), slab, slabtop, fullblock);
     }
 
-    public void modelFenceBlock(RegistryObject<? extends FenceBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelFenceBlock(Supplier<? extends FenceBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile post = models().getExistingFile(locMod(dir + "_post"));
         ModelFile side = models().getExistingFile(locMod(dir + "_side"));
 
         fourWayBlock(block.get(), post, side);
     }
 
-    public void modelTrapdoorBlock(RegistryObject<? extends TrapDoorBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelTrapdoorBlock(Supplier<? extends TrapDoorBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile bottom = models().getExistingFile(locMod(dir + "_bottom"));
         ModelFile top = models().getExistingFile(locMod(dir + "_top"));
         ModelFile open = models().getExistingFile(locMod(dir + "_open"));
@@ -380,8 +381,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBlock(block.get(), bottom, top, open, true);
     }
 
-    public void modelFenceGateBlock(RegistryObject<? extends FenceGateBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelFenceGateBlock(Supplier<? extends FenceGateBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile gate = models().getExistingFile(locMod(dir));
         ModelFile open = models().getExistingFile(locMod(dir + "_open"));
         ModelFile wall = models().getExistingFile(locMod(dir + "_wall"));
@@ -390,9 +391,9 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBlock(block.get(), gate, open, wall, wallopen);
     }
 
-    public void halfDirtDoorBlock(RegistryObject<? extends DoorBlock> block, String path) {
-        String dirt = ModBlocks.dirt_door.getId().getPath();
-        String dir = path + "/" + block.getId().getPath();
+    public void halfDirtDoorBlock(Supplier<? extends DoorBlock> block, String path) {
+        String dirt = getKey(ModBlocks.dirt_door);
+        String dir = path + "/" + getKey(block);
         ModelFile bottomleft = models().getExistingFile(locMod(dirt + "_bottom_left"));
         ModelFile bottomleftopen = models().getExistingFile(locMod(dirt + "_bottom_left_open"));
         ModelFile bottomright = models().getExistingFile(locMod(dirt + "_bottom_right"));
@@ -405,8 +406,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBlock(block.get(), bottomleft, bottomleftopen, bottomright, bottomrightopen, topleft, topleftopen, topright, toprightopen);
     }
 
-    public void modelPoleBlock(RegistryObject<? extends OrnamentPole> block, String path, String full) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelPoleBlock(Supplier<? extends OrnamentPole> block, String path, String full) {
+        String dir = path + "/" + getKey(block);
         ModelFile whole = models().getExistingFile(locMod(dir + "_whole"));
         ModelFile horizon = models().getExistingFile(locMod(dir + "_horizontal"));
         ModelFile vertical = models().getExistingFile(locMod(dir + "_vertical"));
@@ -416,8 +417,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBlock(block, whole, horizon, vertical, corner, fullblock);
     }
 
-    public void halfDirtBeamBlock(RegistryObject<? extends OrnamentBeam> block, String full, String path, boolean noface) {
-        String name = path + "/" + block.getId().getPath();
+    public void halfDirtBeamBlock(Supplier<? extends OrnamentBeam> block, String full, String path, boolean noface) {
+        String name = path + "/" + getKey(block);
         ModelFile wholetop = models().getExistingFile(locMod(name + "_whole_top"));
         ModelFile wholebottom = models().getExistingFile(locMod(name + "_whole_bottom"));
         ModelFile horizontop = models().getExistingFile(locMod(name + "_horizontal_top"));
@@ -431,8 +432,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBlock(block, wholetop, wholebottom, horizontop, horizonbottom, verticaltop, verticalbottom, cornertop, cornerbottom, fullblock);
     }
 
-    public void modelWallBlock(RegistryObject<? extends WallBlock> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelWallBlock(Supplier<? extends WallBlock> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile post = models().getExistingFile(locMod(dir + "_post"));
         ModelFile side = models().getExistingFile(locMod(dir + "_side"));
         ModelFile tall = models().getExistingFile(locMod(dir + "_side_tall"));
@@ -440,8 +441,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBlock(block.get(), post, side, tall);
     }
 
-    public void modelSaddleDoorBlock(RegistryObject<? extends OrnamentSaddleDoor> block, String path) {
-        String dir = path + "/" + block.getId().getPath();
+    public void modelSaddleDoorBlock(Supplier<? extends OrnamentSaddleDoor> block, String path) {
+        String dir = path + "/" + getKey(block);
         ModelFile left = models().getExistingFile(locMod(dir + "_left"));
         ModelFile leftOpen = models().getExistingFile(locMod(dir + "_left_open"));
         ModelFile right = models().getExistingFile(locMod(dir + "_right"));
@@ -480,7 +481,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
                 }, StairBlock.WATERLOGGED);
     }
 
-    public void beamBlock(RegistryObject<? extends OrnamentBeam> block, ModelFile wt, ModelFile wb, ModelFile ht, ModelFile hb, ModelFile vt, ModelFile vb, ModelFile ct, ModelFile cb, ModelFile fullblock) {
+    public void beamBlock(Supplier<? extends OrnamentBeam> block, ModelFile wt, ModelFile wb, ModelFile ht, ModelFile hb, ModelFile vt, ModelFile vb, ModelFile ct, ModelFile cb, ModelFile fullblock) {
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
         beamModelWhole(builder, wt, 0, 0, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
         beamModelWhole(builder, wt, 0, 270, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);

@@ -11,25 +11,25 @@ import com.google.common.collect.Lists;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.RegistryObject;
+import java.util.function.Supplier;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
-    public static final List<RegistryObject<? extends Block>> BEAMS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> DOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> FENCES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> FENCE_GATES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> NETHER_BRICK_FENCES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> PIGLIN_LOVED = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> POLES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SADDLE_DOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SLABS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> STAIRS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> TRAPDOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> WALLS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> BEAMS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> DOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> FENCES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> FENCE_GATES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> NETHER_BRICK_FENCES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> PIGLIN_LOVED = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> POLES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SADDLE_DOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SLABS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> STAIRS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> TRAPDOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> WALLS = Lists.newArrayList();
 
     public OrnamentalItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, BlockTagsProvider blockTags, ExistingFileHelper helper) {
         super(output, provider, OrnamentalMod.MODID, helper, blockTags);

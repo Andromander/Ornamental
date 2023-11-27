@@ -10,38 +10,38 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
 
-    public static final List<RegistryObject<? extends Block>> BEACON_BASES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> BEAMS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> CRYSTAL_SOUNDS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> DOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> DRAGON_IMMUNE = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> FENCES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> FENCE_GATES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> INFINIBURN_OVERWORLD = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> NETHER_BRICK_FENCE = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> PIGLIN_GUARDED = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> POLES = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SADDLE_DOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SLABS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SNOW = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> STAIRS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> TRAPDOORS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> VIBRATIONS = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> WALLS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> BEACON_BASES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> BEAMS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> CRYSTAL_SOUNDS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> DOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> DRAGON_IMMUNE = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> FENCES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> FENCE_GATES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> INFINIBURN_OVERWORLD = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> NETHER_BRICK_FENCE = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> PIGLIN_GUARDED = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> POLES = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SADDLE_DOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SLABS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SNOW = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> STAIRS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> TRAPDOORS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> VIBRATIONS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> WALLS = Lists.newArrayList();
 
-    public static final List<RegistryObject<? extends Block>> PICKAXE_TOOL = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> SHOVEL_TOOL = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> PICKAXE_TOOL = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SHOVEL_TOOL = Lists.newArrayList();
 
-    public static final List<RegistryObject<? extends Block>> STONE_REQUIRED = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> IRON_REQUIRED = Lists.newArrayList();
-    public static final List<RegistryObject<? extends Block>> DIAMOND_REQUIRED = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> STONE_REQUIRED = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> IRON_REQUIRED = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> DIAMOND_REQUIRED = Lists.newArrayList();
 
     public OrnamentalBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
         super(output, provider, OrnamentalMod.MODID, helper);

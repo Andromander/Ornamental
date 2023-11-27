@@ -58,7 +58,7 @@ public class NetheriteGolem extends OrnamentalGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 20.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
     }
 
     @Override

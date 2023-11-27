@@ -5,8 +5,8 @@ import com.androsa.ornamental.entity.OrnamentalGolem;
 import com.androsa.ornamental.entity.model.AbstractGolemModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 
 public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends AbstractGolemModel<T>> extends MobRenderer<T,M> {
 
@@ -19,7 +19,7 @@ public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends Abstract
     @Override
     public ResourceLocation getTextureLocation(T entity) {
         if (entityName == null) {
-            entityName = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getPath();
+            entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).getPath();
         }
         return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }

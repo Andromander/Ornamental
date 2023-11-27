@@ -5,6 +5,7 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModCreativeTabs;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
+import com.androsa.ornamental.registry.handler.RemapHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -32,6 +33,8 @@ public class OrnamentalMod {
         ModCreativeTabs.CREATIVE_TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        RemapHandler.remapEntries();
     }
 
     public void gatherData(GatherDataEvent event) {

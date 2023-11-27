@@ -49,7 +49,7 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.0F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
     }
 
     @Override

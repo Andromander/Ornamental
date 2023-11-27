@@ -7,9 +7,9 @@ import com.androsa.ornamental.registry.ModCreativeTabs;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class OrnamentalItemModels extends OrnamentalItemModelProvider {
 
@@ -330,7 +330,7 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.magma_saddle_door, "magma");
         blockItemSaddleDoor(ModBlocks.calcite_saddle_door, "calcite");
 
-        for (RegistryObject<? extends Item> item : ModCreativeTabs.SPAWN_EGGS) {
+        for (Supplier<? extends Item> item : ModCreativeTabs.SPAWN_EGGS) {
             eggItem(item);
         }
     }

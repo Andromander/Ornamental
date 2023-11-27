@@ -81,7 +81,7 @@ public class CopperGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 110.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
     }
 
     public int getErosion() {

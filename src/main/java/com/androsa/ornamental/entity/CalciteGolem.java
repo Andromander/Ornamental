@@ -124,7 +124,7 @@ public class CalciteGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 70.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.2F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.2F);
     }
 
     @Override

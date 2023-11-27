@@ -57,7 +57,7 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 120.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.get(), 1.5F);
+                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
     }
 
     @Override

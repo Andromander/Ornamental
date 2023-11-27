@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,9 +190,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentStair object.
-     * @return RegistryObject for an OrnamentStair.
+     * @return Supplier for an OrnamentStair.
      */
-    public <T extends OrnamentStair, O extends OrnamentBuilder> RegistryObject<T> stairs(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentStair, O extends OrnamentBuilder> Supplier<T> stairs(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = stairProperties(builder);
         blocktags.addAll(stairTags().blockTags());
         itemtags.addAll(stairTags().itemTags());
@@ -208,9 +207,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentSlab object.
-     * @return RegistryObject for an OrnamentSlab.
+     * @return Supplier for an OrnamentSlab.
      */
-    public <T extends OrnamentSlab, O extends OrnamentBuilder> RegistryObject<T> slab(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentSlab, O extends OrnamentBuilder> Supplier<T> slab(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = slabProperties(builder);
         blocktags.addAll(slabTags().blockTags());
         itemtags.addAll(slabTags().itemTags());
@@ -225,9 +224,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentFence object.
-     * @return RegistryObject for an OrnamentFence.
+     * @return Supplier for an OrnamentFence.
      */
-    public <T extends OrnamentFence, O extends OrnamentBuilder> RegistryObject<T> fence(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentFence, O extends OrnamentBuilder> Supplier<T> fence(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = fenceProperties(builder);
         blocktags.addAll(fenceTags().blockTags());
         itemtags.addAll(fenceTags().itemTags());
@@ -242,9 +241,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentTrapDoor object.
-     * @return RegistryObject for an OrnamentTrapDoor.
+     * @return Supplier for an OrnamentTrapDoor.
      */
-    public <T extends OrnamentTrapDoor, O extends OrnamentBuilder> RegistryObject<T> trapdoor(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentTrapDoor, O extends OrnamentBuilder> Supplier<T> trapdoor(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = trapdoorProperties(builder);
         blocktags.addAll(trapdoorTags().blockTags());
         itemtags.addAll(trapdoorTags().itemTags());
@@ -259,9 +258,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentFenceGate object.
-     * @return RegistryObject for an OrnamentFenceGate.
+     * @return Supplier for an OrnamentFenceGate.
      */
-    public <T extends OrnamentFenceGate, O extends OrnamentBuilder> RegistryObject<T> fencegate(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentFenceGate, O extends OrnamentBuilder> Supplier<T> fencegate(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = fencegateProperties(builder);
         blocktags.addAll(fencegateTags().blockTags());
         itemtags.addAll(fencegateTags().itemTags());
@@ -276,9 +275,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentDoor object.
-     * @return RegistryObject for an OrnamentDoor.
+     * @return Supplier for an OrnamentDoor.
      */
-    public <T extends OrnamentDoor, O extends OrnamentBuilder> RegistryObject<T> door(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentDoor, O extends OrnamentBuilder> Supplier<T> door(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = doorProperties(builder);
         blocktags.addAll(doorTags().blockTags());
         itemtags.addAll(doorTags().itemTags());
@@ -293,9 +292,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentPole object.
-     * @return RegistryObject for an OrnamentPole.
+     * @return Supplier for an OrnamentPole.
      */
-    public <T extends OrnamentPole, O extends OrnamentBuilder> RegistryObject<T> pole(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentPole, O extends OrnamentBuilder> Supplier<T> pole(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = poleProperties(builder);
         blocktags.addAll(poleTags().blockTags());
         itemtags.addAll(poleTags().itemTags());
@@ -310,9 +309,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentBeam object.
-     * @return RegistryObject for an OrnamentBeam.
+     * @return Supplier for an OrnamentBeam.
      */
-    public <T extends OrnamentBeam, O extends OrnamentBuilder> RegistryObject<T> beam(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentBeam, O extends OrnamentBuilder> Supplier<T> beam(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = beamProperties(builder);
         blocktags.addAll(beamTags().blockTags());
         itemtags.addAll(beamTags().itemTags());
@@ -327,9 +326,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentWall object.
-     * @return RegistryObject for an OrnamentWall.
+     * @return Supplier for an OrnamentWall.
      */
-    public <T extends OrnamentWall, O extends OrnamentBuilder> RegistryObject<T> wall(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentWall, O extends OrnamentBuilder> Supplier<T> wall(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = wallProperties(builder);
         blocktags.addAll(wallTags().blockTags());
         itemtags.addAll(wallTags().itemTags());
@@ -344,9 +343,9 @@ public abstract class MasterRegistryHelper {
      * @param blocktags A list of tags for the individual block.
      * @param itemtags A list of tags for the individual item.
      * @param factory The block class required to create an OrnamentSaddleDoor object.
-     * @return RegistryObject for an OrnamentSaddleDoor.
+     * @return Supplier for an OrnamentSaddleDoor.
      */
-    public <T extends OrnamentSaddleDoor, O extends OrnamentBuilder> RegistryObject<T> saddledoor(O builder, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+    public <T extends OrnamentSaddleDoor, O extends OrnamentBuilder> Supplier<T> saddledoor(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
         BlockBehaviour.Properties props = saddledoorProperties(builder);
         blocktags.addAll(saddledoorTags().blockTags());
         itemtags.addAll(saddledoorTags().itemTags());
@@ -358,18 +357,18 @@ public abstract class MasterRegistryHelper {
     /**
      * INTERNAL USE
      */
-    private <T extends Block> RegistryObject<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<RegistryObject<T>, Supplier<? extends Item>> item, List<RegistryObject<? extends Block>> tab, ArrayList<List<RegistryObject<? extends Block>>> blocktags, ArrayList<List<RegistryObject<? extends Block>>> itemtags) {
+    private <T extends Block> Supplier<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<Supplier<T>, Supplier<? extends Item>> item, List<Supplier<? extends Block>> tab, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         String name = builder.name + suffix;
-        RegistryObject<T> reg = blockRegistry.register(name, block);
+        Supplier<T> reg = blockRegistry.register(name, block);
         itemRegistry.register(name, item.apply(reg));
         tab.add(reg);
 
         blocktags.addAll(builder.tags.blockTags());
-        for (List<RegistryObject<? extends Block>> tag : blocktags) {
+        for (List<Supplier<? extends Block>> tag : blocktags) {
             tag.add(reg);
         }
         itemtags.addAll(builder.tags.itemTags());
-        for (List<RegistryObject<? extends Block>> tag : itemtags) {
+        for (List<Supplier<? extends Block>> tag : itemtags) {
             tag.add(reg);
         }
 
@@ -384,12 +383,12 @@ public abstract class MasterRegistryHelper {
      * @param factory The BlockItem.
      * @return The BlockItem for the ornament.
      */
-    protected <T extends Block, I extends BlockItem> Supplier<BlockItem> registerBlockItem(RegistryObject<T> block, OrnamentBuilder builder, int fuelindex, ItemFactory<I> factory) {
+    protected <T extends Block, I extends BlockItem> Supplier<BlockItem> registerBlockItem(Supplier<T> block, OrnamentBuilder builder, int fuelindex, ItemFactory<I> factory) {
         return () -> factory.create(block.get(), PropertiesHelper.createItem(builder), builder, fuelindex);
     }
 
     @SafeVarargs
-    public final ArrayList<List<RegistryObject<? extends Block>>> array(List<RegistryObject<? extends Block>>... lists) {
+    public final ArrayList<List<Supplier<? extends Block>>> array(List<Supplier<? extends Block>>... lists) {
         return Lists.newArrayList(lists);
     }
 
@@ -408,5 +407,5 @@ public abstract class MasterRegistryHelper {
      * @param blockTags The Block Tags to provide.
      * @param itemTags the Item Tags to provide.
      */
-    public record TagHelper(ArrayList<List<RegistryObject<? extends Block>>> blockTags, ArrayList<List<RegistryObject<? extends Block>>> itemTags) { }
+    public record TagHelper(ArrayList<List<Supplier<? extends Block>>> blockTags, ArrayList<List<Supplier<? extends Block>>> itemTags) { }
 }

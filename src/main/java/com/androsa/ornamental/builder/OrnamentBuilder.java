@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -508,7 +507,7 @@ public class OrnamentBuilder {
      * For ornament-based tags, this is handled via registration.
      * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
      */
-    public OrnamentBuilder addBlockTags(ArrayList<List<RegistryObject<? extends Block>>> tags) {
+    public OrnamentBuilder addBlockTags(ArrayList<List<Supplier<? extends Block>>> tags) {
         return this.addTags(tags, Lists.newArrayList());
     }
 
@@ -517,7 +516,7 @@ public class OrnamentBuilder {
      * For ornament-based tags, this is handled via registration.
      * @param tags The list of tags provided for data generation. These will apply to all ornaments of the specified OrnamentBuilder material.
      */
-    public OrnamentBuilder addItemTags(ArrayList<List<RegistryObject<? extends Block>>> tags) {
+    public OrnamentBuilder addItemTags(ArrayList<List<Supplier<? extends Block>>> tags) {
         return this.addTags(Lists.newArrayList(), tags);
     }
 
@@ -527,7 +526,7 @@ public class OrnamentBuilder {
      * @param blocks an ArrayList of Block Tags.
      * @param items an ArrayList of Item Tags.
      */
-    public OrnamentBuilder addTags(ArrayList<List<RegistryObject<? extends Block>>> blocks, ArrayList<List<RegistryObject<? extends Block>>> items) {
+    public OrnamentBuilder addTags(ArrayList<List<Supplier<? extends Block>>> blocks, ArrayList<List<Supplier<? extends Block>>> items) {
         this.tags = new MasterRegistryHelper.TagHelper(blocks, items);
         return this;
     }

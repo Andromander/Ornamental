@@ -1,6 +1,7 @@
 package com.androsa.ornamental.data.provider;
 
 import com.androsa.ornamental.OrnamentalMod;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -8,8 +9,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.ForgeRegistries;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -27,7 +26,7 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
     }
 
     public String blockName(Supplier<? extends Block> block) {
-        return ForgeRegistries.ITEMS.getKey(block.get().asItem()).getPath();
+        return BuiltInRegistries.ITEM.getKey(block.get().asItem()).getPath();
     }
 
     public void blockItem(Supplier<? extends Block> block) {
@@ -167,8 +166,8 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
                 .texture("bottom", bottom);
     }
 
-    public void eggItem(RegistryObject<? extends Item> item) {
-        withExistingParent(item.getId().getPath(), mcLoc("item/template_spawn_egg"));
+    public void eggItem(Supplier<? extends Item> item) {
+        withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     public ItemModelBuilder existingParent(Supplier<? extends Block> block, ResourceLocation parent) {

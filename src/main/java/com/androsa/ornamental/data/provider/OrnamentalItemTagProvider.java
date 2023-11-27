@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +19,7 @@ public abstract class OrnamentalItemTagProvider extends ItemTagsProvider {
         super(output, provider, blockTags.contentsGetter(), modid, helper);
     }
 
-    protected void addToTag(TagKey<Item> tag, List<RegistryObject<? extends Block>> list) {
+    protected void addToTag(TagKey<Item> tag, List<? extends Supplier<? extends Block>> list) {
         for (Supplier<? extends Block> block : list) {
             tag(tag).add(block.get().asItem());
         }
