@@ -20,7 +20,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(OrnamentalMod.MODID)
-@Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OrnamentalMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
