@@ -47,12 +47,14 @@ public class ModCreativeTabs {
     public static final Supplier<CreativeModeTab> SADDLE_DOOR_TAB = createTab("saddle_door_ornaments", () -> new ItemStack(ModBlocks.diamond_saddle_door.get()), WALL_TAB);
 
     private static Supplier<CreativeModeTab> createTab(String name, Supplier<ItemStack> icon, Supplier<CreativeModeTab> after) {
-        CreativeModeTab.Builder tab =  CreativeModeTab.builder()
-                .title(Component.translatable("ornamental.tab." + name))
-                .icon(icon);
-        if (after != null)
-            tab.withTabsBefore(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(after.get()));
-        return CREATIVE_TABS.register(name, tab::build);
+        return CREATIVE_TABS.register(name, () -> {
+            CreativeModeTab.Builder tab = CreativeModeTab.builder()
+                    .title(Component.translatable("ornamental.tab." + name))
+                    .icon(icon);
+            if (after != null)
+                tab.withTabsBefore(BuiltInRegistries.CREATIVE_MODE_TAB.getKey(after.get()));
+            return tab.build();
+        });
     }
 
     @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
