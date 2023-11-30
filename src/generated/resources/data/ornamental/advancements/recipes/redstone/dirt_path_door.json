@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_dirt_path",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_dirt_path"
     ]
   ],
   "rewards": {

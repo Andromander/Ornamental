@@ -1,7 +1,7 @@
 package com.androsa.ornamental.data.provider;
 
-import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.blocks.*;
+import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -9,8 +9,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
@@ -30,244 +28,222 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         return new ResourceLocation(modID, name);
     }
 
-    public void stairs(RecipeOutput output, Supplier<? extends OrnamentStair> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8)
-                .pattern("#  ")
-                .pattern("## ")
-                .pattern("###")
-                .define('#', ingredient);
+    /**
+     * Generates a Stairs recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentStair
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     */
+    public void stairs(RecipeOutput output, Supplier<? extends OrnamentStair> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8);
+        if (override) {
+            recipe.define('/', ItemTags.STAIRS)
+                    .pattern("# /")
+                    .pattern("## ")
+                    .pattern("###");
+        } else {
+            recipe.pattern("#  ")
+                    .pattern("## ")
+                    .pattern("###");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_stairs");
     }
 
-    /*
-     * In the event a Stair recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Slab recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentSlab
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void stairsOverride(RecipeOutput output, Supplier<? extends OrnamentStair> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8)
-                .pattern("# /")
-                .pattern("## ")
-                .pattern("###")
-                .define('/', ItemTags.STAIRS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_stairs");
-    }
-
-    public void slab(RecipeOutput output, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-                .pattern("###")
-                .define('#', ingredient);
+    public void slab(RecipeOutput output, Supplier<? extends OrnamentSlab> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+        if (override) {
+            recipe.define('/', ItemTags.SLABS)
+                    .pattern(" / ")
+                    .pattern("###");
+        } else {
+            recipe.pattern("###");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_slab");
     }
 
-    /*
-     * In the event a Slab recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Fence recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentFence
+     * @param bigItem The ingredient required to craft this recipe. This is typically a "big" ingredient
+     * @param smallItem The ingredient required to craft this recipe. This is typically a "small" ingredient
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void slabOverride(RecipeOutput output, Supplier<? extends OrnamentSlab> result, Block ingredient) {
-		ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-				.pattern(" / ")
-				.pattern("###")
-				.define('/', ItemTags.SLABS)
-				.define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_slab");
-	}
-
-    public void fence(RecipeOutput output, Supplier<? extends OrnamentFence> result, Block bigItem, Supplier<? extends SlabBlock> smallItem) {
-        fence(output, result, bigItem, smallItem.get());
-    }
-
-    public void fence(RecipeOutput output, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 3)
-                .pattern("#/#")
-                .pattern("#/#")
-                .define('#', bigItem)
+    public void fence(RecipeOutput output, Supplier<? extends OrnamentFence> result, ItemLike bigItem, ItemLike smallItem, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 3);
+        if (override) {
+            recipe.define('*', ItemTags.FENCES)
+                    .pattern(" * ")
+                    .pattern("#/#")
+                    .pattern("#/#");
+        } else {
+            recipe.pattern("#/#")
+                    .pattern("#/#");
+        }
+        recipe.define('#', bigItem)
                 .define('/', smallItem);
 
         internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence");
     }
 
-    /*
-     * In the event a Fence recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Trapdoor recipe. This formation is for "small" forms (2x2)
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentTrapDoor
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void fenceOverride(RecipeOutput output, Supplier<? extends OrnamentFence> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 3)
-                .pattern(" * ")
-                .pattern("#/#")
-                .pattern("#/#")
-                .define('*', ItemTags.FENCES)
-                .define('#', bigItem)
-                .define('/', smallItem);
-
-        internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence");
-    }
-
-    public void trapdoor(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
-        trapdoor(output, result, ingredient.get());
-    }
-
-    public void trapdoor(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern("##")
-                .pattern("##")
-                .define('#', ingredient);
+    public void trapdoor(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+        if (override) {
+            recipe.define('/', ItemTags.TRAPDOORS)
+                    .pattern(" /")
+                    .pattern("##")
+                    .pattern("##");
+        } else {
+            recipe.pattern("##")
+                    .pattern("##");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
     }
 
-    /*
-     * In the event a Trapdoor recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Trapdoor recipe. This formation is for "wide" forms (2x3)
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentTrapDoor
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void trapdoorOverride(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern(" /")
-                .pattern("##")
-                .pattern("##")
-                .define('/', ItemTags.TRAPDOORS)
-                .define('#', ingredient);
+    public void trapdoorWide(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+        if (override) {
+            recipe.define('/', ItemTags.TRAPDOORS)
+                    .pattern(" / ")
+                    .pattern("###")
+                    .pattern("###");
+        } else {
+            recipe.pattern("###")
+                    .pattern("###");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
     }
 
-    public void trapdoorWide(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
-        trapdoorWide(output, result, ingredient.get());
-    }
-
-    public void trapdoorWide(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern("###")
-                .pattern("###")
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
-    }
-
-    /*
-     * In the event a wide Trapdoor recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Fence Gate recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentFenceGate
+     * @param bigItem The ingredient required to craft this recipe. This is typically a "big" ingredient
+     * @param smallItem The ingredient required to craft this recipe. This is typically a "small" ingredient
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void trapdoorWideOverride(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern(" / ")
-                .pattern("###")
-                .pattern("###")
-                .define('/', ItemTags.TRAPDOORS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
-    }
-
-    public void fencegate(RecipeOutput output, Supplier<? extends OrnamentFenceGate> result, Block bigItem, Supplier<? extends OrnamentSlab> smallItem) {
-        fencegate(output, result, bigItem, smallItem.get());
-    }
-
-    public void fencegate(RecipeOutput output, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern("/#/")
-                .pattern("/#/")
-                .define('#', bigItem)
+    public void fencegate(RecipeOutput output, Supplier<? extends OrnamentFenceGate> result, ItemLike bigItem, ItemLike smallItem, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+        if (override) {
+            recipe.define('*', Tags.Items.FENCE_GATES)
+                    .pattern(" * ")
+                    .pattern("/#/")
+                    .pattern("/#/");
+        } else {
+            recipe.pattern("/#/")
+                    .pattern("/#/");
+        }
+        recipe.define('#', bigItem)
                 .define('/', smallItem);
 
         internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence_gate");
     }
 
-    /*
-     * In the event a Fence Gate recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Door recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentDoor
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void fencegateOverride(RecipeOutput output, Supplier<? extends OrnamentFenceGate> result, Block bigItem, ItemLike smallItem) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern(" * ")
-                .pattern("/#/")
-                .pattern("/#/")
-                .define('*', Tags.Items.FENCE_GATES)
-                .define('#', bigItem)
-                .define('/', smallItem);
-
-        internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence_gate");
-    }
-
-    public void door(RecipeOutput output, Supplier<? extends OrnamentDoor> result, Supplier<? extends OrnamentSlab> ingredient) {
-        door(output, result, ingredient.get());
-    }
-
-    public void door(RecipeOutput output, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern("##")
-                .pattern("##")
-                .pattern("##")
-                .define('#', ingredient);
+    public void door(RecipeOutput output, Supplier<? extends OrnamentDoor> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+        if (override) {
+            recipe.define('/', ItemTags.DOORS)
+                    .pattern("## ")
+                    .pattern("##/")
+                    .pattern("## ");
+        } else {
+            recipe.pattern("##")
+                    .pattern("##")
+                    .pattern("##");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_door");
     }
 
-    /*
-     * In the event a Door recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Pole recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentPole
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void doorOverride(RecipeOutput output, Supplier<? extends OrnamentDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get())
-                .pattern("## ")
-                .pattern("##/")
-                .pattern("## ")
-                .define('/', ItemTags.DOORS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_door");
-    }
-
-    public void pole(RecipeOutput output, Supplier<? extends OrnamentPole> result, Supplier<? extends OrnamentSlab> ingredient) {
-        pole(output, result, ingredient.get());
-    }
-
-    public void pole(RecipeOutput output, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-                .pattern("#")
-                .pattern("#")
-                .pattern("#")
-                .define('#', ingredient);
+    public void pole(RecipeOutput output, Supplier<? extends OrnamentPole> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+        if (override)  {
+            recipe.define('/', ModTags.Items.POLES)
+                    .pattern("# ")
+                    .pattern("#/")
+                    .pattern("# ");
+        } else {
+            recipe.pattern("#")
+                    .pattern("#")
+                    .pattern("#");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_pole");
     }
 
-    /*
-     * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
+    /**
+     * Generates a Beam recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentBeam
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void poleOverride(RecipeOutput output, Supplier<? extends OrnamentPole> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-                .pattern("# ")
-                .pattern("#/")
-                .pattern("# ")
-                .define('/', ModTags.Items.POLES)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_pole");
-    }
-
-    public void beam(RecipeOutput output, Supplier<? extends OrnamentBeam> result, Supplier<? extends OrnamentSlab> ingredient) {
-        beam(output, result, ingredient.get());
-    }
-
-    public void beam(RecipeOutput output, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-                .pattern("###")
-                .define('#', ingredient);
+    public void beam(RecipeOutput output, Supplier<? extends OrnamentBeam> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+        if (override) {
+            recipe.define('/', ModTags.Items.BEAMS)
+                    .pattern(" / ")
+                    .pattern("###");
+        } else {
+            recipe.pattern("###");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_beam");
     }
 
-    /*
-     * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
+    /**
+     * Generates two recipes for converting between Poles and Beams
+     * @param output The RecipeOutput from the data generator
+     * @param pole The OrnamentPole as an ingredient and output
+     * @param beam the OrnamentBeam as an ingredient and output
      */
-    public void beamOverride(RecipeOutput output, Supplier<? extends OrnamentBeam> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6)
-                .pattern(" / ")
-                .pattern("###")
-                .define('/', ModTags.Items.BEAMS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_beam");
-    }
-
     public void convertPoleBeam(RecipeOutput output, Supplier<? extends OrnamentPole> pole, Supplier<? extends OrnamentBeam> beam) {
         ShapelessRecipeBuilder polerecipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, beam.get())
                 .requires(pole.get());
@@ -278,60 +254,58 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         internalRecipeBuild(output, beamrecipe, pole.get(), beam.get(), "_beam_to_pole");
     }
 
-    public void wall(RecipeOutput output, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6)
-                .pattern("###")
-                .pattern("###")
-                .define('#', ingredient);
+    /**
+     * Generates a Wall recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentWall
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     */
+    public void wall(RecipeOutput output, Supplier<? extends OrnamentWall> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6);
+        if (override) {
+            recipe.define('/', ItemTags.WALLS)
+                    .pattern(" / ")
+                    .pattern("###")
+                    .pattern("###");
+        } else {
+            recipe.pattern("###")
+                    .pattern("###");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_wall");
     }
 
-    /*
-     * In the event a Wall recipe is conflicting with another, this is almost guaranteed to work
+    /**
+     * Generates a Saddle Door recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentSaddleDoor
+     * @param ingredient The ingredient required to craft this recipe
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void wallOverride(RecipeOutput output, Supplier<? extends OrnamentWall> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6)
-                .pattern(" / ")
-                .pattern("###")
-                .pattern("###")
-                .define('/', ItemTags.WALLS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_wall");
-    }
-
-    public void saddleDoor(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentTrapDoor> ingredient) {
-        saddleDoor(output, result, ingredient.get());
-    }
-
-    public void saddleDoor(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get(), 2)
-                .pattern("#")
-                .pattern("#")
-                .define('#', ingredient);
+    public void saddleDoor(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient, boolean override) {
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get(), 2);
+        if (override) {
+            recipe.define('/', ModTags.Items.SADDLE_DOORS)
+                    .pattern(" / ")
+                    .pattern("#")
+                    .pattern("#");
+        } else {
+            recipe.pattern("#")
+                    .pattern("#");
+        }
+        recipe.define('#', ingredient);
 
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door");
     }
 
-    /*
-     * This wouldn't be necessary, but in the event this recipe shape is occupied, this exists
+    /**
+     * Generates a recipe for converting Doors to SaddleDoors
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentSaddleDoor
+     * @param ingredient The ingredient required to craft this recipe
      */
-    public void saddleDoorOverride(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get(), 2)
-                .pattern(" / ")
-                .pattern("#")
-                .pattern("#")
-                .define('/', ModTags.Items.SADDLE_DOORS)
-                .define('#', ingredient);
-
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door");
-    }
-
-    public void saddleDoorFromDoor(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, Supplier<? extends OrnamentDoor> ingredient) {
-        saddleDoorFromDoor(output, result, ingredient.get());
-    }
-
     public void saddleDoorFromDoor(RecipeOutput output, Supplier<? extends OrnamentSaddleDoor> result, ItemLike ingredient) {
         ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, result.get(), 2)
                 .requires(ingredient);
