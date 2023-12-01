@@ -3,7 +3,7 @@
   "category": "redstone",
   "key": {
     "#": {
-      "item": "minecraft:hay_block"
+      "item": "minecraft:wheat"
     }
   },
   "pattern": [

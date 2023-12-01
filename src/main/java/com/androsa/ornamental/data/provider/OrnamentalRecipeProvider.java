@@ -12,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -26,6 +27,36 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
 
     private ResourceLocation loc(String name) {
         return new ResourceLocation(modID, name);
+    }
+
+    /**
+     * Using an AutoRecipeManager, generates an array of recipes without the need for manual input
+     * @param output The RecipeOutput from the data generator
+     * @param manager An AutoRecipeManager containing all the required ingredients, outputs, and flags for overrides
+     */
+    public void autoRecipe(RecipeOutput output, AutoRecipeManager manager) {
+        manager.stair().ifPresent(result -> stairs(output, result, manager.bigIngredient(), manager.stairOverride()));
+        manager.slab().ifPresent(result -> slab(output, result, manager.bigIngredient(), manager.slabOverride()));
+        manager.fence().ifPresent(result -> fence(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fenceOverride()));
+        manager.trapdoor().ifPresent(result -> {
+            if (manager.trapdoorWide()) {
+                trapdoorWide(output, result, manager.smallIngredient(), manager.trapdoorOverride());
+            } else {
+                trapdoor(output, result, manager.smallIngredient(), manager.trapdoorOverride());
+            }
+        });
+        manager.fencegate().ifPresent(result -> fencegate(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fencegateOverride()));
+        manager.door().ifPresent(result -> door(output, result, manager.smallIngredient(), manager.doorOverride()));
+        manager.pole().ifPresent(result -> pole(output, result, manager.slabIngredient(), manager.poleOverride()));
+        manager.beam().ifPresent(result -> beam(output, result, manager.slabIngredient(), manager.beamOverride()));
+        if (manager.pole().isPresent() && manager.beam().isPresent()) {
+            convertPoleBeam(output, manager.pole().get(), manager.beam().get());
+        }
+        manager.wall().ifPresent(result -> wall(output, result, manager.bigIngredient(), manager.wallOverride()));
+        manager.saddledoor().ifPresent(result -> {
+            saddleDoor(output, result, manager.tdIngredient(), manager.saddledoorOverride());
+            saddleDoorFromDoor(output, result, manager.doorIngredient());
+        });
     }
 
     /**
@@ -320,4 +351,21 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
 
         recipe.save(output, location);
     }
+
+    /**
+     * A Record helper for generating recipes in a batch. An Optional ensures no nulls and efficient method calling.
+     * bigIngredient is for ingredients considered "large" such as blocks, while a smallIngredient is for ingredients considered "small" such as items or slab variants.
+     * Ingredients accepting Slabs, Trap Doors, and Doors are for more specified recipes that don't use big or small ingredients.
+     */
+    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient,
+                                    Optional<Supplier<? extends OrnamentStair>> stair, boolean stairOverride,
+                                    Optional<Supplier<? extends OrnamentSlab>> slab, boolean slabOverride,
+                                    Optional<Supplier<? extends OrnamentFence>> fence, boolean fenceOverride,
+                                    Optional<Supplier<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide, boolean trapdoorOverride,
+                                    Optional<Supplier<? extends OrnamentFenceGate>> fencegate, boolean fencegateOverride,
+                                    Optional<Supplier<? extends OrnamentDoor>> door, boolean doorOverride,
+                                    Optional<Supplier<? extends OrnamentPole>> pole, boolean poleOverride,
+                                    Optional<Supplier<? extends OrnamentBeam>> beam, boolean beamOverride,
+                                    Optional<Supplier<? extends OrnamentWall>> wall, boolean wallOverride,
+                                    Optional<Supplier<? extends OrnamentSaddleDoor>> saddledoor, boolean saddledoorOverride) { }
 }
