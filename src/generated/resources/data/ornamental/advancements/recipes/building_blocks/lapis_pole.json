@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:lapis_pole"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

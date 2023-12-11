@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:magma_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

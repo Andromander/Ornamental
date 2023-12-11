@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:grass_beam"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

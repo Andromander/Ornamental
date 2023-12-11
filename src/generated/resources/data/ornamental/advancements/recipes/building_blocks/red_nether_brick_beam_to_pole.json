@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:red_nether_brick_beam_to_pole"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:red_nether_brick_fence_gate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

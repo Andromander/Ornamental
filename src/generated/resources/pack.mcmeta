@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": "Ornamental Resources",
+    "neoforge": {
+      "versions": {
+        "client_resources": 22,
+        "server_data": 26
+      }
+    },
+    "pack_format": 22
+  }
+}

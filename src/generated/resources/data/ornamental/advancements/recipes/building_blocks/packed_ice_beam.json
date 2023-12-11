@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:packed_ice_beam"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

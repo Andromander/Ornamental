@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:magma_saddle_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

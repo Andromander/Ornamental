@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:bone_beam_to_pole"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

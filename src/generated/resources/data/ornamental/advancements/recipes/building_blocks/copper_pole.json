@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:copper_pole"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

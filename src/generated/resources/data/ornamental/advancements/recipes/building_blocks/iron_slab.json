@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:iron_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

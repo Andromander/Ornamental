@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:packed_ice_fence_gate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

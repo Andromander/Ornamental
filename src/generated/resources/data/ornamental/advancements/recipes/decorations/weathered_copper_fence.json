@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:weathered_copper_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:grass_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

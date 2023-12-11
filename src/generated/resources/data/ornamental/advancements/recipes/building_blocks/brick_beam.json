@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:brick_beam"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

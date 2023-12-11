@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:gold_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:snow_pole_to_beam"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

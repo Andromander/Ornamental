@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:bone_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

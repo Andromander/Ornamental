@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:weathered_copper_saddle_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:quartz_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

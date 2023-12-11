@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:oxidized_copper_fence_gate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

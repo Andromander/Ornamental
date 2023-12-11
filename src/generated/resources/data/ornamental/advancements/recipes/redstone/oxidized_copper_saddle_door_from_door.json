@@ -30,6 +30,5 @@
     "recipes": [
       "ornamental:oxidized_copper_saddle_door_from_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
