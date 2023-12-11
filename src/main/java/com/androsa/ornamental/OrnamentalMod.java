@@ -6,9 +6,14 @@ import com.androsa.ornamental.registry.ModCreativeTabs;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import com.androsa.ornamental.registry.handler.RemapHandler;
+import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -17,7 +22,10 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Mod(OrnamentalMod.MODID)
 public class OrnamentalMod {
@@ -49,5 +57,11 @@ public class OrnamentalMod {
         generator.addProvider(event.includeServer(), new OrnamentalRecipes(output, provider));
         generator.addProvider(event.includeServer(), blockTags);
         generator.addProvider(event.includeServer(), new OrnamentalItemTags(output, provider, blockTags, helper));
+        generator.addProvider(true, new PackMetadataGenerator(output).add(
+                PackMetadataSection.TYPE,
+                new PackMetadataSection(
+                        Component.literal("Ornamental Resources"),
+                        DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
+                        Arrays.stream(PackType.values()).collect(Collectors.toMap(Function.identity(), DetectedVersion.BUILT_IN::getPackVersion)))));
     }
 }
