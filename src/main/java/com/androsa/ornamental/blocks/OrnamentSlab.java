@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,15 +35,25 @@ import java.util.function.Supplier;
 
 public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentSlab> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentSlab::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentSlab::new));
+
     protected static final VoxelShape PATH_BOTTOM_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
     protected static final VoxelShape PATH_TOP_SHAPE = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 15.0D, 16.0D);
     protected static final VoxelShape PATH_FULL_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
 
     private final OrnamentBuilder builder;
 
-    public OrnamentSlab(Properties props, OrnamentBuilder builder) {
+    public OrnamentSlab(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<? extends OrnamentSlab> codec() {
+        return CODEC;
     }
 
     @Override

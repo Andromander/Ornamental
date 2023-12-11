@@ -3,15 +3,14 @@ package com.androsa.ornamental.builder;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.helper.MasterRegistryHelper;
 import com.google.common.collect.Lists;
-import net.minecraft.core.BlockPos;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -40,6 +39,10 @@ import java.util.function.ToIntFunction;
  */
 public class OrnamentBuilder {
 
+    public static final Codec<OrnamentBuilder> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.STRING.fieldOf("name").forGetter(obj -> obj.name)
+    ).apply(instance, OrnamentBuilder::new));
+
     public final String name;
     public MapColor color = MapColor.NONE;
     public float hardness = 0.0F;
@@ -52,7 +55,6 @@ public class OrnamentBuilder {
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
     public BlockSetType blockSetType = BlockSetType.OAK;
-    public boolean canOpen = blockSetType.canOpenByHand();
     public boolean fallThrough = false;
     public boolean hasPower = false;
     public boolean doesTick = false;
@@ -105,7 +107,6 @@ public class OrnamentBuilder {
         this.fencegateSounds = builder.fencegateSounds;
         this.saddledoorSounds = builder.saddledoorSounds;
         this.blockSetType = builder.blockSetType;
-        this.canOpen = builder.canOpen;
         this.fallThrough = builder.fallThrough;
         this.hasPower = builder.hasPower;
         this.doesTick = builder.doesTick;
@@ -233,17 +234,6 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets the block to be opened by hand. Used in blocks with an open/close state. Redstone power still applies if false.
-     * Note: BlockSetType sets this value, but in the event the desired behaviour is incorrect, this may be used.
-     * Author's Note: This is actually because Mojang has set Stone and Polished Blackstone's boolean value to false, which contradicts what Ornamental has set, as well as {@link net.minecraft.world.level.block.DoorBlock#isWoodenDoor(Level, BlockPos)}.
-     * It is very likely if a Stone door is added, this method will be removed.
-     */
-    public OrnamentBuilder canOpen(boolean flag) {
-        this.canOpen = flag;
-        return this;
-    }
-
-    /**
      * Sets the block to open if walked on. Used in blocks with an open/close state and can open underneath players, such as Trapdoors.
      */
     public OrnamentBuilder canFallThrough() {
@@ -278,50 +268,6 @@ public class OrnamentBuilder {
     public OrnamentBuilder saddledoorSounds(SoundEvent open, SoundEvent close) {
         this.saddledoorSounds = new SoundEvent[]{ open, close };
         return this;
-    }
-
-    /**
-     * Sets a BlockSetType with the OrnamentBuilder name. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
-     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
-     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
-     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
-     * See {@link OrnamentBuilder#blockSetType(String, boolean, SoundType, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent)} for full parameter breakdown.
-     */
-    public OrnamentBuilder blockSetType(SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
-        return this.blockSetType(name, false, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
-    }
-
-    /**
-     * Sets a BlockSetType with the OrnamentBuilder name and allows opening by hand. This is used to handle SoundType, Door opening and closing, and Trapdoor Opening and closing.
-     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
-     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
-     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
-     * See {@link OrnamentBuilder#blockSetType(String, boolean, SoundType, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent, SoundEvent)} for full parameter breakdown.
-     */
-    public OrnamentBuilder blockSetTypeByHand(SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
-        return this.blockSetType(name, true, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon);
-    }
-
-    /**
-     * Sets a BlockSetType from scratch. This is used to handle SoundType, opening by hand, Door opening and closing, and Trapdoor Opening and closing.
-     * Pressure Plates and Buttons are currently not handled, but values should be provided otherwise.
-     * Opening the door by hand may be overridden with {@link OrnamentBuilder#canOpen(boolean)} should behaviour contradict logic.
-     * For Fence Gate sounds, use {@link OrnamentBuilder#fencegateSounds(SoundEvent, SoundEvent)}.
-     * For Saddle Door sounds, use {@link OrnamentBuilder#saddledoorSounds(SoundEvent, SoundEvent)}
-     * @param name The name for the BlockSetType.
-     * @param hand If the block can be opened by hand.
-     * @param sound The sound the block makes.
-     * @param closedoor The close sound of a Door.
-     * @param opendoor The open sound of a Door.
-     * @param closetrap The close sound of a Trapdoor.
-     * @param opentrap The open sound of a Trapdoor.
-     * @param plateoff The off sound of a Pressure Plate.
-     * @param plateon The on sound of a Pressure Plate.
-     * @param buttonoff The off sound of a Button.
-     * @param buttonon The on sound of a Button.
-     */
-    public OrnamentBuilder blockSetType(String name, boolean hand, SoundType sound, SoundEvent closedoor, SoundEvent opendoor, SoundEvent closetrap, SoundEvent opentrap, SoundEvent plateoff, SoundEvent plateon, SoundEvent buttonoff, SoundEvent buttonon) {
-        return this.blockSetType(new BlockSetType(name, hand, sound, closedoor, opendoor, closetrap, opentrap, plateoff, plateon, buttonoff, buttonon));
     }
 
     /**

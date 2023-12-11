@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,6 +38,11 @@ import java.util.stream.IntStream;
 
 public class OrnamentStair extends StairBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentStair> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentStair::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentStair::new));
+
     protected static final VoxelShape PATH_AABB_SLAB_TOP = OrnamentSlab.PATH_TOP_SHAPE;
     protected static final VoxelShape PATH_AABB_SLAB_BOTTOM = OrnamentSlab.PATH_BOTTOM_SHAPE;
     protected static final VoxelShape PATH_NWD_CORNER = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 8.0D, 8.0D);
@@ -52,9 +59,14 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
 
     private final OrnamentBuilder builder;
 
-    public OrnamentStair(Properties props, OrnamentBuilder builder) {
+    public OrnamentStair(OrnamentBuilder builder, Properties props) {
         super(() -> builder.baseBlock.get().defaultBlockState(), props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<? extends OrnamentStair> codec() {
+        return CODEC;
     }
 
     @Override

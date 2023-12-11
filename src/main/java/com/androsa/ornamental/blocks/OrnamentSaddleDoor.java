@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,6 +34,12 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
+
+    public static final MapCodec<OrnamentSaddleDoor> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentSaddleDoor::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentSaddleDoor::new));
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
@@ -50,13 +58,18 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     private final SoundEvent closeSound;
     private final SoundEvent openSound;
 
-    public OrnamentSaddleDoor(Properties props, OrnamentBuilder builder) {
+    public OrnamentSaddleDoor(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
         this.closeSound = builder.saddledoorSounds[1];
         this.openSound = builder.saddledoorSounds[0];
 
         this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(HINGE, DoorHingeSide.LEFT).setValue(POWERED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends OrnamentSaddleDoor> codec() {
+        return CODEC;
     }
 
     @Override
@@ -164,7 +177,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
             }
         }
 
-        if (!builder.canOpen) {
+        if (!builder.blockSetType.canOpenByHand()) {
             return InteractionResult.PASS;
         } else {
             state = state.cycle(OPEN);

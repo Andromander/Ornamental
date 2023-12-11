@@ -197,7 +197,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(stairTags().blockTags());
         itemtags.addAll(stairTags().itemTags());
 
-        return registerBlock(builder, "_stairs", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_stairs", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 4, OrnamentBlockItem::new), ModCreativeTabs.STAIR_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -214,7 +214,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(slabTags().blockTags());
         itemtags.addAll(slabTags().itemTags());
 
-        return registerBlock(builder, "_slab", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_slab", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 3, OrnamentBlockItem::new), ModCreativeTabs.SLAB_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -231,7 +231,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(fenceTags().blockTags());
         itemtags.addAll(fenceTags().itemTags());
 
-        return registerBlock(builder, "_fence", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_fence", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 1, OrnamentBlockItem::new), ModCreativeTabs.FENCE_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -248,7 +248,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(trapdoorTags().blockTags());
         itemtags.addAll(trapdoorTags().itemTags());
 
-        return registerBlock(builder, "_trapdoor", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_trapdoor", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 5, OrnamentBlockItem::new), ModCreativeTabs.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -265,7 +265,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(fencegateTags().blockTags());
         itemtags.addAll(fencegateTags().itemTags());
 
-        return registerBlock(builder, "_fence_gate", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_fence_gate", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 2, OrnamentBlockItem::new), ModCreativeTabs.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -282,7 +282,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(doorTags().blockTags());
         itemtags.addAll(doorTags().itemTags());
 
-        return registerBlock(builder, "_door", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_door", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), ModCreativeTabs.DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -299,7 +299,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(poleTags().blockTags());
         itemtags.addAll(poleTags().itemTags());
 
-        return registerBlock(builder, "_pole", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_pole", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 6, OrnamentBlockItem::new), ModCreativeTabs.POLE_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -316,7 +316,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(beamTags().blockTags());
         itemtags.addAll(beamTags().itemTags());
 
-        return registerBlock(builder, "_beam", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_beam", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 7, OrnamentBlockItem::new), ModCreativeTabs.BEAM_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -333,7 +333,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(wallTags().blockTags());
         itemtags.addAll(wallTags().itemTags());
 
-        return registerBlock(builder, "_wall", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_wall", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 8, OrnamentBlockItem::new), ModCreativeTabs.WALL_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -350,7 +350,7 @@ public abstract class MasterRegistryHelper {
         blocktags.addAll(saddledoorTags().blockTags());
         itemtags.addAll(saddledoorTags().itemTags());
 
-        return registerBlock(builder, "_saddle_door", () -> factory.create(props, builder), item ->
+        return registerBlock(builder, "_saddle_door", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
@@ -394,7 +394,7 @@ public abstract class MasterRegistryHelper {
 
     @FunctionalInterface
     public interface BlockFactory<T extends OrnamentalBlock, O extends OrnamentBuilder> {
-        T create(BlockBehaviour.Properties props, O builder);
+        T create(O builder, BlockBehaviour.Properties props);
     }
 
     @FunctionalInterface

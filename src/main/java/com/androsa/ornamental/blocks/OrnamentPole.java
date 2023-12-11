@@ -4,6 +4,8 @@ import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -47,6 +49,11 @@ import java.util.function.Supplier;
 
 public class OrnamentPole extends Block implements SimpleWaterloggedBlock, OrnamentalBlock {
 
+    public static final MapCodec<OrnamentPole> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentPole::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentPole::new));
+
     protected static final VoxelShape TL_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 8.0D);
     protected static final VoxelShape TR_SHAPE = Block.box(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
     protected static final VoxelShape BL_SHAPE = Block.box(0.0D, 0.0D, 8.0D, 8.0D, 16.0D, 16.0D);
@@ -68,7 +75,7 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
 
     private final OrnamentBuilder builder;
 
-    public OrnamentPole(Properties props, OrnamentBuilder builder) {
+    public OrnamentPole(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
         this.registerDefaultState(this.stateDefinition.any()
@@ -77,6 +84,11 @@ public class OrnamentPole extends Block implements SimpleWaterloggedBlock, Ornam
                 .setValue(BOTTOM_LEFT, false)
                 .setValue(BOTTOM_RIGHT, false)
                 .setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends OrnamentPole> codec() {
+        return CODEC;
     }
 
     @Override

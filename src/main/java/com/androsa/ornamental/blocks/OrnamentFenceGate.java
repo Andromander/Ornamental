@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,6 +34,11 @@ import java.util.function.Supplier;
 
 public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentFenceGate> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentFenceGate::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentFenceGate::new));
+
     protected static final VoxelShape PATH_HITBOX_ZAXIS = Block.box(0.0D, 0.0D, 6.0D, 16.0D, 15.0D, 10.0D);
     protected static final VoxelShape PATH_HITBOX_XAXIS = Block.box(6.0D, 0.0D, 0.0D, 10.0D, 15.0D, 16.0D);
     protected static final VoxelShape PATH_HITBOX_ZAXIS_INWALL = Block.box(0.0D, 0.0D, 6.0D, 16.0D, 12.0D, 10.0D);
@@ -45,9 +52,14 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
 
     private final OrnamentBuilder builder;
 
-    public OrnamentFenceGate(Properties props, OrnamentBuilder builder) {
+    public OrnamentFenceGate(OrnamentBuilder builder, Properties props) {
         super(props, builder.fencegateSounds[0], builder.fencegateSounds[1]);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<FenceGateBlock> codec() {
+        return (MapCodec<FenceGateBlock>)(MapCodec<?>)CODEC;
     }
 
     @Override
@@ -146,7 +158,7 @@ public class OrnamentFenceGate extends FenceGateBlock implements OrnamentalBlock
             }
         }
 
-        if (!builder.canOpen) {
+        if (!builder.blockSetType.canOpenByHand()) {
             return InteractionResult.PASS;
         } else {
             return super.use(state, worldIn, pos, player, hand, result);

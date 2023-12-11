@@ -3,6 +3,8 @@ package com.androsa.ornamental.blocks;
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,13 +37,23 @@ import java.util.function.Supplier;
 
 public class OrnamentWall extends WallBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentWall> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentWall::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentWall::new));
+
     protected final Map<BlockState, VoxelShape> collisionShapeByIndex = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
     protected final Map<BlockState, VoxelShape> shapeByIndex = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
     private final OrnamentBuilder builder;
 
-    public OrnamentWall(Properties props, OrnamentBuilder builder) {
+    public OrnamentWall(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<WallBlock> codec() {
+        return (MapCodec<WallBlock>)(MapCodec<?>)CODEC;
     }
 
     @Override

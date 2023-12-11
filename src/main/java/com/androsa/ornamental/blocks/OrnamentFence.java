@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,14 +35,24 @@ import java.util.function.Supplier;
 
 public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentFence> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentFence::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentFence::new));
+
     protected final VoxelShape[] collisionShapes = this.makeShapes(2.0F, 2.0F, 23.0F, 0.0F, 23.0F);
     protected final VoxelShape[] shapes = this.makeShapes(2.0F, 2.0F, 15.0F, 0.0F, 15.0F);
 
     private final OrnamentBuilder builder;
 
-    public OrnamentFence(Properties props, OrnamentBuilder builder) {
+    public OrnamentFence(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<FenceBlock> codec() {
+        return (MapCodec<FenceBlock>)(MapCodec<?>)CODEC;
     }
 
     @Override

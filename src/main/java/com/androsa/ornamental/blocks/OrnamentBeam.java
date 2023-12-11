@@ -4,6 +4,8 @@ import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,12 +43,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.Supplier;
 
 public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, OrnamentalBlock {
+
+    public static final MapCodec<OrnamentBeam> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentBeam::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentBeam::new));
 
     protected static final VoxelShape BL_SHAPE_X = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 8.0D);
     protected static final VoxelShape BR_SHAPE_X = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 8.0D, 16.0D);
@@ -80,7 +88,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
 
     private final OrnamentBuilder builder;
 
-    public OrnamentBeam(Properties props, OrnamentBuilder builder) {
+    public OrnamentBeam(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
         this.registerDefaultState(this.stateDefinition.any()
@@ -93,13 +101,19 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, HORIZONTAL_AXIS, WATERLOGGED);
+    @NotNull
+    protected MapCodec<? extends OrnamentBeam> codec() {
+        return CODEC;
     }
 
     @Override
     public OrnamentBuilder getBuilder() {
         return builder;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, HORIZONTAL_AXIS, WATERLOGGED);
     }
 
     @Override

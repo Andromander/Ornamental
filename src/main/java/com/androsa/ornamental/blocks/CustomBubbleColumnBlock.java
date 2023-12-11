@@ -1,6 +1,7 @@
 package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.registry.ModBlocks;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,9 +32,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nonnull;
 import java.util.Optional;
 
 public class CustomBubbleColumnBlock extends Block implements BucketPickup {
+    public static final MapCodec<CustomBubbleColumnBlock> CODEC = simpleCodec(CustomBubbleColumnBlock::new);
     public static final BooleanProperty DRAG_DOWN = BlockStateProperties.DRAG;
 
     public CustomBubbleColumnBlock(Properties props) {
@@ -42,6 +45,13 @@ public class CustomBubbleColumnBlock extends Block implements BucketPickup {
     }
 
     @Override
+    @Nonnull
+    protected MapCodec<? extends Block> codec() {
+        return CODEC;
+    }
+
+    @Override
+    @Deprecated
     public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         return Shapes.empty();
     }

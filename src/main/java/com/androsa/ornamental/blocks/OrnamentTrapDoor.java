@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,7 +27,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,6 +35,11 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
+
+    public static final MapCodec<OrnamentTrapDoor> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentTrapDoor::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentTrapDoor::new));
 
     protected static final VoxelShape PATH_EAST_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, 2.0D, 16.0D, 16.0D);
     protected static final VoxelShape PATH_WEST_OPEN_AABB = Block.box(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -44,9 +50,14 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
 
     private final OrnamentBuilder builder;
 
-    public OrnamentTrapDoor(Properties props, OrnamentBuilder builder) {
-        super(props, builder.blockSetType);
+    public OrnamentTrapDoor(OrnamentBuilder builder, Properties props) {
+        super(builder.blockSetType, props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<? extends OrnamentTrapDoor> codec() {
+        return CODEC;
     }
 
     @Override
@@ -114,18 +125,7 @@ public class OrnamentTrapDoor extends TrapDoorBlock implements OrnamentalBlock {
             }
         }
 
-        if (!builder.canOpen) {
-            return InteractionResult.PASS;
-        } else {
-            state = state.cycle(OPEN);
-            worldIn.setBlock(pos, state, 2);
-            if (state.getValue(WATERLOGGED)) {
-                worldIn.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-            }
-
-            this.playSound(player, worldIn, pos, state.getValue(OPEN));
-            return InteractionResult.sidedSuccess(worldIn.isClientSide());
-        }
+        return super.use(state, worldIn, pos, player, hand, result);
     }
 
     private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {

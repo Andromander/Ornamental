@@ -2,6 +2,8 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,7 +28,6 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -36,6 +37,11 @@ import java.util.function.Supplier;
 
 public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
 
+    public static final MapCodec<OrnamentDoor> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(OrnamentBuilder.CODEC.fieldOf("ornament_builder").forGetter(OrnamentDoor::getBuilder),
+                            propertiesCodec())
+                    .apply(instance, OrnamentDoor::new));
+
     protected static final VoxelShape PATH_SOUTH_AABB_TOP = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 3.0D);
     protected static final VoxelShape PATH_NORTH_AABB_TOP = Block.box(0.0D, 0.0D, 13.0D, 16.0D, 15.0D, 16.0D);
     protected static final VoxelShape PATH_WEST_AABB_TOP = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
@@ -43,9 +49,14 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
 
     private final OrnamentBuilder builder;
 
-    public OrnamentDoor(Properties props, OrnamentBuilder builder) {
-        super(props, builder.blockSetType);
+    public OrnamentDoor(OrnamentBuilder builder, Properties props) {
+        super(builder.blockSetType, props);
         this.builder = builder;
+    }
+
+    @Override
+    public MapCodec<? extends OrnamentDoor> codec() {
+        return CODEC;
     }
 
     @Override
@@ -138,15 +149,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
             }
         }
 
-        if (!builder.canOpen) {
-            return InteractionResult.PASS;
-        } else {
-            state = state.cycle(OPEN);
-            worldIn.setBlock(pos, state, 10);
-            worldIn.playSound(player, pos, state.getValue(OPEN) ? builder.blockSetType.doorOpen() : builder.blockSetType.doorClose(), SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
-            worldIn.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-            return InteractionResult.sidedSuccess(worldIn.isClientSide());
-        }
+        return super.use(state, worldIn, pos, player, hand, result);
     }
 
     private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
