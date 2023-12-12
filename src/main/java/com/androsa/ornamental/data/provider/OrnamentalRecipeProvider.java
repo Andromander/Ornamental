@@ -381,6 +381,16 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door_from_door");
     }
 
+    /**
+     * Generates a Stonecutter recipe. This does not apply to any specific block and can generate whatever input and output.
+     * Note that AutoRecipeManager will only output Stairs, Slabs, Poles, Beams, and Walls. Any other blocks will have to be made manually.
+     * @param output The RecipeOutput from the data generator
+     * @param category The RecipeCategory the recipe belongs to
+     * @param result The result of the recipe. Any block may be used as the output
+     * @param ingredient The ingredient required to stonecut this recipe
+     * @param count How many the recipe will output
+     * @param name A prefix for the recipe name
+     */
     public void stoneCutting(RecipeOutput output, RecipeCategory category, Supplier<? extends Block> result, ItemLike ingredient, int count, String name) {
         if (result.get() instanceof OrnamentalBlock ornament) {
             SingleItemRecipeBuilder recipe = SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), category, result.get(), count);
