@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:nether_bricks"
+  },
+  "result": "ornamental:nether_brick_pole"
+}

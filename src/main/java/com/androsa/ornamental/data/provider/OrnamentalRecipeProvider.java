@@ -8,7 +8,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
@@ -35,8 +37,8 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param manager An AutoRecipeManager containing all the required ingredients, outputs, and flags for overrides
      */
     public void autoRecipe(RecipeOutput output, AutoRecipeManager manager) {
-        manager.stair().ifPresent(result -> stairs(output, result, manager.bigIngredient(), manager.stairOverride()));
-        manager.slab().ifPresent(result -> slab(output, result, manager.bigIngredient(), manager.slabOverride()));
+        manager.stair().ifPresent(result -> stairs(output, result, manager.bigIngredient(), manager.stairOverride(), manager.stonecutter()));
+        manager.slab().ifPresent(result -> slab(output, result, manager.bigIngredient(), manager.slabOverride(), manager.stonecutter()));
         manager.fence().ifPresent(result -> fence(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fenceOverride()));
         manager.trapdoor().ifPresent(result -> {
             if (manager.trapdoorWide()) {
@@ -47,12 +49,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         });
         manager.fencegate().ifPresent(result -> fencegate(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fencegateOverride()));
         manager.door().ifPresent(result -> door(output, result, manager.smallIngredient(), manager.doorOverride()));
-        manager.pole().ifPresent(result -> pole(output, result, manager.slabIngredient(), manager.poleOverride()));
-        manager.beam().ifPresent(result -> beam(output, result, manager.slabIngredient(), manager.beamOverride()));
+        manager.pole().ifPresent(result -> pole(output, result, manager.bigIngredient(), manager.slabIngredient(), manager.poleOverride(), manager.stonecutter()));
+        manager.beam().ifPresent(result -> beam(output, result, manager.bigIngredient(), manager.slabIngredient(), manager.beamOverride(), manager.stonecutter()));
         if (manager.pole().isPresent() && manager.beam().isPresent()) {
             convertPoleBeam(output, manager.pole().get(), manager.beam().get());
         }
-        manager.wall().ifPresent(result -> wall(output, result, manager.bigIngredient(), manager.wallOverride()));
+        manager.wall().ifPresent(result -> wall(output, result, manager.bigIngredient(), manager.wallOverride(), manager.stonecutter()));
         manager.saddledoor().ifPresent(result -> {
             saddleDoor(output, result, manager.tdIngredient(), manager.saddledoorOverride());
             saddleDoorFromDoor(output, result, manager.doorIngredient());
@@ -60,14 +62,17 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     /**
-     * Generates a Stairs recipe
+     * Generates Stairs recipes
      * @param output The RecipeOutput from the data generator
      * @param result The result of the recipe. This must be an OrnamentStair
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe. If there's no Stone Cutter recipe, the recipe output will be 8
      */
-    public void stairs(RecipeOutput output, Supplier<? extends OrnamentStair> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 8);
+    public void stairs(RecipeOutput output, Supplier<? extends OrnamentStair> result, ItemLike ingredient, boolean override, boolean stonecutter) {
+        String suffix = "_stairs";
+        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(category, result.get(), stonecutter ? 4 : 8);
         if (override) {
             recipe.define('/', ItemTags.STAIRS)
                     .pattern("# /")
@@ -80,7 +85,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_stairs");
+        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, ingredient, 1, suffix);
+        }
     }
 
     /**
@@ -89,8 +98,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param result The result of the recipe. This must be an OrnamentSlab
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe
      */
-    public void slab(RecipeOutput output, Supplier<? extends OrnamentSlab> result, ItemLike ingredient, boolean override) {
+    public void slab(RecipeOutput output, Supplier<? extends OrnamentSlab> result, ItemLike ingredient, boolean override, boolean stonecutter) {
+        String suffix = "_slab";
+        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
         ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
         if (override) {
             recipe.define('/', ItemTags.SLABS)
@@ -101,7 +113,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_slab");
+        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, ingredient, 2, suffix);
+        }
     }
 
     /**
@@ -230,9 +246,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param result The result of the recipe. This must be an OrnamentPole
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe
      */
-    public void pole(RecipeOutput output, Supplier<? extends OrnamentPole> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+    public void pole(RecipeOutput output, Supplier<? extends OrnamentPole> result, ItemLike block, ItemLike ingredient, boolean override, boolean stonecutter) {
+        String suffix = "_pole";
+        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(category, result.get(), 6);
         if (override)  {
             recipe.define('/', ModTags.Items.POLES)
                     .pattern("# ")
@@ -245,7 +264,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_pole");
+        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, block, 4, suffix);
+        }
     }
 
     /**
@@ -254,9 +277,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param result The result of the recipe. This must be an OrnamentBeam
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe
      */
-    public void beam(RecipeOutput output, Supplier<? extends OrnamentBeam> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+    public void beam(RecipeOutput output, Supplier<? extends OrnamentBeam> result, ItemLike block, ItemLike ingredient, boolean override, boolean stonecutter) {
+        String suffix = "_beam";
+        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(category, result.get(), 6);
         if (override) {
             recipe.define('/', ModTags.Items.BEAMS)
                     .pattern(" / ")
@@ -266,7 +292,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_beam");
+        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, block, 4, suffix);
+        }
     }
 
     /**
@@ -291,9 +321,12 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param result The result of the recipe. This must be an OrnamentWall
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe
      */
-    public void wall(RecipeOutput output, Supplier<? extends OrnamentWall> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result.get(), 6);
+    public void wall(RecipeOutput output, Supplier<? extends OrnamentWall> result, ItemLike ingredient, boolean override, boolean stonecutter) {
+        String suffix = "_wall";
+        RecipeCategory category = RecipeCategory.DECORATIONS;
+        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(category, result.get(), 6);
         if (override) {
             recipe.define('/', ItemTags.WALLS)
                     .pattern(" / ")
@@ -305,7 +338,11 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_wall");
+        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, ingredient, 1, suffix);
+        }
     }
 
     /**
@@ -344,6 +381,13 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door_from_door");
     }
 
+    public void stoneCutting(RecipeOutput output, RecipeCategory category, Supplier<? extends Block> result, ItemLike ingredient, int count, String name) {
+        if (result.get() instanceof OrnamentalBlock ornament) {
+            SingleItemRecipeBuilder recipe = SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), category, result.get(), count);
+            internalRecipeBuild(output, recipe, ornament, ingredient, name + "_stone_cutting");
+        }
+    }
+
     private void internalRecipeBuild(RecipeOutput output, RecipeBuilder recipe, OrnamentalBlock result, ItemLike criteria, String name) {
         OrnamentBuilder builder = result.getBuilder();
         recipe = recipe.unlockedBy("has_" + builder.name, has(criteria));
@@ -357,7 +401,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * bigIngredient is for ingredients considered "large" such as blocks, while a smallIngredient is for ingredients considered "small" such as items or slab variants.
      * Ingredients accepting Slabs, Trap Doors, and Doors are for more specified recipes that don't use big or small ingredients.
      */
-    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient,
+    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient, boolean stonecutter,
                                     Optional<Supplier<? extends OrnamentStair>> stair, boolean stairOverride,
                                     Optional<Supplier<? extends OrnamentSlab>> slab, boolean slabOverride,
                                     Optional<Supplier<? extends OrnamentFence>> fence, boolean fenceOverride,
