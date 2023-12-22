@@ -21,13 +21,13 @@ This mod provides decorative blocks of usually absurd materials.
 
 [[dependencies.ornamental]] #optional
     modId="neoforge" #mandatory
-    mandatory=true #mandatory
+    type="required" #mandatory
     versionRange="${neo_version_range}" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.ornamental]]
     modId="minecraft"
-    mandatory=true
+    type="required"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"

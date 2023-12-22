@@ -14,8 +14,9 @@ import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+import net.minecraft.util.InclusiveRange;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -23,6 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -32,14 +34,14 @@ public class OrnamentalMod {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ornamental";
 
-    public OrnamentalMod() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::gatherData);
+    public OrnamentalMod(IEventBus bus) {
+        bus.addListener(this::gatherData);
 
-        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModCreativeTabs.CREATIVE_TABS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModParticles.PARTICLE_TYPE.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.BLOCKS.register(bus);
+        ModBlocks.ITEMS.register(bus);
+        ModCreativeTabs.CREATIVE_TABS.register(bus);
+        ModEntities.ENTITIES.register(bus);
+        ModParticles.PARTICLE_TYPE.register(bus);
 
         RemapHandler.remapEntries();
     }
@@ -62,6 +64,6 @@ public class OrnamentalMod {
                 new PackMetadataSection(
                         Component.literal("Ornamental Resources"),
                         DetectedVersion.BUILT_IN.getPackVersion(PackType.CLIENT_RESOURCES),
-                        Arrays.stream(PackType.values()).collect(Collectors.toMap(Function.identity(), DetectedVersion.BUILT_IN::getPackVersion)))));
+                        Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
     }
 }

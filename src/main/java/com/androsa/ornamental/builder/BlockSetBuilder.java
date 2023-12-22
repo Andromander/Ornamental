@@ -140,10 +140,10 @@ public class BlockSetBuilder {
     }
 
     public BlockSetType build() {
-        return new BlockSetType(this.name, this.openByHand, this.openByBreeze, this.activateByArrow, this.pressureSensitivity, this.sound,
+        return BlockSetType.register(new BlockSetType(this.name, this.openByHand, this.openByBreeze, this.activateByArrow, this.pressureSensitivity, this.sound,
                 doorSounds.getFirst(), doorSounds.getSecond(),
                 trapdoorSounds.getFirst(), trapdoorSounds.getSecond(),
                 plateSounds.getFirst(), plateSounds.getSecond(),
-                buttonSounds.getFirst(), buttonSounds.getSecond());
+                buttonSounds.getFirst(), buttonSounds.getSecond()));
     }
 }
