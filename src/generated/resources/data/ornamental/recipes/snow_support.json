@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:snow_pole"
+    },
+    {
+      "item": "ornamental:snow_beam"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:snow_support"
+  }
+}

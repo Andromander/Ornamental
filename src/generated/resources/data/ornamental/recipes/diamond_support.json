@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:diamond_pole"
+    },
+    {
+      "item": "ornamental:diamond_beam"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:diamond_support"
+  }
+}

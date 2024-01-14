@@ -37,7 +37,8 @@ public class ClientEvents {
                 ModBlocks.grass_pole.get(),
                 ModBlocks.grass_beam.get(),
                 ModBlocks.grass_wall.get(),
-                ModBlocks.grass_saddle_door.get());
+                ModBlocks.grass_saddle_door.get(),
+                ModBlocks.grass_support.get());
         event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1,
                 ModBlocks.fake_bubble_column.get());
     }
@@ -53,7 +54,8 @@ public class ClientEvents {
                 ModBlocks.grass_pole.get(),
                 ModBlocks.grass_beam.get(),
                 ModBlocks.grass_wall.get(),
-                ModBlocks.grass_saddle_door.get());
+                ModBlocks.grass_saddle_door.get(),
+                ModBlocks.grass_support.get());
     }
 
     @SubscribeEvent

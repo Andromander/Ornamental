@@ -1,10 +1,10 @@
-// 1.20.4	2023-12-11T13:58:53.9544166	Tags for minecraft:item mod id ornamental
+// 1.20.4	2024-01-11T10:18:12.9189921	Tags for minecraft:item mod id ornamental
 543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/forge/tags/items/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/items/fences/nether_brick.json
 ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/forge/tags/items/fence_gates.json
 47df8911aff3188df43b91b62d9a6d83001c99b8 data/minecraft/tags/items/doors.json
 543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/minecraft/tags/items/fences.json
-b96769646a5bfa38feadc8b5f568ff260ece20dc data/minecraft/tags/items/piglin_loved.json
+34a17aa4a6caaeab027393a913dac027cb5120dc data/minecraft/tags/items/piglin_loved.json
 66fc019f8a5a145ac6653c7d1fdeec542f5f3854 data/minecraft/tags/items/slabs.json
 7003a4ae6b457fae7149f70cf6f1b7ed1a82a07a data/minecraft/tags/items/stairs.json
 2cf4a9abb8948129f29ea2de188bf09f1d78c14f data/minecraft/tags/items/trapdoors.json
@@ -12,3 +12,5 @@ e8fb6c0a09f1dba07f4be0fb5e758314aa9fc7e8 data/minecraft/tags/items/walls.json
 c1a771094d62297192181e5a5779d56923c4f1cc data/ornamental/tags/items/beams.json
 8cbbd430c90342e7957f94b1bd0e76b7343e7e7a data/ornamental/tags/items/poles.json
 eb07cb3ef80f566331547e86761613c2e5aa84f4 data/ornamental/tags/items/saddle_doors.json
+f3d0a9eeb9e9b546fa0002966fba70b9c5b4e0df data/ornamental/tags/items/supports.json
+fde0ef2ba2ccb14e74468b92e4872b08004353e1 data/ornamental/tags/items/support_fillers.json

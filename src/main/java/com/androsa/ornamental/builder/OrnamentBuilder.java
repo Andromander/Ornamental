@@ -50,7 +50,7 @@ public class OrnamentBuilder {
     public int light = 0;
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
-    public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0};
+    public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0,0,0};
     public Supplier<? extends Block> baseBlock = () -> Blocks.AIR;
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};

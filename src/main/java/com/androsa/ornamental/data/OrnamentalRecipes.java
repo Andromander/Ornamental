@@ -20,7 +20,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.IRON_BLOCK, Items.IRON_INGOT, ModBlocks.iron_slab.get(), Blocks.IRON_TRAPDOOR, Blocks.IRON_DOOR, true,
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.IRON_BLOCK, Items.IRON_INGOT, ModBlocks.iron_slab.get(), Blocks.IRON_TRAPDOOR, Blocks.IRON_DOOR, ModBlocks.iron_pole.get(), ModBlocks.iron_beam.get(), true,
                 Optional.of(ModBlocks.iron_stairs), false,
                 Optional.of(ModBlocks.iron_slab), false,
                 Optional.of(ModBlocks.iron_fence), false,
@@ -30,8 +30,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.iron_pole), false,
                 Optional.of(ModBlocks.iron_beam), false,
                 Optional.of(ModBlocks.iron_wall), false,
-                Optional.of(ModBlocks.iron_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.GOLD_BLOCK, Items.GOLD_INGOT, ModBlocks.gold_slab.get(), ModBlocks.gold_trapdoor.get(), ModBlocks.gold_door.get(), true,
+                Optional.of(ModBlocks.iron_saddle_door), false,
+                Optional.of(ModBlocks.iron_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.GOLD_BLOCK, Items.GOLD_INGOT, ModBlocks.gold_slab.get(), ModBlocks.gold_trapdoor.get(), ModBlocks.gold_door.get(), ModBlocks.gold_pole.get(), ModBlocks.gold_beam.get(), true,
                 Optional.of(ModBlocks.gold_stairs), false,
                 Optional.of(ModBlocks.gold_slab), false,
                 Optional.of(ModBlocks.gold_fence), false,
@@ -41,8 +42,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.gold_pole), false,
                 Optional.of(ModBlocks.gold_beam), false,
                 Optional.of(ModBlocks.gold_wall), false,
-                Optional.of(ModBlocks.gold_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIAMOND_BLOCK, Items.DIAMOND, ModBlocks.diamond_slab.get(), ModBlocks.diamond_trapdoor.get(), ModBlocks.diamond_door.get(), true,
+                Optional.of(ModBlocks.gold_saddle_door), false,
+                Optional.of(ModBlocks.gold_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIAMOND_BLOCK, Items.DIAMOND, ModBlocks.diamond_slab.get(), ModBlocks.diamond_trapdoor.get(), ModBlocks.diamond_door.get(), ModBlocks.diamond_pole.get(), ModBlocks.diamond_beam.get(), true,
                 Optional.of(ModBlocks.diamond_stairs), false,
                 Optional.of(ModBlocks.diamond_slab), false,
                 Optional.of(ModBlocks.diamond_fence), false,
@@ -52,8 +54,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.diamond_pole), false,
                 Optional.of(ModBlocks.diamond_beam), false,
                 Optional.of(ModBlocks.diamond_wall), false,
-                Optional.of(ModBlocks.diamond_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.EMERALD_BLOCK, Items.EMERALD, ModBlocks.emerald_slab.get(), ModBlocks.emerald_trapdoor.get(), ModBlocks.emerald_door.get(), true,
+                Optional.of(ModBlocks.diamond_saddle_door), false,
+                Optional.of(ModBlocks.diamond_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.EMERALD_BLOCK, Items.EMERALD, ModBlocks.emerald_slab.get(), ModBlocks.emerald_trapdoor.get(), ModBlocks.emerald_door.get(), ModBlocks.emerald_pole.get(), ModBlocks.emerald_beam.get(), true,
                 Optional.of(ModBlocks.emerald_stairs), false,
                 Optional.of(ModBlocks.emerald_slab), false,
                 Optional.of(ModBlocks.emerald_fence), false,
@@ -63,8 +66,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.emerald_pole), false,
                 Optional.of(ModBlocks.emerald_beam), false,
                 Optional.of(ModBlocks.emerald_wall), false,
-                Optional.of(ModBlocks.emerald_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI, ModBlocks.lapis_slab.get(), ModBlocks.lapis_trapdoor.get(), ModBlocks.lapis_door.get(), true,
+                Optional.of(ModBlocks.emerald_saddle_door), false,
+                Optional.of(ModBlocks.emerald_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI, ModBlocks.lapis_slab.get(), ModBlocks.lapis_trapdoor.get(), ModBlocks.lapis_door.get(), ModBlocks.lapis_pole.get(), ModBlocks.lapis_beam.get(), true,
                 Optional.of(ModBlocks.lapis_stairs), false,
                 Optional.of(ModBlocks.lapis_slab), false,
                 Optional.of(ModBlocks.lapis_fence), false,
@@ -74,8 +78,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.lapis_pole), false,
                 Optional.of(ModBlocks.lapis_beam), false,
                 Optional.of(ModBlocks.lapis_wall), false,
-                Optional.of(ModBlocks.lapis_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.OBSIDIAN, ModBlocks.obsidian_slab.get(), ModBlocks.obsidian_slab.get(), ModBlocks.obsidian_trapdoor.get(), ModBlocks.obsidian_door.get(), true,
+                Optional.of(ModBlocks.lapis_saddle_door), false,
+                Optional.of(ModBlocks.lapis_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.OBSIDIAN, ModBlocks.obsidian_slab.get(), ModBlocks.obsidian_slab.get(), ModBlocks.obsidian_trapdoor.get(), ModBlocks.obsidian_door.get(), ModBlocks.obsidian_pole.get(), ModBlocks.obsidian_beam.get(), true,
                 Optional.of(ModBlocks.obsidian_stairs), false,
                 Optional.of(ModBlocks.obsidian_slab), false,
                 Optional.of(ModBlocks.obsidian_fence), false,
@@ -85,8 +90,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.obsidian_pole), false,
                 Optional.of(ModBlocks.obsidian_beam), false,
                 Optional.of(ModBlocks.obsidian_wall), false,
-                Optional.of(ModBlocks.obsidian_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.COAL_BLOCK, Items.COAL, ModBlocks.coal_slab.get(), ModBlocks.coal_trapdoor.get(), ModBlocks.coal_door.get(), true,
+                Optional.of(ModBlocks.obsidian_saddle_door), false,
+                Optional.of(ModBlocks.obsidian_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.COAL_BLOCK, Items.COAL, ModBlocks.coal_slab.get(), ModBlocks.coal_trapdoor.get(), ModBlocks.coal_door.get(), ModBlocks.coal_pole.get(), ModBlocks.coal_beam.get(), true,
                 Optional.of(ModBlocks.coal_stairs), false,
                 Optional.of(ModBlocks.coal_slab), false,
                 Optional.of(ModBlocks.coal_fence), false,
@@ -96,8 +102,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.coal_pole), false,
                 Optional.of(ModBlocks.coal_beam), false,
                 Optional.of(ModBlocks.coal_wall), false,
-                Optional.of(ModBlocks.coal_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.REDSTONE_BLOCK, Items.REDSTONE, ModBlocks.redstone_slab.get(), ModBlocks.redstone_trapdoor.get(), ModBlocks.redstone_door.get(), true,
+                Optional.of(ModBlocks.coal_saddle_door), false,
+                Optional.of(ModBlocks.coal_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.REDSTONE_BLOCK, Items.REDSTONE, ModBlocks.redstone_slab.get(), ModBlocks.redstone_trapdoor.get(), ModBlocks.redstone_door.get(), ModBlocks.redstone_pole.get(), ModBlocks.redstone_beam.get(), true,
                 Optional.of(ModBlocks.redstone_stairs), false,
                 Optional.of(ModBlocks.redstone_slab), false,
                 Optional.of(ModBlocks.redstone_fence), false,
@@ -107,8 +114,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.redstone_pole), false,
                 Optional.of(ModBlocks.redstone_beam), false,
                 Optional.of(ModBlocks.redstone_wall), false,
-                Optional.of(ModBlocks.redstone_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.CLAY, Items.CLAY_BALL, ModBlocks.clay_slab.get(), ModBlocks.clay_trapdoor.get(), ModBlocks.clay_door.get(), false,
+                Optional.of(ModBlocks.redstone_saddle_door), false,
+                Optional.of(ModBlocks.redstone_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.CLAY, Items.CLAY_BALL, ModBlocks.clay_slab.get(), ModBlocks.clay_trapdoor.get(), ModBlocks.clay_door.get(), ModBlocks.clay_pole.get(), ModBlocks.clay_beam.get(), false,
                 Optional.of(ModBlocks.clay_stairs), false,
                 Optional.of(ModBlocks.clay_slab), false,
                 Optional.of(ModBlocks.clay_fence), false,
@@ -118,8 +126,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.clay_pole), false,
                 Optional.of(ModBlocks.clay_beam), false,
                 Optional.of(ModBlocks.clay_wall), false,
-                Optional.of(ModBlocks.clay_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT, ModBlocks.dirt_slab.get(), ModBlocks.dirt_slab.get(), ModBlocks.dirt_trapdoor.get(), ModBlocks.dirt_door.get(), false,
+                Optional.of(ModBlocks.clay_saddle_door), false,
+                Optional.of(ModBlocks.clay_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT, ModBlocks.dirt_slab.get(), ModBlocks.dirt_slab.get(), ModBlocks.dirt_trapdoor.get(), ModBlocks.dirt_door.get(), ModBlocks.dirt_pole.get(), ModBlocks.dirt_beam.get(), false,
                 Optional.of(ModBlocks.dirt_stairs), false,
                 Optional.of(ModBlocks.dirt_slab), false,
                 Optional.of(ModBlocks.dirt_fence), false,
@@ -129,8 +138,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.dirt_pole), false,
                 Optional.of(ModBlocks.dirt_beam), false,
                 Optional.of(ModBlocks.dirt_wall), false,
-                Optional.of(ModBlocks.dirt_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.GRASS_BLOCK, ModBlocks.grass_slab.get(), ModBlocks.grass_slab.get(), ModBlocks.grass_trapdoor.get(), ModBlocks.grass_door.get(), false,
+                Optional.of(ModBlocks.dirt_saddle_door), false,
+                Optional.of(ModBlocks.dirt_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.GRASS_BLOCK, ModBlocks.grass_slab.get(), ModBlocks.grass_slab.get(), ModBlocks.grass_trapdoor.get(), ModBlocks.grass_door.get(), ModBlocks.grass_pole.get(), ModBlocks.grass_beam.get(), false,
                 Optional.of(ModBlocks.grass_stairs), false,
                 Optional.of(ModBlocks.grass_slab), false,
                 Optional.of(ModBlocks.grass_fence), false,
@@ -140,8 +150,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.grass_pole), false,
                 Optional.of(ModBlocks.grass_beam), false,
                 Optional.of(ModBlocks.grass_wall), false,
-                Optional.of(ModBlocks.grass_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.HAY_BLOCK, Items.WHEAT, ModBlocks.hay_slab.get(), ModBlocks.hay_trapdoor.get(), ModBlocks.hay_door.get(), false,
+                Optional.of(ModBlocks.grass_saddle_door), false,
+                Optional.of(ModBlocks.grass_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.HAY_BLOCK, Items.WHEAT, ModBlocks.hay_slab.get(), ModBlocks.hay_trapdoor.get(), ModBlocks.hay_door.get(), ModBlocks.hay_pole.get(), ModBlocks.hay_beam.get(), false,
                 Optional.of(ModBlocks.hay_stairs), false,
                 Optional.of(ModBlocks.hay_slab), false,
                 Optional.of(ModBlocks.hay_fence), false,
@@ -151,8 +162,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.hay_pole), false,
                 Optional.of(ModBlocks.hay_beam), false,
                 Optional.of(ModBlocks.hay_wall), false,
-                Optional.of(ModBlocks.hay_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT_PATH, ModBlocks.path_slab.get(), ModBlocks.path_slab.get(), ModBlocks.path_trapdoor.get(), ModBlocks.path_door.get(), false,
+                Optional.of(ModBlocks.hay_saddle_door), false,
+                Optional.of(ModBlocks.hay_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT_PATH, ModBlocks.path_slab.get(), ModBlocks.path_slab.get(), ModBlocks.path_trapdoor.get(), ModBlocks.path_door.get(), ModBlocks.path_pole.get(), ModBlocks.path_beam.get(), false,
                 Optional.of(ModBlocks.path_stairs), false,
                 Optional.of(ModBlocks.path_slab), false,
                 Optional.of(ModBlocks.path_fence), false,
@@ -162,8 +174,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.path_pole), false,
                 Optional.of(ModBlocks.path_beam), false,
                 Optional.of(ModBlocks.path_wall), false,
-                Optional.of(ModBlocks.path_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BRICKS, Items.BRICK, Blocks.BRICK_SLAB, ModBlocks.brick_trapdoor.get(), ModBlocks.brick_door.get(), true,
+                Optional.of(ModBlocks.path_saddle_door), false,
+                Optional.of(ModBlocks.path_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.BRICKS, Items.BRICK, Blocks.BRICK_SLAB, ModBlocks.brick_trapdoor.get(), ModBlocks.brick_door.get(), ModBlocks.brick_pole.get(), ModBlocks.brick_beam.get(), true,
                 Optional.empty(), false,
                 Optional.empty(), false,
                 Optional.of(ModBlocks.brick_fence), false,
@@ -173,8 +186,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.brick_pole), false,
                 Optional.of(ModBlocks.brick_beam), false,
                 Optional.empty(), false,
-                Optional.of(ModBlocks.brick_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.QUARTZ_BLOCK, Items.QUARTZ, Blocks.QUARTZ_SLAB, ModBlocks.quartz_trapdoor.get(), ModBlocks.quartz_door.get(), true,
+                Optional.of(ModBlocks.brick_saddle_door), false,
+                Optional.of(ModBlocks.brick_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.QUARTZ_BLOCK, Items.QUARTZ, Blocks.QUARTZ_SLAB, ModBlocks.quartz_trapdoor.get(), ModBlocks.quartz_door.get(), ModBlocks.quartz_pole.get(), ModBlocks.quartz_beam.get(), true,
                 Optional.empty(), false,
                 Optional.empty(), false,
                 Optional.of(ModBlocks.quartz_fence), false,
@@ -184,8 +198,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.quartz_pole), false,
                 Optional.of(ModBlocks.quartz_beam), false,
                 Optional.of(ModBlocks.quartz_wall), false,
-                Optional.of(ModBlocks.quartz_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BONE_BLOCK, Items.BONE_MEAL, ModBlocks.bone_slab.get(), ModBlocks.bone_trapdoor.get(), ModBlocks.bone_door.get(), true,
+                Optional.of(ModBlocks.quartz_saddle_door), false,
+                Optional.of(ModBlocks.quartz_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.BONE_BLOCK, Items.BONE_MEAL, ModBlocks.bone_slab.get(), ModBlocks.bone_trapdoor.get(), ModBlocks.bone_door.get(), ModBlocks.bone_pole.get(), ModBlocks.bone_beam.get(), true,
                 Optional.of(ModBlocks.bone_stairs), false,
                 Optional.of(ModBlocks.bone_slab), false,
                 Optional.of(ModBlocks.bone_fence), false,
@@ -195,8 +210,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.bone_pole), false,
                 Optional.of(ModBlocks.bone_beam), false,
                 Optional.of(ModBlocks.bone_wall), false,
-                Optional.of(ModBlocks.bone_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHER_BRICKS, Items.NETHER_BRICK, Blocks.NETHER_BRICK_SLAB, ModBlocks.nether_brick_trapdoor.get(), ModBlocks.nether_brick_door.get(), true,
+                Optional.of(ModBlocks.bone_saddle_door), false,
+                Optional.of(ModBlocks.bone_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHER_BRICKS, Items.NETHER_BRICK, Blocks.NETHER_BRICK_SLAB, ModBlocks.nether_brick_trapdoor.get(), ModBlocks.nether_brick_door.get(), ModBlocks.nether_brick_pole.get(), ModBlocks.nether_brick_beam.get(), true,
                 Optional.empty(), false,
                 Optional.empty(), false,
                 Optional.empty(), false,
@@ -206,8 +222,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.nether_brick_pole), false,
                 Optional.of(ModBlocks.nether_brick_beam), false,
                 Optional.empty(), false,
-                Optional.of(ModBlocks.nether_brick_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.RED_NETHER_BRICKS, Items.NETHER_WART, Blocks.RED_NETHER_BRICK_SLAB, ModBlocks.red_nether_brick_trapdoor.get(), ModBlocks.red_nether_brick_door.get(), true,
+                Optional.of(ModBlocks.nether_brick_saddle_door), false,
+                Optional.of(ModBlocks.nether_brick_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.RED_NETHER_BRICKS, Items.NETHER_WART, Blocks.RED_NETHER_BRICK_SLAB, ModBlocks.red_nether_brick_trapdoor.get(), ModBlocks.red_nether_brick_door.get(), ModBlocks.red_nether_brick_pole.get(), ModBlocks.red_nether_brick_beam.get(), true,
                 Optional.empty(), false,
                 Optional.empty(), false,
                 Optional.of(ModBlocks.red_nether_brick_fence), false,
@@ -217,8 +234,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.red_nether_brick_pole), false,
                 Optional.of(ModBlocks.red_nether_brick_beam), false,
                 Optional.empty(), false,
-                Optional.of(ModBlocks.red_nether_brick_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.SNOW_BLOCK, Items.SNOWBALL, ModBlocks.snow_slab.get(), ModBlocks.snow_trapdoor.get(), ModBlocks.snow_door.get(), false,
+                Optional.of(ModBlocks.red_nether_brick_saddle_door), false,
+                Optional.of(ModBlocks.red_nether_brick_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.SNOW_BLOCK, Items.SNOWBALL, ModBlocks.snow_slab.get(), ModBlocks.snow_trapdoor.get(), ModBlocks.snow_door.get(), ModBlocks.snow_pole.get(), ModBlocks.snow_beam.get(), false,
                 Optional.of(ModBlocks.snow_stairs), false,
                 Optional.of(ModBlocks.snow_slab), true,
                 Optional.of(ModBlocks.snow_fence), false,
@@ -228,8 +246,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.snow_pole), false,
                 Optional.of(ModBlocks.snow_beam), false,
                 Optional.of(ModBlocks.snow_wall), false,
-                Optional.of(ModBlocks.snow_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.ICE, ModBlocks.ice_slab.get(), ModBlocks.ice_slab.get(), ModBlocks.ice_trapdoor.get(), ModBlocks.ice_door.get(), true,
+                Optional.of(ModBlocks.snow_saddle_door), false,
+                Optional.of(ModBlocks.snow_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.ICE, ModBlocks.ice_slab.get(), ModBlocks.ice_slab.get(), ModBlocks.ice_trapdoor.get(), ModBlocks.ice_door.get(), ModBlocks.ice_pole.get(), ModBlocks.ice_beam.get(), true,
                 Optional.of(ModBlocks.ice_stairs), false,
                 Optional.of(ModBlocks.ice_slab), false,
                 Optional.of(ModBlocks.ice_fence), false,
@@ -239,8 +258,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.ice_pole), false,
                 Optional.of(ModBlocks.ice_beam), false,
                 Optional.of(ModBlocks.ice_wall), false,
-                Optional.of(ModBlocks.ice_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.PACKED_ICE, ModBlocks.packed_ice_slab.get(), ModBlocks.packed_ice_slab.get(), ModBlocks.packed_ice_trapdoor.get(), ModBlocks.packed_ice_door.get(), true,
+                Optional.of(ModBlocks.ice_saddle_door), false,
+                Optional.of(ModBlocks.ice_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.PACKED_ICE, ModBlocks.packed_ice_slab.get(), ModBlocks.packed_ice_slab.get(), ModBlocks.packed_ice_trapdoor.get(), ModBlocks.packed_ice_door.get(), ModBlocks.packed_ice_pole.get(), ModBlocks.packed_ice_beam.get(), true,
                 Optional.of(ModBlocks.packed_ice_stairs), false,
                 Optional.of(ModBlocks.packed_ice_slab), false,
                 Optional.of(ModBlocks.packed_ice_fence), false,
@@ -250,8 +270,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.packed_ice_pole), false,
                 Optional.of(ModBlocks.packed_ice_beam), false,
                 Optional.of(ModBlocks.packed_ice_wall), false,
-                Optional.of(ModBlocks.packed_ice_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BLUE_ICE, ModBlocks.blue_ice_slab.get(), ModBlocks.blue_ice_slab.get(), ModBlocks.blue_ice_trapdoor.get(), ModBlocks.blue_ice_door.get(), true,
+                Optional.of(ModBlocks.packed_ice_saddle_door), false,
+                Optional.of(ModBlocks.packed_ice_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.BLUE_ICE, ModBlocks.blue_ice_slab.get(), ModBlocks.blue_ice_slab.get(), ModBlocks.blue_ice_trapdoor.get(), ModBlocks.blue_ice_door.get(), ModBlocks.blue_ice_pole.get(), ModBlocks.blue_ice_beam.get(), true,
                 Optional.of(ModBlocks.blue_ice_stairs), false,
                 Optional.of(ModBlocks.blue_ice_slab), false,
                 Optional.of(ModBlocks.blue_ice_fence), false,
@@ -261,8 +282,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.blue_ice_pole), false,
                 Optional.of(ModBlocks.blue_ice_beam), false,
                 Optional.of(ModBlocks.blue_ice_wall), false,
-                Optional.of(ModBlocks.blue_ice_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT, ModBlocks.netherite_slab.get(), ModBlocks.netherite_trapdoor.get(), ModBlocks.netherite_door.get(), true,
+                Optional.of(ModBlocks.blue_ice_saddle_door), false,
+                Optional.of(ModBlocks.blue_ice_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT, ModBlocks.netherite_slab.get(), ModBlocks.netherite_trapdoor.get(), ModBlocks.netherite_door.get(), ModBlocks.netherite_pole.get(), ModBlocks.netherite_beam.get(), true,
                 Optional.of(ModBlocks.netherite_stairs), false,
                 Optional.of(ModBlocks.netherite_slab), false,
                 Optional.of(ModBlocks.netherite_fence), false,
@@ -272,8 +294,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.netherite_pole), false,
                 Optional.of(ModBlocks.netherite_beam), false,
                 Optional.of(ModBlocks.netherite_wall), false,
-                Optional.of(ModBlocks.netherite_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD, ModBlocks.amethyst_slab.get(), ModBlocks.amethyst_trapdoor.get(), ModBlocks.amethyst_door.get(), true,
+                Optional.of(ModBlocks.netherite_saddle_door), false,
+                Optional.of(ModBlocks.netherite_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD, ModBlocks.amethyst_slab.get(), ModBlocks.amethyst_trapdoor.get(), ModBlocks.amethyst_door.get(), ModBlocks.amethyst_pole.get(), ModBlocks.amethyst_beam.get(), true,
                 Optional.of(ModBlocks.amethyst_stairs), false,
                 Optional.of(ModBlocks.amethyst_slab), false,
                 Optional.of(ModBlocks.amethyst_fence), false,
@@ -283,8 +306,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.amethyst_pole), false,
                 Optional.of(ModBlocks.amethyst_beam), false,
                 Optional.of(ModBlocks.amethyst_wall), false,
-                Optional.of(ModBlocks.amethyst_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.COPPER_BLOCK, Items.COPPER_INGOT, ModBlocks.copper_slab.get(), ModBlocks.copper_trapdoor.get(), ModBlocks.copper_door.get(), true,
+                Optional.of(ModBlocks.amethyst_saddle_door), false,
+                Optional.of(ModBlocks.amethyst_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.COPPER_BLOCK, Items.COPPER_INGOT, ModBlocks.copper_slab.get(), ModBlocks.copper_trapdoor.get(), ModBlocks.copper_door.get(), ModBlocks.copper_pole.get(), ModBlocks.copper_beam.get(), true,
                 Optional.of(ModBlocks.copper_stairs), false,
                 Optional.of(ModBlocks.copper_slab), false,
                 Optional.of(ModBlocks.copper_fence), false,
@@ -294,8 +318,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.copper_pole), false,
                 Optional.of(ModBlocks.copper_beam), false,
                 Optional.of(ModBlocks.copper_wall), false,
-                Optional.of(ModBlocks.copper_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab.get(), ModBlocks.exposed_copper_slab.get(), ModBlocks.exposed_copper_trapdoor.get(), ModBlocks.exposed_copper_door.get(), true,
+                Optional.of(ModBlocks.copper_saddle_door), false,
+                Optional.of(ModBlocks.copper_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab.get(), ModBlocks.exposed_copper_slab.get(), ModBlocks.exposed_copper_trapdoor.get(), ModBlocks.exposed_copper_door.get(), ModBlocks.exposed_copper_pole.get(), ModBlocks.exposed_copper_beam.get(), true,
                 Optional.of(ModBlocks.exposed_copper_stairs), false,
                 Optional.of(ModBlocks.exposed_copper_slab), false,
                 Optional.of(ModBlocks.exposed_copper_fence), false,
@@ -305,8 +330,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.exposed_copper_pole), false,
                 Optional.of(ModBlocks.exposed_copper_beam), false,
                 Optional.of(ModBlocks.exposed_copper_wall), false,
-                Optional.of(ModBlocks.exposed_copper_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab.get(), ModBlocks.weathered_copper_slab.get(), ModBlocks.weathered_copper_trapdoor.get(), ModBlocks.weathered_copper_door.get(), true,
+                Optional.of(ModBlocks.exposed_copper_saddle_door), false,
+                Optional.of(ModBlocks.exposed_copper_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab.get(), ModBlocks.weathered_copper_slab.get(), ModBlocks.weathered_copper_trapdoor.get(), ModBlocks.weathered_copper_door.get(), ModBlocks.weathered_copper_pole.get(), ModBlocks.weathered_copper_beam.get(), true,
                 Optional.of(ModBlocks.weathered_copper_stairs), false,
                 Optional.of(ModBlocks.weathered_copper_slab), false,
                 Optional.of(ModBlocks.weathered_copper_fence), false,
@@ -316,8 +342,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.weathered_copper_pole), false,
                 Optional.of(ModBlocks.weathered_copper_beam), false,
                 Optional.of(ModBlocks.weathered_copper_wall), false,
-                Optional.of(ModBlocks.weathered_copper_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab.get(), ModBlocks.oxidized_copper_slab.get(), ModBlocks.oxidized_copper_trapdoor.get(), ModBlocks.oxidized_copper_door.get(), true,
+                Optional.of(ModBlocks.weathered_copper_saddle_door), false,
+                Optional.of(ModBlocks.weathered_copper_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab.get(), ModBlocks.oxidized_copper_slab.get(), ModBlocks.oxidized_copper_trapdoor.get(), ModBlocks.oxidized_copper_door.get(), ModBlocks.oxidized_copper_pole.get(), ModBlocks.oxidized_copper_beam.get(), true,
                 Optional.of(ModBlocks.oxidized_copper_stairs), false,
                 Optional.of(ModBlocks.oxidized_copper_slab), false,
                 Optional.of(ModBlocks.oxidized_copper_fence), false,
@@ -327,8 +354,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.oxidized_copper_pole), false,
                 Optional.of(ModBlocks.oxidized_copper_beam), false,
                 Optional.of(ModBlocks.oxidized_copper_wall), false,
-                Optional.of(ModBlocks.oxidized_copper_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM, ModBlocks.magma_slab.get(), ModBlocks.magma_trapdoor.get(), ModBlocks.magma_door.get(), true,
+                Optional.of(ModBlocks.oxidized_copper_saddle_door), false,
+                Optional.of(ModBlocks.oxidized_copper_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM, ModBlocks.magma_slab.get(), ModBlocks.magma_trapdoor.get(), ModBlocks.magma_door.get(), ModBlocks.magma_pole.get(), ModBlocks.magma_beam.get(), true,
                 Optional.of(ModBlocks.magma_stairs), false,
                 Optional.of(ModBlocks.magma_slab), false,
                 Optional.of(ModBlocks.magma_fence), false,
@@ -338,8 +366,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.magma_pole), false,
                 Optional.of(ModBlocks.magma_beam), false,
                 Optional.of(ModBlocks.magma_wall), false,
-                Optional.of(ModBlocks.magma_saddle_door), false));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.CALCITE, ModBlocks.calcite_slab.get(), ModBlocks.calcite_slab.get(), ModBlocks.calcite_trapdoor.get(), ModBlocks.calcite_door.get(), true,
+                Optional.of(ModBlocks.magma_saddle_door), false,
+                Optional.of(ModBlocks.magma_support), false));
+        autoRecipe(consumer, new AutoRecipeManager(Blocks.CALCITE, ModBlocks.calcite_slab.get(), ModBlocks.calcite_slab.get(), ModBlocks.calcite_trapdoor.get(), ModBlocks.calcite_door.get(), ModBlocks.calcite_pole.get(), ModBlocks.calcite_beam.get(), true,
                 Optional.of(ModBlocks.calcite_stairs), false,
                 Optional.of(ModBlocks.calcite_slab), false,
                 Optional.of(ModBlocks.calcite_fence), false,
@@ -349,6 +378,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 Optional.of(ModBlocks.calcite_pole), false,
                 Optional.of(ModBlocks.calcite_beam), false,
                 Optional.of(ModBlocks.calcite_wall), false,
-                Optional.of(ModBlocks.calcite_saddle_door), false));
+                Optional.of(ModBlocks.calcite_saddle_door), false,
+                Optional.of(ModBlocks.calcite_support), false));
     }
 }

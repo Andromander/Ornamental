@@ -39,6 +39,10 @@
     "ornamental:gold_saddle_door",
     "ornamental:diamond_saddle_door",
     "ornamental:emerald_saddle_door",
-    "ornamental:missingno_saddle_door"
+    "ornamental:missingno_saddle_door",
+    "ornamental:gold_support",
+    "ornamental:diamond_support",
+    "ornamental:emerald_support",
+    "ornamental:missingno_support"
   ]
 }

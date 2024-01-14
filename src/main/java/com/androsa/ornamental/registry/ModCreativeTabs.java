@@ -33,6 +33,7 @@ public class ModCreativeTabs {
     public static final List<Supplier<? extends Block>> BEAM_ORNAMENTS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> WALL_ORNAMENTS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> SADDLE_DOOR_ORNAMENTS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SUPPORT_ORNAMENTS = Lists.newArrayList();
     public static final List<Supplier<? extends Item>> SPAWN_EGGS = Lists.newArrayList();
 
     public static final Supplier<CreativeModeTab> STAIR_TAB = createTab("stair_ornaments", () -> new ItemStack(ModBlocks.diamond_stairs.get()), null);
@@ -45,6 +46,7 @@ public class ModCreativeTabs {
     public static final Supplier<CreativeModeTab> BEAM_TAB = createTab("beam_ornaments", () -> new ItemStack(ModBlocks.diamond_beam.get()), POLE_TAB);
     public static final Supplier<CreativeModeTab> WALL_TAB = createTab("wall_ornaments", () -> new ItemStack(ModBlocks.diamond_wall.get()), BEAM_TAB);
     public static final Supplier<CreativeModeTab> SADDLE_DOOR_TAB = createTab("saddle_door_ornaments", () -> new ItemStack(ModBlocks.diamond_saddle_door.get()), WALL_TAB);
+    public static final Supplier<CreativeModeTab> SUPPORT_TAB = createTab("support_ornaments", () -> new ItemStack(ModBlocks.diamond_support.get()), SADDLE_DOOR_TAB);
 
     private static Supplier<CreativeModeTab> createTab(String name, Supplier<ItemStack> icon, Supplier<CreativeModeTab> after) {
         return CREATIVE_TABS.register(name, () -> {
@@ -108,6 +110,11 @@ public class ModCreativeTabs {
             }
             if (event.getTab() == SADDLE_DOOR_TAB.get()) {
                 for (Supplier<? extends Block> block : SADDLE_DOOR_ORNAMENTS) {
+                    event.accept(block.get());
+                }
+            }
+            if (event.getTab() == SUPPORT_TAB.get()) {
+                for (Supplier<? extends Block> block : SUPPORT_ORNAMENTS) {
                     event.accept(block.get());
                 }
             }

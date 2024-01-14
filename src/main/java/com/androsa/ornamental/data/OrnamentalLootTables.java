@@ -350,6 +350,38 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_saddle_door);
             dropSelf(ModBlocks.magma_saddle_door);
             dropSelf(ModBlocks.calcite_saddle_door);
+
+            dropSelf(ModBlocks.iron_support);
+            dropSelf(ModBlocks.gold_support);
+            dropSelf(ModBlocks.diamond_support);
+            dropSelf(ModBlocks.emerald_support);
+            dropSelf(ModBlocks.lapis_support);
+            dropSelf(ModBlocks.obsidian_support);
+            dropSelf(ModBlocks.coal_support);
+            dropSelf(ModBlocks.redstone_support);
+            dropSelf(ModBlocks.missingno_support);
+            dropSelf(ModBlocks.clay_support);
+            dropSelf(ModBlocks.dirt_support);
+            dropSelf(ModBlocks.grass_support);
+            dropSelf(ModBlocks.hay_support);
+            dropSelf(ModBlocks.path_support);
+            dropSelf(ModBlocks.brick_support);
+            dropSelf(ModBlocks.quartz_support);
+            dropSelf(ModBlocks.bone_support);
+            dropSelf(ModBlocks.nether_brick_support);
+            dropSelf(ModBlocks.red_nether_brick_support);
+            dropSelf(ModBlocks.snow_support);
+            dropSelf(ModBlocks.ice_support);
+            dropSelf(ModBlocks.packed_ice_support);
+            dropSelf(ModBlocks.blue_ice_support);
+            dropSelf(ModBlocks.netherite_support);
+            dropSelf(ModBlocks.copper_support);
+            dropSelf(ModBlocks.exposed_copper_support);
+            dropSelf(ModBlocks.weathered_copper_support);
+            dropSelf(ModBlocks.oxidized_copper_support);
+            dropSelf(ModBlocks.amethyst_support);
+            dropSelf(ModBlocks.magma_support);
+            dropSelf(ModBlocks.calcite_support);
         }
 
         @Override

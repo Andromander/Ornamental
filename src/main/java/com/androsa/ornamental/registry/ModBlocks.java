@@ -1,19 +1,34 @@
 package com.androsa.ornamental.registry;
 
-import com.androsa.ornamental.builder.OrnamentBuilders;
+import com.androsa.ornamental.builder.*;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.OrnamentalBlockTags;
 import com.androsa.ornamental.data.OrnamentalItemTags;
 import com.androsa.ornamental.registry.helper.RegistryHelper;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import com.google.common.collect.Lists;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -327,6 +342,38 @@ public class ModBlocks {
     public static final Supplier<OrnamentSaddleDoor> oxidized_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentSaddleDoor> magma_saddle_door = HELPER.saddledoor(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentSaddleDoor> calcite_saddle_door = HELPER.saddledoor(OrnamentBuilders.CALCITE);
+
+    public static final Supplier<OrnamentSupport> iron_support = HELPER.support(OrnamentBuilders.IRON);
+    public static final Supplier<OrnamentSupport> gold_support = HELPER.support(OrnamentBuilders.GOLD);
+    public static final Supplier<OrnamentSupport> diamond_support = HELPER.support(OrnamentBuilders.DIAMOND);
+    public static final Supplier<OrnamentSupport> emerald_support = HELPER.support(OrnamentBuilders.EMERALD);
+    public static final Supplier<OrnamentSupport> lapis_support = HELPER.support(OrnamentBuilders.LAPIS);
+    public static final Supplier<OrnamentSupport> obsidian_support = HELPER.support(OrnamentBuilders.OBSIDIAN);
+    public static final Supplier<OrnamentSupport> coal_support = HELPER.support(OrnamentBuilders.COAL);
+    public static final Supplier<OrnamentSupport> redstone_support = HELPER.support(OrnamentBuilders.REDSTONE);
+    public static final Supplier<OrnamentSupport> missingno_support = HELPER.support(OrnamentBuilders.MISSINGNO);
+    public static final Supplier<OrnamentSupport> clay_support = HELPER.support(OrnamentBuilders.CLAY);
+    public static final Supplier<OrnamentSupport> dirt_support = HELPER.support(OrnamentBuilders.DIRT);
+    public static final Supplier<OrnamentSupport> grass_support = HELPER.support(OrnamentBuilders.GRASS);
+    public static final Supplier<OrnamentSupport> hay_support = HELPER.support(OrnamentBuilders.HAY);
+    public static final Supplier<OrnamentSupport> path_support = HELPER.support(OrnamentBuilders.PATH);
+    public static final Supplier<OrnamentSupport> brick_support = HELPER.support(OrnamentBuilders.BRICK);
+    public static final Supplier<OrnamentSupport> quartz_support = HELPER.support(OrnamentBuilders.QUARTZ);
+    public static final Supplier<OrnamentSupport> bone_support = HELPER.support(OrnamentBuilders.BONE);
+    public static final Supplier<OrnamentSupport> nether_brick_support = HELPER.support(OrnamentBuilders.NETHER_BRICK);
+    public static final Supplier<OrnamentSupport> red_nether_brick_support = HELPER.support(OrnamentBuilders.RED_NETHER_BRICK);
+    public static final Supplier<OrnamentSupport> snow_support = HELPER.support(OrnamentBuilders.SNOW);
+    public static final Supplier<OrnamentSupport> ice_support = HELPER.support(OrnamentBuilders.ICE);
+    public static final Supplier<OrnamentSupport> packed_ice_support = HELPER.support(OrnamentBuilders.PACKED_ICE);
+    public static final Supplier<OrnamentSupport> blue_ice_support = HELPER.support(OrnamentBuilders.BLUE_ICE);
+    public static final Supplier<OrnamentSupport> netherite_support = HELPER.support(OrnamentBuilders.NETHERITE);
+    public static final Supplier<OrnamentSupport> copper_support = HELPER.support(OrnamentBuilders.COPPER);
+    public static final Supplier<OrnamentSupport> exposed_copper_support = HELPER.support(OrnamentBuilders.EXPOSED_COPPER);
+    public static final Supplier<OrnamentSupport> weathered_copper_support = HELPER.support(OrnamentBuilders.WEATHERED_COPPER);
+    public static final Supplier<OrnamentSupport> oxidized_copper_support = HELPER.support(OrnamentBuilders.OXIDIZED_COPPER);
+    public static final Supplier<OrnamentSupport> amethyst_support = HELPER.support(OrnamentBuilders.AMETHYST);
+    public static final Supplier<OrnamentSupport> magma_support = HELPER.support(OrnamentBuilders.MAGMA);
+    public static final Supplier<OrnamentSupport> calcite_support = HELPER.support(OrnamentBuilders.CALCITE);
 
     public static final Supplier<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BUBBLE_COLUMN).noLootTable()));
 }

@@ -1,9 +1,7 @@
 package com.androsa.ornamental.data;
 
-import com.androsa.ornamental.blocks.CustomBubbleColumnBlock;
-import com.androsa.ornamental.blocks.OrnamentBeam;
-import com.androsa.ornamental.blocks.OrnamentPole;
-import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
+import com.androsa.ornamental.blocks.*;
+import com.androsa.ornamental.builder.OrnamentBuilders;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
@@ -331,6 +329,36 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
         saddleDoorBasic(ModBlocks.magma_saddle_door, "magma");
         saddleDoorBasic(ModBlocks.calcite_saddle_door, "calcite");
+
+        supportBasic(ModBlocks.iron_support, "iron_block");
+        supportBasic(ModBlocks.gold_support, "gold_block");
+        supportBasic(ModBlocks.diamond_support, "diamond_block");
+        supportBasic(ModBlocks.emerald_support, "emerald_block");
+        supportBasic(ModBlocks.lapis_support, "lapis_block");
+        supportBasic(ModBlocks.obsidian_support, "obsidian");
+        supportBasic(ModBlocks.coal_support, "coal_block");
+        supportBasic(ModBlocks.redstone_support, "redstone_block");
+        supportBasic(ModBlocks.missingno_support, locMod("missingno"), SOLID);
+        supportBasic(ModBlocks.clay_support, "clay");
+        supportBasic(ModBlocks.dirt_support, "dirt");
+        supportColumn(ModBlocks.hay_support, "hay_block_side", "hay_block_top");
+        supportBasic(ModBlocks.brick_support, "bricks");
+        supportColumn(ModBlocks.quartz_support, "quartz_block_side", "quartz_block_top");
+        supportColumn(ModBlocks.bone_support, "bone_block_side", "bone_block_top");
+        supportBasic(ModBlocks.nether_brick_support, "nether_bricks");
+        supportBasic(ModBlocks.red_nether_brick_support, "red_nether_bricks");
+        supportBasic(ModBlocks.snow_support, "snow");
+        supportBasic(ModBlocks.ice_support, "ice", TRANSLUCENT);
+        supportBasic(ModBlocks.packed_ice_support, "packed_ice");
+        supportBasic(ModBlocks.blue_ice_support, "blue_ice");
+        supportBasic(ModBlocks.netherite_support, "netherite_block");
+        supportBasic(ModBlocks.copper_support, "copper_block");
+        supportBasic(ModBlocks.exposed_copper_support, "exposed_copper");
+        supportBasic(ModBlocks.weathered_copper_support, "weathered_copper");
+        supportBasic(ModBlocks.oxidized_copper_support, "oxidized_copper");
+        supportBasic(ModBlocks.amethyst_support, "amethyst_block");
+        supportBasic(ModBlocks.magma_support, "magma");
+        supportBasic(ModBlocks.calcite_support, "calcite");
 
         fakeBubbleColumn();
     }

@@ -17,6 +17,7 @@ public class ModTags {
         public static final TagKey<Block> POLES = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "poles"));
         public static final TagKey<Block> BEAMS = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "beams"));
         public static final TagKey<Block> SADDLE_DOORS = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "saddle_doors"));
+        public static final TagKey<Block> SUPPORTS = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "supports"));
         public static final TagKey<Block> GRASS_GOLEM_FLOWER_PLANTABLE = BlockTags.create(new ResourceLocation(OrnamentalMod.MODID, "grass_golem_flower_plantable"));
     }
 
@@ -24,6 +25,8 @@ public class ModTags {
         public static final TagKey<Item> POLES = ItemTags.create(new ResourceLocation(OrnamentalMod.MODID, "poles"));
         public static final TagKey<Item> BEAMS = ItemTags.create(new ResourceLocation(OrnamentalMod.MODID, "beams"));
         public static final TagKey<Item> SADDLE_DOORS = ItemTags.create(new ResourceLocation(OrnamentalMod.MODID, "saddle_doors"));
+        public static final TagKey<Item> SUPPORTS = ItemTags.create(new ResourceLocation(OrnamentalMod.MODID, "supports"));
+        public static final TagKey<Item> SUPPORT_FILLERS = ItemTags.create(new ResourceLocation(OrnamentalMod.MODID, "support_fillers"));
     }
 
     public static class DamageTypes {

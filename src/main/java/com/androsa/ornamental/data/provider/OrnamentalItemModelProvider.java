@@ -166,6 +166,29 @@ public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
                 .texture("bottom", bottom);
     }
 
+    public void blockItemSupport(Supplier<? extends Block> block, String name) {
+        ResourceLocation texture = mcLoc("block/" + name);
+        blockItemSupport(block, texture, texture, texture);
+    }
+
+    public void blockItemSupport(Supplier<? extends Block> block, String top, String side) {
+        ResourceLocation endLoc = mcLoc("block/" + top);
+        ResourceLocation sideLoc = mcLoc("block/" + side);
+        blockItemSupport(block, endLoc, endLoc, sideLoc);
+    }
+
+    public void blockItemSupport(Supplier<? extends Block> block, ResourceLocation top, ResourceLocation bottom, ResourceLocation side) {
+        existingParent(block, ornamentLoc("block/util/support_inventory"))
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public void blockItemSupportMissing(Supplier<? extends Block> block) {
+        ResourceLocation texture = modLoc("block/missingno");
+        blockItemSupport(block, texture, texture, texture);
+    }
+
     public void eggItem(Supplier<? extends Item> item) {
         withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), mcLoc("item/template_spawn_egg"));
     }

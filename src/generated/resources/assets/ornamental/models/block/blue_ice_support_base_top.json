@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/support_base_top",
+  "textures": {
+    "bottom": "minecraft:block/blue_ice",
+    "side": "minecraft:block/blue_ice",
+    "top": "minecraft:block/blue_ice"
+  }
+}

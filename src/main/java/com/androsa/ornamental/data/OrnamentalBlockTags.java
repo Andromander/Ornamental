@@ -32,6 +32,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     public static final List<Supplier<? extends Block>> SLABS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> SNOW = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> STAIRS = Lists.newArrayList();
+    public static final List<Supplier<? extends Block>> SUPPORTS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> TRAPDOORS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> VIBRATIONS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> WALLS = Lists.newArrayList();
@@ -66,6 +67,7 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
         addToTag(BlockTags.SLABS, SLABS);
         addToTag(BlockTags.SNOW, SNOW);
         addToTag(BlockTags.STAIRS, STAIRS);
+        addToTag(ModTags.Blocks.SUPPORTS, SUPPORTS);
         addToTag(BlockTags.TRAPDOORS, TRAPDOORS);
         addToTag(BlockTags.VIBRATION_RESONATORS, VIBRATIONS);
         addToTag(BlockTags.WALLS, WALLS);

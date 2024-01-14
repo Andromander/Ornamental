@@ -19,6 +19,8 @@
     "ornamental:obsidian_wall",
     "ornamental:netherite_wall",
     "ornamental:obsidian_saddle_door",
-    "ornamental:netherite_saddle_door"
+    "ornamental:netherite_saddle_door",
+    "ornamental:obsidian_support",
+    "ornamental:netherite_support"
   ]
 }

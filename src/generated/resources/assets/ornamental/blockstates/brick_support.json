@@ -1,0 +1,372 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base_top",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base_top",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base_top",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_base_top",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "tb_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "tb_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "tb_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "tb_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical_top",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "tb_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical_top",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "tb_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical_top",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "tb_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_vertical_top",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "tb_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "ns_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "ns_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "ns_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "ns_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z_top",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "ns_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x_top",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "ns_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z_top",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "ns_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x_top",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "ns_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "ew_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "ew_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "ew_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "ew_connect": "true",
+        "upper_half": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x_top",
+        "uvlock": true
+      },
+      "when": {
+        "corner": "top_left",
+        "ew_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z_top",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "corner": "top_right",
+        "ew_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_x_top",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "corner": "bottom_right",
+        "ew_connect": "true",
+        "upper_half": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ornamental:block/brick_support_horizontal_z_top",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "corner": "bottom_left",
+        "ew_connect": "true",
+        "upper_half": "true"
+      }
+    }
+  ]
+}

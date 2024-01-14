@@ -330,6 +330,38 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.magma_saddle_door, "magma");
         blockItemSaddleDoor(ModBlocks.calcite_saddle_door, "calcite");
 
+        blockItemSupport(ModBlocks.iron_support, "iron_block");
+        blockItemSupport(ModBlocks.gold_support, "gold_block");
+        blockItemSupport(ModBlocks.diamond_support, "diamond_block");
+        blockItemSupport(ModBlocks.emerald_support, "emerald_block");
+        blockItemSupport(ModBlocks.lapis_support, "lapis_block");
+        blockItemSupport(ModBlocks.obsidian_support, "obsidian");
+        blockItemSupport(ModBlocks.coal_support, "coal_block");
+        blockItemSupport(ModBlocks.redstone_support, "redstone_block");
+        blockItemSupportMissing(ModBlocks.missingno_support);
+        blockItemSupport(ModBlocks.clay_support, "clay");
+        blockItemSupport(ModBlocks.dirt_support, "dirt");
+        existingParent(ModBlocks.grass_support, modLoc("block/grass/grass_support_inventory"));
+        blockItemSupport(ModBlocks.hay_support, "hay_block_top", "hay_block_side");
+        existingParent(ModBlocks.path_support, modLoc("block/path/dirt_path_support_inventory"));
+        blockItemSupport(ModBlocks.brick_support, "bricks");
+        blockItemSupport(ModBlocks.quartz_support, "quartz_block_top", "quartz_block_side");
+        blockItemSupport(ModBlocks.bone_support, "bone_block_top", "bone_block_side");
+        blockItemSupport(ModBlocks.nether_brick_support, "nether_bricks");
+        blockItemSupport(ModBlocks.red_nether_brick_support, "red_nether_bricks");
+        blockItemSupport(ModBlocks.snow_support, "snow");
+        blockItemSupport(ModBlocks.ice_support, "ice");
+        blockItemSupport(ModBlocks.packed_ice_support, "packed_ice");
+        blockItemSupport(ModBlocks.blue_ice_support, "blue_ice");
+        blockItemSupport(ModBlocks.netherite_support, "netherite_block");
+        blockItemSupport(ModBlocks.copper_support, "copper_block");
+        blockItemSupport(ModBlocks.exposed_copper_support, "exposed_copper");
+        blockItemSupport(ModBlocks.weathered_copper_support, "weathered_copper");
+        blockItemSupport(ModBlocks.oxidized_copper_support, "oxidized_copper");
+        blockItemSupport(ModBlocks.amethyst_support, "amethyst_block");
+        blockItemSupport(ModBlocks.magma_support, "magma");
+        blockItemSupport(ModBlocks.calcite_support, "calcite");
+
         for (Supplier<? extends Item> item : ModCreativeTabs.SPAWN_EGGS) {
             eggItem(item);
         }

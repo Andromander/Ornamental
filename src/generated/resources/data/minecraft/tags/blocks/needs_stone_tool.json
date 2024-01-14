@@ -67,6 +67,13 @@
     "ornamental:copper_saddle_door",
     "ornamental:exposed_copper_saddle_door",
     "ornamental:weathered_copper_saddle_door",
-    "ornamental:oxidized_copper_saddle_door"
+    "ornamental:oxidized_copper_saddle_door",
+    "ornamental:iron_support",
+    "ornamental:lapis_support",
+    "ornamental:copper_support",
+    "ornamental:exposed_copper_support",
+    "ornamental:weathered_copper_support",
+    "ornamental:oxidized_copper_support",
+    "ornamental:amethyst_support"
   ]
 }

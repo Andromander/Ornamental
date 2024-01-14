@@ -49,6 +49,11 @@
     "ornamental:dirt_saddle_door",
     "ornamental:grass_saddle_door",
     "ornamental:dirt_path_saddle_door",
-    "ornamental:snow_saddle_door"
+    "ornamental:snow_saddle_door",
+    "ornamental:clay_support",
+    "ornamental:dirt_support",
+    "ornamental:grass_support",
+    "ornamental:dirt_path_support",
+    "ornamental:snow_support"
   ]
 }

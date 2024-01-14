@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:redstone_pole"
+    },
+    {
+      "item": "ornamental:redstone_beam"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:redstone_support"
+  }
+}

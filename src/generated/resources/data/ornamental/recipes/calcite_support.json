@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:calcite_pole"
+    },
+    {
+      "item": "ornamental:calcite_beam"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "ornamental:calcite_support"
+  }
+}

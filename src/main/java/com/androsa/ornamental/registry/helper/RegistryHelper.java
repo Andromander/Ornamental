@@ -89,6 +89,13 @@ public class RegistryHelper extends MasterRegistryHelper {
                 this.array(OrnamentalItemTags.SADDLE_DOORS));
     }
 
+    @Override
+    protected TagHelper supportTags() {
+        return new TagHelper(
+                this.array(OrnamentalBlockTags.SUPPORTS),
+                this.array(OrnamentalItemTags.SUPPORTS));
+    }
+
     /**
      * Examples of creating template methods of {@link MasterRegistryHelper#stairs(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
      */
@@ -197,5 +204,16 @@ public class RegistryHelper extends MasterRegistryHelper {
 
     public Supplier<OrnamentSaddleDoor> saddledoor(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         return saddledoor(builder, blocktags, itemtags, OrnamentSaddleDoor::new);
+    }
+
+    /**
+     * Examples of creating template methods of {@link MasterRegistryHelper#support(OrnamentBuilder, ArrayList, ArrayList, BlockFactory)}.
+     */
+    public Supplier<OrnamentSupport> support(OrnamentBuilder builder) {
+        return support(builder, Lists.newArrayList(), Lists.newArrayList());
+    }
+
+    public Supplier<OrnamentSupport> support(OrnamentBuilder builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
+        return support(builder, blocktags, itemtags, OrnamentSupport::new);
     }
 }

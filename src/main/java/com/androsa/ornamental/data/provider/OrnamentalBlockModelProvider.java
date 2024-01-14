@@ -201,6 +201,62 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
                 .texture("bottom", bottom);
     }
 
+    public BlockModelBuilder supportBase(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_base")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportBaseTop(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_base_top")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportVertical(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_vertical")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportVerticalTop(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_vertical_top")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportHorizontalX(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_horizontal_x")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportHorizontalXTop(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_horizontal_x_top")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportHorizontalZ(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_horizontal_z")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
+    public BlockModelBuilder supportHorizontalZTop(String name, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        return parent(name, "support_horizontal_z_top")
+                .texture("side", side)
+                .texture("top", top)
+                .texture("bottom", bottom);
+    }
+
     public BlockModelBuilder forceRenderType(String name, ResourceLocation parent, ResourceLocation renderType) {
         return withExistingParent(name, parent).renderType(renderType);
     }

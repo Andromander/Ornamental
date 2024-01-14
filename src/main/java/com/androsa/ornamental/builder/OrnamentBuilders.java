@@ -159,7 +159,7 @@ public class OrnamentBuilders {
             .setConversionPredicates(ImmutableList.of(
                     new BlockConverter(
                             (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() == Items.BONE_MEAL,
-                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door),
+                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door, ModBlocks.grass_support),
                             SoundEvents.GRASS_BREAK)))
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.SHOVEL_TOOL)));
 
@@ -175,11 +175,11 @@ public class OrnamentBuilders {
             .setConversionPredicates(ImmutableList.of(
                     new BlockConverter(
                             (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof HoeItem,
-                            () -> List.of(ModBlocks.dirt_stairs, ModBlocks.dirt_slab, ModBlocks.dirt_fence, ModBlocks.dirt_trapdoor, ModBlocks.dirt_fence_gate, ModBlocks.dirt_door, ModBlocks.dirt_pole, ModBlocks.dirt_beam, ModBlocks.dirt_wall, ModBlocks.dirt_saddle_door),
+                            () -> List.of(ModBlocks.dirt_stairs, ModBlocks.dirt_slab, ModBlocks.dirt_fence, ModBlocks.dirt_trapdoor, ModBlocks.dirt_fence_gate, ModBlocks.dirt_door, ModBlocks.dirt_pole, ModBlocks.dirt_beam, ModBlocks.dirt_wall, ModBlocks.dirt_saddle_door, ModBlocks.dirt_support),
                             SoundEvents.GRAVEL_BREAK),
                     new BlockConverter(
                             (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof ShovelItem,
-                            () -> List.of(ModBlocks.path_stairs, ModBlocks.path_slab, ModBlocks.path_fence, ModBlocks.path_trapdoor, ModBlocks.path_fence_gate, ModBlocks.path_door, ModBlocks.path_pole, ModBlocks.path_beam, ModBlocks.path_wall, ModBlocks.path_saddle_door),
+                            () -> List.of(ModBlocks.path_stairs, ModBlocks.path_slab, ModBlocks.path_fence, ModBlocks.path_trapdoor, ModBlocks.path_fence_gate, ModBlocks.path_door, ModBlocks.path_pole, ModBlocks.path_beam, ModBlocks.path_wall, ModBlocks.path_saddle_door, ModBlocks.path_support),
                             SoundEvents.SHOVEL_FLATTEN)))
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.SHOVEL_TOOL)));
 
@@ -207,7 +207,7 @@ public class OrnamentBuilders {
             .setConversionPredicates(ImmutableList.of(
                     new BlockConverter(
                             (s, l, p, e, h, r) -> !e.getItemInHand(h).isEmpty() && e.getItemInHand(h).getItem() instanceof HoeItem,
-                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door),
+                            () -> List.of(ModBlocks.grass_stairs, ModBlocks.grass_slab, ModBlocks.grass_fence, ModBlocks.grass_trapdoor, ModBlocks.grass_fence_gate, ModBlocks.grass_door, ModBlocks.grass_pole, ModBlocks.grass_beam, ModBlocks.grass_wall, ModBlocks.grass_saddle_door, ModBlocks.grass_support),
                             SoundEvents.GRASS_BREAK)))
             .usePathShapes()
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.SHOVEL_TOOL)));

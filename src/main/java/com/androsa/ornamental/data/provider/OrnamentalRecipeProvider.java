@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -59,6 +60,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
             saddleDoor(output, result, manager.tdIngredient(), manager.saddledoorOverride());
             saddleDoorFromDoor(output, result, manager.doorIngredient());
         });
+        manager.support().ifPresent(result -> support(output, result, manager.bigIngredient(), manager.poleIngredient(), manager.beamIngredient(), manager.supportOverride(), manager.stonecutter()));
     }
 
     /**
@@ -85,7 +87,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
 
         if (stonecutter) {
             stoneCutting(output, category, result, ingredient, 1, suffix);
@@ -113,7 +115,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
 
         if (stonecutter) {
             stoneCutting(output, category, result, ingredient, 2, suffix);
@@ -142,7 +144,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         recipe.define('#', bigItem)
                 .define('/', smallItem);
 
-        internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence");
+        internalRecipeBuild(output, recipe, result.get(), List.of(bigItem), "_fence");
     }
 
     /**
@@ -165,7 +167,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_trapdoor");
     }
 
     /**
@@ -188,7 +190,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_trapdoor");
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_trapdoor");
     }
 
     /**
@@ -213,7 +215,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         recipe.define('#', bigItem)
                 .define('/', smallItem);
 
-        internalRecipeBuild(output, recipe, result.get(), bigItem, "_fence_gate");
+        internalRecipeBuild(output, recipe, result.get(), List.of(bigItem), "_fence_gate");
     }
 
     /**
@@ -237,7 +239,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_door");
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_door");
     }
 
     /**
@@ -264,7 +266,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
 
         if (stonecutter) {
             stoneCutting(output, category, result, block, 4, suffix);
@@ -292,7 +294,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
 
         if (stonecutter) {
             stoneCutting(output, category, result, block, 4, suffix);
@@ -311,8 +313,8 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         ShapelessRecipeBuilder beamrecipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, pole.get())
                 .requires(beam.get());
 
-        internalRecipeBuild(output, polerecipe, beam.get(), pole.get(), "_pole_to_beam");
-        internalRecipeBuild(output, beamrecipe, pole.get(), beam.get(), "_beam_to_pole");
+        internalRecipeBuild(output, polerecipe, beam.get(), List.of(pole.get()), "_pole_to_beam");
+        internalRecipeBuild(output, beamrecipe, pole.get(), List.of(beam.get()), "_beam_to_pole");
     }
 
     /**
@@ -338,7 +340,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, suffix);
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
 
         if (stonecutter) {
             stoneCutting(output, category, result, ingredient, 1, suffix);
@@ -365,7 +367,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         }
         recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door");
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_saddle_door");
     }
 
     /**
@@ -378,7 +380,34 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, result.get(), 2)
                 .requires(ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), ingredient, "_saddle_door_from_door");
+        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_saddle_door_from_door");
+    }
+
+    /**
+     * Generates a Support recipe
+     * @param output The RecipeOutput from the data generator
+     * @param result The result of the recipe. This must be an OrnamentSupport
+     * @param bigItem The ingredient required to craft this recipe. This is typically a "big" ingredient
+     * @param pole One ingredient necessary to craft a Support. An OrnamentPole is recommended
+     * @param beam One ingredient necessary to craft a Support. An OrnamentBeam is recommended
+     * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
+     * @param stonecutter If the block can have a Stone Cutter recipe
+     */
+    public void support(RecipeOutput output, Supplier<? extends OrnamentSupport> result, ItemLike bigItem, ItemLike pole, ItemLike beam, boolean override, boolean stonecutter) {
+        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+        String suffix = "_support";
+        ShapelessRecipeBuilder recipe = ShapelessRecipeBuilder.shapeless(category, result.get(), 2);
+        if (override) {
+            recipe.requires(ModTags.Items.SUPPORTS);
+        }
+        recipe.requires(pole);
+        recipe.requires(beam);
+
+        internalRecipeBuild(output, recipe, result.get(), List.of(pole, beam), suffix);
+
+        if (stonecutter) {
+            stoneCutting(output, category, result, bigItem, 1, suffix);
+        }
     }
 
     /**
@@ -394,13 +423,15 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     public void stoneCutting(RecipeOutput output, RecipeCategory category, Supplier<? extends Block> result, ItemLike ingredient, int count, String name) {
         if (result.get() instanceof OrnamentalBlock ornament) {
             SingleItemRecipeBuilder recipe = SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), category, result.get(), count);
-            internalRecipeBuild(output, recipe, ornament, ingredient, name + "_stone_cutting");
+            internalRecipeBuild(output, recipe, ornament, List.of(ingredient), name + "_stone_cutting");
         }
     }
 
-    private void internalRecipeBuild(RecipeOutput output, RecipeBuilder recipe, OrnamentalBlock result, ItemLike criteria, String name) {
+    private void internalRecipeBuild(RecipeOutput output, RecipeBuilder recipe, OrnamentalBlock result, List<ItemLike> criteria, String name) {
         OrnamentBuilder builder = result.getBuilder();
-        recipe = recipe.unlockedBy("has_" + builder.name, has(criteria));
+        for (ItemLike criterion : criteria) {
+            recipe = recipe.unlockedBy("has_" + builder.name, has(criterion));
+        }
         ResourceLocation location = loc(builder.name + name);
 
         recipe.save(output, location);
@@ -411,7 +442,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * bigIngredient is for ingredients considered "large" such as blocks, while a smallIngredient is for ingredients considered "small" such as items or slab variants.
      * Ingredients accepting Slabs, Trap Doors, and Doors are for more specified recipes that don't use big or small ingredients.
      */
-    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient, boolean stonecutter,
+    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient, ItemLike poleIngredient, ItemLike beamIngredient, boolean stonecutter,
                                     Optional<Supplier<? extends OrnamentStair>> stair, boolean stairOverride,
                                     Optional<Supplier<? extends OrnamentSlab>> slab, boolean slabOverride,
                                     Optional<Supplier<? extends OrnamentFence>> fence, boolean fenceOverride,
@@ -421,5 +452,6 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
                                     Optional<Supplier<? extends OrnamentPole>> pole, boolean poleOverride,
                                     Optional<Supplier<? extends OrnamentBeam>> beam, boolean beamOverride,
                                     Optional<Supplier<? extends OrnamentWall>> wall, boolean wallOverride,
-                                    Optional<Supplier<? extends OrnamentSaddleDoor>> saddledoor, boolean saddledoorOverride) { }
+                                    Optional<Supplier<? extends OrnamentSaddleDoor>> saddledoor, boolean saddledoorOverride,
+                                    Optional<Supplier<? extends OrnamentSupport>> support, boolean supportOverride) { }
 }

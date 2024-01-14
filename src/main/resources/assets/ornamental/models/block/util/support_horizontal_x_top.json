@@ -1,0 +1,19 @@
+{
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "#side"
+  },
+  "elements": [
+    {
+      "from": [ 8, 8, 0 ],
+      "to": [ 16, 16, 8 ],
+      "faces":{
+        "down":  { "texture": "#bottom", "cullface": "down" },
+        "up":    { "texture": "#top" },
+        "north": { "texture": "#side",   "cullface": "north" },
+        "south": { "texture": "#side" },
+        "east":  { "texture": "#side",   "cullface": "east" }
+      }
+    }
+  ]
+}

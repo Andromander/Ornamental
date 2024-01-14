@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ornamental:weathered_copper_support"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weathered_copper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ornamental:weathered_copper_beam"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_weathered_copper"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ornamental:weathered_copper_support"
+    ]
+  }
+}

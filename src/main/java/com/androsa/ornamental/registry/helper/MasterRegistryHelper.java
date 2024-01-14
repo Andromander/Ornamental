@@ -125,6 +125,15 @@ public abstract class MasterRegistryHelper {
     }
 
     /**
+     * For creating properties for an OrnamentSupport.
+     * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
+     * @return Properties for the OrnamentSupport.
+     */
+    protected BlockBehaviour.Properties supportProperties(OrnamentBuilder builder) {
+        return PropertiesHelper.createProps(builder);
+    }
+
+    /**
      * For creating lists of default Block and Item Tags for an OrnamentStair.
      * @return TagHelper containing Block and Item Tags.
      */
@@ -183,6 +192,12 @@ public abstract class MasterRegistryHelper {
      * @return TagHelper containing Block and Item Tags.
      */
     protected abstract TagHelper saddledoorTags();
+
+    /**
+     * For creating lists of default Block and Item Tags for an OrnamentSupport.
+     * @return TagHelper containing Block and Item Tags.
+     */
+    protected abstract TagHelper supportTags();
 
     /**
      * For registering an OrnamentStair. This method contains everything required for registration.
@@ -352,6 +367,23 @@ public abstract class MasterRegistryHelper {
 
         return registerBlock(builder, "_saddle_door", () -> factory.create(builder, props), item ->
                 registerBlockItem(item, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
+    }
+
+    /**
+     * For registering an OrnamentSupport. This method contains everything required for registration.
+     * @param builder OrnamentBuilder.
+     * @param blocktags A list of tags for the individual block.
+     * @param itemtags A list of tags for the individual item.
+     * @param factory The block class required to create an OrnamentSupport object.
+     * @return Supplier for an OrnamentSupport.
+     */
+    public <T extends OrnamentSupport, O extends OrnamentBuilder> Supplier<T> support(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
+        BlockBehaviour.Properties props = supportProperties(builder);
+        blocktags.addAll(supportTags().blockTags());
+        itemtags.addAll(supportTags().itemTags());
+
+        return registerBlock(builder, "_support", () -> factory.create(builder, props), item ->
+                registerBlockItem(item, builder, 10 ,OrnamentBlockItem::new), ModCreativeTabs.SUPPORT_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
