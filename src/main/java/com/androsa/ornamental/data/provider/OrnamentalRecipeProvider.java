@@ -3,6 +3,7 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModTags;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -32,35 +33,43 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         return new ResourceLocation(modID, name);
     }
 
+    public <T extends OrnamentalBlock> Optional<ManagerEntry<? extends T>> entry(Supplier<T> block, boolean override) {
+        return Optional.of(new ManagerEntry<>(block, override));
+    }
+
     /**
      * Using an AutoRecipeManager, generates an array of recipes without the need for manual input
      * @param output The RecipeOutput from the data generator
      * @param manager An AutoRecipeManager containing all the required ingredients, outputs, and flags for overrides
      */
     public void autoRecipe(RecipeOutput output, AutoRecipeManager manager) {
-        manager.stair().ifPresent(result -> stairs(output, result, manager.bigIngredient(), manager.stairOverride(), manager.stonecutter()));
-        manager.slab().ifPresent(result -> slab(output, result, manager.bigIngredient(), manager.slabOverride(), manager.stonecutter()));
-        manager.fence().ifPresent(result -> fence(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fenceOverride()));
+        manager.stair().ifPresent(result -> stairs(output, result.block(), manager.bigIngredient(), result.override(), manager.stonecutter()));
+        manager.slab().ifPresent(result -> slab(output, result.block(), manager.bigIngredient(), result.override(), manager.stonecutter()));
+        manager.fence().ifPresent(result -> fence(output, result.block(), manager.bigIngredient(), manager.smallIngredient(), result.override()));
         manager.trapdoor().ifPresent(result -> {
             if (manager.trapdoorWide()) {
-                trapdoorWide(output, result, manager.smallIngredient(), manager.trapdoorOverride());
+                trapdoorWide(output, result.block(), manager.smallIngredient(), result.override());
             } else {
-                trapdoor(output, result, manager.smallIngredient(), manager.trapdoorOverride());
+                trapdoor(output, result.block(), manager.smallIngredient(), result.override());
             }
         });
-        manager.fencegate().ifPresent(result -> fencegate(output, result, manager.bigIngredient(), manager.smallIngredient(), manager.fencegateOverride()));
-        manager.door().ifPresent(result -> door(output, result, manager.smallIngredient(), manager.doorOverride()));
-        manager.pole().ifPresent(result -> pole(output, result, manager.bigIngredient(), manager.slabIngredient(), manager.poleOverride(), manager.stonecutter()));
-        manager.beam().ifPresent(result -> beam(output, result, manager.bigIngredient(), manager.slabIngredient(), manager.beamOverride(), manager.stonecutter()));
+        manager.fencegate().ifPresent(result -> fencegate(output, result.block(), manager.bigIngredient(), manager.smallIngredient(), result.override()));
+        manager.door().ifPresent(result -> door(output, result.block(), manager.smallIngredient(), result.override()));
+        manager.pole().ifPresent(result -> manager.slab().ifPresent(s -> pole(output, result.block(), manager.bigIngredient(), s.block().get(), result.override(), manager.stonecutter())));
+        manager.beam().ifPresent(result -> manager.slab().ifPresent(s -> beam(output, result.block(), manager.bigIngredient(), s.block().get(), result.override(), manager.stonecutter())));
         if (manager.pole().isPresent() && manager.beam().isPresent()) {
-            convertPoleBeam(output, manager.pole().get(), manager.beam().get());
+            convertPoleBeam(output, manager.pole().get().block(), manager.beam().get().block());
         }
-        manager.wall().ifPresent(result -> wall(output, result, manager.bigIngredient(), manager.wallOverride(), manager.stonecutter()));
+        manager.wall().ifPresent(result -> wall(output, result.block(), manager.bigIngredient(), result.override(), manager.stonecutter()));
         manager.saddledoor().ifPresent(result -> {
-            saddleDoor(output, result, manager.tdIngredient(), manager.saddledoorOverride());
-            saddleDoorFromDoor(output, result, manager.doorIngredient());
+            manager.trapdoor().ifPresent(sd -> saddleDoor(output, result.block(), sd.block().get(), result.override()));
+            manager.door().ifPresent(d -> saddleDoorFromDoor(output, result.block(), d.block().get()));
         });
-        manager.support().ifPresent(result -> support(output, result, manager.bigIngredient(), manager.poleIngredient(), manager.beamIngredient(), manager.supportOverride(), manager.stonecutter()));
+        manager.support().ifPresent(result -> {
+            if (manager.pole().isPresent() && manager.beam().isPresent()) {
+                support(output, result.block(), manager.bigIngredient(), manager.pole().get().block().get(), manager.beam().get().block().get(), result.override(), manager.stonecutter());
+            }
+        });
     }
 
     /**
@@ -429,9 +438,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
 
     private void internalRecipeBuild(RecipeOutput output, RecipeBuilder recipe, OrnamentalBlock result, List<ItemLike> criteria, String name) {
         OrnamentBuilder builder = result.getBuilder();
-        for (ItemLike criterion : criteria) {
-            recipe = recipe.unlockedBy("has_" + builder.name, has(criterion));
-        }
+        recipe = recipe.unlockedBy("has_" + builder.name, inventoryTrigger(ItemPredicate.Builder.item().of(criteria.toArray(new ItemLike[0]))));
         ResourceLocation location = loc(builder.name + name);
 
         recipe.save(output, location);
@@ -442,16 +449,19 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * bigIngredient is for ingredients considered "large" such as blocks, while a smallIngredient is for ingredients considered "small" such as items or slab variants.
      * Ingredients accepting Slabs, Trap Doors, and Doors are for more specified recipes that don't use big or small ingredients.
      */
-    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, ItemLike slabIngredient, ItemLike tdIngredient, ItemLike doorIngredient, ItemLike poleIngredient, ItemLike beamIngredient, boolean stonecutter,
-                                    Optional<Supplier<? extends OrnamentStair>> stair, boolean stairOverride,
-                                    Optional<Supplier<? extends OrnamentSlab>> slab, boolean slabOverride,
-                                    Optional<Supplier<? extends OrnamentFence>> fence, boolean fenceOverride,
-                                    Optional<Supplier<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide, boolean trapdoorOverride,
-                                    Optional<Supplier<? extends OrnamentFenceGate>> fencegate, boolean fencegateOverride,
-                                    Optional<Supplier<? extends OrnamentDoor>> door, boolean doorOverride,
-                                    Optional<Supplier<? extends OrnamentPole>> pole, boolean poleOverride,
-                                    Optional<Supplier<? extends OrnamentBeam>> beam, boolean beamOverride,
-                                    Optional<Supplier<? extends OrnamentWall>> wall, boolean wallOverride,
-                                    Optional<Supplier<? extends OrnamentSaddleDoor>> saddledoor, boolean saddledoorOverride,
-                                    Optional<Supplier<? extends OrnamentSupport>> support, boolean supportOverride) { }
+    public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, boolean stonecutter,
+                                    Optional<ManagerEntry<? extends OrnamentStair>> stair,
+                                    Optional<ManagerEntry<? extends OrnamentSlab>> slab,
+                                    Optional<ManagerEntry<? extends OrnamentFence>> fence,
+                                    Optional<ManagerEntry<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide,
+                                    Optional<ManagerEntry<? extends OrnamentFenceGate>> fencegate,
+                                    Optional<ManagerEntry<? extends OrnamentDoor>> door,
+                                    Optional<ManagerEntry<? extends OrnamentPole>> pole,
+                                    Optional<ManagerEntry<? extends OrnamentBeam>> beam,
+                                    Optional<ManagerEntry<? extends OrnamentWall>> wall,
+                                    Optional<ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor,
+                                    Optional<ManagerEntry<? extends OrnamentSupport>> support) { }
+
+    public record ManagerEntry<T extends OrnamentalBlock>(Supplier<? extends T> block, boolean override) {
+    }
 }

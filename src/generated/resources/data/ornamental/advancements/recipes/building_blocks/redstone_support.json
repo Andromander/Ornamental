@@ -6,6 +6,7 @@
         "items": [
           {
             "items": [
+              "ornamental:redstone_pole",
               "ornamental:redstone_beam"
             ]
           }
