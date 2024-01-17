@@ -450,17 +450,17 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * Ingredients accepting Slabs, Trap Doors, and Doors are for more specified recipes that don't use big or small ingredients.
      */
     public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, boolean stonecutter,
-                                    Optional<ManagerEntry<? extends OrnamentStair>> stair,
-                                    Optional<ManagerEntry<? extends OrnamentSlab>> slab,
-                                    Optional<ManagerEntry<? extends OrnamentFence>> fence,
-                                    Optional<ManagerEntry<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide,
-                                    Optional<ManagerEntry<? extends OrnamentFenceGate>> fencegate,
-                                    Optional<ManagerEntry<? extends OrnamentDoor>> door,
-                                    Optional<ManagerEntry<? extends OrnamentPole>> pole,
-                                    Optional<ManagerEntry<? extends OrnamentBeam>> beam,
-                                    Optional<ManagerEntry<? extends OrnamentWall>> wall,
-                                    Optional<ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor,
-                                    Optional<ManagerEntry<? extends OrnamentSupport>> support) { }
+                                    Optional<? extends ManagerEntry<? extends OrnamentStair>> stair,
+                                    Optional<? extends ManagerEntry<? extends OrnamentSlab>> slab,
+                                    Optional<? extends ManagerEntry<? extends OrnamentFence>> fence,
+                                    Optional<? extends ManagerEntry<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide,
+                                    Optional<? extends ManagerEntry<? extends OrnamentFenceGate>> fencegate,
+                                    Optional<? extends ManagerEntry<? extends OrnamentDoor>> door,
+                                    Optional<? extends ManagerEntry<? extends OrnamentPole>> pole,
+                                    Optional<? extends ManagerEntry<? extends OrnamentBeam>> beam,
+                                    Optional<? extends ManagerEntry<? extends OrnamentWall>> wall,
+                                    Optional<? extends ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor,
+                                    Optional<? extends ManagerEntry<? extends OrnamentSupport>> support) { }
 
     public record ManagerEntry<T extends OrnamentalBlock>(Supplier<? extends T> block, boolean override) {
     }
