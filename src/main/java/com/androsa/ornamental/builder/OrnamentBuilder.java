@@ -227,6 +227,7 @@ public class OrnamentBuilder {
      * 7 = Beam
      * 8 = Wall
      * 9 = Saddle Door
+     * 10 = Support
      */
     public OrnamentBuilder burnTime(int... times) {
         this.burnTime = Arrays.stream(times).toArray();

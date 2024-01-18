@@ -96,7 +96,7 @@ public class OrnamentBuilders {
             .mapColor(MapColor.COLOR_BLACK)
             .hardnessAndResistance(5.0F, 10.0F)
             .requiresTool()
-            .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000, 12000, 5250)
+            .burnTime(10500, 5250, 4000, 8000, 12000, 5250, 4000, 4000, 12000, 5250, 5250)
             .stairBaseBlock(() -> Blocks.COAL_BLOCK)
             .blockSetType(new BlockSetBuilder("coal")
                     .openByHand()
