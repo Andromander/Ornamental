@@ -33,7 +33,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         return new ResourceLocation(modID, name);
     }
 
-    public <T extends OrnamentalBlock> Optional<ManagerEntry<? extends T>> entry(Supplier<T> block, boolean override) {
+    public <T extends Block> Optional<ManagerEntry<? extends T>> entry(Supplier<T> block, boolean override) {
         return Optional.of(new ManagerEntry<>(block, override));
     }
 
@@ -111,23 +111,25 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      * @param stonecutter If the block can have a Stone Cutter recipe
      */
-    public void slab(RecipeOutput output, Supplier<? extends OrnamentSlab> result, ItemLike ingredient, boolean override, boolean stonecutter) {
-        String suffix = "_slab";
-        RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
-        if (override) {
-            recipe.define('/', ItemTags.SLABS)
-                    .pattern(" / ")
-                    .pattern("###");
-        } else {
-            recipe.pattern("###");
-        }
-        recipe.define('#', ingredient);
+    public void slab(RecipeOutput output, Supplier<? extends Block> result, ItemLike ingredient, boolean override, boolean stonecutter) {
+        if (result.get() instanceof OrnamentalBlock ornament) {
+            String suffix = "_slab";
+            RecipeCategory category = RecipeCategory.BUILDING_BLOCKS;
+            ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result.get(), 6);
+            if (override) {
+                recipe.define('/', ItemTags.SLABS)
+                        .pattern(" / ")
+                        .pattern("###");
+            } else {
+                recipe.pattern("###");
+            }
+            recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), suffix);
+            internalRecipeBuild(output, recipe, ornament, List.of(ingredient), suffix);
 
-        if (stonecutter) {
-            stoneCutting(output, category, result, ingredient, 2, suffix);
+            if (stonecutter) {
+                stoneCutting(output, category, result, ingredient, 2, suffix);
+            }
         }
     }
 
@@ -163,20 +165,22 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void trapdoor(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
-        if (override) {
-            recipe.define('/', ItemTags.TRAPDOORS)
-                    .pattern(" /")
-                    .pattern("##")
-                    .pattern("##");
-        } else {
-            recipe.pattern("##")
-                    .pattern("##");
-        }
-        recipe.define('#', ingredient);
+    public void trapdoor(RecipeOutput output, Supplier<? extends Block> result, ItemLike ingredient, boolean override) {
+        if (result.get() instanceof OrnamentalBlock ornament) {
+            ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+            if (override) {
+                recipe.define('/', ItemTags.TRAPDOORS)
+                        .pattern(" /")
+                        .pattern("##")
+                        .pattern("##");
+            } else {
+                recipe.pattern("##")
+                        .pattern("##");
+            }
+            recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_trapdoor");
+            internalRecipeBuild(output, recipe, ornament, List.of(ingredient), "_trapdoor");
+        }
     }
 
     /**
@@ -186,20 +190,22 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void trapdoorWide(RecipeOutput output, Supplier<? extends OrnamentTrapDoor> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
-        if (override) {
-            recipe.define('/', ItemTags.TRAPDOORS)
-                    .pattern(" / ")
-                    .pattern("###")
-                    .pattern("###");
-        } else {
-            recipe.pattern("###")
-                    .pattern("###");
-        }
-        recipe.define('#', ingredient);
+    public void trapdoorWide(RecipeOutput output, Supplier<? extends Block> result, ItemLike ingredient, boolean override) {
+        if (result.get() instanceof OrnamentalBlock ornament) {
+            ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+            if (override) {
+                recipe.define('/', ItemTags.TRAPDOORS)
+                        .pattern(" / ")
+                        .pattern("###")
+                        .pattern("###");
+            } else {
+                recipe.pattern("###")
+                        .pattern("###");
+            }
+            recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_trapdoor");
+            internalRecipeBuild(output, recipe, ornament, List.of(ingredient), "_trapdoor");
+        }
     }
 
     /**
@@ -234,21 +240,23 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      * @param ingredient The ingredient required to craft this recipe
      * @param override If the recipe is likely to conflict with another recipe, this will secure a less conflicting recipe
      */
-    public void door(RecipeOutput output, Supplier<? extends OrnamentDoor> result, ItemLike ingredient, boolean override) {
-        ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
-        if (override) {
-            recipe.define('/', ItemTags.DOORS)
-                    .pattern("## ")
-                    .pattern("##/")
-                    .pattern("## ");
-        } else {
-            recipe.pattern("##")
-                    .pattern("##")
-                    .pattern("##");
-        }
-        recipe.define('#', ingredient);
+    public void door(RecipeOutput output, Supplier<? extends Block> result, ItemLike ingredient, boolean override) {
+        if (result.get() instanceof OrnamentalBlock ornament) {
+            ShapedRecipeBuilder recipe = ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, result.get());
+            if (override) {
+                recipe.define('/', ItemTags.DOORS)
+                        .pattern("## ")
+                        .pattern("##/")
+                        .pattern("## ");
+            } else {
+                recipe.pattern("##")
+                        .pattern("##")
+                        .pattern("##");
+            }
+            recipe.define('#', ingredient);
 
-        internalRecipeBuild(output, recipe, result.get(), List.of(ingredient), "_door");
+            internalRecipeBuild(output, recipe, ornament, List.of(ingredient), "_door");
+        }
     }
 
     /**
@@ -451,17 +459,17 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
      */
     public record AutoRecipeManager(ItemLike bigIngredient, ItemLike smallIngredient, boolean stonecutter,
                                     Optional<? extends ManagerEntry<? extends OrnamentStair>> stair,
-                                    Optional<? extends ManagerEntry<? extends OrnamentSlab>> slab,
+                                    Optional<? extends ManagerEntry<? extends Block>> slab,
                                     Optional<? extends ManagerEntry<? extends OrnamentFence>> fence,
-                                    Optional<? extends ManagerEntry<? extends OrnamentTrapDoor>> trapdoor, boolean trapdoorWide,
+                                    Optional<? extends ManagerEntry<? extends Block>> trapdoor, boolean trapdoorWide,
                                     Optional<? extends ManagerEntry<? extends OrnamentFenceGate>> fencegate,
-                                    Optional<? extends ManagerEntry<? extends OrnamentDoor>> door,
+                                    Optional<? extends ManagerEntry<? extends Block>> door,
                                     Optional<? extends ManagerEntry<? extends OrnamentPole>> pole,
                                     Optional<? extends ManagerEntry<? extends OrnamentBeam>> beam,
                                     Optional<? extends ManagerEntry<? extends OrnamentWall>> wall,
                                     Optional<? extends ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor,
                                     Optional<? extends ManagerEntry<? extends OrnamentSupport>> support) { }
 
-    public record ManagerEntry<T extends OrnamentalBlock>(Supplier<? extends T> block, boolean override) {
+    public record ManagerEntry<T extends Block>(Supplier<? extends T> block, boolean override) {
     }
 }

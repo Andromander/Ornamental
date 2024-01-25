@@ -24,9 +24,9 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.iron_stairs, false),
                 entry(ModBlocks.iron_slab, false),
                 entry(ModBlocks.iron_fence, false),
-                Optional.empty(), false,
+                entry(() -> Blocks.IRON_TRAPDOOR, false), false,
                 entry(ModBlocks.iron_fence_gate, false),
-                Optional.empty(),
+                entry(() -> Blocks.IRON_DOOR, false),
                 entry(ModBlocks.iron_pole, false),
                 entry(ModBlocks.iron_beam, false),
                 entry(ModBlocks.iron_wall, false),
@@ -178,7 +178,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.path_support, false)));
         autoRecipe(consumer, new AutoRecipeManager(Blocks.BRICKS, Items.BRICK, true,
                 Optional.empty(),
-                Optional.empty(),
+                entry(() -> Blocks.BRICK_SLAB, false),
                 entry(ModBlocks.brick_fence, false),
                 entry(ModBlocks.brick_trapdoor, false), true,
                 entry(ModBlocks.brick_fence_gate, false),
@@ -190,7 +190,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.brick_support, false)));
         autoRecipe(consumer, new AutoRecipeManager(Blocks.QUARTZ_BLOCK, Items.QUARTZ, true,
                 Optional.empty(),
-                Optional.empty(),
+                entry(() -> Blocks.QUARTZ_SLAB, false),
                 entry(ModBlocks.quartz_fence, false),
                 entry(ModBlocks.quartz_trapdoor, false), true,
                 entry(ModBlocks.quartz_fence_gate, false),
@@ -214,7 +214,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.bone_support, false)));
         autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHER_BRICKS, Items.NETHER_BRICK, true,
                 Optional.empty(),
-                Optional.empty(),
+                entry(() -> Blocks.NETHER_BRICK_SLAB, false),
                 Optional.empty(),
                 entry(ModBlocks.nether_brick_trapdoor, false), true,
                 entry(ModBlocks.nether_brick_fence_gate, false),
@@ -226,7 +226,7 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.nether_brick_support, false)));
         autoRecipe(consumer, new AutoRecipeManager(Blocks.RED_NETHER_BRICKS, Items.NETHER_WART, true,
                 Optional.empty(),
-                Optional.empty(),
+                entry(() -> Blocks.RED_NETHER_BRICK_SLAB, false),
                 entry(ModBlocks.red_nether_brick_fence, false),
                 entry(ModBlocks.red_nether_brick_trapdoor, false), true,
                 entry(ModBlocks.red_nether_brick_fence_gate, false),
@@ -380,16 +380,5 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
                 entry(ModBlocks.calcite_wall, false),
                 entry(ModBlocks.calcite_saddle_door, false),
                 entry(ModBlocks.calcite_support, false)));
-
-        saddleDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_TRAPDOOR, false);
-        saddleDoorFromDoor(consumer, ModBlocks.iron_saddle_door, Blocks.IRON_DOOR);
-        pole(consumer, ModBlocks.quartz_pole, Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_SLAB, false, true);
-        beam(consumer, ModBlocks.quartz_beam, Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_SLAB, false, true);
-        pole(consumer, ModBlocks.brick_pole, Blocks.BRICKS, Blocks.BRICK_SLAB, false, true);
-        beam(consumer, ModBlocks.brick_beam, Blocks.BRICKS, Blocks.BRICK_SLAB, false, true);
-        pole(consumer, ModBlocks.nether_brick_pole, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_SLAB, false, true);
-        beam(consumer, ModBlocks.nether_brick_beam, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_SLAB, false, true);
-        pole(consumer, ModBlocks.red_nether_brick_pole, Blocks.RED_NETHER_BRICKS, Blocks.RED_NETHER_BRICK_SLAB, false, true);
-        beam(consumer, ModBlocks.red_nether_brick_beam, Blocks.RED_NETHER_BRICKS, Blocks.RED_NETHER_BRICK_SLAB, false, true);
     }
 }
