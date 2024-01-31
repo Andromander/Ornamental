@@ -33,7 +33,7 @@ repositories {
     mavenLocal()
     maven {
         name 'progwm\'s Maven' // JEI + Mantle + TCon
-        url 'https://dvs1.progwml6.com/files/maven'
+        url 'https://modmaven.dev/'
     }
 }
 
@@ -62,11 +62,11 @@ runs {
     }
 
     client {
-        systemProperty 'forge.enabledGameTesetNamespaces', project.mod_id
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
 
     server {
-        systemProperty 'forge.enabledGameTesetNamespaces', project.mod_id
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         programArgument '--nogui'
     }
 
@@ -81,8 +81,8 @@ sourceSets.main.resources {
 }
 
 dependencies {
-//    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     implementation "net.neoforged:neoforge:${project.neo_version}"
 }
