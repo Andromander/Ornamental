@@ -3,19 +3,17 @@ package com.androsa.ornamental.data;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalRecipeProvider;
 import com.androsa.ornamental.registry.ModBlocks;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 public class OrnamentalRecipes extends OrnamentalRecipeProvider {
 
-    public OrnamentalRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
-        super(output, provider, OrnamentalMod.MODID);
+    public OrnamentalRecipes(PackOutput output) {
+        super(output, OrnamentalMod.MODID);
     }
 
     @Override

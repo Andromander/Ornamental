@@ -60,7 +60,7 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
     private final OrnamentBuilder builder;
 
     public OrnamentStair(OrnamentBuilder builder, Properties props) {
-        super(() -> builder.baseBlock.get().defaultBlockState(), props);
+        super(builder.baseBlock.get().defaultBlockState(), props);
         this.builder = builder;
     }
 
