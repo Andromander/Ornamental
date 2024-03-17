@@ -4,8 +4,10 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.data.provider.GolemLootTableProvider;
 import com.androsa.ornamental.data.provider.OrnamentLootTableProvider;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -30,6 +32,7 @@ public class OrnamentalLootTables extends LootTableProvider {
     public OrnamentalLootTables(PackOutput output) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(BlockTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(VanillaBlocks::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(EntityTables::new, LootContextParamSets.ENTITY)
         ));
     }
@@ -387,6 +390,23 @@ public class OrnamentalLootTables extends LootTableProvider {
         @Override
         protected Iterable<Block> getKnownBlocks() {
             return ModBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        }
+    }
+
+    public static class VanillaBlocks extends BlockLootSubProvider {
+
+        protected VanillaBlocks() {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        }
+
+        @Override
+        protected void generate() {
+            add(Blocks.DIRT_PATH, block -> this.createSingleItemTableWithSilkTouch(block, Blocks.DIRT));
+        }
+
+        @Override
+        protected Iterable<Block> getKnownBlocks() {
+            return ImmutableList.of(Blocks.DIRT_PATH);
         }
     }
 

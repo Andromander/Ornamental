@@ -1,4 +1,5 @@
-// 1.20.4	2024-01-05T10:58:18.6028884	Loot Tables
+// 1.20.4	2024-03-17T09:58:10.0123076	Loot Tables
+e27b3bfe615adf6023724a37ffe8d12da8a13a1c data/minecraft/loot_tables/blocks/dirt_path.json
 243edf3537fea2df18fe0e8c84eacc3b81284d74 data/ornamental/loot_tables/blocks/amethyst_beam.json
 330fbaa02ab3a8475d96d5b2aa850a3c8943993a data/ornamental/loot_tables/blocks/amethyst_door.json
 2180f3aa489cfca8e33444175c6443e87ccb312a data/ornamental/loot_tables/blocks/amethyst_fence.json
@@ -337,7 +338,7 @@ d1ab489a45f71f5c70a8b84488ba27462c3647c3 data/ornamental/loot_tables/entities/cl
 a496145b5d978033cf1293df46404000ba1c528f data/ornamental/loot_tables/entities/diamond_golem.json
 6a08567d0ba010ea621c5c03012f452924f239a7 data/ornamental/loot_tables/entities/dirt_golem.json
 bcd7b211679fb48000df0f3c2f3e910b6ad0cbaf data/ornamental/loot_tables/entities/dirt_path_golem.json
-087649948df7f6ebec993668e1697d65bfc8990d data/ornamental/loot_tables/entities/emerald_golem.json
+dddf99a30f32b8ea0ea31a1ce39bf4a9fe243da5 data/ornamental/loot_tables/entities/emerald_golem.json
 495a5c8473a40119a9d31f55c5a0e02a32256a4f data/ornamental/loot_tables/entities/gold_golem.json
 4e21460f3e40358cb3be2680f0f4e202bba66bb5 data/ornamental/loot_tables/entities/grass_golem.json
 b92deaf716ae354eca534adf15db08facfd62cbb data/ornamental/loot_tables/entities/hay_golem.json
