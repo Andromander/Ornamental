@@ -428,7 +428,7 @@ public class OrnamentalLootTables extends LootTableProvider {
         public void generate() {
             add(ModEntities.GOLD_GOLEM, flowerGolemTable(Blocks.DANDELION, Items.GOLD_INGOT));
             add(ModEntities.DIAMOND_GOLEM, flowerGolemTable(Blocks.BLUE_ORCHID, Items.DIAMOND));
-            add(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.ALLIUM));
+            add(ModEntities.EMERALD_GOLEM, flowerGolemTable(Blocks.ALLIUM, Items.EMERALD));
             add(ModEntities.LAPIS_GOLEM, golemTable(Items.LAPIS_LAZULI));
             add(ModEntities.OBSIDIAN_GOLEM, golemTableBlock(Blocks.OBSIDIAN));
             add(ModEntities.COAL_GOLEM, golemTable(Items.COAL));
