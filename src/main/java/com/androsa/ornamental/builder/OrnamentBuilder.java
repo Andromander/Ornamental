@@ -51,6 +51,9 @@ public class OrnamentBuilder {
     public float fallMultiplier = 1.0F;
     public float slipperiness = 0.6F;
     public int[] burnTime = new int[]{0,0,0,0,0,0,0,0,0,0,0};
+    public boolean lavaIgnites = false;
+    public int flammability = -1;
+    public int spreadChance = -1;
     public Supplier<? extends Block> baseBlock = () -> Blocks.AIR;
     public SoundEvent[] fencegateSounds = new SoundEvent[]{SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE};
     public SoundEvent[] saddledoorSounds = new SoundEvent[]{SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE};
@@ -103,6 +106,9 @@ public class OrnamentBuilder {
         this.fallMultiplier = builder.fallMultiplier;
         this.slipperiness = builder.slipperiness;
         this.burnTime = builder.burnTime;
+        this.lavaIgnites = builder.lavaIgnites;
+        this.flammability = builder.flammability;
+        this.spreadChance = builder.spreadChance;
         this.baseBlock = builder.baseBlock;
         this.fencegateSounds = builder.fencegateSounds;
         this.saddledoorSounds = builder.saddledoorSounds;
@@ -231,6 +237,25 @@ public class OrnamentBuilder {
      */
     public OrnamentBuilder burnTime(int... times) {
         this.burnTime = Arrays.stream(times).toArray();
+        return this;
+    }
+
+    /**
+     * If enabled, lava will have a chance to ignite the block on fire. Used to set {@link BlockBehaviour.Properties#ignitedByLava()}.
+     */
+    public OrnamentBuilder lavaIgnites() {
+        this.lavaIgnites = true;
+        return this;
+    }
+
+    /**
+     * Sets the flammability of the block.
+     * @param flammability Sets how quickly a block will burn up. Higher numbers will increase the chances of burning up.
+     * @param spread Sets how quickly fire will spread from this block.
+     */
+    public OrnamentBuilder flammable(int flammability, int spread) {
+        this.flammability = flammability;
+        this.spreadChance = spread;
         return this;
     }
 

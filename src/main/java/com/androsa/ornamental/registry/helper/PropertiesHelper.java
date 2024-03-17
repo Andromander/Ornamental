@@ -23,6 +23,7 @@ public class PropertiesHelper {
         if (builder.light > 0) props.lightLevel((state) -> builder.light);
         if (builder.doesTick) props.randomTicks();
         if (!builder.isSolid) props.noOcclusion();
+        if (builder.lavaIgnites) props.ignitedByLava();
         if (builder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
         if (builder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
         if (builder.requiresTool) props.requiresCorrectToolForDrops();

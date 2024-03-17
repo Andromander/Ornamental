@@ -224,6 +224,22 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     }
 
     @Override
+    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        if (builder.spreadChance == -1) {
+            return super.getFlammability(state, level, pos, direction);
+        }
+        return builder.spreadChance;
+    }
+
+    @Override
+    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        if (builder.flammability == -1) {
+            return super.getFireSpreadSpeed(state, level, pos, direction);
+        }
+        return builder.flammability;
+    }
+
+    @Override
     @Deprecated
     public boolean isSignalSource(BlockState state) {
         return builder.hasPower;
