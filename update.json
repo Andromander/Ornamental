@@ -76,7 +76,8 @@
     "4.12.78": "Fixed a possible crash with the height Golems can step up by."
   },
   "1.20.4": {
-    "4.13.96": "Ornamental has now been ported to 1.20.4! This mod has made the change to NeoForge, do note this new change.\n • Added Supports. These blocks are a compliment to Poles and Beams to fill out corners. They will start out as 1/8th of a cube, but by using a Pole, Beam, or Support on any side, the selected side will extend, up to 1/2 of a block in the shape of a corner.\n • Added Stonecutting recipes. These apply only to blocks that make sense to be used in the Stonecutter and thus will not apply to all materials. Any Stair Crafting recipes that have a Stonecutting recipe will now only output 4 Stairs.\n • Fixed Magma Golem being called Calcite Golem and thus Calcite Golem not having a name.\n • Changes to OrnamentBuilder:\n  • Registering a BlockSetType has now been reduced to a single method. In exchange, a new builder called BlockSetBuilder has been added to more easily build a BlockSetType should one not exist yet.\n  • Removed the canOpen method and field. It has been decided that an override is unnecessary and that what the parent mod has decided is final.\n • Created a recipe datagen helper called AutoRecipeManager. This is a tool for those that create addons to help streamline the recipe datagen process to reduce on copy-pasting."
+    "4.13.96": "Ornamental has now been ported to 1.20.4! This mod has made the change to NeoForge, do note this new change.\n • Added Supports. These blocks are a compliment to Poles and Beams to fill out corners. They will start out as 1/8th of a cube, but by using a Pole, Beam, or Support on any side, the selected side will extend, up to 1/2 of a block in the shape of a corner.\n • Added Stonecutting recipes. These apply only to blocks that make sense to be used in the Stonecutter and thus will not apply to all materials. Any Stair Crafting recipes that have a Stonecutting recipe will now only output 4 Stairs.\n • Fixed Magma Golem being called Calcite Golem and thus Calcite Golem not having a name.\n • Changes to OrnamentBuilder:\n  • Registering a BlockSetType has now been reduced to a single method. In exchange, a new builder called BlockSetBuilder has been added to more easily build a BlockSetType should one not exist yet.\n  • Removed the canOpen method and field. It has been decided that an override is unnecessary and that what the parent mod has decided is final.\n • Created a recipe datagen helper called AutoRecipeManager. This is a tool for those that create addons to help streamline the recipe datagen process to reduce on copy-pasting.",
+    "4.13.98": "• Added new properties to OrnamentBuilder:\n • lavaIgnites - if set, will allow blocks to be ignited by lava.\n • flammability - determines how quickly a block burns.\n • spreadChance - determines how frequently fire can spread.\n • lavaIgnites can be set with the method lavaIgnites.\n • flammability and spreadChance can be set with the method flammable.\n• By popular demand (I was asked one day), Ornamental now allows for Dirt Paths to be harvested with Silk Touch, allowing for craftable Dirt Path ornaments.\n• Fixed Emerald Golem only dropping Allium."
   },
 
   "promos": {
@@ -111,6 +112,8 @@
     "1.19.4-latest": "4.11.56",
     "1.19.4-recommended": "4.11.56",
     "1.20-latest": "4.12.76",
-    "1.20-recommended": "4.12.76"
+    "1.20-recommended": "4.12.76",
+    "1.20.4-latest": "4.13.98",
+    "1.20.4-recommended": "4.13.98"
   }
 }
