@@ -17,8 +17,9 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -283,9 +284,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
 
     @Override
     @Deprecated
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        ItemStack stack = player.getItemInHand(hand);
-
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (builder.convertPredicates != null) {
             for (BlockConverter converter : builder.convertPredicates) {
                 if (converter.predicate().test(state, level, pos, player, hand, result)) {
@@ -296,77 +295,54 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
 
         //Convert predicates overrule changing states of Supports
         if (stack.is(ModTags.Items.SUPPORT_FILLERS)) {
-            switch (result.getDirection().getAxis()) {
-                case X -> {
-                    if (!state.getValue(EW_CONNECT)) {
-                        level.setBlock(pos, state.setValue(EW_CONNECT, true), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                case Y -> {
-                    if (!state.getValue(TB_CONNECT)) {
-                        level.setBlock(pos, state.setValue(TB_CONNECT, true), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                case Z -> {
-                    if (!state.getValue(NS_CONNECT)) {
-                        level.setBlock(pos, state.setValue(NS_CONNECT, true), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
+            if (editBlock(state, level, pos, switch (result.getDirection().getAxis()) {
+                case X -> EW_CONNECT;
+                case Y -> TB_CONNECT;
+                case Z -> NS_CONNECT;
+            }, true)) {
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
         if (stack.canPerformAction(ToolActions.AXE_STRIP)) {
-            switch (result.getDirection().getAxis()) {
-                case X -> {
-                    if (state.getValue(EW_CONNECT)) {
-                        level.setBlock(pos, state.setValue(EW_CONNECT, false), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                case Y -> {
-                    if (state.getValue(TB_CONNECT)) {
-                        level.setBlock(pos, state.setValue(TB_CONNECT, false), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                case Z -> {
-                    if (state.getValue(NS_CONNECT)) {
-                        level.setBlock(pos, state.setValue(NS_CONNECT, false), 3);
-                        level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
+            if (editBlock(state, level, pos, switch (result.getDirection().getAxis()) {
+                case X -> EW_CONNECT;
+                case Y -> TB_CONNECT;
+                case Z -> NS_CONNECT;
+            }, false)) {
+                return ItemInteractionResult.SUCCESS;
             }
         }
 
-        return super.use(state, level, pos, player, hand, result);
+        return super.useItemOn(stack, state, level, pos, player, hand, result);
     }
 
-    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+    private ItemInteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
+    }
+
+    private boolean editBlock(BlockState state, Level level, BlockPos pos, BooleanProperty connection, boolean swap) {
+        if (state.getValue(connection) != swap) {
+            level.setBlock(pos, state.setValue(connection, swap), 3);
+            level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS);
+            return true;
+        }
+        return false;
     }
 
     @Override
     @Deprecated
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         if (type == PathComputationType.WATER) {
-            return getter.getFluidState(pos).is(FluidTags.WATER);
+            return state.getFluidState().is(FluidTags.WATER);
         }
         return false;
     }

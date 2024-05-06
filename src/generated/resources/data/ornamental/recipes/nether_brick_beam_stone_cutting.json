@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:nether_bricks"
   },
-  "result": "ornamental:nether_brick_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:nether_brick_beam"
+  }
 }

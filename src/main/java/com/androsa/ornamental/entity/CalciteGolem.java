@@ -32,7 +32,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 public class CalciteGolem extends OrnamentalGolem {
@@ -47,11 +46,11 @@ public class CalciteGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(NEWLY_TARGETED, false);
-        this.entityData.define(RESONATING, false);
-        this.entityData.define(CHARGE_STATE, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder build) {
+        super.defineSynchedData(build);
+        build.define(NEWLY_TARGETED, false);
+        build.define(RESONATING, false);
+        build.define(CHARGE_STATE, 0);
     }
 
     @Override
@@ -124,7 +123,7 @@ public class CalciteGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 70.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.2F);
+                .add(Attributes.STEP_HEIGHT, 1.2F);
     }
 
     @Override

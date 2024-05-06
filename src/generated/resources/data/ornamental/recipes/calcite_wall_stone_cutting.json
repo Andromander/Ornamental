@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:calcite"
   },
-  "result": "ornamental:calcite_wall"
+  "result": {
+    "count": 1,
+    "id": "ornamental:calcite_wall"
+  }
 }

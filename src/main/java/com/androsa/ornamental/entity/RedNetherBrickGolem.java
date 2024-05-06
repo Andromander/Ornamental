@@ -25,7 +25,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttackMob {
 
@@ -53,7 +52,7 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -77,11 +76,6 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
     }
 
     @Override
-    public float getStepHeight() {
-        return super.getStepHeight();
-    }
-
-    @Override
     public void performRangedAttack(LivingEntity entity, float multiplier) {
         NetherBrick brick = new NetherBrick(ModEntities.THROWN_NETHER_BRICK.get(), this.level(), this);
         double eye = entity.getEyeY() - (double)1.1F;
@@ -97,11 +91,6 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect().getCategory() != MobEffectCategory.HARMFUL;
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.7F;
+        return effect.getEffect().value().getCategory() != MobEffectCategory.HARMFUL;
     }
 }

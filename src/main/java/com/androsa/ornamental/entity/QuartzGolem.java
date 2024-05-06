@@ -58,9 +58,9 @@ public class QuartzGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(TARGETING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(TARGETING, false);
     }
 
     public boolean isTargeting() {
@@ -156,10 +156,5 @@ public class QuartzGolem extends OrnamentalGolem {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.0F;
     }
 }

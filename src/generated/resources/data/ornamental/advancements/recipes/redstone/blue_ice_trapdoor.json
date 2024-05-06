@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:blue_ice_slab"
-            ]
+            "items": "ornamental:blue_ice_slab"
           }
         ]
       },

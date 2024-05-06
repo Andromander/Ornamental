@@ -27,7 +27,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -57,13 +56,13 @@ public class AmethystGolem extends OrnamentalGolem {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 60.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.2F);
+                .add(Attributes.STEP_HEIGHT, 1.2F);
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(CASTING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(CASTING, false);
     }
 
     public boolean isCasting() {
@@ -143,11 +142,6 @@ public class AmethystGolem extends OrnamentalGolem {
     @Override
     protected boolean canRepair(ItemStack stack) {
         return stack.is(Items.AMETHYST_SHARD);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.0F;
     }
 
     public static class AmethystCastGoal extends Goal {

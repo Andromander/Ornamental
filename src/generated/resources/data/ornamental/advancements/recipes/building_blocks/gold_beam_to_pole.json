@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:gold_beam"
-            ]
+            "items": "ornamental:gold_beam"
           }
         ]
       },

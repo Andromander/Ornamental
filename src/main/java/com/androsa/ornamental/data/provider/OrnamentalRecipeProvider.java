@@ -4,6 +4,7 @@ import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -16,14 +17,15 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public abstract class OrnamentalRecipeProvider extends RecipeProvider implements IConditionBuilder {
 
     private final String modID;
 
-    public OrnamentalRecipeProvider(PackOutput output, String modid) {
-        super(output);
+    public OrnamentalRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid) {
+        super(output, provider);
         this.modID = modid;
     }
 

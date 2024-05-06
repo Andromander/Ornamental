@@ -75,7 +75,7 @@ public class DirtGolem extends OrnamentalGolem {
             if (!this.level().isClientSide()) {
                 GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
                 grass.copyPosition(this);
-                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());
@@ -112,10 +112,5 @@ public class DirtGolem extends OrnamentalGolem {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.GRAVEL_STEP, 1.0F, 1.0F);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 0.6F;
     }
 }

@@ -29,7 +29,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -51,16 +50,16 @@ public class CopperGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(EROSION_LEVEL, 0);
-        this.entityData.define(CHARGED, false);
-        this.entityData.define(TARGETING, false);
-        this.entityData.define(CHARGE_TIMER, 0);
-        this.entityData.define(EROSION_TIMER, 1200);
-        this.entityData.define(WAXED, false);
-        this.entityData.define(CHARGES, 10);
-        this.entityData.define(RECHARGE_TIMER, 100);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(EROSION_LEVEL, 0);
+        builder.define(CHARGED, false);
+        builder.define(TARGETING, false);
+        builder.define(CHARGE_TIMER, 0);
+        builder.define(EROSION_TIMER, 1200);
+        builder.define(WAXED, false);
+        builder.define(CHARGES, 10);
+        builder.define(RECHARGE_TIMER, 100);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class CopperGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 110.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
+                .add(Attributes.STEP_HEIGHT, 1.5F);
     }
 
     public int getErosion() {
@@ -297,7 +296,7 @@ public class CopperGolem extends OrnamentalGolem {
                 setErosionTimer(1200);
                 setErosion(getErosion() - 1);
                 this.level().playSound(player, blockPosition(), SoundEvents.AXE_SCRAPE, getSoundSource(), 1.0F, 1.0F);
-                itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+                itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
                 return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
         } else if (itemstack.is(Items.HONEYCOMB)) {
@@ -321,11 +320,6 @@ public class CopperGolem extends OrnamentalGolem {
     @Override
     protected boolean canRepair(ItemStack stack) {
         return stack.is(Items.COPPER_INGOT);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.0F;
     }
 
     class CopperAttackGoal extends MeleeAttackGoal {

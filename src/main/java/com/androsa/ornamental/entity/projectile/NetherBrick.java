@@ -26,7 +26,7 @@ public class NetherBrick extends Brick {
 
     @Override
     protected ParticleOptions makeParticle() {
-        ItemStack itemstack = this.getItemRaw();
+        ItemStack itemstack = this.getItem();
         return itemstack.isEmpty() ? ModParticles.ITEM_NETHER_BRICK.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack);
     }
 

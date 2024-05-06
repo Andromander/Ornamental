@@ -52,8 +52,8 @@ public class OrnamentalMod {
 
         generator.addProvider(event.includeClient(), new OrnamentalBlockStates(output, helper));
         generator.addProvider(event.includeClient(), new OrnamentalItemModels(output, helper));
-        generator.addProvider(event.includeServer(), new OrnamentalLootTables(output));
-        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output));
+        generator.addProvider(event.includeServer(), new OrnamentalLootTables(output, provider));
+        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output, provider));
         generator.addProvider(event.includeServer(), blockTags);
         generator.addProvider(event.includeServer(), new OrnamentalItemTags(output, provider, blockTags, helper));
         generator.addProvider(true, new PackMetadataGenerator(output).add(

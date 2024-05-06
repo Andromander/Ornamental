@@ -20,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class RedstoneGolem extends OrnamentalGolem implements RangedAttackMob {
 
@@ -75,10 +74,5 @@ public class RedstoneGolem extends OrnamentalGolem implements RangedAttackMob {
         bullet.shoot(x, y + f, z, 1.6F, 12.0F);
         this.playSound(SoundEvents.FIREWORK_ROCKET_LAUNCH, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(bullet);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.8F;
     }
 }

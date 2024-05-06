@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:emerald_trapdoor"
-            ]
+            "items": "ornamental:emerald_trapdoor"
           }
         ]
       },

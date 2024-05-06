@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:netherite_beam"
-            ]
+            "items": "ornamental:netherite_beam"
           }
         ]
       },

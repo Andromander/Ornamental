@@ -17,6 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -64,9 +65,9 @@ public class GrassGolem extends DirtGolem {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(HAS_FLOWER, Optional.empty());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(HAS_FLOWER, Optional.empty());
     }
 
     @Override
@@ -124,12 +125,12 @@ public class GrassGolem extends DirtGolem {
         } else if (item instanceof ShovelItem) {
             PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level());
             addFreshEntity(path);
-            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
             this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else if (item instanceof HoeItem) {
             DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level());
             addFreshEntity(dirt);
-            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
             this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else {
             return this.repairGolem(player, hand);
@@ -159,7 +160,7 @@ public class GrassGolem extends DirtGolem {
 
         if (!this.level().isClientSide()) {
             entity.copyPosition(this);
-            EventHooks.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null, null);
+            EventHooks.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());

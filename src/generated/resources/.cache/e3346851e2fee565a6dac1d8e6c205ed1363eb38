@@ -1,7 +1,7 @@
-// 1.20.4	2024-01-11T10:18:12.9209937	Tags for minecraft:block mod id ornamental
-543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/forge/tags/blocks/fences.json
-1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/blocks/fences/nether_brick.json
-ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/forge/tags/blocks/fence_gates.json
+// 1.20.6	2024-05-06T17:24:07.0260328	Tags for minecraft:block mod id ornamental
+543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/c/tags/blocks/fences.json
+1093f8414f853a1a8e40303befba8eee0df30812 data/c/tags/blocks/fences/nether_brick.json
+ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/c/tags/blocks/fence_gates.json
 618ec1eb20bc78823859c5dbf3ebd96f02d863a9 data/minecraft/tags/blocks/beacon_base_blocks.json
 29dae5f78aa91574939b709b97d68fb30ada08a2 data/minecraft/tags/blocks/crystal_sound_blocks.json
 47df8911aff3188df43b91b62d9a6d83001c99b8 data/minecraft/tags/blocks/doors.json

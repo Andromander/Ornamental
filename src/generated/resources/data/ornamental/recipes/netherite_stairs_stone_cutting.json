@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:netherite_block"
   },
-  "result": "ornamental:netherite_stairs"
+  "result": {
+    "count": 1,
+    "id": "ornamental:netherite_stairs"
+  }
 }

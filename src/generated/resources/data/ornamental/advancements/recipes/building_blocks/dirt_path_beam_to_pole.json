@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:dirt_path_beam"
-            ]
+            "items": "ornamental:dirt_path_beam"
           }
         ]
       },

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:coal_pole"
-            ]
+            "items": "ornamental:coal_pole"
           }
         ]
       },

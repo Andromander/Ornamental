@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:magma_pole"
-            ]
+            "items": "ornamental:magma_pole"
           }
         ]
       },

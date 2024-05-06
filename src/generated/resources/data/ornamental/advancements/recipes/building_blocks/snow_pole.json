@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:snow_slab"
-            ]
+            "items": "ornamental:snow_slab"
           }
         ]
       },

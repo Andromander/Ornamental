@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Block;
 import com.google.common.collect.Lists;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -59,7 +59,7 @@ public class ModCreativeTabs {
         });
     }
 
-    @Mod.EventBusSubscriber(modid = OrnamentalMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = OrnamentalMod.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class BuildContent {
         @SubscribeEvent
         public static void buildContent(BuildCreativeModeTabContentsEvent event) {

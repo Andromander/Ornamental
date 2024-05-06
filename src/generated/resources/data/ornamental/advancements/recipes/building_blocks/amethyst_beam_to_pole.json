@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:amethyst_beam"
-            ]
+            "items": "ornamental:amethyst_beam"
           }
         ]
       },

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:netherite_pole"
-            ]
+            "items": "ornamental:netherite_pole"
           }
         ]
       },

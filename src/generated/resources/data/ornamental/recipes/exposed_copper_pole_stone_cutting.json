@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:exposed_copper"
   },
-  "result": "ornamental:exposed_copper_pole"
+  "result": {
+    "count": 4,
+    "id": "ornamental:exposed_copper_pole"
+  }
 }

@@ -14,7 +14,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -117,7 +119,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public boolean isPathfindable(BlockState state, BlockGetter getter, BlockPos pos, PathComputationType path) {
+    public boolean isPathfindable(BlockState state, PathComputationType path) {
         return switch (path) {
             case LAND, AIR -> state.getValue(OPEN);
             default -> false;
@@ -164,19 +166,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
-    @Nonnull
-    @Deprecated
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        ItemStack itemstack = player.getItemInHand(hand);
-
-        if (builder.convertPredicates != null) {
-            for (BlockConverter converter : builder.convertPredicates) {
-                if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
-                    return changeBlock(itemstack, converter.list().get().get(9), converter.sound(), worldIn, pos, player, hand);
-                }
-            }
-        }
-
+    protected InteractionResult useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult result) {
         if (!builder.blockSetType.canOpenByHand()) {
             return InteractionResult.PASS;
         } else {
@@ -188,16 +178,31 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         }
     }
 
-    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+    @Override
+    @Nonnull
+    @Deprecated
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        if (builder.convertPredicates != null) {
+            for (BlockConverter converter : builder.convertPredicates) {
+                if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
+                    return changeBlock(stack, converter.list().get().get(9), converter.sound(), worldIn, pos, player, hand);
+                }
+            }
+        }
+
+        return super.useItemOn(stack, state, worldIn, pos, player, hand, result);
+    }
+
+    private ItemInteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
         }
-        return InteractionResult.sidedSuccess(worldIn.isClientSide());
+        return ItemInteractionResult.sidedSuccess(worldIn.isClientSide());
     }
 
     @Override

@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:blue_ice"
   },
-  "result": "ornamental:blue_ice_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:blue_ice_beam"
+  }
 }

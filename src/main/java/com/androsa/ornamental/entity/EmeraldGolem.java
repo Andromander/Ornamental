@@ -22,7 +22,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class EmeraldGolem extends FlowerGolem {
 
@@ -52,7 +51,7 @@ public class EmeraldGolem extends FlowerGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.9D)
                 .add(Attributes.ATTACK_DAMAGE, 13.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -109,11 +108,6 @@ public class EmeraldGolem extends FlowerGolem {
     @Override
     protected void playStepSound(BlockPos pos, BlockState stats) {
         this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.2F;
     }
 
     @Override

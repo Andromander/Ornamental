@@ -1,7 +1,7 @@
-// 1.20.4	2024-01-11T10:18:12.9189921	Tags for minecraft:item mod id ornamental
-543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/forge/tags/items/fences.json
-1093f8414f853a1a8e40303befba8eee0df30812 data/forge/tags/items/fences/nether_brick.json
-ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/forge/tags/items/fence_gates.json
+// 1.20.6	2024-05-06T17:24:07.0250316	Tags for minecraft:item mod id ornamental
+543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/c/tags/items/fences.json
+1093f8414f853a1a8e40303befba8eee0df30812 data/c/tags/items/fences/nether_brick.json
+ca8087cab07abd6f2982e7bf69d0e1acd7a2fa26 data/c/tags/items/fence_gates.json
 47df8911aff3188df43b91b62d9a6d83001c99b8 data/minecraft/tags/items/doors.json
 543e43048ffb13d8f0a17605bcc4842dbf2ff686 data/minecraft/tags/items/fences.json
 34a17aa4a6caaeab027393a913dac027cb5120dc data/minecraft/tags/items/piglin_loved.json

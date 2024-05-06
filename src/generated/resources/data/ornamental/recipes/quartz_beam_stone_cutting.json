@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:quartz_block"
   },
-  "result": "ornamental:quartz_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:quartz_beam"
+  }
 }

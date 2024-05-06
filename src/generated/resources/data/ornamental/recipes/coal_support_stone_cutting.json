@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:coal_block"
   },
-  "result": "ornamental:coal_support"
+  "result": {
+    "count": 1,
+    "id": "ornamental:coal_support"
+  }
 }

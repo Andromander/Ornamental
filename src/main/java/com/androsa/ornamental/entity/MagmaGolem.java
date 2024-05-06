@@ -31,7 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -41,8 +40,8 @@ public class MagmaGolem extends OrnamentalGolem {
     private static final EntityDataAccessor<Integer> STATE_ID = SynchedEntityData.defineId(MagmaGolem.class, EntityDataSerializers.INT);
     private static final UUID HEATED_SPEED_UUID = UUID.fromString("82C7A9E0-8621-4284-895F-33F41F129263");
     private static final UUID COOLED_SPEED_UUID = UUID.fromString("335C7BCE-E224-443A-B8D5-888DFFF1E80E");
-    private static final AttributeModifier HEATED_SPEED_MODIFIER = new AttributeModifier(HEATED_SPEED_UUID, "Heated speed boost", 0.25D, AttributeModifier.Operation.ADDITION);
-    private static final AttributeModifier COOLED_SPEED_MODIFIER = new AttributeModifier(COOLED_SPEED_UUID, "Cooled speed nerf", -0.25D, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier HEATED_SPEED_MODIFIER = new AttributeModifier(HEATED_SPEED_UUID, "Heated speed boost", 0.25D, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier COOLED_SPEED_MODIFIER = new AttributeModifier(COOLED_SPEED_UUID, "Cooled speed nerf", -0.25D, AttributeModifier.Operation.ADD_VALUE);
     private int cooldownTimer = 20 * 20;
 
     public MagmaGolem(EntityType<MagmaGolem> type, Level level) {
@@ -54,7 +53,7 @@ public class MagmaGolem extends OrnamentalGolem {
                 .add(Attributes.MAX_HEALTH, 90.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.55D)
                 .add(Attributes.ATTACK_DAMAGE, 12.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -70,9 +69,9 @@ public class MagmaGolem extends OrnamentalGolem {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(STATE_ID, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder build) {
+        super.defineSynchedData(build);
+        build.define(STATE_ID, 0);
     }
 
     @Override
@@ -187,7 +186,7 @@ public class MagmaGolem extends OrnamentalGolem {
             this.doEnchantDamageEffects(this, target);
         }
         if (this.getState() == 1) {
-            target.setSecondsOnFire(5);
+            target.igniteForSeconds(5);
         }
 
         return flag;

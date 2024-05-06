@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:obsidian"
   },
-  "result": "ornamental:obsidian_wall"
+  "result": {
+    "count": 1,
+    "id": "ornamental:obsidian_wall"
+  }
 }

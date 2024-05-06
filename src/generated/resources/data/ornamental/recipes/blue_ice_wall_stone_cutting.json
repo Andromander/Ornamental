@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:blue_ice"
   },
-  "result": "ornamental:blue_ice_wall"
+  "result": {
+    "count": 1,
+    "id": "ornamental:blue_ice_wall"
+  }
 }

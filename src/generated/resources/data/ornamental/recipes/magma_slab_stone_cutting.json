@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 2,
   "ingredient": {
     "item": "minecraft:magma_block"
   },
-  "result": "ornamental:magma_slab"
+  "result": {
+    "count": 2,
+    "id": "ornamental:magma_slab"
+  }
 }

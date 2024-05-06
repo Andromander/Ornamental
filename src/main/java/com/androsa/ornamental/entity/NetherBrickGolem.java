@@ -49,7 +49,7 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
                 .add(Attributes.MAX_HEALTH, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -90,10 +90,5 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
     public boolean hurt(DamageSource source, float multiplier) {
         float modifier = source.is(ModTags.DamageTypes.NETHER_BRICK_GOLEM_RESIST) ? 0.5F : multiplier;
         return super.hurt(source, modifier);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.7F;
     }
 }

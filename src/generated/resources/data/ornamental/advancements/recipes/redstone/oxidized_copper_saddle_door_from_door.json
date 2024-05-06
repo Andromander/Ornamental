@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:oxidized_copper_door"
-            ]
+            "items": "ornamental:oxidized_copper_door"
           }
         ]
       },

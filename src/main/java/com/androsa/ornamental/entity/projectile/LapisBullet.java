@@ -29,7 +29,7 @@ public class LapisBullet extends ThrowableItemProjectile {
     }
 
     protected ParticleOptions makeParticle() {
-        ItemStack itemstack = this.getItemRaw();
+        ItemStack itemstack = this.getItem();
         return itemstack.isEmpty() ? ModParticles.ITEM_LAPIS.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack);
     }
 
@@ -45,8 +45,8 @@ public class LapisBullet extends ThrowableItemProjectile {
     }
 
     @Override
-    protected float getGravity() {
-        return 0.01F;
+    protected double getDefaultGravity() {
+        return 0.01D;
     }
 
     @Override

@@ -18,7 +18,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class DiamondGolem extends FlowerGolem {
 
@@ -46,7 +45,7 @@ public class DiamondGolem extends FlowerGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.45D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, 20.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 0.5F);
+                .add(Attributes.STEP_HEIGHT, 0.5F);
     }
 
     private float getAttackDamage() {
@@ -87,11 +86,6 @@ public class DiamondGolem extends FlowerGolem {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.IRON_GOLEM_STEP, 1.0F, 1.0F);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.1F;
     }
 
     @Override

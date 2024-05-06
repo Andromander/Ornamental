@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:weathered_copper"
   },
-  "result": "ornamental:weathered_copper_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:weathered_copper_beam"
+  }
 }

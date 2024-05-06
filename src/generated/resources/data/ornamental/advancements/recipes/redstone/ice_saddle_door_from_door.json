@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:ice_door"
-            ]
+            "items": "ornamental:ice_door"
           }
         ]
       },

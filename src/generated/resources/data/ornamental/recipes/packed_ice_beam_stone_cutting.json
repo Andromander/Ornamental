@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:packed_ice"
   },
-  "result": "ornamental:packed_ice_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:packed_ice_beam"
+  }
 }

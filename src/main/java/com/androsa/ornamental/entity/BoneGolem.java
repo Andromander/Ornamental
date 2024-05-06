@@ -26,7 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
@@ -57,13 +56,13 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 120.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
+                .add(Attributes.STEP_HEIGHT, 1.5F);
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(TARGETING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(TARGETING, false);
     }
 
     public boolean isTargeting() {
@@ -126,10 +125,5 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
 
     protected AbstractArrow getArrow(ItemStack stack, float multiplier) {
         return ProjectileUtil.getMobArrow(this, stack, multiplier);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.7F;
     }
 }

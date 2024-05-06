@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:redstone_trapdoor"
-            ]
+            "items": "ornamental:redstone_trapdoor"
           }
         ]
       },

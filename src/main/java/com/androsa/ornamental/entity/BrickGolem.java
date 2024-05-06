@@ -22,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
 
@@ -48,7 +47,7 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -89,10 +88,5 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
         brick.shoot(x, y + f, z, 1.6F, 12.0F);
         this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(brick);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.9F;
     }
 }

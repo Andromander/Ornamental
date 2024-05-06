@@ -23,7 +23,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.EventHooks;
 
 public class ClayGolem extends OrnamentalGolem {
@@ -51,7 +50,7 @@ public class ClayGolem extends OrnamentalGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.0F);
+                .add(Attributes.STEP_HEIGHT, 1.0F);
     }
 
     @Override
@@ -73,7 +72,7 @@ public class ClayGolem extends OrnamentalGolem {
             if (!this.level().isClientSide()) {
                 BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level());
                 brick.copyPosition(this);
-                EventHooks.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                EventHooks.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null);
                 brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());
@@ -112,10 +111,5 @@ public class ClayGolem extends OrnamentalGolem {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(SoundEvents.GRAVEL_STEP, 1.0F, 1.0F);
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.9F;
     }
 }

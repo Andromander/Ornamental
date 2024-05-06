@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:amethyst_block"
   },
-  "result": "ornamental:amethyst_pole"
+  "result": {
+    "count": 4,
+    "id": "ornamental:amethyst_pole"
+  }
 }

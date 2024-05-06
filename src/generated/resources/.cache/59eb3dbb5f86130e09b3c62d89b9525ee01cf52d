@@ -1,5 +1,5 @@
-// 1.20.4	2024-03-17T09:58:10.0123076	Loot Tables
-e27b3bfe615adf6023724a37ffe8d12da8a13a1c data/minecraft/loot_tables/blocks/dirt_path.json
+// 1.20.6	2024-05-06T17:24:07.0420469	Loot Tables
+93478a2cd8f2022dd49c4181ab8c94d43d1d6c03 data/minecraft/loot_tables/blocks/dirt_path.json
 243edf3537fea2df18fe0e8c84eacc3b81284d74 data/ornamental/loot_tables/blocks/amethyst_beam.json
 330fbaa02ab3a8475d96d5b2aa850a3c8943993a data/ornamental/loot_tables/blocks/amethyst_door.json
 2180f3aa489cfca8e33444175c6443e87ccb312a data/ornamental/loot_tables/blocks/amethyst_fence.json

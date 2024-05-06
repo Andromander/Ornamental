@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -75,7 +76,7 @@ public class PathGolem extends DirtGolem {
             if (!this.level().isClientSide()) {
                 GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
                 grass.copyPosition(this);
-                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());
@@ -90,7 +91,7 @@ public class PathGolem extends DirtGolem {
                 this.level().addFreshEntity(grass);
                 this.discard();
             }
-            itemstack.hurtAndBreak(1, player, (user) -> user.broadcastBreakEvent(hand));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
             this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         } else {

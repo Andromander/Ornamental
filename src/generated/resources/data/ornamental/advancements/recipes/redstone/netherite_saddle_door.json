@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:netherite_trapdoor"
-            ]
+            "items": "ornamental:netherite_trapdoor"
           }
         ]
       },

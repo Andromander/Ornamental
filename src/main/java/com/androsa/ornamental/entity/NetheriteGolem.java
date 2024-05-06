@@ -58,14 +58,14 @@ public class NetheriteGolem extends OrnamentalGolem {
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 20.0D)
-                .add(NeoForgeMod.STEP_HEIGHT.value(), 1.5F);
+                .add(Attributes.STEP_HEIGHT, 1.5F);
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(TARGETING, false);
-        this.entityData.define(FIREBALLS, 6);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(TARGETING, false);
+        builder.define(FIREBALLS, 6);
     }
 
     public boolean isTargeting() {
@@ -180,11 +180,6 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 2.0F;
     }
 
     @Override

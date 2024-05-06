@@ -11,7 +11,6 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -54,9 +53,9 @@ public class IceGolem extends AbstractGolem implements IShearable {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(PUMPKIN_EQUIPPED, true);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(PUMPKIN_EQUIPPED, true);
     }
 
     @Override
@@ -115,10 +114,5 @@ public class IceGolem extends AbstractGolem implements IShearable {
     public List<ItemStack> onSheared(Player player, ItemStack item, Level world, BlockPos pos, int fortune) {
         this.setPumpkinEquipped(false);
         return new ArrayList<>();
-    }
-
-    @Override
-    public float getEyeHeight(Pose pose) {
-        return 1.7F;
     }
 }

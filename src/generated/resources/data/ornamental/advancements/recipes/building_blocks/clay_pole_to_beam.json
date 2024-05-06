@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:clay_pole"
-            ]
+            "items": "ornamental:clay_pole"
           }
         ]
       },

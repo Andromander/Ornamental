@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 4,
   "ingredient": {
     "item": "minecraft:redstone_block"
   },
-  "result": "ornamental:redstone_beam"
+  "result": {
+    "count": 4,
+    "id": "ornamental:redstone_beam"
+  }
 }

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:bone_slab"
-            ]
+            "items": "ornamental:bone_slab"
           }
         ]
       },

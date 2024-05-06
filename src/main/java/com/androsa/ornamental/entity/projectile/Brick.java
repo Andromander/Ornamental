@@ -28,7 +28,7 @@ public class Brick extends ThrowableItemProjectile {
     }
 
     protected ParticleOptions makeParticle() {
-        ItemStack itemstack = this.getItemRaw();
+        ItemStack itemstack = this.getItem();
         return itemstack.isEmpty() ? ModParticles.ITEM_BRICK.get() : new ItemParticleOption(ParticleTypes.ITEM, itemstack);
     }
 

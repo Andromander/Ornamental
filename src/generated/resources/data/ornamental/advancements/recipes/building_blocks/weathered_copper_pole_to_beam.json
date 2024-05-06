@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:weathered_copper_pole"
-            ]
+            "items": "ornamental:weathered_copper_pole"
           }
         ]
       },

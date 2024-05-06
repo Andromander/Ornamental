@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:bricks"
   },
-  "result": "ornamental:brick_support"
+  "result": {
+    "count": 1,
+    "id": "ornamental:brick_support"
+  }
 }

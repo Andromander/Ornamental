@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "ornamental:packed_ice_pole"
-            ]
+            "items": "ornamental:packed_ice_pole"
           }
         ]
       },

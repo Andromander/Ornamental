@@ -6,10 +6,12 @@ import com.androsa.ornamental.data.provider.GolemLootTableProvider;
 import com.androsa.ornamental.data.provider.OrnamentLootTableProvider;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.flag.FeatureFlags;
@@ -21,24 +23,24 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OrnamentalLootTables extends LootTableProvider {
 
-    public OrnamentalLootTables(PackOutput output) {
+    public OrnamentalLootTables(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(BlockTables::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(VanillaBlocks::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(EntityTables::new, LootContextParamSets.ENTITY)
-        ));
+        ), provider);
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> tableMap, ValidationContext tracker) { }
+    protected void validate(WritableRegistry<LootTable> registry, ValidationContext context, ProblemReporter.Collector collector) { }
 
     public static class BlockTables extends OrnamentLootTableProvider {
 
