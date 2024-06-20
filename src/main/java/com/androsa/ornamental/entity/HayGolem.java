@@ -46,7 +46,7 @@ public class HayGolem extends OrnamentalGolem {
     public void aiStep() {
         super.aiStep();
 
-        if (!EventHooks.getMobGriefingEvent(this.level(), this)) {
+        if (!EventHooks.canEntityGrief(this.level(), this)) {
             return;
         }
 

@@ -67,7 +67,7 @@ public class CoalGolem extends OrnamentalGolem {
             this.explode();
         }
 
-        if (!EventHooks.getMobGriefingEvent(this.level(), this)) {
+        if (!EventHooks.canEntityGrief(this.level(), this)) {
             return;
         }
 

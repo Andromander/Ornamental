@@ -160,7 +160,7 @@ public class GrassGolem extends DirtGolem {
 
         if (!this.level().isClientSide()) {
             entity.copyPosition(this);
-            EventHooks.onFinalizeSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null);
+            EventHooks.finalizeMobSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());

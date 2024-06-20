@@ -106,12 +106,12 @@ public class IceGolem extends AbstractGolem implements IShearable {
     }
 
     @Override
-    public boolean isShearable(ItemStack item, Level world, BlockPos pos) {
+    public boolean isShearable(Player player, ItemStack item, Level world, BlockPos pos) {
         return this.isPumpkinEquipped();
     }
 
     @Override
-    public List<ItemStack> onSheared(Player player, ItemStack item, Level world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(Player player, ItemStack item, Level world, BlockPos pos) {
         this.setPumpkinEquipped(false);
         return new ArrayList<>();
     }

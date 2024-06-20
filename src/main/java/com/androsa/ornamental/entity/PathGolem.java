@@ -76,7 +76,7 @@ public class PathGolem extends DirtGolem {
             if (!this.level().isClientSide()) {
                 GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
                 grass.copyPosition(this);
-                EventHooks.onFinalizeSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null);
+                EventHooks.finalizeMobSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());

@@ -72,7 +72,7 @@ public class ClayGolem extends OrnamentalGolem {
             if (!this.level().isClientSide()) {
                 BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level());
                 brick.copyPosition(this);
-                EventHooks.onFinalizeSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null);
+                EventHooks.finalizeMobSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null);
                 brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());
