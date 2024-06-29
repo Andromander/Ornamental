@@ -441,7 +441,7 @@ public class OrnamentBeam extends Block implements SimpleWaterloggedBlock, Ornam
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
         return ItemInteractionResult.SUCCESS;
     }

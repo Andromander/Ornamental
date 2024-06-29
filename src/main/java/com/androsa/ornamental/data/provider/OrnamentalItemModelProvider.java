@@ -15,14 +15,14 @@ import java.util.function.Supplier;
 
 public abstract class OrnamentalItemModelProvider extends ItemModelProvider {
 
-    public static final ResourceLocation TRANSLUCENT = new ResourceLocation("translucent");
+    public static final ResourceLocation TRANSLUCENT = ResourceLocation.withDefaultNamespace("translucent");
 
     public OrnamentalItemModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
         super(output, modid, helper);
     }
 
     public ResourceLocation ornamentLoc(String path) {
-        return new ResourceLocation(OrnamentalMod.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, path);
     }
 
     public String blockName(Supplier<? extends Block> block) {

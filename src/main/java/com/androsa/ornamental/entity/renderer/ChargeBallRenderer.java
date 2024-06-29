@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
 public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> {
-    private static final ResourceLocation LOCATION = new ResourceLocation(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
+    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
     private static final RenderType RENDER = RenderType.entityCutoutNoCull(LOCATION);
 
     public ChargeBallRenderer(EntityRendererProvider.Context context) {
@@ -45,13 +45,12 @@ public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> 
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int light, float x, int y, int texX, int texY) {
-        consumer.vertex(pose, x - 0.5F, y - 0.25F, 0.0F)
-                .color(255, 255, 255, 255)
-                .uv(texX, texY)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(light)
-                .normal(pose, 0.0F, 1.0F, 0.0F)
-                .endVertex();
+        consumer.addVertex(pose, x - 0.5F, y - 0.25F, 0.0F)
+                .setColor(255, 255, 255, 255)
+                .setUv(texX, texY)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(light)
+                .setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
 
     @Override

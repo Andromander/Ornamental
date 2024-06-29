@@ -37,6 +37,6 @@ public class ModelLocations {
     }
 
     private static ModelLayerLocation modelLocation(String entity, String layer) {
-        return new ModelLayerLocation(new ResourceLocation(OrnamentalMod.MODID, entity), layer);
+        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, entity), layer);
     }
 }

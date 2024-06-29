@@ -39,6 +39,6 @@ public class MagmaGolemRenderer<T extends MagmaGolem, M extends MagmaGolemModel<
     }
 
     private static ResourceLocation getLocation(String path) {
-        return new ResourceLocation(OrnamentalMod.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, path);
     }
 }

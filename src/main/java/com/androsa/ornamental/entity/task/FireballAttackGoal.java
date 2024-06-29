@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.phys.Vec3;
 
 //VanillaCopy of GhastEntity.FireballAttackGoal, modified for Quartz Golem
 public class FireballAttackGoal extends Goal {
@@ -35,11 +36,9 @@ public class FireballAttackGoal extends Goal {
             ++this.attackTimer;
 
             if (this.attackTimer == 20) {
-                double x = target.getX() - this.parentEntity.getX();
-                double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
-                double z = target.getZ() - this.parentEntity.getZ();
+                Vec3 pos = new Vec3(target.getX() - this.parentEntity.getX(), target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D)), target.getZ() - this.parentEntity.getZ());
                 world.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, parentEntity.blockPosition(), 0);
-                SmallFireball fireball = new SmallFireball(world, this.parentEntity, x, y, z);
+                SmallFireball fireball = new SmallFireball(world, this.parentEntity, pos);
                 fireball.setPos(this.parentEntity.getX(), this.parentEntity.getY(0.5D) + 0.5D, fireball.getZ());
                 world.addFreshEntity(fireball);
                 this.attackTimer = -40;

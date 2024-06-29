@@ -24,6 +24,6 @@ public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGol
         if (entityName == null) {
             entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).getPath();
         }
-        return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
+        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
 }

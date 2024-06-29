@@ -27,11 +27,11 @@ public class RemapHandler {
      */
     private static void remapRegistry(DeferredRegister<?> registry) {
         for (String name : registry.getEntries().stream().map((f) -> f.getKey().location().getPath()).toList()) {
-            registry.addAlias(new ResourceLocation("nifty", name), new ResourceLocation(OrnamentalMod.MODID, name));
+            registry.addAlias(ResourceLocation.fromNamespaceAndPath("nifty", name), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
 
             if (name.contains("dirt_path")) {
                 String oldname = name.replace("dirt", "grass");
-                registry.addAlias(new ResourceLocation(OrnamentalMod.MODID, oldname), new ResourceLocation(OrnamentalMod.MODID, name));
+                registry.addAlias(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
             }
         }
     }

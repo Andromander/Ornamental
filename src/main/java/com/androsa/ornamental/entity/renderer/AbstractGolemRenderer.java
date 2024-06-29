@@ -21,6 +21,6 @@ public class AbstractGolemRenderer<T extends OrnamentalGolem, M extends Abstract
         if (entityName == null) {
             entityName = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).getPath();
         }
-        return new ResourceLocation(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
+        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
 }

@@ -26,10 +26,10 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     private final OrnamentalBlockModelProvider blockModels;
     private final String parentID;
 
-    public static final ResourceLocation SOLID = new ResourceLocation("solid");
-    public static final ResourceLocation TRANSLUCENT = new ResourceLocation("translucent");
-    public static final ResourceLocation CUTOUT = new ResourceLocation("cutout");
-    public static final ResourceLocation CUTOUT_MIPPED = new ResourceLocation("cutout_mipped");
+    public static final ResourceLocation SOLID = ResourceLocation.withDefaultNamespace("solid");
+    public static final ResourceLocation TRANSLUCENT = ResourceLocation.withDefaultNamespace("translucent");
+    public static final ResourceLocation CUTOUT = ResourceLocation.withDefaultNamespace("cutout");
+    public static final ResourceLocation CUTOUT_MIPPED = ResourceLocation.withDefaultNamespace("cutout_mipped");
 
     public OrnamentalBlockStateProvider(PackOutput output, String modid, String parent, ExistingFileHelper helper) {
         super(output, modid, helper);
@@ -66,7 +66,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     protected ResourceLocation locParent(String name) {
-        return new ResourceLocation(parentLoc(), "block/" + name);
+        return ResourceLocation.fromNamespaceAndPath(parentLoc(), "block/" + name);
     }
 
     protected String getKey(Supplier<? extends Block> block) {
@@ -611,41 +611,41 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
 
     public void supportBlock(Supplier<? extends OrnamentSupport> block, ModelFile base, ModelFile basetop, ModelFile vertical, ModelFile verticaltop, ModelFile horizontalX, ModelFile horizontalXtop, ModelFile horizontalZ, ModelFile horizontalZtop, boolean topmodels) {
         MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
-        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_LEFT, false, 0, topmodels);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_RIGHT, false, 90, topmodels);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_RIGHT, false, 180, topmodels);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_LEFT, false, 270, topmodels);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_LEFT, true, 0, topmodels);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_RIGHT, true, 90, topmodels);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_RIGHT, true, 180, topmodels);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_LEFT, true, 270, topmodels);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, false, 0, topmodels);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, false, 90, topmodels);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, false, 180, topmodels);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, false, 270, topmodels);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, true, 0, topmodels);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, true, 90, topmodels);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, true, 180, topmodels);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, true, 270, topmodels);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, false, 0, topmodels);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, false, 90, topmodels);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, false, 180, topmodels);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, false, 270, topmodels);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, true, 0, topmodels);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, true, 90, topmodels);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, true, 180, topmodels);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, true, 270, topmodels);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, false, 0, topmodels);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, false, 90, topmodels);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, false, 180, topmodels);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, false, 270, topmodels);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, true, 0, topmodels);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, true, 90, topmodels);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, true, 180, topmodels);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, true, 270, topmodels);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_LEFT, false, 0);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_RIGHT, false, 90);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_RIGHT, false, 180);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_LEFT, false, 270);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_LEFT, true, 0);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_RIGHT, true, 90);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_RIGHT, true, 180);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_LEFT, true, 270);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, false, 0);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, false, 90);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, false, 180);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, false, 270);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, true, 0);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, true, 90);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, true, 180);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, true, 270);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, false, 0);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, false, 90);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, false, 180);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, false, 270);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, true, 0);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, true, 90);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, true, 180);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, true, 270);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, false, 0);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, false, 90);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, false, 180);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, false, 270);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, true, 0);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, true, 90);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, true, 180);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, true, 270);
     }
 
-    public void supportModelBase(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, boolean upper, int y, boolean topmodel) {
+    public void supportModelBase(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, boolean upper, int y) {
         builder.part()
                 .modelFile(model)
                 .rotationY(y)
@@ -655,7 +655,7 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
                 .condition(OrnamentSupport.UPPER_HALF, upper);
     }
 
-    public void supportModelConnect(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, BooleanProperty connect, boolean upper, int y, boolean topmodel) {
+    public void supportModelConnect(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, BooleanProperty connect, boolean upper, int y) {
         builder.part()
                 .modelFile(model)
                 .rotationY(y)

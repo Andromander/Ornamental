@@ -38,6 +38,6 @@ public class CopperGolemRenderer<T extends CopperGolem, M extends CopperGolemMod
     }
 
     private static ResourceLocation getLocation(String path) {
-        return new ResourceLocation(OrnamentalMod.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, path);
     }
 }

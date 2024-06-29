@@ -91,7 +91,7 @@ public class PathGolem extends DirtGolem {
                 this.level().addFreshEntity(grass);
                 this.discard();
             }
-            itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
+            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
             this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         } else {

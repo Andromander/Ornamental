@@ -124,6 +124,6 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
     }
 
     protected AbstractArrow getArrow(ItemStack stack, float multiplier) {
-        return ProjectileUtil.getMobArrow(this, stack, multiplier);
+        return ProjectileUtil.getMobArrow(this, stack, multiplier, ItemStack.EMPTY);
     }
 }

@@ -1,5 +1,6 @@
 package com.androsa.ornamental.data.provider;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -16,8 +17,8 @@ import java.util.function.Supplier;
 
 public abstract class GolemLootTableProvider extends EntityLootSubProvider {
 
-    protected GolemLootTableProvider(FeatureFlagSet feature) {
-        super(feature);
+    protected GolemLootTableProvider(FeatureFlagSet feature, HolderLookup.Provider provider) {
+        super(feature, provider);
     }
 
     public void add(Supplier<? extends EntityType<?>> entity, LootTable.Builder table) {

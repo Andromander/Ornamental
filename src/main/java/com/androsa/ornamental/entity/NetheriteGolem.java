@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -22,9 +23,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 
@@ -129,10 +130,12 @@ public class NetheriteGolem extends OrnamentalGolem {
         this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
-        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
+        DamageSource source = this.damageSources().mobAttack(this);
+        boolean flag = target.hurt(source, multiplier);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
-            this.doEnchantDamageEffects(this, target);
+            if (this.level() instanceof ServerLevel server)
+                EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);

@@ -447,7 +447,7 @@ public class OrnamentBuilders {
             .doPostProcessing()
             .doEmissiveRendering()
             .setCanEntitySpawn((state, reader, pos, type) -> type.fireImmune())
-            .floorHazard(new FloorHazard((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity living && !EnchantmentHelper.hasFrostWalker(living), level -> level.damageSources().hotFloor(), 1.0F))
+            .floorHazard(new FloorHazard((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity, level -> level.damageSources().hotFloor(), 1.0F))
             .bubbleUnderwater(20, true, true)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.INFINIBURN_OVERWORLD, OrnamentalBlockTags.PICKAXE_TOOL)));
 

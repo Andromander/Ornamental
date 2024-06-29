@@ -14,6 +14,7 @@ import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nonnull;
 
@@ -23,8 +24,8 @@ public class ChargeBall extends AbstractHurtingProjectile {
         super(entity, level);
     }
 
-    public ChargeBall(Level level, LivingEntity owner, double x, double y, double z) {
-        super(ModEntities.CHARGE_BALL.get(), owner, x, y, z, level);
+    public ChargeBall(Level level, LivingEntity owner, Vec3 pos) {
+        super(ModEntities.CHARGE_BALL.get(), owner, pos, level);
     }
 
     @Override

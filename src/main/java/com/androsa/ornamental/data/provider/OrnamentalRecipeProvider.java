@@ -30,7 +30,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
     }
 
     private ResourceLocation loc(String name) {
-        return new ResourceLocation(modID, name);
+        return ResourceLocation.fromNamespaceAndPath(modID, name);
     }
 
     public <T extends Block> Optional<ManagerEntry<? extends T>> entry(Supplier<T> block, boolean override) {

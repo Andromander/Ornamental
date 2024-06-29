@@ -360,5 +360,5 @@ public class ModBlocks {
     public static final Supplier<OrnamentSupport> magma_support = HELPER.support(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentSupport> calcite_support = HELPER.support(OrnamentBuilders.CALCITE);
 
-    public static final Supplier<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BUBBLE_COLUMN).noLootTable()));
+    public static final Supplier<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_COLUMN)));
 }

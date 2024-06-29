@@ -3,6 +3,7 @@ package com.androsa.ornamental.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.*;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -80,10 +82,12 @@ public class EmeraldGolem extends FlowerGolem {
         this.level().broadcastEntityEvent(this, (byte)4);
         float attack = this.getAttackDamage();
         float mul = attack > 0.0F ? attack / 2.0F + (float)this.random.nextInt((int)attack) : 0.0F;
-        boolean flag = target.hurt(this.damageSources().mobAttack(this), mul);
+        DamageSource source = this.damageSources().mobAttack(this);
+        boolean flag = target.hurt(source, mul);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
-            this.doEnchantDamageEffects(this, target);
+            if (this.level() instanceof ServerLevel server)
+                EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);

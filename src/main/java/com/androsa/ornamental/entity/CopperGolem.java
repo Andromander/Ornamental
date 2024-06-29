@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
@@ -270,14 +271,16 @@ public class CopperGolem extends OrnamentalGolem {
         }
         if (isCharged())
             multiplier *= 2.0F;
-        boolean flag = target.hurt(this.damageSources().mobAttack(this), multiplier);
+        DamageSource source = this.damageSources().mobAttack(this);
+        boolean flag = target.hurt(source, multiplier);
 
         if (flag) {
             double x = isCharged() ? Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) : 0.0D;
             double z = isCharged() ? -Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) : 0.0D;
             double y = isCharged() ? 0.8D : 0.5D;
             target.setDeltaMovement(target.getDeltaMovement().add(x, y, z));
-            this.doEnchantDamageEffects(this, target);
+            if (this.level() instanceof ServerLevel server)
+                EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
@@ -296,7 +299,7 @@ public class CopperGolem extends OrnamentalGolem {
                 setErosionTimer(1200);
                 setErosion(getErosion() - 1);
                 this.level().playSound(player, blockPosition(), SoundEvents.AXE_SCRAPE, getSoundSource(), 1.0F, 1.0F);
-                itemstack.hurtAndBreak(1, player, LivingEntity.getEquipmentSlotForItem(player.getItemInHand(hand)));
+                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
         } else if (itemstack.is(Items.HONEYCOMB)) {
@@ -389,12 +392,9 @@ public class CopperGolem extends OrnamentalGolem {
 
                 if (this.attackTimer == 20) {
                     Vec3 vec3 = this.parentEntity.getViewVector(1.0F);
-                    double x = target.getX() - (this.parentEntity.getX() + vec3.x * 2.0D);
-                    double y = target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D));
-                    double z = target.getZ() - (this.parentEntity.getZ() + vec3.z * 2.0D);
-
+                    Vec3 pos = new Vec3(target.getX() - (this.parentEntity.getX() + vec3.x * 2.0D), target.getY(0.5D) - (0.5D + this.parentEntity.getY(0.5D)), target.getZ() - (this.parentEntity.getZ() + vec3.z * 2.0D));
                     world.levelEvent(null, LevelEvent.SOUND_BLAZE_FIREBALL, parentEntity.blockPosition(), 0);
-                    ChargeBall chargeball = new ChargeBall(world, this.parentEntity, x, y, z);
+                    ChargeBall chargeball = new ChargeBall(world, this.parentEntity, pos.normalize());
                     chargeball.setPos(chargeball.getX() + vec3.x * 2.0D, this.parentEntity.getY(0.5D) + 0.5D, chargeball.getZ() + vec3.z * 2.0D);
                     world.addFreshEntity(chargeball);
                     parentEntity.setCharges(parentEntity.getCharges() - 1);

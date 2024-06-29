@@ -262,6 +262,6 @@ public abstract class OrnamentalBlockModelProvider extends BlockModelProvider {
     }
 
     private BlockModelBuilder parent(String name, String parent) {
-        return withExistingParent(name, new ResourceLocation(OrnamentalMod.MODID, "block/util/" + parent));
+        return withExistingParent(name, ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/" + parent));
     }
 }

@@ -44,8 +44,8 @@ public class OrnamentalLootTables extends LootTableProvider {
 
     public static class BlockTables extends OrnamentLootTableProvider {
 
-        protected BlockTables() {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        protected BlockTables(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
         }
 
         @Override
@@ -397,8 +397,8 @@ public class OrnamentalLootTables extends LootTableProvider {
 
     public static class VanillaBlocks extends BlockLootSubProvider {
 
-        protected VanillaBlocks() {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+        protected VanillaBlocks(HolderLookup.Provider provider) {
+            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
         }
 
         @Override
@@ -442,8 +442,8 @@ public class OrnamentalLootTables extends LootTableProvider {
                 ModEntities.CALCITE_GOLEM.get()
         );
 
-        protected EntityTables() {
-            super(FeatureFlags.REGISTRY.allFlags());
+        protected EntityTables(HolderLookup.Provider provider) {
+            super(FeatureFlags.REGISTRY.allFlags(), provider);
         }
 
         @Override

@@ -1,5 +1,6 @@
 package com.androsa.ornamental.entity;
 
+import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.task.HotMeleeAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -7,6 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,19 +32,18 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
-
 public class MagmaGolem extends OrnamentalGolem {
 
     private static final EntityDataAccessor<Integer> STATE_ID = SynchedEntityData.defineId(MagmaGolem.class, EntityDataSerializers.INT);
-    private static final UUID HEATED_SPEED_UUID = UUID.fromString("82C7A9E0-8621-4284-895F-33F41F129263");
-    private static final UUID COOLED_SPEED_UUID = UUID.fromString("335C7BCE-E224-443A-B8D5-888DFFF1E80E");
-    private static final AttributeModifier HEATED_SPEED_MODIFIER = new AttributeModifier(HEATED_SPEED_UUID, "Heated speed boost", 0.25D, AttributeModifier.Operation.ADD_VALUE);
-    private static final AttributeModifier COOLED_SPEED_MODIFIER = new AttributeModifier(COOLED_SPEED_UUID, "Cooled speed nerf", -0.25D, AttributeModifier.Operation.ADD_VALUE);
+    private static final ResourceLocation HEATED_SPEED = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "heated");
+    private static final ResourceLocation COOLED_SPEED = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "cooled");
+    private static final AttributeModifier HEATED_SPEED_MODIFIER = new AttributeModifier(HEATED_SPEED, 0.25D, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier COOLED_SPEED_MODIFIER = new AttributeModifier(COOLED_SPEED, -0.25D, AttributeModifier.Operation.ADD_VALUE);
     private int cooldownTimer = 20 * 20;
 
     public MagmaGolem(EntityType<MagmaGolem> type, Level level) {
@@ -96,20 +98,20 @@ public class MagmaGolem extends OrnamentalGolem {
             state = 0;
         }
         if (state == 0 || state == 2) {
-            if (instance.hasModifier(HEATED_SPEED_MODIFIER)) {
-                instance.removeModifier(HEATED_SPEED_UUID);
+            if (instance.hasModifier(HEATED_SPEED)) {
+                instance.removeModifier(HEATED_SPEED);
             }
         } else {
-            if (!instance.hasModifier(HEATED_SPEED_MODIFIER)) {
+            if (!instance.hasModifier(HEATED_SPEED)) {
                 instance.addTransientModifier(HEATED_SPEED_MODIFIER);
             }
         }
         if (state == 0 || state == 1) {
-            if (instance.hasModifier(COOLED_SPEED_MODIFIER)) {
-                instance.removeModifier(COOLED_SPEED_UUID);
+            if (instance.hasModifier(COOLED_SPEED)) {
+                instance.removeModifier(COOLED_SPEED);
             }
         } else {
-            if (!instance.hasModifier(COOLED_SPEED_MODIFIER)) {
+            if (!instance.hasModifier(COOLED_SPEED)) {
                 instance.addTransientModifier(COOLED_SPEED_MODIFIER);
             }
         }
@@ -180,10 +182,12 @@ public class MagmaGolem extends OrnamentalGolem {
     public boolean doHurtTarget(Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
-        boolean flag = target.hurt(this.damageSources().mobAttack(this), 0.0F);
+        DamageSource source = this.damageSources().mobAttack(this);
+        boolean flag = target.hurt(source, 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
-            this.doEnchantDamageEffects(this, target);
+            if (this.level() instanceof ServerLevel server)
+                EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
         if (this.getState() == 1) {
             target.igniteForSeconds(5);
