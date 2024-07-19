@@ -43,7 +43,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -304,7 +304,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
             }
         }
 
-        if (stack.canPerformAction(ToolActions.AXE_STRIP)) {
+        if (stack.canPerformAction(ItemAbilities.AXE_STRIP)) {
             if (editBlock(state, level, pos, switch (result.getDirection().getAxis()) {
                 case X -> EW_CONNECT;
                 case Y -> TB_CONNECT;
