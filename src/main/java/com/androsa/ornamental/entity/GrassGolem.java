@@ -115,25 +115,28 @@ public class GrassGolem extends DirtGolem {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
 
-        if (item instanceof BlockItem blockitem) {
-            if (blockitem.getBlock().defaultBlockState().is(ModTags.Blocks.GRASS_GOLEM_FLOWER_PLANTABLE) && this.getFlower() == null) {
+        switch (item) {
+            case BlockItem blockitem when blockitem.getBlock().defaultBlockState().is(ModTags.Blocks.GRASS_GOLEM_FLOWER_PLANTABLE) && this.getFlower() == null -> {
                 this.setFlower(blockitem.getBlock().defaultBlockState());
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
             }
-        } else if (item instanceof ShovelItem) {
-            PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level());
-            addFreshEntity(path);
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-            this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-        } else if (item instanceof HoeItem) {
-            DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level());
-            addFreshEntity(dirt);
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
-            this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-        } else {
-            return this.repairGolem(player, hand);
+            case ShovelItem shovel -> {
+                PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level());
+                addFreshEntity(path);
+                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            case HoeItem hoe -> {
+                DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level());
+                addFreshEntity(dirt);
+                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            default -> {
+                return this.repairGolem(player, hand);
+            }
         }
 
         return InteractionResult.PASS;
