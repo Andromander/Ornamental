@@ -43,13 +43,21 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentWall::new));
 
-    protected final Map<BlockState, VoxelShape> collisionShapeByIndex = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
-    protected final Map<BlockState, VoxelShape> shapeByIndex = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
+    protected final Map<BlockState, VoxelShape> pathShapes;
+    protected final Map<BlockState, VoxelShape> pathCollisionShapes;
     private final OrnamentBuilder builder;
 
     public OrnamentWall(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
+
+        if (builder.pathShape) {
+            this.pathShapes = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
+            this.pathCollisionShapes = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
+        } else {
+            this.pathShapes = Map.of();
+            this.pathCollisionShapes = Map.of();
+        }
     }
 
     @Override
@@ -117,13 +125,13 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
     @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.shapeByIndex.get(state) : super.getShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.pathShapes.get(state) : super.getShape(state, worldIn, pos, context);
     }
 
     @Override
     @Nonnull
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.collisionShapeByIndex.get(state) : super.getCollisionShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.pathCollisionShapes.get(state) : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
