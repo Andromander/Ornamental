@@ -2,8 +2,6 @@ package com.androsa.ornamental.blocks;
 
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -35,8 +33,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 public class OrnamentWall extends WallBlock implements OrnamentalBlock {
@@ -46,8 +44,8 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentWall::new));
 
-    protected Map<BlockState, VoxelShape> pathShapes = Maps.newHashMap();
-    protected Map<BlockState, VoxelShape> pathCollisionShapes = Maps.newHashMap();
+    protected final Map<BlockState, VoxelShape> pathShapes = new ConcurrentHashMap<>();
+    protected final Map<BlockState, VoxelShape> pathCollisionShapes = new ConcurrentHashMap<>();
     private final OrnamentBuilder builder;
 
     public OrnamentWall(OrnamentBuilder builder, Properties props) {
