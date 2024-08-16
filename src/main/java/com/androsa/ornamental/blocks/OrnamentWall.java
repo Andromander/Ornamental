@@ -3,6 +3,7 @@ package com.androsa.ornamental.blocks;
 import com.androsa.ornamental.builder.BlockConverter;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WallSide;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -33,6 +35,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -43,21 +46,13 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentWall::new));
 
-    protected final Map<BlockState, VoxelShape> pathShapes;
-    protected final Map<BlockState, VoxelShape> pathCollisionShapes;
+    protected Map<BlockState, VoxelShape> pathShapes = Maps.newHashMap();
+    protected Map<BlockState, VoxelShape> pathCollisionShapes = Maps.newHashMap();
     private final OrnamentBuilder builder;
 
     public OrnamentWall(OrnamentBuilder builder, Properties props) {
         super(props);
         this.builder = builder;
-
-        if (builder.pathShape) {
-            this.pathShapes = this.makeShapes(4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F);
-            this.pathCollisionShapes = this.makeShapes(4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F);
-        } else {
-            this.pathShapes = Map.of();
-            this.pathCollisionShapes = Map.of();
-        }
     }
 
     @Override
@@ -70,8 +65,7 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
         return builder;
     }
 
-    //Begin WallBlock vanillacopy
-    private Map<BlockState, VoxelShape> makeShapes(float topshape, float offset, float yUpMax, float yMin, float yLowMax, float yTallMax) {
+    private VoxelShape createShapes(BlockState state, float topshape, float offset, float yUpMax, float yMin, float yLowMax, float yTallMax) {
         float topmin = 8.0F - topshape;
         float topmax = 8.0F + topshape;
         float minoff = 8.0F - offset;
@@ -85,53 +79,39 @@ public class OrnamentWall extends WallBlock implements OrnamentalBlock {
         VoxelShape southtall = Block.box(minoff, yMin, minoff, maxoff, yTallMax, 16.0D);
         VoxelShape westtall = Block.box(0.0D, yMin, minoff, maxoff, yTallMax, maxoff);
         VoxelShape easttall = Block.box(minoff, yMin, minoff, 16.0D, yTallMax, maxoff);
-        ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
 
-        for (Boolean upstate : UP.getPossibleValues()) {
-            for (WallSide eastheight : EAST_WALL.getPossibleValues()) {
-                for (WallSide northheight : NORTH_WALL.getPossibleValues()) {
-                    for (WallSide westheight : WEST_WALL.getPossibleValues()) {
-                        for (WallSide southheight : SOUTH_WALL.getPossibleValues()) {
-                            VoxelShape totalshape = Shapes.empty();
-                            totalshape = applyWallShape(totalshape, eastheight, eastlow, easttall);
-                            totalshape = applyWallShape(totalshape, westheight, westlow, westtall);
-                            totalshape = applyWallShape(totalshape, northheight, northlow, northtall);
-                            totalshape = applyWallShape(totalshape, southheight, southlow, southtall);
-                            if (upstate) {
-                                totalshape = Shapes.or(totalshape, upshape);
-                            }
-
-                            BlockState blockstate = this.defaultBlockState().setValue(UP, upstate).setValue(EAST_WALL, eastheight).setValue(WEST_WALL, westheight).setValue(NORTH_WALL, northheight).setValue(SOUTH_WALL, southheight);
-                            builder.put(blockstate.setValue(WATERLOGGED, false), totalshape);
-                            builder.put(blockstate.setValue(WATERLOGGED, true), totalshape);
-                        }
-                    }
-                }
-            }
+        VoxelShape total = Shapes.empty();
+        if (state.getValue(UP)) {
+            total = Shapes.or(total, upshape);
         }
+        total = applyWallShape(state, total, EAST_WALL, eastlow, easttall);
+        total = applyWallShape(state, total, WEST_WALL, westlow, westtall);
+        total = applyWallShape(state, total, NORTH_WALL, northlow, northtall);
+        total = applyWallShape(state, total, SOUTH_WALL, southlow, southtall);
 
-        return builder.build();
+        return total;
     }
 
-    private static VoxelShape applyWallShape(VoxelShape base, WallSide wallheight, VoxelShape lowshape, VoxelShape tallshape) {
-        return switch (wallheight) {
+    private static VoxelShape applyWallShape(BlockState state, VoxelShape base, EnumProperty<WallSide> wallheight, VoxelShape lowshape, VoxelShape tallshape) {
+        return switch (state.getValue(wallheight)) {
             case TALL -> Shapes.or(base, tallshape);
             case LOW -> Shapes.or(base, lowshape);
             default -> base;
         };
     }
-    //End WallBlock vanillacopy
 
     @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.pathShapes.get(state) : super.getShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.pathShapes.computeIfAbsent(state, s -> createShapes(s, 4.0F, 3.0F, 15.0F, 0.0F, 13.0F, 15.0F))
+                : super.getShape(state, worldIn, pos, context);
     }
 
     @Override
     @Nonnull
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.pathCollisionShapes.get(state) : super.getCollisionShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.pathCollisionShapes.computeIfAbsent(state, s -> createShapes(s, 4.0F, 3.0F, 23.0F, 0.0F, 23.0F, 25.0F))
+                : super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
