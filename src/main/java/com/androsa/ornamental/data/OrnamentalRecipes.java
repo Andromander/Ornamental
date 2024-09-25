@@ -9,7 +9,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class OrnamentalRecipes extends OrnamentalRecipeProvider {
@@ -20,365 +19,387 @@ public class OrnamentalRecipes extends OrnamentalRecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.IRON_BLOCK, Items.IRON_INGOT, true,
-                entry(ModBlocks.iron_stairs, false),
-                entry(ModBlocks.iron_slab, false),
-                entry(ModBlocks.iron_fence, false),
-                entry(() -> Blocks.IRON_TRAPDOOR, false), false,
-                entry(ModBlocks.iron_fence_gate, false),
-                entry(() -> Blocks.IRON_DOOR, false),
-                entry(ModBlocks.iron_pole, false),
-                entry(ModBlocks.iron_beam, false),
-                entry(ModBlocks.iron_wall, false),
-                entry(ModBlocks.iron_saddle_door, false),
-                entry(ModBlocks.iron_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.GOLD_BLOCK, Items.GOLD_INGOT, true,
-                entry(ModBlocks.gold_stairs, false),
-                entry(ModBlocks.gold_slab, false),
-                entry(ModBlocks.gold_fence, false),
-                entry(ModBlocks.gold_trapdoor, false), false,
-                entry(ModBlocks.gold_fence_gate, false),
-                entry(ModBlocks.gold_door, false),
-                entry(ModBlocks.gold_pole, false),
-                entry(ModBlocks.gold_beam, false),
-                entry(ModBlocks.gold_wall, false),
-                entry(ModBlocks.gold_saddle_door, false),
-                entry(ModBlocks.gold_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIAMOND_BLOCK, Items.DIAMOND, true,
-                entry(ModBlocks.diamond_stairs, false),
-                entry(ModBlocks.diamond_slab, false),
-                entry(ModBlocks.diamond_fence, false),
-                entry(ModBlocks.diamond_trapdoor, false), false,
-                entry(ModBlocks.diamond_fence_gate, false),
-                entry(ModBlocks.diamond_door, false),
-                entry(ModBlocks.diamond_pole, false),
-                entry(ModBlocks.diamond_beam, false),
-                entry(ModBlocks.diamond_wall, false),
-                entry(ModBlocks.diamond_saddle_door, false),
-                entry(ModBlocks.diamond_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.EMERALD_BLOCK, Items.EMERALD, true,
-                entry(ModBlocks.emerald_stairs, false),
-                entry(ModBlocks.emerald_slab, false),
-                entry(ModBlocks.emerald_fence, false),
-                entry(ModBlocks.emerald_trapdoor, false), false,
-                entry(ModBlocks.emerald_fence_gate, false),
-                entry(ModBlocks.emerald_door, false),
-                entry(ModBlocks.emerald_pole, false),
-                entry(ModBlocks.emerald_beam, false),
-                entry(ModBlocks.emerald_wall, false),
-                entry(ModBlocks.emerald_saddle_door, false),
-                entry(ModBlocks.emerald_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI, true,
-                entry(ModBlocks.lapis_stairs, false),
-                entry(ModBlocks.lapis_slab, false),
-                entry(ModBlocks.lapis_fence, false),
-                entry(ModBlocks.lapis_trapdoor, false), false,
-                entry(ModBlocks.lapis_fence_gate, false),
-                entry(ModBlocks.lapis_door, false),
-                entry(ModBlocks.lapis_pole, false),
-                entry(ModBlocks.lapis_beam, false),
-                entry(ModBlocks.lapis_wall, false),
-                entry(ModBlocks.lapis_saddle_door, false),
-                entry(ModBlocks.lapis_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.OBSIDIAN, ModBlocks.obsidian_slab.get(), true,
-                entry(ModBlocks.obsidian_stairs, false),
-                entry(ModBlocks.obsidian_slab, false),
-                entry(ModBlocks.obsidian_fence, false),
-                entry(ModBlocks.obsidian_trapdoor, false), false,
-                entry(ModBlocks.obsidian_fence_gate, false),
-                entry(ModBlocks.obsidian_door, false),
-                entry(ModBlocks.obsidian_pole, false),
-                entry(ModBlocks.obsidian_beam, false),
-                entry(ModBlocks.obsidian_wall, false),
-                entry(ModBlocks.obsidian_saddle_door, false),
-                entry(ModBlocks.obsidian_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.COAL_BLOCK, Items.COAL, true,
-                entry(ModBlocks.coal_stairs, false),
-                entry(ModBlocks.coal_slab, false),
-                entry(ModBlocks.coal_fence, false),
-                entry(ModBlocks.coal_trapdoor, false), true,
-                entry(ModBlocks.coal_fence_gate, false),
-                entry(ModBlocks.coal_door, false),
-                entry(ModBlocks.coal_pole, false),
-                entry(ModBlocks.coal_beam, false),
-                entry(ModBlocks.coal_wall, false),
-                entry(ModBlocks.coal_saddle_door, false),
-                entry(ModBlocks.coal_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.REDSTONE_BLOCK, Items.REDSTONE, true,
-                entry(ModBlocks.redstone_stairs, false),
-                entry(ModBlocks.redstone_slab, false),
-                entry(ModBlocks.redstone_fence, false),
-                entry(ModBlocks.redstone_trapdoor, false), true,
-                entry(ModBlocks.redstone_fence_gate, false),
-                entry(ModBlocks.redstone_door, false),
-                entry(ModBlocks.redstone_pole, false),
-                entry(ModBlocks.redstone_beam, false),
-                entry(ModBlocks.redstone_wall, false),
-                entry(ModBlocks.redstone_saddle_door, false),
-                entry(ModBlocks.redstone_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.CLAY, Items.CLAY_BALL, false,
-                entry(ModBlocks.clay_stairs, false),
-                entry(ModBlocks.clay_slab, false),
-                entry(ModBlocks.clay_fence, false),
-                entry(ModBlocks.clay_trapdoor, false), true,
-                entry(ModBlocks.clay_fence_gate, false),
-                entry(ModBlocks.clay_door, false),
-                entry(ModBlocks.clay_pole, false),
-                entry(ModBlocks.clay_beam, false),
-                entry(ModBlocks.clay_wall, false),
-                entry(ModBlocks.clay_saddle_door, false),
-                entry(ModBlocks.clay_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT, ModBlocks.dirt_slab.get(), false,
-                entry(ModBlocks.dirt_stairs, false),
-                entry(ModBlocks.dirt_slab, false),
-                entry(ModBlocks.dirt_fence, false),
-                entry(ModBlocks.dirt_trapdoor, false), true,
-                entry(ModBlocks.dirt_fence_gate, false),
-                entry(ModBlocks.dirt_door, false),
-                entry(ModBlocks.dirt_pole, false),
-                entry(ModBlocks.dirt_beam, false),
-                entry(ModBlocks.dirt_wall, false),
-                entry(ModBlocks.dirt_saddle_door, false),
-                entry(ModBlocks.dirt_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.GRASS_BLOCK, ModBlocks.grass_slab.get(), false,
-                entry(ModBlocks.grass_stairs, false),
-                entry(ModBlocks.grass_slab, false),
-                entry(ModBlocks.grass_fence, false),
-                entry(ModBlocks.grass_trapdoor, false), true,
-                entry(ModBlocks.grass_fence_gate, false),
-                entry(ModBlocks.grass_door, false),
-                entry(ModBlocks.grass_pole, false),
-                entry(ModBlocks.grass_beam, false),
-                entry(ModBlocks.grass_wall, false),
-                entry(ModBlocks.grass_saddle_door, false),
-                entry(ModBlocks.grass_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.HAY_BLOCK, Items.WHEAT, false,
-                entry(ModBlocks.hay_stairs, false),
-                entry(ModBlocks.hay_slab, false),
-                entry(ModBlocks.hay_fence, false),
-                entry(ModBlocks.hay_trapdoor, false), true,
-                entry(ModBlocks.hay_fence_gate, false),
-                entry(ModBlocks.hay_door, false),
-                entry(ModBlocks.hay_pole, false),
-                entry(ModBlocks.hay_beam, false),
-                entry(ModBlocks.hay_wall, false),
-                entry(ModBlocks.hay_saddle_door, false),
-                entry(ModBlocks.hay_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.DIRT_PATH, ModBlocks.path_slab.get(), false,
-                entry(ModBlocks.path_stairs, false),
-                entry(ModBlocks.path_slab, false),
-                entry(ModBlocks.path_fence, false),
-                entry(ModBlocks.path_trapdoor, false), true,
-                entry(ModBlocks.path_fence_gate, false),
-                entry(ModBlocks.path_door, false),
-                entry(ModBlocks.path_pole, false),
-                entry(ModBlocks.path_beam, false),
-                entry(ModBlocks.path_wall, false),
-                entry(ModBlocks.path_saddle_door, false),
-                entry(ModBlocks.path_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BRICKS, Items.BRICK, true,
-                Optional.empty(),
-                entry(() -> Blocks.BRICK_SLAB, false),
-                entry(ModBlocks.brick_fence, false),
-                entry(ModBlocks.brick_trapdoor, false), true,
-                entry(ModBlocks.brick_fence_gate, false),
-                entry(ModBlocks.brick_door, false),
-                entry(ModBlocks.brick_pole, false),
-                entry(ModBlocks.brick_beam, false),
-                Optional.empty(),
-                entry(ModBlocks.brick_saddle_door, false),
-                entry(ModBlocks.brick_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.QUARTZ_BLOCK, Items.QUARTZ, true,
-                Optional.empty(),
-                entry(() -> Blocks.QUARTZ_SLAB, false),
-                entry(ModBlocks.quartz_fence, false),
-                entry(ModBlocks.quartz_trapdoor, false), true,
-                entry(ModBlocks.quartz_fence_gate, false),
-                entry(ModBlocks.quartz_door, false),
-                entry(ModBlocks.quartz_pole, false),
-                entry(ModBlocks.quartz_beam, false),
-                entry(ModBlocks.quartz_wall, false),
-                entry(ModBlocks.quartz_saddle_door, false),
-                entry(ModBlocks.quartz_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BONE_BLOCK, Items.BONE_MEAL, true,
-                entry(ModBlocks.bone_stairs, false),
-                entry(ModBlocks.bone_slab, false),
-                entry(ModBlocks.bone_fence, false),
-                entry(ModBlocks.bone_trapdoor, false), true,
-                entry(ModBlocks.bone_fence_gate, false),
-                entry(ModBlocks.bone_door, false),
-                entry(ModBlocks.bone_pole, false),
-                entry(ModBlocks.bone_beam, false),
-                entry(ModBlocks.bone_wall, false),
-                entry(ModBlocks.bone_saddle_door, false),
-                entry(ModBlocks.bone_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHER_BRICKS, Items.NETHER_BRICK, true,
-                Optional.empty(),
-                entry(() -> Blocks.NETHER_BRICK_SLAB, false),
-                Optional.empty(),
-                entry(ModBlocks.nether_brick_trapdoor, false), true,
-                entry(ModBlocks.nether_brick_fence_gate, false),
-                entry(ModBlocks.nether_brick_door, false),
-                entry(ModBlocks.nether_brick_pole, false),
-                entry(ModBlocks.nether_brick_beam, false),
-                Optional.empty(),
-                entry(ModBlocks.nether_brick_saddle_door, false),
-                entry(ModBlocks.nether_brick_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.RED_NETHER_BRICKS, Items.NETHER_WART, true,
-                Optional.empty(),
-                entry(() -> Blocks.RED_NETHER_BRICK_SLAB, false),
-                entry(ModBlocks.red_nether_brick_fence, false),
-                entry(ModBlocks.red_nether_brick_trapdoor, false), true,
-                entry(ModBlocks.red_nether_brick_fence_gate, false),
-                entry(ModBlocks.red_nether_brick_door, false),
-                entry(ModBlocks.red_nether_brick_pole, false),
-                entry(ModBlocks.red_nether_brick_beam, false),
-                Optional.empty(),
-                entry(ModBlocks.red_nether_brick_saddle_door, false),
-                entry(ModBlocks.red_nether_brick_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.SNOW_BLOCK, Items.SNOWBALL, false,
-                entry(ModBlocks.snow_stairs, false),
-                entry(ModBlocks.snow_slab, true),
-                entry(ModBlocks.snow_fence, false),
-                entry(ModBlocks.snow_trapdoor, false), true,
-                entry(ModBlocks.snow_fence_gate, false),
-                entry(ModBlocks.snow_door, false),
-                entry(ModBlocks.snow_pole, false),
-                entry(ModBlocks.snow_beam, false),
-                entry(ModBlocks.snow_wall, false),
-                entry(ModBlocks.snow_saddle_door, false),
-                entry(ModBlocks.snow_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.ICE, ModBlocks.ice_slab.get(), true,
-                entry(ModBlocks.ice_stairs, false),
-                entry(ModBlocks.ice_slab, false),
-                entry(ModBlocks.ice_fence, false),
-                entry(ModBlocks.ice_trapdoor, false), true,
-                entry(ModBlocks.ice_fence_gate, false),
-                entry(ModBlocks.ice_door, false),
-                entry(ModBlocks.ice_pole, false),
-                entry(ModBlocks.ice_beam, false),
-                entry(ModBlocks.ice_wall, false),
-                entry(ModBlocks.ice_saddle_door, false),
-                entry(ModBlocks.ice_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.PACKED_ICE, ModBlocks.packed_ice_slab.get(), true,
-                entry(ModBlocks.packed_ice_stairs, false),
-                entry(ModBlocks.packed_ice_slab, false),
-                entry(ModBlocks.packed_ice_fence, false),
-                entry(ModBlocks.packed_ice_trapdoor, false), true,
-                entry(ModBlocks.packed_ice_fence_gate, false),
-                entry(ModBlocks.packed_ice_door, false),
-                entry(ModBlocks.packed_ice_pole, false),
-                entry(ModBlocks.packed_ice_beam, false),
-                entry(ModBlocks.packed_ice_wall, false),
-                entry(ModBlocks.packed_ice_saddle_door, false),
-                entry(ModBlocks.packed_ice_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.BLUE_ICE, ModBlocks.blue_ice_slab.get(), true,
-                entry(ModBlocks.blue_ice_stairs, false),
-                entry(ModBlocks.blue_ice_slab, false),
-                entry(ModBlocks.blue_ice_fence, false),
-                entry(ModBlocks.blue_ice_trapdoor, false), true,
-                entry(ModBlocks.blue_ice_fence_gate, false),
-                entry(ModBlocks.blue_ice_door, false),
-                entry(ModBlocks.blue_ice_pole, false),
-                entry(ModBlocks.blue_ice_beam, false),
-                entry(ModBlocks.blue_ice_wall, false),
-                entry(ModBlocks.blue_ice_saddle_door, false),
-                entry(ModBlocks.blue_ice_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT, true,
-                entry(ModBlocks.netherite_stairs, false),
-                entry(ModBlocks.netherite_slab, false),
-                entry(ModBlocks.netherite_fence, false),
-                entry(ModBlocks.netherite_trapdoor, false), false,
-                entry(ModBlocks.netherite_fence_gate, false),
-                entry(ModBlocks.netherite_door, false),
-                entry(ModBlocks.netherite_pole, false),
-                entry(ModBlocks.netherite_beam, false),
-                entry(ModBlocks.netherite_wall, false),
-                entry(ModBlocks.netherite_saddle_door, false),
-                entry(ModBlocks.netherite_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD, true,
-                entry(ModBlocks.amethyst_stairs, false),
-                entry(ModBlocks.amethyst_slab, false),
-                entry(ModBlocks.amethyst_fence, false),
-                entry(ModBlocks.amethyst_trapdoor, false), true,
-                entry(ModBlocks.amethyst_fence_gate, false),
-                entry(ModBlocks.amethyst_door, false),
-                entry(ModBlocks.amethyst_pole, false),
-                entry(ModBlocks.amethyst_beam, false),
-                entry(ModBlocks.amethyst_wall, false),
-                entry(ModBlocks.amethyst_saddle_door, false),
-                entry(ModBlocks.amethyst_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.COPPER_BLOCK, Items.COPPER_INGOT, true,
-                entry(ModBlocks.copper_stairs, false),
-                entry(ModBlocks.copper_slab, false),
-                entry(ModBlocks.copper_fence, false),
-                entry(ModBlocks.copper_trapdoor, false), false,
-                entry(ModBlocks.copper_fence_gate, false),
-                entry(ModBlocks.copper_door, false),
-                entry(ModBlocks.copper_pole, false),
-                entry(ModBlocks.copper_beam, false),
-                entry(ModBlocks.copper_wall, false),
-                entry(ModBlocks.copper_saddle_door, false),
-                entry(ModBlocks.copper_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab.get(), true,
-                entry(ModBlocks.exposed_copper_stairs, false),
-                entry(ModBlocks.exposed_copper_slab, false),
-                entry(ModBlocks.exposed_copper_fence, false),
-                entry(ModBlocks.exposed_copper_trapdoor, false), false,
-                entry(ModBlocks.exposed_copper_fence_gate, false),
-                entry(ModBlocks.exposed_copper_door, false),
-                entry(ModBlocks.exposed_copper_pole, false),
-                entry(ModBlocks.exposed_copper_beam, false),
-                entry(ModBlocks.exposed_copper_wall, false),
-                entry(ModBlocks.exposed_copper_saddle_door, false),
-                entry(ModBlocks.exposed_copper_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab.get(), true,
-                entry(ModBlocks.weathered_copper_stairs, false),
-                entry(ModBlocks.weathered_copper_slab, false),
-                entry(ModBlocks.weathered_copper_fence, false),
-                entry(ModBlocks.weathered_copper_trapdoor, false), false,
-                entry(ModBlocks.weathered_copper_fence_gate, false),
-                entry(ModBlocks.weathered_copper_door, false),
-                entry(ModBlocks.weathered_copper_pole, false),
-                entry(ModBlocks.weathered_copper_beam, false),
-                entry(ModBlocks.weathered_copper_wall, false),
-                entry(ModBlocks.weathered_copper_saddle_door, false),
-                entry(ModBlocks.weathered_copper_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab.get(), true,
-                entry(ModBlocks.oxidized_copper_stairs, false),
-                entry(ModBlocks.oxidized_copper_slab, false),
-                entry(ModBlocks.oxidized_copper_fence, false),
-                entry(ModBlocks.oxidized_copper_trapdoor, false), false,
-                entry(ModBlocks.oxidized_copper_fence_gate, false),
-                entry(ModBlocks.oxidized_copper_door, false),
-                entry(ModBlocks.oxidized_copper_pole, false),
-                entry(ModBlocks.oxidized_copper_beam, false),
-                entry(ModBlocks.oxidized_copper_wall, false),
-                entry(ModBlocks.oxidized_copper_saddle_door, false),
-                entry(ModBlocks.oxidized_copper_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM, true,
-                entry(ModBlocks.magma_stairs, false),
-                entry(ModBlocks.magma_slab, false),
-                entry(ModBlocks.magma_fence, false),
-                entry(ModBlocks.magma_trapdoor, false), true,
-                entry(ModBlocks.magma_fence_gate, false),
-                entry(ModBlocks.magma_door, false),
-                entry(ModBlocks.magma_pole, false),
-                entry(ModBlocks.magma_beam, false),
-                entry(ModBlocks.magma_wall, false),
-                entry(ModBlocks.magma_saddle_door, false),
-                entry(ModBlocks.magma_support, false)));
-        autoRecipe(consumer, new AutoRecipeManager(Blocks.CALCITE, ModBlocks.calcite_slab.get(), true,
-                entry(ModBlocks.calcite_stairs, false),
-                entry(ModBlocks.calcite_slab, false),
-                entry(ModBlocks.calcite_fence, false),
-                entry(ModBlocks.calcite_trapdoor, false), false,
-                entry(ModBlocks.calcite_fence_gate, false),
-                entry(ModBlocks.calcite_door, false),
-                entry(ModBlocks.calcite_pole, false),
-                entry(ModBlocks.calcite_beam, false),
-                entry(ModBlocks.calcite_wall, false),
-                entry(ModBlocks.calcite_saddle_door, false),
-                entry(ModBlocks.calcite_support, false)));
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.IRON_BLOCK, Items.IRON_INGOT, true)
+                .stairs(add(ModBlocks.iron_stairs, false))
+                .slab(add(ModBlocks.iron_slab, false))
+                .fence(add(ModBlocks.iron_fence, false))
+                .trapdoor(add(() -> Blocks.IRON_TRAPDOOR, false), false)
+                .fencegate(add(ModBlocks.iron_fence_gate, false))
+                .door(add(() -> Blocks.IRON_DOOR, false))
+                .pole(add(ModBlocks.iron_pole, false))
+                .beam(add(ModBlocks.iron_beam, false))
+                .wall(add(ModBlocks.iron_wall, false))
+                .saddledoor(add(ModBlocks.iron_saddle_door, false))
+                .support(add(ModBlocks.iron_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.GOLD_BLOCK, Items.GOLD_INGOT, true)
+                .stairs(add(ModBlocks.gold_stairs, false))
+                .slab(add(ModBlocks.gold_slab, false))
+                .fence(add(ModBlocks.gold_fence, false))
+                .trapdoor(add(ModBlocks.gold_trapdoor, false), false)
+                .fencegate(add(ModBlocks.gold_fence_gate, false))
+                .door(add(ModBlocks.gold_door, false))
+                .pole(add(ModBlocks.gold_pole, false))
+                .beam(add(ModBlocks.gold_beam, false))
+                .wall(add(ModBlocks.gold_wall, false))
+                .saddledoor(add(ModBlocks.gold_saddle_door, false))
+                .support(add(ModBlocks.gold_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.DIAMOND_BLOCK, Items.DIAMOND, true)
+                .stairs(add(ModBlocks.diamond_stairs, false))
+                .slab(add(ModBlocks.diamond_slab, false))
+                .fence(add(ModBlocks.diamond_fence, false))
+                .trapdoor(add(ModBlocks.diamond_trapdoor, false), false)
+                .fencegate(add(ModBlocks.diamond_fence_gate, false))
+                .door(add(ModBlocks.diamond_door, false))
+                .pole(add(ModBlocks.diamond_pole, false))
+                .beam(add(ModBlocks.diamond_beam, false))
+                .wall(add(ModBlocks.diamond_wall, false))
+                .saddledoor(add(ModBlocks.diamond_saddle_door, false))
+                .support(add(ModBlocks.diamond_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.EMERALD_BLOCK, Items.EMERALD, true)
+                .stairs(add(ModBlocks.emerald_stairs, false))
+                .slab(add(ModBlocks.emerald_slab, false))
+                .fence(add(ModBlocks.emerald_fence, false))
+                .trapdoor(add(ModBlocks.emerald_trapdoor, false), false)
+                .fencegate(add(ModBlocks.emerald_fence_gate, false))
+                .door(add(ModBlocks.emerald_door, false))
+                .pole(add(ModBlocks.emerald_pole, false))
+                .beam(add(ModBlocks.emerald_beam, false))
+                .wall(add(ModBlocks.emerald_wall, false))
+                .saddledoor(add(ModBlocks.emerald_saddle_door, false))
+                .support(add(ModBlocks.emerald_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.LAPIS_BLOCK, Items.LAPIS_LAZULI, true)
+                .stairs(add(ModBlocks.lapis_stairs, false))
+                .slab(add(ModBlocks.lapis_slab, false))
+                .fence(add(ModBlocks.lapis_fence, false))
+                .trapdoor(add(ModBlocks.lapis_trapdoor, false), false)
+                .fencegate(add(ModBlocks.lapis_fence_gate, false))
+                .door(add(ModBlocks.lapis_door, false))
+                .pole(add(ModBlocks.lapis_pole, false))
+                .beam(add(ModBlocks.lapis_beam, false))
+                .wall(add(ModBlocks.lapis_wall, false))
+                .saddledoor(add(ModBlocks.lapis_saddle_door, false))
+                .support(add(ModBlocks.lapis_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.OBSIDIAN, ModBlocks.obsidian_slab.get(), true)
+                .stairs(add(ModBlocks.obsidian_stairs, false))
+                .slab(add(ModBlocks.obsidian_slab, false))
+                .fence(add(ModBlocks.obsidian_fence, false))
+                .trapdoor(add(ModBlocks.obsidian_trapdoor, false), false)
+                .fencegate(add(ModBlocks.obsidian_fence_gate, false))
+                .door(add(ModBlocks.obsidian_door, false))
+                .pole(add(ModBlocks.obsidian_pole, false))
+                .beam(add(ModBlocks.obsidian_beam, false))
+                .wall(add(ModBlocks.obsidian_wall, false))
+                .saddledoor(add(ModBlocks.obsidian_saddle_door, false))
+                .support(add(ModBlocks.obsidian_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.COAL_BLOCK, Items.COAL, true)
+                .stairs(add(ModBlocks.coal_stairs, false))
+                .slab(add(ModBlocks.coal_slab, false))
+                .fence(add(ModBlocks.coal_fence, false))
+                .trapdoor(add(ModBlocks.coal_trapdoor, false), true)
+                .fencegate(add(ModBlocks.coal_fence_gate, false))
+                .door(add(ModBlocks.coal_door, false))
+                .pole(add(ModBlocks.coal_pole, false))
+                .beam(add(ModBlocks.coal_beam, false))
+                .wall(add(ModBlocks.coal_wall, false))
+                .saddledoor(add(ModBlocks.coal_saddle_door, false))
+                .support(add(ModBlocks.coal_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.REDSTONE_BLOCK, Items.REDSTONE, true)
+                .stairs(add(ModBlocks.redstone_stairs, false))
+                .slab(add(ModBlocks.redstone_slab, false))
+                .fence(add(ModBlocks.redstone_fence, false))
+                .trapdoor(add(ModBlocks.redstone_trapdoor, false), true)
+                .fencegate(add(ModBlocks.redstone_fence_gate, false))
+                .door(add(ModBlocks.redstone_door, false))
+                .pole(add(ModBlocks.redstone_pole, false))
+                .beam(add(ModBlocks.redstone_beam, false))
+                .wall(add(ModBlocks.redstone_wall, false))
+                .saddledoor(add(ModBlocks.redstone_saddle_door, false))
+                .support(add(ModBlocks.redstone_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.CLAY, Items.CLAY_BALL, false)
+                .stairs(add(ModBlocks.clay_stairs, false))
+                .slab(add(ModBlocks.clay_slab, false))
+                .fence(add(ModBlocks.clay_fence, false))
+                .trapdoor(add(ModBlocks.clay_trapdoor, false), true)
+                .fencegate(add(ModBlocks.clay_fence_gate, false))
+                .door(add(ModBlocks.clay_door, false))
+                .pole(add(ModBlocks.clay_pole, false))
+                .beam(add(ModBlocks.clay_beam, false))
+                .wall(add(ModBlocks.clay_wall, false))
+                .saddledoor(add(ModBlocks.clay_saddle_door, false))
+                .support(add(ModBlocks.clay_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.DIRT, ModBlocks.dirt_slab.get(), false)
+                .stairs(add(ModBlocks.dirt_stairs, false))
+                .slab(add(ModBlocks.dirt_slab, false))
+                .fence(add(ModBlocks.dirt_fence, false))
+                .trapdoor(add(ModBlocks.dirt_trapdoor, false), true)
+                .fencegate(add(ModBlocks.dirt_fence_gate, false))
+                .door(add(ModBlocks.dirt_door, false))
+                .pole(add(ModBlocks.dirt_pole, false))
+                .beam(add(ModBlocks.dirt_beam, false))
+                .wall(add(ModBlocks.dirt_wall, false))
+                .saddledoor(add(ModBlocks.dirt_saddle_door, false))
+                .support(add(ModBlocks.dirt_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.GRASS_BLOCK, ModBlocks.grass_slab.get(), false)
+                .stairs(add(ModBlocks.grass_stairs, false))
+                .slab(add(ModBlocks.grass_slab, false))
+                .fence(add(ModBlocks.grass_fence, false))
+                .trapdoor(add(ModBlocks.grass_trapdoor, false), true)
+                .fencegate(add(ModBlocks.grass_fence_gate, false))
+                .door(add(ModBlocks.grass_door, false))
+                .pole(add(ModBlocks.grass_pole, false))
+                .beam(add(ModBlocks.grass_beam, false))
+                .wall(add(ModBlocks.grass_wall, false))
+                .saddledoor(add(ModBlocks.grass_saddle_door, false))
+                .support(add(ModBlocks.grass_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.HAY_BLOCK, Items.WHEAT, false)
+                .stairs(add(ModBlocks.hay_stairs, false))
+                .slab(add(ModBlocks.hay_slab, false))
+                .fence(add(ModBlocks.hay_fence, false))
+                .trapdoor(add(ModBlocks.hay_trapdoor, false), true)
+                .fencegate(add(ModBlocks.hay_fence_gate, false))
+                .door(add(ModBlocks.hay_door, false))
+                .pole(add(ModBlocks.hay_pole, false))
+                .beam(add(ModBlocks.hay_beam, false))
+                .wall(add(ModBlocks.hay_wall, false))
+                .saddledoor(add(ModBlocks.hay_saddle_door, false))
+                .support(add(ModBlocks.hay_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.DIRT_PATH, ModBlocks.path_slab.get(), false)
+                .stairs(add(ModBlocks.path_stairs, false))
+                .slab(add(ModBlocks.path_slab, false))
+                .fence(add(ModBlocks.path_fence, false))
+                .trapdoor(add(ModBlocks.path_trapdoor, false), true)
+                .fencegate(add(ModBlocks.path_fence_gate, false))
+                .door(add(ModBlocks.path_door, false))
+                .pole(add(ModBlocks.path_pole, false))
+                .beam(add(ModBlocks.path_beam, false))
+                .wall(add(ModBlocks.path_wall, false))
+                .saddledoor(add(ModBlocks.path_saddle_door, false))
+                .support(add(ModBlocks.path_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.BRICKS, Items.BRICK, true)
+                .slab(add(() -> Blocks.BRICK_SLAB, false))
+                .fence(add(ModBlocks.brick_fence, false))
+                .trapdoor(add(ModBlocks.brick_trapdoor, false), true)
+                .fencegate(add(ModBlocks.brick_fence_gate, false))
+                .door(add(ModBlocks.brick_door, false))
+                .pole(add(ModBlocks.brick_pole, false))
+                .beam(add(ModBlocks.brick_beam, false))
+                .saddledoor(add(ModBlocks.brick_saddle_door, false))
+                .support(add(ModBlocks.brick_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.QUARTZ_BLOCK, Items.QUARTZ, true)
+                .slab(add(() -> Blocks.QUARTZ_SLAB, false))
+                .fence(add(ModBlocks.quartz_fence, false))
+                .trapdoor(add(ModBlocks.quartz_trapdoor, false), true)
+                .fencegate(add(ModBlocks.quartz_fence_gate, false))
+                .door(add(ModBlocks.quartz_door, false))
+                .pole(add(ModBlocks.quartz_pole, false))
+                .beam(add(ModBlocks.quartz_beam, false))
+                .wall(add(ModBlocks.quartz_wall, false))
+                .saddledoor(add(ModBlocks.quartz_saddle_door, false))
+                .support(add(ModBlocks.quartz_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.BONE_BLOCK, Items.BONE_MEAL, true)
+                .stairs(add(ModBlocks.bone_stairs, false))
+                .slab(add(ModBlocks.bone_slab, false))
+                .fence(add(ModBlocks.bone_fence, false))
+                .trapdoor(add(ModBlocks.bone_trapdoor, false), true)
+                .fencegate(add(ModBlocks.bone_fence_gate, false))
+                .door(add(ModBlocks.bone_door, false))
+                .pole(add(ModBlocks.bone_pole, false))
+                .beam(add(ModBlocks.bone_beam, false))
+                .wall(add(ModBlocks.bone_wall, false))
+                .saddledoor(add(ModBlocks.bone_saddle_door, false))
+                .support(add(ModBlocks.bone_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.NETHER_BRICKS, Items.NETHER_BRICK, true)
+                .slab(add(() -> Blocks.NETHER_BRICK_SLAB, false))
+                .trapdoor(add(ModBlocks.nether_brick_trapdoor, false), true)
+                .fencegate(add(ModBlocks.nether_brick_fence_gate, false))
+                .door(add(ModBlocks.nether_brick_door, false))
+                .pole(add(ModBlocks.nether_brick_pole, false))
+                .beam(add(ModBlocks.nether_brick_beam, false))
+                .saddledoor(add(ModBlocks.nether_brick_saddle_door, false))
+                .support(add(ModBlocks.nether_brick_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.RED_NETHER_BRICKS, Items.NETHER_WART, true)
+                .slab(add(() -> Blocks.RED_NETHER_BRICK_SLAB, false))
+                .fence(add(ModBlocks.red_nether_brick_fence, false))
+                .trapdoor(add(ModBlocks.red_nether_brick_trapdoor, false), true)
+                .fencegate(add(ModBlocks.red_nether_brick_fence_gate, false))
+                .door(add(ModBlocks.red_nether_brick_door, false))
+                .pole(add(ModBlocks.red_nether_brick_pole, false))
+                .beam(add(ModBlocks.red_nether_brick_beam, false))
+                .saddledoor(add(ModBlocks.red_nether_brick_saddle_door, false))
+                .support(add(ModBlocks.red_nether_brick_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.SNOW_BLOCK, Items.SNOWBALL, false)
+                .stairs(add(ModBlocks.snow_stairs, false))
+                .slab(add(ModBlocks.snow_slab, true))
+                .fence(add(ModBlocks.snow_fence, false))
+                .trapdoor(add(ModBlocks.snow_trapdoor, false), true)
+                .fencegate(add(ModBlocks.snow_fence_gate, false))
+                .door(add(ModBlocks.snow_door, false))
+                .pole(add(ModBlocks.snow_pole, false))
+                .beam(add(ModBlocks.snow_beam, false))
+                .wall(add(ModBlocks.snow_wall, false))
+                .saddledoor(add(ModBlocks.snow_saddle_door, false))
+                .support(add(ModBlocks.snow_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.ICE, ModBlocks.ice_slab.get(), true)
+                .stairs(add(ModBlocks.ice_stairs, false))
+                .slab(add(ModBlocks.ice_slab, false))
+                .fence(add(ModBlocks.ice_fence, false))
+                .trapdoor(add(ModBlocks.ice_trapdoor, false), true)
+                .fencegate(add(ModBlocks.ice_fence_gate, false))
+                .door(add(ModBlocks.ice_door, false))
+                .pole(add(ModBlocks.ice_pole, false))
+                .beam(add(ModBlocks.ice_beam, false))
+                .wall(add(ModBlocks.ice_wall, false))
+                .saddledoor(add(ModBlocks.ice_saddle_door, false))
+                .support(add(ModBlocks.ice_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.PACKED_ICE, ModBlocks.packed_ice_slab.get(), true)
+                .stairs(add(ModBlocks.packed_ice_stairs, false))
+                .slab(add(ModBlocks.packed_ice_slab, false))
+                .fence(add(ModBlocks.packed_ice_fence, false))
+                .trapdoor(add(ModBlocks.packed_ice_trapdoor, false), true)
+                .fencegate(add(ModBlocks.packed_ice_fence_gate, false))
+                .door(add(ModBlocks.packed_ice_door, false))
+                .pole(add(ModBlocks.packed_ice_pole, false))
+                .beam(add(ModBlocks.packed_ice_beam, false))
+                .wall(add(ModBlocks.packed_ice_wall, false))
+                .saddledoor(add(ModBlocks.packed_ice_saddle_door, false))
+                .support(add(ModBlocks.packed_ice_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.BLUE_ICE, ModBlocks.blue_ice_slab.get(), true)
+                .stairs(add(ModBlocks.blue_ice_stairs, false))
+                .slab(add(ModBlocks.blue_ice_slab, false))
+                .fence(add(ModBlocks.blue_ice_fence, false))
+                .trapdoor(add(ModBlocks.blue_ice_trapdoor, false), true)
+                .fencegate(add(ModBlocks.blue_ice_fence_gate, false))
+                .door(add(ModBlocks.blue_ice_door, false))
+                .pole(add(ModBlocks.blue_ice_pole, false))
+                .beam(add(ModBlocks.blue_ice_beam, false))
+                .wall(add(ModBlocks.blue_ice_wall, false))
+                .saddledoor(add(ModBlocks.blue_ice_saddle_door, false))
+                .support(add(ModBlocks.blue_ice_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.NETHERITE_BLOCK, Items.NETHERITE_INGOT, true)
+                .stairs(add(ModBlocks.netherite_stairs, false))
+                .slab(add(ModBlocks.netherite_slab, false))
+                .fence(add(ModBlocks.netherite_fence, false))
+                .trapdoor(add(ModBlocks.netherite_trapdoor, false), false)
+                .fencegate(add(ModBlocks.netherite_fence_gate, false))
+                .door(add(ModBlocks.netherite_door, false))
+                .pole(add(ModBlocks.netherite_pole, false))
+                .beam(add(ModBlocks.netherite_beam, false))
+                .wall(add(ModBlocks.netherite_wall, false))
+                .saddledoor(add(ModBlocks.netherite_saddle_door, false))
+                .support(add(ModBlocks.netherite_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.AMETHYST_BLOCK, Items.AMETHYST_SHARD, true)
+                .stairs(add(ModBlocks.amethyst_stairs, false))
+                .slab(add(ModBlocks.amethyst_slab, false))
+                .fence(add(ModBlocks.amethyst_fence, false))
+                .trapdoor(add(ModBlocks.amethyst_trapdoor, false), true)
+                .fencegate(add(ModBlocks.amethyst_fence_gate, false))
+                .door(add(ModBlocks.amethyst_door, false))
+                .pole(add(ModBlocks.amethyst_pole, false))
+                .beam(add(ModBlocks.amethyst_beam, false))
+                .wall(add(ModBlocks.amethyst_wall, false))
+                .saddledoor(add(ModBlocks.amethyst_saddle_door, false))
+                .support(add(ModBlocks.amethyst_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.COPPER_BLOCK, Items.COPPER_INGOT, true)
+                .stairs(add(ModBlocks.copper_stairs, false))
+                .slab(add(ModBlocks.copper_slab, false))
+                .fence(add(ModBlocks.copper_fence, false))
+                .trapdoor(add(ModBlocks.copper_trapdoor, false), false)
+                .fencegate(add(ModBlocks.copper_fence_gate, false))
+                .door(add(ModBlocks.copper_door, false))
+                .pole(add(ModBlocks.copper_pole, false))
+                .beam(add(ModBlocks.copper_beam, false))
+                .wall(add(ModBlocks.copper_wall, false))
+                .saddledoor(add(ModBlocks.copper_saddle_door, false))
+                .support(add(ModBlocks.copper_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.EXPOSED_COPPER, ModBlocks.exposed_copper_slab.get(), true)
+                .stairs(add(ModBlocks.exposed_copper_stairs, false))
+                .slab(add(ModBlocks.exposed_copper_slab, false))
+                .fence(add(ModBlocks.exposed_copper_fence, false))
+                .trapdoor(add(ModBlocks.exposed_copper_trapdoor, false), false)
+                .fencegate(add(ModBlocks.exposed_copper_fence_gate, false))
+                .door(add(ModBlocks.exposed_copper_door, false))
+                .pole(add(ModBlocks.exposed_copper_pole, false))
+                .beam(add(ModBlocks.exposed_copper_beam, false))
+                .wall(add(ModBlocks.exposed_copper_wall, false))
+                .saddledoor(add(ModBlocks.exposed_copper_saddle_door, false))
+                .support(add(ModBlocks.exposed_copper_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.WEATHERED_COPPER, ModBlocks.weathered_copper_slab.get(), true)
+                .stairs(add(ModBlocks.weathered_copper_stairs, false))
+                .slab(add(ModBlocks.weathered_copper_slab, false))
+                .fence(add(ModBlocks.weathered_copper_fence, false))
+                .trapdoor(add(ModBlocks.weathered_copper_trapdoor, false), false)
+                .fencegate(add(ModBlocks.weathered_copper_fence_gate, false))
+                .door(add(ModBlocks.weathered_copper_door, false))
+                .pole(add(ModBlocks.weathered_copper_pole, false))
+                .beam(add(ModBlocks.weathered_copper_beam, false))
+                .wall(add(ModBlocks.weathered_copper_wall, false))
+                .saddledoor(add(ModBlocks.weathered_copper_saddle_door, false))
+                .support(add(ModBlocks.weathered_copper_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.OXIDIZED_COPPER, ModBlocks.oxidized_copper_slab.get(), true)
+                .stairs(add(ModBlocks.oxidized_copper_stairs, false))
+                .slab(add(ModBlocks.oxidized_copper_slab, false))
+                .fence(add(ModBlocks.oxidized_copper_fence, false))
+                .trapdoor(add(ModBlocks.oxidized_copper_trapdoor, false), false)
+                .fencegate(add(ModBlocks.oxidized_copper_fence_gate, false))
+                .door(add(ModBlocks.oxidized_copper_door, false))
+                .pole(add(ModBlocks.oxidized_copper_pole, false))
+                .beam(add(ModBlocks.oxidized_copper_beam, false))
+                .wall(add(ModBlocks.oxidized_copper_wall, false))
+                .saddledoor(add(ModBlocks.oxidized_copper_saddle_door, false))
+                .support(add(ModBlocks.oxidized_copper_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.MAGMA_BLOCK, Items.MAGMA_CREAM, true)
+                .stairs(add(ModBlocks.magma_stairs, false))
+                .slab(add(ModBlocks.magma_slab, false))
+                .fence(add(ModBlocks.magma_fence, false))
+                .trapdoor(add(ModBlocks.magma_trapdoor, false), true)
+                .fencegate(add(ModBlocks.magma_fence_gate, false))
+                .door(add(ModBlocks.magma_door, false))
+                .pole(add(ModBlocks.magma_pole, false))
+                .beam(add(ModBlocks.magma_beam, false))
+                .wall(add(ModBlocks.magma_wall, false))
+                .saddledoor(add(ModBlocks.magma_saddle_door, false))
+                .support(add(ModBlocks.magma_support, false))
+                .build());
+        autoRecipe(consumer, new AutoRecipeManager.Builder(Blocks.CALCITE, ModBlocks.calcite_slab.get(), true)
+                .stairs(add(ModBlocks.calcite_stairs, false))
+                .slab(add(ModBlocks.calcite_slab, false))
+                .fence(add(ModBlocks.calcite_fence, false))
+                .trapdoor(add(ModBlocks.calcite_trapdoor, false), false)
+                .fencegate(add(ModBlocks.calcite_fence_gate, false))
+                .door(add(ModBlocks.calcite_door, false))
+                .pole(add(ModBlocks.calcite_pole, false))
+                .beam(add(ModBlocks.calcite_beam, false))
+                .wall(add(ModBlocks.calcite_wall, false))
+                .saddledoor(add(ModBlocks.calcite_saddle_door, false))
+                .support(add(ModBlocks.calcite_support, false))
+                .build());
     }
 }

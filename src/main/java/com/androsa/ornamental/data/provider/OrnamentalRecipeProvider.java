@@ -33,8 +33,8 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
         return ResourceLocation.fromNamespaceAndPath(modID, name);
     }
 
-    public <T extends Block> Optional<ManagerEntry<? extends T>> entry(Supplier<T> block, boolean override) {
-        return Optional.of(new ManagerEntry<>(block, override));
+    public <T extends Block> ManagerEntry<? extends T> add(Supplier<T> block, boolean override) {
+        return new ManagerEntry<>(block, override);
     }
 
     /**
@@ -468,7 +468,113 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider implements
                                     Optional<? extends ManagerEntry<? extends OrnamentBeam>> beam,
                                     Optional<? extends ManagerEntry<? extends OrnamentWall>> wall,
                                     Optional<? extends ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor,
-                                    Optional<? extends ManagerEntry<? extends OrnamentSupport>> support) { }
+                                    Optional<? extends ManagerEntry<? extends OrnamentSupport>> support) {
+
+        @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+        public static class Builder {
+            private final ItemLike bigIngredient;
+            private final ItemLike smallIngredient;
+            private final boolean stonecutter;
+            private Optional<? extends ManagerEntry<? extends OrnamentStair>> stair;
+            private Optional<? extends ManagerEntry<? extends Block>> slab;
+            private Optional<? extends ManagerEntry<? extends OrnamentFence>> fence;
+            private Optional<? extends ManagerEntry<? extends Block>> trapdoor;
+            private boolean trapdoorWide;
+            private Optional<? extends ManagerEntry<? extends OrnamentFenceGate>> fencegate;
+            private Optional<? extends ManagerEntry<? extends Block>> door;
+            private Optional<? extends ManagerEntry<? extends OrnamentPole>> pole;
+            private Optional<? extends ManagerEntry<? extends OrnamentBeam>> beam;
+            private Optional<? extends ManagerEntry<? extends OrnamentWall>> wall;
+            private Optional<? extends ManagerEntry<? extends OrnamentSaddleDoor>> saddledoor;
+            private Optional<? extends ManagerEntry<? extends OrnamentSupport>> support;
+
+
+            /**
+             * This class provides a more streamlined way to create an AutoRecipeManager.
+             * Unlike manually creating an AutoRecipeManager, blocks can be omitted from being added, removing the need to specify empty Optionals.
+             * On creating a Builder, all fields will be empty except for the required big and small ingredients, and if stonecutting recipes should be made.
+             * Once building is complete, an AutoRecipeManager is created with Optionals of ManagerEntries or empty.
+             */
+            public Builder(ItemLike big, ItemLike small, boolean stonecut) {
+                this.bigIngredient = big;
+                this.smallIngredient = small;
+                this.stonecutter = stonecut;
+                this.stair = Optional.empty();
+                this.slab = Optional.empty();
+                this.fence = Optional.empty();
+                this.trapdoor = Optional.empty();
+                this.trapdoorWide = false;
+                this.fencegate = Optional.empty();
+                this.door = Optional.empty();
+                this.pole = Optional.empty();
+                this.beam = Optional.empty();
+                this.wall = Optional.empty();
+                this.saddledoor = Optional.empty();
+                this.support = Optional.empty();
+            }
+
+            public Builder stairs(ManagerEntry<? extends OrnamentStair> stair) {
+                this.stair = Optional.of(stair);
+                return this;
+            }
+
+            public Builder slab(ManagerEntry<? extends Block> slab) {
+                this.slab = Optional.of(slab);
+                return this;
+            }
+
+            public Builder fence(ManagerEntry<? extends OrnamentFence> fence) {
+                this.fence = Optional.of(fence);
+                return this;
+            }
+
+            public Builder trapdoor(ManagerEntry<? extends Block> trapdoor, boolean wide) {
+                this.trapdoor = Optional.of(trapdoor);
+                this.trapdoorWide = wide;
+                return this;
+            }
+
+            public Builder fencegate(ManagerEntry<? extends OrnamentFenceGate> fencegate) {
+                this.fencegate = Optional.of(fencegate);
+                return this;
+            }
+
+            public Builder door(ManagerEntry<? extends Block> door) {
+                this.door = Optional.of(door);
+                return this;
+            }
+
+            public Builder pole(ManagerEntry<? extends OrnamentPole> pole) {
+                this.pole = Optional.of(pole);
+                return this;
+            }
+
+            public Builder beam(ManagerEntry<? extends OrnamentBeam> beam) {
+                this.beam = Optional.of(beam);
+                return this;
+            }
+
+            public Builder wall(ManagerEntry<? extends OrnamentWall> wall) {
+                this.wall = Optional.of(wall);
+                return this;
+            }
+
+            public Builder saddledoor(ManagerEntry<? extends OrnamentSaddleDoor> saddledoor) {
+                this.saddledoor = Optional.of(saddledoor);
+                return this;
+            }
+
+            public Builder support(ManagerEntry<? extends OrnamentSupport> support) {
+                this.support = Optional.of(support);
+                return this;
+            }
+
+            public AutoRecipeManager build() {
+                return new AutoRecipeManager(this.bigIngredient, this.smallIngredient, this.stonecutter,
+                        this.stair, this.slab, this.fence, this.trapdoor, this.trapdoorWide, this.fencegate, this.door, this.pole, this.beam, this.wall, this.saddledoor, this.support);
+            }
+        }
+    }
 
     public record ManagerEntry<T extends Block>(Supplier<? extends T> block, boolean override) {
     }
