@@ -271,7 +271,7 @@ public class OrnamentBuilder {
      * Sets a base block for an OrnamentStair. Not necessary to set if no OrnamentStair is getting registered, but is highly advised.
      * @param block The Supplier of a Block to provide.
      */
-    public OrnamentBuilder stairBaseBlock(Supplier<Block> block) {
+    public OrnamentBuilder stairBaseBlock(Supplier<? extends Block> block) {
         this.baseBlock = block;
         return this;
     }
