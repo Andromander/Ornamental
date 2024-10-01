@@ -82,6 +82,9 @@
   "1.20.6": {
     "4.14.102": "Ornamental has now been ported to 1.20.4! No new changes have been made, just some changes to make the mod compatible for this version."
   },
+  "1.21": {
+    "4.15.117": "Ornamental has now been ported to 1.21! Some changes have been made to accommodate for the new version.\n • Added Cut Copper Ornaments. These blocks have been added to not only mirror some of the decorative blocks added by the game, but to accommodate for some new blocks introduced in 1.21.\n • Any Copper Trapdoors or Copper Doors have now been replaced with Cut Copper Trapdoors and Cut Copper Doors. This is so that there's only one instance of Copper Doors, while keeping the sleeker textures added by Copper Doors and Trapdoors in Ornamental.\n • Copper Golems can now be built with Cut Copper.\n • Improved the AutoRecipeManager, allowing for fewer entries to be added for materials that may not add as many ornaments.\n • Changed OrnamentBuilder's parameter for the method stairBaseBlock, allowing for any block that extends Block.\n • Made some slight adjustments to Wall Ornaments. This may improve memory usage.\n • Fix Grass Golems unable to be repaired.\n • Fix some incorrect face culling on Supports."
+  },
 
   "promos": {
     "1.12.2-latest": "1.5",
@@ -119,6 +122,8 @@
     "1.20.4-latest": "4.13.100",
     "1.20.4-recommended": "4.13.100",
     "1.20.6-latest": "4.14.102",
-    "1.20.6-recommended": "4.14.102"
+    "1.20.6-recommended": "4.14.102",
+    "1.21.0-latest": "4.15.117",
+    "1.21.0-recommended": "4.15.117"
   }
 }
