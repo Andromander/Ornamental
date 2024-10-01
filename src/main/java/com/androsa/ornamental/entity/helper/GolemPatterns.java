@@ -186,8 +186,11 @@ public class GolemPatterns {
 
     public static BlockPattern getCopperPattern() {
         if (copperGolem == null) {
-            copperGolem = buildPattern(Blocks.COPPER_BLOCK)
+            copperGolem = BlockPatternBuilder.start()
                     .aisle("~^~", "###", "###", "~#~")
+                    .where('^', BlockInWorld.hasState(IS_PUMPKIN))
+                    .where('~', worldblock -> worldblock.getState().isAir())
+                    .where('#', BlockInWorld.hasState((state) -> state != null && (state.is(Blocks.COPPER_BLOCK) || state.is(Blocks.CUT_COPPER))))
                     .build();
         }
         return copperGolem;
