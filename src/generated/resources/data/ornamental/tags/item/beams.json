@@ -30,6 +30,10 @@
     "ornamental:weathered_copper_beam",
     "ornamental:oxidized_copper_beam",
     "ornamental:magma_beam",
-    "ornamental:calcite_beam"
+    "ornamental:calcite_beam",
+    "ornamental:cut_copper_beam",
+    "ornamental:exposed_cut_copper_beam",
+    "ornamental:weathered_cut_copper_beam",
+    "ornamental:oxidized_cut_copper_beam"
   ]
 }

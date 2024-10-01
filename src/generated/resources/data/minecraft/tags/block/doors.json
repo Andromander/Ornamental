@@ -24,11 +24,11 @@
     "ornamental:blue_ice_door",
     "ornamental:netherite_door",
     "ornamental:amethyst_door",
-    "ornamental:copper_door",
-    "ornamental:exposed_copper_door",
-    "ornamental:weathered_copper_door",
-    "ornamental:oxidized_copper_door",
     "ornamental:magma_door",
-    "ornamental:calcite_door"
+    "ornamental:calcite_door",
+    "ornamental:cut_copper_door",
+    "ornamental:exposed_cut_copper_door",
+    "ornamental:weathered_cut_copper_door",
+    "ornamental:oxidized_cut_copper_door"
   ]
 }

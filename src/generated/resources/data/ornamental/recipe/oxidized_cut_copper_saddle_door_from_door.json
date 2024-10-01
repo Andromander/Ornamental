@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "ornamental:oxidized_cut_copper_door"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:oxidized_cut_copper_saddle_door"
+  }
+}

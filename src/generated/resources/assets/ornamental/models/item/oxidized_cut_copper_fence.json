@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/fence_inventory",
+  "textures": {
+    "bottom": "minecraft:block/oxidized_cut_copper",
+    "side": "minecraft:block/oxidized_cut_copper",
+    "top": "minecraft:block/oxidized_cut_copper"
+  }
+}

@@ -3,7 +3,7 @@
   "category": "redstone",
   "key": {
     "#": {
-      "item": "ornamental:exposed_copper_trapdoor"
+      "item": "minecraft:exposed_copper_trapdoor"
     }
   },
   "pattern": [

@@ -30,6 +30,10 @@
     "ornamental:weathered_copper_saddle_door",
     "ornamental:oxidized_copper_saddle_door",
     "ornamental:magma_saddle_door",
-    "ornamental:calcite_saddle_door"
+    "ornamental:calcite_saddle_door",
+    "ornamental:cut_copper_saddle_door",
+    "ornamental:exposed_cut_copper_saddle_door",
+    "ornamental:weathered_cut_copper_saddle_door",
+    "ornamental:oxidized_cut_copper_saddle_door"
   ]
 }

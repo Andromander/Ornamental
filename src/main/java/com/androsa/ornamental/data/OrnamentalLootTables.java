@@ -136,6 +136,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_fence);
             dropSelf(ModBlocks.magma_fence);
             dropSelf(ModBlocks.calcite_fence);
+            dropSelf(ModBlocks.cut_copper_fence);
+            dropSelf(ModBlocks.exposed_cut_copper_fence);
+            dropSelf(ModBlocks.weathered_cut_copper_fence);
+            dropSelf(ModBlocks.oxidized_cut_copper_fence);
 
             dropSelf(ModBlocks.gold_trapdoor);
             dropSelf(ModBlocks.diamond_trapdoor);
@@ -161,12 +165,12 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.blue_ice_trapdoor);
             dropSelf(ModBlocks.netherite_trapdoor);
             dropSelf(ModBlocks.amethyst_trapdoor);
-            dropSelf(ModBlocks.copper_trapdoor);
-            dropSelf(ModBlocks.exposed_copper_trapdoor);
-            dropSelf(ModBlocks.weathered_copper_trapdoor);
-            dropSelf(ModBlocks.oxidized_copper_trapdoor);
             dropSelf(ModBlocks.magma_trapdoor);
             dropSelf(ModBlocks.calcite_trapdoor);
+            dropSelf(ModBlocks.cut_copper_trapdoor);
+            dropSelf(ModBlocks.exposed_cut_copper_trapdoor);
+            dropSelf(ModBlocks.weathered_cut_copper_trapdoor);
+            dropSelf(ModBlocks.oxidized_cut_copper_trapdoor);
 
             dropSelf(ModBlocks.iron_fence_gate);
             dropSelf(ModBlocks.gold_fence_gate);
@@ -199,6 +203,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_fence_gate);
             dropSelf(ModBlocks.magma_fence_gate);
             dropSelf(ModBlocks.calcite_fence_gate);
+            dropSelf(ModBlocks.cut_copper_fence_gate);
+            dropSelf(ModBlocks.exposed_cut_copper_fence_gate);
+            dropSelf(ModBlocks.weathered_cut_copper_fence_gate);
+            dropSelf(ModBlocks.oxidized_cut_copper_fence_gate);
 
             dropDoor(ModBlocks.gold_door);
             dropDoor(ModBlocks.diamond_door);
@@ -224,12 +232,12 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropDoor(ModBlocks.blue_ice_door);
             dropDoor(ModBlocks.netherite_door);
             dropDoor(ModBlocks.amethyst_door);
-            dropDoor(ModBlocks.copper_door);
-            dropDoor(ModBlocks.exposed_copper_door);
-            dropDoor(ModBlocks.weathered_copper_door);
-            dropDoor(ModBlocks.oxidized_copper_door);
             dropDoor(ModBlocks.magma_door);
             dropDoor(ModBlocks.calcite_door);
+            dropDoor(ModBlocks.cut_copper_door);
+            dropDoor(ModBlocks.exposed_cut_copper_door);
+            dropDoor(ModBlocks.weathered_cut_copper_door);
+            dropDoor(ModBlocks.oxidized_cut_copper_door);
 
             dropSelf(ModBlocks.iron_pole);
             dropSelf(ModBlocks.gold_pole);
@@ -262,6 +270,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_pole);
             dropSelf(ModBlocks.magma_pole);
             dropSelf(ModBlocks.calcite_pole);
+            dropSelf(ModBlocks.cut_copper_pole);
+            dropSelf(ModBlocks.exposed_cut_copper_pole);
+            dropSelf(ModBlocks.weathered_cut_copper_pole);
+            dropSelf(ModBlocks.oxidized_cut_copper_pole);
 
             dropSelf(ModBlocks.iron_beam);
             dropSelf(ModBlocks.gold_beam);
@@ -294,6 +306,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_beam);
             dropSelf(ModBlocks.magma_beam);
             dropSelf(ModBlocks.calcite_beam);
+            dropSelf(ModBlocks.cut_copper_beam);
+            dropSelf(ModBlocks.exposed_cut_copper_beam);
+            dropSelf(ModBlocks.weathered_cut_copper_beam);
+            dropSelf(ModBlocks.oxidized_cut_copper_beam);
 
             dropSelf(ModBlocks.iron_wall);
             dropSelf(ModBlocks.gold_wall);
@@ -323,6 +339,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_wall);
             dropSelf(ModBlocks.magma_wall);
             dropSelf(ModBlocks.calcite_wall);
+            dropSelf(ModBlocks.cut_copper_wall);
+            dropSelf(ModBlocks.exposed_cut_copper_wall);
+            dropSelf(ModBlocks.weathered_cut_copper_wall);
+            dropSelf(ModBlocks.oxidized_cut_copper_wall);
 
             dropSelf(ModBlocks.iron_saddle_door);
             dropSelf(ModBlocks.gold_saddle_door);
@@ -355,6 +375,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.oxidized_copper_saddle_door);
             dropSelf(ModBlocks.magma_saddle_door);
             dropSelf(ModBlocks.calcite_saddle_door);
+            dropSelf(ModBlocks.cut_copper_saddle_door);
+            dropSelf(ModBlocks.exposed_cut_copper_saddle_door);
+            dropSelf(ModBlocks.weathered_cut_copper_saddle_door);
+            dropSelf(ModBlocks.oxidized_cut_copper_saddle_door);
 
             dropSelf(ModBlocks.iron_support);
             dropSelf(ModBlocks.gold_support);
@@ -387,6 +411,10 @@ public class OrnamentalLootTables extends LootTableProvider {
             dropSelf(ModBlocks.amethyst_support);
             dropSelf(ModBlocks.magma_support);
             dropSelf(ModBlocks.calcite_support);
+            dropSelf(ModBlocks.cut_copper_support);
+            dropSelf(ModBlocks.exposed_cut_copper_support);
+            dropSelf(ModBlocks.weathered_cut_copper_support);
+            dropSelf(ModBlocks.oxidized_cut_copper_support);
         }
 
         @Override

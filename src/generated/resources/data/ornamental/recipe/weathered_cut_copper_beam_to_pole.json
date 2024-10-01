@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "ornamental:weathered_cut_copper_beam"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "ornamental:weathered_cut_copper_pole"
+  }
+}

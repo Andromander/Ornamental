@@ -3,7 +3,7 @@
   "category": "redstone",
   "ingredients": [
     {
-      "item": "ornamental:oxidized_copper_door"
+      "item": "minecraft:oxidized_copper_door"
     }
   ],
   "result": {

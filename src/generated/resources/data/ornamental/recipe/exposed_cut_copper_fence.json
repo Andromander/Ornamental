@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:exposed_cut_copper"
+    },
+    "/": {
+      "item": "minecraft:exposed_cut_copper_slab"
+    }
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "ornamental:exposed_cut_copper_fence"
+  }
+}

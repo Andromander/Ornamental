@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/door_bottom_right_open",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "ornamental:block/weathered_copper_door_bottom",
-    "side": "ornamental:block/weathered_copper_door_bottom"
-  }
-}

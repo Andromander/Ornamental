@@ -108,6 +108,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentFence> oxidized_copper_fence = HELPER.fence(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentFence> magma_fence = HELPER.fence(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentFence> calcite_fence = HELPER.fence(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentFence> cut_copper_fence = HELPER.fence(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentFence> exposed_cut_copper_fence = HELPER.fence(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentFence> weathered_cut_copper_fence = HELPER.fence(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentFence> oxidized_cut_copper_fence = HELPER.fence(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentTrapDoor> gold_trapdoor = HELPER.trapdoor(OrnamentBuilders.GOLD);
     public static final Supplier<OrnamentTrapDoor> diamond_trapdoor = HELPER.trapdoor(OrnamentBuilders.DIAMOND);
@@ -133,12 +137,12 @@ public class ModBlocks {
     public static final Supplier<OrnamentTrapDoor> blue_ice_trapdoor = HELPER.trapdoor(OrnamentBuilders.BLUE_ICE);
     public static final Supplier<OrnamentTrapDoor> netherite_trapdoor = HELPER.trapdoor(OrnamentBuilders.NETHERITE);
     public static final Supplier<OrnamentTrapDoor> amethyst_trapdoor = HELPER.trapdoor(OrnamentBuilders.AMETHYST);
-    public static final Supplier<OrnamentTrapDoor> copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.COPPER);
-    public static final Supplier<OrnamentTrapDoor> exposed_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.EXPOSED_COPPER);
-    public static final Supplier<OrnamentTrapDoor> weathered_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.WEATHERED_COPPER);
-    public static final Supplier<OrnamentTrapDoor> oxidized_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentTrapDoor> magma_trapdoor = HELPER.trapdoor(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentTrapDoor> calcite_trapdoor = HELPER.trapdoor(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentTrapDoor> cut_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentTrapDoor> exposed_cut_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentTrapDoor> weathered_cut_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentTrapDoor> oxidized_cut_copper_trapdoor = HELPER.trapdoor(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentFenceGate> iron_fence_gate = HELPER.fencegate(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentFenceGate> gold_fence_gate = HELPER.fencegate(OrnamentBuilders.GOLD);
@@ -171,6 +175,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentFenceGate> oxidized_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentFenceGate> magma_fence_gate = HELPER.fencegate(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentFenceGate> calcite_fence_gate = HELPER.fencegate(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentFenceGate> cut_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentFenceGate> exposed_cut_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentFenceGate> weathered_cut_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentFenceGate> oxidized_cut_copper_fence_gate = HELPER.fencegate(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentDoor> gold_door = HELPER.door(OrnamentBuilders.GOLD);
     public static final Supplier<OrnamentDoor> diamond_door = HELPER.door(OrnamentBuilders.DIAMOND);
@@ -196,12 +204,12 @@ public class ModBlocks {
     public static final Supplier<OrnamentDoor> blue_ice_door = HELPER.door(OrnamentBuilders.BLUE_ICE);
     public static final Supplier<OrnamentDoor> netherite_door = HELPER.door(OrnamentBuilders.NETHERITE);
     public static final Supplier<OrnamentDoor> amethyst_door = HELPER.door(OrnamentBuilders.AMETHYST);
-    public static final Supplier<OrnamentDoor> copper_door = HELPER.door(OrnamentBuilders.COPPER);
-    public static final Supplier<OrnamentDoor> exposed_copper_door = HELPER.door(OrnamentBuilders.EXPOSED_COPPER);
-    public static final Supplier<OrnamentDoor> weathered_copper_door = HELPER.door(OrnamentBuilders.WEATHERED_COPPER);
-    public static final Supplier<OrnamentDoor> oxidized_copper_door = HELPER.door(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentDoor> magma_door = HELPER.door(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentDoor> calcite_door = HELPER.door(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentDoor> cut_copper_door = HELPER.door(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentDoor> exposed_cut_copper_door = HELPER.door(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentDoor> weathered_cut_copper_door = HELPER.door(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentDoor> oxidized_cut_copper_door = HELPER.door(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentPole> iron_pole = HELPER.pole(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentPole> gold_pole = HELPER.pole(OrnamentBuilders.GOLD);
@@ -234,6 +242,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentPole> oxidized_copper_pole = HELPER.pole(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentPole> magma_pole = HELPER.pole(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentPole> calcite_pole = HELPER.pole(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentPole> cut_copper_pole = HELPER.pole(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentPole> exposed_cut_copper_pole = HELPER.pole(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentPole> weathered_cut_copper_pole = HELPER.pole(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentPole> oxidized_cut_copper_pole = HELPER.pole(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentBeam> iron_beam = HELPER.beam(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentBeam> gold_beam = HELPER.beam(OrnamentBuilders.GOLD);
@@ -266,6 +278,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentBeam> oxidized_copper_beam = HELPER.beam(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentBeam> magma_beam = HELPER.beam(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentBeam> calcite_beam = HELPER.beam(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentBeam> cut_copper_beam = HELPER.beam(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentBeam> exposed_cut_copper_beam = HELPER.beam(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentBeam> weathered_cut_copper_beam = HELPER.beam(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentBeam> oxidized_cut_copper_beam = HELPER.beam(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentWall> iron_wall = HELPER.wall(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentWall> gold_wall = HELPER.wall(OrnamentBuilders.GOLD);
@@ -295,6 +311,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentWall> oxidized_copper_wall = HELPER.wall(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentWall> magma_wall = HELPER.wall(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentWall> calcite_wall = HELPER.wall(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentWall> cut_copper_wall = HELPER.wall(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentWall> exposed_cut_copper_wall = HELPER.wall(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentWall> weathered_cut_copper_wall = HELPER.wall(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentWall> oxidized_cut_copper_wall = HELPER.wall(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentSaddleDoor> iron_saddle_door = HELPER.saddledoor(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentSaddleDoor> gold_saddle_door = HELPER.saddledoor(OrnamentBuilders.GOLD);
@@ -327,6 +347,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentSaddleDoor> oxidized_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.OXIDIZED_COPPER);
     public static final Supplier<OrnamentSaddleDoor> magma_saddle_door = HELPER.saddledoor(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentSaddleDoor> calcite_saddle_door = HELPER.saddledoor(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentSaddleDoor> cut_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentSaddleDoor> exposed_cut_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentSaddleDoor> weathered_cut_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentSaddleDoor> oxidized_cut_copper_saddle_door = HELPER.saddledoor(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<OrnamentSupport> iron_support = HELPER.support(OrnamentBuilders.IRON);
     public static final Supplier<OrnamentSupport> gold_support = HELPER.support(OrnamentBuilders.GOLD);
@@ -359,6 +383,10 @@ public class ModBlocks {
     public static final Supplier<OrnamentSupport> amethyst_support = HELPER.support(OrnamentBuilders.AMETHYST);
     public static final Supplier<OrnamentSupport> magma_support = HELPER.support(OrnamentBuilders.MAGMA);
     public static final Supplier<OrnamentSupport> calcite_support = HELPER.support(OrnamentBuilders.CALCITE);
+    public static final Supplier<OrnamentSupport> cut_copper_support = HELPER.support(OrnamentBuilders.CUT_COPPER);
+    public static final Supplier<OrnamentSupport> exposed_cut_copper_support = HELPER.support(OrnamentBuilders.EXPOSED_CUT_COPPER);
+    public static final Supplier<OrnamentSupport> weathered_cut_copper_support = HELPER.support(OrnamentBuilders.WEATHERED_CUT_COPPER);
+    public static final Supplier<OrnamentSupport> oxidized_cut_copper_support = HELPER.support(OrnamentBuilders.OXIDIZED_CUT_COPPER);
 
     public static final Supplier<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_COLUMN)));
 }

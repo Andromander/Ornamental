@@ -33,6 +33,10 @@ public class RemapHandler {
                 String oldname = name.replace("dirt", "grass");
                 registry.addAlias(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
             }
+            if (name.contains("cut_copper")) {
+                String oldname = name.replace("cut_", "");
+                registry.addAlias(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
+            }
         }
     }
 }

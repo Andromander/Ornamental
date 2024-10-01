@@ -30,6 +30,10 @@
     "ornamental:weathered_copper_fence_gate",
     "ornamental:oxidized_copper_fence_gate",
     "ornamental:magma_fence_gate",
-    "ornamental:calcite_fence_gate"
+    "ornamental:calcite_fence_gate",
+    "ornamental:cut_copper_fence_gate",
+    "ornamental:exposed_cut_copper_fence_gate",
+    "ornamental:weathered_cut_copper_fence_gate",
+    "ornamental:oxidized_cut_copper_fence_gate"
   ]
 }

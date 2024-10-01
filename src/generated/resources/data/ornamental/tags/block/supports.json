@@ -30,6 +30,10 @@
     "ornamental:oxidized_copper_support",
     "ornamental:amethyst_support",
     "ornamental:magma_support",
-    "ornamental:calcite_support"
+    "ornamental:calcite_support",
+    "ornamental:cut_copper_support",
+    "ornamental:exposed_cut_copper_support",
+    "ornamental:weathered_cut_copper_support",
+    "ornamental:oxidized_cut_copper_support"
   ]
 }

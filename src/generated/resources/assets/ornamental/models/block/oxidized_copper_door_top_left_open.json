@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/door_top_left_open",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "side": "ornamental:block/oxidized_copper_door_top",
-    "top": "ornamental:block/oxidized_copper_door_top"
-  }
-}

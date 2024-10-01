@@ -110,6 +110,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemFence(ModBlocks.oxidized_copper_fence, "oxidized_copper");
         blockItemFence(ModBlocks.magma_fence, "magma");
         blockItemFence(ModBlocks.calcite_fence, "calcite");
+        blockItemFence(ModBlocks.cut_copper_fence, "cut_copper");
+        blockItemFence(ModBlocks.exposed_cut_copper_fence, "exposed_cut_copper");
+        blockItemFence(ModBlocks.weathered_cut_copper_fence, "weathered_cut_copper");
+        blockItemFence(ModBlocks.oxidized_cut_copper_fence, "oxidized_cut_copper");
 
         blockItemTrapdoor(ModBlocks.gold_trapdoor);
         blockItemTrapdoor(ModBlocks.diamond_trapdoor);
@@ -135,12 +139,12 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemTrapdoor(ModBlocks.blue_ice_trapdoor);
         blockItemTrapdoor(ModBlocks.netherite_trapdoor);
         blockItemTrapdoor(ModBlocks.amethyst_trapdoor);
-        blockItemTrapdoor(ModBlocks.copper_trapdoor);
-        blockItemTrapdoor(ModBlocks.exposed_copper_trapdoor);
-        blockItemTrapdoor(ModBlocks.weathered_copper_trapdoor);
-        blockItemTrapdoor(ModBlocks.oxidized_copper_trapdoor);
         blockItemTrapdoor(ModBlocks.magma_trapdoor);
         blockItemTrapdoor(ModBlocks.calcite_trapdoor);
+        blockItemTrapdoor(ModBlocks.cut_copper_trapdoor);
+        blockItemTrapdoor(ModBlocks.exposed_cut_copper_trapdoor);
+        blockItemTrapdoor(ModBlocks.weathered_cut_copper_trapdoor);
+        blockItemTrapdoor(ModBlocks.oxidized_cut_copper_trapdoor);
 
         blockItem(ModBlocks.iron_fence_gate);
         blockItem(ModBlocks.gold_fence_gate);
@@ -173,6 +177,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItem(ModBlocks.oxidized_copper_fence_gate);
         blockItem(ModBlocks.magma_fence_gate);
         blockItem(ModBlocks.calcite_fence_gate);
+        blockItem(ModBlocks.cut_copper_fence_gate);
+        blockItem(ModBlocks.exposed_cut_copper_fence_gate);
+        blockItem(ModBlocks.weathered_cut_copper_fence_gate);
+        blockItem(ModBlocks.oxidized_cut_copper_fence_gate);
 
         blockItemModel(ModBlocks.gold_door);
         blockItemModel(ModBlocks.diamond_door);
@@ -198,12 +206,12 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemModel(ModBlocks.blue_ice_door);
         blockItemModel(ModBlocks.netherite_door);
         blockItemModel(ModBlocks.amethyst_door);
-        blockItemModel(ModBlocks.copper_door);
-        blockItemModel(ModBlocks.exposed_copper_door);
-        blockItemModel(ModBlocks.weathered_copper_door);
-        blockItemModel(ModBlocks.oxidized_copper_door);
         blockItemModel(ModBlocks.magma_door);
         blockItemModel(ModBlocks.calcite_door);
+        blockItemModel(ModBlocks.cut_copper_door);
+        blockItemModel(ModBlocks.exposed_cut_copper_door);
+        blockItemModel(ModBlocks.weathered_cut_copper_door);
+        blockItemModel(ModBlocks.oxidized_cut_copper_door);
 
         blockItemPole(ModBlocks.iron_pole, "iron_block");
         blockItemPole(ModBlocks.gold_pole, "gold_block");
@@ -236,6 +244,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemPole(ModBlocks.oxidized_copper_pole, "oxidized_copper");
         blockItemPole(ModBlocks.magma_pole, "magma");
         blockItemPole(ModBlocks.calcite_pole, "calcite");
+        blockItemPole(ModBlocks.cut_copper_pole, "cut_copper");
+        blockItemPole(ModBlocks.exposed_cut_copper_pole, "exposed_cut_copper");
+        blockItemPole(ModBlocks.weathered_cut_copper_pole, "weathered_cut_copper");
+        blockItemPole(ModBlocks.oxidized_cut_copper_pole, "oxidized_cut_copper");
 
         blockItemBeam(ModBlocks.iron_beam, "iron_block");
         blockItemBeam(ModBlocks.gold_beam, "gold_block");
@@ -268,6 +280,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemBeam(ModBlocks.oxidized_copper_beam, "oxidized_copper");
         blockItemBeam(ModBlocks.magma_beam, "magma");
         blockItemBeam(ModBlocks.calcite_beam, "calcite");
+        blockItemBeam(ModBlocks.cut_copper_beam, "cut_copper");
+        blockItemBeam(ModBlocks.exposed_cut_copper_beam, "exposed_cut_copper");
+        blockItemBeam(ModBlocks.weathered_cut_copper_beam, "weathered_cut_copper");
+        blockItemBeam(ModBlocks.oxidized_cut_copper_beam, "oxidized_cut_copper");
 
         blockItemWall(ModBlocks.iron_wall, "iron_block");
         blockItemWall(ModBlocks.gold_wall, "gold_block");
@@ -297,6 +313,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemWall(ModBlocks.oxidized_copper_wall, "oxidized_copper");
         blockItemWall(ModBlocks.magma_wall, "magma");
         blockItemWall(ModBlocks.calcite_wall, "calcite");
+        blockItemWall(ModBlocks.cut_copper_wall, "cut_copper");
+        blockItemWall(ModBlocks.exposed_cut_copper_wall, "exposed_cut_copper");
+        blockItemWall(ModBlocks.weathered_cut_copper_wall, "weathered_cut_copper");
+        blockItemWall(ModBlocks.oxidized_cut_copper_wall, "oxidized_cut_copper");
 
         blockItemSaddleDoorV(ModBlocks.iron_saddle_door, "iron_trapdoor");
         blockItemSaddleDoor(ModBlocks.gold_saddle_door, "gold");
@@ -323,12 +343,16 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSaddleDoor(ModBlocks.blue_ice_saddle_door, "blue_ice");
         blockItemSaddleDoor(ModBlocks.netherite_saddle_door, "netherite");
         blockItemSaddleDoor(ModBlocks.amethyst_saddle_door, "amethyst");
-        blockItemSaddleDoor(ModBlocks.copper_saddle_door, "copper");
-        blockItemSaddleDoor(ModBlocks.exposed_copper_saddle_door, "exposed_copper");
-        blockItemSaddleDoor(ModBlocks.weathered_copper_saddle_door, "weathered_copper");
-        blockItemSaddleDoor(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper");
+        blockItemSaddleDoorV(ModBlocks.copper_saddle_door, "copper_trapdoor");
+        blockItemSaddleDoorV(ModBlocks.exposed_copper_saddle_door, "exposed_copper_trapdoor");
+        blockItemSaddleDoorV(ModBlocks.weathered_copper_saddle_door, "weathered_copper_trapdoor");
+        blockItemSaddleDoorV(ModBlocks.oxidized_copper_saddle_door, "oxidized_copper_trapdoor");
         blockItemSaddleDoor(ModBlocks.magma_saddle_door, "magma");
         blockItemSaddleDoor(ModBlocks.calcite_saddle_door, "calcite");
+        blockItemSaddleDoor(ModBlocks.cut_copper_saddle_door, "cut_copper");
+        blockItemSaddleDoor(ModBlocks.exposed_cut_copper_saddle_door, "exposed_cut_copper");
+        blockItemSaddleDoor(ModBlocks.weathered_cut_copper_saddle_door, "weathered_cut_copper");
+        blockItemSaddleDoor(ModBlocks.oxidized_cut_copper_saddle_door, "oxidized_cut_copper");
 
         blockItemSupport(ModBlocks.iron_support, "iron_block");
         blockItemSupport(ModBlocks.gold_support, "gold_block");
@@ -361,6 +385,10 @@ public class OrnamentalItemModels extends OrnamentalItemModelProvider {
         blockItemSupport(ModBlocks.amethyst_support, "amethyst_block");
         blockItemSupport(ModBlocks.magma_support, "magma");
         blockItemSupport(ModBlocks.calcite_support, "calcite");
+        blockItemSupport(ModBlocks.cut_copper_support, "cut_copper");
+        blockItemSupport(ModBlocks.exposed_cut_copper_support, "exposed_cut_copper");
+        blockItemSupport(ModBlocks.weathered_cut_copper_support, "weathered_cut_copper");
+        blockItemSupport(ModBlocks.oxidized_cut_copper_support, "oxidized_cut_copper");
 
         for (Supplier<? extends Item> item : ModCreativeTabs.SPAWN_EGGS) {
             eggItem(item);

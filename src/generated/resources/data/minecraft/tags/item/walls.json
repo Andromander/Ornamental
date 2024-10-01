@@ -27,6 +27,10 @@
     "ornamental:weathered_copper_wall",
     "ornamental:oxidized_copper_wall",
     "ornamental:magma_wall",
-    "ornamental:calcite_wall"
+    "ornamental:calcite_wall",
+    "ornamental:cut_copper_wall",
+    "ornamental:exposed_cut_copper_wall",
+    "ornamental:weathered_cut_copper_wall",
+    "ornamental:oxidized_cut_copper_wall"
   ]
 }
