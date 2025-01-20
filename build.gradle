@@ -70,7 +70,7 @@ runs {
         programArgument '--nogui'
     }
 
-    data {
+    clientData {
         workingDirectory project.file('run-data')
         programArguments.addAll '--mod', 'ornamental', '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', file('src/generated/resources/').getAbsolutePath()
     }
