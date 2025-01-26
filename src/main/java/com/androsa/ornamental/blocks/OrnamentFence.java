@@ -13,23 +13,22 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -90,6 +89,11 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     }
 
     @Override
+    public BubbleColumnDirection getBubbleColumnDirection(BlockState state) {
+        return builder.bubbleDirection;
+    }
+
+    @Override
     public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         if (builder.spreadChance == -1) {
             return super.getFlammability(state, level, pos, direction);
@@ -118,19 +122,19 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState facing, LevelAccessor level, BlockPos currentPos, BlockPos nearPos) {
-        if (builder.createBubbles) {
+    public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos currentPos, Direction direction, BlockPos nearPos, BlockState facing, RandomSource random) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             if (direction == Direction.UP && facing.is(Blocks.WATER)) {
-                level.scheduleTick(currentPos, this, builder.tickSchedule);
+                access.scheduleTick(currentPos, this, builder.tickSchedule);
             }
         }
 
-        return super.updateShape(state, direction, facing, level, currentPos, nearPos);
+        return super.updateShape(state, level, access, currentPos, direction, nearPos, facing, random);
     }
 
     @Override
     @Nonnull
-    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (builder.convertPredicates != null) {
             for (BlockConverter converter : builder.convertPredicates) {
                 if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
@@ -142,7 +146,7 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
         return super.useItemOn(stack, state, worldIn, pos, player, hand, result);
     }
 
-    private ItemInteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
@@ -151,14 +155,14 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
         } else {
             itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     @Deprecated
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (builder.createBubbles) {
-            CustomBubbleColumnBlock.updateColumn(level, pos.above(), state);
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
+            BubbleColumnBlock.updateColumn(level, pos.above(), state);
         }
     }
 
@@ -167,7 +171,7 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
-            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock()) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
@@ -186,14 +190,14 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
-            world.neighborChanged(pos, builder.meltResult, pos);
+            world.neighborChanged(pos, builder.meltResult, null);
         }
     }
 
     @Override
     @Deprecated
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState nearstate, boolean moving) {
-        if (builder.createBubbles) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             level.scheduleTick(pos, this, builder.tickSchedule);
         }
     }

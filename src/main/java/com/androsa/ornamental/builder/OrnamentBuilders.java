@@ -11,12 +11,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -448,7 +448,7 @@ public class OrnamentBuilders {
             .doEmissiveRendering()
             .setCanEntitySpawn((state, reader, pos, type) -> type.fireImmune())
             .floorHazard(new FloorHazard((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity, level -> level.damageSources().hotFloor(), 1.0F))
-            .bubbleUnderwater(20, true, true)
+            .bubbleUnderwater(BubbleColumnDirection.DOWNWARD, 20, true)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.INFINIBURN_OVERWORLD, OrnamentalBlockTags.PICKAXE_TOOL)));
 
     public static final OrnamentBuilder CALCITE = new OrnamentBuilder("calcite")

@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,9 +79,8 @@ public class OrnamentBuilder {
     public List<SoundEvent> projectileHitSounds = new ArrayList<>();
     public List<BlockConverter> convertPredicates = null;
     public FloorHazard floorHazard = null;
-    public boolean createBubbles = false;
+    public BubbleColumnDirection bubbleDirection = BubbleColumnDirection.NONE;
     public boolean extinguishes = false;
-    public boolean bubbleDragDown = false;
     public int tickSchedule = 0;
     public MasterRegistryHelper.TagHelper tags = new MasterRegistryHelper.TagHelper(new ArrayList<>(), new ArrayList<>());
 
@@ -133,9 +133,8 @@ public class OrnamentBuilder {
         this.projectileHitSounds = builder.projectileHitSounds;
         this.convertPredicates = builder.convertPredicates;
         this.floorHazard = builder.floorHazard;
-        this.createBubbles = builder.createBubbles;
+        this.bubbleDirection = builder.bubbleDirection;
         this.extinguishes = builder.extinguishes;
-        this.bubbleDragDown = builder.bubbleDragDown;
         this.tickSchedule = builder.tickSchedule;
         this.tags = builder.tags;
     }
@@ -464,12 +463,10 @@ public class OrnamentBuilder {
      * Note that the bubble column created is not a BubbleColumnBlock but a fake copy of one. Don't blame me, the logic is hard-coded.
      * @param tick the amount of ticks to schedule an update.
      * @param extinguish if the block emits smoke and extinguish noises. If true, the OrnamentBuilder must enable {@link OrnamentBuilder#ticks()}.
-     * @param dragdown if the bubble column pulls down entities.
      */
-    public OrnamentBuilder bubbleUnderwater(int tick, boolean extinguish, boolean dragdown) {
-        this.createBubbles = true;
+    public OrnamentBuilder bubbleUnderwater(BubbleColumnDirection direction, int tick, boolean extinguish) {
+        this.bubbleDirection = direction;
         this.extinguishes = extinguish;
-        this.bubbleDragDown = dragdown;
         this.tickSchedule = tick;
         return this;
     }

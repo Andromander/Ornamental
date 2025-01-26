@@ -14,7 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -27,10 +26,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
@@ -42,7 +43,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentSaddleDoor::new));
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -107,14 +108,14 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     @Override
     @Nonnull
     @Deprecated
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighbor, LevelAccessor accessor, BlockPos pos, BlockPos neighborpos) {
-        if (builder.createBubbles) {
+    public BlockState updateShape(BlockState state, LevelReader accessor, ScheduledTickAccess ticker, BlockPos pos, Direction direction, BlockPos neighborpos, BlockState neighbor, RandomSource random) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             if (direction == Direction.UP && neighbor.is(Blocks.WATER)) {
-                accessor.scheduleTick(pos, this, builder.tickSchedule);
+                ticker.scheduleTick(pos, this, builder.tickSchedule);
             }
         }
 
-        return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighbor, accessor, pos, neighborpos);
+        return direction == Direction.DOWN && !state.canSurvive(accessor, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, accessor, ticker, pos, direction, neighborpos, neighbor, random);
     }
 
     @Override
@@ -174,14 +175,14 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
             worldIn.setBlock(pos, state, 10);
             worldIn.playSound(player, pos, state.getValue(OPEN) ? this.openSound : this.closeSound, SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.1F + 0.9F);
             worldIn.gameEvent(player, state.getValue(OPEN) ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-            return InteractionResult.sidedSuccess(worldIn.isClientSide());
+            return InteractionResult.SUCCESS;
         }
     }
 
     @Override
     @Nonnull
     @Deprecated
-    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (builder.convertPredicates != null) {
             for (BlockConverter converter : builder.convertPredicates) {
                 if (converter.predicate().test(state, worldIn, pos, player, hand, result)) {
@@ -193,7 +194,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         return super.useItemOn(stack, state, worldIn, pos, player, hand, result);
     }
 
-    private ItemInteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
@@ -202,12 +203,12 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         } else {
             itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
-        return ItemInteractionResult.sidedSuccess(worldIn.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     @Deprecated
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos frompos, boolean moving) {
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, Orientation frompos, boolean moving) {
         boolean flag = level.hasNeighborSignal(pos);
         if (!this.defaultBlockState().is(block) && flag != state.getValue(POWERED)) {
             if (flag != state.getValue(OPEN)) {
@@ -262,8 +263,8 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     @Override
     @Deprecated
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (builder.createBubbles) {
-            CustomBubbleColumnBlock.updateColumn(level, pos.above(), state);
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
+            BubbleColumnBlock.updateColumn(level, pos.above(), state);
         }
     }
 
@@ -272,7 +273,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
-            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(worldIn, pos)) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock()) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
@@ -291,14 +292,14 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
-            world.neighborChanged(pos, builder.meltResult, pos);
+            world.neighborChanged(pos, builder.meltResult, null);
         }
     }
 
     @Override
     @Deprecated
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState nearstate, boolean moving) {
-        if (builder.createBubbles) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             level.scheduleTick(pos, this, builder.tickSchedule);
         }
     }

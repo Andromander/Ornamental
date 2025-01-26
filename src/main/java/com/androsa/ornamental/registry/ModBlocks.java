@@ -387,6 +387,4 @@ public class ModBlocks {
     public static final Supplier<OrnamentSupport> exposed_cut_copper_support = HELPER.support(OrnamentBuilders.EXPOSED_CUT_COPPER);
     public static final Supplier<OrnamentSupport> weathered_cut_copper_support = HELPER.support(OrnamentBuilders.WEATHERED_CUT_COPPER);
     public static final Supplier<OrnamentSupport> oxidized_cut_copper_support = HELPER.support(OrnamentBuilders.OXIDIZED_CUT_COPPER);
-
-    public static final Supplier<CustomBubbleColumnBlock> fake_bubble_column = BLOCKS.register("fake_bubble_column", () -> new CustomBubbleColumnBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUBBLE_COLUMN)));
 }

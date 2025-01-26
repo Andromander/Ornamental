@@ -17,19 +17,17 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -44,6 +42,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -268,23 +267,23 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
 
     @Override
     @Deprecated
-    public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, LevelAccessor accessor, BlockPos pos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState state, LevelReader accessor, ScheduledTickAccess ticker, BlockPos pos, Direction direction, BlockPos facingPos, BlockState facingState, RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
-            accessor.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(accessor));
+            ticker.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(accessor));
         }
 
-        if (builder.createBubbles) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             if (direction == Direction.UP && facingState.is(Blocks.WATER)) {
-                accessor.scheduleTick(pos, this, builder.tickSchedule);
+                ticker.scheduleTick(pos, this, builder.tickSchedule);
             }
         }
 
-        return super.updateShape(state, direction, facingState, accessor, pos, facingPos);
+        return super.updateShape(state, accessor, ticker, pos,direction, facingPos, facingState, random);
     }
 
     @Override
     @Deprecated
-    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (builder.convertPredicates != null) {
             for (BlockConverter converter : builder.convertPredicates) {
                 if (converter.predicate().test(state, level, pos, player, hand, result)) {
@@ -300,7 +299,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
                 case Y -> TB_CONNECT;
                 case Z -> NS_CONNECT;
             }, true)) {
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
 
@@ -310,14 +309,14 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
                 case Y -> TB_CONNECT;
                 case Z -> NS_CONNECT;
             }, false)) {
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, result);
     }
 
-    private ItemInteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
+    private InteractionResult changeBlock(ItemStack itemstack, Supplier<? extends Block> newblock, SoundEvent sound, Level worldIn, BlockPos pos, Player player, InteractionHand hand) {
         worldIn.setBlockAndUpdate(pos, newblock.get().withPropertiesOf(worldIn.getBlockState(pos)));
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
 
@@ -326,7 +325,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
         } else {
             itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     private boolean editBlock(BlockState state, Level level, BlockPos pos, BooleanProperty connection, boolean swap) {
@@ -350,8 +349,8 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     @Override
     @Deprecated
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (builder.createBubbles) {
-            CustomBubbleColumnBlock.updateColumn(level, pos.above(), state);
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
+            BubbleColumnBlock.updateColumn(level, pos.above(), state);
         }
     }
 
@@ -360,7 +359,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
         super.randomTick(state, level, pos, source);
         if (builder.canMelt) {
-            if (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(level, pos)) {
+            if (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock()) {
                 this.turnIntoWater(level, pos);
             }
         }
@@ -379,13 +378,13 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());
-            world.neighborChanged(pos, builder.meltResult, pos);
+            world.neighborChanged(pos, builder.meltResult, null);
         }
     }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState neighbour, boolean moving) {
-        if (builder.createBubbles) {
+        if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
             level.scheduleTick(pos, this, builder.tickSchedule);
         }
     }
