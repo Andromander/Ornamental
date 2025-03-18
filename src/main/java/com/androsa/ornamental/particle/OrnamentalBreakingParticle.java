@@ -3,38 +3,38 @@ package com.androsa.ornamental.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BreakingItemParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class OrnamentalBreakingParticle extends BreakingItemParticle {
 
-    protected OrnamentalBreakingParticle(ClientLevel world, double x, double y, double z, ItemStack stack) {
+    protected OrnamentalBreakingParticle(ClientLevel world, double x, double y, double z, ItemStackRenderState stack) {
         super(world, x, y, z, stack);
     }
 
-    public static class LapisFactory implements ParticleProvider<SimpleParticleType> {
+    public static class LapisFactory extends BreakingItemParticle.ItemParticleProvider<SimpleParticleType> {
         public Particle createParticle(SimpleParticleType particle, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.LAPIS_LAZULI));
+            return new OrnamentalBreakingParticle(world, x, y, z, calculateState(new ItemStack(Items.LAPIS_LAZULI), world));
         }
     }
 
-    public static class RedstoneFactory implements ParticleProvider<SimpleParticleType> {
+    public static class RedstoneFactory extends BreakingItemParticle.ItemParticleProvider<SimpleParticleType> {
         public Particle createParticle(SimpleParticleType particle, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.REDSTONE));
+            return new OrnamentalBreakingParticle(world, x, y, z, calculateState(new ItemStack(Items.REDSTONE), world));
         }
     }
 
-    public static class BrickFactory implements ParticleProvider<SimpleParticleType> {
+    public static class BrickFactory extends BreakingItemParticle.ItemParticleProvider<SimpleParticleType> {
         public Particle createParticle(SimpleParticleType particle, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.BRICK));
+            return new OrnamentalBreakingParticle(world, x, y, z, calculateState(new ItemStack(Items.BRICK), world));
         }
     }
 
-    public static class NetherBrickFactory implements ParticleProvider<SimpleParticleType> {
+    public static class NetherBrickFactory extends BreakingItemParticle.ItemParticleProvider<SimpleParticleType> {
         public Particle createParticle(SimpleParticleType particle, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new OrnamentalBreakingParticle(world, x, y, z, new ItemStack(Items.NETHER_BRICK));
+            return new OrnamentalBreakingParticle(world, x, y, z, calculateState(new ItemStack(Items.NETHER_BRICK), world));
         }
     }
 }
