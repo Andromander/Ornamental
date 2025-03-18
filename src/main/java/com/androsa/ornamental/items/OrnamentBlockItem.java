@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.FuelValues;
 
 public class OrnamentBlockItem extends BlockItem {
 
@@ -20,7 +21,7 @@ public class OrnamentBlockItem extends BlockItem {
     }
 
     @Override
-    public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
+    public int getBurnTime(ItemStack itemStack, RecipeType<?> type, FuelValues values) {
         if (index >= builder.burnTime.length || index < 0) {
             OrnamentalMod.LOGGER.debug("Index is out of Burn Time array! Index: {}, Array Length: {}, Builder: {}", index, builder.burnTime.length, builder.name);
             return 0;

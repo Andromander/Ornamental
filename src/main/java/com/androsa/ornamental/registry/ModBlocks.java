@@ -9,8 +9,6 @@ import com.androsa.ornamental.registry.helper.RegistryHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import com.google.common.collect.Lists;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
