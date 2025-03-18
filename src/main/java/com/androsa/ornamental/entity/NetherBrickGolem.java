@@ -4,6 +4,7 @@ import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.entity.projectile.NetherBrick;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -39,7 +40,7 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 
@@ -86,8 +87,8 @@ public class NetherBrickGolem extends OrnamentalGolem implements RangedAttackMob
     }
 
     @Override
-    public boolean hurt(DamageSource source, float multiplier) {
+    public boolean hurtServer(ServerLevel server, DamageSource source, float multiplier) {
         float modifier = source.is(ModTags.DamageTypes.NETHER_BRICK_GOLEM_RESIST) ? 0.5F : multiplier;
-        return super.hurt(source, modifier);
+        return super.hurtServer(server, source, modifier);
     }
 }

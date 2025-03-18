@@ -29,7 +29,7 @@ public class PackedIce extends ThrowableItemProjectile {
     }
 
     public PackedIce(EntityType<? extends ThrowableItemProjectile> type, Level world, LivingEntity entity) {
-        super(type, entity, world);
+        super(type, entity, world, new ItemStack(Items.SNOWBALL));
     }
 
     @Override

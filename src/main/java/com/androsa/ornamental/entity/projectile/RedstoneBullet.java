@@ -25,7 +25,7 @@ public class RedstoneBullet extends ThrowableItemProjectile {
     }
 
     public RedstoneBullet(Level world, LivingEntity entity) {
-        super(ModEntities.REDSTONE_BULLET.get(), entity, world);
+        super(ModEntities.REDSTONE_BULLET.get(), entity, world, new ItemStack(Items.REDSTONE));
     }
 
     protected ParticleOptions makeParticle() {

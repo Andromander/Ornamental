@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.QuartzGolem;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
  * QuartzGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class QuartzGolemModel<T extends QuartzGolem> extends AbstractGolemModel<T> {
+public class QuartzGolemModel extends AbstractGolemModel<GolemRenderState> {
     public ModelPart tail1;
     public ModelPart tail2;
     public ModelPart tail3;
@@ -75,17 +75,11 @@ public class QuartzGolemModel<T extends QuartzGolem> extends AbstractGolemModel<
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = headPitch * ((float)Math.PI / 180F);
-        this.tail1.xRot = Mth.sin(ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
-        this.tail2.xRot = Mth.sin(ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
-        this.tail3.xRot = Mth.sin(ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
-    }
-
-    @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        //TODO: Wave arms gently because we are flying. Don't swing
-        super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
+    public void setupAnim(GolemRenderState entity) {
+        this.head.yRot = entity.yRot * ((float)Math.PI / 180F);
+        this.head.xRot = entity.xRot * ((float)Math.PI / 180F);
+        this.tail1.xRot = Mth.sin(entity.ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
+        this.tail2.xRot = Mth.sin(entity.ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
+        this.tail3.xRot = Mth.sin(entity.ageInTicks * 0.067F) * 0.1F + 0.3490658503988659F;
     }
 }

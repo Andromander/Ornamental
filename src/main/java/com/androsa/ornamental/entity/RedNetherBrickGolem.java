@@ -41,9 +41,9 @@ public class RedNetherBrickGolem extends OrnamentalGolem implements RangedAttack
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, 3, false, false, (target) ->
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Witch.class, 3, false, false, (target, server) ->
                 target instanceof Witch));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 

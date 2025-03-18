@@ -3,6 +3,7 @@ package com.androsa.ornamental.entity.renderer.layer;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.CopperGolem;
 import com.androsa.ornamental.entity.model.CopperGolemModel;
+import com.androsa.ornamental.entity.model.renderstate.CopperGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,7 +13,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class CopperGlowLayer<T extends CopperGolem, M extends CopperGolemModel<T>> extends RenderLayer<T,M> {
+public class CopperGlowLayer<T extends CopperGolemRenderState, M extends CopperGolemModel> extends RenderLayer<T, M> {
 
     private static final RenderType GLOW_LAYER = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/copper_golem/copper_golem_charged_glow.png"));
 
@@ -20,8 +21,8 @@ public class CopperGlowLayer<T extends CopperGolem, M extends CopperGolemModel<T
         super(parent);
     }
 
-    public void render(PoseStack stack, MultiBufferSource multibuffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
-        if (entity.isCharged()) {
+    public void render(PoseStack stack, MultiBufferSource multibuffer, int light, CopperGolemRenderState entity, float v1, float v2) {
+        if (entity.isCharged) {
             VertexConsumer vertexconsumer = multibuffer.getBuffer(GLOW_LAYER);
             this.getParentModel().renderToBuffer(stack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY);
         }

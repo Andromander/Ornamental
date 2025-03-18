@@ -24,7 +24,11 @@ public class Brick extends ThrowableItemProjectile {
     }
 
     public Brick(EntityType<? extends Brick> type, Level world, LivingEntity entity) {
-        super(type, entity, world);
+        this(type, world, entity, new ItemStack(Items.BRICK));
+    }
+
+    public Brick(EntityType<? extends Brick> type, Level world, LivingEntity entity, ItemStack stack) {
+        super(type, entity, world, stack);
     }
 
     protected ParticleOptions makeParticle() {

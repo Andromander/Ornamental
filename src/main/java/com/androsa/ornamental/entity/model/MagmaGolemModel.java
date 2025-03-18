@@ -2,8 +2,7 @@ package com.androsa.ornamental.entity.model;
 // Made with Blockbench 4.6.5
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 
-
-import com.androsa.ornamental.entity.MagmaGolem;
+import com.androsa.ornamental.entity.model.renderstate.MagmaGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +11,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-public class MagmaGolemModel<T extends MagmaGolem> extends AbstractGolemModel<T> {
+public class MagmaGolemModel extends AbstractGolemModel<MagmaGolemRenderState> {
 
 	private final ModelPart flame;
 	private final ModelPart flameRot;
@@ -239,11 +238,11 @@ public class MagmaGolemModel<T extends MagmaGolem> extends AbstractGolemModel<T>
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+	public void setupAnim(MagmaGolemRenderState entity) {
+		super.setupAnim(entity);
 
-		if (entity.getState() == 1) {
-			float f = ageInTicks * (float)Math.PI * 0.2F;
+		if (entity.magmaState == 1) {
+			float f = entity.ageInTicks * (float)Math.PI * 0.2F;
 			float xrot = Mth.sin(f * 2.0F) * 0.3F;
 
 			this.flame.xRot = xrot - 0.9553F;
@@ -255,7 +254,7 @@ public class MagmaGolemModel<T extends MagmaGolem> extends AbstractGolemModel<T>
 			this.setFins(0.7854F);
 			this.setBraces(0.0873F, 2.0F, 4.0F);
 		} else {
-			float f = ageInTicks * (float)Math.PI * 0.1F;
+			float f = entity.ageInTicks * (float)Math.PI * 0.1F;
 			float xrot = Mth.sin(f * 2.0F) * 0.3F;
 
 			this.flame.xRot = xrot - 0.9553F;

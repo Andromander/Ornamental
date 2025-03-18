@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.HayGolem;
+import com.androsa.ornamental.entity.model.renderstate.FlammableGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * HayGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class HayGolemModel<T extends HayGolem> extends AbstractGolemModel<T> {
+public class HayGolemModel extends AbstractGolemModel<FlammableGolemRenderState> {
 
     public HayGolemModel(ModelPart root) {
         super(root, true, true, true, false);
@@ -59,8 +59,9 @@ public class HayGolemModel<T extends HayGolem> extends AbstractGolemModel<T> {
     }
 
     @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity.isOnFire()) {
+    public void setupAnim(FlammableGolemRenderState entity) {
+        super.setupAnim(entity);
+        if (entity.isOnFire) {
             armR.zRot = 0.7F;
             armL.zRot = -0.7F;
         } else {

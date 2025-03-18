@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -78,7 +79,7 @@ public class CalciteGolem extends OrnamentalGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Warden));
     }
 
@@ -192,7 +193,7 @@ public class CalciteGolem extends OrnamentalGolem {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel server, DamageSource source, float amount) {
         if (source.is(DamageTypes.SONIC_BOOM)) {
             if (source.getEntity() instanceof Warden && this.getTarget() != source.getEntity()) {
                 this.setTarget((LivingEntity) source.getEntity());
@@ -209,7 +210,7 @@ public class CalciteGolem extends OrnamentalGolem {
             }
         }
 
-        return super.hurt(source, amount);
+        return super.hurtServer(server, source, amount);
     }
 
     @Override

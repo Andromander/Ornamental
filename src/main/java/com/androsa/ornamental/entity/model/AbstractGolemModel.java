@@ -1,18 +1,16 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.OrnamentalGolem;
-import net.minecraft.client.model.HierarchicalModel;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-
-import javax.annotation.Nonnull;
+import net.minecraft.util.Mth;
 
 /**
  * Abstract class holding basic parts: Head, Torso, Body, 2 Arms, and 2 Legs. These are only fields
  * Not all fields are required. Special cases can ignore certain fields
  */
-public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends HierarchicalModel<T> {
+public abstract class AbstractGolemModel<T extends GolemRenderState> extends EntityModel<T> {
 
-    public final ModelPart root;
     public ModelPart head;
     public ModelPart legL;
     public ModelPart legR;
@@ -22,7 +20,7 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
     private final boolean useTimer;
 
     public AbstractGolemModel(ModelPart root, boolean hasHead, boolean hasArms, boolean hasLegs, boolean useTimer) {
-        this.root = root;
+        super(root);
         if (hasHead) {
             this.head = root.getChild("head");
         }
@@ -39,40 +37,27 @@ public abstract class AbstractGolemModel<T extends OrnamentalGolem> extends Hier
     }
 
     @Override
-    @Nonnull
-    public ModelPart root() {
-        return this.root;
-    }
-
-    @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = headPitch * ((float)Math.PI / 180F);
-        this.legL.xRot = -1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
-        this.legR.xRot = 1.5F * this.triangleWave(limbSwing, 13.0F) * limbSwingAmount;
+    public void setupAnim(T entity) {
+        super.setupAnim(entity);
+        this.head.yRot = entity.yRot * ((float)Math.PI / 180F);
+        this.head.xRot = entity.xRot * ((float)Math.PI / 180F);
+        if (hasArms) {
+            float attack = entity.attackTicksRemaining;
+            if (attack > 0 && useTimer) {
+                this.armR.xRot = -2.0F + 1.5F * Mth.triangleWave(attack, 10.0F);
+                this.armL.xRot = -2.0F + 1.5F * Mth.triangleWave(attack, 10.0F);
+            } else {
+                swingArms(entity, entity.walkAnimationPos, entity.walkAnimationSpeed);
+            }
+        }
+        this.legL.xRot = -1.5F * Mth.triangleWave(entity.walkAnimationPos, 13.0F) * entity.walkAnimationSpeed;
+        this.legR.xRot = 1.5F * Mth.triangleWave(entity.walkAnimationPos, 13.0F) * entity.walkAnimationSpeed;
         this.legL.yRot = 0.0F;
         this.legR.yRot = 0.0F;
     }
 
-    @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (hasArms) {
-            int attack = entity.getAttackTimer();
-            if (attack > 0 && useTimer) {
-                this.armR.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
-                this.armL.xRot = -2.0F + 1.5F * this.triangleWave((float)attack - partialTicks, 10.0F);
-            } else {
-                swingArms(limbSwing, limbSwingAmount);
-            }
-        }
-    }
-
-    protected void swingArms(float limbSwing, float limbSwingAmount) {
-        this.armR.xRot = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-        this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-    }
-
-    protected float triangleWave(float limbSwing, float amount) {
-        return (Math.abs(limbSwing % amount - amount * 0.5F) - amount * 0.25F) / (amount * 0.25F);
+    protected void swingArms(T entity, float limbSwing, float limbSwingAmount) {
+        this.armR.xRot = (-0.2F + 1.5F * Mth.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
+        this.armL.xRot = (-0.2F - 1.5F * Mth.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
     }
 }

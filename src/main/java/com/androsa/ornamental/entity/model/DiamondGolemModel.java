@@ -1,6 +1,5 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.DiamondGolem;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +11,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * DiamondGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class DiamondGolemModel<T extends DiamondGolem> extends FlowerGolemModel<T> {
+public class DiamondGolemModel extends FlowerGolemModel {
 
     public DiamondGolemModel(ModelPart root) {
         super(root);

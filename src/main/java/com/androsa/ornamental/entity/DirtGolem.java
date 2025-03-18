@@ -41,7 +41,7 @@ public class DirtGolem extends OrnamentalGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 
@@ -73,9 +73,9 @@ public class DirtGolem extends OrnamentalGolem {
         if (itemstack.is(Items.BONE_MEAL)) {
 
             if (!this.level().isClientSide()) {
-                GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level());
+                GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 grass.copyPosition(this);
-                EventHooks.finalizeMobSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), MobSpawnType.CONVERSION, null);
+                EventHooks.finalizeMobSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), EntitySpawnReason.CONVERSION, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());

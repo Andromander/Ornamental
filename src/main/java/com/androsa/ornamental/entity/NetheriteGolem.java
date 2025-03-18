@@ -125,17 +125,22 @@ public class NetheriteGolem extends OrnamentalGolem {
         return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
-    public boolean doHurtTarget(Entity target) {
+    @Override
+    public boolean hurtServer(ServerLevel server, DamageSource source, float multiplier) {
+        return source != this.damageSources().wither() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE) && super.hurtServer(server, source, multiplier);
+    }
+
+    @Override
+    public boolean doHurtTarget(ServerLevel server, Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float multiplier = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         DamageSource source = this.damageSources().mobAttack(this);
-        boolean flag = target.hurt(source, multiplier);
+        boolean flag = target.hurtServer(server, source, multiplier);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.5F, 0.0D));
-            if (this.level() instanceof ServerLevel server)
-                EnchantmentHelper.doPostAttackEffects(server, target, source);
+            EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
@@ -183,10 +188,5 @@ public class NetheriteGolem extends OrnamentalGolem {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-    }
-
-    @Override
-    public boolean hurt(DamageSource source, float multiplier) {
-        return source != this.damageSources().wither() && !source.is(DamageTypeTags.IS_EXPLOSION) && !source.is(DamageTypeTags.IS_FIRE) && super.hurt(source, multiplier);
     }
 }

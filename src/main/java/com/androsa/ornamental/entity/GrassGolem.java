@@ -16,10 +16,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -53,7 +53,7 @@ public class GrassGolem extends DirtGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -123,13 +123,13 @@ public class GrassGolem extends DirtGolem {
                 }
             }
             case ShovelItem shovel -> {
-                PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level());
+                PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 addFreshEntity(path);
                 itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             case HoeItem hoe -> {
-                DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level());
+                DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 addFreshEntity(dirt);
                 itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -152,18 +152,18 @@ public class GrassGolem extends DirtGolem {
         super.dropCustomDeathLoot(level, source, playerhurt);
         BlockState state = this.getFlower();
         if (state != null) {
-            this.spawnAtLocation(state.getBlock());
+            this.spawnAtLocation(level, state.getBlock());
         }
     }
 
     private void addFreshEntity(Mob entity) {
-        if (this.getFlower() != null) {
-            this.spawnAtLocation(new ItemStack(this.getFlower().getBlock().asItem()));
-        }
+        if (this.level() instanceof ServerLevel server) {
+            if (this.getFlower() != null) {
+                this.spawnAtLocation(server, new ItemStack(this.getFlower().getBlock().asItem()));
+            }
 
-        if (!this.level().isClientSide()) {
             entity.copyPosition(this);
-            EventHooks.finalizeMobSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.CONVERSION, null);
+            EventHooks.finalizeMobSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.CONVERSION, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());

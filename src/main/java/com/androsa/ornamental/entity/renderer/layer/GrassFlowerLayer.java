@@ -1,7 +1,7 @@
 package com.androsa.ornamental.entity.renderer.layer;
 
-import com.androsa.ornamental.entity.GrassGolem;
 import com.androsa.ornamental.entity.model.DirtGolemModel;
+import com.androsa.ornamental.entity.model.renderstate.FlowerGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -11,22 +11,22 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class GrassFlowerLayer<T extends GrassGolem, M extends DirtGolemModel<T>> extends RenderLayer<T, M> {
+public class GrassFlowerLayer<T extends FlowerGolemRenderState, M extends DirtGolemModel<T>> extends RenderLayer<T, M> {
 
     public GrassFlowerLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
-        if (!entity.isInvisible() && entity.getFlower() != null) {
+    public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float v1, float v2) {
+        if (!entity.isInvisible && entity.flower != null) {
             stack.pushPose();
             this.getParentModel().getHead().translateAndRotate(stack);
             stack.translate(0.0D, -0.43D, -0.05D);
             stack.mulPose(Axis.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.getFlower(), stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.flower, stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
             stack.popPose();
         }
     }

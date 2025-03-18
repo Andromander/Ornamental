@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.AmethystGolem;
+import com.androsa.ornamental.entity.model.renderstate.AmethystGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * AmethystGolem - Androsa
  * Created using Tabula 7.0.0
  */
-public class AmethystGolemModel<T extends AmethystGolem> extends AbstractGolemModel<T> {
+public class AmethystGolemModel extends AbstractGolemModel<AmethystGolemRenderState> {
     public ModelPart jaw;
     public ModelPart fingerLL;
     public ModelPart fingerRL;
@@ -150,8 +150,8 @@ public class AmethystGolemModel<T extends AmethystGolem> extends AbstractGolemMo
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (entity.isCasting()) {
+    public void setupAnim(AmethystGolemRenderState entity) {
+        if (entity.isCasting) {
             armL.xRot = -1.5F;
             armR.xRot = -1.5F;
             fingerLL.xRot = -1.0F;
@@ -174,7 +174,7 @@ public class AmethystGolemModel<T extends AmethystGolem> extends AbstractGolemMo
 
             this.reset = true;
         } else {
-            super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            super.setupAnim(entity);
         }
     }
 }

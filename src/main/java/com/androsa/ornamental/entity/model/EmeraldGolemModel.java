@@ -1,6 +1,5 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.EmeraldGolem;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +11,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * ModelIronGolem - Either Mojang or a mod author
  * Created using Tabula 7.0.0
  */
-public class EmeraldGolemModel<T extends EmeraldGolem> extends FlowerGolemModel<T> {
+public class EmeraldGolemModel extends FlowerGolemModel {
 
     public EmeraldGolemModel(ModelPart root) {
         super(root);

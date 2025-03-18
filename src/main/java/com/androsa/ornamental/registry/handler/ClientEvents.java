@@ -88,31 +88,31 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerRenders(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.GOLD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new GoldGolemModel<>(m.bakeLayer(ModelLocations.GOLD_GOLEM)), 0.6F));
-        event.registerEntityRenderer(ModEntities.DIAMOND_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new DiamondGolemModel<>(m.bakeLayer(ModelLocations.DIAMOND_GOLEM)), 0.4F));
-        event.registerEntityRenderer(ModEntities.EMERALD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new EmeraldGolemModel<>(m.bakeLayer(ModelLocations.EMERALD_GOLEM)), 0.5F));
-        event.registerEntityRenderer(ModEntities.LAPIS_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new LapisGolemModel<>(m.bakeLayer(ModelLocations.LAPIS_GOLEM)), 0.5F));
-        event.registerEntityRenderer(ModEntities.OBSIDIAN_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new ObsidianGolemModel<>(m.bakeLayer(ModelLocations.OBSIDIAN_GOLEM)), 0.8F));
-        event.registerEntityRenderer(ModEntities.COAL_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new CoalGolemModel<>(m.bakeLayer(ModelLocations.COAL_GOLEM)), 0.4F));
-        event.registerEntityRenderer(ModEntities.REDSTONE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new RedstoneGolemModel<>(m.bakeLayer(ModelLocations.REDSTONE_GOLEM)), 0.5F));
-        event.registerEntityRenderer(ModEntities.CLAY_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new ClayGolemModel<>(m.bakeLayer(ModelLocations.CLAY_GOLEM)), 0.4F));
-        event.registerEntityRenderer(ModEntities.DIRT_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new DirtGolemModel<>(m.bakeLayer(ModelLocations.DIRT_GOLEM)), 0.2F));
+        event.registerEntityRenderer(ModEntities.GOLD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new GoldGolemModel(m.bakeLayer(ModelLocations.GOLD_GOLEM)), "gold_golem", 0.6F));
+        event.registerEntityRenderer(ModEntities.DIAMOND_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new DiamondGolemModel(m.bakeLayer(ModelLocations.DIAMOND_GOLEM)), "diamond_golem", 0.4F));
+        event.registerEntityRenderer(ModEntities.EMERALD_GOLEM.get(), m -> new FlowerGolemRenderer<>(m, new EmeraldGolemModel(m.bakeLayer(ModelLocations.EMERALD_GOLEM)), "emerald_golem", 0.5F));
+        event.registerEntityRenderer(ModEntities.LAPIS_GOLEM.get(), m -> new ShootingGolemRender<>(m, new LapisGolemModel(m.bakeLayer(ModelLocations.LAPIS_GOLEM)), "lapis_golem", 0.5F ,true));
+        event.registerEntityRenderer(ModEntities.OBSIDIAN_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new ObsidianGolemModel(m.bakeLayer(ModelLocations.OBSIDIAN_GOLEM)), "obsidian_golem", 0.8F, true));
+        event.registerEntityRenderer(ModEntities.COAL_GOLEM.get(), m -> new FlammableGolemRenderer<>(m, new CoalGolemModel(m.bakeLayer(ModelLocations.COAL_GOLEM)), "coal_golem", 0.4F));
+        event.registerEntityRenderer(ModEntities.REDSTONE_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new RedstoneGolemModel(m.bakeLayer(ModelLocations.REDSTONE_GOLEM)), "redstone_golem", 0.5F, false));
+        event.registerEntityRenderer(ModEntities.CLAY_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new ClayGolemModel(m.bakeLayer(ModelLocations.CLAY_GOLEM)), "clay_golem", 0.4F, false));
+        event.registerEntityRenderer(ModEntities.DIRT_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new DirtGolemModel<>(m.bakeLayer(ModelLocations.DIRT_GOLEM)), "dirt_golem", 0.2F, false));
         event.registerEntityRenderer(ModEntities.GRASS_GOLEM.get(), m -> new GrassGolemRenderer<>(m, new DirtGolemModel<>(m.bakeLayer(ModelLocations.GRASS_GOLEM)), 0.2F));
-        event.registerEntityRenderer(ModEntities.HAY_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new HayGolemModel<>(m.bakeLayer(ModelLocations.HAY_GOLEM)), 0.3F));
-        event.registerEntityRenderer(ModEntities.PATH_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new DirtGolemModel<>(m.bakeLayer(ModelLocations.DIRT_PATH_GOLEM)), 0.2F));
-        event.registerEntityRenderer(ModEntities.BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new ClayGolemModel<>(m.bakeLayer(ModelLocations.BRICK_GOLEM)), 0.4F));
-        event.registerEntityRenderer(ModEntities.QUARTZ_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new QuartzGolemModel<>(m.bakeLayer(ModelLocations.QUARTZ_GOLEM)), 0.5F));
-        event.registerEntityRenderer(ModEntities.BONE_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new BoneGolemModel<>(m.bakeLayer(ModelLocations.BONE_GOLEM)), 0.6F));
-        event.registerEntityRenderer(ModEntities.NETHER_BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new NetherBrickGolemModel<>(m.bakeLayer(ModelLocations.NETHER_BRICK_GOLEM)), 0.4F));
-        event.registerEntityRenderer(ModEntities.RED_NETHER_BRICK_GOLEM.get(), m -> new HeavyGolemRenderer<>(m, new NetherBrickGolemModel<>(m.bakeLayer(ModelLocations.RED_NETHER_BRICK_GOLEM)), 0.4F));
+        event.registerEntityRenderer(ModEntities.HAY_GOLEM.get(), m -> new FlammableGolemRenderer<>(m, new HayGolemModel(m.bakeLayer(ModelLocations.HAY_GOLEM)), "hay_golem", 0.3F));
+        event.registerEntityRenderer(ModEntities.PATH_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new DirtGolemModel<>(m.bakeLayer(ModelLocations.DIRT_PATH_GOLEM)), "dirt_path_golem", 0.2F, false));
+        event.registerEntityRenderer(ModEntities.BRICK_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new ClayGolemModel(m.bakeLayer(ModelLocations.BRICK_GOLEM)), "brick_golem", 0.4F, true));
+        event.registerEntityRenderer(ModEntities.QUARTZ_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new QuartzGolemModel(m.bakeLayer(ModelLocations.QUARTZ_GOLEM)), "quartz_golem", 0.5F, false));
+        event.registerEntityRenderer(ModEntities.BONE_GOLEM.get(), m -> new ShootingGolemRender<>(m, new BoneGolemModel(m.bakeLayer(ModelLocations.BONE_GOLEM)), "bone_golem", 0.6F, true));
+        event.registerEntityRenderer(ModEntities.NETHER_BRICK_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new NetherBrickGolemModel(m.bakeLayer(ModelLocations.NETHER_BRICK_GOLEM)), "nether_brick_golem", 0.4F, true));
+        event.registerEntityRenderer(ModEntities.RED_NETHER_BRICK_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new NetherBrickGolemModel(m.bakeLayer(ModelLocations.RED_NETHER_BRICK_GOLEM)), "red_nether_brick_golem", 0.4F, true));
         event.registerEntityRenderer(ModEntities.ICE_GOLEM.get(), IceGolemTransparentRenderer::new);
-        event.registerEntityRenderer(ModEntities.PACKED_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, ModelLocations.PACKED_ICE_GOLEM));
-        event.registerEntityRenderer(ModEntities.BLUE_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, ModelLocations.BLUE_ICE_GOLEM));
-        event.registerEntityRenderer(ModEntities.NETHERITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new NetheriteGolemModel<>(m.bakeLayer(ModelLocations.NETHERITE_GOLEM)), 1.0F));
-        event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), m -> new CopperGolemRenderer<>(m, new CopperGolemModel<>(m.bakeLayer(ModelLocations.COPPER_GOLEM)), 1.0F));
-        event.registerEntityRenderer(ModEntities.AMETHYST_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new AmethystGolemModel<>(m.bakeLayer(ModelLocations.AMETHYST_GOLEM)), 1.0F));
-        event.registerEntityRenderer(ModEntities.MAGMA_GOLEM.get(), m -> new MagmaGolemRenderer<>(m, new MagmaGolemModel<>(m.bakeLayer(ModelLocations.MAGMA_GOLEM)), 0.5F));
-        event.registerEntityRenderer(ModEntities.CALCITE_GOLEM.get(), m -> new AbstractGolemRenderer<>(m, new CalciteGolemModel<>(m.bakeLayer(ModelLocations.CALCITE_GOLEM)), 0.5F));
+        event.registerEntityRenderer(ModEntities.PACKED_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, ModelLocations.PACKED_ICE_GOLEM, "packed_ice_golem"));
+        event.registerEntityRenderer(ModEntities.BLUE_ICE_GOLEM.get(), m -> new IceGolemRenderer<>(m, ModelLocations.BLUE_ICE_GOLEM, "blue_ice_golem"));
+        event.registerEntityRenderer(ModEntities.NETHERITE_GOLEM.get(), m -> new BasicGolemRenderer<>(m, new NetheriteGolemModel(m.bakeLayer(ModelLocations.NETHERITE_GOLEM)), "netherite_golem", 1.0F, false));
+        event.registerEntityRenderer(ModEntities.COPPER_GOLEM.get(), m -> new CopperGolemRenderer<>(m, new CopperGolemModel(m.bakeLayer(ModelLocations.COPPER_GOLEM)), 1.0F));
+        event.registerEntityRenderer(ModEntities.AMETHYST_GOLEM.get(), m -> new AmethystGolemRenderer(m, new AmethystGolemModel(m.bakeLayer(ModelLocations.AMETHYST_GOLEM)), 1.0F));
+        event.registerEntityRenderer(ModEntities.MAGMA_GOLEM.get(), m -> new MagmaGolemRenderer<>(m, new MagmaGolemModel(m.bakeLayer(ModelLocations.MAGMA_GOLEM)), 0.5F));
+        event.registerEntityRenderer(ModEntities.CALCITE_GOLEM.get(), m -> new CalciteGolemRenderer(m, new CalciteGolemModel(m.bakeLayer(ModelLocations.CALCITE_GOLEM)), 0.5F));
 
         event.registerEntityRenderer(ModEntities.LAPIS_BULLET.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.REDSTONE_BULLET.get(), ThrownItemRenderer::new);

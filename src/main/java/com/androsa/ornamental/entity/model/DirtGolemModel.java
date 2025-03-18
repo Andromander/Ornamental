@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.DirtGolem;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * DirtGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class DirtGolemModel<T extends DirtGolem> extends AbstractGolemModel<T> {
+public class DirtGolemModel<T extends GolemRenderState> extends AbstractGolemModel<T> {
 
     public DirtGolemModel(ModelPart root) {
         super(root, true, true, true, true);

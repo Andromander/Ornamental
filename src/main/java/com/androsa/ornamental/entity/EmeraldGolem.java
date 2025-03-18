@@ -43,7 +43,7 @@ public class EmeraldGolem extends FlowerGolem {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Pillager.class, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -67,7 +67,7 @@ public class EmeraldGolem extends FlowerGolem {
             BlockPos pos = new BlockPos(x, y, z);
             BlockState blockstate = this.level().getBlockState(pos);
             if (!blockstate.isAir()) {
-                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
+                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate, pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
@@ -77,17 +77,16 @@ public class EmeraldGolem extends FlowerGolem {
     }
 
     @Override
-    public boolean doHurtTarget(Entity target) {
+    public boolean doHurtTarget(ServerLevel server, Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
         float attack = this.getAttackDamage();
         float mul = attack > 0.0F ? attack / 2.0F + (float)this.random.nextInt((int)attack) : 0.0F;
         DamageSource source = this.damageSources().mobAttack(this);
-        boolean flag = target.hurt(source, mul);
+        boolean flag = target.hurtServer(server, source, mul);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
-            if (this.level() instanceof ServerLevel server)
-                EnchantmentHelper.doPostAttackEffects(server, target, source);
+            EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);

@@ -30,9 +30,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
-public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
-
-    private static final EntityDataAccessor<Boolean> TARGETING = SynchedEntityData.defineId(BoneGolem.class, EntityDataSerializers.BOOLEAN);
+public class BoneGolem extends ShootingGolem implements RangedAttackMob {
 
     public BoneGolem(EntityType<? extends BoneGolem> entity, Level world) {
         super(entity, world);
@@ -47,7 +45,7 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 
@@ -57,26 +55,6 @@ public class BoneGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.STEP_HEIGHT, 1.5F);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(TARGETING, false);
-    }
-
-    public boolean isTargeting() {
-        return entityData.get(TARGETING);
-    }
-
-    public void setTargeting(boolean flag) {
-        entityData.set(TARGETING, flag);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        setTargeting(target != null);
-        super.setTarget(target);
     }
 
     @Override

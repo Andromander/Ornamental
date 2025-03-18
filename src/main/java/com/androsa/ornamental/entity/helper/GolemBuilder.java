@@ -5,6 +5,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -78,7 +79,7 @@ public class GolemBuilder {
     }
 
     private static void addGolem(PatternType type, Level world, BlockPattern.BlockPatternMatch pattern, int x, int y) {
-        AbstractGolem entity = type.getSupplierEntity().get().create(world);
+        AbstractGolem entity = type.getSupplierEntity().get().create(world, EntitySpawnReason.TRIGGERED);
         BlockPos pos = pattern.getBlock(x, y, 0).getPos();
         entity.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addFreshEntity(entity);

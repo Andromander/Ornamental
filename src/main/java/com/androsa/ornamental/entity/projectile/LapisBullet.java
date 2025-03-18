@@ -25,7 +25,7 @@ public class LapisBullet extends ThrowableItemProjectile {
     }
 
     public LapisBullet(Level world, LivingEntity entity) {
-        super(ModEntities.LAPIS_BULLET.get(), entity, world);
+        super(ModEntities.LAPIS_BULLET.get(), entity, world, new ItemStack(Items.LAPIS_LAZULI));
     }
 
     protected ParticleOptions makeParticle() {

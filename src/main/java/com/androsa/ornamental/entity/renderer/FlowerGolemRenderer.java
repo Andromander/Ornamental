@@ -2,13 +2,28 @@ package com.androsa.ornamental.entity.renderer;
 
 import com.androsa.ornamental.entity.FlowerGolem;
 import com.androsa.ornamental.entity.model.FlowerGolemModel;
+import com.androsa.ornamental.entity.model.renderstate.FlowerGolemRenderState;
+import com.androsa.ornamental.entity.model.renderstate.OfferingGolemRenderState;
 import com.androsa.ornamental.entity.renderer.layer.GolemFlowerLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-public class FlowerGolemRenderer<T extends FlowerGolem, M extends FlowerGolemModel<T>> extends HeavyGolemRenderer<T,M> {
+public class FlowerGolemRenderer<T extends FlowerGolem, M extends FlowerGolemModel> extends AbstractGolemRenderer<T, OfferingGolemRenderState, M> {
 
-    public FlowerGolemRenderer(EntityRendererProvider.Context manager, M model, float shadow) {
-        super(manager, model, shadow);
+    public FlowerGolemRenderer(EntityRendererProvider.Context manager, M model, String texture, float shadow) {
+        super(manager, model, texture, shadow, true);
         this.addLayer(new GolemFlowerLayer<>(this));
+    }
+
+    @Override
+    public OfferingGolemRenderState createRenderState() {
+        return new OfferingGolemRenderState();
+    }
+
+    @Override
+    public void extractRenderState(T entity, OfferingGolemRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.flower = entity.getFlower();
+        state.flowerPos = entity.getFlowerPos();
+        state.offerFlowerTick = entity.getHoldFlowerTick();
     }
 }

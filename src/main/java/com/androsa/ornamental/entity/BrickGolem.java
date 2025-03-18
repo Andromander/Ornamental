@@ -3,6 +3,7 @@ package com.androsa.ornamental.entity;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.entity.projectile.Brick;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -38,7 +39,7 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 
@@ -51,9 +52,9 @@ public class BrickGolem extends OrnamentalGolem implements RangedAttackMob {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float multiplier) {
+    public boolean hurtServer(ServerLevel server, DamageSource source, float multiplier) {
         float modifier = source.getSourcePosition() != null ? 0.85F : multiplier;
-        return super.hurt(source, modifier);
+        return super.hurtServer(server, source, modifier);
     }
 
     @Override

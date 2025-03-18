@@ -21,7 +21,7 @@ public class NetherBrick extends Brick {
     }
 
     public NetherBrick(EntityType<? extends NetherBrick> type, Level world, LivingEntity entity) {
-        super(type, world, entity);
+        super(type, world, entity, new ItemStack(Items.NETHER_BRICK));
     }
 
     @Override

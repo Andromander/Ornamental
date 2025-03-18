@@ -41,7 +41,7 @@ public class ClayGolem extends OrnamentalGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -55,16 +55,14 @@ public class ClayGolem extends OrnamentalGolem {
     }
 
     @Override
-    public boolean doHurtTarget(Entity target) {
+    public boolean doHurtTarget(ServerLevel server, Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
         DamageSource damage = this.damageSources().mobAttack(this);
-        boolean flag = target.hurt(damage, 0.0F);
+        boolean flag = target.hurtServer(server, damage, 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
-            if (this.level() instanceof ServerLevel server) {
-                EnchantmentHelper.doPostAttackEffects(server, target, damage);
-            }
+            EnchantmentHelper.doPostAttackEffects(server, target, damage);
         }
 
         return flag;
@@ -74,9 +72,9 @@ public class ClayGolem extends OrnamentalGolem {
     public void aiStep() {
         if (this.isOnFire()) {
             if (!this.level().isClientSide()) {
-                BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level());
+                BrickGolem brick = ModEntities.BRICK_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 brick.copyPosition(this);
-                EventHooks.finalizeMobSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), MobSpawnType.CONVERSION, null);
+                EventHooks.finalizeMobSpawn(brick, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(brick.blockPosition()), EntitySpawnReason.CONVERSION, null);
                 brick.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     brick.setCustomName(this.getCustomName());

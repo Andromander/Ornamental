@@ -2,9 +2,6 @@ package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.projectile.LapisBullet;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,11 +22,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-
-public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
-
-    private static final EntityDataAccessor<Boolean> TARGETING = SynchedEntityData.defineId(LapisGolem.class, EntityDataSerializers.BOOLEAN);
+public class LapisGolem extends ShootingGolem implements RangedAttackMob {
 
     public LapisGolem(EntityType<? extends LapisGolem> entity, Level world) {
         super(entity, world);
@@ -43,7 +36,7 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy));
     }
 
@@ -53,26 +46,6 @@ public class LapisGolem extends OrnamentalGolem implements RangedAttackMob {
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(TARGETING, false);
-    }
-
-    public boolean isTargeting() {
-        return entityData.get(TARGETING);
-    }
-
-    public void setTargeting(boolean flag) {
-        entityData.set(TARGETING, flag);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        this.setTargeting(target != null);
-        super.setTarget(target);
     }
 
     @Override

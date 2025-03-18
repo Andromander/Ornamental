@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.BoneGolem;
+import com.androsa.ornamental.entity.model.renderstate.ShootingGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * BoneGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
+public class BoneGolemModel extends AbstractGolemModel<ShootingGolemRenderState> {
 
     public BoneGolemModel(ModelPart root) {
         super(root, true, true, true, false);
@@ -144,12 +144,13 @@ public class BoneGolemModel<T extends BoneGolem> extends AbstractGolemModel<T> {
     }
 
     @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity.isTargeting()) {
+    public void setupAnim(ShootingGolemRenderState entity) {
+        super.setupAnim(entity);
+
+        if (entity.isShooting) {
             this.armR.xRot = -1.5F;
-            this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
         } else {
-            swingArms(limbSwing, limbSwingAmount);
+            swingArms(entity, entity.walkAnimationPos, entity.walkAnimationSpeed);
         }
     }
 }

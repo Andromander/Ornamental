@@ -2,6 +2,7 @@ package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.task.FirePanicGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -46,20 +47,22 @@ public class HayGolem extends OrnamentalGolem {
     public void aiStep() {
         super.aiStep();
 
-        if (!EventHooks.canEntityGrief(this.level(), this)) {
-            return;
-        }
+        if (this.level() instanceof ServerLevel server) {
+            if (!EventHooks.canEntityGrief(server, this)) {
+                return;
+            }
 
-        BlockState blockstate = Blocks.FIRE.defaultBlockState();
+            BlockState blockstate = Blocks.FIRE.defaultBlockState();
 
-        if (this.isOnFire()) {
-            for(int l = 0; l < 4; ++l) {
-                int x = Mth.floor(this.getX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
-                int y = Mth.floor(this.getY());
-                int z = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
-                BlockPos blockpos = new BlockPos(x, y, z);
-                if (this.level().isEmptyBlock(blockpos) && blockstate.canSurvive(this.level(), blockpos)) {
-                    this.level().setBlockAndUpdate(blockpos, blockstate);
+            if (this.isOnFire()) {
+                for(int l = 0; l < 4; ++l) {
+                    int x = Mth.floor(this.getX() + (double)((float)(l % 2 * 2 - 1) * 0.25F));
+                    int y = Mth.floor(this.getY());
+                    int z = Mth.floor(this.getZ() + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+                    BlockPos blockpos = new BlockPos(x, y, z);
+                    if (this.level().isEmptyBlock(blockpos) && blockstate.canSurvive(this.level(), blockpos)) {
+                        this.level().setBlockAndUpdate(blockpos, blockstate);
+                    }
                 }
             }
         }

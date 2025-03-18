@@ -2,7 +2,7 @@ package com.androsa.ornamental.entity.model;
 // Made with Blockbench 4.6.5
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 
-import com.androsa.ornamental.entity.CalciteGolem;
+import com.androsa.ornamental.entity.model.renderstate.CalciteGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-public class CalciteGolemModel<T extends CalciteGolem> extends AbstractGolemModel<T> {
+public class CalciteGolemModel extends AbstractGolemModel<CalciteGolemRenderState> {
 
 	private final ModelPart neck;
 	private final ModelPart collarL1;
@@ -187,22 +187,22 @@ public class CalciteGolemModel<T extends CalciteGolem> extends AbstractGolemMode
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.legL.xRot = -1.5F * (this.triangleWave(limbSwing, 13.0F) * 0.5F) * limbSwingAmount - 0.718F;
-		this.legR.xRot = 1.5F * (this.triangleWave(limbSwing, 13.0F) * 0.5F) * limbSwingAmount - 0.718F;
+	public void setupAnim(CalciteGolemRenderState entity) {
+		this.legL.xRot = -1.5F * (Mth.triangleWave(entity.walkAnimationPos, 13.0F) * 0.5F) * entity.walkAnimationSpeed - 0.718F;
+		this.legR.xRot = 1.5F * (Mth.triangleWave(entity.walkAnimationPos, 13.0F) * 0.5F) * entity.walkAnimationSpeed - 0.718F;
 
-		if (entity.isResonating()) {
-			this.resonate(ageInTicks);
+		if (entity.isResonating) {
+			this.resonate(entity.ageInTicks);
 
-			this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
-			this.neck.xRot = headPitch * ((float)Math.PI / 180F);
+			this.neck.yRot = entity.yRot * ((float)Math.PI / 180F);
+			this.neck.xRot = entity.xRot * ((float)Math.PI / 180F);
 			this.armL.xRot = -1.6165F;
 			this.armR.xRot = -1.6165F;
 			this.forearmL.xRot = 0.0F;
 			this.forearmR.xRot = 0.0F;
 		} else {
 			this.stopCollar();
-			if (entity.getChargeState() == 1) {
+			if (entity.chargeState == 1) {
 				this.neck.xRot = 0.4363F;
 				this.chestL.yRot = 1.0036F;
 				this.chestR.yRot = -1.0036F;
@@ -212,7 +212,7 @@ public class CalciteGolemModel<T extends CalciteGolem> extends AbstractGolemMode
 				this.forearmR.xRot = -1.4835F;
 				this.handL.xRot = 1.5708F;
 				this.handR.xRot = 1.5708F;
-			} else if (entity.getChargeState() == 2) {
+			} else if (entity.chargeState == 2) {
 				this.neck.xRot = -0.3927F;
 				this.chestL.yRot = 0.5236F;
 				this.chestR.yRot = -0.5236F;
@@ -225,8 +225,8 @@ public class CalciteGolemModel<T extends CalciteGolem> extends AbstractGolemMode
 				this.handL.xRot = 0.0F;
 				this.handR.xRot = 0.0F;
 			} else {
-				this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
-				this.neck.xRot = headPitch * ((float)Math.PI / 180F);
+				this.neck.yRot = entity.yRot * ((float)Math.PI / 180F);
+				this.neck.xRot = entity.xRot * ((float)Math.PI / 180F);
 				this.chestL.yRot = 0.7854F;
 				this.chestR.yRot = -0.7854F;
 				this.armL.xRot = -0.8311F;

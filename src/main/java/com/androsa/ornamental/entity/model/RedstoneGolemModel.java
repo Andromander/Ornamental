@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.RedstoneGolem;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
  * RedstoneGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemModel<T> {
+public class RedstoneGolemModel extends AbstractGolemModel<GolemRenderState> {
     public ModelPart legL1;
     public ModelPart legL2;
     public ModelPart legL3;
@@ -82,9 +82,9 @@ public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemMo
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = headPitch * ((float)Math.PI / 180F);
+    public void setupAnim(GolemRenderState entity) {
+        this.head.yRot = entity.yRot * ((float)Math.PI / 180F);
+        this.head.xRot = entity.xRot * ((float)Math.PI / 180F);
 
         this.legL1.zRot = 0.7853981633974483F;
         this.legR1.zRot = -0.7853981633974483F;
@@ -100,12 +100,12 @@ public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemMo
         this.legL3.yRot = -0.7853981633974483F;
         this.legR3.yRot = 3.9269908169872414F;
 
-        float f3 = -(Mth.cos(limbSwing * 0.6662F * 2.0F + 0.0F) * 0.4F) * limbSwingAmount;
-        float f4 = -(Mth.cos(limbSwing * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * limbSwingAmount;
-        float f5 = -(Mth.cos(limbSwing * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * limbSwingAmount;
-        float f7 = Math.abs(Mth.sin(limbSwing * 0.6662F + 0.0F) * 0.4F) * limbSwingAmount;
-        float f8 = Math.abs(Mth.sin(limbSwing * 0.6662F + (float)Math.PI) * 0.4F) * limbSwingAmount;
-        float f9 = Math.abs(Mth.sin(limbSwing * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * limbSwingAmount;
+        float f3 = -(Mth.cos(entity.walkAnimationPos * 0.6662F * 2.0F + 0.0F) * 0.4F) * entity.walkAnimationSpeed;
+        float f4 = -(Mth.cos(entity.walkAnimationPos * 0.6662F * 2.0F + (float)Math.PI) * 0.4F) * entity.walkAnimationSpeed;
+        float f5 = -(Mth.cos(entity.walkAnimationPos * 0.6662F * 2.0F + ((float)Math.PI / 2F)) * 0.4F) * entity.walkAnimationSpeed;
+        float f7 = Math.abs(Mth.sin(entity.walkAnimationPos * 0.6662F + 0.0F) * 0.4F) * entity.walkAnimationSpeed;
+        float f8 = Math.abs(Mth.sin(entity.walkAnimationPos * 0.6662F + (float)Math.PI) * 0.4F) * entity.walkAnimationSpeed;
+        float f9 = Math.abs(Mth.sin(entity.walkAnimationPos * 0.6662F + ((float)Math.PI / 2F)) * 0.4F) * entity.walkAnimationSpeed;
 
         this.legL1.yRot -= f3;
         this.legR1.yRot -= -f3;
@@ -120,9 +120,5 @@ public class RedstoneGolemModel<T extends RedstoneGolem> extends AbstractGolemMo
         this.legR2.zRot -= -f8;
         this.legL3.zRot -= f9;
         this.legR3.zRot -= -f9;
-    }
-
-    @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
     }
 }

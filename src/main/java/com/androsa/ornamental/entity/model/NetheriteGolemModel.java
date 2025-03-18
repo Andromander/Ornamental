@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.NetheriteGolem;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
  * NetheriteGolemModel - Androsa
  * Created using Tabula 8.0.0
  */
-public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolemModel<T> {
+public class NetheriteGolemModel extends AbstractGolemModel<GolemRenderState> {
     public ModelPart legB;
 
     public NetheriteGolemModel(ModelPart root) {
@@ -122,10 +122,7 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
     }
 
     @Override
-    public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = headPitch * ((float)Math.PI / 180F);
-
+    public void setupAnim(GolemRenderState entity) {
         this.legL.zRot = 0.0F;
         this.legR.zRot = 0.0F;
 
@@ -134,8 +131,8 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
 
         this.legB.xRot = -0.2617993877991494F;
 
-        float f3 = -(Mth.cos(limbSwing * 0.6662F * 2.0F + 0.0F) * 0.4F) * limbSwingAmount;
-        float f7 = Math.abs(Mth.sin(limbSwing * 0.6662F + 0.0F) * 0.4F) * limbSwingAmount;
+        float f3 = -(Mth.cos(entity.walkAnimationPos * 0.6662F * 2.0F + 0.0F) * 0.4F) * entity.walkAnimationSpeed;
+        float f7 = Math.abs(Mth.sin(entity.walkAnimationPos * 0.6662F + 0.0F) * 0.4F) * entity.walkAnimationSpeed;
 
         this.legL.yRot -= f3;
         this.legR.yRot -= -f3;
@@ -147,8 +144,8 @@ public class NetheriteGolemModel<T extends NetheriteGolem> extends AbstractGolem
     }
 
     @Override
-    protected void swingArms(float limbSwing, float limbSwingAmount) {
-        this.armR.xRot = (-0.2F + 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount + -0.2708751078990032F;
-        this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount + -0.2708751078990032F;
+    protected void swingArms(GolemRenderState state, float limbSwing, float limbSwingAmount) {
+        this.armR.xRot = (-0.2F + 1.5F * Mth.triangleWave(limbSwing, 13.0F)) * limbSwingAmount + -0.2708751078990032F;
+        this.armL.xRot = (-0.2F - 1.5F * Mth.triangleWave(limbSwing, 13.0F)) * limbSwingAmount + -0.2708751078990032F;
     }
 }

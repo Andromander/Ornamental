@@ -1,18 +1,19 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.CopperGolem;
+import com.androsa.ornamental.entity.model.renderstate.CopperGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 /**
  * CopperGolem - Androsa
  * Created using Tabula 7.0.0
  */
-public class CopperGolemModel<T extends CopperGolem> extends AbstractGolemModel<T> {
+public class CopperGolemModel extends AbstractGolemModel<CopperGolemRenderState> {
     public ModelPart antennaL;
     public ModelPart antennaR;
     public ModelPart backCellL;
@@ -204,26 +205,21 @@ public class CopperGolemModel<T extends CopperGolem> extends AbstractGolemModel<
     }
 
     @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity.isTargeting() && entity.isCharged() && entity.getCharges() > 0) {
-            this.armR.xRot = -1.5F;
-            this.armL.xRot = (-0.2F - 1.5F * this.triangleWave(limbSwing, 13.0F)) * limbSwingAmount;
-        } else {
-            super.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        }
-    }
-
-    @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (entity.isCharged()) {
+    public void setupAnim(CopperGolemRenderState entity) {
+        if (entity.isCharged) {
             setChargedRotations();
-        } else if (entity.getErosion() >= 3) {
+        } else if (entity.erosion >= 3) {
             armL.y = -17.0F;
             armR.y = -17.0F;
         } else {
             resetRotations();
         }
-        super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        if (entity.isShooting && entity.isCharged && entity.charges > 0) {
+            this.armR.xRot = -1.5F;
+            this.armL.xRot = (-0.2F - 1.5F * Mth.triangleWave(entity.walkAnimationPos, 13.0F)) * entity.walkAnimationSpeed;
+        }
+
+        super.setupAnim(entity);
     }
 
     private void resetRotations() {

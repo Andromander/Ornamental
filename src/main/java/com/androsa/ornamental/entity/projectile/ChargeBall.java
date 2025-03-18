@@ -5,6 +5,7 @@ import com.androsa.ornamental.registry.ModParticles;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -43,7 +44,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
         if (!this.level().isClientSide) {
             Entity target = result.getEntity();
             Entity owner = getOwner();
-            DamageSource source = new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(ModTags.DamageTypes.SHOCKED), this, owner);
+            DamageSource source = new DamageSource(level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(ModTags.DamageTypes.SHOCKED), this, owner);
             target.hurt(source, 5.0F);
             if (target instanceof LivingEntity) {
                 ((LivingEntity) target).knockback(0.8F, Mth.sin(this.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(this.getYRot() * ((float)Math.PI / 180F)));
@@ -57,7 +58,7 @@ public class ChargeBall extends AbstractHurtingProjectile {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel server, DamageSource source, float amount) {
         return false;
     }
 

@@ -1,6 +1,5 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.GoldGolem;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -9,7 +8,7 @@ import net.minecraft.client.model.geom.builders.*;
  * GoldGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class GoldGolemModel<T extends GoldGolem> extends FlowerGolemModel<T> {
+public class GoldGolemModel extends FlowerGolemModel {
 
     public GoldGolemModel(ModelPart root) {
         super(root);

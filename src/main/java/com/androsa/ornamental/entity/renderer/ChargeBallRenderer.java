@@ -9,11 +9,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> {
+public class ChargeBallRenderer extends EntityRenderer<ChargeBall, EntityRenderState> {
     private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
     private static final RenderType RENDER = RenderType.entityCutoutNoCull(LOCATION);
 
@@ -22,12 +23,17 @@ public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> 
     }
 
     @Override
-    protected int getBlockLightLevel(T entity, BlockPos pos) {
+    public EntityRenderState createRenderState() {
+        return new EntityRenderState();
+    }
+
+    @Override
+    protected int getBlockLightLevel(ChargeBall entity, BlockPos pos) {
         return 15;
     }
 
     @Override
-    public void render(T entity, float yaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int light) {
+    public void render(EntityRenderState entity, PoseStack stack, MultiBufferSource buffer, int light) {
         stack.pushPose();
         stack.scale(1.0F, 1.0F, 1.0F);
         stack.mulPose(this.entityRenderDispatcher.cameraOrientation());
@@ -41,7 +47,7 @@ public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> 
         vertex(consumer, lastpose, light, 0.0F, 1, 0, 0);
 
         stack.popPose();
-        super.render(entity, yaw, partialTicks, stack, buffer, light);
+        super.render(entity, stack, buffer, light);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int light, float x, int y, int texX, int texY) {
@@ -51,10 +57,5 @@ public class ChargeBallRenderer<T extends ChargeBall> extends EntityRenderer<T> 
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(light)
                 .setNormal(pose, 0.0F, 1.0F, 0.0F);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(T entity) {
-        return LOCATION;
     }
 }

@@ -4,14 +4,17 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.*;
 import com.androsa.ornamental.entity.projectile.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -61,12 +64,12 @@ public class ModEntities {
         return makeEntity(name, entity, item -> makeEgg(item, background, highlight), width, height, eye, fireRes);
     }
 
-    private static <T extends Mob> Supplier<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<Supplier<EntityType<T>>, Supplier<DeferredSpawnEggItem>> spawnegg, float width, float height, float eye, boolean fireRes) {
+    private static <T extends Mob> Supplier<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<Supplier<EntityType<T>>, Supplier<SpawnEggItem>> spawnegg, float width, float height, float eye, boolean fireRes) {
         String regname = name + "_golem";
         EntityType.Builder<T> builder = EntityType.Builder.of(entity, MobCategory.MISC).sized(width, height);
         if (fireRes) builder.fireImmune();
         if (eye > 0.0F) builder.eyeHeight(eye);
-        Supplier<EntityType<T>> reg = ENTITIES.register(regname, () -> builder.build(regname));
+        Supplier<EntityType<T>> reg = ENTITIES.register(regname, () -> builder.build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, regname))));
         Supplier<Item> item = ModBlocks.ITEMS.register(regname + "_spawn_egg", spawnegg.apply(reg));
         ModCreativeTabs.SPAWN_EGGS.add(item);
         return reg;
@@ -78,12 +81,12 @@ public class ModEntities {
                         .sized(width, height)
                         .clientTrackingRange(tracking)
                         .updateInterval(interval)
-                        .build(name)
+                        .build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name)))
         );
     }
 
-    private static Supplier<DeferredSpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, int back, int fore) {
-        return () -> new DeferredSpawnEggItem(entity, back, fore, new Item.Properties());
+    private static Supplier<SpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, int back, int fore) {
+        return () -> new SpawnEggItem(entity.get(), new Item.Properties());
     }
 
     @SubscribeEvent

@@ -37,7 +37,7 @@ public class DiamondGolem extends FlowerGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -55,17 +55,16 @@ public class DiamondGolem extends FlowerGolem {
     }
 
     @Override
-    public boolean doHurtTarget(Entity target) {
+    public boolean doHurtTarget(ServerLevel server, Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
         float damage = this.getAttackDamage();
         float mul = damage > 0.0F ? damage / 2.0F + (float)this.random.nextInt((int)damage) : 0.0F;
         DamageSource source = damageSources().mobAttack(this);
-        boolean flag = target.hurt(source, mul);
+        boolean flag = target.hurtServer(server, source, mul);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
-            if (this.level() instanceof ServerLevel server)
-                EnchantmentHelper.doPostAttackEffects(server, target, source);
+            EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
 
         this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);

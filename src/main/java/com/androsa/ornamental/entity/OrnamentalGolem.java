@@ -97,7 +97,7 @@ public class OrnamentalGolem extends AbstractGolem {
                     itemstack.shrink(1);
                 }
 
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
+                return InteractionResult.SUCCESS;
             }
         } else {
             return InteractionResult.PASS;

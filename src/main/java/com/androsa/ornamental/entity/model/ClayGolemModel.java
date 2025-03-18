@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.OrnamentalGolem;
+import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * ClayGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class ClayGolemModel<T extends OrnamentalGolem> extends AbstractGolemModel<T> {
+public class ClayGolemModel extends AbstractGolemModel<GolemRenderState> {
 
     public ClayGolemModel(ModelPart root) {
         super(root, true, true, true, true);

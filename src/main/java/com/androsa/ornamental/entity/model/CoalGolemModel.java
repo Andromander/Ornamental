@@ -1,6 +1,6 @@
 package com.androsa.ornamental.entity.model;
 
-import com.androsa.ornamental.entity.CoalGolem;
+import com.androsa.ornamental.entity.model.renderstate.FlammableGolemRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
  * CoalGolemModel - Androsa
  * Created using Tabula 7.0.0
  */
-public class CoalGolemModel<T extends CoalGolem> extends AbstractGolemModel<T> {
+public class CoalGolemModel extends AbstractGolemModel<FlammableGolemRenderState> {
 
     public CoalGolemModel(ModelPart root) {
         super(root, true, true, true, true);
@@ -55,14 +55,13 @@ public class CoalGolemModel<T extends CoalGolem> extends AbstractGolemModel<T> {
     }
 
     @Override
-    public void prepareMobModel(T entity, float limbSwing, float limbSwingAmount, float partialTicks) {
-        if (entity.isOnFire()) {
+    public void setupAnim(FlammableGolemRenderState entity) {
+        super.setupAnim(entity);
+        if (entity.isOnFire) {
             armR.zRot = 2.3F;
             armL.zRot = -2.3F;
         } else {
-            armR.zRot = 0.0F;
-            armL.zRot = 0.0F;
-            swingArms(limbSwing, limbSwingAmount);
+            swingArms(entity, entity.walkAnimationPos, entity.walkAnimationSpeed);
         }
     }
 }

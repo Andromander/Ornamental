@@ -2,6 +2,7 @@ package com.androsa.ornamental.entity;
 
 import com.androsa.ornamental.entity.task.FirePanicGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -41,7 +42,7 @@ public class CoalGolem extends OrnamentalGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -67,7 +68,7 @@ public class CoalGolem extends OrnamentalGolem {
             this.explode();
         }
 
-        if (!EventHooks.canEntityGrief(this.level(), this)) {
+        if (this.level() instanceof ServerLevel server && !EventHooks.canEntityGrief(server, this)) {
             return;
         }
 

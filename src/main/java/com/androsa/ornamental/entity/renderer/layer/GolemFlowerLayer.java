@@ -1,7 +1,7 @@
 package com.androsa.ornamental.entity.renderer.layer;
 
-import com.androsa.ornamental.entity.FlowerGolem;
 import com.androsa.ornamental.entity.model.FlowerGolemModel;
+import com.androsa.ornamental.entity.model.renderstate.OfferingGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -12,16 +12,16 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class GolemFlowerLayer<T extends FlowerGolem, M extends FlowerGolemModel<T>> extends RenderLayer<T, M> {
+public class GolemFlowerLayer<T extends OfferingGolemRenderState, M extends FlowerGolemModel> extends RenderLayer<T, M> {
 
     public GolemFlowerLayer(RenderLayerParent<T, M> renderer) {
         super(renderer);
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource buffer, int i, T entity, float v1, float v2, float v3, float v4, float v5, float v6) {
-        double[] pos = entity.getFlowerPos();
-        if (entity.getHoldFlowerTick() != 0) {
+    public void render(PoseStack stack, MultiBufferSource buffer, int i, T entity, float v1, float v2) {
+        double[] pos = entity.flowerPos;
+        if (entity.offerFlowerTick != 0) {
             stack.pushPose();
             ModelPart part = this.getParentModel().getArmHoldingFlower();
             part.translateAndRotate(stack);
@@ -30,7 +30,7 @@ public class GolemFlowerLayer<T extends FlowerGolem, M extends FlowerGolemModel<
             stack.scale(0.5F, 0.5F, 0.5F);
             stack.mulPose(Axis.XP.rotationDegrees(-90.0F));
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.getFlower(), stack, buffer, i, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.flower, stack, buffer, i, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
             stack.popPose();
         }
     }

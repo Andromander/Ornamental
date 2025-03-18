@@ -66,7 +66,7 @@ public class MagmaGolem extends OrnamentalGolem {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target) ->
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (target, server) ->
                 target instanceof Enemy && !(target instanceof Creeper)));
     }
 
@@ -173,21 +173,20 @@ public class MagmaGolem extends OrnamentalGolem {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    public boolean hurtServer(ServerLevel server, DamageSource source, float amount) {
         float modifier = this.getState() == 2 && source.is(DamageTypes.MOB_ATTACK) ? amount * 0.5F : amount;
-        return super.hurt(source, modifier);
+        return super.hurtServer(server, source, modifier);
     }
 
     @Override
-    public boolean doHurtTarget(Entity target) {
+    public boolean doHurtTarget(ServerLevel server, Entity target) {
         this.attackTimer = 10;
         this.level().broadcastEntityEvent(this, (byte)4);
         DamageSource source = this.damageSources().mobAttack(this);
-        boolean flag = target.hurt(source, 0.0F);
+        boolean flag = target.hurtServer(server, source, 0.0F);
         if (flag) {
             target.setDeltaMovement(target.getDeltaMovement().add(0.0D, 0.3F, 0.0D));
-            if (this.level() instanceof ServerLevel server)
-                EnchantmentHelper.doPostAttackEffects(server, target, source);
+            EnchantmentHelper.doPostAttackEffects(server, target, source);
         }
         if (this.getState() == 1) {
             target.igniteForSeconds(5);
