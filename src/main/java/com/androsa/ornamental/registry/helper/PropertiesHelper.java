@@ -42,7 +42,7 @@ public class PropertiesHelper {
      * @param builder the material being used for that item or the item's block.
      */
     public static Item.Properties createItem(OrnamentBuilder builder, String modid, String name) {
-        Item.Properties props = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modid, name)));
+        Item.Properties props = new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modid, name)));
         if (builder.fireproof) props.fireResistant();
 
         return props;
