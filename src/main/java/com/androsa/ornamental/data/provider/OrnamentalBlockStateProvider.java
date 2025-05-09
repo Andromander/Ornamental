@@ -39,48 +39,52 @@ public abstract class OrnamentalBlockStateProvider {
     public static final ResourceLocation CUTOUT = ResourceLocation.withDefaultNamespace("cutout");
     public static final ResourceLocation CUTOUT_MIPPED = ResourceLocation.withDefaultNamespace("cutout_mipped");
 
-    public static final ModelTemplate FENCE_POST = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_post")), Optional.of("_post"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate FENCE_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate FENCE_GATE_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_open")), Optional.of("_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate FENCE_GATE_CLOSED = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate")), Optional.empty(), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate FENCE_GATE_WALL_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_wall_open")), Optional.of("_wall_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate FENCE_GATE_WALL_CLOSED = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_wall")), Optional.of("_wall"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_BOTTOM_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_left")), Optional.of("_bottom_left"), TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_left_open")), Optional.of("_bottom_left_open"), TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_BOTTOM_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_right")), Optional.of("_bottom_right"), TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_BOTTOM_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_right_open")), Optional.of("_bottom_right_open"), TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_TOP_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_left")), Optional.of("_top_left"), TextureSlot.TOP, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_TOP_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_left_open")), Optional.of("_top_left_open"), TextureSlot.TOP, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_TOP_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_right")), Optional.of("_top_right"), TextureSlot.TOP, TextureSlot.SIDE);
-    public static final ModelTemplate DOOR_TOP_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_right_open")), Optional.of("_top_right_open"), TextureSlot.TOP, TextureSlot.SIDE);
-    public static final ModelTemplate POLE_WHOLE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_whole")), Optional.of("_whole"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate POLE_HORIZONTAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_horizontal")), Optional.of("_horizontal"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate POLE_VERTICAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate POLE_CORNER = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_corner")), Optional.of("_corner"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate POLE_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate BEAM_WHOLE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_whole")), Optional.of("_whole"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate BEAM_HORIZONTAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_horizontal")), Optional.of("_horizontal"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate BEAM_VERTICAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate BEAM_CORNER = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_corner")), Optional.of("_corner"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate BEAM_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate WALL_POST = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_post")), Optional.of("_post"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate WALL_SIDE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_side")), Optional.of("_side"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate WALL_SIDE_TALL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_side_tall")), Optional.of("_side_tall"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate WALL_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SADDLE_DOOR_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_left")), Optional.of("_left"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SADDLE_DOOR_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_left_open")), Optional.of("_left_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SADDLE_DOOR_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_right")), Optional.of("_right"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SADDLE_DOOR_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_right_open")), Optional.of("_right_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SADDLE_DOOR_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_BASE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_base")), Optional.of("_base"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_BASE_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_base_top")), Optional.of("_base_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_X = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_x")), Optional.of("_horizontal_x"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_X_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_x_top")), Optional.of("_horizontal_x_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_Z = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_z")), Optional.of("_horizontal_z"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_Z_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_z_top")), Optional.of("_horizontal_z_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_Y = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_Y_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_vertical_top")), Optional.of("_vertical_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
-    public static final ModelTemplate SUPPORT_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_POST = makeUtilTemplate("fence_post", "_post", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_INVENTORY = makeUtilTemplate("fence_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_OPEN = makeUtilTemplate("fence_gate_open", "_open", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_CLOSED = makeUtilTemplate("fence_gate", null, TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_WALL_OPEN = makeUtilTemplate("fence_gate_wall_open", "_wall_open", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_WALL_CLOSED = makeUtilTemplate("fence_gate_wall", "_wall", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_LEFT = makeUtilTemplate("door_bottom_left", "_bottom_left", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = makeUtilTemplate("door_bottom_left_open", "_bottom_left_open", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_RIGHT = makeUtilTemplate("door_bottom_right", "_bottom_right", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_RIGHT_OPEN = makeUtilTemplate("door_bottom_right_open", "_bottom_right_open", TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_LEFT = makeUtilTemplate("door_top_left", "_top_left", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_LEFT_OPEN = makeUtilTemplate("door_top_left_open", "_top_left_open", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_RIGHT = makeUtilTemplate("door_top_right", "_top_right", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_RIGHT_OPEN = makeUtilTemplate("door_top_right_open", "_top_right_open", TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_WHOLE = makeUtilTemplate("pole_whole", "_whole", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_HORIZONTAL = makeUtilTemplate("pole_horizontal", "_horizontal", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_VERTICAL = makeUtilTemplate("pole_vertical", "_vertical", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_CORNER = makeUtilTemplate("pole_corner", "_corner", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_INVENTORY = makeUtilTemplate("pole_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_WHOLE = makeUtilTemplate("beam_whole", "_whole", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_HORIZONTAL = makeUtilTemplate("beam_horizontal", "_horizontal", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_VERTICAL = makeUtilTemplate("beam_vertical", "_vertical", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_CORNER = makeUtilTemplate("beam_corner", "_corner", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_INVENTORY = makeUtilTemplate("beam_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_POST = makeUtilTemplate("wall_post", "_post", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_SIDE = makeUtilTemplate("wall_side", "_side", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_SIDE_TALL = makeUtilTemplate("wall_side_tall", "_side_tall", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_INVENTORY = makeUtilTemplate("wall_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_LEFT = makeUtilTemplate("saddle_door_left", "_left", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_LEFT_OPEN = makeUtilTemplate("saddle_door_left_open", "_left_open", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_RIGHT = makeUtilTemplate("saddle_door_right", "_right", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_RIGHT_OPEN = makeUtilTemplate("saddle_door_right_open", "_right_open", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_INVENTORY = makeUtilTemplate("saddle_door_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_BASE = makeUtilTemplate("support_base", "_base", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_BASE_TOP = makeUtilTemplate("support_base_top", "_base_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_X = makeUtilTemplate("support_horizontal_x", "_horizontal_x", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_X_TOP = makeUtilTemplate("support_horizontal_x_top", "_horizontal_x_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Z = makeUtilTemplate("support_horizontal_z", "_horizontal_z", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Z_TOP = makeUtilTemplate("support_horizontal_z_top", "_horizontal_z_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Y = makeUtilTemplate("support_vertical", "_vertical", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Y_TOP = makeUtilTemplate("support_vertical_top", "_vertical_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_INVENTORY = makeUtilTemplate("support_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+
+    private static ModelTemplate makeUtilTemplate(String model, String suffix, TextureSlot... slots) {
+        return new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/" + model)), suffix != null ? Optional.of(suffix) : Optional.empty(), slots);
+    }
 
     public OrnamentalBlockStateProvider(BlockModelGenerators generator, String modid, String parent) {
         this.blockModels = generator;
@@ -96,6 +100,13 @@ public abstract class OrnamentalBlockStateProvider {
 
     protected ResourceLocation locParent(String name) {
         return ResourceLocation.fromNamespaceAndPath(parentID, "block/" + name);
+    }
+
+    protected TextureMapping makeMapping(ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        return new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top);
     }
 
     /* Stairs */
@@ -116,10 +127,7 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void stairs(Supplier<? extends OrnamentStair> block, ModelTemplate innerModel, ModelTemplate straightModel, ModelTemplate outerModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top);
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation inner = innerModel.create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation straight = straightModel.create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation outer = outerModel.create(block.get(), mapping, blockModels.modelOutput);
@@ -151,10 +159,7 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void slab(DeferredBlock<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<ResourceLocation, Supplier<? extends Block>> doubleModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top);
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation bm, tm, dm;
         if (type != SOLID) {
             bm = bottomModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
@@ -198,13 +203,8 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void fence(Supplier<? extends FenceBlock> block, ModelTemplate post, ModelTemplate north, ModelTemplate east, ModelTemplate south, ModelTemplate west, ModelTemplate inventory, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        TextureMapping postMapping = new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.PARTICLE, side);
-        TextureMapping railMapping = new TextureMapping()
-                .put(TextureSlot.TEXTURE, side);
+        TextureMapping postMapping = makeMapping(side, bottom, top).put(TextureSlot.PARTICLE, side);
+        TextureMapping railMapping = new TextureMapping().put(TextureSlot.TEXTURE, side);
         ResourceLocation p = post.create(block.get(), postMapping, blockModels.modelOutput);
         ResourceLocation n = north.create(block.get(), railMapping, blockModels.modelOutput);
         ResourceLocation e = east.create(block.get(), railMapping, blockModels.modelOutput);
@@ -267,12 +267,9 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void fenceGate(Supplier<? extends FenceGateBlock> block, ModelTemplate gate, ModelTemplate opengate, ModelTemplate wall, ModelTemplate openwall, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.BOTTOM, bottom);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation g, go, w, wo;
+
         if (type != SOLID) {
             g = gate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
             go = opengate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
@@ -361,12 +358,9 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void pole(Supplier<? extends OrnamentPole> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<ResourceLocation, Supplier<? extends Block>> full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.SIDE, side);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation whole, horizon, vertical, corner, fullblock, inventory;
+
         if (type != SOLID) {
             whole = w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
             horizon = h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
@@ -421,12 +415,9 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void beam(Supplier<? extends OrnamentBeam> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<ResourceLocation, Supplier<? extends Block>> full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.SIDE, side);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation whole, horizon, vertical, corner, fullblock, inventory;
+
         if (type != SOLID) {
             whole = w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
             horizon = h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
@@ -469,11 +460,7 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void wall(Supplier<? extends WallBlock> block, ModelTemplate post, ModelTemplate sidewall, ModelTemplate sidetall, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.SIDE, side);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation wallpost = post.create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation wallside = sidewall.create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation walltall = sidetall.create(block.get(), mapping, blockModels.modelOutput);
@@ -509,11 +496,7 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ModelTemplate leftDoor, ModelTemplate leftDoorOpen, ModelTemplate rightDoor, ModelTemplate rightDoorOpen, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.SIDE, side);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation left = leftDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation leftOpen = leftDoorOpen.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         ResourceLocation right = rightDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
@@ -542,12 +525,9 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void support(Supplier<? extends OrnamentSupport> block, ModelTemplate baseModel, ModelTemplate baseTModel, ModelTemplate yModel, ModelTemplate yTModel, ModelTemplate xModel, ModelTemplate xTModel, ModelTemplate zModel, ModelTemplate zTModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top)
-                .put(TextureSlot.SIDE, side);
-
+        TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation base, baseTop, vertical, verticalTop ,horizontalX, horizontalXTop, horizontalZ, horizontalZTop, inventory;
+
         if (type != SOLID) {
             base = baseModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
             baseTop = baseTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
