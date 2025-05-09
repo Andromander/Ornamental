@@ -4,7 +4,6 @@ import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
-import com.google.errorprone.annotations.Var;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
