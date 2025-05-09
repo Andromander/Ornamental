@@ -206,6 +206,7 @@ public class CopperGolemModel extends AbstractGolemModel<CopperGolemRenderState>
 
     @Override
     public void setupAnim(CopperGolemRenderState entity) {
+        super.setupAnim(entity);
         if (entity.isCharged) {
             setChargedRotations();
         } else if (entity.erosion >= 3) {
@@ -218,8 +219,6 @@ public class CopperGolemModel extends AbstractGolemModel<CopperGolemRenderState>
             this.armR.xRot = -1.5F;
             this.armL.xRot = (-0.2F - 1.5F * Mth.triangleWave(entity.walkAnimationPos, 13.0F)) * entity.walkAnimationSpeed;
         }
-
-        super.setupAnim(entity);
     }
 
     private void resetRotations() {
