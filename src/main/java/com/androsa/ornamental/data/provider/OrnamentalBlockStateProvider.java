@@ -137,28 +137,28 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     /* Slabs */
-    public void slabBasic(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname) {
+    public void slabBasic(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname) {
         slabBasic(block, blockname, SOLID);
     }
 
-    public void slabBasic(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, ResourceLocation type) {
+    public void slabBasic(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, ResourceLocation type) {
         String name = BuiltInRegistries.BLOCK.getKey(blockname.get()).getPath();
         slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
     }
 
-    public void slabModel(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, String name, ResourceLocation type) {
+    public void slabModel(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String name, ResourceLocation type) {
         slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
     }
 
-    public void slabModel(DeferredBlock<? extends SlabBlock> block, String blockname, ResourceLocation name, ResourceLocation type) {
+    public void slabModel(Supplier<? extends SlabBlock> block, String blockname, ResourceLocation name, ResourceLocation type) {
         slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.left(locMod(blockname)), name, name, name, type);
     }
 
-    public void slabColumn(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, String side, String end, ResourceLocation type) {
+    public void slabColumn(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String side, String end, ResourceLocation type) {
         slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(side), locParent(end), locParent(end), type);
     }
 
-    public void slab(DeferredBlock<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<ResourceLocation, Supplier<? extends Block>> doubleModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+    public void slab(Supplier<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<ResourceLocation, Supplier<? extends Block>> doubleModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         ResourceLocation bm, tm, dm;
         if (type != SOLID) {
