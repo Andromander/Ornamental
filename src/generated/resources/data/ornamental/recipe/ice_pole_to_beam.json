@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:ice_pole"
-    }
+    "ornamental:ice_pole"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:snow_slab"
-    }
+    "#": "ornamental:snow_slab"
   },
   "pattern": [
     "#",

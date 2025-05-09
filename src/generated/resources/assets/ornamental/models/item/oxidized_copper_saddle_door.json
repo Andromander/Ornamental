@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/saddle_door_inventory",
-  "textures": {
-    "bottom": "minecraft:block/oxidized_copper_trapdoor",
-    "side": "minecraft:block/oxidized_copper_trapdoor",
-    "top": "minecraft:block/oxidized_copper_trapdoor"
-  }
-}

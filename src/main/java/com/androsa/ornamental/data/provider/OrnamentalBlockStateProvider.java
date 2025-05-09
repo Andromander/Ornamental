@@ -1,191 +1,257 @@
 package com.androsa.ornamental.data.provider;
 
-import com.androsa.ornamental.blocks.OrnamentBeam;
-import com.androsa.ornamental.blocks.OrnamentPole;
-import com.androsa.ornamental.blocks.OrnamentSaddleDoor;
-import com.androsa.ornamental.blocks.OrnamentSupport;
+import com.androsa.ornamental.OrnamentalMod;
+import com.androsa.ornamental.blocks.*;
+import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.util.Either;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.blockstates.*;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
-import javax.annotation.Nonnull;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
-public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
+public abstract class OrnamentalBlockStateProvider {
 
-    private final OrnamentalBlockModelProvider blockModels;
+    protected final BlockModelGenerators blockModels;
+    private final String modID;
     private final String parentID;
+
+    public static final Map<Integer, VariantProperties.Rotation> INT_TO_ROT = ImmutableMap.of(
+            0, VariantProperties.Rotation.R0,
+            90, VariantProperties.Rotation.R90,
+            180, VariantProperties.Rotation.R180,
+            270, VariantProperties.Rotation.R270);
 
     public static final ResourceLocation SOLID = ResourceLocation.withDefaultNamespace("solid");
     public static final ResourceLocation TRANSLUCENT = ResourceLocation.withDefaultNamespace("translucent");
     public static final ResourceLocation CUTOUT = ResourceLocation.withDefaultNamespace("cutout");
     public static final ResourceLocation CUTOUT_MIPPED = ResourceLocation.withDefaultNamespace("cutout_mipped");
 
-    public OrnamentalBlockStateProvider(PackOutput output, String modid, String parent, ExistingFileHelper helper) {
-        super(output, modid, helper);
-        parentID = parent;
+    public static final ModelTemplate FENCE_POST = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_post")), Optional.of("_post"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_open")), Optional.of("_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_CLOSED = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate")), Optional.empty(), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_WALL_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_wall_open")), Optional.of("_wall_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate FENCE_GATE_WALL_CLOSED = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/fence_gate_wall")), Optional.of("_wall"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_left")), Optional.of("_bottom_left"), TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_left_open")), Optional.of("_bottom_left_open"), TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_right")), Optional.of("_bottom_right"), TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_BOTTOM_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_bottom_right_open")), Optional.of("_bottom_right_open"), TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_left")), Optional.of("_top_left"), TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_left_open")), Optional.of("_top_left_open"), TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_right")), Optional.of("_top_right"), TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate DOOR_TOP_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/door_top_right_open")), Optional.of("_top_right_open"), TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_WHOLE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_whole")), Optional.of("_whole"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_HORIZONTAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_horizontal")), Optional.of("_horizontal"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_VERTICAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_CORNER = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_corner")), Optional.of("_corner"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate POLE_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/pole_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_WHOLE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_whole")), Optional.of("_whole"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_HORIZONTAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_horizontal")), Optional.of("_horizontal"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_VERTICAL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_CORNER = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_corner")), Optional.of("_corner"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate BEAM_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/beam_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_POST = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_post")), Optional.of("_post"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_SIDE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_side")), Optional.of("_side"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_SIDE_TALL = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_side_tall")), Optional.of("_side_tall"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate WALL_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/wall_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_LEFT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_left")), Optional.of("_left"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_LEFT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_left_open")), Optional.of("_left_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_RIGHT = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_right")), Optional.of("_right"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_RIGHT_OPEN = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_right_open")), Optional.of("_right_open"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SADDLE_DOOR_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/saddle_door_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_BASE = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_base")), Optional.of("_base"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_BASE_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_base_top")), Optional.of("_base_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_X = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_x")), Optional.of("_horizontal_x"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_X_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_x_top")), Optional.of("_horizontal_x_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Z = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_z")), Optional.of("_horizontal_z"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Z_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_horizontal_z_top")), Optional.of("_horizontal_z_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Y = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_vertical")), Optional.of("_vertical"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_Y_TOP = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_vertical_top")), Optional.of("_vertical_top"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
+    public static final ModelTemplate SUPPORT_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "block/util/support_inventory")), Optional.of("_inventory"), TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
 
-        blockModels = new OrnamentalBlockModelProvider(output, modid, helper) {
-            @Override
-            protected void registerModels() { }
-
-            @Override
-            public String getName() {
-                return OrnamentalBlockStateProvider.this.getName();
-            }
-        };
+    public OrnamentalBlockStateProvider(BlockModelGenerators generator, String modid, String parent) {
+        this.blockModels = generator;
+        this.modID = modid;
+        this.parentID = parent;
     }
 
-    @Nonnull
-    @Override
-    public String getName() {
-        return "Ornamental Blockstates and Block Models";
-    }
-
-    public String parentLoc() {
-        return parentID;
-    }
-
-    @Override
-    public OrnamentalBlockModelProvider models() {
-        return blockModels;
-    }
+    public abstract void runBlockGen();
 
     protected ResourceLocation locMod(String name) {
-        return modLoc("block/" + name);
+        return ResourceLocation.fromNamespaceAndPath(modID, "block/" + name);
     }
 
     protected ResourceLocation locParent(String name) {
-        return ResourceLocation.fromNamespaceAndPath(parentLoc(), "block/" + name);
-    }
-
-    protected String getKey(Supplier<? extends Block> block) {
-        return BuiltInRegistries.BLOCK.getKey(block.get()).getPath();
+        return ResourceLocation.fromNamespaceAndPath(parentID, "block/" + name);
     }
 
     /* Stairs */
-    public void stairsBasic(Supplier<? extends StairBlock> block, String name) {
-        stairsBasic(block, name, SOLID);
+    public void stairsBasic(Supplier<? extends OrnamentStair> block, String name) {
+        stairsBasic(block, name, ModelTemplates.STAIRS_INNER, ModelTemplates.STAIRS_STRAIGHT, ModelTemplates.STAIRS_OUTER);
     }
 
-    public void stairsBasic(Supplier<? extends StairBlock> block, String name, ResourceLocation type) {
-        stairsBasic(block, locParent(name), type);
+    public void stairsBasic(Supplier<? extends OrnamentStair> block, String name, ModelTemplate inner, ModelTemplate straight, ModelTemplate outer) {
+        stairsBasic(block, locParent(name), inner, straight, outer);
     }
 
-    public void stairsBasic(Supplier<? extends StairBlock> block, ResourceLocation name, ResourceLocation type) {
-        stairs(block, name, name, name, type);
+    public void stairsBasic(Supplier<? extends OrnamentStair> block, ResourceLocation name, ModelTemplate inner, ModelTemplate straight, ModelTemplate outer) {
+        stairs(block, inner, straight, outer, name, name, name);
     }
 
-    public void stairsColumn(Supplier<? extends StairBlock> block, String side, String end) {
-        stairs(block, locParent(side), locParent(end), locParent(end), SOLID);
+    public void stairsColumn(Supplier<? extends OrnamentStair> block, String side, String end) {
+        stairs(block, ModelTemplates.STAIRS_INNER, ModelTemplates.STAIRS_STRAIGHT, ModelTemplates.STAIRS_OUTER, locParent(side), locParent(end), locParent(end));
     }
 
-    public void stairs(Supplier<? extends StairBlock> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        if (type == SOLID) {
-            stairsBlock(block.get(), side, bottom, top);
-        } else {
-            stairsBlockWithRenderType(block.get(), side, bottom, top, type);
-        }
+    public void stairs(Supplier<? extends OrnamentStair> block, ModelTemplate innerModel, ModelTemplate straightModel, ModelTemplate outerModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top);
+        ResourceLocation inner = innerModel.create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation straight = straightModel.create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation outer = outerModel.create(block.get(), mapping, blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createStairs(block.get(), inner, straight, outer));
+        blockModels.registerSimpleItemModel(block.get().asItem(), straight);
     }
 
     /* Slabs */
-    public void slabBasic(Supplier<? extends SlabBlock> block, String name) {
-        slabBasic(block, name, SOLID);
+    public void slabBasic(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname) {
+        slabBasic(block, blockname, SOLID);
     }
 
-    public void slabBasic(Supplier<? extends SlabBlock> block, String name, ResourceLocation type) {
-        slabBasic(block, locParent(name), type);
+    public void slabBasic(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, ResourceLocation type) {
+        String name = BuiltInRegistries.BLOCK.getKey(blockname.get()).getPath();
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
     }
 
-    public void slabBasic(Supplier<? extends SlabBlock> block, ResourceLocation name, ResourceLocation type) {
-        slab(block, name, name, name, name, type);
+    public void slabModel(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, String name, ResourceLocation type) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
     }
 
-    public void slabModel(Supplier<? extends SlabBlock> block, String model, String name) {
-        slab(block, locParent(model), locParent(name), locParent(name), locParent(name), SOLID);
+    public void slabModel(DeferredBlock<? extends SlabBlock> block, String blockname, ResourceLocation name, ResourceLocation type) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.left(locMod(blockname)), name, name, name, type);
     }
 
-    public void slabColumn(Supplier<? extends SlabBlock> block, String blockname, String side, String end) {
-        slab(block, locParent(blockname), locParent(side), locParent(end), locParent(end), SOLID);
+    public void slabColumn(DeferredBlock<? extends SlabBlock> block, Supplier<? extends Block> blockname, String side, String end, ResourceLocation type) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(side), locParent(end), locParent(end), type);
     }
 
-    public void slab(Supplier<? extends SlabBlock> block, ResourceLocation model, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        ModelFile slab, slabTop, doubleSlab;
-        if (type == SOLID) {
-            slab = models().slab(getKey(block), side, bottom, top);
-            slabTop = models().slabTop(getKey(block) + "_top", side, bottom, top);
-            doubleSlab = models().getExistingFile(model);
+    public void slab(DeferredBlock<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<ResourceLocation, Supplier<? extends Block>> doubleModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top);
+        ResourceLocation bm, tm, dm;
+        if (type != SOLID) {
+            bm = bottomModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            tm = topModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            dm = new ExtendedModelTemplateBuilder()
+                    .parent(doubleModel.map(
+                            r -> r,
+                            b -> ModelLocationUtils.getModelLocation(b.get())))
+                    .suffix("_double")
+                    .renderType(type)
+                    .build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            slab = models().slab(getKey(block), side, bottom, top).renderType(type);
-            slabTop = models().slabTop(getKey(block) + "_top", side, bottom, top).renderType(type);
-            doubleSlab = models().forceRenderType(model.getPath(), model, type);
+            bm = bottomModel.create(block.get(), mapping, blockModels.modelOutput);
+            tm = topModel.create(block.get(), mapping, blockModels.modelOutput);
+            dm = doubleModel.map(
+                    r -> r,
+                    b -> ModelLocationUtils.getModelLocation(b.get()));
         }
-        slabBlock(block.get(), slab, slabTop, doubleSlab);
+
+
+        BlockStateGenerator slabgen = MultiVariantGenerator.multiVariant(block.get())
+                .with(PropertyDispatch.property(BlockStateProperties.SLAB_TYPE)
+                        .select(SlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, bm))
+                        .select(SlabType.TOP, Variant.variant().with(VariantProperties.MODEL, tm))
+                        .select(SlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, dm)));
+        blockModels.blockStateOutput.accept(slabgen);
+        blockModels.registerSimpleItemModel(block.get(), bm);
     }
 
     /* Fences */
     public void fenceBasic(Supplier<? extends FenceBlock> block, String name) {
-        fenceBasic(block, name, SOLID);
+        fenceBasic(block, locParent(name));
     }
 
-    public void fenceBasic(Supplier<? extends FenceBlock> block, String name, ResourceLocation type) {
-        fenceBasic(block, locParent(name), type);
-    }
-
-    public void fenceBasic(Supplier<? extends FenceBlock> block, ResourceLocation name, ResourceLocation type) {
-        fence(block, name, name, name, type);
+    public void fenceBasic(Supplier<? extends FenceBlock> block, ResourceLocation name) {
+        fence(block, FENCE_POST, ModelTemplates.CUSTOM_FENCE_SIDE_NORTH, ModelTemplates.CUSTOM_FENCE_SIDE_EAST, ModelTemplates.CUSTOM_FENCE_SIDE_SOUTH, ModelTemplates.CUSTOM_FENCE_SIDE_WEST, FENCE_INVENTORY, name, name, name);
     }
 
     public void fenceColumn(Supplier<? extends FenceBlock> block, String side, String top) {
-        fence(block, locParent(side), locParent(top), locParent(top), SOLID);
+        fence(block, FENCE_POST, ModelTemplates.CUSTOM_FENCE_SIDE_NORTH, ModelTemplates.CUSTOM_FENCE_SIDE_EAST, ModelTemplates.CUSTOM_FENCE_SIDE_SOUTH, ModelTemplates.CUSTOM_FENCE_SIDE_WEST, FENCE_INVENTORY, locParent(side), locParent(top), locParent(top));
     }
 
-    public void fence(Supplier<? extends FenceBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
-        if (type == SOLID) {
-            fourWayBlock(block.get(),
-                    models().fencePost(getKey(block) + "_post", side, top, bottom),
-                    models().fenceSide(getKey(block) + "_side", side));
-        } else {
-            fourWayBlock(block.get(),
-                    models().fencePost(getKey(block) + "_post", side, top, bottom).renderType(type),
-                    models().fenceSide(getKey(block) + "_side", side).renderType(type));
-        }
+    public void fence(Supplier<? extends FenceBlock> block, ModelTemplate post, ModelTemplate north, ModelTemplate east, ModelTemplate south, ModelTemplate west, ModelTemplate inventory, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        TextureMapping postMapping = new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.PARTICLE, side);
+        TextureMapping railMapping = new TextureMapping()
+                .put(TextureSlot.TEXTURE, side);
+        ResourceLocation p = post.create(block.get(), postMapping, blockModels.modelOutput);
+        ResourceLocation n = north.create(block.get(), railMapping, blockModels.modelOutput);
+        ResourceLocation e = east.create(block.get(), railMapping, blockModels.modelOutput);
+        ResourceLocation s = south.create(block.get(), railMapping, blockModels.modelOutput);
+        ResourceLocation w = west.create(block.get(), railMapping, blockModels.modelOutput);
+        ResourceLocation i = inventory.create(block.get(), postMapping, blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createCustomFence(block.get(), p, n, e, s, w));
+        blockModels.registerSimpleItemModel(block.get(), i);
     }
 
     /* Trapdoors */
     public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name) {
-        trapdoorBasic(block, name, CUTOUT);
-    }
-
-    public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name, ResourceLocation type) {
-        trapdoor(block, locMod(name + "_trapdoor"), type, true);
+        trapdoor(block, locMod(name + "_trapdoor"), true, CUTOUT);
     }
 
     public void trapdoorParent(Supplier<? extends TrapDoorBlock> block, String name) {
-        trapdoor(block, locParent(name), CUTOUT, false);
+        trapdoor(block, locParent(name), false, CUTOUT);
     }
 
-    public void trapdoor(Supplier<? extends TrapDoorBlock> block, ResourceLocation texture, ResourceLocation type, boolean orientable) {
-        if (type == SOLID) {
-            trapdoorBlock(block.get(), texture, orientable);
+    public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name, ResourceLocation type) {
+        trapdoor(block, locMod(name + "_trapdoor"), true, type);
+    }
+
+    public void trapdoorParent(Supplier<? extends TrapDoorBlock> block, String name, ResourceLocation type) {
+        trapdoor(block, locParent(name), false, type);
+    }
+
+    public void trapdoor(Supplier<? extends TrapDoorBlock> block, ResourceLocation texture, boolean orientable, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping().put(TextureSlot.TEXTURE, texture);
+        ResourceLocation top, bottom, open;
+        if (orientable) {
+            top = ModelTemplates.ORIENTABLE_TRAPDOOR_TOP.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            bottom = ModelTemplates.ORIENTABLE_TRAPDOOR_BOTTOM.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            open = ModelTemplates.ORIENTABLE_TRAPDOOR_OPEN.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            trapdoorBlockWithRenderType(block.get(), texture, orientable, type);
+            top = ModelTemplates.TRAPDOOR_TOP.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            bottom = ModelTemplates.TRAPDOOR_BOTTOM.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            open = ModelTemplates.TRAPDOOR_OPEN.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         }
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createTrapdoor(block.get(), top, bottom, open));
+        this.blockModels.registerSimpleItemModel(block.get(), bottom);
     }
 
     /* Fence Gates */
     public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, String name) {
-        fenceGateBasic(block, name, SOLID);
+        fenceGateBasic(block, locParent(name), SOLID);
     }
 
     public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, String name, ResourceLocation type) {
@@ -193,209 +259,269 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, ResourceLocation name, ResourceLocation type) {
-        fenceGate(block, name, name, name, type);
+        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, name, name, name, type);
     }
 
-    public void fenceGateColumn(Supplier<? extends FenceGateBlock> block, String side, String top) {
-        fenceGate(block, locParent(side), locParent(top), locParent(top), SOLID);
+    public void fenceGateColumn(Supplier<? extends FenceGateBlock> block, String side, String top, ResourceLocation type) {
+        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, locParent(side), locParent(top), locParent(top), type);
     }
 
-    public void fenceGate(Supplier<? extends FenceGateBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
-        ModelFile gate, gateOpen, gateWall, gateWallOpen;
-        if (type == SOLID) {
-            gate =         models().fenceGate(getKey(block), side, top, bottom);
-            gateOpen =     models().fenceGateOpen(getKey(block) + "_open", side, top, bottom);
-            gateWall =     models().fenceGateWall(getKey(block) + "_wall", side, top, bottom);
-            gateWallOpen = models().fenceGateWallOpen(getKey(block) + "_wall_open", side, top, bottom);
+    public void fenceGate(Supplier<? extends FenceGateBlock> block, ModelTemplate gate, ModelTemplate opengate, ModelTemplate wall, ModelTemplate openwall, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, side)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.BOTTOM, bottom);
+
+        ResourceLocation g, go, w, wo;
+        if (type != SOLID) {
+            g = gate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            go = opengate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            w = wall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            wo = openwall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            gate =         models().fenceGate(getKey(block), side, top, bottom).renderType(type);
-            gateOpen =     models().fenceGateOpen(getKey(block) + "_open", side, top, bottom).renderType(type);
-            gateWall =     models().fenceGateWall(getKey(block) + "_wall", side, top, bottom).renderType(type);
-            gateWallOpen = models().fenceGateWallOpen(getKey(block) + "_wall_open", side, top, bottom).renderType(type);
+            g = gate.create(block.get(), mapping, blockModels.modelOutput);
+            go = opengate.create(block.get(), mapping, blockModels.modelOutput);
+            w = wall.create(block.get(), mapping, blockModels.modelOutput);
+            wo = openwall.create(block.get(), mapping, blockModels.modelOutput);
         }
-
-        fenceGateBlock(block.get(), gate, gateOpen, gateWall, gateWallOpen);
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createFenceGate(block.get(), go, g, wo, w, true));
+        this.blockModels.registerSimpleItemModel(block.get(), g);
     }
 
     /* Doors */
-    public void doorBasic(Supplier<? extends DoorBlock> block, String name) {
+    public void doorBasic(DeferredBlock<? extends DoorBlock> block, String name) {
         doorBasic(block, name, CUTOUT);
     }
 
-    public void doorBasic(Supplier<? extends DoorBlock> block, String name, ResourceLocation type) {
-        door(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"), type);
+    public void doorHidden(DeferredBlock<? extends DoorBlock> block, String name) {
+        doorHidden(block, name, CUTOUT);
     }
 
-    public void doorHidden(Supplier<? extends DoorBlock> block, String name) {
-        door(block, locParent(name), locParent(name), locParent(name), locParent(name), CUTOUT);
+    public void doorBasic(DeferredBlock<? extends DoorBlock> block, String name, ResourceLocation type) {
+        doorBasic(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"), type);
     }
 
-    public void door(Supplier<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
-        ModelFile bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen;
+    public void doorHidden(DeferredBlock<? extends DoorBlock> block, String name, ResourceLocation type) {
+        doorBasic(block, locParent(name), locParent(name), locParent(name), locParent(name), type);
+    }
 
-        if (type == SOLID) {
-            bottomLeft = models().doorBottomLeftO(getKey(block) + "_bottom_left", bottomside, bottom);
-            bottomLeftOpen = models().doorBottomLeftOpenO(getKey(block) + "_bottom_left_open", bottomside, bottom);
-            bottomRight = models().doorBottomRightO(getKey(block) + "_bottom_right", bottomside, bottom);
-            bottomRightOpen = models().doorBottomRightOpenO(getKey(block) + "_bottom_right_open", bottomside, bottom);
-            topLeft = models().doorTopLeftO(getKey(block) + "_top_left", topside, top);
-            topLeftOpen = models().doorTopLeftOpenO(getKey(block) + "_top_left_open", topside, top);
-            topRight = models().doorTopRightO(getKey(block) + "_top_right", topside, top);
-            topRightOpen = models().doorTopRightOpenO(getKey(block) + "_top_right_open", topside, top);
-        } else {
-            bottomLeft = models().doorBottomLeftO(getKey(block) + "_bottom_left", bottomside, bottom).renderType(type);
-            bottomLeftOpen = models().doorBottomLeftOpenO(getKey(block) + "_bottom_left_open", bottomside, bottom).renderType(type);
-            bottomRight = models().doorBottomRightO(getKey(block) + "_bottom_right", bottomside, bottom).renderType(type);
-            bottomRightOpen = models().doorBottomRightOpenO(getKey(block) + "_bottom_right_open", bottomside, bottom).renderType(type);
-            topLeft = models().doorTopLeftO(getKey(block) + "_top_left", topside, top).renderType(type);
-            topLeftOpen = models().doorTopLeftOpenO(getKey(block) + "_top_left_open", topside, top).renderType(type);
-            topRight = models().doorTopRightO(getKey(block) + "_top_right", topside, top).renderType(type);
-            topRightOpen = models().doorTopRightOpenO(getKey(block) + "_top_right_open", topside, top).renderType(type);
-        }
+    public void doorBasic(DeferredBlock<? extends DoorBlock> block, ResourceLocation name, ResourceLocation type) {
+        doorBasic(block, name, name, name, name, type);
+    }
 
-        doorBlock(block.get(), bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen);
+    public void doorBasic(DeferredBlock<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
+        door(block, DOOR_BOTTOM_LEFT, DOOR_BOTTOM_LEFT_OPEN, DOOR_BOTTOM_RIGHT, DOOR_BOTTOM_RIGHT_OPEN, DOOR_TOP_LEFT, DOOR_TOP_LEFT_OPEN, DOOR_TOP_RIGHT, DOOR_TOP_RIGHT_OPEN, bottomside, bottom, topside, top, type);
+    }
+
+    public void door(DeferredBlock<? extends DoorBlock> block, ModelTemplate bl, ModelTemplate blo, ModelTemplate br, ModelTemplate bro, ModelTemplate tl, ModelTemplate tlo, ModelTemplate tr, ModelTemplate tro, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
+        TextureMapping bottomTex = new TextureMapping()
+                .put(TextureSlot.SIDE, bottomside)
+                .put(TextureSlot.BOTTOM, bottom);
+        TextureMapping topTex = new TextureMapping()
+                .put(TextureSlot.SIDE, topside)
+                .put(TextureSlot.TOP, top);
+
+        ResourceLocation bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen;
+        bottomLeft = bl.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput);
+        bottomLeftOpen = blo.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput);
+        bottomRight = br.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput);
+        bottomRightOpen = bro.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput);
+        topLeft = tl.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput);
+        topLeftOpen = tlo.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput);
+        topRight = tr.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput);
+        topRightOpen = tro.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput);
+
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createDoor(block.get(), bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen));
+        this.blockModels.registerSimpleFlatItemModel(block.asItem());
     }
 
     /* Poles */
-    public void poleBasic(Supplier<? extends OrnamentPole> block, String name) {
-        poleBasic(block, name, SOLID);
+    public void poleBasic(Supplier<? extends OrnamentPole> block, String fullblock, String name) {
+        poleBasic(block, fullblock, name, SOLID);
     }
 
-    public void poleBasic(Supplier<? extends OrnamentPole> block, String name, ResourceLocation type) {
-        poleBasic(block, name, name, type);
+    public void poleBasic(Supplier<? extends OrnamentPole> block, Supplier<? extends Block> fullblock, String name) {
+        poleBasic(block, fullblock, name, SOLID);
     }
 
     public void poleBasic(Supplier<? extends OrnamentPole> block, String fullblock, String name, ResourceLocation type) {
-        poleBasic(block, locParent(fullblock), locParent(name), type);
+        poleBasic(block, Either.left(locMod(fullblock)), locMod(name), type);
     }
 
-    public void poleBasic(Supplier<? extends OrnamentPole> block, ResourceLocation fullblock, ResourceLocation name, ResourceLocation type) {
-        pole(block, fullblock, name, name, name, type);
+    public void poleBasic(Supplier<? extends OrnamentPole> block, Supplier<? extends Block> fullblock, String name, ResourceLocation type) {
+        poleBasic(block, Either.right(fullblock), locParent(name), type);
     }
 
-    public void poleColumn(Supplier<? extends OrnamentPole> block, String fullblock, String side, String top) {
-        pole(block, locParent(fullblock), locParent(top), locParent(top), locParent(side), SOLID);
+    public void poleBasic(Supplier<? extends OrnamentPole> block, Either<ResourceLocation, Supplier<? extends Block>> fullblock, ResourceLocation name, ResourceLocation type) {
+        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, name, name, name, type);
     }
 
-    public void pole(Supplier<? extends OrnamentPole> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        ModelFile whole, horizon, vertical, corner, fullblock;
+    public void poleColumn(Supplier<? extends OrnamentPole> block, Either<ResourceLocation, Supplier<? extends Block>> fullblock, String side, String top, ResourceLocation type) {
+        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, locParent(top), locParent(top), locParent(side), type);
+    }
 
-        if (type == SOLID) {
-            whole = models().poleWhole(getKey(block) + "_whole", side, top, bottom);
-            horizon = models().poleHorizon(getKey(block) + "_horizontal", side, top, bottom);
-            vertical = models().poleVertical(getKey(block) + "_vertical", side, top, bottom);
-            corner = models().poleCorner(getKey(block) + "_corner", side, top, bottom);
-            fullblock = models().getExistingFile(full);
+    public void pole(Supplier<? extends OrnamentPole> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<ResourceLocation, Supplier<? extends Block>> full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.SIDE, side);
+
+        ResourceLocation whole, horizon, vertical, corner, fullblock, inventory;
+        if (type != SOLID) {
+            whole = w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizon = h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            vertical = v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            corner = c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            fullblock = new ExtendedModelTemplateBuilder()
+                    .parent(full.map(
+                            r -> r,
+                            b -> ModelLocationUtils.getModelLocation(b.get())))
+                    .suffix("_full")
+                    .renderType(type)
+                    .build().create(block.get(), mapping, blockModels.modelOutput);
+            inventory = POLE_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            whole = models().poleWhole(getKey(block) + "_whole", side, top, bottom).renderType(type);
-            horizon = models().poleHorizon(getKey(block) + "_horizontal", side, top, bottom).renderType(type);
-            vertical = models().poleVertical(getKey(block) + "_vertical", side, top, bottom).renderType(type);
-            corner = models().poleCorner(getKey(block) + "_corner", side, top, bottom).renderType(type);
-            fullblock = models().forceRenderType(full.getPath(), full, type);
+            whole = w.create(block.get(), mapping, blockModels.modelOutput);
+            horizon = h.create(block.get(), mapping, blockModels.modelOutput);
+            vertical = v.create(block.get(), mapping, blockModels.modelOutput);
+            corner = c.create(block.get(), mapping, blockModels.modelOutput);
+            fullblock = full.map(
+                    r -> r,
+                    b -> ModelLocationUtils.getModelLocation(b.get()));
+            inventory = POLE_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
         }
 
-        poleBlock(block, whole, horizon, vertical, corner, fullblock);
+        this.blockModels.blockStateOutput.accept(poleBlock(block, whole, horizon, vertical, corner, fullblock));
+        this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, String name) {
-        beamBasic(block, name, SOLID);
+    /* Beams */
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, String fullblock, String name) {
+        beamBasic(block, Either.left(locMod(fullblock)), locMod(name), SOLID);
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, String name, ResourceLocation type) {
-        beamBasic(block, name, name, type);
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, Supplier<? extends Block> fullblock, String name) {
+        beamBasic(block, Either.right(fullblock), locParent(name), SOLID);
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, String name, String fullblock, ResourceLocation type) {
-        beamBasic(block, locParent(fullblock), locParent(name), type);
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, String fullblock, String name, ResourceLocation type) {
+        beamBasic(block, Either.left(locMod(fullblock)), locMod(name), type);
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, ResourceLocation fullblock, ResourceLocation name, ResourceLocation type) {
-        beam(block, fullblock, name, name, name, type);
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, Supplier<? extends Block> fullblock, String name, ResourceLocation type) {
+        beamBasic(block, Either.right(fullblock), locParent(name), type);
     }
 
-    public void beamColumn(Supplier<? extends OrnamentBeam> block, String name, String top, String side) {
-        beam(block, locParent(name), locParent(top), locParent(top), locParent(side), SOLID);
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, Either<ResourceLocation, Supplier<? extends Block>> fullblock, ResourceLocation name, ResourceLocation type) {
+        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, name, name, name, type);
     }
 
-    public void beam(Supplier<? extends OrnamentBeam> block, ResourceLocation full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
-        ModelFile whole, horizon, vertical, corner, fullblock;
+    public void beamColumn(Supplier<? extends OrnamentBeam> block, Either<ResourceLocation, Supplier<? extends Block>> fullblock, String top, String side, ResourceLocation type) {
+        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, locParent(top), locParent(top), locParent(side), type);
+    }
 
-        if (type == SOLID) {
-            whole = models().beamWhole(getKey(block) + "_whole", side, top, bottom);
-            horizon = models().beamHorizontal(getKey(block) + "_horizontal", side, top, bottom);
-            vertical = models().beamVertical(getKey(block) + "_vertical", side, top, bottom);
-            corner = models().beamCorner(getKey(block) + "_corner", side, top, bottom);
-            fullblock = models().getExistingFile(full);
+    public void beam(Supplier<? extends OrnamentBeam> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<ResourceLocation, Supplier<? extends Block>> full, ResourceLocation top, ResourceLocation bottom, ResourceLocation side, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.SIDE, side);
+
+        ResourceLocation whole, horizon, vertical, corner, fullblock, inventory;
+        if (type != SOLID) {
+            whole = w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizon = h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            vertical = v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            corner = c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            fullblock = new ExtendedModelTemplateBuilder()
+                    .parent(full.map(
+                            r -> r,
+                            b -> ModelLocationUtils.getModelLocation(b.get())))
+                    .suffix("_full")
+                    .renderType(type)
+                    .build().create(block.get(), mapping, blockModels.modelOutput);
+            inventory = BEAM_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            whole = models().beamWhole(getKey(block) + "_whole", side, top, bottom).renderType(type);
-            horizon = models().beamHorizontal(getKey(block) + "_horizontal", side, top, bottom).renderType(type);
-            vertical = models().beamVertical(getKey(block) + "_vertical", side, top, bottom).renderType(type);
-            corner = models().beamCorner(getKey(block) + "_corner", side, top, bottom).renderType(type);
-            fullblock = models().forceRenderType(full.getPath(), full, type);
+            whole = w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizon = h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            vertical = v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            corner = c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            fullblock = full.map(
+                    r -> r,
+                    b -> ModelLocationUtils.getModelLocation(b.get()));
+            inventory = BEAM_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         }
 
-        beamBlock(block, whole, horizon, vertical, corner, fullblock);
+        this.blockModels.blockStateOutput.accept(beamBlock(block, whole, horizon, vertical, corner, fullblock));
+        this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
+    /* Walls */
     public void wallBasic(Supplier<? extends WallBlock> block, String name) {
-        wallBasic(block, name, SOLID);
+        wallBasic(block, locParent(name));
     }
 
-    public void wallBasic(Supplier<? extends WallBlock> block, String name, ResourceLocation type) {
-        wallBasic(block, locParent(name), type);
-    }
-
-    public void wallBasic(Supplier<? extends WallBlock> block, ResourceLocation name, ResourceLocation type) {
-        wall(block, name, name, name, type);
+    public void wallBasic(Supplier<? extends WallBlock> block, ResourceLocation name) {
+        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, name, name, name);
     }
 
     public void wallColumn(Supplier<? extends WallBlock> block, String side, String end) {
-        wall(block, locParent(side), locParent(end), locParent(end), SOLID);
+        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, locParent(side), locParent(end), locParent(end));
     }
 
-    public void wall(Supplier<? extends WallBlock> block, ResourceLocation side, ResourceLocation top, ResourceLocation bottom, ResourceLocation type) {
-        ModelFile wallpost, wallside, walltall;
+    public void wall(Supplier<? extends WallBlock> block, ModelTemplate post, ModelTemplate sidewall, ModelTemplate sidetall, ResourceLocation side, ResourceLocation top, ResourceLocation bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.SIDE, side);
 
-        if (type == SOLID) {
-            wallpost = models().wallPost(getKey(block) + "_post", side, top, bottom);
-            wallside = models().wallSide(getKey(block) + "_side", side, top, bottom);
-            walltall = models().wallSideTall(getKey(block) + "_side_tall", side, top, bottom);
-        } else {
-            wallpost = models().wallPost(getKey(block) + "_post", side, top, bottom).renderType(type);
-            wallside = models().wallSide(getKey(block) + "_side", side, top, bottom).renderType(type);
-            walltall = models().wallSideTall(getKey(block) + "_side_tall", side, top, bottom).renderType(type);
-        }
+        ResourceLocation wallpost = post.create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation wallside = sidewall.create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation walltall = sidetall.create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation inventory = WALL_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
 
-        wallBlock(block.get(), wallpost, wallside, walltall);
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createWall(block.get(), wallpost, wallside, walltall));
+        this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
+    /* Saddle Doors */
     public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoorBasic(block, name, CUTOUT);
+        saddleDoor(block, locMod(name + "_trapdoor"), CUTOUT);
+    }
+
+    public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, ResourceLocation name) {
+        saddleDoor(block, name, CUTOUT);
     }
 
     public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, String name, ResourceLocation type) {
-        saddleDoor(block, locMod(name + "_trapdoor"), locMod(name + "_trapdoor"), locMod(name + "_trapdoor"), type);
+        saddleDoor(block, locMod(name + "_trapdoor"), type);
+    }
+
+    public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, ResourceLocation name, ResourceLocation type) {
+        saddleDoor(block, name, type);
     }
 
     public void saddleDoorHidden(Supplier<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locParent(name), locParent(name), locParent(name), CUTOUT);
+        saddleDoor(block, locParent(name), CUTOUT);
     }
 
-    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        ModelFile left, leftOpen, right, rightOpen;
+    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ResourceLocation name, ResourceLocation type) {
+        saddleDoor(block, SADDLE_DOOR_LEFT, SADDLE_DOOR_LEFT_OPEN, SADDLE_DOOR_RIGHT, SADDLE_DOOR_RIGHT_OPEN, name, name, name, type);
+    }
 
-        if (type == SOLID) {
-            left = models().saddleDoorLeft(getKey(block) + "_left", side, top, bottom);
-            leftOpen = models().saddleDoorLeftOpen(getKey(block) + "_left_open", side, top, bottom);
-            right = models().saddleDoorRight(getKey(block) + "_right", side, top, bottom);
-            rightOpen = models().saddleDoorRightOpen(getKey(block) + "_right_open", side, top, bottom);
-        } else {
-            left = models().saddleDoorLeft(getKey(block) + "_left", side, top, bottom).renderType(type);
-            leftOpen = models().saddleDoorLeftOpen(getKey(block) + "_left_open", side, top, bottom).renderType(type);
-            right = models().saddleDoorRight(getKey(block) + "_right", side, top, bottom).renderType(type);
-            rightOpen = models().saddleDoorRightOpen(getKey(block) + "_right_open", side, top, bottom).renderType(type);
-        }
-        saddleDoorBlock(block, left, leftOpen, right, rightOpen);
+    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ModelTemplate leftDoor, ModelTemplate leftDoorOpen, ModelTemplate rightDoor, ModelTemplate rightDoorOpen, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.SIDE, side);
+
+        ResourceLocation left = leftDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation leftOpen = leftDoorOpen.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation right = rightDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation rightOpen = rightDoorOpen.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+        ResourceLocation inventory = SADDLE_DOOR_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+
+        this.blockModels.blockStateOutput.accept(saddleDoorBlock(block, left, leftOpen, right, rightOpen));
+        this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
     /* Supports */
@@ -408,261 +534,285 @@ public abstract class OrnamentalBlockStateProvider extends BlockStateProvider {
     }
 
     public void supportBasic(Supplier<? extends OrnamentSupport> block, ResourceLocation name, ResourceLocation type) {
-        support(block, name, name, name, type);
+        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, name, name, name, type);
     }
 
-    public void supportColumn(Supplier<? extends OrnamentSupport> block, String side, String top) {
-        support(block, locParent(side), locParent(top), locParent(top), SOLID);
+    public void supportColumn(Supplier<? extends OrnamentSupport> block, String side, String top, ResourceLocation type) {
+        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, locParent(side), locParent(top), locParent(top), type);
     }
 
-    public void support(Supplier<? extends OrnamentSupport> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
-        ModelFile base, baseTop, vertical, verticalTop, horizontalX, horizontalXTop, horizontalZ, horizontalZTop;
+    public void support(Supplier<? extends OrnamentSupport> block, ModelTemplate baseModel, ModelTemplate baseTModel, ModelTemplate yModel, ModelTemplate yTModel, ModelTemplate xModel, ModelTemplate xTModel, ModelTemplate zModel, ModelTemplate zTModel, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, ResourceLocation type) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, bottom)
+                .put(TextureSlot.TOP, top)
+                .put(TextureSlot.SIDE, side);
 
-        if (type == SOLID) {
-            base = models().supportBase(getKey(block) + "_base", side, top, bottom);
-            baseTop = models().supportBaseTop(getKey(block) + "_base_top", side, top, bottom);
-            vertical = models().supportVertical(getKey(block) + "_vertical", side, top, bottom);
-            verticalTop = models().supportVerticalTop(getKey(block) + "_vertical_top", side, top, bottom);
-            horizontalX = models().supportHorizontalX(getKey(block) + "_horizontal_x", side, top, bottom);
-            horizontalXTop = models().supportHorizontalXTop(getKey(block) + "_horizontal_x_top", side, top, bottom);
-            horizontalZ = models().supportHorizontalZ(getKey(block) + "_horizontal_z", side, top, bottom);
-            horizontalZTop = models().supportHorizontalZTop(getKey(block) + "_horizontal_z_top", side, top, bottom);
+        ResourceLocation base, baseTop, vertical, verticalTop ,horizontalX, horizontalXTop, horizontalZ, horizontalZTop, inventory;
+        if (type != SOLID) {
+            base = baseModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            baseTop = baseTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            vertical = yModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            verticalTop = yTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizontalX = xModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizontalXTop = xTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizontalZ = zModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            horizontalZTop = zTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            inventory = SUPPORT_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            base = models().supportBase(getKey(block) + "_base", side, top, bottom).renderType(type);
-            baseTop = models().supportBase(getKey(block) + "_base_top", side, top, bottom).renderType(type);
-            vertical = models().supportVertical(getKey(block) + "_vertical", side, top, bottom).renderType(type);
-            verticalTop = models().supportVerticalTop(getKey(block) + "_vertical_top", side, top, bottom).renderType(type);
-            horizontalX = models().supportHorizontalX(getKey(block) + "_horizontal_x", side, top, bottom).renderType(type);
-            horizontalXTop = models().supportHorizontalXTop(getKey(block) + "_horizontal_x_top", side, top, bottom).renderType(type);
-            horizontalZ = models().supportHorizontalZ(getKey(block) + "_horizontal_z", side, top, bottom).renderType(type);
-            horizontalZTop = models().supportHorizontalZTop(getKey(block) + "_horizontal_z_top", side, top, bottom).renderType(type);
+            base = baseModel.create(block.get(), mapping, blockModels.modelOutput);
+            baseTop = baseTModel.create(block.get(), mapping, blockModels.modelOutput);
+            vertical = yModel.create(block.get(), mapping, blockModels.modelOutput);
+            verticalTop = yTModel.create(block.get(), mapping, blockModels.modelOutput);
+            horizontalX = xModel.create(block.get(), mapping, blockModels.modelOutput);
+            horizontalXTop = xTModel.create(block.get(), mapping, blockModels.modelOutput);
+            horizontalZ = zModel.create(block.get(), mapping, blockModels.modelOutput);
+            horizontalZTop = zTModel.create(block.get(), mapping, blockModels.modelOutput);
+            inventory = SUPPORT_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
         }
-        supportBlock(block, base, baseTop, vertical, verticalTop, horizontalX, horizontalXTop, horizontalZ, horizontalZTop, false);
+
+        this.blockModels.blockStateOutput.accept(supportBlock(block, base, baseTop, vertical, verticalTop, horizontalX, horizontalXTop, horizontalZ, horizontalZTop));
+        this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
-    public void saddleDoorBlock(Supplier<? extends OrnamentSaddleDoor> block, ModelFile left, ModelFile leftOpen, ModelFile right, ModelFile rightOpen) {
-        getVariantBuilder(block.get()).forAllStatesExcept(state -> {
-            int yRot = ((int) state.getValue(OrnamentSaddleDoor.FACING).toYRot()) + 90;
-            boolean rh = state.getValue(OrnamentSaddleDoor.HINGE) == DoorHingeSide.RIGHT;
-            boolean open = state.getValue(OrnamentSaddleDoor.OPEN);
-            if (open) {
-                yRot += 90;
-            }
-            if (rh && open) {
-                yRot += 180;
-            }
-            yRot %= 360;
-
-            ModelFile model = null;
-            if (rh && open) {
-                model = rightOpen;
-            } else if (!rh && open) {
-                model = leftOpen;
-            }
-            if (rh && !open) {
-                model = right;
-            } else if (!rh && !open) {
-                model = left;
-            }
-
-            return ConfiguredModel.builder().modelFile(model)
-                    .rotationY(yRot)
-                    .build();
-        }, OrnamentSaddleDoor.POWERED);
+    public BlockStateGenerator saddleDoorBlock(Supplier<? extends OrnamentSaddleDoor> block, ResourceLocation left, ResourceLocation leftOpen, ResourceLocation right, ResourceLocation rightOpen) {
+        return MultiVariantGenerator.multiVariant(block.get())
+                .with(PropertyDispatch.properties(
+                                OrnamentSaddleDoor.FACING,
+                                OrnamentSaddleDoor.HINGE,
+                                OrnamentSaddleDoor.OPEN)
+                        .select(
+                                Direction.EAST, DoorHingeSide.LEFT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, left))
+                        .select(
+                                Direction.EAST, DoorHingeSide.LEFT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, leftOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(
+                                Direction.EAST, DoorHingeSide.RIGHT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, right))
+                        .select(
+                                Direction.EAST, DoorHingeSide.RIGHT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, rightOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(
+                                Direction.NORTH, DoorHingeSide.LEFT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, left).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(
+                                Direction.NORTH, DoorHingeSide.LEFT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, leftOpen))
+                        .select(
+                                Direction.NORTH, DoorHingeSide.RIGHT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, right).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(
+                                Direction.NORTH, DoorHingeSide.RIGHT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, rightOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(
+                                Direction.SOUTH, DoorHingeSide.LEFT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, left).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(
+                                Direction.SOUTH, DoorHingeSide.LEFT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, leftOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(
+                                Direction.SOUTH, DoorHingeSide.RIGHT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, right).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .select(
+                                Direction.SOUTH, DoorHingeSide.RIGHT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, rightOpen))
+                        .select(
+                                Direction.WEST, DoorHingeSide.LEFT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, left).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(
+                                Direction.WEST, DoorHingeSide.LEFT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, leftOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .select(
+                                Direction.WEST, DoorHingeSide.RIGHT, false,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, right).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .select(
+                                Direction.WEST, DoorHingeSide.RIGHT, true,
+                                Variant.variant()
+                                        .with(VariantProperties.MODEL, rightOpen).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)));
     }
 
-    public void poleBlock(Supplier<? extends OrnamentPole> block, ModelFile whole, ModelFile horizon, ModelFile vertical, ModelFile corner, ModelFile fullblock) {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
-        poleModelWhole(builder, whole, 0, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        poleModelWhole(builder, whole, 90, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        poleModelWhole(builder, whole, 180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        poleModelWhole(builder, whole, 270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        poleModelLength(builder, horizon, 0, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        poleModelLength(builder, horizon, 90, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        poleModelLength(builder, horizon, 180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        poleModelLength(builder, horizon, 270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        poleModelLength(builder, vertical, 0, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        poleModelLength(builder, vertical, 90, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        poleModelLength(builder, vertical, 180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        poleModelLength(builder, vertical, 270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        poleModelCorner(builder, corner, 0, true, true, true, false);
-        poleModelCorner(builder, corner, 90, true, true, false, true);
-        poleModelCorner(builder, corner, 180, false, true, true, true);
-        poleModelCorner(builder, corner, 270, true, false, true, true);
+    public BlockStateGenerator poleBlock(Supplier<? extends OrnamentPole> block, ResourceLocation whole, ResourceLocation horizon, ResourceLocation vertical, ResourceLocation corner, ResourceLocation fullblock) {
+        MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
+        poleModelWhole(builder, whole, VariantProperties.Rotation.R0, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        poleModelWhole(builder, whole, VariantProperties.Rotation.R90, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        poleModelWhole(builder, whole, VariantProperties.Rotation.R180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        poleModelWhole(builder, whole, VariantProperties.Rotation.R270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        poleModelLength(builder, horizon, VariantProperties.Rotation.R0, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        poleModelLength(builder, horizon, VariantProperties.Rotation.R90, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        poleModelLength(builder, horizon, VariantProperties.Rotation.R180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        poleModelLength(builder, horizon, VariantProperties.Rotation.R270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        poleModelLength(builder, vertical, VariantProperties.Rotation.R0, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
+        poleModelLength(builder, vertical, VariantProperties.Rotation.R90, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
+        poleModelLength(builder, vertical, VariantProperties.Rotation.R180, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
+        poleModelLength(builder, vertical, VariantProperties.Rotation.R270, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
+        poleModelCorner(builder, corner, VariantProperties.Rotation.R0, true, true, true, false);
+        poleModelCorner(builder, corner, VariantProperties.Rotation.R90, true, true, false, true);
+        poleModelCorner(builder, corner, VariantProperties.Rotation.R180, false, true, true, true);
+        poleModelCorner(builder, corner, VariantProperties.Rotation.R270, true, false, true, true);
 
-        builder.part()
-                .modelFile(fullblock)
-                .addModel()
-                .condition(OrnamentPole.TOP_LEFT, true)
-                .condition(OrnamentPole.TOP_RIGHT, true)
-                .condition(OrnamentPole.BOTTOM_LEFT, true)
-                .condition(OrnamentPole.BOTTOM_RIGHT, true);
+        return builder.with(
+                Condition.condition().term(OrnamentPole.TOP_LEFT, true).term(OrnamentPole.TOP_RIGHT, true).term(OrnamentPole.BOTTOM_LEFT, true).term(OrnamentPole.BOTTOM_RIGHT, true),
+                Variant.variant().with(VariantProperties.MODEL, fullblock));
     }
 
-    public void poleModelWhole(MultiPartBlockStateBuilder builder, ModelFile whole, int yRot, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
+    public void poleModelWhole(MultiPartGenerator builder, ResourceLocation whole, VariantProperties.Rotation yRot, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
         poleModelTri(builder, whole, yRot, main, true, c1, false, c2, false);
     }
 
-    public void poleModelLength(MultiPartBlockStateBuilder builder, ModelFile length, int yRot, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
+    public void poleModelLength(MultiPartGenerator builder, ResourceLocation length, VariantProperties.Rotation yRot, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
         poleModelTri(builder, length, yRot, main, true, c1, true, c2, false);
     }
 
-    public void poleModelTri(MultiPartBlockStateBuilder builder, ModelFile model, int yRot, BooleanProperty main, boolean mFlag, BooleanProperty c1, boolean c1Flag, BooleanProperty c2, boolean c2Flag) {
-        builder.part()
-                .modelFile(model)
-                .rotationY(yRot)
-                .uvLock(yRot != 0)
-                .addModel()
-                .condition(main, mFlag)
-                .condition(c1, c1Flag)
-                .condition(c2, c2Flag);
+    public void poleModelTri(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation yRot, BooleanProperty main, boolean mFlag, BooleanProperty c1, boolean c1Flag, BooleanProperty c2, boolean c2Flag) {
+        builder.with(
+                Condition.condition().term(main, mFlag).term(c1, c1Flag).term(c2, c2Flag),
+                Variant.variant()
+                        .with(VariantProperties.MODEL, model)
+                        .with(VariantProperties.Y_ROT, yRot)
+                        .with(VariantProperties.UV_LOCK, yRot != VariantProperties.Rotation.R0));
     }
 
-    public void poleModelCorner(MultiPartBlockStateBuilder builder, ModelFile model, int yRot, boolean tlFlag, boolean trFlag, boolean blFlag, boolean brFlag) {
-        builder.part()
-                .modelFile(model)
-                .rotationY(yRot)
-                .uvLock(yRot != 0)
-                .addModel()
-                .condition(OrnamentPole.TOP_LEFT, tlFlag)
-                .condition(OrnamentPole.TOP_RIGHT, trFlag)
-                .condition(OrnamentPole.BOTTOM_LEFT, blFlag)
-                .condition(OrnamentPole.BOTTOM_RIGHT, brFlag);
+    public void poleModelCorner(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation yRot, boolean tlFlag, boolean trFlag, boolean blFlag, boolean brFlag) {
+        builder.with(
+                Condition.condition().term(OrnamentPole.TOP_LEFT, tlFlag).term(OrnamentPole.TOP_RIGHT, trFlag).term(OrnamentPole.BOTTOM_LEFT, blFlag).term(OrnamentPole.BOTTOM_RIGHT, brFlag),
+                Variant.variant()
+                        .with(VariantProperties.MODEL, model)
+                        .with(VariantProperties.Y_ROT, yRot)
+                        .with(VariantProperties.UV_LOCK, yRot != VariantProperties.Rotation.R0));
     }
 
-    public void beamBlock(Supplier<? extends OrnamentBeam> block, ModelFile whole, ModelFile horizon, ModelFile vertical, ModelFile corner, ModelFile fullblock) {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
-        beamModelWhole(builder, whole, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelWhole(builder, whole, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelWhole(builder, whole, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, horizon, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, horizon, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, horizon, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, horizon, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, horizon, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, horizon, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 180, 180, Direction.Axis.X, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 180, 90, Direction.Axis.Z, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_RIGHT);
-        beamModelLength(builder, vertical, 180, 0, Direction.Axis.X, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, vertical, 180, 270, Direction.Axis.Z, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_LEFT);
-        beamModelLength(builder, vertical, 0, 0, Direction.Axis.X, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, vertical, 0, 270, Direction.Axis.Z, OrnamentPole.BOTTOM_LEFT, OrnamentPole.TOP_LEFT, OrnamentPole.BOTTOM_RIGHT);
-        beamModelLength(builder, vertical, 0, 180, Direction.Axis.X, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelLength(builder, vertical, 0, 90, Direction.Axis.Z, OrnamentPole.BOTTOM_RIGHT, OrnamentPole.TOP_RIGHT, OrnamentPole.BOTTOM_LEFT);
-        beamModelCorner(builder, corner, 180, 180, Direction.Axis.X, true, true, true, false);
-        beamModelCorner(builder, corner, 180, 90, Direction.Axis.Z, true, true, true, false);
-        beamModelCorner(builder, corner, 180, 0, Direction.Axis.X, true, true, false, true);
-        beamModelCorner(builder, corner, 180, 270, Direction.Axis.Z, true, true, false, true);
-        beamModelCorner(builder, corner, 0, 180, Direction.Axis.X, false, true, true, true);
-        beamModelCorner(builder, corner, 0, 90, Direction.Axis.Z, false, true, true, true);
-        beamModelCorner(builder, corner, 0, 0, Direction.Axis.X, true, false, true, true);
-        beamModelCorner(builder, corner, 0, 270, Direction.Axis.Z, true, false, true, true);
+    public BlockStateGenerator beamBlock(Supplier<? extends OrnamentBeam> block, ResourceLocation whole, ResourceLocation horizon, ResourceLocation vertical, ResourceLocation corner, ResourceLocation fullblock) {
+        MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R180, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R180, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R180, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R180, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, whole, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R180, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R180, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R180, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R180, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, horizon, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R180, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R180, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R180, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R180, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, vertical, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R180, VariantProperties.Rotation.R180, Direction.Axis.X, true, true, true, false);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R180, VariantProperties.Rotation.R90, Direction.Axis.Z, true, true, true, false);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R180, VariantProperties.Rotation.R0, Direction.Axis.X, true, true, false, true);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R180, VariantProperties.Rotation.R270, Direction.Axis.Z, true, true, false, true);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, false, true, true, true);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, false, true, true, true);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, true, false, true, true);
+        beamModelCorner(builder, corner, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, true, false, true, true);
 
-        builder.part()
-                .modelFile(fullblock)
-                .addModel()
-                .condition(OrnamentPole.TOP_LEFT, true)
-                .condition(OrnamentPole.TOP_RIGHT, true)
-                .condition(OrnamentPole.BOTTOM_LEFT, true)
-                .condition(OrnamentPole.BOTTOM_RIGHT, true);
+        return builder.with(
+                Condition.condition().term(OrnamentBeam.TOP_LEFT, true).term(OrnamentBeam.TOP_RIGHT, true).term(OrnamentBeam.BOTTOM_LEFT, true).term(OrnamentBeam.BOTTOM_RIGHT, true),
+                Variant.variant().with(VariantProperties.MODEL, fullblock));
     }
 
-    public void beamModelWhole(MultiPartBlockStateBuilder builder, ModelFile model, int xRot, int yRot, Direction.Axis axis, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
+    public void beamModelWhole(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation xRot, VariantProperties.Rotation yRot, Direction.Axis axis, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
         beamModelTri(builder, model, xRot, yRot, axis, main, true, c1, false, c2, false);
     }
 
-    public void beamModelLength(MultiPartBlockStateBuilder builder, ModelFile model, int xRot, int yRot, Direction.Axis axis, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
+    public void beamModelLength(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation xRot, VariantProperties.Rotation yRot, Direction.Axis axis, BooleanProperty main, BooleanProperty c1, BooleanProperty c2) {
         beamModelTri(builder, model, xRot, yRot, axis, main, true, c1, true, c2, false);
     }
 
-    public void beamModelTri(MultiPartBlockStateBuilder builder, ModelFile model, int xRot, int yRot, Direction.Axis axis, BooleanProperty main, boolean mFlag, BooleanProperty c1, boolean c1Flag, BooleanProperty c2, boolean c2Flag) {
-        builder.part()
-                .modelFile(model)
-                .rotationX(xRot)
-                .rotationY(yRot)
-                .uvLock(xRot != 0 || yRot != 0)
-                .addModel()
-                .condition(BlockStateProperties.HORIZONTAL_AXIS, axis)
-                .condition(main, mFlag)
-                .condition(c1, c1Flag)
-                .condition(c2, c2Flag);
+    public void beamModelTri(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation xRot, VariantProperties.Rotation yRot, Direction.Axis axis, BooleanProperty main, boolean mFlag, BooleanProperty c1, boolean c1Flag, BooleanProperty c2, boolean c2Flag) {
+        builder.with(
+                Condition.condition().term(BlockStateProperties.HORIZONTAL_AXIS, axis).term(main, mFlag).term(c1, c1Flag).term(c2, c2Flag),
+                Variant.variant()
+                        .with(VariantProperties.MODEL, model)
+                        .with(VariantProperties.X_ROT, xRot)
+                        .with(VariantProperties.Y_ROT, yRot)
+                        .with(VariantProperties.UV_LOCK, xRot != VariantProperties.Rotation.R0 || yRot != VariantProperties.Rotation.R0));
     }
 
-    public void beamModelCorner(MultiPartBlockStateBuilder builder, ModelFile model, int xRot, int yRot, Direction.Axis axis, boolean tlFlag, boolean trFlag, boolean blFlag, boolean brFlag) {
-        builder.part()
-                .modelFile(model)
-                .rotationX(xRot)
-                .rotationY(yRot)
-                .uvLock(xRot != 0 || yRot != 0)
-                .addModel()
-                .condition(BlockStateProperties.HORIZONTAL_AXIS, axis)
-                .condition(OrnamentPole.TOP_LEFT, tlFlag)
-                .condition(OrnamentPole.TOP_RIGHT, trFlag)
-                .condition(OrnamentPole.BOTTOM_LEFT, blFlag)
-                .condition(OrnamentPole.BOTTOM_RIGHT, brFlag);
+    public void beamModelCorner(MultiPartGenerator builder, ResourceLocation model, VariantProperties.Rotation xRot, VariantProperties.Rotation yRot, Direction.Axis axis, boolean tlFlag, boolean trFlag, boolean blFlag, boolean brFlag) {
+        builder.with(
+                Condition.condition().term(BlockStateProperties.HORIZONTAL_AXIS, axis)
+                        .term(OrnamentBeam.TOP_LEFT, tlFlag).term(OrnamentBeam.TOP_RIGHT, trFlag).term(OrnamentBeam.BOTTOM_LEFT, blFlag).term(OrnamentBeam.BOTTOM_RIGHT, brFlag),
+                Variant.variant()
+                        .with(VariantProperties.MODEL, model)
+                        .with(VariantProperties.X_ROT, xRot)
+                        .with(VariantProperties.Y_ROT, yRot)
+                        .with(VariantProperties.UV_LOCK, xRot != VariantProperties.Rotation.R0 || yRot != VariantProperties.Rotation.R0));
     }
 
-    public void supportBlock(Supplier<? extends OrnamentSupport> block, ModelFile base, ModelFile basetop, ModelFile vertical, ModelFile verticaltop, ModelFile horizontalX, ModelFile horizontalXtop, ModelFile horizontalZ, ModelFile horizontalZtop, boolean topmodels) {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(block.get());
-        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_LEFT, false, 0);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_RIGHT, false, 90);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_RIGHT, false, 180);
-        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_LEFT, false, 270);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_LEFT, true, 0);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_RIGHT, true, 90);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_RIGHT, true, 180);
-        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_LEFT, true, 270);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, false, 0);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, false, 90);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, false, 180);
-        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, false, 270);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, true, 0);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, true, 90);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, true, 180);
-        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, true, 270);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, false, 0);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, false, 90);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, false, 180);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, false, 270);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, true, 0);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, true, 90);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, true, 180);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, true, 270);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, false, 0);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, false, 90);
-        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, false, 180);
-        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, false, 270);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, true, 0);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, true, 90);
-        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, true, 180);
-        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, true, 270);
+    public BlockStateGenerator supportBlock(Supplier<? extends OrnamentSupport> block, ResourceLocation base, ResourceLocation basetop, ResourceLocation vertical, ResourceLocation verticaltop, ResourceLocation horizontalX, ResourceLocation horizontalXtop, ResourceLocation horizontalZ, ResourceLocation horizontalZtop) {
+        MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
+        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_LEFT, false, VariantProperties.Rotation.R0);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.TOP_RIGHT, false, VariantProperties.Rotation.R90);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_RIGHT, false, VariantProperties.Rotation.R180);
+        supportModelBase(builder, base, OrnamentSupport.CornerType.BOTTOM_LEFT, false, VariantProperties.Rotation.R270);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_LEFT, true, VariantProperties.Rotation.R0);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.TOP_RIGHT, true, VariantProperties.Rotation.R90);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_RIGHT, true, VariantProperties.Rotation.R180);
+        supportModelBase(builder, basetop, OrnamentSupport.CornerType.BOTTOM_LEFT, true, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, false, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, false, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, false, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, vertical, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, false, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.TB_CONNECT, true, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.TB_CONNECT, true, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.TB_CONNECT, true, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, verticaltop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.TB_CONNECT, true, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, false, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, false, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, false, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, false, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.NS_CONNECT, true, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.NS_CONNECT, true, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.NS_CONNECT, true, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.NS_CONNECT, true, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, false, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, false, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, horizontalX, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, false, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, horizontalZ, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, false, VariantProperties.Rotation.R270);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.TOP_LEFT, OrnamentSupport.EW_CONNECT, true, VariantProperties.Rotation.R0);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.TOP_RIGHT, OrnamentSupport.EW_CONNECT, true, VariantProperties.Rotation.R90);
+        supportModelConnect(builder, horizontalXtop, OrnamentSupport.CornerType.BOTTOM_RIGHT, OrnamentSupport.EW_CONNECT, true, VariantProperties.Rotation.R180);
+        supportModelConnect(builder, horizontalZtop, OrnamentSupport.CornerType.BOTTOM_LEFT, OrnamentSupport.EW_CONNECT, true, VariantProperties.Rotation.R270);
+        return builder;
     }
 
-    public void supportModelBase(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, boolean upper, int y) {
-        builder.part()
-                .modelFile(model)
-                .rotationY(y)
-                .uvLock(true)
-                .addModel()
-                .condition(OrnamentSupport.CORNER, corner)
-                .condition(OrnamentSupport.UPPER_HALF, upper);
+    public void supportModelBase(MultiPartGenerator builder, ResourceLocation model, OrnamentSupport.CornerType corner, boolean upper, VariantProperties.Rotation y) {
+        builder.with(
+                Condition.condition().term(OrnamentSupport.CORNER, corner).term(OrnamentSupport.UPPER_HALF, upper),
+                Variant.variant().with(VariantProperties.MODEL, model).with(VariantProperties.Y_ROT, y).with(VariantProperties.UV_LOCK, true)
+        );
     }
 
-    public void supportModelConnect(MultiPartBlockStateBuilder builder, ModelFile model, OrnamentSupport.CornerType corner, BooleanProperty connect, boolean upper, int y) {
-        builder.part()
-                .modelFile(model)
-                .rotationY(y)
-                .uvLock(true)
-                .addModel()
-                .condition(OrnamentSupport.CORNER, corner)
-                .condition(OrnamentSupport.UPPER_HALF, upper)
-                .condition(connect, true);
+    public void supportModelConnect(MultiPartGenerator builder, ResourceLocation model, OrnamentSupport.CornerType corner, BooleanProperty connect, boolean upper, VariantProperties.Rotation y) {
+        builder.with(
+                Condition.condition().term(OrnamentSupport.CORNER, corner).term(OrnamentSupport.UPPER_HALF, upper).term(connect, true),
+                Variant.variant().with(VariantProperties.MODEL, model).with(VariantProperties.Y_ROT, y).with(VariantProperties.UV_LOCK, true)
+        );
     }
 }

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:blue_ice_pole"
-    },
-    {
-      "item": "ornamental:blue_ice_beam"
-    }
+    "ornamental:blue_ice_pole",
+    "ornamental:blue_ice_beam"
   ],
   "result": {
     "count": 2,

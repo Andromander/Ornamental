@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:grass_block"
-    },
-    "/": {
-      "item": "ornamental:grass_slab"
-    }
+    "#": "minecraft:grass_block",
+    "/": "ornamental:grass_slab"
   },
   "pattern": [
     "/#/",

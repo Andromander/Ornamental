@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Block;
 import com.google.common.collect.Lists;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.util.function.Supplier;
 
 import java.util.List;
@@ -32,8 +31,8 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
     public static final List<Supplier<? extends Block>> TRAPDOORS = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> WALLS = Lists.newArrayList();
 
-    public OrnamentalItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, BlockTagsProvider blockTags, ExistingFileHelper helper) {
-        super(output, provider, OrnamentalMod.MODID, helper, blockTags);
+    public OrnamentalItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, BlockTagsProvider blockTags) {
+        super(output, provider, OrnamentalMod.MODID, blockTags);
     }
 
     @Override

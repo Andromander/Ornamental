@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:emerald_pole"
-    }
+    "ornamental:emerald_pole"
   ],
   "result": {
     "count": 1,

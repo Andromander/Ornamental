@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:diamond_beam"
-    }
+    "ornamental:diamond_beam"
   ],
   "result": {
     "count": 1,

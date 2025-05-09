@@ -2,8 +2,8 @@
   "parent": "ornamental:block/util/saddle_door_right",
   "render_type": "minecraft:cutout",
   "textures": {
-    "bottom": "minecraft:block/oxidized_copper",
-    "side": "minecraft:block/oxidized_copper",
-    "top": "minecraft:block/oxidized_copper"
+    "bottom": "minecraft:block/oxidized_copper_trapdoor",
+    "side": "minecraft:block/oxidized_copper_trapdoor",
+    "top": "minecraft:block/oxidized_copper_trapdoor"
   }
 }

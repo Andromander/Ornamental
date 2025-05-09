@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:calcite_slab"
-    }
+    "#": "ornamental:calcite_slab"
   },
   "pattern": [
     "###"

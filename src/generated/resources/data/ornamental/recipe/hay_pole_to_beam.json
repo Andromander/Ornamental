@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:hay_pole"
-    }
+    "ornamental:hay_pole"
   ],
   "result": {
     "count": 1,

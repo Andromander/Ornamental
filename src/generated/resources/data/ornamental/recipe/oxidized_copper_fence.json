@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:oxidized_copper"
-    },
-    "/": {
-      "item": "ornamental:oxidized_copper_slab"
-    }
+    "#": "minecraft:oxidized_copper",
+    "/": "ornamental:oxidized_copper_slab"
   },
   "pattern": [
     "#/#",

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:amethyst_pole"
-    },
-    {
-      "item": "ornamental:amethyst_beam"
-    }
+    "ornamental:amethyst_pole",
+    "ornamental:amethyst_beam"
   ],
   "result": {
     "count": 2,

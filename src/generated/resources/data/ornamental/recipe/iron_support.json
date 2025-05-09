@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:iron_pole"
-    },
-    {
-      "item": "ornamental:iron_beam"
-    }
+    "ornamental:iron_pole",
+    "ornamental:iron_beam"
   ],
   "result": {
     "count": 2,

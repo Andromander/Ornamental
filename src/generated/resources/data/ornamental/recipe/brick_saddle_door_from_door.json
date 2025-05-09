@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:brick_door"
-    }
+    "ornamental:brick_door"
   ],
   "result": {
     "count": 2,

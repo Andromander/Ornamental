@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:dirt_path_pole"
-    }
+    "ornamental:dirt_path_pole"
   ],
   "result": {
     "count": 1,

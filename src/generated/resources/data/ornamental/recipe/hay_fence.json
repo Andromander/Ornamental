@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:hay_block"
-    },
-    "/": {
-      "item": "minecraft:wheat"
-    }
+    "#": "minecraft:hay_block",
+    "/": "minecraft:wheat"
   },
   "pattern": [
     "#/#",

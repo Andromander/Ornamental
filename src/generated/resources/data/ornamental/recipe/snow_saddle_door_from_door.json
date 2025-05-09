@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:snow_door"
-    }
+    "ornamental:snow_door"
   ],
   "result": {
     "count": 2,

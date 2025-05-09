@@ -1,8 +1,0 @@
-{
-  "parent": "ornamental:block/util/support_inventory",
-  "textures": {
-    "bottom": "minecraft:block/ice",
-    "side": "minecraft:block/ice",
-    "top": "minecraft:block/ice"
-  }
-}

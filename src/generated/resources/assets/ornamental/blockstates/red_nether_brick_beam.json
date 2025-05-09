@@ -32,7 +32,8 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_whole",
         "uvlock": true,
-        "x": 180
+        "x": 180,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -57,7 +58,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/red_nether_brick_beam_whole"
+        "model": "ornamental:block/red_nether_brick_beam_whole",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -70,6 +74,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_whole",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -83,6 +88,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_whole",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -96,6 +102,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_whole",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -137,7 +144,8 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_horizontal",
         "uvlock": true,
-        "x": 180
+        "x": 180,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -162,7 +170,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/red_nether_brick_beam_horizontal"
+        "model": "ornamental:block/red_nether_brick_beam_horizontal",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -175,6 +186,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_horizontal",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -188,6 +200,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_horizontal",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -201,6 +214,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_horizontal",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -242,7 +256,8 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_vertical",
         "uvlock": true,
-        "x": 180
+        "x": 180,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -267,7 +282,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/red_nether_brick_beam_vertical"
+        "model": "ornamental:block/red_nether_brick_beam_vertical",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -280,6 +298,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -293,6 +312,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -306,6 +326,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -349,7 +370,8 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_corner",
         "uvlock": true,
-        "x": 180
+        "x": 180,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -378,6 +400,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -392,6 +415,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -404,7 +428,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/red_nether_brick_beam_corner"
+        "model": "ornamental:block/red_nether_brick_beam_corner",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -418,6 +445,7 @@
       "apply": {
         "model": "ornamental:block/red_nether_brick_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {

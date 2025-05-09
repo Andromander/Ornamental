@@ -2,7 +2,9 @@
   "multipart": [
     {
       "apply": {
-        "model": "ornamental:block/amethyst_pole_whole"
+        "model": "ornamental:block/amethyst_pole_whole",
+        "uvlock": false,
+        "y": 0
       },
       "when": {
         "bottom_left": "false",
@@ -48,7 +50,9 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/amethyst_pole_horizontal"
+        "model": "ornamental:block/amethyst_pole_horizontal",
+        "uvlock": false,
+        "y": 0
       },
       "when": {
         "bottom_left": "false",
@@ -94,7 +98,9 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/amethyst_pole_vertical"
+        "model": "ornamental:block/amethyst_pole_vertical",
+        "uvlock": false,
+        "y": 0
       },
       "when": {
         "bottom_left": "true",
@@ -140,7 +146,9 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/amethyst_pole_corner"
+        "model": "ornamental:block/amethyst_pole_corner",
+        "uvlock": false,
+        "y": 0
       },
       "when": {
         "bottom_left": "true",

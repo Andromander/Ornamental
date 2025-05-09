@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:hay_slab"
-    }
+    "#": "ornamental:hay_slab"
   },
   "pattern": [
     "#",

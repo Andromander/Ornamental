@@ -13,7 +13,6 @@ import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -506,11 +505,6 @@ public class OrnamentalLootTables extends LootTableProvider {
         @Override
         protected Stream<EntityType<?>> getKnownEntityTypes() {
             return ModEntities.ENTITIES.getEntries().stream().map(Supplier::get);
-        }
-
-        @Override
-        protected boolean canHaveLootTable(EntityType<?> type) {
-            return ALLOWED_ENTITIES.contains(type) || type.getCategory() != MobCategory.MISC;
         }
     }
 }

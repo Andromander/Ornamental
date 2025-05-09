@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "ornamental:emerald_trapdoor"
-    }
+    "#": "ornamental:emerald_trapdoor"
   },
   "pattern": [
     "#",

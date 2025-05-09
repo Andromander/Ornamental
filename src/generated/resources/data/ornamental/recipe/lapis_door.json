@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:lapis_lazuli"
-    }
+    "#": "minecraft:lapis_lazuli"
   },
   "pattern": [
     "##",

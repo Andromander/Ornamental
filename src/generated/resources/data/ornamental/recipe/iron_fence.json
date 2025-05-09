@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:iron_block"
-    },
-    "/": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:iron_block",
+    "/": "minecraft:iron_ingot"
   },
   "pattern": [
     "#/#",

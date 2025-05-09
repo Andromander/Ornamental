@@ -12,6 +12,9 @@
       "scale":[ 0.5, 0.5, 0.5 ]
     }
   },
+  "textures": {
+    "particle": "#side"
+  },
   "ambientocclusion": false,
   "elements": [{
     "from": [ 6, 0, 0 ],

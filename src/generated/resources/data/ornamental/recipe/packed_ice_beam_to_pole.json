@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:packed_ice_beam"
-    }
+    "ornamental:packed_ice_beam"
   ],
   "result": {
     "count": 1,

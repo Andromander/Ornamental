@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:grass_pole"
-    }
+    "ornamental:grass_pole"
   ],
   "result": {
     "count": 1,

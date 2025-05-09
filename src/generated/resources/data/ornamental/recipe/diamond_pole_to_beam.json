@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:diamond_pole"
-    }
+    "ornamental:diamond_pole"
   ],
   "result": {
     "count": 1,

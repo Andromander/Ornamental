@@ -40,8 +40,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentStair.
      */
-    protected BlockBehaviour.Properties stairProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties stairProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -49,8 +49,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentSlab.
      */
-    protected BlockBehaviour.Properties slabProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties slabProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -58,8 +58,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentFence.
      */
-    protected BlockBehaviour.Properties fenceProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties fenceProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -67,8 +67,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentTrapDoor.
      */
-    protected BlockBehaviour.Properties trapdoorProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder).noOcclusion().isValidSpawn((state, reader, pos, type) -> false);
+    protected BlockBehaviour.Properties trapdoorProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name).noOcclusion().isValidSpawn((state, reader, pos, type) -> false);
     }
 
     /**
@@ -76,8 +76,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentFenceGate.
      */
-    protected BlockBehaviour.Properties fencegateProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties fencegateProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -85,8 +85,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentDoor.
      */
-    protected BlockBehaviour.Properties doorProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder).noOcclusion().pushReaction(PushReaction.DESTROY);
+    protected BlockBehaviour.Properties doorProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name).noOcclusion().pushReaction(PushReaction.DESTROY);
     }
 
     /**
@@ -94,8 +94,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentPole.
      */
-    protected BlockBehaviour.Properties poleProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties poleProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -103,8 +103,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the Ornamentbeam.
      */
-    protected BlockBehaviour.Properties beamProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties beamProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -112,8 +112,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentWall.
      */
-    protected BlockBehaviour.Properties wallProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties wallProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -121,8 +121,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentSaddleDoor.
      */
-    protected BlockBehaviour.Properties saddledoorProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder).noOcclusion();
+    protected BlockBehaviour.Properties saddledoorProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name).noOcclusion();
     }
 
     /**
@@ -130,8 +130,8 @@ public abstract class MasterRegistryHelper {
      * @param builder OrnamentBuilder in the event of special handling, ie. a subclass of OrnamentBuilder.
      * @return Properties for the OrnamentSupport.
      */
-    protected BlockBehaviour.Properties supportProperties(OrnamentBuilder builder) {
-        return PropertiesHelper.createProps(builder);
+    protected BlockBehaviour.Properties supportProperties(OrnamentBuilder builder, String name) {
+        return PropertiesHelper.createProps(builder, blockRegistry.getNamespace(), name);
     }
 
     /**
@@ -209,12 +209,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentStair.
      */
     public <T extends OrnamentStair, O extends OrnamentBuilder> DeferredBlock<T> stairs(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = stairProperties(builder);
+        String name = builder.name + "_stairs";
+        BlockBehaviour.Properties props = stairProperties(builder, name);
         blocktags.addAll(stairTags().blockTags());
         itemtags.addAll(stairTags().itemTags());
 
-        return registerBlock(builder, "_stairs", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 4, OrnamentBlockItem::new), ModCreativeTabs.STAIR_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 4, OrnamentBlockItem::new), ModCreativeTabs.STAIR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -226,12 +227,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentSlab.
      */
     public <T extends OrnamentSlab, O extends OrnamentBuilder> DeferredBlock<T> slab(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = slabProperties(builder);
+        String name = builder.name + "_slab";
+        BlockBehaviour.Properties props = slabProperties(builder, name);
         blocktags.addAll(slabTags().blockTags());
         itemtags.addAll(slabTags().itemTags());
 
-        return registerBlock(builder, "_slab", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 3, OrnamentBlockItem::new), ModCreativeTabs.SLAB_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 3, OrnamentBlockItem::new), ModCreativeTabs.SLAB_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -243,12 +245,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentFence.
      */
     public <T extends OrnamentFence, O extends OrnamentBuilder> DeferredBlock<T> fence(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = fenceProperties(builder);
+        String name = builder.name + "_fence";
+        BlockBehaviour.Properties props = fenceProperties(builder, name);
         blocktags.addAll(fenceTags().blockTags());
         itemtags.addAll(fenceTags().itemTags());
 
-        return registerBlock(builder, "_fence", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 1, OrnamentBlockItem::new), ModCreativeTabs.FENCE_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 1, OrnamentBlockItem::new), ModCreativeTabs.FENCE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -260,12 +263,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentTrapDoor.
      */
     public <T extends OrnamentTrapDoor, O extends OrnamentBuilder> DeferredBlock<T> trapdoor(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = trapdoorProperties(builder);
+        String name = builder.name + "_trapdoor";
+        BlockBehaviour.Properties props = trapdoorProperties(builder, name);
         blocktags.addAll(trapdoorTags().blockTags());
         itemtags.addAll(trapdoorTags().itemTags());
 
-        return registerBlock(builder, "_trapdoor", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 5, OrnamentBlockItem::new), ModCreativeTabs.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 5, OrnamentBlockItem::new), ModCreativeTabs.TRAPDOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -277,12 +281,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentFenceGate.
      */
     public <T extends OrnamentFenceGate, O extends OrnamentBuilder> DeferredBlock<T> fencegate(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = fencegateProperties(builder);
+        String name = builder.name + "_fence_gate";
+        BlockBehaviour.Properties props = fencegateProperties(builder, name);
         blocktags.addAll(fencegateTags().blockTags());
         itemtags.addAll(fencegateTags().itemTags());
 
-        return registerBlock(builder, "_fence_gate", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 2, OrnamentBlockItem::new), ModCreativeTabs.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 2, OrnamentBlockItem::new), ModCreativeTabs.FENCE_GATE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -294,12 +299,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentDoor.
      */
     public <T extends OrnamentDoor, O extends OrnamentBuilder> DeferredBlock<T> door(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = doorProperties(builder);
+        String name = builder.name + "_door";
+        BlockBehaviour.Properties props = doorProperties(builder, name);
         blocktags.addAll(doorTags().blockTags());
         itemtags.addAll(doorTags().itemTags());
 
-        return registerBlock(builder, "_door", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 0, OrnamentTallBlockItem::new), ModCreativeTabs.DOOR_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 0, OrnamentTallBlockItem::new), ModCreativeTabs.DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -311,12 +317,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentPole.
      */
     public <T extends OrnamentPole, O extends OrnamentBuilder> DeferredBlock<T> pole(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = poleProperties(builder);
+        String name = builder.name + "_pole";
+        BlockBehaviour.Properties props = poleProperties(builder, name);
         blocktags.addAll(poleTags().blockTags());
         itemtags.addAll(poleTags().itemTags());
 
-        return registerBlock(builder, "_pole", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 6, OrnamentBlockItem::new), ModCreativeTabs.POLE_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 6, OrnamentBlockItem::new), ModCreativeTabs.POLE_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -328,12 +335,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentBeam.
      */
     public <T extends OrnamentBeam, O extends OrnamentBuilder> DeferredBlock<T> beam(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = beamProperties(builder);
+        String name = builder.name + "_beam";
+        BlockBehaviour.Properties props = beamProperties(builder, name);
         blocktags.addAll(beamTags().blockTags());
         itemtags.addAll(beamTags().itemTags());
 
-        return registerBlock(builder, "_beam", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 7, OrnamentBlockItem::new), ModCreativeTabs.BEAM_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 7, OrnamentBlockItem::new), ModCreativeTabs.BEAM_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -345,12 +353,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentWall.
      */
     public <T extends OrnamentWall, O extends OrnamentBuilder> DeferredBlock<T> wall(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = wallProperties(builder);
+        String name = builder.name + "_wall";
+        BlockBehaviour.Properties props = wallProperties(builder, name);
         blocktags.addAll(wallTags().blockTags());
         itemtags.addAll(wallTags().itemTags());
 
-        return registerBlock(builder, "_wall", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 8, OrnamentBlockItem::new), ModCreativeTabs.WALL_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 8, OrnamentBlockItem::new), ModCreativeTabs.WALL_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -362,12 +371,13 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentSaddleDoor.
      */
     public <T extends OrnamentSaddleDoor, O extends OrnamentBuilder> DeferredBlock<T> saddledoor(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = saddledoorProperties(builder);
+        String name = builder.name + "_saddle_door";
+        BlockBehaviour.Properties props = saddledoorProperties(builder, name);
         blocktags.addAll(saddledoorTags().blockTags());
         itemtags.addAll(saddledoorTags().itemTags());
 
-        return registerBlock(builder, "_saddle_door", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 9, OrnamentBlockItem::new), ModCreativeTabs.SADDLE_DOOR_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
@@ -379,19 +389,19 @@ public abstract class MasterRegistryHelper {
      * @return Supplier for an OrnamentSupport.
      */
     public <T extends OrnamentSupport, O extends OrnamentBuilder> DeferredBlock<T> support(O builder, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags, BlockFactory<T, O> factory) {
-        BlockBehaviour.Properties props = supportProperties(builder);
+        String name = builder.name + "_support";
+        BlockBehaviour.Properties props = supportProperties(builder, name);
         blocktags.addAll(supportTags().blockTags());
         itemtags.addAll(supportTags().itemTags());
 
-        return registerBlock(builder, "_support", () -> factory.create(builder, props), item ->
-                registerBlockItem(item, builder, 10 ,OrnamentBlockItem::new), ModCreativeTabs.SUPPORT_ORNAMENTS, blocktags, itemtags);
+        return registerBlock(builder, name, () -> factory.create(builder, props), item ->
+                registerBlockItem(item, name, builder, 10, OrnamentBlockItem::new), ModCreativeTabs.SUPPORT_ORNAMENTS, blocktags, itemtags);
     }
 
     /**
      * INTERNAL USE
      */
-    private <T extends Block> DeferredBlock<T> registerBlock(OrnamentBuilder builder, String suffix, Supplier<? extends T> block, Function<Supplier<T>, Supplier<? extends Item>> item, List<Supplier<? extends Block>> tab, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
-        String name = builder.name + suffix;
+    private <T extends Block> DeferredBlock<T> registerBlock(OrnamentBuilder builder, String name, Supplier<? extends T> block, Function<Supplier<T>, Supplier<? extends Item>> item, List<Supplier<? extends Block>> tab, ArrayList<List<Supplier<? extends Block>>> blocktags, ArrayList<List<Supplier<? extends Block>>> itemtags) {
         DeferredBlock<T> reg = blockRegistry.register(name, block);
         itemRegistry.register(name, item.apply(reg));
         tab.add(reg);
@@ -409,15 +419,15 @@ public abstract class MasterRegistryHelper {
     }
 
     /**
-     * The BlockItem for an ornament, o long as the BlockItem follows {@link ItemFactory#create(Block, Item.Properties, OrnamentBuilder, int)}.
+     * The BlockItem for an ornament, so long as the BlockItem follows {@link ItemFactory#create(Block, Item.Properties, OrnamentBuilder, int)}.
      * @param block The Block ornament.
      * @param builder The OrnamentBuilder.
      * @param fuelindex The fuel index for the {@link OrnamentBuilder#burnTime}. See {@link OrnamentBuilder#burnTime(int...)} for block to index.
      * @param factory The BlockItem.
      * @return The BlockItem for the ornament.
      */
-    protected <T extends Block, I extends BlockItem> Supplier<BlockItem> registerBlockItem(Supplier<T> block, OrnamentBuilder builder, int fuelindex, ItemFactory<I> factory) {
-        return () -> factory.create(block.get(), PropertiesHelper.createItem(builder), builder, fuelindex);
+    protected <T extends Block, I extends BlockItem> Supplier<BlockItem> registerBlockItem(Supplier<T> block, String name, OrnamentBuilder builder, int fuelindex, ItemFactory<I> factory) {
+        return () -> factory.create(block.get(), PropertiesHelper.createItem(builder, itemRegistry.getNamespace(), name), builder, fuelindex);
     }
 
     @SafeVarargs

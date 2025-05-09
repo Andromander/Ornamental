@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:amethyst_block"
-    },
-    "/": {
-      "item": "minecraft:amethyst_shard"
-    }
+    "#": "minecraft:amethyst_block",
+    "/": "minecraft:amethyst_shard"
   },
   "pattern": [
     "#/#",

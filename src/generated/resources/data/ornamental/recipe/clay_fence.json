@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:clay"
-    },
-    "/": {
-      "item": "minecraft:clay_ball"
-    }
+    "#": "minecraft:clay",
+    "/": "minecraft:clay_ball"
   },
   "pattern": [
     "#/#",

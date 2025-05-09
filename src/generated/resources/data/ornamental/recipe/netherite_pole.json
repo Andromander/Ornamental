@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:netherite_slab"
-    }
+    "#": "ornamental:netherite_slab"
   },
   "pattern": [
     "#",

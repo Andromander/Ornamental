@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:magma_pole"
-    },
-    {
-      "item": "ornamental:magma_beam"
-    }
+    "ornamental:magma_pole",
+    "ornamental:magma_beam"
   ],
   "result": {
     "count": 2,

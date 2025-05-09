@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:oxidized_copper_slab"
-    }
+    "#": "ornamental:oxidized_copper_slab"
   },
   "pattern": [
     "###"

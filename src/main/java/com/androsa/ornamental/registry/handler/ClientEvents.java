@@ -42,20 +42,20 @@ public class ClientEvents {
                 ModBlocks.grass_support.get());
     }
 
-    @SubscribeEvent
-    public static void itemColors(RegisterColorHandlersEvent.Item event) {
-        event.register((stack, index) -> event.getBlockColors().getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, index),
-                ModBlocks.grass_fence.get(),
-                ModBlocks.grass_fence_gate.get(),
-                ModBlocks.grass_slab.get(),
-                ModBlocks.grass_stairs.get(),
-                ModBlocks.grass_trapdoor.get(),
-                ModBlocks.grass_pole.get(),
-                ModBlocks.grass_beam.get(),
-                ModBlocks.grass_wall.get(),
-                ModBlocks.grass_saddle_door.get(),
-                ModBlocks.grass_support.get());
-    }
+//    @SubscribeEvent
+//    public static void itemColors(RegisterColorHandlersEvent.Item event) {
+//        event.register((stack, index) -> event.getBlockColors().getColor(((BlockItem)stack.getItem()).getBlock().defaultBlockState(), null, null, index),
+//                ModBlocks.grass_fence.get(),
+//                ModBlocks.grass_fence_gate.get(),
+//                ModBlocks.grass_slab.get(),
+//                ModBlocks.grass_stairs.get(),
+//                ModBlocks.grass_trapdoor.get(),
+//                ModBlocks.grass_pole.get(),
+//                ModBlocks.grass_beam.get(),
+//                ModBlocks.grass_wall.get(),
+//                ModBlocks.grass_saddle_door.get(),
+//                ModBlocks.grass_support.get());
+//    }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

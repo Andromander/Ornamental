@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:snow_block"
-    },
-    "/": {
-      "tag": "minecraft:slabs"
-    }
+    "#": "minecraft:snow_block",
+    "/": "#minecraft:slabs"
   },
   "pattern": [
     " / ",

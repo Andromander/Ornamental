@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:netherite_pole"
-    }
+    "ornamental:netherite_pole"
   ],
   "result": {
     "count": 1,

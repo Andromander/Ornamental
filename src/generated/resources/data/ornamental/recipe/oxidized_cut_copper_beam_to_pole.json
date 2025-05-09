@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:oxidized_cut_copper_beam"
-    }
+    "ornamental:oxidized_cut_copper_beam"
   ],
   "result": {
     "count": 1,

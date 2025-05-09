@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:amethyst_slab"
-    }
+    "#": "ornamental:amethyst_slab"
   },
   "pattern": [
     "#",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "ornamental:bone_trapdoor"
-    }
+    "#": "ornamental:bone_trapdoor"
   },
   "pattern": [
     "#",

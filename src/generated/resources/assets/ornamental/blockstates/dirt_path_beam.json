@@ -2,7 +2,10 @@
   "multipart": [
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_whole_top"
+        "model": "ornamental:block/path/dirt_path_beam_whole_top",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -15,6 +18,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_top",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -28,6 +32,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_top",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -41,6 +46,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_top",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -52,7 +58,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_whole_bottom"
+        "model": "ornamental:block/path/dirt_path_beam_whole_bottom",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -65,6 +74,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -78,6 +88,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -91,6 +102,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_whole_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -102,7 +114,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_horizontal_top"
+        "model": "ornamental:block/path/dirt_path_beam_horizontal_top",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -115,6 +130,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_top",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -128,6 +144,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_top",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -141,6 +158,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_top",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -152,7 +170,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_horizontal_bottom"
+        "model": "ornamental:block/path/dirt_path_beam_horizontal_bottom",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -165,6 +186,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -178,6 +200,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -191,6 +214,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_horizontal_bottom",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -202,7 +226,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_vertical"
+        "model": "ornamental:block/path/dirt_path_beam_vertical",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -215,6 +242,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -228,6 +256,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -241,6 +270,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_vertical",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -252,7 +282,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_vertical",
+        "model": "ornamental:block/dirt_beam_vertical",
         "uvlock": true,
         "x": 90,
         "y": 90
@@ -266,9 +296,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_vertical",
+        "model": "ornamental:block/dirt_beam_vertical",
         "uvlock": true,
-        "x": 90
+        "x": 90,
+        "y": 0
       },
       "when": {
         "axis": "z",
@@ -279,7 +310,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_vertical",
+        "model": "ornamental:block/dirt_beam_vertical",
         "uvlock": true,
         "x": 90,
         "y": 270
@@ -293,7 +324,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_vertical",
+        "model": "ornamental:block/dirt_beam_vertical",
         "uvlock": true,
         "x": 90,
         "y": 180
@@ -307,7 +338,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/path/dirt_path_beam_corner"
+        "model": "ornamental:block/path/dirt_path_beam_corner",
+        "uvlock": false,
+        "x": 0,
+        "y": 0
       },
       "when": {
         "axis": "x",
@@ -321,6 +355,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 270
       },
       "when": {
@@ -335,6 +370,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 180
       },
       "when": {
@@ -349,6 +385,7 @@
       "apply": {
         "model": "ornamental:block/path/dirt_path_beam_corner",
         "uvlock": true,
+        "x": 0,
         "y": 90
       },
       "when": {
@@ -361,7 +398,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_whole",
+        "model": "ornamental:block/dirt_beam_whole",
         "uvlock": true,
         "x": 90,
         "y": 270
@@ -376,7 +413,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_whole",
+        "model": "ornamental:block/dirt_beam_whole",
         "uvlock": true,
         "x": 90,
         "y": 180
@@ -391,7 +428,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_whole",
+        "model": "ornamental:block/dirt_beam_whole",
         "uvlock": true,
         "x": 90,
         "y": 90
@@ -406,9 +443,10 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_pole_whole",
+        "model": "ornamental:block/dirt_beam_whole",
         "uvlock": true,
-        "x": 90
+        "x": 90,
+        "y": 0
       },
       "when": {
         "axis": "z",
@@ -420,7 +458,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/dirt_path"
+        "model": "minecraft:block/dirt_path"
       },
       "when": {
         "bottom_left": "true",

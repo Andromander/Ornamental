@@ -9,7 +9,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -44,8 +43,8 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
     public static final List<Supplier<? extends Block>> IRON_REQUIRED = Lists.newArrayList();
     public static final List<Supplier<? extends Block>> DIAMOND_REQUIRED = Lists.newArrayList();
 
-    public OrnamentalBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper helper) {
-        super(output, provider, OrnamentalMod.MODID, helper);
+    public OrnamentalBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider, OrnamentalMod.MODID);
     }
 
     @Override

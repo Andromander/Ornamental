@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ornamental:block/diamond_wall_inventory"
+  }
+}

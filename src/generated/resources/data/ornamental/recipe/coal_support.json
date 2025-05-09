@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:coal_pole"
-    },
-    {
-      "item": "ornamental:coal_beam"
-    }
+    "ornamental:coal_pole",
+    "ornamental:coal_beam"
   ],
   "result": {
     "count": 2,

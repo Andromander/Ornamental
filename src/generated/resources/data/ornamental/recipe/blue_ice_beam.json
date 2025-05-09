@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:blue_ice_slab"
-    }
+    "#": "ornamental:blue_ice_slab"
   },
   "pattern": [
     "###"

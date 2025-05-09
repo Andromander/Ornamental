@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "ornamental:lapis_trapdoor"
-    }
+    "#": "ornamental:lapis_trapdoor"
   },
   "pattern": [
     "#",

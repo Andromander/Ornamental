@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:gold_pole"
-    }
+    "ornamental:gold_pole"
   ],
   "result": {
     "count": 1,

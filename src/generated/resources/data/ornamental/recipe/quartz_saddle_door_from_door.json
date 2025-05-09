@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:quartz_door"
-    }
+    "ornamental:quartz_door"
   ],
   "result": {
     "count": 2,

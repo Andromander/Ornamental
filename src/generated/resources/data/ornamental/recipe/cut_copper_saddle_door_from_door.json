@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:cut_copper_door"
-    }
+    "ornamental:cut_copper_door"
   ],
   "result": {
     "count": 2,

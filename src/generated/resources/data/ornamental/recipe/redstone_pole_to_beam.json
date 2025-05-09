@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:redstone_pole"
-    }
+    "ornamental:redstone_pole"
   ],
   "result": {
     "count": 1,

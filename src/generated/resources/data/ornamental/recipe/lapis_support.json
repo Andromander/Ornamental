@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:lapis_pole"
-    },
-    {
-      "item": "ornamental:lapis_beam"
-    }
+    "ornamental:lapis_pole",
+    "ornamental:lapis_beam"
   ],
   "result": {
     "count": 2,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:quartz_block"
-    },
-    "/": {
-      "item": "minecraft:quartz"
-    }
+    "#": "minecraft:quartz_block",
+    "/": "minecraft:quartz"
   },
   "pattern": [
     "#/#",

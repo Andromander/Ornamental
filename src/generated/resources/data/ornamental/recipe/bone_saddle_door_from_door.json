@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:bone_door"
-    }
+    "ornamental:bone_door"
   ],
   "result": {
     "count": 2,

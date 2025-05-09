@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:grass_slab"
-    }
+    "#": "ornamental:grass_slab"
   },
   "pattern": [
     "###"

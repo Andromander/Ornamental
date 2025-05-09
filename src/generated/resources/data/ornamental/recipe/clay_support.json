@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:clay_pole"
-    },
-    {
-      "item": "ornamental:clay_beam"
-    }
+    "ornamental:clay_pole",
+    "ornamental:clay_beam"
   ],
   "result": {
     "count": 2,

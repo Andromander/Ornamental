@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:netherite_door"
-    }
+    "ornamental:netherite_door"
   ],
   "result": {
     "count": 2,

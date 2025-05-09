@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:obsidian_pole"
-    },
-    {
-      "item": "ornamental:obsidian_beam"
-    }
+    "ornamental:obsidian_pole",
+    "ornamental:obsidian_beam"
   ],
   "result": {
     "count": 2,

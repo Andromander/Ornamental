@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ornamental:item/path_door"
+    "layer0": "ornamental:item/dirt_path_door"
   }
 }

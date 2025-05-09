@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:ice"
-    },
-    "/": {
-      "item": "ornamental:ice_slab"
-    }
+    "#": "minecraft:ice",
+    "/": "ornamental:ice_slab"
   },
   "pattern": [
     "#/#",

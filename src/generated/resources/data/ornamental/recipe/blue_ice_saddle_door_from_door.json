@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "ornamental:blue_ice_door"
-    }
+    "ornamental:blue_ice_door"
   ],
   "result": {
     "count": 2,

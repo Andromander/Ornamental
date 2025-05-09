@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:obsidian"
-    },
-    "/": {
-      "item": "ornamental:obsidian_slab"
-    }
+    "#": "minecraft:obsidian",
+    "/": "ornamental:obsidian_slab"
   },
   "pattern": [
     "/#/",

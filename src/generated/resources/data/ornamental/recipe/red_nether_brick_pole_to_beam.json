@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:red_nether_brick_pole"
-    }
+    "ornamental:red_nether_brick_pole"
   ],
   "result": {
     "count": 1,

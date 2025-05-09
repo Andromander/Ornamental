@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:cut_copper_pole"
-    },
-    {
-      "item": "ornamental:cut_copper_beam"
-    }
+    "ornamental:cut_copper_pole",
+    "ornamental:cut_copper_beam"
   ],
   "result": {
     "count": 2,

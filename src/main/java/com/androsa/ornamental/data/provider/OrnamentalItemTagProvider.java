@@ -7,7 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -15,8 +14,8 @@ import java.util.function.Supplier;
 
 public abstract class OrnamentalItemTagProvider extends ItemTagsProvider {
 
-    public OrnamentalItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid, ExistingFileHelper helper, BlockTagsProvider blockTags) {
-        super(output, provider, blockTags.contentsGetter(), modid, helper);
+    public OrnamentalItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modid, BlockTagsProvider blockTags) {
+        super(output, provider, blockTags.contentsGetter(), modid);
     }
 
     protected void addToTag(TagKey<Item> tag, List<? extends Supplier<? extends Block>> list) {

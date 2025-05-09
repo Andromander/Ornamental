@@ -18,6 +18,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -25,6 +28,8 @@ import java.util.function.Supplier;
 public class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, OrnamentalMod.MODID);
+
+    public static Map<Supplier<Item>, List<Integer>> ITEM_TO_INTS = new HashMap<>();
 
     public static final Supplier<EntityType<GoldGolem>> GOLD_GOLEM = makeEntity("gold", GoldGolem::new, 1.3F, 2.7F, 2.6F, false, 16768040, 6502914);
     public static final Supplier<EntityType<DiamondGolem>> DIAMOND_GOLEM = makeEntity("diamond", DiamondGolem::new, 1.0F, 1.5F, 1.1F, false, 7991036, 4548228);
@@ -61,16 +66,17 @@ public class ModEntities {
     public static final Supplier<EntityType<ChargeBall>> CHARGE_BALL = makeProjectile("charge_ball", ChargeBall::new, 0.25F, 0.35F, 150, 2);
 
     private static <T extends Mob> Supplier<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, float width, float height, float eye, boolean fireRes, int background, int highlight) {
-        return makeEntity(name, entity, item -> makeEgg(item, background, highlight), width, height, eye, fireRes);
+        return makeEntity(name, entity, item -> makeEgg(item, name), width, height, eye, fireRes, background, highlight);
     }
 
-    private static <T extends Mob> Supplier<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<Supplier<EntityType<T>>, Supplier<SpawnEggItem>> spawnegg, float width, float height, float eye, boolean fireRes) {
+    private static <T extends Mob> Supplier<EntityType<T>> makeEntity(String name, EntityType.EntityFactory<T> entity, Function<Supplier<EntityType<T>>, Supplier<SpawnEggItem>> spawnegg, float width, float height, float eye, boolean fireRes, int background, int highlight) {
         String regname = name + "_golem";
         EntityType.Builder<T> builder = EntityType.Builder.of(entity, MobCategory.MISC).sized(width, height);
         if (fireRes) builder.fireImmune();
         if (eye > 0.0F) builder.eyeHeight(eye);
         Supplier<EntityType<T>> reg = ENTITIES.register(regname, () -> builder.build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, regname))));
         Supplier<Item> item = ModBlocks.ITEMS.register(regname + "_spawn_egg", spawnegg.apply(reg));
+        ITEM_TO_INTS.put(item, List.of(background, highlight));
         ModCreativeTabs.SPAWN_EGGS.add(item);
         return reg;
     }
@@ -78,6 +84,7 @@ public class ModEntities {
     private static <T extends Entity> Supplier<EntityType<T>> makeProjectile(String name, EntityType.EntityFactory<T> entity, float width, float height, int tracking, int interval) {
         return ENTITIES.register(name, () ->
                 EntityType.Builder.of(entity, MobCategory.MISC)
+                        .noLootTable()
                         .sized(width, height)
                         .clientTrackingRange(tracking)
                         .updateInterval(interval)
@@ -85,8 +92,8 @@ public class ModEntities {
         );
     }
 
-    private static Supplier<SpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, int back, int fore) {
-        return () -> new SpawnEggItem(entity.get(), new Item.Properties());
+    private static Supplier<SpawnEggItem> makeEgg(Supplier<? extends EntityType<? extends Mob>> entity, String name) {
+        return () -> new SpawnEggItem(entity.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name + "_golem_spawn_egg"))));
     }
 
     @SubscribeEvent

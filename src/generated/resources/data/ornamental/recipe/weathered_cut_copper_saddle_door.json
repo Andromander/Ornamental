@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "ornamental:weathered_cut_copper_trapdoor"
-    }
+    "#": "ornamental:weathered_cut_copper_trapdoor"
   },
   "pattern": [
     "#",

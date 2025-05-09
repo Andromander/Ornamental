@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "ornamental:quartz_beam"
-    }
+    "ornamental:quartz_beam"
   ],
   "result": {
     "count": 1,

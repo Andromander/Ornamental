@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "ornamental:bone_slab"
-    }
+    "#": "ornamental:bone_slab"
   },
   "pattern": [
     "#",

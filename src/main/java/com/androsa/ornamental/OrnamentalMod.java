@@ -1,6 +1,7 @@
 package com.androsa.ornamental;
 
 import com.androsa.ornamental.data.*;
+import com.androsa.ornamental.data.provider.OrnamentalModelProvider;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModCreativeTabs;
 import com.androsa.ornamental.registry.ModEntities;
@@ -24,7 +25,7 @@ public class OrnamentalMod {
     public static final String MODID = "ornamental";
 
     public OrnamentalMod(IEventBus bus) {
-        bus.addListener(this::gatherData);
+        bus.addListener(this::clientData);
 
         ModBlocks.BLOCKS.register(bus);
         ModBlocks.ITEMS.register(bus);
@@ -35,18 +36,17 @@ public class OrnamentalMod {
         RemapHandler.remapEntries();
     }
 
-    public void gatherData(GatherDataEvent event) {
+    public void clientData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
-        ExistingFileHelper helper = event.getExistingFileHelper();
-        BlockTagsProvider blockTags = new OrnamentalBlockTags(output, provider, helper);
 
-        generator.addProvider(event.includeClient(), new OrnamentalBlockStates(output, helper));
-        generator.addProvider(event.includeClient(), new OrnamentalItemModels(output, helper));
-        generator.addProvider(event.includeServer(), new OrnamentalLootTables(output, provider));
-        generator.addProvider(event.includeServer(), new OrnamentalRecipes(output, provider));
-        generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new OrnamentalItemTags(output, provider, blockTags, helper));
+        generator.addProvider(true, new OrnamentalModelProvider(output));
+
+        generator.addProvider(true, new OrnamentalLootTables(output, provider));
+        generator.addProvider(true, new OrnamentalRecipes.Runner(output, provider));
+        BlockTagsProvider blockTags = new OrnamentalBlockTags(output, provider);
+        generator.addProvider(true, blockTags);
+        generator.addProvider(true, new OrnamentalItemTags(output, provider, blockTags));
     }
 }

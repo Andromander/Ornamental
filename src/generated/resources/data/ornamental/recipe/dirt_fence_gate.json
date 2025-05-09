@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:dirt"
-    },
-    "/": {
-      "item": "ornamental:dirt_slab"
-    }
+    "#": "minecraft:dirt",
+    "/": "ornamental:dirt_slab"
   },
   "pattern": [
     "/#/",
