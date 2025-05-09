@@ -286,31 +286,31 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     /* Doors */
-    public void doorBasic(DeferredBlock<? extends DoorBlock> block, String name) {
+    public void doorBasic(Supplier<? extends DoorBlock> block, String name) {
         doorBasic(block, name, CUTOUT);
     }
 
-    public void doorHidden(DeferredBlock<? extends DoorBlock> block, String name) {
+    public void doorHidden(Supplier<? extends DoorBlock> block, String name) {
         doorHidden(block, name, CUTOUT);
     }
 
-    public void doorBasic(DeferredBlock<? extends DoorBlock> block, String name, ResourceLocation type) {
+    public void doorBasic(Supplier<? extends DoorBlock> block, String name, ResourceLocation type) {
         doorBasic(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"), type);
     }
 
-    public void doorHidden(DeferredBlock<? extends DoorBlock> block, String name, ResourceLocation type) {
+    public void doorHidden(Supplier<? extends DoorBlock> block, String name, ResourceLocation type) {
         doorBasic(block, locParent(name), locParent(name), locParent(name), locParent(name), type);
     }
 
-    public void doorBasic(DeferredBlock<? extends DoorBlock> block, ResourceLocation name, ResourceLocation type) {
+    public void doorBasic(Supplier<? extends DoorBlock> block, ResourceLocation name, ResourceLocation type) {
         doorBasic(block, name, name, name, name, type);
     }
 
-    public void doorBasic(DeferredBlock<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
+    public void doorBasic(Supplier<? extends DoorBlock> block, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
         door(block, DOOR_BOTTOM_LEFT, DOOR_BOTTOM_LEFT_OPEN, DOOR_BOTTOM_RIGHT, DOOR_BOTTOM_RIGHT_OPEN, DOOR_TOP_LEFT, DOOR_TOP_LEFT_OPEN, DOOR_TOP_RIGHT, DOOR_TOP_RIGHT_OPEN, bottomside, bottom, topside, top, type);
     }
 
-    public void door(DeferredBlock<? extends DoorBlock> block, ModelTemplate bl, ModelTemplate blo, ModelTemplate br, ModelTemplate bro, ModelTemplate tl, ModelTemplate tlo, ModelTemplate tr, ModelTemplate tro, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
+    public void door(Supplier<? extends DoorBlock> block, ModelTemplate bl, ModelTemplate blo, ModelTemplate br, ModelTemplate bro, ModelTemplate tl, ModelTemplate tlo, ModelTemplate tr, ModelTemplate tro, ResourceLocation bottomside, ResourceLocation bottom, ResourceLocation topside, ResourceLocation top, ResourceLocation type) {
         TextureMapping bottomTex = new TextureMapping()
                 .put(TextureSlot.SIDE, bottomside)
                 .put(TextureSlot.BOTTOM, bottom);
@@ -329,7 +329,7 @@ public abstract class OrnamentalBlockStateProvider {
         topRightOpen = tro.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput);
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createDoor(block.get(), bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen));
-        this.blockModels.registerSimpleFlatItemModel(block.asItem());
+        this.blockModels.registerSimpleFlatItemModel(block.get().asItem());
     }
 
     /* Poles */
