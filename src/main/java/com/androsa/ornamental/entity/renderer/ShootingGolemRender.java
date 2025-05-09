@@ -13,7 +13,7 @@ public class ShootingGolemRender<T extends ShootingGolem, M extends AbstractGole
 
     @Override
     public ShootingGolemRenderState createRenderState() {
-        return null;
+        return new ShootingGolemRenderState();
     }
 
     @Override
