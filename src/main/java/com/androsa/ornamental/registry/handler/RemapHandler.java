@@ -3,7 +3,7 @@ package com.androsa.ornamental.registry.handler;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class RemapHandler {
@@ -26,16 +26,19 @@ public class RemapHandler {
      * Remap Grass Path to Dirt Path
      */
     private static void remapRegistry(DeferredRegister<?> registry) {
-        for (String name : registry.getEntries().stream().map((f) -> f.getKey().location().getPath()).toList()) {
-            registry.addAlias(ResourceLocation.fromNamespaceAndPath("nifty", name), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
+        for (String name : registry.getEntries().stream().map((f) -> f.getKey().identifier().getPath()).toList()) {
+            registry.addAlias(Identifier.fromNamespaceAndPath("nifty", name), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, name));
 
             if (name.contains("dirt_path")) {
                 String oldname = name.replace("dirt", "grass");
-                registry.addAlias(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
+                registry.addAlias(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, name));
             }
             if (name.contains("cut_copper")) {
                 String oldname = name.replace("cut_", "");
-                registry.addAlias(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name));
+                registry.addAlias(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, oldname), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, name));
+            }
+            if (name.contains("copper_golem")) {
+                registry.addAlias(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "copper_golem"), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "cut_copper_golem"));
             }
         }
     }

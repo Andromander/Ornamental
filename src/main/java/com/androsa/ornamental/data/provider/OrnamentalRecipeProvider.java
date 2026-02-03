@@ -3,12 +3,12 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import com.androsa.ornamental.registry.ModTags;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -29,8 +29,8 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider {
         this.modID = modid;
     }
 
-    private ResourceLocation loc(String name) {
-        return ResourceLocation.fromNamespaceAndPath(modID, name);
+    private Identifier loc(String name) {
+        return Identifier.fromNamespaceAndPath(modID, name);
     }
 
     public <T extends Block> ManagerEntry<? extends T> add(Supplier<T> block, boolean override) {
@@ -446,7 +446,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider {
     private void internalRecipeBuild(HolderGetter<Item> registry, RecipeBuilder recipe, OrnamentalBlock result, List<ItemLike> criteria, String name) {
         OrnamentBuilder builder = result.getBuilder();
         recipe = recipe.unlockedBy("has_" + builder.name, inventoryTrigger(ItemPredicate.Builder.item().of(registry, criteria.toArray(new ItemLike[0]))));
-        ResourceLocation location = loc(builder.name + name);
+        Identifier location = loc(builder.name + name);
 
         if (!location.equals(BuiltInRegistries.ITEM.getKey(recipe.getResult()))) {
             recipe.save(this.output, location.toString());

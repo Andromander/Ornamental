@@ -4,19 +4,20 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.projectile.ChargeBall;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ChargeBallRenderer extends EntityRenderer<ChargeBall, EntityRenderState> {
-    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
-    private static final RenderType RENDER = RenderType.entityCutoutNoCull(LOCATION);
+    private static final Identifier LOCATION = Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
+    private static final RenderType RENDER = RenderTypes.entityCutoutNoCull(LOCATION);
 
     public ChargeBallRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -33,21 +34,19 @@ public class ChargeBallRenderer extends EntityRenderer<ChargeBall, EntityRenderS
     }
 
     @Override
-    public void render(EntityRenderState entity, PoseStack stack, MultiBufferSource buffer, int light) {
+    public void submit(EntityRenderState entity, PoseStack stack, SubmitNodeCollector buffer, CameraRenderState camera) {
         stack.pushPose();
         stack.scale(1.0F, 1.0F, 1.0F);
-        stack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        stack.mulPose(Axis.YP.rotationDegrees(180.0F));
-        PoseStack.Pose lastpose = stack.last();
-        VertexConsumer consumer = buffer.getBuffer(RENDER);
-
-        vertex(consumer, lastpose, light, 0.0F, 0, 0, 1);
-        vertex(consumer, lastpose, light, 1.0F, 0, 1, 1);
-        vertex(consumer, lastpose, light, 1.0F, 1, 1, 0);
-        vertex(consumer, lastpose, light, 0.0F, 1, 0, 0);
+        stack.mulPose(camera.orientation);
+        buffer.submitCustomGeometry(stack, RENDER, (pose, consumer) -> {
+            vertex(consumer, pose, entity.lightCoords, 0.0F, 0, 0, 1);
+            vertex(consumer, pose, entity.lightCoords, 1.0F, 0, 1, 1);
+            vertex(consumer, pose, entity.lightCoords, 1.0F, 1, 1, 0);
+            vertex(consumer, pose, entity.lightCoords, 0.0F, 1, 0, 0);
+        });
 
         stack.popPose();
-        super.render(entity, stack, buffer, light);
+        super.submit(entity, stack, buffer, camera);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int light, float x, int y, int texX, int texY) {

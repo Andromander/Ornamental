@@ -3,7 +3,6 @@ package com.androsa.ornamental.entity;
 import com.androsa.ornamental.entity.projectile.ChargeBall;
 import com.androsa.ornamental.registry.ModParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -29,6 +28,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -149,7 +150,7 @@ public class CopperGolem extends OrnamentalGolem {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("Erosion", getErosion());
         tag.putBoolean("Charged", isCharged());
@@ -162,16 +163,16 @@ public class CopperGolem extends OrnamentalGolem {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setErosion(tag.getInt("Erosion"));
-        this.setCharged(tag.getBoolean("Charged"));
-        this.setTargeting(tag.getBoolean("Targeting"));
-        this.setChargeTimer(tag.getInt("ChargeTimer"));
-        this.setErosionTimer(tag.getInt("ErosionTimer"));
-        this.setWaxed(tag.getBoolean("Waxed"));
-        this.setCharges(tag.getInt("Charges"));
-        this.setRechargeTimer(tag.getInt("RechargeTimer"));
+        this.setErosion(tag.getIntOr("Erosion", 0));
+        this.setCharged(tag.getBooleanOr("Charged", false));
+        this.setTargeting(tag.getBooleanOr("Targeting", false));
+        this.setChargeTimer(tag.getIntOr("ChargeTimer", 0));
+        this.setErosionTimer(tag.getIntOr("ErosionTimer", 1200));
+        this.setWaxed(tag.getBooleanOr("Waxed", false));
+        this.setCharges(tag.getIntOr("Charges", 10));
+        this.setRechargeTimer(tag.getIntOr("RechargeTimer", 100));
     }
 
     @Override
@@ -298,7 +299,7 @@ public class CopperGolem extends OrnamentalGolem {
                 setErosionTimer(1200);
                 setErosion(getErosion() - 1);
                 this.level().playSound(player, blockPosition(), SoundEvents.AXE_SCRAPE, getSoundSource(), 1.0F, 1.0F);
-                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
                 return InteractionResult.SUCCESS;
             }
         } else if (itemstack.is(Items.HONEYCOMB)) {

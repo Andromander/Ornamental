@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/support_horizontal_z_top",
+  "textures": {
+    "bottom": "minecraft:block/diamond_block",
+    "side": "minecraft:block/diamond_block",
+    "top": "minecraft:block/diamond_block"
+  }
+}

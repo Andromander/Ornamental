@@ -14,8 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
@@ -30,10 +30,12 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import javax.annotation.Nonnull;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
@@ -43,10 +45,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentDoor::new));
 
-    protected static final VoxelShape PATH_SOUTH_AABB_TOP = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 3.0D);
-    protected static final VoxelShape PATH_NORTH_AABB_TOP = Block.box(0.0D, 0.0D, 13.0D, 16.0D, 15.0D, 16.0D);
-    protected static final VoxelShape PATH_WEST_AABB_TOP = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
-    protected static final VoxelShape PATH_EAST_AABB_TOP = Block.box(0.0D, 0.0D, 0.0D, 3.0D, 15.0D, 16.0D);
+    private static final Map<Direction, VoxelShape> PATH_SHAPES = Shapes.rotateHorizontal(Block.box(0.0, 0.0, 13.0, 16.0, 15.0, 16.0));
 
     private final OrnamentBuilder builder;
 
@@ -69,24 +68,14 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         if (builder.pathShape) {
-            Direction direction = state.getValue(FACING);
-            boolean flag = !state.getValue(OPEN);
-            boolean flag1 = state.getValue(HINGE) == DoorHingeSide.RIGHT;
-
             if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-                return switch (direction) {
-                    case SOUTH -> flag ? PATH_SOUTH_AABB_TOP : (flag1 ? PATH_EAST_AABB_TOP : PATH_WEST_AABB_TOP);
-                    case WEST -> flag ? PATH_WEST_AABB_TOP : (flag1 ? PATH_SOUTH_AABB_TOP : PATH_NORTH_AABB_TOP);
-                    case NORTH -> flag ? PATH_NORTH_AABB_TOP : (flag1 ? PATH_WEST_AABB_TOP : PATH_EAST_AABB_TOP);
-                    default -> flag ? PATH_EAST_AABB_TOP : (flag1 ? PATH_NORTH_AABB_TOP : PATH_SOUTH_AABB_TOP);
-                };
+                Direction facing = state.getValue(FACING);
+                Direction open = state.getValue(OPEN)
+                        ? (state.getValue(HINGE) == DoorHingeSide.RIGHT ? facing.getCounterClockWise() : facing.getClockWise())
+                        : facing;
+                return PATH_SHAPES.get(open);
             } else {
-                return switch (direction) {
-                    case SOUTH -> flag ? SOUTH_AABB : (flag1 ? EAST_AABB : WEST_AABB);
-                    case WEST -> flag ? WEST_AABB : (flag1 ? SOUTH_AABB : NORTH_AABB);
-                    case NORTH -> flag ? NORTH_AABB : (flag1 ? WEST_AABB : EAST_AABB);
-                    default -> flag ? EAST_AABB : (flag1 ? NORTH_AABB : SOUTH_AABB);
-                };
+                return super.getShape(state, worldIn, pos, context);
             }
         }
         return super.getShape(state, worldIn, pos, context);
@@ -104,7 +93,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     }
 
     @Override
-    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, double fallDistance) {
         entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
@@ -137,7 +126,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
 
     @Override
     @Deprecated
-    public int getAnalogOutputSignal(BlockState state, Level worldIn, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level worldIn, BlockPos pos, Direction dir) {
         return builder.hasPower && state.getValue(POWERED) ? 10 : 0;
     }
 
@@ -185,7 +174,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
         }
         return InteractionResult.SUCCESS;
     }
@@ -227,7 +216,7 @@ public class OrnamentDoor extends DoorBlock implements OrnamentalBlock {
     }
 
     protected void turnIntoWater(Level world, BlockPos pos) {
-        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
             if (world.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.LOWER) {

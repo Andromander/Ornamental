@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:weathered_copper",
+    "/": "ornamental:weathered_copper_slab"
+  },
+  "pattern": [
+    "#/#",
+    "#/#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "ornamental:weathered_copper_fence"
+  }
+}

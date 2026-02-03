@@ -14,8 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -201,7 +201,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
         }
         return InteractionResult.SUCCESS;
     }
@@ -240,7 +240,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float dist) {
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double dist) {
         entity.causeFallDamage(dist, builder.fallMultiplier, level.damageSources().fall());
     }
 
@@ -288,7 +288,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     }
 
     protected void turnIntoWater(Level world, BlockPos pos) {
-        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());

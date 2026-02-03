@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:exposed_cut_copper",
+  "result": {
+    "count": 4,
+    "id": "ornamental:exposed_cut_copper_beam"
+  }
+}

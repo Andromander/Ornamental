@@ -6,7 +6,10 @@ import com.androsa.ornamental.registry.ModTags;
 import com.google.common.collect.Lists;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 
@@ -49,6 +52,13 @@ public class OrnamentalBlockTags extends OrnamentalBlockTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        (new OrnamentalBlockItemTags() {
+            @Override
+            protected TagAppender<Block, Block> tag(TagKey<Block> blocktag, TagKey<Item> itemtag) {
+                return OrnamentalBlockTags.this.tag(blocktag);
+            }
+        }).run();
+
         addToTag(BlockTags.BEACON_BASE_BLOCKS, BEACON_BASES);
         addToTag(ModTags.Blocks.BEAMS, BEAMS);
         addToTag(BlockTags.CRYSTAL_SOUND_BLOCKS, CRYSTAL_SOUNDS);

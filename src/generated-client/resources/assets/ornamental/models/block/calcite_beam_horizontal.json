@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_horizontal",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/calcite",
+    "side": "minecraft:block/calcite",
+    "top": "minecraft:block/calcite"
+  }
+}

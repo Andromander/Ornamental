@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_corner",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/quartz_block_top",
+    "side": "minecraft:block/quartz_block_side",
+    "top": "minecraft:block/quartz_block_top"
+  }
+}

@@ -26,6 +26,7 @@ public class OrnamentalMod {
 
     public OrnamentalMod(IEventBus bus) {
         bus.addListener(this::clientData);
+        bus.addListener(this::serverData);
 
         ModBlocks.BLOCKS.register(bus);
         ModBlocks.ITEMS.register(bus);
@@ -39,9 +40,14 @@ public class OrnamentalMod {
     public void clientData(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
 
         generator.addProvider(true, new OrnamentalModelProvider(output));
+    }
+
+    public void serverData(GatherDataEvent.Server event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
 
         generator.addProvider(true, new OrnamentalLootTables(output, provider));
         generator.addProvider(true, new OrnamentalRecipes.Runner(output, provider));

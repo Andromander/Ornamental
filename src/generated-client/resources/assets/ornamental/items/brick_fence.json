@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ornamental:block/brick_fence_inventory"
+  }
+}

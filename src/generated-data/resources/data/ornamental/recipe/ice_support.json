@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "ornamental:ice_pole",
+    "ornamental:ice_beam"
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:ice_support"
+  }
+}

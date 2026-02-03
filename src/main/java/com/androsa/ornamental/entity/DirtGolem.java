@@ -72,10 +72,10 @@ public class DirtGolem extends OrnamentalGolem {
         ItemStack itemstack = player.getItemInHand(hand);
         if (itemstack.is(Items.BONE_MEAL)) {
 
-            if (!this.level().isClientSide()) {
+            if (this.level() instanceof ServerLevel server) {
                 GrassGolem grass = ModEntities.GRASS_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 grass.copyPosition(this);
-                EventHooks.finalizeMobSpawn(grass, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(grass.blockPosition()), EntitySpawnReason.CONVERSION, null);
+                EventHooks.finalizeMobSpawn(grass, server, server.getCurrentDifficultyAt(grass.blockPosition()), EntitySpawnReason.CONVERSION, null);
                 grass.setNoAi(this.isNoAi());
                 if (this.hasCustomName()) {
                     grass.setCustomName(this.getCustomName());

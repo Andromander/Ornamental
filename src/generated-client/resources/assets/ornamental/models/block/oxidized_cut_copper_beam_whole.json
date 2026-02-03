@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_whole",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/oxidized_cut_copper",
+    "side": "minecraft:block/oxidized_cut_copper",
+    "top": "minecraft:block/oxidized_cut_copper"
+  }
+}

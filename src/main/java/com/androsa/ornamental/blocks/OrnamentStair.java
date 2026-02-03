@@ -14,8 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
@@ -123,7 +123,7 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
     }
 
     @Override
-    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, double fallDistance) {
         entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
@@ -187,7 +187,7 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
         }
         return InteractionResult.SUCCESS;
     }
@@ -219,7 +219,7 @@ public class OrnamentStair extends StairBlock implements OrnamentalBlock {
     }
 
     private void turnIntoWater(Level world, BlockPos pos) {
-        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos)) {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());

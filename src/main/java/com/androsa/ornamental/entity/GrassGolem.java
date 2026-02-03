@@ -3,9 +3,6 @@ package com.androsa.ornamental.entity;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,7 +15,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -33,6 +29,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.Optional;
@@ -71,25 +69,18 @@ public class GrassGolem extends DirtGolem {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag nbt) {
+    public void addAdditionalSaveData(ValueOutput nbt) {
         super.addAdditionalSaveData(nbt);
         BlockState state = this.getFlower();
         if (state != null) {
-            nbt.put("flower", NbtUtils.writeBlockState(state));
+            nbt.store("flower", BlockState.CODEC, state);
         }
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag nbt) {
+    public void readAdditionalSaveData(ValueInput nbt) {
         super.readAdditionalSaveData(nbt);
-        BlockState state = null;
-        if (nbt.contains("flower", 10)) {
-            state = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), nbt.getCompound("flower"));
-            if (state.isAir()) {
-                state = null;
-            }
-        }
-        this.setFlower(state);
+        this.setFlower(nbt.read("flower", BlockState.CODEC).filter((b) -> !b.isAir()).orElse(null));
     }
 
     public BlockState getFlower() {
@@ -125,13 +116,13 @@ public class GrassGolem extends DirtGolem {
             case ShovelItem shovel -> {
                 PathGolem path = ModEntities.PATH_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 addFreshEntity(path);
-                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
                 this.level().playSound(null, this.blockPosition(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             case HoeItem hoe -> {
                 DirtGolem dirt = ModEntities.DIRT_GOLEM.get().create(this.level(), EntitySpawnReason.CONVERSION);
                 addFreshEntity(dirt);
-                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
                 this.level().playSound(null, this.blockPosition(), SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             default -> {
@@ -163,7 +154,7 @@ public class GrassGolem extends DirtGolem {
             }
 
             entity.copyPosition(this);
-            EventHooks.finalizeMobSpawn(entity, (ServerLevel)this.level(), this.level().getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.CONVERSION, null);
+            EventHooks.finalizeMobSpawn(entity, server, server.getCurrentDifficultyAt(entity.blockPosition()), EntitySpawnReason.CONVERSION, null);
             entity.setNoAi(this.isNoAi());
             if (this.hasCustomName()) {
                 entity.setCustomName(this.getCustomName());

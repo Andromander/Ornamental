@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "ornamental:gold_pole",
+    "ornamental:gold_beam"
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:gold_support"
+  }
+}

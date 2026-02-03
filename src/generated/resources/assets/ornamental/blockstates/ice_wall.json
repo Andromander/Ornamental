@@ -74,8 +74,7 @@
     {
       "apply": {
         "model": "ornamental:block/ice/ice_wall_post_side",
-        "uvlock": true,
-        "y": 0
+        "uvlock": true
       },
       "when": {
         "north": "low",
@@ -85,8 +84,7 @@
     {
       "apply": {
         "model": "ornamental:block/ice/ice_wall_side",
-        "uvlock": true,
-        "y": 0
+        "uvlock": true
       },
       "when": {
         "north": "low",
@@ -96,8 +94,7 @@
     {
       "apply": {
         "model": "ornamental:block/ice/ice_wall_side",
-        "uvlock": true,
-        "y": 0
+        "uvlock": true
       },
       "when": {
         "north": "tall",
@@ -107,8 +104,7 @@
     {
       "apply": {
         "model": "ornamental:block/ice/ice_wall_side_tall",
-        "uvlock": true,
-        "y": 0
+        "uvlock": true
       },
       "when": {
         "north": "tall",
@@ -118,8 +114,7 @@
     {
       "apply": {
         "model": "ornamental:block/ice/ice_wall_side_tall_piece",
-        "uvlock": true,
-        "y": 0
+        "uvlock": true
       },
       "when": {
         "north": "tall",

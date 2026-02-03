@@ -72,7 +72,7 @@ public class QuartzGolem extends OrnamentalGolem {
     }
 
     @Override
-    public boolean causeFallDamage(float amount, float multiplier, DamageSource source) {
+    public boolean causeFallDamage(double amount, float multiplier, DamageSource source) {
         return false;
     }
 
@@ -140,7 +140,7 @@ public class QuartzGolem extends OrnamentalGolem {
 
     @Override
     public void aiStep() {
-        if (this.level().isClientSide && isTargeting()) {
+        if (this.level().isClientSide() && isTargeting()) {
             for(int i = 0; i < 2; ++i) {
                 this.level().addParticle(ParticleTypes.FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
             }

@@ -1,13 +1,13 @@
-// 1.21.4	2025-05-06T12:25:27.2738098	Tags for minecraft:block mod id ornamental
-12f42598a7647e0f951f4e2f22cad8f0616b5d86 data/c/tags/block/fences.json
+// 1.21.8	2025-10-22T11:04:17.9486639	Tags for minecraft:block mod id ornamental
+feb52912bc821e8b43e5c4433e64785daa4ef185 data/c/tags/block/fences.json
 1093f8414f853a1a8e40303befba8eee0df30812 data/c/tags/block/fences/nether_brick.json
-cb86fadd16d783c5c0f15c0ac99d15e63427b5e4 data/c/tags/block/fence_gates.json
+09e472e9f1f0415ea0b52c700436bd721f22dca4 data/c/tags/block/fence_gates.json
 618ec1eb20bc78823859c5dbf3ebd96f02d863a9 data/minecraft/tags/block/beacon_base_blocks.json
 29dae5f78aa91574939b709b97d68fb30ada08a2 data/minecraft/tags/block/crystal_sound_blocks.json
-0145d2a0f73455a3958e1195e12a06dc24acc035 data/minecraft/tags/block/doors.json
+a7d5b35346438685609540998717388c27ea1503 data/minecraft/tags/block/doors.json
 a5388f7f37e5743a1ed688a9211775ce270a290a data/minecraft/tags/block/dragon_immune.json
-12f42598a7647e0f951f4e2f22cad8f0616b5d86 data/minecraft/tags/block/fences.json
-cb86fadd16d783c5c0f15c0ac99d15e63427b5e4 data/minecraft/tags/block/fence_gates.json
+feb52912bc821e8b43e5c4433e64785daa4ef185 data/minecraft/tags/block/fences.json
+09e472e9f1f0415ea0b52c700436bd721f22dca4 data/minecraft/tags/block/fence_gates.json
 34a17aa4a6caaeab027393a913dac027cb5120dc data/minecraft/tags/block/guarded_by_piglins.json
 db026b049b035d4a49093dd7742083407cf715b3 data/minecraft/tags/block/infiniburn_overworld.json
 4e54cd641063a6bbb9663a690d3823dcb1dce895 data/minecraft/tags/block/mineable/pickaxe.json
@@ -15,14 +15,14 @@ b3d2017335f0409895353a22be0cdb32985406a8 data/minecraft/tags/block/mineable/shov
 ca0edad53de600145d212de8c2b88d949b4c7930 data/minecraft/tags/block/needs_diamond_tool.json
 ab3c1beedf89d4d77174d5ad2c0e2bbf087f5dea data/minecraft/tags/block/needs_iron_tool.json
 31ff56296d087a6fe04ef3f90ced8c2b22489a16 data/minecraft/tags/block/needs_stone_tool.json
-66fc019f8a5a145ac6653c7d1fdeec542f5f3854 data/minecraft/tags/block/slabs.json
+c04b9d4803f8b0e1ada7b4465caf9bb8e3306994 data/minecraft/tags/block/slabs.json
 e8ba88de0bcd3a7489f4911e06423176791ce9af data/minecraft/tags/block/snow.json
-7003a4ae6b457fae7149f70cf6f1b7ed1a82a07a data/minecraft/tags/block/stairs.json
-e9f7583e6241efe2a016aefe3f266f730e159ade data/minecraft/tags/block/trapdoors.json
+09cf85ddf4ef4734b9c2b4295b0d6f578923aa3a data/minecraft/tags/block/stairs.json
+6fedc24178cb6a46f10dd74f307c6df479ec2948 data/minecraft/tags/block/trapdoors.json
 29dae5f78aa91574939b709b97d68fb30ada08a2 data/minecraft/tags/block/vibration_resonators.json
-786376a7efd4a57ad1d58c5cf9f0f2dfb883de32 data/minecraft/tags/block/walls.json
-d4e47693aeeec05e706b206b12503f6c70b653bc data/ornamental/tags/block/beams.json
+ddb6d3eaa6efac913c8e8ecad8c4be171452f0c1 data/minecraft/tags/block/walls.json
+e8a79c4defa2e92902ec7276adfcce76f3279ac8 data/ornamental/tags/block/beams.json
 5ada63323e7c618396492fa76dfed21cda818478 data/ornamental/tags/block/grass_golem_flower_plantable.json
-07a1e8402596c74e4bbfca6cc1eea01e228c0a37 data/ornamental/tags/block/poles.json
-ee7f7a3e194ffe1f0345101ab7b6b08aaf4f115c data/ornamental/tags/block/saddle_doors.json
-4647bd103e37b8d29df791308159e73eab0c5b61 data/ornamental/tags/block/supports.json
+48d4e7450dd37f86821135467ea86e3509a02016 data/ornamental/tags/block/poles.json
+833f36dc6e834fa2eed556149399abda3f509a4e data/ornamental/tags/block/saddle_doors.json
+53c113fadb03fefb31e12219fdb553331a789f05 data/ornamental/tags/block/supports.json

@@ -1,8 +1,8 @@
 package com.androsa.ornamental.registry;
 
+import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.builder.*;
 import com.androsa.ornamental.OrnamentalMod;
-import com.androsa.ornamental.blocks.*;
 import com.androsa.ornamental.data.OrnamentalBlockTags;
 import com.androsa.ornamental.data.OrnamentalItemTags;
 import com.androsa.ornamental.registry.helper.RegistryHelper;

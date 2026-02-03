@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "minecraft:exposed_cut_copper",
+    "/": "minecraft:exposed_cut_copper_slab"
+  },
+  "pattern": [
+    "/#/",
+    "/#/"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ornamental:exposed_cut_copper_fence_gate"
+  }
+}

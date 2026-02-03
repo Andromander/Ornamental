@@ -4,12 +4,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
-public class ChargeSparkParticle extends TextureSheetParticle {
+public class ChargeSparkParticle extends SingleQuadParticle {
     private final SpriteSet sprites;
 
     public ChargeSparkParticle(ClientLevel level, double xPos, double yPos, double zPos, double xSpeed, double ySpeed, double zSpeed, SpriteSet sprites) {
-        super(level, xPos, yPos, zPos, xSpeed, ySpeed, zSpeed);
+        super(level, xPos, yPos, zPos, xSpeed, ySpeed, zSpeed, sprites.first());
         this.friction = 0.96F;
         this.speedUpWhenYMotionIsBlocked = true;
         this.sprites = sprites;
@@ -18,10 +19,12 @@ public class ChargeSparkParticle extends TextureSheetParticle {
         this.setSpriteFromAge(sprites);
     }
 
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    @Override
+    public Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
+    @Override
     public int getLightColor(float level) {
         float f = ((float)this.age + level) / (float)this.lifetime;
         f = Mth.clamp(f, 0.0F, 1.0F);
@@ -36,6 +39,7 @@ public class ChargeSparkParticle extends TextureSheetParticle {
         return j | k << 16;
     }
 
+    @Override
     public void tick() {
         super.tick();
         this.setSpriteFromAge(this.sprites);
@@ -48,10 +52,10 @@ public class ChargeSparkParticle extends TextureSheetParticle {
             this.sprite = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType particle, ClientLevel level, double xPos, double yPos, double zPos, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(SimpleParticleType particle, ClientLevel level, double xPos, double yPos, double zPos, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
             ChargeSparkParticle spark = new ChargeSparkParticle(level, xPos, yPos, zPos, 0.0D, 0.0D, 0.0D, this.sprite);
             spark.setParticleSpeed(xSpeed * 0.25D, ySpeed * 0.25D, zSpeed * 0.25D);
-            spark.setLifetime(level.random.nextInt(2) + 2);
+            spark.setLifetime(random.nextInt(2) + 2);
             return spark;
         }
     }

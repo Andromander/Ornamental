@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "ornamental:dirt_door"
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:dirt_saddle_door"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_whole",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/nether_bricks",
+    "side": "minecraft:block/nether_bricks",
+    "top": "minecraft:block/nether_bricks"
+  }
+}

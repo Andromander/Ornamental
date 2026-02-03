@@ -6,7 +6,7 @@ import com.androsa.ornamental.entity.model.MagmaGolemModel;
 import com.androsa.ornamental.entity.model.renderstate.MagmaGolemRenderState;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MagmaGolemRenderer<T extends MagmaGolem, M extends MagmaGolemModel> extends AbstractGolemRenderer<T, MagmaGolemRenderState, M> {
 
@@ -42,7 +42,7 @@ public class MagmaGolemRenderer<T extends MagmaGolem, M extends MagmaGolemModel>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MagmaGolemRenderState entity) {
+    public Identifier getTextureLocation(MagmaGolemRenderState entity) {
         return switch (entity.magmaState) {
             case 1 -> getLocation(HEATED_TEXTURE);
             case 2 -> getLocation(COOLED_TEXTURE);
@@ -50,7 +50,7 @@ public class MagmaGolemRenderer<T extends MagmaGolem, M extends MagmaGolemModel>
         };
     }
 
-    private static ResourceLocation getLocation(String path) {
-        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, path);
+    private static Identifier getLocation(String path) {
+        return Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, path);
     }
 }

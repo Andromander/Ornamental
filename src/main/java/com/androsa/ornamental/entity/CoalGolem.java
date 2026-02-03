@@ -88,7 +88,7 @@ public class CoalGolem extends OrnamentalGolem {
     }
 
     private void explode() {
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             this.dead = true;
             this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
             this.discard();

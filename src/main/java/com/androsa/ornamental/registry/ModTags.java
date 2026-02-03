@@ -2,8 +2,8 @@ package com.androsa.ornamental.registry;
 
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -35,7 +35,7 @@ public class ModTags {
         public static final TagKey<DamageType> NETHER_BRICK_GOLEM_RESIST = TagKey.create(Registries.DAMAGE_TYPE, location("nether_brick_golem_resist"));
     }
 
-    public static ResourceLocation location(String name) {
-        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, name);
+    public static Identifier location(String name) {
+        return Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, name);
     }
 }

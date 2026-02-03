@@ -3,7 +3,6 @@ package com.androsa.ornamental.entity;
 import com.androsa.ornamental.entity.task.ExplodingFireballAttackGoal;
 import com.androsa.ornamental.entity.task.NextMeleeAttackGoal;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,6 +25,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 
@@ -99,15 +100,15 @@ public class NetheriteGolem extends OrnamentalGolem {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(ValueOutput compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("Fireballs", this.getFireballs());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(ValueInput compound) {
         super.readAdditionalSaveData(compound);
-        this.setFireballs(compound.getInt("Fireballs"));
+        this.setFireballs(compound.getIntOr("Fireballs", 0));
     }
 
     @Override

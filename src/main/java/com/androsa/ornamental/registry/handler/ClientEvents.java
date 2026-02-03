@@ -10,20 +10,18 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import com.androsa.ornamental.registry.ModelLocations;
-import net.minecraft.client.model.SnowGolemModel;
+import net.minecraft.client.model.animal.golem.SnowGolemModel;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.GrassColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
-@EventBusSubscriber(modid = OrnamentalMod.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = OrnamentalMod.MODID, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent

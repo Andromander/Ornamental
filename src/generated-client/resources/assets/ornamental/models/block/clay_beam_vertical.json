@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_vertical",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/clay",
+    "side": "minecraft:block/clay",
+    "top": "minecraft:block/clay"
+  }
+}

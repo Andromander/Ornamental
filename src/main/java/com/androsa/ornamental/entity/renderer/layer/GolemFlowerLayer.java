@@ -4,13 +4,11 @@ import com.androsa.ornamental.entity.model.FlowerGolemModel;
 import com.androsa.ornamental.entity.model.renderstate.OfferingGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
 public class GolemFlowerLayer<T extends OfferingGolemRenderState, M extends FlowerGolemModel> extends RenderLayer<T, M> {
 
@@ -19,7 +17,7 @@ public class GolemFlowerLayer<T extends OfferingGolemRenderState, M extends Flow
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource buffer, int i, T entity, float v1, float v2) {
+    public void submit(PoseStack stack, SubmitNodeCollector buffer, int i, T entity, float v1, float v2) {
         double[] pos = entity.flowerPos;
         if (entity.offerFlowerTick != 0) {
             stack.pushPose();
@@ -30,7 +28,7 @@ public class GolemFlowerLayer<T extends OfferingGolemRenderState, M extends Flow
             stack.scale(0.5F, 0.5F, 0.5F);
             stack.mulPose(Axis.XP.rotationDegrees(-90.0F));
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.flower, stack, buffer, i, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, null);
+            buffer.submitBlock(stack, entity.flower, i, OverlayTexture.NO_OVERLAY, entity.outlineColor);
             stack.popPose();
         }
     }

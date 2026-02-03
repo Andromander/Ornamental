@@ -5,16 +5,19 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.data.provider.OrnamentalBlockStateProvider;
 import com.mojang.datafixers.util.Either;
+import com.mojang.math.Quadrant;
 import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Half;
@@ -305,10 +308,10 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.clay_wall, "clay");
         wallBasic(ModBlocks.dirt_wall, "dirt");
         modelWallBlock(ModBlocks.grass_wall, "grass", true);
-        wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top");
+        wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top", SOLID);
         modelWallBlock(ModBlocks.path_wall, "path", false);
-        wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top");
-        wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top");
+        wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top", SOLID);
+        wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top", SOLID);
         wallBasic(ModBlocks.snow_wall, "snow");
         modelIceWall(ModBlocks.ice_wall);
         wallBasic(ModBlocks.packed_ice_wall, "packed_ice");
@@ -400,61 +403,64 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void modelStairsBlock(Supplier<? extends OrnamentStair> block, String path) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation stairs = key.withPath(s -> dir + s);
-        ResourceLocation innerstairs = key.withPath(s -> dir + s + "_inner");
-        ResourceLocation outerstairs = key.withPath(s -> dir + s + "_outer");
+        Identifier inventory = key.withPath(s -> dir + s);
+        MultiVariant stairs = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s));
+        MultiVariant innerstairs = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_inner"));
+        MultiVariant outerstairs = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_outer"));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createStairs(block.get(), innerstairs, stairs, outerstairs));
-        this.blockModels.registerSimpleItemModel(block.get().asItem(), stairs);
+        this.blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
     }
 
     public void hexamodelStairsBlock(Supplier<? extends OrnamentStair> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation bottomstraight = key.withPath(s -> dir + s + "_bottom_straight");
-        ResourceLocation topstraight = key.withPath(s -> dir + s + "_top_straight");
-        ResourceLocation bottominner = key.withPath(s -> dir + s + "_bottom_inner");
-        ResourceLocation topinner = key.withPath(s -> dir + s + "_top_inner");
-        ResourceLocation bottomouter = key.withPath(s -> dir + s + "_bottom_outer");
-        ResourceLocation topouter = key.withPath(s -> dir + s + "_top_outer");
+        Identifier inventory = key.withPath(s -> dir + s + "_bottom_straight");
+        MultiVariant bottomstraight = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_bottom_straight"));
+        MultiVariant topstraight = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_straight"));
+        MultiVariant bottominner = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_bottom_inner"));
+        MultiVariant topinner = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_inner"));
+        MultiVariant bottomouter = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_bottom_outer"));
+        MultiVariant topouter = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_outer"));
 
         this.blockModels.blockStateOutput.accept(stairsBlock(block.get(), bottomstraight, topstraight, bottominner, topinner, bottomouter, topouter));
         if (tint) {
-            blockModels.registerSimpleTintedItemModel(block.get(), bottomstraight, new GrassColorSource());
+            blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
-            blockModels.registerSimpleItemModel(block.get().asItem(), bottomstraight);
+            blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
         }
     }
 
-    public void modelSlabBlock(Supplier<? extends SlabBlock> block, Supplier<? extends Block> full, String path, boolean tint, ResourceLocation type) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+    public void modelSlabBlock(Supplier<? extends SlabBlock> block, Supplier<? extends Block> full, String path, boolean tint, Identifier type) {
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation slab = key.withPath(s -> dir + s);
-        ResourceLocation slabtop = key.withPath(s -> dir + s + "_top");
-        ResourceLocation fullblock = new ExtendedModelTemplateBuilder()
+        Identifier inventory = key.withPath(s -> dir + s);
+        MultiVariant slab = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s));
+        MultiVariant slabtop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top"));
+        MultiVariant fullblock = BlockModelGenerators.plainVariant(new ExtendedModelTemplateBuilder()
                 .parent(ModelLocationUtils.getModelLocation(full.get()))
                 .suffix("_double")
                 .renderType(type)
-                .build().create(block.get(), new TextureMapping().put(TextureSlot.PARTICLE, ResourceLocation.withDefaultNamespace("dirt")), blockModels.modelOutput);
+                .build().create(block.get(), new TextureMapping().put(TextureSlot.PARTICLE, Identifier.withDefaultNamespace("dirt")), blockModels.modelOutput));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createSlab(block.get(), slab, slabtop, fullblock));
         if (tint) {
-            blockModels.registerSimpleTintedItemModel(block.get(), slab, new GrassColorSource());
+            blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
-            blockModels.registerSimpleItemModel(block.get().asItem(), slab);
+            blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
         }
     }
 
     public void modelFenceBlock(Supplier<? extends FenceBlock> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation post = key.withPath(s -> dir + s + "_post");
-        ResourceLocation side = key.withPath(s -> dir + s + "_side");
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        Identifier post = key.withPath(s -> dir + s + "_post");
+        Identifier side = key.withPath(s -> dir + s + "_side");
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
-        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createFence(block.get(), post, side));
+        this.blockModels.blockStateOutput.accept(BlockModelGenerators.createFence(block.get(), BlockModelGenerators.plainVariant(post), BlockModelGenerators.plainVariant(side)));
         if (tint) {
             blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
@@ -463,61 +469,63 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void modelTrapdoorBlock(Supplier<? extends TrapDoorBlock> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation bottom = key.withPath(s -> dir + s + "_bottom");
-        ResourceLocation top = key.withPath(s -> dir + s + "_top");
-        ResourceLocation open = key.withPath(s -> dir + s + "_open");
+        Identifier inventory = key.withPath(s -> dir + s + "_bottom");
+        MultiVariant bottom = BlockModelGenerators.plainVariant(inventory);
+        MultiVariant top = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top"));
+        MultiVariant open = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_open"));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createTrapdoor(block.get(), bottom, top, open));
         if (tint) {
-            blockModels.registerSimpleTintedItemModel(block.get(), bottom, new GrassColorSource());
+            blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
-            blockModels.registerSimpleItemModel(block.get().asItem(), bottom);
+            blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
         }
     }
 
     public void modelFenceGateBlock(Supplier<? extends FenceGateBlock> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation gate = key.withPath(s -> dir + s);
-        ResourceLocation open = key.withPath(s -> dir + s + "_open");
-        ResourceLocation wall = key.withPath(s -> dir + s + "_wall");
-        ResourceLocation wallopen = key.withPath(s -> dir + s + "_wall_open");
+        Identifier inventory = key.withPath(s -> dir + s);
+        MultiVariant gate = BlockModelGenerators.plainVariant(inventory);
+        MultiVariant open = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_open"));
+        MultiVariant wall = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_wall"));
+        MultiVariant wallopen = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_wall_open"));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createFenceGate(block.get(), gate, open, wall, wallopen, false));
         if (tint) {
-            blockModels.registerSimpleTintedItemModel(block.get(), gate, new GrassColorSource());
+            blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
-            blockModels.registerSimpleItemModel(block.get().asItem(), gate);
+            blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
         }
     }
 
     public void halfDirtDoorBlock(Supplier<? extends DoorBlock> block, String path) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation bottomleft = ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_left");
-        ResourceLocation bottomleftopen = ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_left_open");
-        ResourceLocation bottomright = ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_right");
-        ResourceLocation bottomrightopen = ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_right_open");
-        ResourceLocation topleft = key.withPath(s -> dir + s + "_top_left");
-        ResourceLocation topleftopen = key.withPath(s -> dir + s + "_top_left_open");
-        ResourceLocation topright = key.withPath(s -> dir + s + "_top_right");
-        ResourceLocation toprightopen = key.withPath(s -> dir + s + "_top_right_open");
+        MultiVariant bottomleft = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_left"));
+        MultiVariant bottomleftopen = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_left_open"));
+        MultiVariant bottomright = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_right"));
+        MultiVariant bottomrightopen = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_door.get(), "_bottom_right_open"));
+        MultiVariant topleft = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_left"));
+        MultiVariant topleftopen = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_left_open"));
+        MultiVariant topright = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_right"));
+        MultiVariant toprightopen = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_top_right_open"));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createDoor(block.get(), bottomleft, bottomleftopen, bottomright, bottomrightopen, topleft, topleftopen, topright, toprightopen));
         this.blockModels.registerSimpleFlatItemModel(block.get().asItem());
     }
 
     public void modelPoleBlock(Supplier<? extends OrnamentPole> block, String path, Supplier<? extends Block> full, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation whole = key.withPath(s -> dir + s + "_whole");
-        ResourceLocation horizon = key.withPath(s -> dir + s + "_horizontal");
-        ResourceLocation vertical = key.withPath(s -> dir + s + "_vertical");
-        ResourceLocation corner = key.withPath(s -> dir + s + "_corner");
-        ResourceLocation fullblock = ModelLocationUtils.getModelLocation(full.get());
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        MultiVariant whole = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_whole"));
+        MultiVariant horizon = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal"));
+        MultiVariant vertical = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_vertical"));
+        MultiVariant corner = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_corner"));
+        MultiVariant fullblock = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(full.get()));
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
         this.blockModels.blockStateOutput.accept(poleBlock(block, whole, horizon, vertical, corner, fullblock));
         if (tint) {
@@ -528,18 +536,18 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void halfDirtBeamBlock(Supplier<? extends OrnamentBeam> block, Supplier<? extends Block> full, String path, boolean noface, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation wholetop = key.withPath(s -> dir + s + "_whole_top");
-        ResourceLocation wholebottom = key.withPath(s -> dir + s + "_whole_bottom");
-        ResourceLocation horizontop = key.withPath(s -> dir + s + "_horizontal_top");
-        ResourceLocation horizonbottom = key.withPath(s -> dir + s + "_horizontal_bottom");
-        ResourceLocation verticaltop = key.withPath(s -> dir + s + "_vertical");
-        ResourceLocation verticalbottom = ModelLocationUtils.getModelLocation(ModBlocks.dirt_beam.get(), "_vertical");
-        ResourceLocation cornertop = key.withPath(s -> dir + s + "_corner");
-        ResourceLocation cornerbottom = ModelLocationUtils.getModelLocation(ModBlocks.dirt_beam.get(), noface ? "_corner" : "_whole");
-        ResourceLocation fullblock = ModelLocationUtils.getModelLocation(full.get());
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        MultiVariant wholetop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_whole_top"));
+        MultiVariant wholebottom = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_whole_bottom"));
+        MultiVariant horizontop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_top"));
+        MultiVariant horizonbottom = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_bottom"));
+        MultiVariant verticaltop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_vertical"));
+        MultiVariant verticalbottom = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_beam.get(), "_vertical"));
+        MultiVariant cornertop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_corner"));
+        MultiVariant cornerbottom = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.dirt_beam.get(), noface ? "_corner" : "_whole"));
+        MultiVariant fullblock = BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(full.get()));
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
         this.blockModels.blockStateOutput.accept(beamBlock(block, wholetop, wholebottom, horizontop, horizonbottom, verticaltop, verticalbottom, cornertop, cornerbottom, fullblock));
         if (tint) {
@@ -550,12 +558,12 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void modelWallBlock(Supplier<? extends WallBlock> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation post = key.withPath(s -> dir + s + "_post");
-        ResourceLocation side = key.withPath(s -> dir + s + "_side");
-        ResourceLocation tall = key.withPath(s -> dir + s + "_side_tall");
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        MultiVariant post = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_post"));
+        MultiVariant side = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_side"));
+        MultiVariant tall = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_side_tall"));
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createWall(block.get(), post, side, tall));
         if (tint) {
@@ -566,22 +574,22 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void modelIceWall(Supplier<? extends OrnamentWall> block) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/ice/";
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
         this.blockModels.blockStateOutput.accept(iceWall(block));
         blockModels.registerSimpleItemModel(block.get().asItem(), inventory);
     }
 
     public void modelSaddleDoorBlock(Supplier<? extends OrnamentSaddleDoor> block, String path, boolean tint) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation left = key.withPath(s -> dir + s + "_left");
-        ResourceLocation leftOpen = key.withPath(s -> dir + s + "_left_open");
-        ResourceLocation right = key.withPath(s -> dir + s + "_right");
-        ResourceLocation rightOpen = key.withPath(s -> dir + s + "_right_open");
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        MultiVariant left = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_left"));
+        MultiVariant leftOpen = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_left_open"));
+        MultiVariant right = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_right"));
+        MultiVariant rightOpen = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_right_open"));
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
         this.blockModels.blockStateOutput.accept(saddleDoorBlock(block, left, leftOpen, right, rightOpen));
         if (tint) {
@@ -592,20 +600,20 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
     }
 
     public void dirtSupportBlock(Supplier<? extends OrnamentSupport> block, String path, boolean tint) {
-        ResourceLocation dirt = BuiltInRegistries.BLOCK.getKey(ModBlocks.dirt_support.get());
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+        Identifier dirt = BuiltInRegistries.BLOCK.getKey(ModBlocks.dirt_support.get());
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
-        ResourceLocation base = key.withPath(s -> dir + s + "_base");
-        ResourceLocation basetop = key.withPath(s -> dir + s + "_base_top");
-        ResourceLocation vertical = key.withPath(s -> dir + s + "_vertical");
-        ResourceLocation verticaltop = key.withPath(s -> dir + s + "_vertical_top");
-        ResourceLocation x = key.withPath(s -> dir + s + "_horizontal_x");
-        ResourceLocation xtop = key.withPath(s -> dir + s + "_horizontal_x_top");
-        ResourceLocation z = key.withPath(s -> dir + s + "_horizontal_z");
-        ResourceLocation ztop = key.withPath(s -> dir + s + "_horizontal_z_top");
-        ResourceLocation inventory = key.withPath(s -> dir + s + "_inventory");
+        MultiVariant base = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_base"));
+        MultiVariant basetop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_base_top"));
+        MultiVariant vertical = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_vertical"));
+        MultiVariant verticaltop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_vertical_top"));
+        MultiVariant x = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_x"));
+        MultiVariant xtop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_x_top"));
+        MultiVariant z = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_z"));
+        MultiVariant ztop = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_horizontal_z_top"));
+        Identifier inventory = key.withPath(s -> dir + s + "_inventory");
 
-        this.blockModels.blockStateOutput.accept(dirtSupportBlock(block, base, basetop, vertical, verticaltop, x, xtop, z, ztop, dirt.withPath(s -> "block/" + s + "_base")));
+        this.blockModels.blockStateOutput.accept(dirtSupportBlock(block, base, basetop, vertical, verticaltop, x, xtop, z, ztop, BlockModelGenerators.plainVariant(dirt.withPath(s -> "block/" + s + "_base"))));
         if (tint) {
             blockModels.registerSimpleTintedItemModel(block.get(), inventory, new GrassColorSource());
         } else {
@@ -613,8 +621,8 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         }
     }
 
-    public BlockStateGenerator stairsBlock(StairBlock block, ResourceLocation bs, ResourceLocation ts, ResourceLocation bi, ResourceLocation ti, ResourceLocation bo, ResourceLocation to) {
-        PropertyDispatch.C3<Direction, Half, StairsShape> props = PropertyDispatch.properties(StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE);
+    public BlockModelDefinitionGenerator stairsBlock(StairBlock block, MultiVariant bs, MultiVariant ts, MultiVariant bi, MultiVariant ti, MultiVariant bo, MultiVariant to) {
+        PropertyDispatch.C3<MultiVariant, Direction, Half, StairsShape> props = PropertyDispatch.initial(StairBlock.FACING, StairBlock.HALF, StairBlock.SHAPE);
 
         for (Direction dir : Direction.values()) {
             if (!dir.getAxis().isVertical()) {
@@ -631,224 +639,221 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
             }
         }
 
-        return MultiVariantGenerator.multiVariant(block).with(props);
+        return MultiVariantGenerator.dispatch(block).with(props);
     }
 
-    public void selectStair(PropertyDispatch.C3<Direction, Half, StairsShape> props, Direction dir, Half half, StairsShape shape, ResourceLocation model) {
+    public void selectStair(PropertyDispatch.C3<MultiVariant, Direction, Half, StairsShape> props, Direction dir, Half half, StairsShape shape, MultiVariant model) {
         int rot = (int) dir.getClockWise().toYRot(); // Stairs model is rotated 90 degrees clockwise for some reason
         if (shape == StairsShape.INNER_LEFT || shape == StairsShape.OUTER_LEFT)
             rot += 270; // Left facing stairs are rotated 90 degrees clockwise
         if (shape == StairsShape.STRAIGHT && half == Half.TOP)
             rot += 90; // Top stairs are rotated 90 degrees clockwise
-        VariantProperties.Rotation yRot = INT_TO_ROT.get(rot % 360);
+        Quadrant yRot = INT_TO_ROT.get(rot % 360);
 
         props.select(
                 dir, half, shape,
-                Variant.variant()
-                        .with(VariantProperties.MODEL, model)
-                        .with(VariantProperties.X_ROT, half == Half.BOTTOM ? VariantProperties.Rotation.R0 : VariantProperties.Rotation.R180)
-                        .with(VariantProperties.Y_ROT, yRot)
-                        .with(VariantProperties.UV_LOCK, yRot != VariantProperties.Rotation.R0 || half == Half.TOP)); // Don't set uvlock for states that have no rotation
+                model.with(VariantMutator.X_ROT.withValue(half == Half.BOTTOM ? Quadrant.R0 : Quadrant.R180))
+                        .with(VariantMutator.Y_ROT.withValue(yRot))
+                        .with(VariantMutator.UV_LOCK.withValue(yRot != Quadrant.R0 || half == Half.TOP))); // Don't set uvlock for states that have no rotation
     }
 
-    public BlockStateGenerator beamBlock(Supplier<? extends OrnamentBeam> block, ResourceLocation wt, ResourceLocation wb, ResourceLocation ht, ResourceLocation hb, ResourceLocation vt, ResourceLocation vb, ResourceLocation ct, ResourceLocation cb, ResourceLocation fullblock) {
+    public BlockModelDefinitionGenerator beamBlock(Supplier<? extends OrnamentBeam> block, MultiVariant wt, MultiVariant wb, MultiVariant ht, MultiVariant hb, MultiVariant vt, MultiVariant vb, MultiVariant ct, MultiVariant cb, MultiVariant fullblock) {
         MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
-        beamModelWhole(builder, wt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelWhole(builder, wt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelWhole(builder, wt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelWhole(builder, wt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelWhole(builder, wb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelWhole(builder, wb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelWhole(builder, wb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelWhole(builder, wb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelLength(builder, ht, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelLength(builder, ht, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelLength(builder, ht, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelLength(builder, ht, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelLength(builder, hb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
-        beamModelLength(builder, hb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
-        beamModelLength(builder, hb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
-        beamModelLength(builder, hb, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
-        beamModelLength(builder, vt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
-        beamModelLength(builder, vt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
-        beamModelLength(builder, vt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
-        beamModelLength(builder, vt, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
-        beamModelLength(builder, vb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R90, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelLength(builder, vb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R0, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
-        beamModelLength(builder, vb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R270, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelLength(builder, vb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R180, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
-        beamModelCorner(builder, ct, VariantProperties.Rotation.R0, VariantProperties.Rotation.R0, Direction.Axis.X, true, true, true, false);
-        beamModelCorner(builder, ct, VariantProperties.Rotation.R0, VariantProperties.Rotation.R270, Direction.Axis.Z, true, true, true, false);
-        beamModelCorner(builder, ct, VariantProperties.Rotation.R0, VariantProperties.Rotation.R180, Direction.Axis.X, true, true, false, true);
-        beamModelCorner(builder, ct, VariantProperties.Rotation.R0, VariantProperties.Rotation.R90, Direction.Axis.Z, true, true, false, true);
-        beamModelCorner(builder, cb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R270, Direction.Axis.X, false, true, true, true);
-        beamModelCorner(builder, cb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R180, Direction.Axis.Z, false, true, true, true);
-        beamModelCorner(builder, cb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R90, Direction.Axis.X, true, false, true, true);
-        beamModelCorner(builder, cb, VariantProperties.Rotation.R90, VariantProperties.Rotation.R0, Direction.Axis.Z, true, false, true, true);
+        beamModelWhole(builder, wt, Quadrant.R0, Quadrant.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, wt, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, wt, Quadrant.R0, Quadrant.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, wt, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, Quadrant.R0, Quadrant.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelWhole(builder, wb, Quadrant.R0, Quadrant.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelWhole(builder, wb, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, ht, Quadrant.R0, Quadrant.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, ht, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, ht, Quadrant.R0, Quadrant.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, ht, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, hb, Quadrant.R0, Quadrant.R0, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, hb, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, hb, Quadrant.R0, Quadrant.R180, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, hb, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vt, Quadrant.R0, Quadrant.R0, Direction.Axis.X, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vt, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_RIGHT);
+        beamModelLength(builder, vt, Quadrant.R0, Quadrant.R180, Direction.Axis.X, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, vt, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_LEFT);
+        beamModelLength(builder, vb, Quadrant.R90, Quadrant.R90, Direction.Axis.X, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, vb, Quadrant.R90, Quadrant.R0, Direction.Axis.Z, OrnamentBeam.BOTTOM_LEFT, OrnamentBeam.TOP_LEFT, OrnamentBeam.BOTTOM_RIGHT);
+        beamModelLength(builder, vb, Quadrant.R90, Quadrant.R270, Direction.Axis.X, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelLength(builder, vb, Quadrant.R90, Quadrant.R180, Direction.Axis.Z, OrnamentBeam.BOTTOM_RIGHT, OrnamentBeam.TOP_RIGHT, OrnamentBeam.BOTTOM_LEFT);
+        beamModelCorner(builder, ct, Quadrant.R0, Quadrant.R0, Direction.Axis.X, true, true, true, false);
+        beamModelCorner(builder, ct, Quadrant.R0, Quadrant.R270, Direction.Axis.Z, true, true, true, false);
+        beamModelCorner(builder, ct, Quadrant.R0, Quadrant.R180, Direction.Axis.X, true, true, false, true);
+        beamModelCorner(builder, ct, Quadrant.R0, Quadrant.R90, Direction.Axis.Z, true, true, false, true);
+        beamModelCorner(builder, cb, Quadrant.R90, Quadrant.R270, Direction.Axis.X, false, true, true, true);
+        beamModelCorner(builder, cb, Quadrant.R90, Quadrant.R180, Direction.Axis.Z, false, true, true, true);
+        beamModelCorner(builder, cb, Quadrant.R90, Quadrant.R90, Direction.Axis.X, true, false, true, true);
+        beamModelCorner(builder, cb, Quadrant.R90, Quadrant.R0, Direction.Axis.Z, true, false, true, true);
 
         return builder.with(
-                Condition.condition().term(OrnamentBeam.TOP_LEFT, true).term(OrnamentBeam.TOP_RIGHT, true).term(OrnamentBeam.BOTTOM_LEFT, true).term(OrnamentBeam.BOTTOM_RIGHT, true),
-                Variant.variant().with(VariantProperties.MODEL, fullblock));
+                BlockModelGenerators.condition().term(OrnamentBeam.TOP_LEFT, true).term(OrnamentBeam.TOP_RIGHT, true).term(OrnamentBeam.BOTTOM_LEFT, true).term(OrnamentBeam.BOTTOM_RIGHT, true),
+                fullblock);
     }
 
-    public BlockStateGenerator iceWall(Supplier<? extends OrnamentWall> block) {
-        ResourceLocation key = BuiltInRegistries.BLOCK.getKey(block.get());
+    public BlockModelDefinitionGenerator iceWall(Supplier<? extends OrnamentWall> block) {
+        Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/ice/";
 
-        ResourceLocation post = key.withPath(s -> dir + s + "_post");
-        ResourceLocation postside = key.withPath(s -> dir + s + "_post_side");
-        ResourceLocation postsidetall = key.withPath(s -> dir + s + "_side");
-        ResourceLocation side = key.withPath(s -> dir + s + "_side");
-        ResourceLocation sidetall = key.withPath(s -> dir + s + "_side_tall");
-        ResourceLocation sidetallp = key.withPath(s -> dir + s + "_side_tall_piece");
-        ResourceLocation seg = key.withPath(s -> dir + s + "_segment");
+        MultiVariant post = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_post"));
+        MultiVariant postside = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_post_side"));
+        MultiVariant postsidetall = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_post_side_tall"));
+        MultiVariant side = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_side"));
+        MultiVariant sidetall = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_side_tall"));
+        MultiVariant sidetallp = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_side_tall_piece"));
+        MultiVariant seg = BlockModelGenerators.plainVariant(key.withPath(s -> dir + s + "_segment"));
 
         MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
 
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, true),
-                Variant.variant().with(VariantProperties.MODEL, post));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, true),
+                post);
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, false),
-                Variant.variant().with(VariantProperties.MODEL, seg));
-        iceWallRotation(builder, OrnamentWall.EAST_WALL, VariantProperties.Rotation.R90, postside, side, postsidetall, sidetall, sidetallp);
-        iceWallRotation(builder, OrnamentWall.NORTH_WALL, VariantProperties.Rotation.R0, postside, side, postsidetall, sidetall, sidetallp);
-        iceWallRotation(builder, OrnamentWall.SOUTH_WALL, VariantProperties.Rotation.R180, postside, side, postsidetall, sidetall, sidetallp);
-        iceWallRotation(builder, OrnamentWall.WEST_WALL, VariantProperties.Rotation.R270, postside, side, postsidetall, sidetall, sidetallp);
+                BlockModelGenerators.condition().term(OrnamentWall.UP, false),
+                seg);
+        iceWallRotation(builder, OrnamentWall.EAST, Quadrant.R90, postside, side, postsidetall, sidetall, sidetallp);
+        iceWallRotation(builder, OrnamentWall.NORTH, Quadrant.R0, postside, side, postsidetall, sidetall, sidetallp);
+        iceWallRotation(builder, OrnamentWall.SOUTH, Quadrant.R180, postside, side, postsidetall, sidetall, sidetallp);
+        iceWallRotation(builder, OrnamentWall.WEST, Quadrant.R270, postside, side, postsidetall, sidetall, sidetallp);
 
         return builder;
     }
 
-    public void iceWallRotation(MultiPartGenerator builder, EnumProperty<WallSide> wallside, VariantProperties.Rotation rotation, ResourceLocation postside, ResourceLocation side, ResourceLocation postsidetall, ResourceLocation sidetall, ResourceLocation sidetallp) {
+    public void iceWallRotation(MultiPartGenerator builder, EnumProperty<WallSide> wallside, Quadrant rotation, MultiVariant postside, MultiVariant side, MultiVariant postsidetall, MultiVariant sidetall, MultiVariant sidetallp) {
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, true).term(wallside, WallSide.LOW),
-                Variant.variant().with(VariantProperties.MODEL, postside).with(VariantProperties.Y_ROT, rotation).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, true).term(wallside, WallSide.LOW),
+                postside.with(VariantMutator.Y_ROT.withValue(rotation)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.LOW),
-                Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, rotation).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.LOW),
+                side.with(VariantMutator.Y_ROT.withValue(rotation)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, true).term(wallside, WallSide.TALL),
-                Variant.variant().with(VariantProperties.MODEL, postsidetall).with(VariantProperties.Y_ROT, rotation).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, true).term(wallside, WallSide.TALL),
+                postsidetall.with(VariantMutator.Y_ROT.withValue(rotation)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.TALL),
-                Variant.variant().with(VariantProperties.MODEL, sidetall).with(VariantProperties.Y_ROT, rotation).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.TALL),
+                sidetall.with(VariantMutator.Y_ROT.withValue(rotation)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.TALL),
-                Variant.variant().with(VariantProperties.MODEL, sidetallp).with(VariantProperties.Y_ROT, rotation).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentWall.UP, false).term(wallside, WallSide.TALL),
+                sidetallp.with(VariantMutator.Y_ROT.withValue(rotation)).with(VariantMutator.UV_LOCK.withValue(true)));
     }
 
-    public BlockStateGenerator dirtSupportBlock(Supplier<? extends OrnamentSupport> block, ResourceLocation base, ResourceLocation basetop, ResourceLocation vertical, ResourceLocation verticaltop, ResourceLocation horizontalX, ResourceLocation horizontalXtop, ResourceLocation horizontalZ, ResourceLocation horizontalZtop, ResourceLocation dirt) {
+    public BlockModelDefinitionGenerator dirtSupportBlock(Supplier<? extends OrnamentSupport> block, MultiVariant base, MultiVariant basetop, MultiVariant vertical, MultiVariant verticaltop, MultiVariant horizontalX, MultiVariant horizontalXtop, MultiVariant horizontalZ, MultiVariant horizontalZtop, MultiVariant dirt) {
         MultiPartGenerator builder = MultiPartGenerator.multiPart(block.get());
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
-                Variant.variant().with(VariantProperties.MODEL, base).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
+                base.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
-                Variant.variant().with(VariantProperties.MODEL, base).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
+                base.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
-                Variant.variant().with(VariantProperties.MODEL, base).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
+                base.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
-                Variant.variant().with(VariantProperties.MODEL, base).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, false),
+                base.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
-                Variant.variant().with(VariantProperties.MODEL, dirt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
+                dirt.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
-                Variant.variant().with(VariantProperties.MODEL, dirt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
+                dirt.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
-                Variant.variant().with(VariantProperties.MODEL, dirt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
+                dirt.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
-                Variant.variant().with(VariantProperties.MODEL, dirt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, false).term(OrnamentSupport.TB_CONNECT, true),
+                dirt.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, basetop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.UPPER_HALF, true),
+                basetop.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, basetop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.UPPER_HALF, true),
+                basetop.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, basetop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.UPPER_HALF, true),
+                basetop.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, basetop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.UPPER_HALF, true),
+                basetop.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                vertical.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                vertical.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                vertical.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, vertical).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                vertical.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, verticaltop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                verticaltop.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, verticaltop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                verticaltop.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, verticaltop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                verticaltop.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, verticaltop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.TB_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                verticaltop.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZ).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalZ.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalX).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalX.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZ).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalZ.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalX).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalX.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalZtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalXtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalXtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalZtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalXtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.NS_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalXtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalX).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalX.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZ).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalZ.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalX).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalX.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZ).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, false),
+                horizontalZ.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalXtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R0).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalXtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R0)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.TOP_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalZtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R90)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalXtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_RIGHT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalXtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R180)).with(VariantMutator.UV_LOCK.withValue(true)));
         builder.with(
-                Condition.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
-                Variant.variant().with(VariantProperties.MODEL, horizontalZtop).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+                BlockModelGenerators.condition().term(OrnamentSupport.CORNER, OrnamentSupport.CornerType.BOTTOM_LEFT).term(OrnamentSupport.EW_CONNECT, true).term(OrnamentSupport.UPPER_HALF, true),
+                horizontalZtop.with(VariantMutator.Y_ROT.withValue(Quadrant.R270)).with(VariantMutator.UV_LOCK.withValue(true)));
 
         return builder;
     }
-
 }

@@ -59,7 +59,7 @@ public class ModCreativeTabs {
         });
     }
 
-    @EventBusSubscriber(modid = OrnamentalMod.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = OrnamentalMod.MODID, value = Dist.CLIENT)
     public static class BuildContent {
         @SubscribeEvent
         public static void buildContent(BuildCreativeModeTabContentsEvent event) {

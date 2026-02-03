@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/support_horizontal_z",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "minecraft:block/ice",
+    "side": "minecraft:block/ice",
+    "top": "minecraft:block/ice"
+  }
+}

@@ -2,8 +2,8 @@ package com.androsa.ornamental.registry.helper;
 
 import com.androsa.ornamental.builder.OrnamentBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -18,7 +18,7 @@ public class PropertiesHelper {
      */
     public static BlockBehaviour.Properties createProps(OrnamentBuilder builder, String modid, String name) {
         BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
-                .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(modid, name)))
+                .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(modid, name)))
                 .mapColor(builder.color)
                 .strength(builder.hardness, builder.resistance)
                 .sound(builder.blockSetType.soundType())
@@ -42,7 +42,7 @@ public class PropertiesHelper {
      * @param builder the material being used for that item or the item's block.
      */
     public static Item.Properties createItem(OrnamentBuilder builder, String modid, String name) {
-        Item.Properties props = new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modid, name)));
+        Item.Properties props = new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modid, name)));
         if (builder.fireproof) props.fireResistant();
 
         return props;

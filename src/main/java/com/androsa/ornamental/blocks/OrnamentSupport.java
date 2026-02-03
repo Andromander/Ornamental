@@ -18,8 +18,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -219,7 +219,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     }
 
     @Override
-    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float distance) {
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double distance) {
         entity.causeFallDamage(distance, builder.fallMultiplier, level.damageSources().fall());
     }
 
@@ -323,7 +323,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
         }
         return InteractionResult.SUCCESS;
     }
@@ -374,7 +374,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     }
 
     protected void turnIntoWater(Level world, BlockPos pos) {
-        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());

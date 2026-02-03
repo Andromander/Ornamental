@@ -5,7 +5,10 @@ import com.androsa.ornamental.data.provider.OrnamentalItemTagProvider;
 import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import com.google.common.collect.Lists;
 import net.neoforged.neoforge.common.Tags;
@@ -37,6 +40,13 @@ public class OrnamentalItemTags extends OrnamentalItemTagProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        (new OrnamentalBlockItemTags() {
+            @Override
+            protected TagAppender<Block, Block> tag(TagKey<Block> blocktag, TagKey<Item> itemtag) {
+                return new BlockToItemTag(OrnamentalItemTags.this.tag(itemtag));
+            }
+        }).run();
+
         addToTag(ModTags.Items.BEAMS, BEAMS);
         addToTag(ItemTags.DOORS, DOORS);
         addToTag(ItemTags.FENCES, FENCES);

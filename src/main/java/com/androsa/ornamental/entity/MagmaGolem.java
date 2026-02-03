@@ -4,11 +4,10 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.task.HotMeleeAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -35,13 +34,15 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 public class MagmaGolem extends OrnamentalGolem {
 
     private static final EntityDataAccessor<Integer> STATE_ID = SynchedEntityData.defineId(MagmaGolem.class, EntityDataSerializers.INT);
-    private static final ResourceLocation HEATED_SPEED = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "heated");
-    private static final ResourceLocation COOLED_SPEED = ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "cooled");
+    private static final Identifier HEATED_SPEED = Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "heated");
+    private static final Identifier COOLED_SPEED = Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "cooled");
     private static final AttributeModifier HEATED_SPEED_MODIFIER = new AttributeModifier(HEATED_SPEED, 0.25D, AttributeModifier.Operation.ADD_VALUE);
     private static final AttributeModifier COOLED_SPEED_MODIFIER = new AttributeModifier(COOLED_SPEED, -0.25D, AttributeModifier.Operation.ADD_VALUE);
     private int cooldownTimer = 20 * 20;
@@ -77,15 +78,15 @@ public class MagmaGolem extends OrnamentalGolem {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("StateID", this.getState());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setState(tag.getInt("StateID"));
+        this.setState(tag.getIntOr("StateID", 0));
     }
 
     public int getState() {
@@ -159,7 +160,7 @@ public class MagmaGolem extends OrnamentalGolem {
             }
         }
 
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             if (this.getState() == 0) {
                 for(int i = 0; i < 1; ++i) {
                     this.level().addParticle(ParticleTypes.SMALL_FLAME, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);

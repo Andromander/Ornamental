@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "ornamental:nether_brick_door"
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:nether_brick_saddle_door"
+  }
+}

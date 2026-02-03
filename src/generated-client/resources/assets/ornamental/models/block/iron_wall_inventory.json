@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/wall_inventory",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/iron_block",
+    "side": "minecraft:block/iron_block",
+    "top": "minecraft:block/iron_block"
+  }
+}

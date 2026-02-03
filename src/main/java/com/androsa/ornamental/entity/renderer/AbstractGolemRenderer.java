@@ -7,9 +7,8 @@ import com.androsa.ornamental.entity.model.renderstate.GolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public abstract class AbstractGolemRenderer<T extends OrnamentalGolem, S extends GolemRenderState, M extends AbstractGolemModel<S>> extends MobRenderer<T, S, M> {
 
@@ -29,8 +28,8 @@ public abstract class AbstractGolemRenderer<T extends OrnamentalGolem, S extends
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GolemRenderState entity) {
-        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
+    public Identifier getTextureLocation(GolemRenderState entity) {
+        return Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
 
     @Override

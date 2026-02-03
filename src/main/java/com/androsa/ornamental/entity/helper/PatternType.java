@@ -3,7 +3,7 @@ package com.androsa.ornamental.entity.helper;
 import com.androsa.ornamental.registry.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.golem.AbstractGolem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 

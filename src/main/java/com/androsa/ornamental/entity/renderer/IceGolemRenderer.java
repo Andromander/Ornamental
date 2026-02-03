@@ -2,13 +2,13 @@ package com.androsa.ornamental.entity.renderer;
 
 import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.entity.IceGolem;
-import net.minecraft.client.model.SnowGolemModel;
+import net.minecraft.client.model.animal.golem.SnowGolemModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.SnowGolemHeadLayer;
 import net.minecraft.client.renderer.entity.state.SnowGolemRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGolemRenderState, SnowGolemModel> {
 
@@ -32,7 +32,7 @@ public class IceGolemRenderer<T extends IceGolem> extends MobRenderer<T, SnowGol
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SnowGolemRenderState entity) {
-        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
+    public Identifier getTextureLocation(SnowGolemRenderState entity) {
+        return Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/entity/" + entityName + ".png");
     }
 }

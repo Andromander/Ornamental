@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "ornamental:block/missingno",
+    "side": "ornamental:block/missingno",
+    "top": "ornamental:block/missingno"
+  }
+}

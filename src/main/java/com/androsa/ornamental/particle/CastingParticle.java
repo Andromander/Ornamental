@@ -3,13 +3,14 @@ package com.androsa.ornamental.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 public class CastingParticle extends RisingParticle {
 
     private final SpriteSet set;
 
     protected CastingParticle(ClientLevel level, double x, double y, double z, double xVel, double yVel, double zVel, SpriteSet set) {
-        super(level, x, y, z, xVel, yVel, zVel);
+        super(level, x, y, z, xVel, yVel, zVel, set.first());
         this.set = set;
         this.setSpriteFromAge(set);
     }
@@ -26,8 +27,8 @@ public class CastingParticle extends RisingParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    public Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     public static class AmethystFactory implements ParticleProvider<SimpleParticleType> {
@@ -37,7 +38,7 @@ public class CastingParticle extends RisingParticle {
             this.sprite = set;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double velX, double velY, double velZ) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double velX, double velY, double velZ, RandomSource rand) {
             CastingParticle particle = new CastingParticle(level, x, y, z, velX, velY, velZ, this.sprite);
             particle.setAlpha(1.0F);
             return particle;

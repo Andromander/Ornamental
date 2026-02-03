@@ -4,6 +4,7 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.helper.MasterRegistryHelper;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

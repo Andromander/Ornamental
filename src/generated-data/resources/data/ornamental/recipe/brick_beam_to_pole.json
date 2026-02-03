@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "ornamental:brick_beam"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ornamental:brick_pole"
+  }
+}

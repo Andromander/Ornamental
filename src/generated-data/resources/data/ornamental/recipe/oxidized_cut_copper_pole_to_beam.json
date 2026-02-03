@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "ornamental:oxidized_cut_copper_pole"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ornamental:oxidized_cut_copper_beam"
+  }
+}

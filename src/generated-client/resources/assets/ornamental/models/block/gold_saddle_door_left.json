@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/saddle_door_left",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "ornamental:block/gold_trapdoor",
+    "side": "ornamental:block/gold_trapdoor",
+    "top": "ornamental:block/gold_trapdoor"
+  }
+}

@@ -14,8 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
@@ -31,6 +31,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.enums.BubbleColumnDirection;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
@@ -40,8 +41,8 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
                             propertiesCodec())
                     .apply(instance, OrnamentFence::new));
 
-    protected final VoxelShape[] collisionShapes = this.makeShapes(2.0F, 2.0F, 23.0F, 0.0F, 23.0F);
-    protected final VoxelShape[] shapes = this.makeShapes(2.0F, 2.0F, 15.0F, 0.0F, 15.0F);
+    protected final Function<BlockState, VoxelShape> collisionShapes = this.makeShapes(4.0F, 23.0F, 4.0F, 0.0F, 23.0F);
+    protected final Function<BlockState, VoxelShape> shapes = this.makeShapes(4.0F, 15.0F, 4.0F, 0.0F, 15.0F);
 
     private final OrnamentBuilder builder;
 
@@ -63,13 +64,13 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.shapes[this.getAABBIndex(state)] : super.getShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.shapes.apply(state) : super.getShape(state, worldIn, pos, context);
     }
 
     @Override
     @Nonnull
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return builder.pathShape ? this.collisionShapes[this.getAABBIndex(state)] : super.getCollisionShape(state, worldIn, pos, context);
+        return builder.pathShape ? this.collisionShapes.apply(state): super.getCollisionShape(state, worldIn, pos, context);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     }
 
     @Override
-    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+    public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, double fallDistance) {
         entityIn.causeFallDamage(fallDistance, builder.fallMultiplier, worldIn.damageSources().fall());
     }
 
@@ -153,7 +154,7 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
         if (!player.getAbilities().instabuild && !itemstack.isDamageableItem()) {
             itemstack.shrink(1);
         } else {
-            itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            itemstack.hurtAndBreak(1, player, hand.asEquipmentSlot());
         }
         return InteractionResult.SUCCESS;
     }
@@ -186,7 +187,7 @@ public class OrnamentFence extends FenceBlock implements OrnamentalBlock {
     }
 
     protected void turnIntoWater(Level world, BlockPos pos) {
-        if (world.dimensionType().ultraWarm() && builder.canVaporise) {
+        if (world.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos) && builder.canVaporise) {
             world.removeBlock(pos, false);
         } else {
             world.setBlockAndUpdate(pos, builder.meltResult.defaultBlockState());

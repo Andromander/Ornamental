@@ -4,7 +4,6 @@ import com.androsa.ornamental.entity.task.EchoAttackGoal;
 import com.androsa.ornamental.entity.task.ResonateGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -25,13 +24,15 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.golem.AbstractGolem;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,15 +56,15 @@ public class CalciteGolem extends OrnamentalGolem {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(ValueInput tag) {
         super.readAdditionalSaveData(tag);
-        this.setNewlyTargeted(tag.getBoolean("NewlyTargeted"));
-        this.setResonating(tag.getBoolean("IsResonating"));
-        this.setChargeState(tag.getInt("ChargeState"));
+        this.setNewlyTargeted(tag.getBooleanOr("NewlyTargeted", false));
+        this.setResonating(tag.getBooleanOr("IsResonating", false));
+        this.setChargeState(tag.getIntOr("ChargeState", 0));
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(ValueOutput tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("NewlyTargeted", this.newlyTargeted());
         tag.putBoolean("IsResonating", this.isResonating());
@@ -160,7 +161,7 @@ public class CalciteGolem extends OrnamentalGolem {
             }
         }
 
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             if (this.getChargeState() == 1) {
                 for(int i = 0; i < 2; ++i) {
                     this.level().addParticle(ParticleTypes.CRIT, this.getX() + (random.nextFloat() - 0.5F), this.getY(0.65F) + (random.nextFloat() - 0.5F), this.getZ() + (random.nextFloat() - 0.5F), 0.0D, 0.0D, 0.0D);

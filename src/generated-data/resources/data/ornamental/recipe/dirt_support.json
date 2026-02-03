@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "ornamental:dirt_pole",
+    "ornamental:dirt_beam"
+  ],
+  "result": {
+    "count": 2,
+    "id": "ornamental:dirt_support"
+  }
+}

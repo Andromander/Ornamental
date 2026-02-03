@@ -2,7 +2,7 @@ package com.androsa.ornamental.registry;
 
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ModelLocations {
 
@@ -37,6 +37,6 @@ public class ModelLocations {
     }
 
     private static ModelLayerLocation modelLocation(String entity, String layer) {
-        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, entity), layer);
+        return new ModelLayerLocation(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, entity), layer);
     }
 }

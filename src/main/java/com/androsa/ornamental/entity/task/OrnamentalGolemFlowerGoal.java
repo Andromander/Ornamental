@@ -3,7 +3,7 @@ package com.androsa.ornamental.entity.task;
 import com.androsa.ornamental.entity.FlowerGolem;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 
 import java.util.EnumSet;
 
@@ -24,7 +24,7 @@ public class OrnamentalGolemFlowerGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.golem.level().isDay()) {
+        if (!this.golem.level().isBrightOutside()) {
             return false;
         } else if (this.golem.getRandom().nextInt(8000) != 0) {
             return false;

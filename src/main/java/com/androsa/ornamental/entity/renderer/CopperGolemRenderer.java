@@ -6,7 +6,7 @@ import com.androsa.ornamental.entity.model.CopperGolemModel;
 import com.androsa.ornamental.entity.model.renderstate.CopperGolemRenderState;
 import com.androsa.ornamental.entity.renderer.layer.CopperGlowLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CopperGolemRenderer<T extends CopperGolem, M extends CopperGolemModel> extends AbstractGolemRenderer<T, CopperGolemRenderState, M> {
 
@@ -38,7 +38,7 @@ public class CopperGolemRenderer<T extends CopperGolem, M extends CopperGolemMod
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CopperGolemRenderState entity) {
+    public Identifier getTextureLocation(CopperGolemRenderState entity) {
         if (entity.isCharged) {
             return getLocation(CHARGED_TEXTURE);
         } else {
@@ -51,7 +51,7 @@ public class CopperGolemRenderer<T extends CopperGolem, M extends CopperGolemMod
         }
     }
 
-    private static ResourceLocation getLocation(String path) {
-        return ResourceLocation.fromNamespaceAndPath(OrnamentalMod.MODID, path);
+    private static Identifier getLocation(String path) {
+        return Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, path);
     }
 }

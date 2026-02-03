@@ -1,0 +1,8 @@
+{
+  "parent": "ornamental:block/util/support_horizontal_x",
+  "textures": {
+    "bottom": "minecraft:block/iron_block",
+    "side": "minecraft:block/iron_block",
+    "top": "minecraft:block/iron_block"
+  }
+}

@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.animal.golem.AbstractGolem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
-@EventBusSubscriber(modid = OrnamentalMod.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = OrnamentalMod.MODID)
 public class GolemBuilder {
 
     //Mimic behaviour seen in CarvedPumpkinBlock
@@ -81,7 +81,7 @@ public class GolemBuilder {
     private static void addGolem(PatternType type, Level world, BlockPattern.BlockPatternMatch pattern, int x, int y) {
         AbstractGolem entity = type.getSupplierEntity().get().create(world, EntitySpawnReason.TRIGGERED);
         BlockPos pos = pattern.getBlock(x, y, 0).getPos();
-        entity.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
+        entity.snapTo((double)pos.getX() + 0.5D, (double)pos.getY() + 0.05D, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
         world.addFreshEntity(entity);
 
         for(ServerPlayer player : world.getEntitiesOfClass(ServerPlayer.class, entity.getBoundingBox().inflate(5.0D))) {
@@ -93,7 +93,7 @@ public class GolemBuilder {
         for(int i1 = 0; i1 < type.getWidth(); ++i1) {
             for(int j1 = 0; j1 < type.getHeight(); ++j1) {
                 BlockInWorld cachedblockinfo1 = pattern.getBlock(i1, j1, 0);
-                world.blockUpdated(cachedblockinfo1.getPos(), Blocks.AIR);
+                world.setBlock(cachedblockinfo1.getPos(), Blocks.AIR.defaultBlockState(), 2);
             }
         }
     }

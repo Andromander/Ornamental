@@ -4,12 +4,10 @@ import com.androsa.ornamental.entity.model.DirtGolemModel;
 import com.androsa.ornamental.entity.model.renderstate.FlowerGolemRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
 public class GrassFlowerLayer<T extends FlowerGolemRenderState, M extends DirtGolemModel<T>> extends RenderLayer<T, M> {
 
@@ -18,7 +16,7 @@ public class GrassFlowerLayer<T extends FlowerGolemRenderState, M extends DirtGo
     }
 
     @Override
-    public void render(PoseStack stack, MultiBufferSource buffer, int light, T entity, float v1, float v2) {
+    public void submit(PoseStack stack, SubmitNodeCollector buffer, int light, T entity, float v1, float v2) {
         if (!entity.isInvisible && entity.flower != null) {
             stack.pushPose();
             this.getParentModel().getHead().translateAndRotate(stack);
@@ -26,7 +24,7 @@ public class GrassFlowerLayer<T extends FlowerGolemRenderState, M extends DirtGo
             stack.mulPose(Axis.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(entity.flower, stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), ModelData.EMPTY, null);
+            buffer.submitBlock(stack, entity.flower, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), entity.outlineColor);
             stack.popPose();
         }
     }

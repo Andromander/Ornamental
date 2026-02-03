@@ -1,0 +1,9 @@
+{
+  "parent": "ornamental:block/util/beam_vertical",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "minecraft:block/red_nether_bricks",
+    "side": "minecraft:block/red_nether_bricks",
+    "top": "minecraft:block/red_nether_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ornamental:block/magma_beam_inventory"
+  }
+}

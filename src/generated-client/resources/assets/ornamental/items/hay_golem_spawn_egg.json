@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ornamental:item/hay_golem_spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -3886803
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -6008533
+      }
+    ]
+  }
+}
