@@ -190,7 +190,7 @@ public class GolemPatterns {
                     .aisle("~^~", "###", "###", "~#~")
                     .where('^', BlockInWorld.hasState(IS_PUMPKIN))
                     .where('~', worldblock -> worldblock.getState().isAir())
-                    .where('#', BlockInWorld.hasState((state) -> state != null && (state.is(Blocks.COPPER_BLOCK) || state.is(Blocks.CUT_COPPER))))
+                    .where('#', BlockInWorld.hasState((state) -> state != null && (state.is(Blocks.CUT_COPPER))))
                     .build();
         }
         return copperGolem;
