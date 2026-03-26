@@ -430,7 +430,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/ice_beam_full"
+        "model": "minecraft:block/ice"
       },
       "when": {
         "bottom_left": "true",

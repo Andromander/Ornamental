@@ -25,10 +25,10 @@ public class ChargeSparkParticle extends SingleQuadParticle {
     }
 
     @Override
-    public int getLightColor(float level) {
+    public int getLightCoords(float level) {
         float f = ((float)this.age + level) / (float)this.lifetime;
         f = Mth.clamp(f, 0.0F, 1.0F);
-        int i = super.getLightColor(level);
+        int i = super.getLightCoords(level);
         int j = i & 255;
         int k = i >> 16 & 255;
         j = j + (int)(f * 15.0F * 16.0F);

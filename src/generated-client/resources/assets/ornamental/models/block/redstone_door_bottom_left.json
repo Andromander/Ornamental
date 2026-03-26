@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/door_bottom_left",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/redstone_door_bottom",
     "side": "ornamental:block/redstone_door_bottom"

@@ -28,7 +28,7 @@ public class GolemFlowerLayer<T extends OfferingGolemRenderState, M extends Flow
             stack.scale(0.5F, 0.5F, 0.5F);
             stack.mulPose(Axis.XP.rotationDegrees(-90.0F));
             stack.translate(-0.5D, -0.5D, -0.5D);
-            buffer.submitBlock(stack, entity.flower, i, OverlayTexture.NO_OVERLAY, entity.outlineColor);
+            entity.flowerModel.submit(stack, buffer, i, OverlayTexture.NO_OVERLAY, entity.outlineColor);
             stack.popPose();
         }
     }

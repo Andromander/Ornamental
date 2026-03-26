@@ -28,7 +28,7 @@ public class PropertiesHelper {
         if (builder.doesTick) props.randomTicks();
         if (!builder.isSolid) props.noOcclusion();
         if (builder.lavaIgnites) props.ignitedByLava();
-        if (builder.postProcess) props.hasPostProcess((state, getter, pos) -> true);
+        if (builder.postProcess != null) props.postProcess(builder.postProcess);
         if (builder.emissiveRender) props.emissiveRendering((state, getter, pos) -> true);
         if (builder.requiresTool) props.requiresCorrectToolForDrops();
         if (builder.conductsRedstone != null) props.isRedstoneConductor(builder.conductsRedstone);

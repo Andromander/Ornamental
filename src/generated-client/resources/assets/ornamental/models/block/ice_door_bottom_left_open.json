@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/door_bottom_left_open",
-  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "ornamental:block/ice_door_bottom",
     "side": "ornamental:block/ice_door_bottom"

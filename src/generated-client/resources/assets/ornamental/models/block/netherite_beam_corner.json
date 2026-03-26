@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_corner",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/netherite_block",
     "side": "minecraft:block/netherite_block",

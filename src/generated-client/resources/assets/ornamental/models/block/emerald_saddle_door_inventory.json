@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/saddle_door_inventory",
-  "render_type": "minecraft:cutout",
   "textures": {
     "bottom": "ornamental:block/emerald_trapdoor",
     "side": "ornamental:block/emerald_trapdoor",

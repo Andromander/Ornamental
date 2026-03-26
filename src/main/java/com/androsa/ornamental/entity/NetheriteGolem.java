@@ -118,8 +118,8 @@ public class NetheriteGolem extends OrnamentalGolem {
     }
 
     @Override
-    public boolean canAttackType(EntityType<?> target) {
-        return target != EntityType.PLAYER || target.getCategory() != MobCategory.MISC;
+    public boolean canAttack(LivingEntity target) {
+        return !target.is(EntityType.PLAYER) || target.getType().getCategory() != MobCategory.MISC;
     }
 
     private float getAttackDamage() {

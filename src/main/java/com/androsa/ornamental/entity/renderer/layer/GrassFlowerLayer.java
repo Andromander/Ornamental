@@ -24,7 +24,7 @@ public class GrassFlowerLayer<T extends FlowerGolemRenderState, M extends DirtGo
             stack.mulPose(Axis.YP.rotationDegrees(-78.0F));
             stack.scale(-0.5F, -0.5F, 0.5F);
             stack.translate(-0.5D, -0.5D, -0.5D);
-            buffer.submitBlock(stack, entity.flower, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), entity.outlineColor);
+            entity.flowerModel.submit(stack, buffer, light, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), entity.outlineColor);
             stack.popPose();
         }
     }

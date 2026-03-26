@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/door_top_right_open",
-  "render_type": "minecraft:cutout",
   "textures": {
     "side": "ornamental:block/netherite_door_top",
     "top": "ornamental:block/netherite_door_top"

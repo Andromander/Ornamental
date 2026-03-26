@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_inventory",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/lapis_block",
     "side": "minecraft:block/lapis_block",

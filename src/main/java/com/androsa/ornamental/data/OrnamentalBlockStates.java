@@ -14,7 +14,8 @@ import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -71,15 +72,15 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.obsidian_slab, () -> Blocks.OBSIDIAN);
         slabBasic(ModBlocks.coal_slab, () -> Blocks.COAL_BLOCK);
         slabBasic(ModBlocks.redstone_slab, () -> Blocks.REDSTONE_BLOCK);
-        slabModel(ModBlocks.missingno_slab, "missingno", locMod("missingno"), SOLID);
+        slabModel(ModBlocks.missingno_slab, "missingno", locMod("missingno"));
         slabBasic(ModBlocks.clay_slab, () -> Blocks.CLAY);
         slabBasic(ModBlocks.dirt_slab, () -> Blocks.DIRT);
-        modelSlabBlock(ModBlocks.grass_slab, () -> Blocks.GRASS_BLOCK, "grass", true, CUTOUT_MIPPED);
-        slabColumn(ModBlocks.hay_slab, () -> Blocks.HAY_BLOCK, "hay_block_side", "hay_block_top", SOLID);
-        modelSlabBlock(ModBlocks.path_slab, () -> Blocks.DIRT_PATH, "path", false, CUTOUT);
-        slabColumn(ModBlocks.bone_slab, () -> Blocks.BONE_BLOCK, "bone_block_side", "bone_block_top", SOLID);
-        slabModel(ModBlocks.snow_slab, () -> Blocks.SNOW_BLOCK, "snow", SOLID);
-        slabBasic(ModBlocks.ice_slab, () -> Blocks.ICE, TRANSLUCENT);
+        modelSlabBlock(ModBlocks.grass_slab, () -> Blocks.GRASS_BLOCK, "grass", true);
+        slabColumn(ModBlocks.hay_slab, () -> Blocks.HAY_BLOCK, "hay_block_side", "hay_block_top");
+        modelSlabBlock(ModBlocks.path_slab, () -> Blocks.DIRT_PATH, "path", false);
+        slabColumn(ModBlocks.bone_slab, () -> Blocks.BONE_BLOCK, "bone_block_side", "bone_block_top");
+        slabModel(ModBlocks.snow_slab, () -> Blocks.SNOW_BLOCK, "snow");
+        slabBasic(ModBlocks.ice_slab, () -> Blocks.ICE);
         slabBasic(ModBlocks.packed_ice_slab, () -> Blocks.PACKED_ICE);
         slabBasic(ModBlocks.blue_ice_slab, () -> Blocks.BLUE_ICE);
         slabBasic(ModBlocks.netherite_slab, () -> Blocks.NETHERITE_BLOCK);
@@ -88,7 +89,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         slabBasic(ModBlocks.exposed_copper_slab, () -> Blocks.EXPOSED_COPPER);
         slabBasic(ModBlocks.weathered_copper_slab, () -> Blocks.WEATHERED_COPPER);
         slabBasic(ModBlocks.oxidized_copper_slab, () -> Blocks.OXIDIZED_COPPER);
-        slabModel(ModBlocks.magma_slab, () -> Blocks.MAGMA_BLOCK, "magma", SOLID);
+        slabModel(ModBlocks.magma_slab, () -> Blocks.MAGMA_BLOCK, "magma");
         slabBasic(ModBlocks.calcite_slab, () -> Blocks.CALCITE);
 
         fenceBasic(ModBlocks.iron_fence, "iron_block");
@@ -133,7 +134,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.obsidian_trapdoor, "obsidian");
         trapdoorBasic(ModBlocks.coal_trapdoor, "coal");
         trapdoorBasic(ModBlocks.redstone_trapdoor, "redstone");
-        trapdoor(ModBlocks.missingno_trapdoor, locMod("missingno"), false, CUTOUT);
+        trapdoor(ModBlocks.missingno_trapdoor, locMod("missingno"), false);
         trapdoorBasic(ModBlocks.clay_trapdoor, "clay");
         trapdoorParent(ModBlocks.dirt_trapdoor, "dirt");
         modelTrapdoorBlock(ModBlocks.grass_trapdoor, "grass", true);
@@ -145,7 +146,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         trapdoorBasic(ModBlocks.nether_brick_trapdoor, "nether_brick");
         trapdoorBasic(ModBlocks.red_nether_brick_trapdoor, "red_nether_brick");
         trapdoorBasic(ModBlocks.snow_trapdoor, "snow");
-        trapdoorBasic(ModBlocks.ice_trapdoor, "ice", TRANSLUCENT);
+        trapdoorBasic(ModBlocks.ice_trapdoor, "ice");
         trapdoorBasic(ModBlocks.packed_ice_trapdoor, "packed_ice");
         trapdoorBasic(ModBlocks.blue_ice_trapdoor, "blue_ice");
         trapdoorBasic(ModBlocks.netherite_trapdoor, "netherite");
@@ -165,19 +166,19 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         fenceGateBasic(ModBlocks.obsidian_fence_gate, "obsidian");
         fenceGateBasic(ModBlocks.coal_fence_gate, "coal_block");
         fenceGateBasic(ModBlocks.redstone_fence_gate, "redstone_block");
-        fenceGateBasic(ModBlocks.missingno_fence_gate, locMod("missingno"), SOLID);
+        fenceGateBasic(ModBlocks.missingno_fence_gate, locMod("missingno"));
         fenceGateBasic(ModBlocks.clay_fence_gate, "clay");
         fenceGateBasic(ModBlocks.dirt_fence_gate, "dirt");
         modelFenceGateBlock(ModBlocks.grass_fence_gate, "grass", true);
-        fenceGateColumn(ModBlocks.hay_fence_gate, "hay_block_side", "hay_block_top", SOLID);
+        fenceGateColumn(ModBlocks.hay_fence_gate, "hay_block_side", "hay_block_top");
         modelFenceGateBlock(ModBlocks.path_fence_gate, "path", false);
         fenceGateBasic(ModBlocks.brick_fence_gate, "bricks");
-        fenceGateColumn(ModBlocks.quartz_fence_gate, "quartz_block_side", "quartz_block_top", SOLID);
-        fenceGateColumn(ModBlocks.bone_fence_gate, "bone_block_side", "bone_block_top", SOLID);
+        fenceGateColumn(ModBlocks.quartz_fence_gate, "quartz_block_side", "quartz_block_top");
+        fenceGateColumn(ModBlocks.bone_fence_gate, "bone_block_side", "bone_block_top");
         fenceGateBasic(ModBlocks.nether_brick_fence_gate, "nether_bricks");
         fenceGateBasic(ModBlocks.red_nether_brick_fence_gate, "red_nether_bricks");
         fenceGateBasic(ModBlocks.snow_fence_gate, "snow");
-        fenceGateBasic(ModBlocks.ice_fence_gate, "ice", TRANSLUCENT);
+        fenceGateBasic(ModBlocks.ice_fence_gate, "ice");
         fenceGateBasic(ModBlocks.packed_ice_fence_gate, "packed_ice");
         fenceGateBasic(ModBlocks.blue_ice_fence_gate, "blue_ice");
         fenceGateBasic(ModBlocks.netherite_fence_gate, "netherite_block");
@@ -200,7 +201,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.obsidian_door, "obsidian");
         doorBasic(ModBlocks.coal_door, "coal");
         doorBasic(ModBlocks.redstone_door, "redstone");
-        doorBasic(ModBlocks.missingno_door, locMod("missingno"), CUTOUT);
+        doorBasic(ModBlocks.missingno_door, locMod("missingno"));
         doorBasic(ModBlocks.clay_door, "clay");
         doorHidden(ModBlocks.dirt_door, "dirt");
         halfDirtDoorBlock(ModBlocks.grass_door, "grass");
@@ -212,7 +213,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         doorBasic(ModBlocks.nether_brick_door, "nether_brick");
         doorBasic(ModBlocks.red_nether_brick_door, "red_nether_brick");
         doorBasic(ModBlocks.snow_door, "snow");
-        doorBasic(ModBlocks.ice_door, "ice", TRANSLUCENT);
+        doorBasic(ModBlocks.ice_door, "ice");
         doorBasic(ModBlocks.packed_ice_door, "packed_ice");
         doorBasic(ModBlocks.blue_ice_door, "blue_ice");
         doorBasic(ModBlocks.netherite_door, "netherite");
@@ -236,15 +237,15 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         poleBasic(ModBlocks.clay_pole, () -> Blocks.CLAY, "clay");
         poleBasic(ModBlocks.dirt_pole, () -> Blocks.DIRT, "dirt");
         modelPoleBlock(ModBlocks.grass_pole, "grass", () -> Blocks.GRASS_BLOCK, true);
-        poleColumn(ModBlocks.hay_pole, Either.right(() -> Blocks.HAY_BLOCK), "hay_block_side", "hay_block_top", SOLID);
+        poleColumn(ModBlocks.hay_pole, Either.right(() -> Blocks.HAY_BLOCK), "hay_block_side", "hay_block_top");
         modelPoleBlock(ModBlocks.path_pole, "path", () -> Blocks.DIRT_PATH, false);
         poleBasic(ModBlocks.brick_pole, () -> Blocks.BRICKS, "bricks");
-        poleColumn(ModBlocks.quartz_pole, Either.right(() -> Blocks.QUARTZ_BLOCK), "quartz_block_side", "quartz_block_top", SOLID);
-        poleColumn(ModBlocks.bone_pole, Either.right(() -> Blocks.BONE_BLOCK), "bone_block_side", "bone_block_top", SOLID);
+        poleColumn(ModBlocks.quartz_pole, Either.right(() -> Blocks.QUARTZ_BLOCK), "quartz_block_side", "quartz_block_top");
+        poleColumn(ModBlocks.bone_pole, Either.right(() -> Blocks.BONE_BLOCK), "bone_block_side", "bone_block_top");
         poleBasic(ModBlocks.nether_brick_pole, () -> Blocks.NETHER_BRICKS, "nether_bricks");
         poleBasic(ModBlocks.red_nether_brick_pole, () -> Blocks.RED_NETHER_BRICKS, "red_nether_bricks");
         poleBasic(ModBlocks.snow_pole, () -> Blocks.SNOW_BLOCK, "snow");
-        poleBasic(ModBlocks.ice_pole, () -> Blocks.ICE, "ice", TRANSLUCENT);
+        poleBasic(ModBlocks.ice_pole, () -> Blocks.ICE, "ice");
         poleBasic(ModBlocks.packed_ice_pole, () -> Blocks.PACKED_ICE, "packed_ice");
         poleBasic(ModBlocks.blue_ice_pole, () -> Blocks.BLUE_ICE, "blue_ice");
         poleBasic(ModBlocks.netherite_pole, () -> Blocks.NETHERITE_BLOCK, "netherite_block");
@@ -272,15 +273,15 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         beamBasic(ModBlocks.clay_beam, () -> Blocks.CLAY, "clay");
         beamBasic(ModBlocks.dirt_beam, () -> Blocks.DIRT, "dirt");
         halfDirtBeamBlock(ModBlocks.grass_beam, () -> Blocks.GRASS_BLOCK, "grass", true, true);
-        beamColumn(ModBlocks.hay_beam, Either.right(() -> Blocks.HAY_BLOCK), "hay_block_top", "hay_block_side", SOLID);
+        beamColumn(ModBlocks.hay_beam, Either.right(() -> Blocks.HAY_BLOCK), "hay_block_top", "hay_block_side");
         halfDirtBeamBlock(ModBlocks.path_beam, () -> Blocks.DIRT_PATH, "path", false, false);
         beamBasic(ModBlocks.brick_beam, () -> Blocks.BRICKS, "bricks");
-        beamColumn(ModBlocks.quartz_beam, Either.right(() -> Blocks.QUARTZ_BLOCK), "quartz_block_top", "quartz_block_side", SOLID);
-        beamColumn(ModBlocks.bone_beam, Either.right(() -> Blocks.BONE_BLOCK), "bone_block_top", "bone_block_side", SOLID);
+        beamColumn(ModBlocks.quartz_beam, Either.right(() -> Blocks.QUARTZ_BLOCK), "quartz_block_top", "quartz_block_side");
+        beamColumn(ModBlocks.bone_beam, Either.right(() -> Blocks.BONE_BLOCK), "bone_block_top", "bone_block_side");
         beamBasic(ModBlocks.nether_brick_beam, () -> Blocks.NETHER_BRICKS, "nether_bricks");
         beamBasic(ModBlocks.red_nether_brick_beam, () -> Blocks.RED_NETHER_BRICKS, "red_nether_bricks");
         beamBasic(ModBlocks.snow_beam, () -> Blocks.SNOW_BLOCK, "snow");
-        beamBasic(ModBlocks.ice_beam, () -> Blocks.ICE, "ice", TRANSLUCENT);
+        beamBasic(ModBlocks.ice_beam, () -> Blocks.ICE, "ice");
         beamBasic(ModBlocks.packed_ice_beam, () -> Blocks.PACKED_ICE, "packed_ice");
         beamBasic(ModBlocks.blue_ice_beam, () -> Blocks.BLUE_ICE, "blue_ice");
         beamBasic(ModBlocks.netherite_beam, () -> Blocks.NETHERITE_BLOCK, "netherite_block");
@@ -308,10 +309,10 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         wallBasic(ModBlocks.clay_wall, "clay");
         wallBasic(ModBlocks.dirt_wall, "dirt");
         modelWallBlock(ModBlocks.grass_wall, "grass", true);
-        wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top", SOLID);
+        wallColumn(ModBlocks.hay_wall, "hay_block_side", "hay_block_top");
         modelWallBlock(ModBlocks.path_wall, "path", false);
-        wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top", SOLID);
-        wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top", SOLID);
+        wallColumn(ModBlocks.quartz_wall, "quartz_block_side", "quartz_block_top");
+        wallColumn(ModBlocks.bone_wall, "bone_block_side", "bone_block_top");
         wallBasic(ModBlocks.snow_wall, "snow");
         modelIceWall(ModBlocks.ice_wall);
         wallBasic(ModBlocks.packed_ice_wall, "packed_ice");
@@ -349,7 +350,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         saddleDoorBasic(ModBlocks.nether_brick_saddle_door, "nether_brick");
         saddleDoorBasic(ModBlocks.red_nether_brick_saddle_door, "red_nether_brick");
         saddleDoorBasic(ModBlocks.snow_saddle_door, "snow");
-        saddleDoorBasic(ModBlocks.ice_saddle_door, "ice", TRANSLUCENT);
+        saddleDoorBasic(ModBlocks.ice_saddle_door, "ice");
         saddleDoorBasic(ModBlocks.packed_ice_saddle_door, "packed_ice");
         saddleDoorBasic(ModBlocks.blue_ice_saddle_door, "blue_ice");
         saddleDoorBasic(ModBlocks.netherite_saddle_door, "netherite");
@@ -373,19 +374,19 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         supportBasic(ModBlocks.obsidian_support, "obsidian");
         supportBasic(ModBlocks.coal_support, "coal_block");
         supportBasic(ModBlocks.redstone_support, "redstone_block");
-        supportBasic(ModBlocks.missingno_support, locMod("missingno"), SOLID);
+        supportBasic(ModBlocks.missingno_support, locMod("missingno"));
         supportBasic(ModBlocks.clay_support, "clay");
         supportBasic(ModBlocks.dirt_support, "dirt");
         dirtSupportBlock(ModBlocks.grass_support, "grass", true);
-        supportColumn(ModBlocks.hay_support, "hay_block_side", "hay_block_top", SOLID);
+        supportColumn(ModBlocks.hay_support, "hay_block_side", "hay_block_top");
         dirtSupportBlock(ModBlocks.path_support, "path", false);
         supportBasic(ModBlocks.brick_support, "bricks");
-        supportColumn(ModBlocks.quartz_support, "quartz_block_side", "quartz_block_top", SOLID);
-        supportColumn(ModBlocks.bone_support, "bone_block_side", "bone_block_top", SOLID);
+        supportColumn(ModBlocks.quartz_support, "quartz_block_side", "quartz_block_top");
+        supportColumn(ModBlocks.bone_support, "bone_block_side", "bone_block_top");
         supportBasic(ModBlocks.nether_brick_support, "nether_bricks");
         supportBasic(ModBlocks.red_nether_brick_support, "red_nether_bricks");
         supportBasic(ModBlocks.snow_support, "snow");
-        supportBasic(ModBlocks.ice_support, "ice", TRANSLUCENT);
+        supportBasic(ModBlocks.ice_support, "ice");
         supportBasic(ModBlocks.packed_ice_support, "packed_ice");
         supportBasic(ModBlocks.blue_ice_support, "blue_ice");
         supportBasic(ModBlocks.netherite_support, "netherite_block");
@@ -433,7 +434,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         }
     }
 
-    public void modelSlabBlock(Supplier<? extends SlabBlock> block, Supplier<? extends Block> full, String path, boolean tint, Identifier type) {
+    public void modelSlabBlock(Supplier<? extends SlabBlock> block, Supplier<? extends Block> full, String path, boolean tint) {
         Identifier key = BuiltInRegistries.BLOCK.getKey(block.get());
         String dir = "block/" + path + "/";
         Identifier inventory = key.withPath(s -> dir + s);
@@ -442,8 +443,7 @@ public class OrnamentalBlockStates extends OrnamentalBlockStateProvider {
         MultiVariant fullblock = BlockModelGenerators.plainVariant(new ExtendedModelTemplateBuilder()
                 .parent(ModelLocationUtils.getModelLocation(full.get()))
                 .suffix("_double")
-                .renderType(type)
-                .build().create(block.get(), new TextureMapping().put(TextureSlot.PARTICLE, Identifier.withDefaultNamespace("dirt")), blockModels.modelOutput));
+                .build().create(block.get(), new TextureMapping().put(TextureSlot.PARTICLE, new Material(Identifier.withDefaultNamespace("dirt"))), blockModels.modelOutput));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createSlab(block.get(), slab, slabtop, fullblock));
         if (tint) {

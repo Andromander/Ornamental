@@ -3,6 +3,7 @@ package com.androsa.ornamental.data.provider;
 import com.androsa.ornamental.OrnamentalMod;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
@@ -20,7 +21,7 @@ public abstract class OrnamentalItemModelProvider {
 
     public void eggItem(Supplier<Item> item, int primary, int secondary) {
         Identifier resourcelocation = itemModels.generateLayeredItem(
-                item.get(), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "item/spawn_egg"), Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "item/spawn_egg_overlay")
+                item.get(), new Material(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "item/spawn_egg")), new Material(Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "item/spawn_egg_overlay"))
         );
         itemModels.itemModelOutput.accept(item.get(), ItemModelUtils.tintedModel(resourcelocation, ItemModelUtils.constantTint(primary), ItemModelUtils.constantTint(secondary)));
     }

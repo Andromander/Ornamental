@@ -190,7 +190,7 @@
     },
     {
       "apply": {
-        "model": "ornamental:block/ice_pole_full"
+        "model": "minecraft:block/ice"
       },
       "when": {
         "bottom_left": "true",

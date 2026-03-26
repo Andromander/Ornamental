@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/door_top_right_open",
-  "render_type": "minecraft:cutout",
   "textures": {
     "side": "minecraft:block/bricks",
     "top": "minecraft:block/bricks"

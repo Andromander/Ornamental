@@ -48,11 +48,11 @@ public class OrnamentalGolem extends AbstractGolem {
     }
 
     @Override
-    public boolean canAttackType(EntityType<?> target) {
+    public boolean canAttack(LivingEntity target) {
         if (targetCreeper) {
-            return target != EntityType.PLAYER && super.canAttackType(target);
+            return !target.is(EntityType.PLAYER) && super.canAttack(target);
         }
-        return target != EntityType.CREEPER && target != EntityType.PLAYER && super.canAttackType(target);
+        return !target.is(EntityType.CREEPER) && !target.is(EntityType.PLAYER) && super.canAttack(target);
     }
 
     @Override

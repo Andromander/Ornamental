@@ -264,7 +264,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     @Deprecated
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
-            BubbleColumnBlock.updateColumn(level, pos.above(), state);
+            BubbleColumnBlock.updateColumn(Blocks.BUBBLE_COLUMN, level, pos.above(), state);
         }
     }
 
@@ -273,7 +273,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         super.randomTick(state, worldIn, pos, random);
         if (builder.canMelt) {
-            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock()) {
+            if (worldIn.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightDampening()) {
                 this.turnIntoWater(worldIn, pos);
             }
         }
@@ -281,7 +281,7 @@ public class OrnamentSaddleDoor extends Block implements OrnamentalBlock {
         if (builder.extinguishes) {
             BlockPos above = pos.above();
             if (worldIn.getFluidState(pos).canExtinguish(worldIn, pos)) {
-                worldIn.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (worldIn.random.nextFloat() - worldIn.random.nextFloat()) * 0.8F);
+                worldIn.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (random.nextFloat() - random.nextFloat()) * 0.8F);
                 worldIn.sendParticles(ParticleTypes.LARGE_SMOKE, above.getX() + 0.5D, above.getY() + 0.25D, above.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
             }
         }

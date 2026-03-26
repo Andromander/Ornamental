@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_horizontal",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/exposed_cut_copper",
     "side": "minecraft:block/exposed_cut_copper",

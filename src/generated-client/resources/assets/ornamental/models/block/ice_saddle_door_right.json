@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/saddle_door_right",
-  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "ornamental:block/ice_trapdoor",
     "side": "ornamental:block/ice_trapdoor",

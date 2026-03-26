@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/door_top_left",
-  "render_type": "minecraft:cutout",
   "textures": {
     "side": "ornamental:block/emerald_door_top",
     "top": "ornamental:block/emerald_door_top"

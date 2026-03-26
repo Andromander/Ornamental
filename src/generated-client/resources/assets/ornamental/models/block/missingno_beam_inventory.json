@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_inventory",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "ornamental:block/missingno",
     "side": "ornamental:block/missingno",

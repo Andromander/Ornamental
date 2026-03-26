@@ -4,7 +4,6 @@ import com.androsa.ornamental.OrnamentalMod;
 import com.androsa.ornamental.registry.helper.MasterRegistryHelper;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -73,7 +72,7 @@ public class OrnamentBuilder {
     public boolean canVaporise = false;
     public boolean isSolid = true;
     public boolean breakableCull = false;
-    public boolean postProcess = false;
+    public BlockBehaviour.PostProcess postProcess = null;
     public boolean emissiveRender = false;
     public NoteBlockInstrument instrument = NoteBlockInstrument.HARP;
     public PushReaction pushReaction = PushReaction.NORMAL;
@@ -405,11 +404,11 @@ public class OrnamentBuilder {
     }
 
     /**
-     * Sets if the block should be marked for post-processing. Used in {@link BlockBehaviour.Properties#hasPostProcess(BlockBehaviour.StatePredicate)}.
+     * Sets if the block should be marked for post-processing. Used in {@link BlockBehaviour.Properties#postProcess(BlockBehaviour.PostProcess)}.
      * Note that this property only takes effect for world generation, however should be considered anyway.
      */
-    public OrnamentBuilder doPostProcessing() {
-        this.postProcess = true;
+    public OrnamentBuilder postProcessing(BlockBehaviour.PostProcess postProcess) {
+        this.postProcess = postProcess;
         return this;
     }
 

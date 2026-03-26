@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_horizontal",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/red_nether_bricks",
     "side": "minecraft:block/red_nether_bricks",

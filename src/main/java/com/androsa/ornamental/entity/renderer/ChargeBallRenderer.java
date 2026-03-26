@@ -10,14 +10,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 
 public class ChargeBallRenderer extends EntityRenderer<ChargeBall, EntityRenderState> {
     private static final Identifier LOCATION = Identifier.fromNamespaceAndPath(OrnamentalMod.MODID, "textures/particle/charge_spark.png");
-    private static final RenderType RENDER = RenderTypes.entityCutoutNoCull(LOCATION);
+    private static final RenderType RENDER = RenderTypes.entityCutout(LOCATION);
 
     public ChargeBallRenderer(EntityRendererProvider.Context context) {
         super(context);

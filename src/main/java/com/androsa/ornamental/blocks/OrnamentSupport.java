@@ -350,7 +350,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     @Deprecated
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (builder.bubbleDirection != BubbleColumnDirection.NONE) {
-            BubbleColumnBlock.updateColumn(level, pos.above(), state);
+            BubbleColumnBlock.updateColumn(Blocks.BUBBLE_COLUMN, level, pos.above(), state);
         }
     }
 
@@ -359,7 +359,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource source) {
         super.randomTick(state, level, pos, source);
         if (builder.canMelt) {
-            if (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock()) {
+            if (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightDampening()) {
                 this.turnIntoWater(level, pos);
             }
         }
@@ -367,7 +367,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
         if (builder.extinguishes) {
             BlockPos above = pos.above();
             if (level.getFluidState(pos).canExtinguish(level, pos)) {
-                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (level.random.nextFloat() - level.random.nextFloat()) * 0.8F);
+                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.8F);
                 level.sendParticles(ParticleTypes.LARGE_SMOKE, above.getX() + 0.5D, above.getY() + 0.25D, above.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
             }
         }
@@ -395,7 +395,7 @@ public class OrnamentSupport extends Block implements SimpleWaterloggedBlock, Or
             if (!level.isClientSide()) {
                 BlockPos pos = result.getBlockPos();
                 for (SoundEvent sound : builder.projectileHitSounds) {
-                    level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 0.5F + level.random.nextFloat() * 1.2F);
+                    level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 0.5F + level.getRandom().nextFloat() * 1.2F);
                 }
             }
         }

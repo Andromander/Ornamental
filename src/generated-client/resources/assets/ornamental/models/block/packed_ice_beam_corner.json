@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_corner",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/packed_ice",
     "side": "minecraft:block/packed_ice",

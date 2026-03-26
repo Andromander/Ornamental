@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_inventory",
-  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "minecraft:block/ice",
     "side": "minecraft:block/ice",

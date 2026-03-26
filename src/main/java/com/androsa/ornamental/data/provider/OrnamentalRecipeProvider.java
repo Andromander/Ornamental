@@ -6,7 +6,6 @@ import com.androsa.ornamental.registry.ModTags;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
@@ -448,7 +447,7 @@ public abstract class OrnamentalRecipeProvider extends RecipeProvider {
         recipe = recipe.unlockedBy("has_" + builder.name, inventoryTrigger(ItemPredicate.Builder.item().of(registry, criteria.toArray(new ItemLike[0]))));
         Identifier location = loc(builder.name + name);
 
-        if (!location.equals(BuiltInRegistries.ITEM.getKey(recipe.getResult()))) {
+        if (!location.equals(recipe.defaultId().identifier())) {
             recipe.save(this.output, location.toString());
         } else {
             recipe.save(output);

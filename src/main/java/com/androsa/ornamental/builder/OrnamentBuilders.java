@@ -444,7 +444,7 @@ public class OrnamentBuilders {
                     .build())
             .instrument(NoteBlockInstrument.BASEDRUM)
             .ticks()
-            .doPostProcessing()
+            .postProcessing((state, level, pos) -> pos.above())
             .doEmissiveRendering()
             .setCanEntitySpawn((state, reader, pos, type) -> type.fireImmune())
             .floorHazard(new FloorHazard((level, pos, state, entity) -> !entity.isSteppingCarefully() && entity instanceof LivingEntity, level -> level.damageSources().hotFloor(), 1.0F))

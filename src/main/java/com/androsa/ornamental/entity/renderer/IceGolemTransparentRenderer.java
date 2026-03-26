@@ -21,7 +21,7 @@ public class IceGolemTransparentRenderer<T extends IceGolem> extends IceGolemRen
 
     public IceGolemTransparentRenderer(EntityRendererProvider.Context manager) {
         super(manager, ModelLocations.ICE_GOLEM, "ice_golem");
-        this.addLayer(new SnowGolemHeadLayer(this, manager.getBlockRenderDispatcher()));
+        this.addLayer(new SnowGolemHeadLayer(this));
         this.addLayer(new IceGolemLayer<>(this));
     }
 

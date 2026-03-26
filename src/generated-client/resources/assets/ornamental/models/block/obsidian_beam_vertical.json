@@ -1,6 +1,5 @@
 {
   "parent": "ornamental:block/util/beam_vertical",
-  "render_type": "minecraft:solid",
   "textures": {
     "bottom": "minecraft:block/obsidian",
     "side": "minecraft:block/obsidian",

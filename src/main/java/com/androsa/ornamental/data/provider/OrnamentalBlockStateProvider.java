@@ -9,7 +9,8 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
 
 import java.util.Map;
 import java.util.Optional;
@@ -35,11 +35,6 @@ public abstract class OrnamentalBlockStateProvider {
             90, Quadrant.R90,
             180, Quadrant.R180,
             270, Quadrant.R270);
-
-    public static final Identifier SOLID = Identifier.withDefaultNamespace("solid");
-    public static final Identifier TRANSLUCENT = Identifier.withDefaultNamespace("translucent");
-    public static final Identifier CUTOUT = Identifier.withDefaultNamespace("cutout");
-    public static final Identifier CUTOUT_MIPPED = Identifier.withDefaultNamespace("cutout_mipped");
 
     public static final ModelTemplate FENCE_POST = makeUtilTemplate("fence_post", "_post", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
     public static final ModelTemplate FENCE_INVENTORY = makeUtilTemplate("fence_inventory", "_inventory", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE);
@@ -106,9 +101,9 @@ public abstract class OrnamentalBlockStateProvider {
 
     protected TextureMapping makeMapping(Identifier side, Identifier bottom, Identifier top) {
         return new TextureMapping()
-                .put(TextureSlot.SIDE, side)
-                .put(TextureSlot.BOTTOM, bottom)
-                .put(TextureSlot.TOP, top);
+                .put(TextureSlot.SIDE, new Material(side))
+                .put(TextureSlot.BOTTOM, new Material(bottom))
+                .put(TextureSlot.TOP, new Material(top));
     }
 
     /* Stairs */
@@ -143,47 +138,30 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Slabs */
     public void slabBasic(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname) {
-        slabBasic(block, blockname, SOLID);
-    }
-
-    public void slabBasic(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, Identifier type) {
         String name = BuiltInRegistries.BLOCK.getKey(blockname.get()).getPath();
-        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name));
     }
 
-    public void slabModel(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String name, Identifier type) {
-        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name), type);
+    public void slabModel(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String name) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(name), locParent(name), locParent(name));
     }
 
-    public void slabModel(Supplier<? extends SlabBlock> block, String blockname, Identifier name, Identifier type) {
-        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.left(locMod(blockname)), name, name, name, type);
+    public void slabModel(Supplier<? extends SlabBlock> block, String blockname, Identifier name) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.left(locMod(blockname)), name, name, name);
     }
 
-    public void slabColumn(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String side, String end, Identifier type) {
-        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(side), locParent(end), locParent(end), type);
+    public void slabColumn(Supplier<? extends SlabBlock> block, Supplier<? extends Block> blockname, String side, String end) {
+        slab(block, ModelTemplates.SLAB_BOTTOM, ModelTemplates.SLAB_TOP, Either.right(blockname), locParent(side), locParent(end), locParent(end));
     }
 
-    public void slab(Supplier<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<Identifier, Supplier<? extends Block>> doubleModel, Identifier side, Identifier bottom, Identifier top, Identifier type) {
+    public void slab(Supplier<? extends SlabBlock> block, ModelTemplate bottomModel, ModelTemplate topModel, Either<Identifier, Supplier<? extends Block>> doubleModel, Identifier side, Identifier bottom, Identifier top) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         Identifier bm, tm, dm;
-        if (type != SOLID) {
-            bm = bottomModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            tm = topModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            dm = new ExtendedModelTemplateBuilder()
-                    .parent(doubleModel.map(
-                            r -> r,
-                            b -> ModelLocationUtils.getModelLocation(b.get())))
-                    .suffix("_double")
-                    .renderType(type)
-                    .build().create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            bm = bottomModel.create(block.get(), mapping, blockModels.modelOutput);
-            tm = topModel.create(block.get(), mapping, blockModels.modelOutput);
-            dm = doubleModel.map(
-                    r -> r,
-                    b -> ModelLocationUtils.getModelLocation(b.get()));
-        }
-
+        bm = bottomModel.create(block.get(), mapping, blockModels.modelOutput);
+        tm = topModel.create(block.get(), mapping, blockModels.modelOutput);
+        dm = doubleModel.map(
+                r -> r,
+                b -> ModelLocationUtils.getModelLocation(b.get()));
 
         BlockModelDefinitionGenerator slabgen = MultiVariantGenerator.dispatch(block.get())
                 .with(PropertyDispatch.initial(BlockStateProperties.SLAB_TYPE)
@@ -208,8 +186,8 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void fence(Supplier<? extends FenceBlock> block, ModelTemplate post, ModelTemplate north, ModelTemplate east, ModelTemplate south, ModelTemplate west, ModelTemplate inventory, Identifier side, Identifier top, Identifier bottom) {
-        TextureMapping postMapping = makeMapping(side, bottom, top).put(TextureSlot.PARTICLE, side);
-        TextureMapping railMapping = new TextureMapping().put(TextureSlot.TEXTURE, side);
+        TextureMapping postMapping = makeMapping(side, bottom, top).put(TextureSlot.PARTICLE, new Material(side));
+        TextureMapping railMapping = new TextureMapping().put(TextureSlot.TEXTURE, new Material(side));
         MultiVariant p = BlockModelGenerators.plainVariant(post.create(block.get(), postMapping, blockModels.modelOutput));
         MultiVariant n = BlockModelGenerators.plainVariant(north.create(block.get(), railMapping, blockModels.modelOutput));
         MultiVariant e = BlockModelGenerators.plainVariant(east.create(block.get(), railMapping, blockModels.modelOutput));
@@ -223,32 +201,24 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Trapdoors */
     public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name) {
-        trapdoor(block, locMod(name + "_trapdoor"), true, CUTOUT);
+        trapdoor(block, locMod(name + "_trapdoor"), true);
     }
 
     public void trapdoorParent(Supplier<? extends TrapDoorBlock> block, String name) {
-        trapdoor(block, locParent(name), false, CUTOUT);
+        trapdoor(block, locParent(name), false);
     }
 
-    public void trapdoorBasic(Supplier<? extends TrapDoorBlock> block, String name, Identifier type) {
-        trapdoor(block, locMod(name + "_trapdoor"), true, type);
-    }
-
-    public void trapdoorParent(Supplier<? extends TrapDoorBlock> block, String name, Identifier type) {
-        trapdoor(block, locParent(name), false, type);
-    }
-
-    public void trapdoor(Supplier<? extends TrapDoorBlock> block, Identifier texture, boolean orientable, Identifier type) {
-        TextureMapping mapping = new TextureMapping().put(TextureSlot.TEXTURE, texture);
+    public void trapdoor(Supplier<? extends TrapDoorBlock> block, Identifier texture, boolean orientable) {
+        TextureMapping mapping = new TextureMapping().put(TextureSlot.TEXTURE, new Material(texture));
         Identifier top, bottom, open;
         if (orientable) {
-            top = ModelTemplates.ORIENTABLE_TRAPDOOR_TOP.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            bottom = ModelTemplates.ORIENTABLE_TRAPDOOR_BOTTOM.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            open = ModelTemplates.ORIENTABLE_TRAPDOOR_OPEN.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            top = ModelTemplates.ORIENTABLE_TRAPDOOR_TOP.create(block.get(), mapping, blockModels.modelOutput);
+            bottom = ModelTemplates.ORIENTABLE_TRAPDOOR_BOTTOM.create(block.get(), mapping, blockModels.modelOutput);
+            open = ModelTemplates.ORIENTABLE_TRAPDOOR_OPEN.create(block.get(), mapping, blockModels.modelOutput);
         } else {
-            top = ModelTemplates.TRAPDOOR_TOP.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            bottom = ModelTemplates.TRAPDOOR_BOTTOM.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            open = ModelTemplates.TRAPDOOR_OPEN.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+            top = ModelTemplates.TRAPDOOR_TOP.create(block.get(), mapping, blockModels.modelOutput);
+            bottom = ModelTemplates.TRAPDOOR_BOTTOM.create(block.get(), mapping, blockModels.modelOutput);
+            open = ModelTemplates.TRAPDOOR_OPEN.create(block.get(), mapping, blockModels.modelOutput);
         }
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createTrapdoor(block.get(),
                 BlockModelGenerators.plainVariant(top),
@@ -259,36 +229,26 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Fence Gates */
     public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, String name) {
-        fenceGateBasic(block, locParent(name), SOLID);
+        fenceGateBasic(block, locParent(name));
     }
 
-    public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, String name, Identifier type) {
-        fenceGateBasic(block, locParent(name), type);
+    public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, Identifier name) {
+        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, name, name, name);
     }
 
-    public void fenceGateBasic(Supplier<? extends FenceGateBlock> block, Identifier name, Identifier type) {
-        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, name, name, name, type);
+    public void fenceGateColumn(Supplier<? extends FenceGateBlock> block, String side, String top) {
+        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, locParent(side), locParent(top), locParent(top));
     }
 
-    public void fenceGateColumn(Supplier<? extends FenceGateBlock> block, String side, String top, Identifier type) {
-        fenceGate(block, FENCE_GATE_CLOSED, FENCE_GATE_OPEN, FENCE_GATE_WALL_CLOSED, FENCE_GATE_WALL_OPEN, locParent(side), locParent(top), locParent(top), type);
-    }
-
-    public void fenceGate(Supplier<? extends FenceGateBlock> block, ModelTemplate gate, ModelTemplate opengate, ModelTemplate wall, ModelTemplate openwall, Identifier side, Identifier top, Identifier bottom, Identifier type) {
+    public void fenceGate(Supplier<? extends FenceGateBlock> block, ModelTemplate gate, ModelTemplate opengate, ModelTemplate wall, ModelTemplate openwall, Identifier side, Identifier top, Identifier bottom) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         Identifier g, go, w, wo;
 
-        if (type != SOLID) {
-            g = gate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            go = opengate.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            w = wall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-            wo = openwall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            g = gate.create(block.get(), mapping, blockModels.modelOutput);
-            go = opengate.create(block.get(), mapping, blockModels.modelOutput);
-            w = wall.create(block.get(), mapping, blockModels.modelOutput);
-            wo = openwall.create(block.get(), mapping, blockModels.modelOutput);
-        }
+        g = gate.create(block.get(), mapping, blockModels.modelOutput);
+        go = opengate.create(block.get(), mapping, blockModels.modelOutput);
+        w = wall.create(block.get(), mapping, blockModels.modelOutput);
+        wo = openwall.create(block.get(), mapping, blockModels.modelOutput);
+
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createFenceGate(block.get(),
                 BlockModelGenerators.plainVariant(go),
                 BlockModelGenerators.plainVariant(g),
@@ -300,46 +260,38 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Doors */
     public void doorBasic(Supplier<? extends DoorBlock> block, String name) {
-        doorBasic(block, name, CUTOUT);
+        doorBasic(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"));
     }
 
     public void doorHidden(Supplier<? extends DoorBlock> block, String name) {
-        doorHidden(block, name, CUTOUT);
+        doorBasic(block, locParent(name), locParent(name), locParent(name), locParent(name));
     }
 
-    public void doorBasic(Supplier<? extends DoorBlock> block, String name, Identifier type) {
-        doorBasic(block, locMod(name + "_door_bottom"), locMod(name + "_door_bottom"), locMod(name + "_door_top"), locMod(name + "_door_top"), type);
+    public void doorBasic(Supplier<? extends DoorBlock> block, Identifier name) {
+        doorBasic(block, name, name, name, name);
     }
 
-    public void doorHidden(Supplier<? extends DoorBlock> block, String name, Identifier type) {
-        doorBasic(block, locParent(name), locParent(name), locParent(name), locParent(name), type);
+    public void doorBasic(Supplier<? extends DoorBlock> block, Identifier bottomside, Identifier bottom, Identifier topside, Identifier top) {
+        door(block, DOOR_BOTTOM_LEFT, DOOR_BOTTOM_LEFT_OPEN, DOOR_BOTTOM_RIGHT, DOOR_BOTTOM_RIGHT_OPEN, DOOR_TOP_LEFT, DOOR_TOP_LEFT_OPEN, DOOR_TOP_RIGHT, DOOR_TOP_RIGHT_OPEN, bottomside, bottom, topside, top);
     }
 
-    public void doorBasic(Supplier<? extends DoorBlock> block, Identifier name, Identifier type) {
-        doorBasic(block, name, name, name, name, type);
-    }
-
-    public void doorBasic(Supplier<? extends DoorBlock> block, Identifier bottomside, Identifier bottom, Identifier topside, Identifier top, Identifier type) {
-        door(block, DOOR_BOTTOM_LEFT, DOOR_BOTTOM_LEFT_OPEN, DOOR_BOTTOM_RIGHT, DOOR_BOTTOM_RIGHT_OPEN, DOOR_TOP_LEFT, DOOR_TOP_LEFT_OPEN, DOOR_TOP_RIGHT, DOOR_TOP_RIGHT_OPEN, bottomside, bottom, topside, top, type);
-    }
-
-    public void door(Supplier<? extends DoorBlock> block, ModelTemplate bl, ModelTemplate blo, ModelTemplate br, ModelTemplate bro, ModelTemplate tl, ModelTemplate tlo, ModelTemplate tr, ModelTemplate tro, Identifier bottomside, Identifier bottom, Identifier topside, Identifier top, Identifier type) {
+    public void door(Supplier<? extends DoorBlock> block, ModelTemplate bl, ModelTemplate blo, ModelTemplate br, ModelTemplate bro, ModelTemplate tl, ModelTemplate tlo, ModelTemplate tr, ModelTemplate tro, Identifier bottomside, Identifier bottom, Identifier topside, Identifier top) {
         TextureMapping bottomTex = new TextureMapping()
-                .put(TextureSlot.SIDE, bottomside)
-                .put(TextureSlot.BOTTOM, bottom);
+                .put(TextureSlot.SIDE, new Material(bottomside))
+                .put(TextureSlot.BOTTOM, new Material(bottom));
         TextureMapping topTex = new TextureMapping()
-                .put(TextureSlot.SIDE, topside)
-                .put(TextureSlot.TOP, top);
+                .put(TextureSlot.SIDE, new Material(topside))
+                .put(TextureSlot.TOP, new Material(top));
 
         MultiVariant bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen;
-        bottomLeft = BlockModelGenerators.plainVariant(bl.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput));
-        bottomLeftOpen = BlockModelGenerators.plainVariant(blo.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput));
-        bottomRight = BlockModelGenerators.plainVariant(br.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput));
-        bottomRightOpen = BlockModelGenerators.plainVariant(bro.extend().renderType(type).build().create(block.get(), bottomTex, blockModels.modelOutput));
-        topLeft = BlockModelGenerators.plainVariant(tl.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput));
-        topLeftOpen = BlockModelGenerators.plainVariant(tlo.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput));
-        topRight = BlockModelGenerators.plainVariant(tr.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput));
-        topRightOpen = BlockModelGenerators.plainVariant(tro.extend().renderType(type).build().create(block.get(), topTex, blockModels.modelOutput));
+        bottomLeft = BlockModelGenerators.plainVariant(bl.create(block.get(), bottomTex, blockModels.modelOutput));
+        bottomLeftOpen = BlockModelGenerators.plainVariant(blo.create(block.get(), bottomTex, blockModels.modelOutput));
+        bottomRight = BlockModelGenerators.plainVariant(br.create(block.get(), bottomTex, blockModels.modelOutput));
+        bottomRightOpen = BlockModelGenerators.plainVariant(bro.create(block.get(), bottomTex, blockModels.modelOutput));
+        topLeft = BlockModelGenerators.plainVariant(tl.create(block.get(), topTex, blockModels.modelOutput));
+        topLeftOpen = BlockModelGenerators.plainVariant(tlo.create(block.get(), topTex, blockModels.modelOutput));
+        topRight = BlockModelGenerators.plainVariant(tr.create(block.get(), topTex, blockModels.modelOutput));
+        topRightOpen = BlockModelGenerators.plainVariant(tro.create(block.get(), topTex, blockModels.modelOutput));
 
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createDoor(block.get(), bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen));
         this.blockModels.registerSimpleFlatItemModel(block.get().asItem());
@@ -347,57 +299,34 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Poles */
     public void poleBasic(Supplier<? extends OrnamentPole> block, String fullblock, String name) {
-        poleBasic(block, fullblock, name, SOLID);
+        poleBasic(block, Either.left(locMod(fullblock)), locMod(name));
     }
 
     public void poleBasic(Supplier<? extends OrnamentPole> block, Supplier<? extends Block> fullblock, String name) {
-        poleBasic(block, fullblock, name, SOLID);
+        poleBasic(block, Either.right(fullblock), locParent(name));
     }
 
-    public void poleBasic(Supplier<? extends OrnamentPole> block, String fullblock, String name, Identifier type) {
-        poleBasic(block, Either.left(locMod(fullblock)), locMod(name), type);
+    public void poleBasic(Supplier<? extends OrnamentPole> block, Either<Identifier, Supplier<? extends Block>> fullblock, Identifier name) {
+        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, name, name, name);
     }
 
-    public void poleBasic(Supplier<? extends OrnamentPole> block, Supplier<? extends Block> fullblock, String name, Identifier type) {
-        poleBasic(block, Either.right(fullblock), locParent(name), type);
+    public void poleColumn(Supplier<? extends OrnamentPole> block, Either<Identifier, Supplier<? extends Block>> fullblock, String side, String top) {
+        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, locParent(top), locParent(top), locParent(side));
     }
 
-    public void poleBasic(Supplier<? extends OrnamentPole> block, Either<Identifier, Supplier<? extends Block>> fullblock, Identifier name, Identifier type) {
-        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, name, name, name, type);
-    }
-
-    public void poleColumn(Supplier<? extends OrnamentPole> block, Either<Identifier, Supplier<? extends Block>> fullblock, String side, String top, Identifier type) {
-        pole(block, POLE_WHOLE, POLE_HORIZONTAL, POLE_VERTICAL, POLE_CORNER, fullblock, locParent(top), locParent(top), locParent(side), type);
-    }
-
-    public void pole(Supplier<? extends OrnamentPole> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<Identifier, Supplier<? extends Block>> full, Identifier top, Identifier bottom, Identifier side, Identifier type) {
+    public void pole(Supplier<? extends OrnamentPole> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<Identifier, Supplier<? extends Block>> full, Identifier top, Identifier bottom, Identifier side) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         MultiVariant whole, horizon, vertical, corner, fullblock;
         Identifier inventory;
 
-        if (type != SOLID) {
-            whole = BlockModelGenerators.plainVariant(w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizon = BlockModelGenerators.plainVariant(h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            corner = BlockModelGenerators.plainVariant(c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            fullblock = BlockModelGenerators.plainVariant(new ExtendedModelTemplateBuilder()
-                    .parent(full.map(
-                            r -> r,
-                            b -> ModelLocationUtils.getModelLocation(b.get())))
-                    .suffix("_full")
-                    .renderType(type)
-                    .build().create(block.get(), mapping, blockModels.modelOutput));
-            inventory = POLE_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            whole = BlockModelGenerators.plainVariant(w.create(block.get(), mapping, blockModels.modelOutput));
-            horizon = BlockModelGenerators.plainVariant(h.create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(v.create(block.get(), mapping, blockModels.modelOutput));
-            corner = BlockModelGenerators.plainVariant(c.create(block.get(), mapping, blockModels.modelOutput));
-            fullblock = BlockModelGenerators.plainVariant(full.map(
-                    r -> r,
-                    b -> ModelLocationUtils.getModelLocation(b.get())));
-            inventory = POLE_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
-        }
+        whole = BlockModelGenerators.plainVariant(w.create(block.get(), mapping, blockModels.modelOutput));
+        horizon = BlockModelGenerators.plainVariant(h.create(block.get(), mapping, blockModels.modelOutput));
+        vertical = BlockModelGenerators.plainVariant(v.create(block.get(), mapping, blockModels.modelOutput));
+        corner = BlockModelGenerators.plainVariant(c.create(block.get(), mapping, blockModels.modelOutput));
+        fullblock = BlockModelGenerators.plainVariant(full.map(
+                r -> r,
+                b -> ModelLocationUtils.getModelLocation(b.get())));
+        inventory = POLE_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
 
         this.blockModels.blockStateOutput.accept(poleBlock(block, whole, horizon, vertical, corner, fullblock));
         this.blockModels.registerSimpleItemModel(block.get(), inventory);
@@ -405,57 +334,34 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Beams */
     public void beamBasic(Supplier<? extends OrnamentBeam> block, String fullblock, String name) {
-        beamBasic(block, Either.left(locMod(fullblock)), locMod(name), SOLID);
+        beamBasic(block, Either.left(locMod(fullblock)), locMod(name));
     }
 
     public void beamBasic(Supplier<? extends OrnamentBeam> block, Supplier<? extends Block> fullblock, String name) {
-        beamBasic(block, Either.right(fullblock), locParent(name), SOLID);
+        beamBasic(block, Either.right(fullblock), locParent(name));
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, String fullblock, String name, Identifier type) {
-        beamBasic(block, Either.left(locMod(fullblock)), locMod(name), type);
+    public void beamBasic(Supplier<? extends OrnamentBeam> block, Either<Identifier, Supplier<? extends Block>> fullblock, Identifier name) {
+        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, name, name, name);
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, Supplier<? extends Block> fullblock, String name, Identifier type) {
-        beamBasic(block, Either.right(fullblock), locParent(name), type);
+    public void beamColumn(Supplier<? extends OrnamentBeam> block, Either<Identifier, Supplier<? extends Block>> fullblock, String top, String side) {
+        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, locParent(top), locParent(top), locParent(side));
     }
 
-    public void beamBasic(Supplier<? extends OrnamentBeam> block, Either<Identifier, Supplier<? extends Block>> fullblock, Identifier name, Identifier type) {
-        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, name, name, name, type);
-    }
-
-    public void beamColumn(Supplier<? extends OrnamentBeam> block, Either<Identifier, Supplier<? extends Block>> fullblock, String top, String side, Identifier type) {
-        beam(block, BEAM_WHOLE, BEAM_HORIZONTAL, BEAM_VERTICAL, BEAM_CORNER, fullblock, locParent(top), locParent(top), locParent(side), type);
-    }
-
-    public void beam(Supplier<? extends OrnamentBeam> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<Identifier, Supplier<? extends Block>> full, Identifier top, Identifier bottom, Identifier side, Identifier type) {
+    public void beam(Supplier<? extends OrnamentBeam> block, ModelTemplate w, ModelTemplate h, ModelTemplate v, ModelTemplate c, Either<Identifier, Supplier<? extends Block>> full, Identifier top, Identifier bottom, Identifier side) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         MultiVariant whole, horizon, vertical, corner, fullblock;
         Identifier inventory;
 
-        if (type != SOLID) {
-            whole = BlockModelGenerators.plainVariant(w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizon = BlockModelGenerators.plainVariant(h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            corner = BlockModelGenerators.plainVariant(c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            fullblock = BlockModelGenerators.plainVariant(new ExtendedModelTemplateBuilder()
-                    .parent(full.map(
-                            r -> r,
-                            b -> ModelLocationUtils.getModelLocation(b.get())))
-                    .suffix("_full")
-                    .renderType(type)
-                    .build().create(block.get(), mapping, blockModels.modelOutput));
-            inventory = BEAM_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            whole = BlockModelGenerators.plainVariant(w.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizon = BlockModelGenerators.plainVariant(h.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(v.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            corner = BlockModelGenerators.plainVariant(c.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            fullblock = BlockModelGenerators.plainVariant(full.map(
-                    r -> r,
-                    b -> ModelLocationUtils.getModelLocation(b.get())));
-            inventory = BEAM_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        }
+        whole = BlockModelGenerators.plainVariant(w.create(block.get(), mapping, blockModels.modelOutput));
+        horizon = BlockModelGenerators.plainVariant(h.create(block.get(), mapping, blockModels.modelOutput));
+        vertical = BlockModelGenerators.plainVariant(v.create(block.get(), mapping, blockModels.modelOutput));
+        corner = BlockModelGenerators.plainVariant(c.create(block.get(), mapping, blockModels.modelOutput));
+        fullblock = BlockModelGenerators.plainVariant(full.map(
+                r -> r,
+                b -> ModelLocationUtils.getModelLocation(b.get())));
+        inventory = BEAM_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
 
         this.blockModels.blockStateOutput.accept(beamBlock(block, whole, horizon, vertical, corner, fullblock));
         this.blockModels.registerSimpleItemModel(block.get(), inventory);
@@ -467,69 +373,51 @@ public abstract class OrnamentalBlockStateProvider {
     }
 
     public void wallBasic(Supplier<? extends WallBlock> block, Identifier name) {
-        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, name, name, name, SOLID);
+        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, name, name, name);
     }
 
-    public void wallBasic(Supplier<? extends WallBlock> block, Identifier name, Identifier type) {
-        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, name, name, name, type);
+    public void wallColumn(Supplier<? extends WallBlock> block, String side, String end) {
+        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, locParent(side), locParent(end), locParent(end));
     }
 
-    public void wallColumn(Supplier<? extends WallBlock> block, String side, String end, Identifier type) {
-        wall(block, WALL_POST, WALL_SIDE, WALL_SIDE_TALL, locParent(side), locParent(end), locParent(end), type);
-    }
-
-    public void wall(Supplier<? extends WallBlock> block, ModelTemplate post, ModelTemplate sidewall, ModelTemplate sidetall, Identifier side, Identifier top, Identifier bottom, Identifier type) {
+    public void wall(Supplier<? extends WallBlock> block, ModelTemplate post, ModelTemplate sidewall, ModelTemplate sidetall, Identifier side, Identifier top, Identifier bottom) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         MultiVariant wallpost,  wallside, walltall;
         Identifier inventory;
 
-        if (type != SOLID) {
-            wallpost = BlockModelGenerators.plainVariant(post.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            wallside = BlockModelGenerators.plainVariant(sidewall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            walltall = BlockModelGenerators.plainVariant(sidetall.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            inventory = WALL_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            wallpost = BlockModelGenerators.plainVariant(post.create(block.get(), mapping, blockModels.modelOutput));
-            wallside = BlockModelGenerators.plainVariant(sidewall.create(block.get(), mapping, blockModels.modelOutput));
-            walltall = BlockModelGenerators.plainVariant(sidetall.create(block.get(), mapping, blockModels.modelOutput));
-            inventory = WALL_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        }
+        wallpost = BlockModelGenerators.plainVariant(post.create(block.get(), mapping, blockModels.modelOutput));
+        wallside = BlockModelGenerators.plainVariant(sidewall.create(block.get(), mapping, blockModels.modelOutput));
+        walltall = BlockModelGenerators.plainVariant(sidetall.create(block.get(), mapping, blockModels.modelOutput));
+        inventory = WALL_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
+
         this.blockModels.blockStateOutput.accept(BlockModelGenerators.createWall(block.get(), wallpost, wallside, walltall));
         this.blockModels.registerSimpleItemModel(block.get(), inventory);
     }
 
     /* Saddle Doors */
     public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locMod(name + "_trapdoor"), CUTOUT);
+        saddleDoor(block, locMod(name + "_trapdoor"));
     }
 
     public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, Identifier name) {
-        saddleDoor(block, name, CUTOUT);
-    }
-
-    public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, String name, Identifier type) {
-        saddleDoor(block, locMod(name + "_trapdoor"), type);
-    }
-
-    public void saddleDoorBasic(Supplier<? extends OrnamentSaddleDoor> block, Identifier name, Identifier type) {
-        saddleDoor(block, name, type);
+        saddleDoor(block, name);
     }
 
     public void saddleDoorHidden(Supplier<? extends OrnamentSaddleDoor> block, String name) {
-        saddleDoor(block, locParent(name), CUTOUT);
+        saddleDoor(block, locParent(name));
     }
 
-    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, Identifier name, Identifier type) {
-        saddleDoor(block, SADDLE_DOOR_LEFT, SADDLE_DOOR_LEFT_OPEN, SADDLE_DOOR_RIGHT, SADDLE_DOOR_RIGHT_OPEN, name, name, name, type);
+    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, Identifier name) {
+        saddleDoor(block, SADDLE_DOOR_LEFT, SADDLE_DOOR_LEFT_OPEN, SADDLE_DOOR_RIGHT, SADDLE_DOOR_RIGHT_OPEN, name, name, name);
     }
 
-    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ModelTemplate leftDoor, ModelTemplate leftDoorOpen, ModelTemplate rightDoor, ModelTemplate rightDoorOpen, Identifier side, Identifier bottom, Identifier top, Identifier type) {
+    public void saddleDoor(Supplier<? extends OrnamentSaddleDoor> block, ModelTemplate leftDoor, ModelTemplate leftDoorOpen, ModelTemplate rightDoor, ModelTemplate rightDoorOpen, Identifier side, Identifier bottom, Identifier top) {
         TextureMapping mapping = makeMapping(side, bottom, top);
-        MultiVariant left = BlockModelGenerators.plainVariant(leftDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-        MultiVariant leftOpen = BlockModelGenerators.plainVariant(leftDoorOpen.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-        MultiVariant right = BlockModelGenerators.plainVariant(rightDoor.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-        MultiVariant rightOpen = BlockModelGenerators.plainVariant(rightDoorOpen.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-        Identifier inventory = SADDLE_DOOR_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
+        MultiVariant left = BlockModelGenerators.plainVariant(leftDoor.create(block.get(), mapping, blockModels.modelOutput));
+        MultiVariant leftOpen = BlockModelGenerators.plainVariant(leftDoorOpen.create(block.get(), mapping, blockModels.modelOutput));
+        MultiVariant right = BlockModelGenerators.plainVariant(rightDoor.create(block.get(), mapping, blockModels.modelOutput));
+        MultiVariant rightOpen = BlockModelGenerators.plainVariant(rightDoorOpen.create(block.get(), mapping, blockModels.modelOutput));
+        Identifier inventory = SADDLE_DOOR_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
 
         this.blockModels.blockStateOutput.accept(saddleDoorBlock(block, left, leftOpen, right, rightOpen));
         this.blockModels.registerSimpleItemModel(block.get(), inventory);
@@ -537,47 +425,31 @@ public abstract class OrnamentalBlockStateProvider {
 
     /* Supports */
     public void supportBasic(Supplier<? extends OrnamentSupport> block, String name) {
-        supportBasic(block, name, SOLID);
+        supportBasic(block, locParent(name));
     }
 
-    public void supportBasic(Supplier<? extends OrnamentSupport> block, String name, Identifier type) {
-        supportBasic(block, locParent(name), type);
+    public void supportBasic(Supplier<? extends OrnamentSupport> block, Identifier name) {
+        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, name, name, name);
     }
 
-    public void supportBasic(Supplier<? extends OrnamentSupport> block, Identifier name, Identifier type) {
-        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, name, name, name, type);
+    public void supportColumn(Supplier<? extends OrnamentSupport> block, String side, String top) {
+        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, locParent(side), locParent(top), locParent(top));
     }
 
-    public void supportColumn(Supplier<? extends OrnamentSupport> block, String side, String top, Identifier type) {
-        support(block, SUPPORT_BASE, SUPPORT_BASE_TOP, SUPPORT_Y, SUPPORT_Y_TOP, SUPPORT_X, SUPPORT_X_TOP, SUPPORT_Z, SUPPORT_Z_TOP, locParent(side), locParent(top), locParent(top), type);
-    }
-
-    public void support(Supplier<? extends OrnamentSupport> block, ModelTemplate baseModel, ModelTemplate baseTModel, ModelTemplate yModel, ModelTemplate yTModel, ModelTemplate xModel, ModelTemplate xTModel, ModelTemplate zModel, ModelTemplate zTModel, Identifier side, Identifier bottom, Identifier top, Identifier type) {
+    public void support(Supplier<? extends OrnamentSupport> block, ModelTemplate baseModel, ModelTemplate baseTModel, ModelTemplate yModel, ModelTemplate yTModel, ModelTemplate xModel, ModelTemplate xTModel, ModelTemplate zModel, ModelTemplate zTModel, Identifier side, Identifier bottom, Identifier top) {
         TextureMapping mapping = makeMapping(side, bottom, top);
         MultiVariant base, baseTop, vertical, verticalTop ,horizontalX, horizontalXTop, horizontalZ, horizontalZTop;
         Identifier inventory;
 
-        if (type != SOLID) {
-            base = BlockModelGenerators.plainVariant(baseModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            baseTop = BlockModelGenerators.plainVariant(baseTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(yModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            verticalTop = BlockModelGenerators.plainVariant(yTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizontalX = BlockModelGenerators.plainVariant(xModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizontalXTop = BlockModelGenerators.plainVariant(xTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizontalZ = BlockModelGenerators.plainVariant(zModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            horizontalZTop = BlockModelGenerators.plainVariant(zTModel.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput));
-            inventory = SUPPORT_INVENTORY.extend().renderType(type).build().create(block.get(), mapping, blockModels.modelOutput);
-        } else {
-            base = BlockModelGenerators.plainVariant(baseModel.create(block.get(), mapping, blockModels.modelOutput));
-            baseTop = BlockModelGenerators.plainVariant(baseTModel.create(block.get(), mapping, blockModels.modelOutput));
-            vertical = BlockModelGenerators.plainVariant(yModel.create(block.get(), mapping, blockModels.modelOutput));
-            verticalTop = BlockModelGenerators.plainVariant(yTModel.create(block.get(), mapping, blockModels.modelOutput));
-            horizontalX = BlockModelGenerators.plainVariant(xModel.create(block.get(), mapping, blockModels.modelOutput));
-            horizontalXTop = BlockModelGenerators.plainVariant(xTModel.create(block.get(), mapping, blockModels.modelOutput));
-            horizontalZ = BlockModelGenerators.plainVariant(zModel.create(block.get(), mapping, blockModels.modelOutput));
-            horizontalZTop = BlockModelGenerators.plainVariant(zTModel.create(block.get(), mapping, blockModels.modelOutput));
-            inventory = SUPPORT_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
-        }
+        base = BlockModelGenerators.plainVariant(baseModel.create(block.get(), mapping, blockModels.modelOutput));
+        baseTop = BlockModelGenerators.plainVariant(baseTModel.create(block.get(), mapping, blockModels.modelOutput));
+        vertical = BlockModelGenerators.plainVariant(yModel.create(block.get(), mapping, blockModels.modelOutput));
+        verticalTop = BlockModelGenerators.plainVariant(yTModel.create(block.get(), mapping, blockModels.modelOutput));
+        horizontalX = BlockModelGenerators.plainVariant(xModel.create(block.get(), mapping, blockModels.modelOutput));
+        horizontalXTop = BlockModelGenerators.plainVariant(xTModel.create(block.get(), mapping, blockModels.modelOutput));
+        horizontalZ = BlockModelGenerators.plainVariant(zModel.create(block.get(), mapping, blockModels.modelOutput));
+        horizontalZTop = BlockModelGenerators.plainVariant(zTModel.create(block.get(), mapping, blockModels.modelOutput));
+        inventory = SUPPORT_INVENTORY.create(block.get(), mapping, blockModels.modelOutput);
 
         this.blockModels.blockStateOutput.accept(supportBlock(block, base, baseTop, vertical, verticalTop, horizontalX, horizontalXTop, horizontalZ, horizontalZTop));
         this.blockModels.registerSimpleItemModel(block.get(), inventory);

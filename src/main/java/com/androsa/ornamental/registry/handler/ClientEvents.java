@@ -10,10 +10,9 @@ import com.androsa.ornamental.registry.ModBlocks;
 import com.androsa.ornamental.registry.ModEntities;
 import com.androsa.ornamental.registry.ModParticles;
 import com.androsa.ornamental.registry.ModelLocations;
+import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.model.animal.golem.SnowGolemModel;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.level.GrassColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,12 +20,14 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
+import java.util.List;
+
 @EventBusSubscriber(modid = OrnamentalMod.MODID, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent
-    public static void blockColors(RegisterColorHandlersEvent.Block event) {
-        event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.get(0.5D, 1.0D),
+    public static void blockColors(RegisterColorHandlersEvent.BlockTintSources event) {
+        event.register(List.of(BlockTintSources.grassBlock()),
                 ModBlocks.grass_fence.get(),
                 ModBlocks.grass_fence_gate.get(),
                 ModBlocks.grass_slab.get(),
