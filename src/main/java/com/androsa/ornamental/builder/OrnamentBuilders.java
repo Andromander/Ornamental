@@ -483,6 +483,7 @@ public class OrnamentBuilders {
                     .pressurePlateSounds(SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON)
                     .buttonSounds(SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
                     .build())
+            .instrument(NoteBlockInstrument.TRUMPET)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED)));
 
     public static final OrnamentBuilder EXPOSED_CUT_COPPER = new OrnamentBuilder("exposed_cut_copper")
@@ -500,6 +501,7 @@ public class OrnamentBuilders {
                     .pressurePlateSounds(SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON)
                     .buttonSounds(SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
                     .build())
+            .instrument(NoteBlockInstrument.TRUMPET_EXPOSED)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED)));
 
     public static final OrnamentBuilder WEATHERED_CUT_COPPER = new OrnamentBuilder("weathered_cut_copper")
@@ -517,6 +519,7 @@ public class OrnamentBuilders {
                     .pressurePlateSounds(SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON)
                     .buttonSounds(SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
                     .build())
+            .instrument(NoteBlockInstrument.TRUMPET_WEATHERED)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED)));
 
     public static final OrnamentBuilder OXIDIZED_CUT_COPPER = new OrnamentBuilder("oxidized_cut_copper")
@@ -534,5 +537,6 @@ public class OrnamentBuilders {
                     .pressurePlateSounds(SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON)
                     .buttonSounds(SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON)
                     .build())
+            .instrument(NoteBlockInstrument.TRUMPET_OXIDIZED)
             .addBlockTags(new ArrayList<>(List.of(OrnamentalBlockTags.PICKAXE_TOOL, OrnamentalBlockTags.STONE_REQUIRED)));
 }
