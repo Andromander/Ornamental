@@ -162,8 +162,15 @@ public class OrnamentSlab extends SlabBlock implements OrnamentalBlock {
     public boolean skipRendering(BlockState state, BlockState otherState, Direction direction) {
         if (builder.breakableCull) {
             if (otherState.getBlock() instanceof OrnamentSlab otherSlab && state.getBlock() instanceof OrnamentSlab slab) {
-                if (otherSlab.getBuilder() == slab.getBuilder() && otherState.getValue(TYPE) == SlabType.DOUBLE && state.getValue(TYPE) == SlabType.DOUBLE) {
-                    return true;
+                if (otherSlab.getBuilder() == slab.getBuilder()) {
+                    //We assume if both match, they can cull
+                    if (otherState.getValue(TYPE) == state.getValue(TYPE)) {
+                        return true;
+                    }
+                    //Inconsequential, but we can cull the slab's face if the neighbour is a double
+                    else if (state.getValue(TYPE) != SlabType.DOUBLE && otherState.getValue(TYPE) == SlabType.DOUBLE) {
+                        return true;
+                    }
                 }
             }
         }
