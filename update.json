@@ -88,6 +88,9 @@
   "1.21.11": {
     "4.16.133": "Ornamental has now been ported to 1.21.11! There have been a few changes in the backend, but this is mostly a straightforward port. To match with changes made to Spawn Eggs in 1.21.5, new Spawn Egg textures have been created for all Ornamental Golems."
   },
+  "26.1": {
+    "4.17.138": "Ornamental has now been ported to 26.1! This should also work for 26.1.1 and 26.1.2.\n • Copper-material ornaments now make the Trumpet noteblock sound.\n • Improved face culling for Ice Slabs.\n • A secret has been revealed."
+  },
 
   "promos": {
     "1.12.2-latest": "1.5",
